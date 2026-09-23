@@ -9,7 +9,7 @@ const root = cva("grid items-center", {
     variant: {
       panel: "grid-cols-[1fr_auto] gap-x-3 gap-y-0.5",
       toolbar: "grid-cols-[auto_4rem_auto] gap-x-2",
-      compact: "grid-cols-[1fr_auto] gap-x-3",
+      compact: "grid-cols-[1fr_auto] gap-x-2",
     },
   },
 });
