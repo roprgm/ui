@@ -10,7 +10,7 @@ export function Checkbox({
     <span className={cn("inline-grid shrink-0 *:[grid-area:1/1]", className)}>
       <input
         type="checkbox"
-        className="peer size-4 cursor-pointer appearance-none rounded bg-neutral-900 shadow-sunken transition focus-ring checked:bg-neutral-100 checked:shadow-raised disabled:cursor-not-allowed disabled:opacity-40"
+        className="peer size-4 cursor-pointer appearance-none rounded bg-field shadow-sunken transition focus-ring checked:bg-accent checked:shadow-raised disabled:cursor-not-allowed disabled:opacity-40"
         {...props}
       />
       <svg
@@ -20,7 +20,7 @@ export function Checkbox({
         strokeWidth={3}
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="pointer-events-none invisible size-4 p-0.5 text-neutral-900 peer-checked:visible"
+        className="pointer-events-none invisible size-4 p-0.5 text-on-accent peer-checked:visible"
         aria-hidden
       >
         <path d="m5 12 4 4L19 6" />

@@ -12,7 +12,7 @@ export function Switch({
       // biome-ignore lint/a11y/useAriaPropsForRole: a native checkbox exposes its checked state.
       role="switch"
       className={cn(
-        "h-5 w-9 shrink-0 cursor-pointer appearance-none rounded-full bg-neutral-900 p-0.5 shadow-sunken transition focus-ring before:block before:size-4 before:rounded-full before:bg-neutral-400 before:shadow-s before:transition-transform checked:bg-neutral-200 checked:shadow-none checked:before:translate-x-4 checked:before:bg-neutral-900 disabled:cursor-not-allowed disabled:opacity-40",
+        "h-5 w-9 shrink-0 cursor-pointer appearance-none rounded-full bg-field p-0.5 shadow-sunken transition focus-ring before:block before:size-4 before:rounded-full before:bg-muted before:shadow-s before:transition-transform checked:bg-accent checked:shadow-none checked:before:translate-x-4 checked:before:bg-on-accent disabled:cursor-not-allowed disabled:opacity-40",
         className,
       )}
       {...props}

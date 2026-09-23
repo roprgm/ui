@@ -7,7 +7,7 @@ export function Spinner({ className, ...props }: ComponentProps<"div">) {
       role="status"
       aria-label="Loading"
       className={cn(
-        "size-4 animate-spin rounded-full border-2 border-neutral-600 border-t-neutral-100",
+        "size-4 animate-spin rounded-full border-2 border-disabled border-t-foreground",
         className,
       )}
       {...props}

@@ -20,6 +20,7 @@ import { Tab, TabList } from "../src/tabs";
 import { Textarea } from "../src/textarea";
 import { Toggle, ToggleGroup } from "../src/toggle-group";
 import { Tooltip } from "../src/tooltip";
+import { type TreeDrop, TreeList } from "../src/tree-list";
 import { VerticalSlider } from "../src/vertical-slider";
 import {
   AdjustIcon,
@@ -161,7 +162,7 @@ export function ChipDemo() {
   const [overlay, setOverlay] = useState(true);
   const [erase, setErase] = useState(false);
   return (
-    <div className="flex items-center gap-1 rounded-full bg-neutral-900/60 p-1">
+    <div className="flex items-center gap-1 rounded-full bg-field/60 p-1">
       <Chip aria-pressed={overlay} onClick={() => setOverlay(!overlay)}>
         Overlay
       </Chip>
@@ -177,7 +178,7 @@ export function SpinnerDemo() {
   return (
     <>
       <Spinner />
-      <span className="flex items-center gap-2 text-neutral-400">
+      <span className="flex items-center gap-2 text-muted">
         <Spinner className="size-3 border" /> Decoding RAW…
       </span>
     </>
@@ -187,14 +188,14 @@ export function SpinnerDemo() {
 export function ShimmerDemo() {
   return (
     <div className="flex w-64 flex-col gap-4">
-      <span className="shimmer flex items-center gap-2 text-neutral-300">
+      <span className="shimmer flex items-center gap-2 text-foreground">
         <BrushIcon /> Finding a source for the patch…
       </span>
       <div className="flex items-center gap-3">
-        <span className="shimmer size-10 rounded-md bg-neutral-600" />
+        <span className="shimmer size-10 rounded-md bg-raised-hover" />
         <span className="shimmer flex flex-1 flex-col gap-2">
-          <span className="h-2.5 w-3/4 rounded-full bg-neutral-600" />
-          <span className="h-2.5 w-1/2 rounded-full bg-neutral-600" />
+          <span className="h-2.5 w-3/4 rounded-full bg-raised-hover" />
+          <span className="h-2.5 w-1/2 rounded-full bg-raised-hover" />
         </span>
       </div>
     </div>
@@ -230,7 +231,7 @@ export function MenuDemo() {
         <MenuItem>Bottom</MenuItem>
       </Submenu>
       <MenuSeparator />
-      <MenuItem className="text-red-300">Delete</MenuItem>
+      <MenuItem className="text-danger">Delete</MenuItem>
     </Menu>
   );
 }
@@ -369,7 +370,7 @@ export function TabsDemo() {
   const [tool, setTool] = useState("adjust");
   return (
     <div className="flex items-start gap-10">
-      <div className="rounded-xl bg-neutral-900/60 p-1.5">
+      <div className="rounded-xl bg-field/60 p-1.5">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <TabList aria-label="Sidebar">
@@ -397,7 +398,7 @@ export function ListItemDemo() {
     { id: "image", name: "Image" },
   ];
   return (
-    <div className="w-64 overflow-hidden rounded-lg bg-neutral-800 shadow-float">
+    <div className="w-64 overflow-hidden rounded-lg bg-surface shadow-float">
       {layers.map((layer) => (
         <ListItem
           key={layer.id}
@@ -420,10 +421,94 @@ export function ListItemDemo() {
   );
 }
 
+type Layer = { id: string; name: string; children?: Layer[] };
+
+function findLayer(layers: Layer[], id: string): Layer | undefined {
+  for (const layer of layers) {
+    const found = layer.id === id ? layer : findLayer(layer.children ?? [], id);
+    if (found) return found;
+  }
+}
+
+function withoutLayer(layers: Layer[], id: string): Layer[] {
+  return layers
+    .filter((layer) => layer.id !== id)
+    .map((layer) => {
+      if (!layer.children) return layer;
+      return { ...layer, children: withoutLayer(layer.children, id) };
+    });
+}
+
+function placeLayer(layers: Layer[], moved: Layer, drop: TreeDrop): Layer[] {
+  return layers.flatMap((layer) => {
+    if (layer.id === drop.target) {
+      if (drop.position === "before") return [moved, layer];
+      if (drop.position === "after") return [layer, moved];
+      return [{ ...layer, children: [...(layer.children ?? []), moved] }];
+    }
+    if (!layer.children) return [layer];
+    return [{ ...layer, children: placeLayer(layer.children, moved, drop) }];
+  });
+}
+
+export function TreeListDemo() {
+  const [selected, setSelected] = useState("sky");
+  const [layers, setLayers] = useState<Layer[]>([
+    {
+      id: "portrait",
+      name: "Portrait",
+      children: [
+        { id: "skin", name: "Skin" },
+        { id: "eyes", name: "Eyes" },
+      ],
+    },
+    { id: "sky", name: "Sky" },
+    { id: "background", name: "Background", children: [] },
+    { id: "vignette", name: "Vignette" },
+    { id: "image", name: "Image" },
+  ]);
+  return (
+    <TreeList
+      aria-label="Layers"
+      items={layers}
+      label={(layer) => layer.name}
+      selected={selected}
+      onSelect={setSelected}
+      canDrag={(layer) => layer.id !== "image"}
+      canDrop={({ target, position }) => {
+        if (target === "image") return position === "before";
+        return (
+          position !== "inside" || Boolean(findLayer(layers, target)?.children)
+        );
+      }}
+      onDrop={(drop) => {
+        const moved = findLayer(layers, drop.id);
+        if (!moved) return;
+        setLayers(placeLayer(withoutLayer(layers, drop.id), moved, drop));
+      }}
+      className="w-64 overflow-hidden rounded-lg bg-surface shadow-float"
+    >
+      {(layer) => (
+        <>
+          <span className="size-6 shrink-0 rounded-sm bg-linear-to-br from-sky-700 to-amber-600" />
+          <span className="flex-1 truncate">{layer.name}</span>
+          <IconButton
+            label="Hide"
+            size="icon-sm"
+            className="opacity-0 group-hover:opacity-100"
+          >
+            <EyeIcon />
+          </IconButton>
+        </>
+      )}
+    </TreeList>
+  );
+}
+
 export function ScrollAreaDemo() {
   return (
-    <ScrollArea fade className="h-48 w-64 rounded-lg bg-neutral-900/60">
-      <ol className="flex flex-col gap-2 p-3 text-neutral-400">
+    <ScrollArea fade className="h-48 w-64 rounded-lg bg-field/60">
+      <ol className="flex flex-col gap-2 p-3 text-muted">
         {Array.from({ length: 24 }, (_, index) => (
           <li key={index}>Step {index + 1}: Exposure +0.1</li>
         ))}
@@ -480,7 +565,7 @@ export function SliderDemo() {
 export function ScrubInputDemo() {
   const [size, setSize] = useState(24);
   return (
-    <span className="flex items-center gap-2 text-neutral-400">
+    <span className="flex items-center gap-2 text-muted">
       Size
       <ScrubInput
         aria-label="Size"

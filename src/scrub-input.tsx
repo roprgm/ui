@@ -14,7 +14,7 @@ type Drag = { x: number; dx: number; value: number; moved: boolean };
 
 // Chevrons shown on hover to hint that the value drags sideways; hidden while typing.
 const hint =
-  "pointer-events-none absolute size-[9px] text-neutral-500 opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
+  "pointer-events-none absolute size-[9px] text-faint opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
 
 /** Whole characters, as tabular digits can differ from `ch` by a fraction of a pixel and shift a row. */
 function digitsWidth(digits: string, minChars?: number) {
@@ -137,7 +137,7 @@ export function ScrubInput({
     <span
       className={cn(
         // A line of text plus 2px above and below, so it follows the app's text size.
-        "group relative inline-flex cursor-ew-resize items-center rounded-sm px-1 py-0.5 tabular-nums transition focus-within:cursor-text focus-within:bg-black/25",
+        "group relative inline-flex cursor-ew-resize items-center rounded-sm px-1 py-0.5 tabular-nums transition focus-within:cursor-text focus-within:bg-field",
         className,
       )}
       onDoubleClick={reset}
@@ -150,7 +150,7 @@ export function ScrubInput({
     >
       <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
       <span className="grid text-right *:[grid-area:1/1]">
-        <span className="text-neutral-100 group-focus-within:invisible">
+        <span className="text-foreground group-focus-within:invisible">
           <span
             className="inline-block"
             style={{ width: digitsWidth(number, minChars) }}
@@ -159,10 +159,7 @@ export function ScrubInput({
           </span>
           {/* A unit set flush against the digits, like % or °, gets a hair of space. */}
           <span
-            className={cn(
-              "text-neutral-500",
-              /^\S/.test(unit ?? "") && "ml-0.5",
-            )}
+            className={cn("text-faint", /^\S/.test(unit ?? "") && "ml-0.5")}
           >
             {unit}
           </span>
@@ -171,7 +168,7 @@ export function ScrubInput({
           ref={input}
           aria-label={label}
           inputMode="decimal"
-          className="w-12 min-w-full cursor-[inherit] bg-transparent text-right text-transparent text-shadow-none outline-none field-sizing-content selection:bg-white/20 focus:text-neutral-100 focus:[text-shadow:inherit] supports-[field-sizing:content]:w-auto"
+          className="w-12 min-w-full cursor-[inherit] bg-transparent text-right text-transparent text-shadow-none outline-none field-sizing-content selection:bg-pressed focus:text-foreground focus:[text-shadow:inherit] supports-[field-sizing:content]:w-auto"
           value={draft ?? fixed}
           onFocus={focus}
           onChange={(event) => setDraft(event.currentTarget.value)}

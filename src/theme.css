@@ -1,14 +1,49 @@
 @source "./";
 
+/*
+ * Semantic colors. Components use only these, so redefining one in :root or your own theme
+ * restyles every component that uses it.
+ */
+
+@theme {
+  /* Backgrounds, from the page up. */
+  --color-page: hsl(0 0% 12%);
+  --color-field: hsl(0 0% 9%);
+  --color-surface: hsl(0 0% 15%);
+  --color-raised: hsl(0 0% 25%);
+  --color-raised-hover: hsl(0 0% 30%);
+  --color-tooltip: hsl(0 0% 4%);
+
+  /* Translucent states over any background. */
+  --color-hover: hsl(0 0% 100% / 0.08);
+  --color-pressed: hsl(0 0% 100% / 0.15);
+
+  /* Text, strongest first. */
+  --color-foreground: hsl(0 0% 95%);
+  --color-muted: hsl(0 0% 63%);
+  --color-faint: hsl(0 0% 45%);
+  --color-disabled: hsl(0 0% 32%);
+
+  /* What is on: primary buttons, checked controls, slider thumbs, drop markers. */
+  --color-accent: hsl(0 0% 93%);
+  --color-accent-hover: hsl(0 0% 100%);
+  --color-on-accent: hsl(0 0% 9%);
+
+  --color-line: hsl(0 0% 0% / 0.4);
+  --color-focus: hsl(0 0% 100% / 0.25);
+  --color-danger: hsl(0 90% 75%);
+}
+
 /* Shadows replace borders: raised surfaces catch light on top and cast a line below; sunken ones invert it. */
 @theme {
   --shadow-raised:
-    inset 0 1px 0 rgb(240 240 240 / 0.06), 0 1px 1px rgb(0 0 0 / 0.25);
+    inset 0 1px 0 rgba(186, 186, 186, 0.08), 0 1px 1px rgb(0 0 0 / 0.28),
+    0 0 1px rgb(0 0 0 / 0.12);
   --shadow-sunken:
     inset 0 1px 1px rgb(0 0 0 / 0.3), 0 1px 0 rgb(240 240 240 / 0.04);
   /* The edge is opaque so it holds over lighter surfaces, not only the page. */
   --shadow-float:
-    0 0 0 1px var(--color-neutral-900), inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 rgb(255 255 255 / 0.08),
     0 2px 6px rgb(0 0 0 / 0.3), 0 16px 32px -8px rgb(0 0 0 / 0.35);
   /* The body's text shadow reads too strong on light fills; they use this one. */
   --text-shadow-subtle: 0.5px 1px 0.5px rgb(0 0 0 / 0.08);
@@ -29,7 +64,7 @@
 
   &:focus-visible,
   &:has(:focus-visible) {
-    outline-color: rgb(255 255 255 / 0.25);
+    outline-color: var(--color-focus);
     transition-duration: 300ms;
   }
 }

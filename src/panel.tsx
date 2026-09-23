@@ -34,7 +34,7 @@ export function Panel({
   return (
     <aside
       className={cn(
-        "relative flex min-h-0 shrink-0 flex-col divide-y divide-black/40 bg-neutral-800",
+        "relative flex min-h-0 shrink-0 flex-col divide-y divide-line bg-surface",
         className,
       )}
       style={{ width, ...style }}
@@ -43,7 +43,7 @@ export function Panel({
       {onWidthChange && (
         <div
           className={cn(
-            "absolute inset-y-0 z-20 w-2 cursor-col-resize touch-none after:absolute after:inset-y-0 after:left-1 after:w-px after:transition-colors hover:after:bg-neutral-600",
+            "absolute inset-y-0 z-20 w-2 cursor-col-resize touch-none after:absolute after:inset-y-0 after:left-1 after:w-px after:transition-colors hover:after:bg-raised-hover",
             edge === "left" ? "-left-1" : "-right-1",
           )}
           onPointerDown={(event) =>
@@ -75,7 +75,7 @@ export function PanelHeader({
         className,
       )}
     >
-      <h2 className="flex-1 truncate font-medium text-neutral-200">{title}</h2>
+      <h2 className="flex-1 truncate font-medium text-foreground">{title}</h2>
       {children}
     </div>
   );

@@ -8,11 +8,11 @@ const button = cva(
     variants: {
       variant: {
         default:
-          "bg-neutral-700 text-neutral-100 shadow-raised hover:bg-neutral-600",
+          "bg-raised text-foreground shadow-raised hover:bg-raised-hover",
         primary:
-          "bg-neutral-100 text-neutral-900 shadow-raised text-shadow-subtle hover:bg-white",
+          "bg-accent text-on-accent shadow-raised text-shadow-subtle hover:bg-accent-hover",
         ghost:
-          "text-neutral-400 hover:bg-white/8 hover:text-neutral-100 active:bg-white/12 data-popup-open:bg-white/8 data-popup-open:text-neutral-100",
+          "text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },
       size: {
         default: "",

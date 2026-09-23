@@ -7,7 +7,7 @@ export function Chip({ className, ...props }: ComponentProps<"button">) {
     <button
       type="button"
       className={cn(
-        "inline-flex h-7 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-2.5 whitespace-nowrap text-neutral-400 transition focus-ring hover:bg-white/10 hover:text-neutral-100 aria-pressed:bg-white/15 aria-pressed:text-neutral-100 data-popup-open:bg-white/15 data-popup-open:text-neutral-100 disabled:pointer-events-none disabled:opacity-40",
+        "inline-flex h-7 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-2.5 whitespace-nowrap text-muted transition focus-ring hover:bg-hover hover:text-foreground aria-pressed:bg-pressed aria-pressed:text-foreground data-popup-open:bg-pressed data-popup-open:text-foreground disabled:pointer-events-none disabled:opacity-40",
         className,
       )}
       {...props}

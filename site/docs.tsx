@@ -61,20 +61,20 @@ export function Page({ groups, intro }: { groups: Group[]; intro: ReactNode }) {
             <a
               href={`#${slug(group)}`}
               className={cn(
-                "transition hover:text-neutral-100",
-                group === current ? "text-neutral-100" : "text-neutral-500",
+                "transition hover:text-foreground",
+                group === current ? "text-foreground" : "text-faint",
               )}
             >
               {group.title}
             </a>
-            <div className="mb-3 flex flex-col gap-1 border-white/10 border-l pl-3">
+            <div className="mb-3 flex flex-col gap-1 border-hover border-l pl-3">
               {group.docs.map((doc) => (
                 <a
                   key={doc.name}
                   href={`#${doc.name}`}
                   className={cn(
-                    "transition hover:text-neutral-100",
-                    doc.name === hash ? "text-neutral-100" : "text-neutral-400",
+                    "transition hover:text-foreground",
+                    doc.name === hash ? "text-foreground" : "text-muted",
                   )}
                 >
                   {doc.title}
@@ -90,9 +90,7 @@ export function Page({ groups, intro }: { groups: Group[]; intro: ReactNode }) {
             <a
               key={group.title}
               href={`#${slug(group)}`}
-              className={
-                group === current ? "text-neutral-100" : "text-neutral-500"
-              }
+              className={group === current ? "text-foreground" : "text-faint"}
             >
               {group.title}
             </a>
@@ -113,11 +111,11 @@ function Article({ doc }: { doc: Doc }) {
     <article id={doc.name} className="flex scroll-mt-12 flex-col gap-4">
       <div className="flex flex-col gap-1">
         <h3 className="text-base font-medium">{doc.title}</h3>
-        <p className="text-neutral-400">{doc.description}</p>
+        <p className="text-muted">{doc.description}</p>
       </div>
       <div
         className={cn(
-          "rounded-xl bg-neutral-800 shadow-raised",
+          "rounded-xl bg-surface shadow-raised",
           doc.block && "overflow-hidden",
           !doc.block &&
             "flex min-h-40 flex-wrap items-center justify-center gap-3 p-10",
@@ -144,8 +142,8 @@ export function Code({ children }: { children: string }) {
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    <div className="flex items-center gap-2 rounded-xl bg-neutral-900 py-1.5 pr-1.5 pl-3 shadow-sunken">
-      <code className="flex-1 truncate font-mono text-xs text-neutral-300">
+    <div className="flex items-center gap-2 rounded-xl bg-field py-1.5 pr-1.5 pl-3 shadow-sunken">
+      <code className="flex-1 truncate font-mono text-xs text-foreground">
         {children}
       </code>
       <IconButton

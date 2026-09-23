@@ -32,8 +32,8 @@ export function EditorDemo() {
   ].join(" ");
 
   return (
-    <div className="flex h-[560px] bg-neutral-900">
-      <div className="border-black/40 border-r bg-neutral-800 p-1.5">
+    <div className="flex h-[560px] bg-field">
+      <div className="border-line border-r bg-surface p-1.5">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <div className="relative grid min-w-0 flex-1 place-items-center p-10">
@@ -42,7 +42,7 @@ export function EditorDemo() {
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="absolute top-3 flex items-center gap-1 rounded-full bg-neutral-800 p-1 pl-3 shadow-float">
+          <div className="absolute top-3 flex items-center gap-1 rounded-full bg-surface p-1 pl-3 shadow-float">
             <Slider
               label="Size"
               value={size}
@@ -83,7 +83,7 @@ export function EditorDemo() {
             <MenuItem>Duplicate</MenuItem>
             <MenuItem>Rename</MenuItem>
             <MenuSeparator />
-            <MenuItem className="text-red-300">Delete</MenuItem>
+            <MenuItem className="text-danger">Delete</MenuItem>
           </Menu>
         </PanelHeader>
         <PanelBody>

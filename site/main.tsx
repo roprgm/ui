@@ -25,6 +25,7 @@ import {
   TextareaDemo,
   ToggleGroupDemo,
   TooltipDemo,
+  TreeListDemo,
   VerticalSliderDemo,
 } from "./demos";
 import { Code, type Group, Page } from "./docs";
@@ -170,6 +171,13 @@ const groups: Group[] = [
         demo: <ListItemDemo />,
       },
       {
+        name: "tree-list",
+        title: "Tree list",
+        description:
+          "Rows that nest into groups and drag to reorder or nest, with arrow-key navigation.",
+        demo: <TreeListDemo />,
+      },
+      {
         name: "scroll-area",
         title: "Scroll area",
         description: "Vertical scrolling with a thin bar and faded edges.",
@@ -220,7 +228,7 @@ const groups: Group[] = [
 const intro = (
   <header className="flex flex-col gap-4">
     <h1 className="text-2xl font-medium">@roprgm/ui</h1>
-    <p className="max-w-xl text-neutral-400">
+    <p className="max-w-xl text-muted">
       Minimal dark components for professional tools such as photo and video
       editors. Shadows instead of borders, CSS before JavaScript, and Base UI
       where behavior needs it.

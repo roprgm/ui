@@ -30,7 +30,7 @@ export function Field({
   const note = error ?? description;
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <label htmlFor={id} className="text-neutral-400">
+      <label htmlFor={id} className="text-muted">
         {label}
       </label>
       {cloneElement(children, {
@@ -41,7 +41,7 @@ export function Field({
       {note && (
         <p
           id={`${id}-note`}
-          className={cn("text-neutral-500", error && "text-red-300")}
+          className={cn("text-faint", error && "text-danger")}
         >
           {note}
         </p>

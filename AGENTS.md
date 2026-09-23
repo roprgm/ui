@@ -6,7 +6,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - Prefer CSS over JavaScript: style native elements with Tailwind variants (`checked:`, `has-checked:`, `peer-*`). Use Base UI only for behavior CSS can't provide, such as positioning, focus management, and typeahead.
 - `theme.css` holds what components need (tokens, utilities, base rules for controls); `base.css` holds optional page defaults. Keep each in sync with its `registry.json` item (`theme`, `base`).
 - Use shadows, not borders: `shadow-raised`, `shadow-sunken`, `shadow-float` from `src/theme.css`. Keep `registry.json`'s `theme` item in sync with that file.
-- Colors are Tailwind `neutral`. Components inherit font size. Controls are `h-8` and take the `focus-ring` utility; icon buttons in 40px panel headers and rows are `icon-sm` (28px).
+- Colors come only from the semantic tokens in `theme.css` (`bg-surface`, `text-muted`, `border-line`, …), whose values are plain `hsl()`. Never use Tailwind palette colors such as `neutral-*` or `white/*` in components; add or reuse a token instead. Components inherit font size. Controls are `h-8` and take the `focus-ring` utility; icon buttons in 40px panel headers and rows are `icon-sm` (28px).
 - Nested corners are concentric: outer radius minus the inset equals the inner radius, with equal insets on both sides of the corner (a 12px card holds a 6px button 6px in; an 8px surface holds 4px items 4px in).
 - Keep Tailwind classes inline; use `cva` only for variants. Named exports only.
 - Avoid ternaries. Use one only when it is trivially short and both branches fit on one line; otherwise use a named function with early returns, a lookup object, or `&&` conditions in `cn`.

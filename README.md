@@ -55,10 +55,35 @@ Components with Base UI, hooks, or their own handlers are marked `"use client"`;
 | Panels | `Panel`, `PanelHeader`, `PanelSection`, `PanelBody` | resizing only |
 | | `TabList`, `Tab` | arrow keys |
 | | `ListItem` | none |
+| | `TreeList` (drag to reorder or nest; `canDrop` and `onDrop` keep the data with the caller) | pointer drag and arrow keys |
 | | `ScrollArea` | Base UI |
 | Controls | `Slider` (`variant`: `panel`, `toolbar`, or `compact` without the bar; the fill runs from `origin`, the default value, to the value) | none for the bar |
 | | `ScrubInput` | drag, typing, and arrow keys |
 | | `VerticalSlider` | none |
+
+## Colors
+
+Components use only these tokens, defined in `theme.css` as `--color-*`, so they work with any color utility (`bg-surface`, `text-muted`, `border-line`, `ring-focus`). Redefine one to restyle every component that uses it:
+
+```css
+@theme {
+  --color-accent: hsl(210 90% 60%);
+}
+```
+
+| Group | Token | Used for |
+| --- | --- | --- |
+| Backgrounds | `page` | the app behind everything |
+| | `field` | inputs, checkboxes, switch and slider tracks, toggle groups |
+| | `surface` | panels, menus, selects, popovers, notices |
+| | `raised`, `raised-hover` | buttons, selected tabs, toggles, and rows |
+| | `tooltip` | tooltips |
+| States | `hover`, `pressed` | translucent fills for ghost buttons, chips, and highlighted items |
+| Text | `foreground`, `muted`, `faint`, `disabled` | body text; idle controls and labels; placeholders, units, and hints; disabled items |
+| Accent | `accent`, `accent-hover`, `on-accent` | primary buttons, checked controls, slider thumbs, drop markers, and what sits on them |
+| Other | `line`, `focus`, `danger` | dividers, the focus ring, errors |
+
+## Utilities
 
 `theme.css` also provides utilities: `shadow-raised`, `shadow-sunken`, `shadow-float`, `drop-shadow-float`, `focus-ring`, `shimmer`, and the `thumb:` variant for range thumbs.
 

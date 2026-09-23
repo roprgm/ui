@@ -9,14 +9,14 @@ import { Surface } from "./surface";
 import { Tooltip } from "./tooltip";
 
 const trigger = cva(
-  "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-neutral-100 transition focus-ring data-disabled:pointer-events-none data-disabled:opacity-40",
+  "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring data-disabled:pointer-events-none data-disabled:opacity-40",
   {
     variants: {
       /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
       variant: {
         field:
-          "h-8 rounded-md bg-neutral-700 pr-2 pl-3 shadow-raised hover:bg-neutral-600",
-        pill: "h-7 rounded-full bg-white/10 pr-2 pl-3 hover:bg-white/15 data-popup-open:bg-white/15",
+          "h-8 rounded-md bg-raised pr-2 pl-3 shadow-raised hover:bg-raised-hover",
+        pill: "h-7 rounded-full bg-hover pr-2 pl-3 hover:bg-pressed data-popup-open:bg-pressed",
       },
     },
   },
@@ -55,7 +55,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
     >
       <Primitive.Value
         placeholder={placeholder}
-        className="truncate data-placeholder:text-neutral-400"
+        className="truncate data-placeholder:text-muted"
       />
       <Primitive.Icon
         render={(props, { open }) => (
@@ -63,7 +63,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
             <Chevron
               direction={open ? "up" : "down"}
               size="sm"
-              className="text-neutral-400"
+              className="text-muted"
             />
           </span>
         )}
@@ -104,7 +104,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
-                  className="flex cursor-default items-center justify-between gap-4 rounded-sm px-2.5 py-1.5 outline-none select-none data-disabled:text-neutral-600 data-highlighted:bg-white/8"
+                  className="flex cursor-default items-center justify-between gap-4 rounded-sm px-2.5 py-1.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-hover"
                 >
                   <Primitive.ItemText>{item.label}</Primitive.ItemText>
                   <Primitive.ItemIndicator>

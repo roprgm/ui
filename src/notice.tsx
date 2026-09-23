@@ -24,8 +24,8 @@ export function Notice({
       role={tone}
       className={cn(
         // 12px corners less 6px of padding fit the dismiss button's 6px corners.
-        "flex max-w-sm items-start gap-2 rounded-xl bg-neutral-800 p-1.5 shadow-float",
-        tone === "alert" ? "text-red-300" : "text-neutral-300",
+        "flex max-w-sm items-start gap-2 rounded-xl bg-surface p-1.5 text-foreground shadow-float",
+        tone === "alert" && "text-danger",
         className,
       )}
       {...props}

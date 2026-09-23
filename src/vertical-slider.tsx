@@ -24,14 +24,14 @@ export function VerticalSlider({
   /** Restored by double-clicking. */
   defaultValue?: number;
   stops?: readonly string[];
-  /** The thumb's color; neutral when omitted. */
+  /** The thumb's color; the accent when omitted. */
   color?: string;
   className?: string;
 }) {
   return (
     <div className={cn("relative flex h-44 w-6 justify-center", className)}>
       <div
-        className="pointer-events-none absolute inset-y-2 w-1 rounded-full bg-neutral-900 shadow-sunken"
+        className="pointer-events-none absolute inset-y-2 w-1 rounded-full bg-field shadow-sunken"
         style={
           stops && { background: `linear-gradient(to top, ${stops.join()})` }
         }
@@ -48,7 +48,7 @@ export function VerticalSlider({
         onDoubleClick={() =>
           defaultValue !== undefined && onChange(defaultValue)
         }
-        className="relative h-full w-full cursor-ns-resize touch-none appearance-none bg-transparent text-neutral-200 outline-none [direction:rtl] [writing-mode:vertical-lr] thumb:size-3.5 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-current thumb:shadow-raised thumb:ring-1 thumb:ring-black/30 focus-visible:thumb:ring-2 focus-visible:thumb:ring-white/25"
+        className="relative h-full w-full cursor-ns-resize touch-none appearance-none bg-transparent text-accent outline-none [direction:rtl] [writing-mode:vertical-lr] thumb:size-3.5 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-current thumb:shadow-raised thumb:ring-1 thumb:ring-line focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus"
         style={color ? { color } : undefined}
       />
     </div>

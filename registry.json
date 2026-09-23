@@ -8,9 +8,27 @@
       "type": "registry:theme",
       "cssVars": {
         "theme": {
-          "shadow-raised": "inset 0 1px 0 rgb(240 240 240 / 0.06), 0 1px 1px rgb(0 0 0 / 0.25)",
+          "color-page": "hsl(0 0% 12%)",
+          "color-field": "hsl(0 0% 9%)",
+          "color-surface": "hsl(0 0% 15%)",
+          "color-raised": "hsl(0 0% 25%)",
+          "color-raised-hover": "hsl(0 0% 32%)",
+          "color-tooltip": "hsl(0 0% 4%)",
+          "color-hover": "hsl(0 0% 100% / 0.08)",
+          "color-pressed": "hsl(0 0% 100% / 0.15)",
+          "color-foreground": "hsl(0 0% 96%)",
+          "color-muted": "hsl(0 0% 63%)",
+          "color-faint": "hsl(0 0% 45%)",
+          "color-disabled": "hsl(0 0% 32%)",
+          "color-accent": "hsl(0 0% 96%)",
+          "color-accent-hover": "hsl(0 0% 100%)",
+          "color-on-accent": "hsl(0 0% 9%)",
+          "color-line": "hsl(0 0% 0% / 0.4)",
+          "color-focus": "hsl(0 0% 100% / 0.25)",
+          "color-danger": "hsl(0 94% 82%)",
+          "shadow-raised": "inset 0 1px 0 rgb(240 240 240 / 0.06), 0 1px 1px rgb(0 0 0 / 0.25), 0 0 1px rgb(0 0 0 / 0.1)",
           "shadow-sunken": "inset 0 1px 1px rgb(0 0 0 / 0.3), 0 1px 0 rgb(240 240 240 / 0.04)",
-          "shadow-float": "0 0 0 1px var(--color-neutral-900), inset 0 1px 0 rgb(255 255 255 / 0.08), 0 2px 6px rgb(0 0 0 / 0.3), 0 16px 32px -8px rgb(0 0 0 / 0.35)",
+          "shadow-float": "0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 rgb(255 255 255 / 0.08), 0 2px 6px rgb(0 0 0 / 0.3), 0 16px 32px -8px rgb(0 0 0 / 0.35)",
           "text-shadow-subtle": "0.5px 1px 0.5px rgb(0 0 0 / 0.08)"
         }
       },
@@ -22,7 +40,7 @@
           "outline": "2px solid transparent",
           "outline-offset": "1px",
           "&:focus-visible, &:has(:focus-visible)": {
-            "outline-color": "rgb(255 255 255 / 0.25)",
+            "outline-color": "var(--color-focus)",
             "transition-duration": "300ms"
           }
         },
@@ -57,8 +75,7 @@
       "type": "registry:theme",
       "cssVars": {
         "theme": {
-          "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
-          "color-page": "color-mix(in oklab, var(--color-neutral-800) 50%, var(--color-neutral-900))"
+          "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif"
         }
       },
       "css": {
@@ -67,7 +84,7 @@
             "font-family": "var(--font-sans)",
             "font-size": "13px",
             "line-height": "20px",
-            "color": "var(--color-neutral-100)",
+            "color": "var(--color-foreground)",
             "background": "var(--color-page)",
             "color-scheme": "dark"
           }
@@ -236,6 +253,17 @@
       "categories": ["panels"],
       "dependencies": ["cn"],
       "files": [{ "path": "src/list-item.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "tree-list",
+      "type": "registry:ui",
+      "categories": ["panels"],
+      "dependencies": ["cn"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/list-item.json",
+        "https://ui.roprgm.com/r/chevron.json"
+      ],
+      "files": [{ "path": "src/tree-list.tsx", "type": "registry:ui" }]
     },
     {
       "name": "scroll-area",

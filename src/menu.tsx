@@ -37,7 +37,7 @@ export function MenuItem({
   return (
     <Primitive.Item
       className={cn(
-        "flex cursor-default items-center gap-2 rounded-sm px-2.5 py-1.5 outline-none select-none data-disabled:text-neutral-600 data-highlighted:bg-white/8",
+        "flex cursor-default items-center gap-2 rounded-sm px-2.5 py-1.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-hover",
         className,
       )}
       {...props}
@@ -46,7 +46,7 @@ export function MenuItem({
 }
 
 export function MenuSeparator() {
-  return <Primitive.Separator className="mx-1 my-1 h-px bg-white/10" />;
+  return <Primitive.Separator className="mx-1 my-1 h-px bg-line" />;
 }
 
 /** An item that opens a nested list of commands beside the menu. */
@@ -59,9 +59,9 @@ export function Submenu({
 }) {
   return (
     <Primitive.SubmenuRoot>
-      <Primitive.SubmenuTrigger className="flex cursor-default items-center justify-between gap-4 rounded-sm px-2.5 py-1.5 outline-none select-none data-highlighted:bg-white/8 data-popup-open:bg-white/8">
+      <Primitive.SubmenuTrigger className="flex cursor-default items-center justify-between gap-4 rounded-sm px-2.5 py-1.5 outline-none select-none data-highlighted:bg-hover data-popup-open:bg-hover">
         {label}
-        <Chevron direction="right" size="sm" className="text-neutral-400" />
+        <Chevron direction="right" size="sm" className="text-muted" />
       </Primitive.SubmenuTrigger>
       <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} alignOffset={-4} className="z-50">
