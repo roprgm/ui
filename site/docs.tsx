@@ -1,7 +1,12 @@
 import { cn } from "cn";
 import { type ReactNode, useEffect, useLayoutEffect, useState } from "react";
+import { parse, render } from "sugar-high/core";
+import * as css from "sugar-high/lang/css";
+import * as shell from "sugar-high/lang/shell";
+import * as typescript from "sugar-high/lang/typescript";
 import { version } from "../package.json";
 import { IconButton } from "../src/icon-button";
+import { ScrollArea } from "../src/scroll-area";
 import { CopyButton } from "./copy-button";
 import { GitHubIcon } from "./icons";
 
@@ -58,68 +63,73 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
 
   return (
     <div className="mx-auto flex max-w-6xl gap-12 px-6">
-      <nav className="sticky top-0 hidden h-dvh w-44 shrink-0 flex-col gap-1 overflow-y-auto py-12 md:flex">
-        <div className="mb-4 -mt-px flex items-center justify-between">
-          <a
-            href="#usage"
-            className={cn(link, "flex items-baseline gap-2 self-center")}
-          >
-            <span className="font-medium">@roprgm/ui</span>
-            <span className="text-muted">v{version}</span>
-          </a>
-          <IconButton
-            label="GitHub"
-            size="icon-sm"
-            render={
+      <nav className="sticky top-0 hidden h-dvh w-48 shrink-0 md:block">
+        {/* The right padding keeps the scrollbar clear of the GitHub button. */}
+        <ScrollArea className="h-full">
+          <div className="flex flex-col gap-1 py-12 pr-4">
+            <div className="mb-4 -mt-px flex items-center justify-between">
               <a
-                href="https://github.com/roprgm/ui"
-                target="_blank"
-                rel="noreferrer"
-              />
-            }
-          >
-            <GitHubIcon />
-          </IconButton>
-        </div>
-        <a
-          href="#usage"
-          className={cn(
-            link,
-            "mb-3 hover:text-foreground",
-            current ? "text-faint" : "text-foreground",
-          )}
-        >
-          Usage
-        </a>
-        {groups.map((group) => (
-          <div key={group.title} className="flex flex-col gap-1">
+                href="#usage"
+                className={cn(link, "flex items-baseline gap-2 self-center")}
+              >
+                <span className="font-medium">@roprgm/ui</span>
+                <span className="text-muted">v{version}</span>
+              </a>
+              <IconButton
+                label="GitHub"
+                size="icon-sm"
+                render={
+                  <a
+                    href="https://github.com/roprgm/ui"
+                    target="_blank"
+                    rel="noreferrer"
+                  />
+                }
+              >
+                <GitHubIcon />
+              </IconButton>
+            </div>
             <a
-              href={`#${slug(group)}`}
+              href="#usage"
               className={cn(
                 link,
-                "hover:text-foreground",
-                group === current ? "text-foreground" : "text-faint",
+                "mb-3 hover:text-foreground",
+                current ? "text-faint" : "text-foreground",
               )}
             >
-              {group.title}
+              Usage
             </a>
-            <div className="mb-3 flex flex-col gap-1 border-hover border-l pl-3">
-              {group.docs.map((doc) => (
+            {groups.map((group) => (
+              <div key={group.title} className="flex flex-col gap-1">
                 <a
-                  key={doc.name}
-                  href={`#${doc.name}`}
+                  href={`#${slug(group)}`}
                   className={cn(
                     link,
                     "hover:text-foreground",
-                    doc.name === hash ? "text-foreground" : "text-muted",
+                    group === current ? "text-foreground" : "text-faint",
                   )}
                 >
-                  {doc.title}
+                  {group.title}
                 </a>
-              ))}
-            </div>
+                <div className="mb-3 flex flex-col gap-1 border-hover border-l pl-3">
+                  {group.docs.map((doc) => (
+                    <a
+                      key={doc.name}
+                      href={`#${doc.name}`}
+                      className={cn(
+                        link,
+                        "hover:text-foreground",
+                        doc.name === hash ? "text-foreground" : "text-muted",
+                      )}
+                    >
+                      {doc.title}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </ScrollArea>
       </nav>
       <main className="flex min-w-0 flex-1 flex-col gap-14 py-12">
         <div className="flex flex-wrap gap-x-4 gap-y-1 md:hidden">
@@ -165,7 +175,7 @@ function Article({ doc }: { doc: Doc }) {
       </div>
       <Preview doc={doc} />
       {!doc.block && (
-        <Code>
+        <Code lang={doc.code ? "tsx" : "shell"}>
           {doc.code ??
             `npx shadcn@latest add https://ui.roprgm.com/r/${doc.name}.json`}
         </Code>
@@ -190,14 +200,24 @@ function Preview({ doc }: { doc: Doc }) {
   );
 }
 
-/** Code with a copy button, one line or several. */
-export function Code({ children }: { children: string }) {
+const languages = { css, shell, tsx: typescript };
+
+/** Highlighted code with a copy button, one line or several. */
+export function Code({
+  lang = "shell",
+  children,
+}: {
+  lang?: keyof typeof languages;
+  children: string;
+}) {
+  const html = render(parse(children, languages[lang]));
   return (
     // Each line is 16px in a 6px padding, so the first one centers on the 28px copy button.
     <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 shadow-sunken">
-      <pre className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground">
-        {children}
-      </pre>
+      <pre
+        className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
       <CopyButton value={children} size="icon-sm" />
     </div>
   );
