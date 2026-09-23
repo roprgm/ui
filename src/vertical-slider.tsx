@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "cn";
 
 /** A native range standing upright: up increases. `stops` paint the track bottom to top. */

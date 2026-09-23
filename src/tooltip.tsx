@@ -1,3 +1,5 @@
+"use client";
+
 import { Tooltip as Primitive } from "@base-ui/react/tooltip";
 import type { ReactElement, ReactNode } from "react";
 

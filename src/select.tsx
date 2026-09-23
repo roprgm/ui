@@ -1,3 +1,5 @@
+"use client";
+
 import { Select as Primitive } from "@base-ui/react/select";
 import { cva } from "class-variance-authority";
 import { cn } from "cn";
@@ -96,9 +98,10 @@ export function Select<T extends string, Multiple extends boolean = false>({
             )}
           >
             <Primitive.List>
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <Primitive.Item
-                  key={item.value}
+                  // Two items may share a value, such as an "Original" ratio equal to a preset.
+                  key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
                   className="flex cursor-default items-center justify-between gap-4 rounded-sm px-2.5 py-1.5 outline-none select-none data-disabled:text-neutral-600 data-highlighted:bg-white/8"

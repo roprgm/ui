@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "cn";
 import type { ComponentProps, PointerEvent, ReactNode } from "react";
 import { ScrollArea } from "./scroll-area";
@@ -58,14 +60,21 @@ export function Panel({
 /** A title row with optional actions after it. */
 export function PanelHeader({
   title,
+  className,
   children,
 }: {
   title: ReactNode;
+  className?: string;
   children?: ReactNode;
 }) {
   return (
     // A small IconButton sits 6px from the top, bottom, and end, so its corner nests in a rounded panel's.
-    <div className="flex h-10 shrink-0 items-center gap-1 pr-1.5 pl-3">
+    <div
+      className={cn(
+        "flex h-10 shrink-0 items-center gap-1 pr-1.5 pl-3",
+        className,
+      )}
+    >
       <h2 className="flex-1 truncate font-medium text-neutral-200">{title}</h2>
       {children}
     </div>

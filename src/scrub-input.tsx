@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "cn";
 import {
   type FocusEvent,
@@ -42,7 +44,7 @@ export function ScrubInput({
   /** Restored by double-clicking the value. */
   defaultValue?: number;
   format?: (value: number) => string;
-  /** Minimum width in characters, so a value whose digit count changes doesn't shift its row. */
+  /** Minimum width of the digits in characters, so a value whose digit count changes doesn't shift its row. */
   minChars?: number;
   className?: string;
   "aria-label"?: string;
@@ -140,12 +142,19 @@ export function ScrubInput({
       }}
     >
       <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
-      <span
-        className="grid text-right *:[grid-area:1/1]"
-        style={minChars ? { minWidth: `${minChars}ch` } : undefined}
-      >
+      <span className="grid text-right *:[grid-area:1/1]">
         <span className="text-neutral-100 group-focus-within:invisible">
-          {number}
+          {/* Sized in whole characters, as tabular digits can differ from `ch` by a fraction of a pixel. */}
+          <span
+            className="inline-block"
+            style={
+              minChars
+                ? { width: `${Math.max(minChars, number.length)}ch` }
+                : undefined
+            }
+          >
+            {number}
+          </span>
           {/* A unit set flush against the digits, like % or °, gets a hair of space. */}
           <span
             className={cn(

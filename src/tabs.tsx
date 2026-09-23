@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "cn";
 import type { ComponentProps, KeyboardEvent } from "react";
 import { Button } from "./button";

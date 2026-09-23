@@ -50,7 +50,7 @@ export function EditorDemo() {
               min={1}
               max={500}
               format={(v) => `${v}px`}
-              valueWidth={5}
+              valueWidth={3}
               variant="toolbar"
             />
             <Popover align="center" trigger={<Chip>More</Chip>}>

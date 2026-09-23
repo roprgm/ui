@@ -1,3 +1,5 @@
+"use client";
+
 import { Popover as Primitive } from "@base-ui/react/popover";
 import type { ReactElement, ReactNode } from "react";
 import { Surface } from "./surface";

@@ -1,3 +1,5 @@
+"use client";
+
 import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { ScrubInput } from "./scrub-input";
@@ -44,7 +46,7 @@ export function Slider({
   format?: (value: number) => string;
   /** CSS colors painting the bar left to right, in place of the progress fill. */
   stops?: readonly string[];
-  /** Minimum width of the value in characters. */
+  /** Minimum width of the value's digits in characters; the unit follows them. */
   valueWidth?: number;
   variant?: "panel" | "toolbar" | "compact";
   className?: string;
@@ -69,8 +71,9 @@ export function Slider({
         defaultValue={defaultValue}
         format={format}
         minChars={valueWidth}
-        // In a panel the digits end with the bar; the hover chevron reaches ~8px past it.
-        className={variant === "toolbar" ? "col-start-3" : "-mr-1"}
+        // In a panel the digits end with the bar; the hover chevron reaches ~8px past it. The value sits
+        // above the bar, whose taller touch target would otherwise overlap it on coarse pointers.
+        className={cn("z-10", variant === "toolbar" ? "col-start-3" : "-mr-1")}
       />
       {variant !== "compact" && (
         // The margin makes room for the thumb, so the slider's box ends where the thumb does.
@@ -97,7 +100,7 @@ export function Slider({
             onPointerCancel={() => onEditingChange?.(false)}
             onFocus={() => onEditingChange?.(true)}
             onBlur={() => onEditingChange?.(false)}
-            className="absolute inset-x-0 top-1/2 h-4 w-full -translate-y-1/2 cursor-pointer touch-pan-y appearance-none bg-transparent outline-none thumb:size-3 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-neutral-200 thumb:shadow-raised thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-white/25"
+            className="absolute inset-x-0 top-1/2 h-4 w-full pointer-coarse:h-11 -translate-y-1/2 cursor-pointer touch-pan-y appearance-none bg-transparent outline-none thumb:size-3 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-neutral-200 thumb:shadow-raised thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-white/25"
           />
         </div>
       )}

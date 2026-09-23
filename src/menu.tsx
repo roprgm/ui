@@ -1,3 +1,5 @@
+"use client";
+
 import { Menu as Primitive } from "@base-ui/react/menu";
 import { cn } from "cn";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
