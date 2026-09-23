@@ -94,11 +94,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
         >
           <Primitive.Popup
             render={(props) => (
-              // 12px corners less 6px of padding fit the items' 6px corners.
-              <Surface
-                {...props}
-                className="min-w-(--anchor-width) rounded-xl p-1.5"
-              />
+              <Surface {...props} className="min-w-(--anchor-width)" />
             )}
           >
             <Primitive.List className="flex flex-col gap-0.5">
