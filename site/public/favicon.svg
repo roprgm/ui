@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 34 34">
+  <title>@roprgm/ui</title>
+  <defs>
+    <!-- shadow-raised, pushed further so it reads at 16px. -->
+    <filter id="raised" x="-15%" y="-15%" width="130%" height="135%">
+      <feDropShadow dy="1" stdDeviation=".6" flood-opacity=".5" />
+      <feDropShadow stdDeviation=".5" flood-opacity=".25" />
+    </filter>
+    <filter id="text" x="-50%" y="-20%" width="200%" height="150%">
+      <feDropShadow dx=".75" dy="1.5" stdDeviation=".4" flood-opacity=".55" />
+    </filter>
+    <!-- The top edge that catches light: the button less itself moved down 1px. -->
+    <mask id="edge">
+      <rect width="32" height="32" rx="7" fill="#fff" />
+      <rect y="1" width="32" height="32" rx="7" />
+    </mask>
+  </defs>
+  <rect width="32" height="32" rx="7" fill="#383838" filter="url(#raised)" />
+  <rect width="32" height="32" rx="7" fill="#fff" fill-opacity=".14" mask="url(#edge)" />
+  <path d="M19.5 8 12.5 24" stroke="#f2f2f2" stroke-width="3.5" stroke-linecap="round" filter="url(#text)" />
+</svg>
