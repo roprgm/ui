@@ -118,9 +118,9 @@ function Article({ doc }: { doc: Doc }) {
       <div
         className={cn(
           "rounded-xl bg-neutral-800 shadow-raised",
-          doc.block
-            ? "overflow-hidden"
-            : "flex min-h-40 flex-wrap items-center justify-center gap-3 p-10",
+          doc.block && "overflow-hidden",
+          !doc.block &&
+            "flex min-h-40 flex-wrap items-center justify-center gap-3 p-10",
         )}
       >
         {doc.demo}

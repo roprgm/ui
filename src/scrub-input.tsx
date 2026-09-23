@@ -16,6 +16,12 @@ type Drag = { x: number; dx: number; value: number; moved: boolean };
 const hint =
   "pointer-events-none absolute size-[9px] text-neutral-500 opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
 
+/** Whole characters, as tabular digits can differ from `ch` by a fraction of a pixel and shift a row. */
+function digitsWidth(digits: string, minChars?: number) {
+  if (!minChars) return undefined;
+  return `${Math.max(minChars, digits.length)}ch`;
+}
+
 /**
  * A number shown as text that scrubs on horizontal drag, types on click or focus,
  * and steps with the arrow keys. `format` writes the text; whatever follows its last
@@ -144,14 +150,9 @@ export function ScrubInput({
       <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
       <span className="grid text-right *:[grid-area:1/1]">
         <span className="text-neutral-100 group-focus-within:invisible">
-          {/* Sized in whole characters, as tabular digits can differ from `ch` by a fraction of a pixel. */}
           <span
             className="inline-block"
-            style={
-              minChars
-                ? { width: `${Math.max(minChars, number.length)}ch` }
-                : undefined
-            }
+            style={{ width: digitsWidth(number, minChars) }}
           >
             {number}
           </span>

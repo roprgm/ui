@@ -14,6 +14,20 @@ const root = cva("grid items-center", {
   },
 });
 
+// Where the value and the bar sit in each layout's grid. In a panel the digits end with the bar,
+// and the hover chevron reaches ~8px past it.
+const cells = {
+  panel: { value: "-mr-1", bar: "col-span-2" },
+  toolbar: { value: "col-start-3", bar: "col-start-2 row-start-1" },
+  compact: { value: "-mr-1", bar: "" },
+};
+
+/** The bar's paint: its color stops, or a fill up to the thumb's center, which travels from 6px to 100% - 6px. */
+function barBackground(progress: number, stops?: readonly string[]) {
+  if (stops) return `linear-gradient(to right, ${stops.join()})`;
+  return `linear-gradient(to right, var(--color-neutral-400) calc(0.375rem + (100% - 0.75rem) * ${progress}), transparent 0)`;
+}
+
 /**
  * A labeled number with a bar. "panel" stacks the bar under its row, "toolbar" keeps one short
  * row for a bar over a canvas, and "compact" drops the bar and edits by dragging the value.
@@ -51,11 +65,7 @@ export function Slider({
   variant?: "panel" | "toolbar" | "compact";
   className?: string;
 }) {
-  // The thumb's center travels from 6px to 100% - 6px, so the fill follows it there.
   const progress = (value - min) / (max - min);
-  const fill = stops
-    ? `linear-gradient(to right, ${stops.join()})`
-    : `linear-gradient(to right, var(--color-neutral-400) calc(0.375rem + (100% - 0.75rem) * ${progress}), transparent 0)`;
 
   return (
     <div className={cn(root({ variant }), className)}>
@@ -71,18 +81,17 @@ export function Slider({
         defaultValue={defaultValue}
         format={format}
         minChars={valueWidth}
-        // In a panel the digits end with the bar; the hover chevron reaches ~8px past it. The value sits
-        // above the bar, whose taller touch target would otherwise overlap it on coarse pointers.
-        className={cn("z-10", variant === "toolbar" ? "col-start-3" : "-mr-1")}
+        // Above the bar, whose taller touch target would otherwise overlap it on coarse pointers.
+        className={cn("z-10", cells[variant].value)}
       />
       {variant !== "compact" && (
         // The margin makes room for the thumb, so the slider's box ends where the thumb does.
         <div
           className={cn(
             "relative my-1 h-1 rounded-full bg-neutral-900 shadow-sunken",
-            variant === "toolbar" ? "col-start-2 row-start-1" : "col-span-2",
+            cells[variant].bar,
           )}
-          style={{ backgroundImage: fill }}
+          style={{ backgroundImage: barBackground(progress, stops) }}
         >
           <input
             type="range"
