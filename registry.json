@@ -48,6 +48,7 @@
       "css": {
         "@layer base": {
           ":root": {
+            "--layer-name": "page",
             "--layer": "var(--color-surface-2)",
             "--field": "var(--color-surface-1)",
             "--raised": "var(--color-surface-4)",
@@ -70,6 +71,7 @@
           }
         },
         "@utility layer-card": {
+          "--layer-name": "card",
           "--layer": "var(--color-surface-3)",
           "--field": "var(--color-surface-2)",
           "--raised": "var(--color-surface-5)",
@@ -77,10 +79,19 @@
           "background-color": "var(--layer)"
         },
         "@utility layer-elevated": {
+          "--layer-name": "elevated",
           "--layer": "var(--color-surface-4)",
           "--field": "var(--color-surface-3)",
           "--raised": "var(--color-surface-6)",
           "--raised-hover": "var(--color-surface-7)",
+          "background-color": "var(--layer)"
+        },
+        "@utility layer-top": {
+          "--layer-name": "top",
+          "--layer": "var(--color-surface-5)",
+          "--field": "var(--color-surface-4)",
+          "--raised": "var(--color-surface-7)",
+          "--raised-hover": "var(--color-surface-8)",
           "background-color": "var(--layer)"
         },
         "@utility drop-shadow-float": {

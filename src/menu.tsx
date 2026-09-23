@@ -4,7 +4,7 @@ import { Menu as Primitive } from "@base-ui/react/menu";
 import { cn } from "cn";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 import { Chevron } from "./chevron";
-import { Surface } from "./surface";
+import { Surface, usePopupLayer } from "./surface";
 
 /** Commands opened from `trigger`, such as an IconButton. For settings, use a Popover. */
 export function Menu({
@@ -16,14 +16,19 @@ export function Menu({
   align?: "start" | "center" | "end";
   children: ReactNode;
 }) {
+  const popup = usePopupLayer();
   return (
-    <Primitive.Root>
-      <Primitive.Trigger render={trigger} />
+    <Primitive.Root onOpenChange={(open) => open && popup.measure()}>
+      <Primitive.Trigger ref={popup.trigger} render={trigger} />
       <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} align={align} className="z-50">
           <Primitive.Popup
             render={(props) => (
-              <Surface {...props} className="flex flex-col gap-0.5" />
+              <Surface
+                {...props}
+                layer={popup.layer}
+                className="flex flex-col gap-0.5"
+              />
             )}
           >
             {children}
@@ -61,9 +66,13 @@ export function Submenu({
   label: ReactNode;
   children: ReactNode;
 }) {
+  const popup = usePopupLayer();
   return (
-    <Primitive.SubmenuRoot>
-      <Primitive.SubmenuTrigger className="flex cursor-default items-center justify-between gap-4 rounded-md px-2.5 py-1.25 outline-none select-none data-highlighted:bg-raised data-popup-open:bg-raised">
+    <Primitive.SubmenuRoot onOpenChange={(open) => open && popup.measure()}>
+      <Primitive.SubmenuTrigger
+        ref={popup.trigger}
+        className="flex cursor-default items-center justify-between gap-4 rounded-md px-2.5 py-1.25 outline-none select-none data-highlighted:bg-raised data-popup-open:bg-raised"
+      >
         {label}
         <Chevron direction="right" size="sm" className="text-muted" />
       </Primitive.SubmenuTrigger>
@@ -71,7 +80,11 @@ export function Submenu({
         <Primitive.Positioner sideOffset={4} alignOffset={-6} className="z-50">
           <Primitive.Popup
             render={(props) => (
-              <Surface {...props} className="flex flex-col gap-0.5" />
+              <Surface
+                {...props}
+                layer={popup.layer}
+                className="flex flex-col gap-0.5"
+              />
             )}
           >
             {children}

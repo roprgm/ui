@@ -84,13 +84,14 @@ Components use only these tokens, defined in `theme.css` as `--color-*`, so they
 
 ### Layers
 
-A control's fill depends on the layer it sits on, so an input or a button keeps the same contrast everywhere. There are three layers:
+A control's fill depends on the layer it sits on, so an input or a button keeps the same contrast everywhere. There are three layers, and a fourth for popups:
 
 | Layer | Background | `field` | `raised` | `raised-hover` |
 | --- | --- | --- | --- | --- |
 | The page | `surface-2` | `surface-1` | `surface-4` | `surface-5` |
 | `layer-card`: panels, notices, cards | `surface-3` | `surface-2` | `surface-5` | `surface-6` |
-| `layer-elevated`: menus, popovers, a card inside a card | `surface-4` | `surface-3` | `surface-6` | `surface-7` |
+| `layer-elevated`: a card inside a card | `surface-4` | `surface-3` | `surface-6` | `surface-7` |
+| `layer-top`: popups opened from an elevated card | `surface-5` | `surface-4` | `surface-7` | `surface-8` |
 
 Give a card or any other container of controls one of these utilities instead of a `bg-*`:
 
@@ -98,9 +99,11 @@ Give a card or any other container of controls one of these utilities instead of
 <div className="layer-card rounded-xl p-3 shadow-raised">…</div>
 ```
 
+Menus, popovers, and select lists open one layer above their trigger's: from the page they are cards, from a card they are elevated. Each layer names itself in `--layer-name`, which the popup reads when it opens.
+
 ## Utilities
 
-`theme.css` also provides utilities: `layer-card`, `layer-elevated`, `shadow-raised`, `shadow-sunken`, `shadow-float`, `drop-shadow-float`, `focus-ring`, `shimmer`, and the `thumb:` variant for range thumbs.
+`theme.css` also provides utilities: `layer-card`, `layer-elevated`, `layer-top`, `shadow-raised`, `shadow-sunken`, `shadow-float`, `drop-shadow-float`, `focus-ring`, `shimmer`, and the `thumb:` variant for range thumbs.
 
 The site at `site/` documents each component and shows a photo editor built from them.
 
