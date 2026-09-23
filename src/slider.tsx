@@ -7,7 +7,7 @@ import { ScrubInput } from "./scrub-input";
 const root = cva("grid items-center", {
   variants: {
     variant: {
-      panel: "grid-cols-[1fr_auto] gap-x-3 gap-y-1",
+      panel: "grid-cols-[1fr_auto] gap-x-3 gap-y-0.5",
       toolbar: "grid-cols-[auto_4rem_auto] gap-x-2",
       compact: "grid-cols-[1fr_auto] gap-x-3",
     },
@@ -22,10 +22,23 @@ const cells = {
   compact: { value: "-mr-1", bar: "" },
 };
 
-/** The bar's paint: its color stops, or a fill up to the thumb's center, which travels from 6px to 100% - 6px. */
-function barBackground(progress: number, stops?: readonly string[]) {
+/** Where the thumb's center sits at a fraction of the range: from 6px to 100% - 6px, or the bar's own ends. */
+function position(fraction: number) {
+  if (fraction <= 0) return "0%";
+  if (fraction >= 1) return "100%";
+  return `calc(0.375rem + (100% - 0.75rem) * ${fraction})`;
+}
+
+/** The bar's paint: its color stops, or a fill between the origin and the value, in fractions of the range. */
+function barBackground(
+  origin: number,
+  value: number,
+  stops?: readonly string[],
+) {
   if (stops) return `linear-gradient(to right, ${stops.join()})`;
-  return `linear-gradient(to right, var(--color-neutral-400) calc(0.375rem + (100% - 0.75rem) * ${progress}), transparent 0)`;
+  const start = position(Math.min(origin, value));
+  const end = position(Math.max(origin, value));
+  return `linear-gradient(to right, transparent ${start}, var(--color-neutral-400) ${start} ${end}, transparent ${end})`;
 }
 
 /**
@@ -41,6 +54,7 @@ export function Slider({
   max,
   step = 1,
   defaultValue,
+  origin = defaultValue ?? min,
   format,
   stops,
   valueWidth,
@@ -57,6 +71,8 @@ export function Slider({
   step?: number;
   /** Restored by double-clicking the value or the bar. */
   defaultValue?: number;
+  /** Where the bar's fill starts; the default value when there is one, otherwise the minimum. */
+  origin?: number;
   format?: (value: number) => string;
   /** CSS colors painting the bar left to right, in place of the progress fill. */
   stops?: readonly string[];
@@ -65,7 +81,7 @@ export function Slider({
   variant?: "panel" | "toolbar" | "compact";
   className?: string;
 }) {
-  const progress = (value - min) / (max - min);
+  const fraction = (x: number) => (x - min) / (max - min);
 
   return (
     <div className={cn(root({ variant }), className)}>
@@ -91,7 +107,13 @@ export function Slider({
             "relative my-1 h-1 rounded-full bg-neutral-900 shadow-sunken",
             cells[variant].bar,
           )}
-          style={{ backgroundImage: barBackground(progress, stops) }}
+          style={{
+            backgroundImage: barBackground(
+              fraction(origin),
+              fraction(value),
+              stops,
+            ),
+          }}
         >
           <input
             type="range"

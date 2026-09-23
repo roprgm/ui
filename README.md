@@ -56,7 +56,7 @@ Components with Base UI, hooks, or their own handlers are marked `"use client"`;
 | | `TabList`, `Tab` | arrow keys |
 | | `ListItem` | none |
 | | `ScrollArea` | Base UI |
-| Controls | `Slider` (`variant`: `panel`, `toolbar`, or `compact` without the bar) | none for the bar |
+| Controls | `Slider` (`variant`: `panel`, `toolbar`, or `compact` without the bar; the fill runs from `origin`, the default value, to the value) | none for the bar |
 | | `ScrubInput` | drag, typing, and arrow keys |
 | | `VerticalSlider` | none |
 

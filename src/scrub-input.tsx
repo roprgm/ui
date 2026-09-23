@@ -136,7 +136,8 @@ export function ScrubInput({
     // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
       className={cn(
-        "group relative inline-flex h-6 cursor-ew-resize items-center rounded-sm px-1 tabular-nums transition focus-within:cursor-text focus-within:bg-black/25",
+        // A line of text plus 2px above and below, so it follows the app's text size.
+        "group relative inline-flex cursor-ew-resize items-center rounded-sm px-1 py-0.5 tabular-nums transition focus-within:cursor-text focus-within:bg-black/25",
         className,
       )}
       onDoubleClick={reset}
