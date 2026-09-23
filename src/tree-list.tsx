@@ -4,6 +4,7 @@ import { cn } from "cn";
 import {
   type ComponentProps,
   type CSSProperties,
+  Fragment,
   type KeyboardEvent,
   type PointerEvent,
   type ReactNode,
@@ -232,8 +233,9 @@ export function TreeList<T extends TreeNode<T>>({
       ?.focus();
   }
 
-  function onRowKeyDown(event: KeyboardEvent<HTMLDivElement>, index: number) {
+  function onRowKeyDown(event: KeyboardEvent<HTMLDivElement>, id: string) {
     if (event.target !== event.currentTarget) return;
+    const index = rows.findIndex((row) => row.item.id === id);
     const row = rows[index];
     const branch = Boolean(row.item.children?.length);
     const keys: Record<string, () => void> = {
@@ -258,6 +260,77 @@ export function TreeList<T extends TreeNode<T>>({
     action();
   }
 
+  // Every row renders, so a group can animate open and closed; closed groups are inert, and
+  // `rows` holds only the open ones for keys and drops.
+  function renderItems(list: readonly T[], depth: number): ReactNode {
+    return list.map((item) => {
+      const branch = Boolean(item.children?.length);
+      const expanded = branch && !collapsed.has(item.id);
+      const indent = { "--indent": `${0.75 + depth}rem` } as CSSProperties;
+      return (
+        <Fragment key={item.id}>
+          <ListItem
+            role="treeitem"
+            aria-level={depth + 1}
+            aria-selected={item.id === selected}
+            aria-expanded={branch ? expanded : undefined}
+            tabIndex={item.id === tabbable?.item.id ? 0 : -1}
+            data-tree-id={item.id}
+            data-dragging={item.id === dragging?.id}
+            data-drop={drop?.target === item.id ? drop.position : undefined}
+            selected={item.id === selected}
+            style={indent}
+            onFocus={() => setFocused(item.id)}
+            onClick={(event) => {
+              // Buttons and fields in the row act on their own.
+              const target = event.target as Element;
+              if (target.closest("button, a, input, textarea, select")) return;
+              onSelect?.(item.id);
+              if (branch) toggle(item.id, !expanded);
+            }}
+            onKeyDown={(event) => onRowKeyDown(event, item.id)}
+            className={cn(
+              "gap-1.5 pl-(--indent) outline-none select-none [-webkit-touch-callout:none] focus-visible:bg-hover focus-visible:ring-1 focus-visible:ring-focus focus-visible:ring-inset",
+              "data-[dragging=true]:opacity-40",
+              "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-accent/60 data-[drop=inside]:ring-inset",
+              "before:absolute before:right-2 before:left-(--indent) before:z-10 before:h-0.5 before:rounded-full before:bg-accent before:opacity-0",
+              "data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100",
+            )}
+          >
+            {branch && (
+              <button
+                type="button"
+                tabIndex={-1}
+                aria-label={`${expanded ? "Collapse" : "Expand"} ${label(item)}`}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  toggle(item.id, !expanded);
+                }}
+                className="-mr-0.5 -ml-1 grid size-5 shrink-0 place-items-center rounded-xs text-faint focus-ring hover:text-foreground"
+              >
+                <Chevron direction={expanded ? "down" : "right"} size="sm" />
+              </button>
+            )}
+            {!branch && <span className="-mr-0.5 -ml-1 w-5 shrink-0" />}
+            {children(item)}
+          </ListItem>
+          {branch && (
+            // Rows 0fr to 1fr animates the group's height to its content, like an accordion.
+            <div
+              inert={!expanded}
+              data-expanded={expanded}
+              className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-200 data-[expanded=true]:grid-rows-[1fr]"
+            >
+              <div className="min-h-0 overflow-hidden">
+                {renderItems(item.children ?? [], depth + 1)}
+              </div>
+            </div>
+          )}
+        </Fragment>
+      );
+    });
+  }
+
   const active = rows.find((row) => row.item.id === dragging?.id);
   return (
     <div
@@ -278,53 +351,7 @@ export function TreeList<T extends TreeNode<T>>({
       className={cn(dragging && "cursor-grabbing", className)}
       {...props}
     >
-      {rows.map((row, index) => {
-        const { item, depth, expanded } = row;
-        const branch = Boolean(item.children?.length);
-        const indent = { "--indent": `${0.75 + depth}rem` } as CSSProperties;
-        return (
-          <ListItem
-            key={item.id}
-            role="treeitem"
-            aria-level={depth + 1}
-            aria-selected={item.id === selected}
-            aria-expanded={branch ? expanded : undefined}
-            tabIndex={item.id === tabbable?.item.id ? 0 : -1}
-            data-tree-id={item.id}
-            data-dragging={item.id === dragging?.id}
-            data-drop={drop?.target === item.id ? drop.position : undefined}
-            selected={item.id === selected}
-            style={indent}
-            onFocus={() => setFocused(item.id)}
-            onClick={() => onSelect?.(item.id)}
-            onKeyDown={(event) => onRowKeyDown(event, index)}
-            className={cn(
-              "gap-1.5 pl-(--indent) outline-none select-none [-webkit-touch-callout:none] focus-visible:bg-hover focus-visible:ring-1 focus-visible:ring-focus focus-visible:ring-inset",
-              "data-[dragging=true]:opacity-40",
-              "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-accent/60 data-[drop=inside]:ring-inset",
-              "before:absolute before:right-2 before:left-(--indent) before:z-10 before:h-0.5 before:rounded-full before:bg-accent before:opacity-0",
-              "data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100",
-            )}
-          >
-            {branch && (
-              <button
-                type="button"
-                tabIndex={-1}
-                aria-label={`${expanded ? "Collapse" : "Expand"} ${label(item)}`}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  toggle(item.id, !expanded);
-                }}
-                className="-ml-1 grid size-5 shrink-0 place-items-center rounded-xs text-faint hover:text-foreground"
-              >
-                <Chevron direction={expanded ? "down" : "right"} size="sm" />
-              </button>
-            )}
-            {!branch && <span className="-ml-1 w-5 shrink-0" />}
-            {children(item)}
-          </ListItem>
-        );
-      })}
+      {renderItems(items, 0)}
       {dragging && active && (
         <div
           ref={ghost}

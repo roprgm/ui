@@ -15,8 +15,8 @@ const trigger = cva(
       /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
       variant: {
         field:
-          "h-8 rounded-md bg-raised pr-2 pl-3 shadow-raised hover:bg-raised-hover",
-        pill: "h-7 rounded-full bg-hover pr-2 pl-3 hover:bg-pressed data-popup-open:bg-pressed",
+          "h-8 rounded-md bg-raised pr-2.5 pl-3 shadow-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
+        pill: "h-7 rounded-full bg-hover pr-2.5 pl-3 hover:bg-pressed data-popup-open:bg-pressed",
       },
     },
   },
@@ -94,17 +94,21 @@ export function Select<T extends string, Multiple extends boolean = false>({
         >
           <Primitive.Popup
             render={(props) => (
-              <Surface {...props} className="min-w-(--anchor-width)" />
+              // 12px corners less 6px of padding fit the items' 6px corners.
+              <Surface
+                {...props}
+                className="min-w-(--anchor-width) rounded-xl p-1.5"
+              />
             )}
           >
-            <Primitive.List>
+            <Primitive.List className="flex flex-col gap-0.5">
               {items.map((item, index) => (
                 <Primitive.Item
                   // Two items may share a value, such as an "Original" ratio equal to a preset.
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
-                  className="flex cursor-default items-center justify-between gap-4 rounded-sm px-2.5 py-1.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-hover"
+                  className="flex cursor-default items-center justify-between gap-4 rounded-md px-2.5 py-1.25 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised data-selected:bg-raised"
                 >
                   <Primitive.ItemText>{item.label}</Primitive.ItemText>
                   <Primitive.ItemIndicator>
@@ -132,7 +136,7 @@ function Check() {
       className="size-3.5"
       aria-hidden
     >
-      <path d="m5 12 4 4L19 6" />
+      <path d="m5 13 4 4L19 7" />
     </svg>
   );
 }

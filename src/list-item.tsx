@@ -13,7 +13,8 @@ export function ListItem({
       data-selected={selected}
       data-muted={muted}
       className={cn(
-        "group relative flex h-10 items-center gap-2 border-line border-b px-3 text-foreground data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
+        // A trailing small IconButton sits 6px from the end, as from the top and bottom.
+        "group relative flex h-10 items-center gap-2 border-line border-b px-3 text-foreground has-[>button:last-child]:pr-1.5 data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
         className,
       )}
       {...props}
