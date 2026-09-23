@@ -1,0 +1,28 @@
+name: Release
+
+# Publishing a GitHub release publishes the package to npm, through npm's trusted publishing,
+# so there is no token to store. The release tag must match package.json, such as v0.5.0.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5.1 or later.
+      - run: npm install -g npm@latest
+      - run: bun install --frozen-lockfile
+      - name: The tag matches package.json
+        run: test "${GITHUB_REF_NAME#v}" = "$(node -p "require('./package.json').version")"
+      - run: npm publish --provenance --access public
