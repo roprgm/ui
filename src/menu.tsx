@@ -62,7 +62,9 @@ export function MenuItem({
 }
 
 export function MenuSeparator() {
-  return <Primitive.Separator className="mx-1 my-0.5 h-px bg-line" />;
+  return (
+    <Primitive.Separator className="mx-1 my-0.5 h-px bg-line shadow-divider" />
+  );
 }
 
 /** An item that opens a nested list of commands beside the menu. */
