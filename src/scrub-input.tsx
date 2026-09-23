@@ -37,6 +37,7 @@ export function ScrubInput({
   defaultValue,
   format,
   minChars,
+  chevrons = false,
   className,
   "aria-label": label,
 }: {
@@ -52,6 +53,8 @@ export function ScrubInput({
   format?: (value: number) => string;
   /** Minimum width of the digits in characters, so a value whose digit count changes doesn't shift its row. */
   minChars?: number;
+  /** Shows chevrons beside the value on hover, hinting that it drags sideways. */
+  chevrons?: boolean;
   className?: string;
   "aria-label"?: string;
 }) {
@@ -148,7 +151,9 @@ export function ScrubInput({
         drag.current = undefined;
       }}
     >
-      <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
+      {chevrons && (
+        <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
+      )}
       <span className="grid text-right *:[grid-area:1/1]">
         <span className="text-foreground group-focus-within:invisible">
           <span
@@ -176,7 +181,9 @@ export function ScrubInput({
           onKeyDown={key}
         />
       </span>
-      <Chevron direction="right" className={cn(hint, "left-full -ml-0.75")} />
+      {chevrons && (
+        <Chevron direction="right" className={cn(hint, "left-full -ml-0.75")} />
+      )}
     </span>
   );
 }
