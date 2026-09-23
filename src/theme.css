@@ -1,5 +1,10 @@
 @source "./";
 
+/* Geist when the app loads it, with next/font or @fontsource-variable/geist; the system font otherwise. */
+@theme {
+  --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
+}
+
 /*
  * Semantic colors. Components use only these, so redefining one in :root or your own theme
  * restyles every component that uses it.
@@ -171,7 +176,14 @@
 }
 
 @layer base {
+  /* 13px text in the foreground color on the page's layer, with dark form controls. */
   body {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-foreground);
+    background: var(--layer);
+    color-scheme: dark;
     text-shadow: 0.5px 1px 0.5px rgb(20 20 20 / 0.2);
   }
 
