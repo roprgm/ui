@@ -1,7 +1,7 @@
 import { cn } from "cn";
 import { type ReactNode, useEffect, useLayoutEffect, useState } from "react";
-import { IconButton } from "../src/icon-button";
-import { CheckIcon, CopyIcon } from "./icons";
+import { version } from "../package.json";
+import { CopyButton } from "./copy-button";
 
 export type Doc = {
   /** The registry item, which also serves as the anchor. */
@@ -11,6 +11,8 @@ export type Doc = {
   demo: ReactNode;
   /** A composition of components: it fills the preview and has no registry item yet. */
   block?: boolean;
+  /** Renders on the page itself, without the preview card. */
+  bare?: boolean;
   /** Shown instead of the install command, for utilities that come with the theme. */
   code?: string;
 };
@@ -18,6 +20,9 @@ export type Doc = {
 export type Group = { title: string; docs: Doc[] };
 
 const slug = (group: Group) => group.title.toLowerCase();
+
+/** Nav links take the library's focus ring, hugging the text rather than the row. */
+const link = "self-start rounded-sm transition focus-ring";
 
 /** The location hash, which names a group or a doc. */
 function useHash() {
@@ -53,15 +58,20 @@ export function Page({ groups, intro }: { groups: Group[]; intro: ReactNode }) {
   return (
     <div className="mx-auto flex max-w-6xl gap-12 px-6">
       <nav className="sticky top-0 hidden h-dvh w-44 shrink-0 flex-col gap-1 overflow-y-auto py-12 md:flex">
-        <a href={`#${slug(groups[0] ?? current)}`} className="mb-5 font-medium">
-          @roprgm/ui
+        <a
+          href={`#${slug(groups[0] ?? current)}`}
+          className={cn(link, "mb-5 flex items-baseline gap-2")}
+        >
+          <span className="font-medium">@roprgm/ui</span>
+          <span className="text-muted">v{version}</span>
         </a>
         {groups.map((group) => (
           <div key={group.title} className="flex flex-col gap-1">
             <a
               href={`#${slug(group)}`}
               className={cn(
-                "transition hover:text-foreground",
+                link,
+                "hover:text-foreground",
                 group === current ? "text-foreground" : "text-faint",
               )}
             >
@@ -73,7 +83,8 @@ export function Page({ groups, intro }: { groups: Group[]; intro: ReactNode }) {
                   key={doc.name}
                   href={`#${doc.name}`}
                   className={cn(
-                    "transition hover:text-foreground",
+                    link,
+                    "hover:text-foreground",
                     doc.name === hash ? "text-foreground" : "text-muted",
                   )}
                 >
@@ -90,7 +101,10 @@ export function Page({ groups, intro }: { groups: Group[]; intro: ReactNode }) {
             <a
               key={group.title}
               href={`#${slug(group)}`}
-              className={group === current ? "text-foreground" : "text-faint"}
+              className={cn(
+                link,
+                group === current ? "text-foreground" : "text-faint",
+              )}
             >
               {group.title}
             </a>
@@ -113,16 +127,7 @@ function Article({ doc }: { doc: Doc }) {
         <h3 className="text-base font-medium">{doc.title}</h3>
         <p className="text-muted">{doc.description}</p>
       </div>
-      <div
-        className={cn(
-          "rounded-xl bg-surface shadow-raised",
-          doc.block && "overflow-hidden",
-          !doc.block &&
-            "flex min-h-40 flex-wrap items-center justify-center gap-3 p-10",
-        )}
-      >
-        {doc.demo}
-      </div>
+      <Preview doc={doc} />
       {!doc.block && (
         <Code>
           {doc.code ??
@@ -133,26 +138,30 @@ function Article({ doc }: { doc: Doc }) {
   );
 }
 
+function Preview({ doc }: { doc: Doc }) {
+  if (doc.bare) return doc.demo;
+  return (
+    <div
+      className={cn(
+        "layer-card rounded-xl shadow-raised",
+        doc.block && "overflow-hidden",
+        !doc.block &&
+          "flex min-h-40 flex-wrap items-center justify-center gap-3 p-10",
+      )}
+    >
+      {doc.demo}
+    </div>
+  );
+}
+
 /** A one-line command with a copy button. */
 export function Code({ children }: { children: string }) {
-  const [copied, setCopied] = useState(false);
-  const copy = async () => {
-    await navigator.clipboard.writeText(children);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  };
   return (
     <div className="flex items-center gap-2 rounded-xl bg-field py-1.5 pr-1.5 pl-3 shadow-sunken">
       <code className="flex-1 truncate font-mono text-xs text-foreground">
         {children}
       </code>
-      <IconButton
-        label={copied ? "Copied" : "Copy"}
-        size="icon-sm"
-        onClick={copy}
-      >
-        {copied ? <CheckIcon /> : <CopyIcon />}
-      </IconButton>
+      <CopyButton value={children} size="icon-sm" />
     </div>
   );
 }
