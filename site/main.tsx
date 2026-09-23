@@ -9,6 +9,7 @@ import {
   FieldDemo,
   IconButtonDemo,
   InputDemo,
+  LayersDemo,
   ListItemDemo,
   MenuDemo,
   NoticeDemo,
@@ -33,7 +34,7 @@ import { EditorDemo } from "./editor";
 
 const groups: Group[] = [
   {
-    title: "Primitives",
+    title: "Actions",
     docs: [
       {
         name: "button",
@@ -49,6 +50,18 @@ const groups: Group[] = [
           "A ghost icon button whose label is its accessible name and tooltip, with an optional shortcut.",
         demo: <IconButtonDemo />,
       },
+      {
+        name: "chip",
+        title: "Chip",
+        description:
+          "Pill buttons for bars over a canvas; aria-pressed shows one on.",
+        demo: <ChipDemo />,
+      },
+    ],
+  },
+  {
+    title: "Inputs",
+    docs: [
       {
         name: "input",
         title: "Input",
@@ -95,25 +108,76 @@ const groups: Group[] = [
         demo: <SelectDemo />,
       },
       {
-        name: "chip",
-        title: "Chip",
+        name: "slider",
+        title: "Slider",
         description:
-          "Pill buttons for bars over a canvas; aria-pressed shows one on.",
-        demo: <ChipDemo />,
+          "A labeled value with a bar; compact drops the bar and edits by dragging the value.",
+        demo: <SliderDemo />,
       },
       {
-        name: "spinner",
-        title: "Spinner",
-        description: "Work in progress.",
-        demo: <SpinnerDemo />,
+        name: "scrub-input",
+        title: "Scrub input",
+        description:
+          "A number that drags sideways, types on click, and steps with the arrow keys.",
+        demo: <ScrubInputDemo />,
       },
       {
-        name: "shimmer",
-        title: "Shimmer",
+        name: "vertical-slider",
+        title: "Vertical slider",
+        description: "An upright range with an optional painted track.",
+        demo: <VerticalSliderDemo />,
+      },
+    ],
+  },
+  {
+    title: "Containers",
+    docs: [
+      {
+        name: "panel",
+        title: "Panel",
         description:
-          "A theme utility: a bright band sweeps across text, icons, or placeholder blocks while work is pending.",
-        demo: <ShimmerDemo />,
-        code: '<span className="shimmer">Decoding RAW…</span>',
+          "A side panel of sections with dividers, a scrolling body, and an optional resize edge.",
+        demo: <PanelDemo />,
+      },
+      {
+        name: "cards",
+        title: "Cards",
+        description:
+          "Theme utilities: layer-card and layer-elevated paint a card and set the fills for the fields and buttons on it, so they keep the same contrast on the page, in a card, and in a card inside it.",
+        demo: <LayersDemo />,
+        bare: true,
+        code: '<div className="layer-card rounded-xl shadow-raised">…</div>',
+      },
+      {
+        name: "scroll-area",
+        title: "Scroll area",
+        description: "Vertical scrolling with a thin bar and faded edges.",
+        demo: <ScrollAreaDemo />,
+      },
+    ],
+  },
+  {
+    title: "Navigation",
+    docs: [
+      {
+        name: "tabs",
+        title: "Tabs",
+        description:
+          "Rows or columns of tabs with arrow-key navigation, such as a tool rail.",
+        demo: <TabsDemo />,
+      },
+      {
+        name: "list-item",
+        title: "List item",
+        description: "Selectable rows for collections such as layers.",
+        demo: <ListItemDemo />,
+      },
+      {
+        name: "tree-list",
+        title: "Tree list",
+        description:
+          "Rows that nest into groups and drag to reorder or nest, with arrow-key navigation.",
+        demo: <TreeListDemo />,
       },
     ],
   },
@@ -148,65 +212,21 @@ const groups: Group[] = [
     ],
   },
   {
-    title: "Panels",
+    title: "Effects",
     docs: [
       {
-        name: "panel",
-        title: "Panel",
+        name: "spinner",
+        title: "Spinner",
+        description: "Work in progress.",
+        demo: <SpinnerDemo />,
+      },
+      {
+        name: "shimmer",
+        title: "Shimmer",
         description:
-          "A side panel of sections with dividers, a scrolling body, and an optional resize edge.",
-        demo: <PanelDemo />,
-      },
-      {
-        name: "tabs",
-        title: "Tabs",
-        description:
-          "Rows or columns of tabs with arrow-key navigation, such as a tool rail.",
-        demo: <TabsDemo />,
-      },
-      {
-        name: "list-item",
-        title: "List item",
-        description: "Selectable rows for collections such as layers.",
-        demo: <ListItemDemo />,
-      },
-      {
-        name: "tree-list",
-        title: "Tree list",
-        description:
-          "Rows that nest into groups and drag to reorder or nest, with arrow-key navigation.",
-        demo: <TreeListDemo />,
-      },
-      {
-        name: "scroll-area",
-        title: "Scroll area",
-        description: "Vertical scrolling with a thin bar and faded edges.",
-        demo: <ScrollAreaDemo />,
-      },
-    ],
-  },
-  {
-    title: "Controls",
-    docs: [
-      {
-        name: "slider",
-        title: "Slider",
-        description:
-          "A labeled value with a bar; compact drops the bar and edits by dragging the value.",
-        demo: <SliderDemo />,
-      },
-      {
-        name: "scrub-input",
-        title: "Scrub input",
-        description:
-          "A number that drags sideways, types on click, and steps with the arrow keys.",
-        demo: <ScrubInputDemo />,
-      },
-      {
-        name: "vertical-slider",
-        title: "Vertical slider",
-        description: "An upright range with an optional painted track.",
-        demo: <VerticalSliderDemo />,
+          "A theme utility: a bright band sweeps across text, icons, or placeholder blocks while work is pending.",
+        demo: <ShimmerDemo />,
+        code: '<span className="shimmer">Decoding RAW…</span>',
       },
     ],
   },
@@ -228,11 +248,7 @@ const groups: Group[] = [
 const intro = (
   <header className="flex flex-col gap-4">
     <h1 className="text-2xl font-medium">@roprgm/ui</h1>
-    <p className="max-w-xl text-muted">
-      Minimal dark components for professional tools such as photo and video
-      editors. Shadows instead of borders, CSS before JavaScript, and Base UI
-      where behavior needs it.
-    </p>
+    <p className="max-w-xl text-muted">A minimal, dark UI library for React.</p>
     <Code>bun add @roprgm/ui</Code>
   </header>
 );

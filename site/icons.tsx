@@ -74,12 +74,6 @@ export const CopyIcon = () => (
   </Icon>
 );
 
-export const CheckIcon = () => (
-  <Icon>
-    <path d="m5 12 4 4L19 6" />
-  </Icon>
-);
-
 export const UndoIcon = () => (
   <Icon>
     <path d="M9 14 4 9l5-5" />

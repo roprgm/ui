@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { useState } from "react";
 import { Button } from "../src/button";
 import { Checkbox } from "../src/checkbox";
@@ -22,6 +23,7 @@ import { Toggle, ToggleGroup } from "../src/toggle-group";
 import { Tooltip } from "../src/tooltip";
 import { type TreeDrop, TreeList } from "../src/tree-list";
 import { VerticalSlider } from "../src/vertical-slider";
+import { CopyButton } from "./copy-button";
 import {
   AdjustIcon,
   BrushIcon,
@@ -75,6 +77,21 @@ export function InputDemo() {
       <Input placeholder="Name" />
       <Input defaultValue="not an email" aria-invalid />
       <Input type="file" />
+      <CopyInput value="https://ui.roprgm.com/r/input.json" />
+    </div>
+  );
+}
+
+function CopyInput({ value }: { value: string }) {
+  return (
+    <div className="relative">
+      <Input readOnly value={value} aria-label="Link" className="pr-8" />
+      {/* 4px inside the field; concentric corners would be 2px, too sharp at this size. */}
+      <CopyButton
+        value={value}
+        size="icon-xs"
+        className="absolute top-1 right-1 rounded-sm"
+      />
     </div>
   );
 }
@@ -191,14 +208,80 @@ export function ShimmerDemo() {
       <span className="shimmer flex items-center gap-2 text-foreground">
         <BrushIcon /> Finding a source for the patch…
       </span>
-      <div className="flex items-center gap-3">
-        <span className="shimmer size-10 rounded-md bg-raised-hover" />
-        <span className="shimmer flex flex-1 flex-col gap-2">
+      <div className="shimmer flex items-center gap-3">
+        <span className="size-10 rounded-md bg-raised-hover" />
+        <span className="flex flex-1 flex-col gap-2">
           <span className="h-2.5 w-3/4 rounded-full bg-raised-hover" />
           <span className="h-2.5 w-1/2 rounded-full bg-raised-hover" />
         </span>
       </div>
     </div>
+  );
+}
+
+export function LayersDemo() {
+  return (
+    <div className="grid gap-2 sm:grid-cols-[1fr_2fr]">
+      <Layer name="Page" className="py-6 pr-4" />
+      {/* 16px corners less 8px of padding leave 8px for the card inside. */}
+      <div className="layer-card grid gap-2 rounded-2xl p-2 shadow-raised sm:grid-cols-2">
+        <Layer name="Card" className="p-4" />
+        <Layer
+          name="Elevated"
+          className="layer-elevated rounded-lg p-4 shadow-raised"
+        />
+      </div>
+    </div>
+  );
+}
+
+function Layer({ name, className }: { name: string; className: string }) {
+  return (
+    <div className={cn("flex flex-col gap-3", className)}>
+      <span className="text-faint">{name}</span>
+      <LayerControls name={name} />
+    </div>
+  );
+}
+
+function LayerControls({ name }: { name: string }) {
+  const [exposure, setExposure] = useState(0.35);
+  return (
+    <>
+      <Input placeholder="Name" />
+      <div className="flex gap-2">
+        <Button className="flex-1">Cancel</Button>
+        <Button variant="primary" className="flex-1">
+          Save
+        </Button>
+      </div>
+      <Select aria-label="Fruit" items={fruits} placeholder="Pick a fruit" />
+      <ToggleGroup>
+        <Toggle name={`${name}-view`} value="fit" defaultChecked>
+          Fit
+        </Toggle>
+        <Toggle name={`${name}-view`} value="fill">
+          Fill
+        </Toggle>
+      </ToggleGroup>
+      <div className="flex gap-4">
+        <label className="flex items-center gap-2">
+          <Switch defaultChecked /> Snap
+        </label>
+        <label className="flex items-center gap-2">
+          <Checkbox defaultChecked /> Grid
+        </label>
+      </div>
+      <Slider
+        label="Exposure"
+        value={exposure}
+        defaultValue={0}
+        onChange={setExposure}
+        min={-5}
+        max={5}
+        step={0.05}
+      />
+    </>
   );
 }
 
@@ -398,7 +481,7 @@ export function ListItemDemo() {
     { id: "image", name: "Image" },
   ];
   return (
-    <div className="w-64 overflow-hidden rounded-lg bg-surface shadow-float">
+    <div className="layer-elevated w-64 overflow-hidden rounded-lg shadow-float">
       {layers.map((layer) => (
         <ListItem
           key={layer.id}
@@ -486,7 +569,7 @@ export function TreeListDemo() {
         if (!moved) return;
         setLayers(placeLayer(withoutLayer(layers, drop.id), moved, drop));
       }}
-      className="w-64 overflow-hidden rounded-lg bg-surface shadow-float"
+      className="layer-elevated w-64 overflow-hidden rounded-lg shadow-float"
     >
       {(layer) => (
         <>
@@ -564,19 +647,35 @@ export function SliderDemo() {
 
 export function ScrubInputDemo() {
   const [size, setSize] = useState(24);
+  const [angle, setAngle] = useState(0);
   return (
-    <span className="flex items-center gap-2 text-muted">
-      Size
-      <ScrubInput
-        aria-label="Size"
-        value={size}
-        defaultValue={24}
-        onChange={setSize}
-        min={1}
-        max={500}
-        format={(v) => `${v}px`}
-      />
-    </span>
+    <>
+      <span className="flex items-center gap-2 text-muted">
+        Size
+        <ScrubInput
+          aria-label="Size"
+          value={size}
+          defaultValue={24}
+          onChange={setSize}
+          min={1}
+          max={500}
+          format={(v) => `${v}px`}
+        />
+      </span>
+      <span className="flex items-center gap-2 text-muted">
+        Angle
+        <ScrubInput
+          aria-label="Angle"
+          value={angle}
+          defaultValue={0}
+          onChange={setAngle}
+          min={-180}
+          max={180}
+          format={(v) => `${v}°`}
+          chevrons
+        />
+      </span>
+    </>
   );
 }
 

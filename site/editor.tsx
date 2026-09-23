@@ -33,7 +33,7 @@ export function EditorDemo() {
 
   return (
     <div className="flex h-[560px] bg-field">
-      <div className="border-line border-r bg-surface p-1.5">
+      <div className="layer-card border-line border-r p-1.5">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <div className="relative grid min-w-0 flex-1 place-items-center p-10">
@@ -42,7 +42,7 @@ export function EditorDemo() {
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="absolute top-3 flex items-center gap-1 rounded-full bg-surface p-1 pl-3 shadow-float">
+          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-1 pl-3 shadow-float">
             <Slider
               label="Size"
               value={size}
