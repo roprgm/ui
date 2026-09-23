@@ -16,8 +16,6 @@
           "color-surface-6": "hsl(0 0% 27.3%)",
           "color-surface-7": "hsl(0 0% 33.0%)",
           "color-surface-8": "hsl(0 0% 39.0%)",
-          "color-surface-9": "hsl(0 0% 45.3%)",
-          "color-surface-10": "hsl(0 0% 52.0%)",
           "color-tooltip": "var(--color-surface-1)",
           "color-field": "var(--field)",
           "color-raised": "var(--raised)",
@@ -98,9 +96,6 @@
           },
           "body": { "text-shadow": "0.5px 1px 0.5px rgb(0 0 0 / 0.2)" },
           "button, input, textarea": { "text-shadow": "inherit" },
-          "button svg": {
-            "transition": "color 200ms var(--default-transition-timing-function)"
-          },
           "label:has(input:is([type=\"checkbox\"], [type=\"radio\"]):enabled)": {
             "cursor": "pointer"
           }

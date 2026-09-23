@@ -75,7 +75,7 @@ Components use only these tokens, defined in `theme.css` as `--color-*`, so they
 
 | Group | Token | Used for |
 | --- | --- | --- |
-| Scale | `surface-1` to `surface-10` | the grays layers and fills pick from, darkest first; use one to match a layer's color |
+| Scale | `surface-1` to `surface-8` | the grays layers and fills pick from, darkest first; use one to match a layer's color |
 | Fills | `field` | a step below the layer: inputs, checkboxes, switch and slider tracks, toggle groups |
 | | `raised`, `raised-hover` | two and three steps above the layer: buttons, selects, selected tabs, toggles, and rows |
 | | `tooltip` | tooltips, darker than any layer |
