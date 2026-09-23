@@ -9,6 +9,7 @@ import {
   FieldDemo,
   IconButtonDemo,
   InputDemo,
+  KbdDemo,
   LayersDemo,
   ListItemDemo,
   MenuDemo,
@@ -57,6 +58,13 @@ const groups: Group[] = [
         description:
           "Pill buttons for bars over a canvas; aria-pressed shows one on.",
         demo: <ChipDemo />,
+      },
+      {
+        name: "kbd",
+        title: "Kbd",
+        description:
+          "A shortcut written as Mod Z: Mod shows as ⌘ on a Mac and Ctrl elsewhere. Tooltips and menu items take one as shortcut.",
+        demo: <KbdDemo />,
       },
     ],
   },

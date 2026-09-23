@@ -291,6 +291,19 @@
       ]
     },
     {
+      "name": "kbd",
+      "type": "registry:ui",
+      "categories": ["actions"],
+      "dependencies": ["cn"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/kbd.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "spinner",
       "type": "registry:ui",
       "categories": ["effects"],
@@ -307,7 +320,10 @@
       "type": "registry:ui",
       "categories": ["overlays"],
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/kbd.json"
+      ],
       "files": [
         {
           "path": "src/tooltip.tsx",
@@ -322,7 +338,8 @@
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/chevron.json",
-        "https://ui.roprgm.com/r/surface.json"
+        "https://ui.roprgm.com/r/surface.json",
+        "https://ui.roprgm.com/r/kbd.json"
       ],
       "files": [
         {

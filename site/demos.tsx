@@ -6,6 +6,7 @@ import { Chip } from "../src/chip";
 import { Field } from "../src/field";
 import { IconButton } from "../src/icon-button";
 import { Input } from "../src/input";
+import { Kbd } from "../src/kbd";
 import { ListItem } from "../src/list-item";
 import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/menu";
 import { Notice } from "../src/notice";
@@ -298,6 +299,16 @@ export function TooltipDemo() {
   ));
 }
 
+export function KbdDemo() {
+  return (
+    <>
+      <Kbd>Mod Z</Kbd>
+      <Kbd>Mod Shift Z</Kbd>
+      <Kbd>B</Kbd>
+    </>
+  );
+}
+
 export function MenuDemo() {
   return (
     <Menu
@@ -307,14 +318,16 @@ export function MenuDemo() {
         </IconButton>
       }
     >
-      <MenuItem>Duplicate</MenuItem>
-      <MenuItem>Rename</MenuItem>
+      <MenuItem shortcut="Mod D">Duplicate</MenuItem>
+      <MenuItem shortcut="F2">Rename</MenuItem>
       <Submenu label="Move to">
         <MenuItem>Top</MenuItem>
         <MenuItem>Bottom</MenuItem>
       </Submenu>
       <MenuSeparator />
-      <MenuItem className="text-danger">Delete</MenuItem>
+      <MenuItem shortcut="⌫" className="text-danger">
+        Delete
+      </MenuItem>
     </Menu>
   );
 }
