@@ -143,20 +143,20 @@ const groups: Group[] = [
     title: "Containers",
     docs: [
       {
-        name: "panel",
-        title: "Panel",
-        description:
-          "A side panel of sections with dividers, a scrolling body, and an optional resize edge.",
-        demo: <PanelDemo />,
-      },
-      {
-        name: "cards",
-        title: "Cards",
+        name: "card",
+        title: "Card",
         description:
           "Theme utilities: layer-card and layer-elevated paint a card and set the fills for the fields and buttons on it, so they keep the same contrast on the page, in a card, and in a card inside it.",
         demo: <LayersDemo />,
         bare: true,
         code: '<div className="layer-card rounded-xl shadow-raised">…</div>',
+      },
+      {
+        name: "panel",
+        title: "Panel",
+        description:
+          "A side panel of sections with dividers, a scrolling body, and an optional resize edge.",
+        demo: <PanelDemo />,
       },
       {
         name: "scroll-area",
@@ -171,7 +171,7 @@ const groups: Group[] = [
     docs: [
       {
         name: "tabs",
-        title: "Tabs",
+        title: "Tab list",
         description:
           "Rows or columns of tabs with arrow-key navigation, such as a tool rail.",
         demo: <TabsDemo />,

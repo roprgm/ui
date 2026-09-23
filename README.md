@@ -53,7 +53,7 @@ Components without JavaScript, such as `Button` and `Input`, render on the serve
 | --- | --- |
 | Actions | `Button`, `IconButton`, `Chip`, `Kbd` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `Switch`, `ToggleGroup`, `Select`, `Slider`, `ScrubInput`, `VerticalSlider` |
-| Containers | `Panel`, `ScrollArea`, and cards with `layer-card` and `layer-elevated` |
+| Containers | Cards with `layer-card` and `layer-elevated`, `Panel`, `ScrollArea` |
 | Navigation | `TabList`, `ListItem`, `TreeList` |
 | Overlays | `Tooltip`, `Menu`, `Popover`, `Dialog`, `Notice` |
 | Effects | `Spinner`, and the `shimmer` utility |
