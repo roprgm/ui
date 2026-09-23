@@ -58,6 +58,7 @@ npx shadcn@latest add https://ui.roprgm.com/r/button.json
 | Overlays | `Tooltip`, `TooltipProvider` | Base UI |
 |  | `Menu`, `MenuItem` (`shortcut`), `MenuSeparator`, `Submenu` | Base UI |
 |  | `Popover` | Base UI |
+|  | `Dialog`, `DialogClose` | Base UI |
 |  | `Notice` | none |
 | Effects | `Spinner` | none |
 |  | `shimmer` (a theme utility) | none |
@@ -81,7 +82,7 @@ Components use only these tokens, defined in `theme.css` as `--color-*`, so they
 | States | `hover`, `pressed` | translucent fills for ghost buttons, chips, and highlighted items |
 | Text | `foreground`, `muted`, `faint`, `disabled` | body text; idle controls and labels; placeholders, units, and hints; disabled items |
 | Accent | `accent`, `accent-hover`, `on-accent` | primary buttons, checked controls, slider thumbs, drop markers, and what sits on them |
-| Other | `line`, `focus`, `danger` | dividers, the focus ring, errors |
+| Other | `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, the shade behind a dialog |
 
 ### Layers
 
