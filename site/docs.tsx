@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import { type ReactNode, useEffect, useLayoutEffect, useState } from "react";
-import { IconButton } from "../src/button";
+import { IconButton } from "../src/icon-button";
 import { CheckIcon, CopyIcon } from "./icons";
 
 export type Doc = {

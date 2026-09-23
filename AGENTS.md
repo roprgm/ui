@@ -4,6 +4,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 - One component file per entry in `registry.json`. Import only `react`, `cn`, `class-variance-authority`, and `@base-ui/react`, plus sibling files with `./`.
 - Prefer CSS over JavaScript: style native elements with Tailwind variants (`checked:`, `has-checked:`, `peer-*`). Use Base UI only for behavior CSS can't provide, such as positioning, focus management, and typeahead.
+- `theme.css` holds what components need (tokens, utilities, base rules for controls); `base.css` holds optional page defaults. Keep each in sync with its `registry.json` item (`theme`, `base`).
 - Use shadows, not borders: `shadow-raised`, `shadow-sunken`, `shadow-float` from `src/theme.css`. Keep `registry.json`'s `theme` item in sync with that file.
 - Colors are Tailwind `neutral`. Components inherit font size. Controls are `h-8` and take the `focus-ring` utility; icon buttons in 40px panel headers and rows are `icon-sm` (28px).
 - Nested corners are concentric: outer radius minus the inset equals the inner radius, with equal insets on both sides of the corner (a 12px card holds a 6px button 6px in; an 8px surface holds 4px items 4px in).

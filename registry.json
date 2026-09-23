@@ -8,8 +8,8 @@
       "type": "registry:theme",
       "cssVars": {
         "theme": {
-          "shadow-raised": "inset 0 1px 0 rgb(255 255 255 / 0.1), 0 1px 1px rgb(0 0 0 / 0.22)",
-          "shadow-sunken": "inset 0 1px rgb(0 0 0 / 0.4), 0 1px 0 rgb(255 255 255 / 0.05)",
+          "shadow-raised": "inset 0 1px 0 rgb(240 240 240 / 0.06), 0 1px 1px rgb(0 0 0 / 0.25)",
+          "shadow-sunken": "inset 0 1px 1px rgb(0 0 0 / 0.3), 0 1px 0 rgb(240 240 240 / 0.04)",
           "shadow-float": "0 0 0 1px var(--color-neutral-900), inset 0 1px 0 rgb(255 255 255 / 0.08), 0 2px 6px rgb(0 0 0 / 0.3), 0 16px 32px -8px rgb(0 0 0 / 0.35)",
           "text-shadow-subtle": "0.5px 1px 0.5px rgb(0 0 0 / 0.08)"
         }
@@ -45,9 +45,31 @@
         },
         "@layer base": {
           "body": { "text-shadow": "0.5px 1px 0.5px rgb(0 0 0 / 0.2)" },
-          "button, input": { "text-shadow": "inherit" },
+          "button, input, textarea": { "text-shadow": "inherit" },
           "label:has(input:is([type=\"checkbox\"], [type=\"radio\"]):enabled)": {
             "cursor": "pointer"
+          }
+        }
+      }
+    },
+    {
+      "name": "base",
+      "type": "registry:theme",
+      "cssVars": {
+        "theme": {
+          "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
+          "color-page": "color-mix(in oklab, var(--color-neutral-800) 50%, var(--color-neutral-900))"
+        }
+      },
+      "css": {
+        "@layer base": {
+          "body": {
+            "font-family": "var(--font-sans)",
+            "font-size": "13px",
+            "line-height": "20px",
+            "color": "var(--color-neutral-100)",
+            "background": "var(--color-page)",
+            "color-scheme": "dark"
           }
         }
       }
@@ -70,11 +92,18 @@
       "type": "registry:ui",
       "categories": ["primitives"],
       "dependencies": ["cn", "class-variance-authority"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [{ "path": "src/button.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "icon-button",
+      "type": "registry:ui",
+      "categories": ["primitives"],
       "registryDependencies": [
-        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/button.json",
         "https://ui.roprgm.com/r/tooltip.json"
       ],
-      "files": [{ "path": "src/button.tsx", "type": "registry:ui" }]
+      "files": [{ "path": "src/icon-button.tsx", "type": "registry:ui" }]
     },
     {
       "name": "input",
@@ -83,6 +112,21 @@
       "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [{ "path": "src/input.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "categories": ["primitives"],
+      "dependencies": ["cn"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [{ "path": "src/textarea.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "categories": ["primitives"],
+      "dependencies": ["cn"],
+      "files": [{ "path": "src/field.tsx", "type": "registry:ui" }]
     },
     {
       "name": "checkbox",
@@ -167,7 +211,7 @@
       "type": "registry:ui",
       "categories": ["overlays"],
       "dependencies": ["cn"],
-      "registryDependencies": ["https://ui.roprgm.com/r/button.json"],
+      "registryDependencies": ["https://ui.roprgm.com/r/icon-button.json"],
       "files": [{ "path": "src/notice.tsx", "type": "registry:ui" }]
     },
     {

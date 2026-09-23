@@ -6,6 +6,8 @@ import {
   ButtonDemo,
   CheckboxDemo,
   ChipDemo,
+  FieldDemo,
+  IconButtonDemo,
   InputDemo,
   ListItemDemo,
   MenuDemo,
@@ -20,6 +22,7 @@ import {
   SpinnerDemo,
   SwitchDemo,
   TabsDemo,
+  TextareaDemo,
   ToggleGroupDemo,
   TooltipDemo,
   VerticalSliderDemo,
@@ -35,14 +38,35 @@ const groups: Group[] = [
         name: "button",
         title: "Button",
         description:
-          "Actions, and IconButton for icon-only ones with a tooltip and shortcut.",
+          "Actions. render draws one as another element, such as a link; it renders on the server.",
         demo: <ButtonDemo />,
+      },
+      {
+        name: "icon-button",
+        title: "Icon button",
+        description:
+          "A ghost icon button whose label is its accessible name and tooltip, with an optional shortcut.",
+        demo: <IconButtonDemo />,
       },
       {
         name: "input",
         title: "Input",
-        description: "A sunken text field.",
+        description:
+          "A sunken text field. aria-invalid rings it red, and file inputs get a styled picker.",
         demo: <InputDemo />,
+      },
+      {
+        name: "textarea",
+        title: "Textarea",
+        description: "A multi-line field that grows with its text.",
+        demo: <TextareaDemo />,
+      },
+      {
+        name: "field",
+        title: "Field",
+        description:
+          "A label, one control, and a description or error, connected for assistive technology.",
+        demo: <FieldDemo />,
       },
       {
         name: "checkbox",

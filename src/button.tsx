@@ -1,9 +1,6 @@
-"use client";
-
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
-import type { ComponentProps } from "react";
-import { Tooltip } from "./tooltip";
+import { type ComponentProps, cloneElement, type ReactElement } from "react";
 
 const button = cva(
   "inline-flex h-8 cursor-pointer items-center justify-center gap-2 rounded-md px-3 whitespace-nowrap transition focus-ring active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-40",
@@ -28,35 +25,26 @@ const button = cva(
   },
 );
 
+/**
+ * An action. `render` draws it as another element, such as a link:
+ * `<Button render={<Link href="/" />}>Home</Button>`.
+ */
 export function Button({
   className,
   variant,
   size,
+  render,
   ...props
-}: ComponentProps<"button"> & VariantProps<typeof button>) {
-  return (
-    <button
-      type="button"
-      className={cn(button({ variant, size }), className)}
-      {...props}
-    />
-  );
-}
-
-/** A ghost icon button; `label` names it for assistive technology and shows as its tooltip. */
-export function IconButton({
-  label,
-  shortcut,
-  side,
-  ...props
-}: ComponentProps<typeof Button> & {
-  label: string;
-  shortcut?: string;
-  side?: ComponentProps<typeof Tooltip>["side"];
-}) {
-  return (
-    <Tooltip content={label} shortcut={shortcut} side={side}>
-      <Button variant="ghost" size="icon" aria-label={label} {...props} />
-    </Tooltip>
-  );
+}: ComponentProps<"button"> &
+  VariantProps<typeof button> & {
+    render?: ReactElement<{ className?: string }>;
+  }) {
+  const classes = cn(button({ variant, size }), className);
+  if (render) {
+    return cloneElement(render, {
+      ...props,
+      className: cn(classes, render.props.className),
+    });
+  }
+  return <button type="button" className={classes} {...props} />;
 }

@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps, ReactNode } from "react";
-import { IconButton } from "./button";
+import { IconButton } from "./icon-button";
 
 /**
  * A message that floats without blocking the app; the caller positions it. An `alert` is red

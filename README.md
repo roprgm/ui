@@ -19,18 +19,29 @@ bun add @roprgm/ui
 ```css
 @import "tailwindcss";
 @import "@roprgm/ui/theme.css";
+/* Optional page defaults: 13px text, the page background, dark form controls, Geist first. */
+@import "@roprgm/ui/base.css";
 ```
+
+`base.css` uses Geist when the app loads it, with `next/font` or `@fontsource-variable/geist`, and the system font otherwise.
 
 ```tsx
 import { Button } from "@roprgm/ui/button";
+
+<Button render={<Link href="/trips" />}>Trips</Button>;
 ```
+
+Components with Base UI, hooks, or their own handlers are marked `"use client"`; the rest, such as `Button`, `Input`, and `Textarea`, render in React Server Components.
 
 ## Components
 
 | Section | Component | JavaScript |
 | --- | --- | --- |
-| Primitives | `Button`, `IconButton` | none; `IconButton` adds a Tooltip |
-| | `Input` | none |
+| Primitives | `Button` (`render` draws it as another element) | none |
+| | `IconButton` | Tooltip |
+| | `Input` (`aria-invalid` and file pickers styled) | none |
+| | `Textarea` | none |
+| | `Field` (label, control, description or error) | ids only |
 | | `Checkbox` | none |
 | | `Switch` | none |
 | | `ToggleGroup`, `Toggle` | none |

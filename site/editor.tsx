@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { IconButton } from "../src/button";
 import { Chip } from "../src/chip";
+import { IconButton } from "../src/icon-button";
 import { ListItem } from "../src/list-item";
 import { Menu, MenuItem, MenuSeparator } from "../src/menu";
 import { Panel, PanelBody, PanelHeader, PanelSection } from "../src/panel";

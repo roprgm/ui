@@ -1,0 +1,24 @@
+/*
+ * The page the components are drawn against: 13px text, a background a step below their neutral-800
+ * panels, and dark form controls. Import it after theme.css. Geist is used when the app loads it,
+ * with next/font or @fontsource-variable/geist; otherwise text falls back to the system font.
+ */
+@theme {
+  --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
+  --color-page: color-mix(
+    in oklab,
+    var(--color-neutral-800) 50%,
+    var(--color-neutral-900)
+  );
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-neutral-100);
+    background: var(--color-page);
+    color-scheme: dark;
+  }
+}

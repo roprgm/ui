@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Button, IconButton } from "../src/button";
+import { Button } from "../src/button";
 import { Checkbox } from "../src/checkbox";
 import { Chip } from "../src/chip";
+import { Field } from "../src/field";
+import { IconButton } from "../src/icon-button";
 import { Input } from "../src/input";
 import { ListItem } from "../src/list-item";
 import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/menu";
@@ -15,6 +17,7 @@ import { Slider } from "../src/slider";
 import { Spinner } from "../src/spinner";
 import { Switch } from "../src/switch";
 import { Tab, TabList } from "../src/tabs";
+import { Textarea } from "../src/textarea";
 import { Toggle, ToggleGroup } from "../src/toggle-group";
 import { Tooltip } from "../src/tooltip";
 import { VerticalSlider } from "../src/vertical-slider";
@@ -45,15 +48,51 @@ export function ButtonDemo() {
       <Button variant="primary">Primary</Button>
       <Button variant="ghost">Ghost</Button>
       <Button disabled>Disabled</Button>
+      <Button variant="ghost" render={<a href="#icon-button" />}>
+        Link
+      </Button>
+    </>
+  );
+}
+
+export function IconButtonDemo() {
+  return (
+    <>
       <IconButton label="Undo" shortcut="Mod Z">
         <UndoIcon />
+      </IconButton>
+      <IconButton label="More" size="icon-sm">
+        <MoreIcon />
       </IconButton>
     </>
   );
 }
 
 export function InputDemo() {
-  return <Input placeholder="Name" className="w-56" />;
+  return (
+    <div className="flex w-64 flex-col gap-3">
+      <Input placeholder="Name" />
+      <Input defaultValue="not an email" aria-invalid />
+      <Input type="file" />
+    </div>
+  );
+}
+
+export function TextareaDemo() {
+  return <Textarea placeholder="Notes" className="w-64" />;
+}
+
+export function FieldDemo() {
+  return (
+    <div className="flex w-64 flex-col gap-4">
+      <Field label="Trip name" description="Shown on the itinerary.">
+        <Input defaultValue="Lisbon" />
+      </Field>
+      <Field label="Email" error="Enter an email address.">
+        <Input defaultValue="ana@" />
+      </Field>
+    </div>
+  );
 }
 
 export function CheckboxDemo() {
