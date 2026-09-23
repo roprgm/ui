@@ -1,4 +1,5 @@
 import { type ReactNode, useState } from "react";
+import { version } from "../package.json";
 import { Button } from "../src/button";
 import { Code } from "./docs";
 import { CopyIcon } from "./icons";
@@ -44,7 +45,10 @@ export function Usage() {
     <div className="flex max-w-3xl flex-col gap-10">
       <header className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-medium">@roprgm/ui</h1>
+          <div className="flex items-baseline gap-2">
+            <h1 className="text-2xl font-medium">@roprgm/ui</h1>
+            <span className="text-muted">v{version}</span>
+          </div>
           <p className="text-muted">A minimal, dark UI library for React.</p>
         </div>
         <CopyForAgents />

@@ -4,7 +4,6 @@ import { parse, render } from "sugar-high/core";
 import * as css from "sugar-high/lang/css";
 import * as shell from "sugar-high/lang/shell";
 import * as typescript from "sugar-high/lang/typescript";
-import { version } from "../package.json";
 import { IconButton } from "../src/icon-button";
 import { ScrollArea } from "../src/scroll-area";
 import { CopyButton } from "./copy-button";
@@ -73,7 +72,6 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
                 className={cn(link, "flex items-baseline gap-2 self-center")}
               >
                 <span className="font-medium">@roprgm/ui</span>
-                <span className="text-muted">v{version}</span>
               </a>
               <IconButton
                 label="GitHub"
