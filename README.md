@@ -1,10 +1,12 @@
 # @roprgm/ui
 
-A minimal, dark UI library for React.
+A minimal, dark UI library for React and Tailwind CSS v4.
+
+Docs and live examples: [ui.roprgm.com](https://ui.roprgm.com)
 
 ## Install
 
-Install the package and import the theme after Tailwind:
+Add the package, then import the theme after Tailwind in your CSS:
 
 ```bash
 bun add @roprgm/ui
@@ -15,99 +17,87 @@ bun add @roprgm/ui
 @import "@roprgm/ui/theme.css";
 ```
 
-The theme also sets the page: 13px text, the background, and dark form controls. It uses Geist when the app loads it, with `next/font` or `@fontsource-variable/geist`, and the system font otherwise.
-
-```tsx
-import { Button } from "@roprgm/ui/button";
-
-<Button render={<Link href="/trips" />}>Trips</Button>;
-```
-
-Components with Base UI, hooks, or their own handlers are marked `"use client"`; the rest, such as `Button`, `Input`, and `Textarea`, render in React Server Components.
-
-Or copy the source into your app with the shadcn CLI, without the package. Each component brings the theme and the components it uses:
+Or copy components into your app with the shadcn CLI. No package needed: each component brings the theme and the components it uses.
 
 ```bash
 npx shadcn@latest add https://ui.roprgm.com/r/button.json
 ```
 
+## Use
+
+Import each component from its own path:
+
+```tsx
+import { Button } from "@roprgm/ui/button";
+
+<Button variant="primary">Export</Button>;
+```
+
+Put groups of controls on a card. Fields and buttons take their color from the card they sit on, so they keep the same contrast everywhere:
+
+```tsx
+<div className="layer-card rounded-xl p-3 shadow-raised">
+  <Input placeholder="Name" />
+</div>
+```
+
+- Use `layer-card` for panels and cards, and `layer-elevated` for a card inside a card.
+- Use the theme's colors, such as `text-muted` or `bg-field`, instead of Tailwind's palette.
+- Use `shadow-raised`, `shadow-sunken`, and `shadow-float` instead of borders.
+
+Components without JavaScript, such as `Button` and `Input`, render on the server.
+
 ## Components
 
-| Section | Component | JavaScript |
-| --- | --- | --- |
-| Actions | `Button` (`render` draws it as another element) | none |
-|  | `IconButton` | Tooltip |
-|  | `Chip` | none |
-|  | `Kbd` (`Mod` shows as ⌘ or Ctrl) | none |
-| Inputs | `Input` (`aria-invalid` and file pickers styled) | none |
-|  | `Textarea` | none |
-|  | `Field` (label, control, description or error) | ids only |
-|  | `Checkbox` | none |
-|  | `Switch` | none |
-|  | `ToggleGroup`, `Toggle` | none |
-|  | `Select` | Base UI |
-|  | `Slider` (`variant`: `panel`, `toolbar`, or `compact` without the bar; the fill runs from `origin`, the default value, to the value) | none for the bar |
-|  | `ScrubInput` (`chevrons` adds hover arrows; off by default) | drag, typing, and arrow keys |
-|  | `VerticalSlider` | none |
-| Containers | `Panel`, `PanelHeader`, `PanelSection`, `PanelBody` | resizing only |
-|  | `layer-card`, `layer-elevated` (theme utilities for cards) | none |
-|  | `ScrollArea` | Base UI |
-| Navigation | `TabList`, `Tab` | arrow keys |
-|  | `ListItem` | none |
-|  | `TreeList` (drag to reorder or nest; `canDrop` and `onDrop` keep the data with the caller) | pointer drag and arrow keys |
-| Overlays | `Tooltip`, `TooltipProvider` | Base UI |
-|  | `Menu`, `MenuItem` (`shortcut`), `MenuSeparator`, `Submenu` | Base UI |
-|  | `Popover` | Base UI |
-|  | `Dialog`, `DialogClose` | Base UI |
-|  | `Notice` | none |
-| Effects | `Spinner` | none |
-|  | `shimmer` (a theme utility) | none |
+| Section | Components |
+| --- | --- |
+| Actions | `Button`, `IconButton`, `Chip`, `Kbd` |
+| Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `Switch`, `ToggleGroup`, `Select`, `Slider`, `ScrubInput`, `VerticalSlider` |
+| Containers | `Panel`, `ScrollArea`, and cards with `layer-card` and `layer-elevated` |
+| Navigation | `TabList`, `ListItem`, `TreeList` |
+| Overlays | `Tooltip`, `Menu`, `Popover`, `Dialog`, `Notice` |
+| Effects | `Spinner`, and the `shimmer` utility |
 
-## Colors
+Each one has a live demo and its install command on the [docs site](https://ui.roprgm.com).
 
-Components use only these tokens, defined in `theme.css` as `--color-*`, so they work with any color utility (`bg-field`, `text-muted`, `border-line`, `ring-focus`). Redefine one to restyle every component that uses it:
+## Theme
+
+Everything lives in `theme.css`: colors, radii, shadows, and a few utilities. It also sets the page to 13px text on a dark background, in Geist when your app loads it.
+
+### Colors
+
+| Token | Use |
+| --- | --- |
+| `foreground`, `muted`, `faint`, `disabled` | text, from strongest to weakest |
+| `field` | inputs, checkboxes, and tracks |
+| `raised`, `raised-hover` | buttons, selects, and selected items |
+| `accent`, `accent-hover`, `on-accent` | primary buttons and checked controls |
+| `hover`, `pressed` | translucent states for ghost buttons and chips |
+| `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
+| `surface-1` to `surface-8` | the gray scale, darkest first |
+
+### Layers
+
+The page and each card pick their colors from the gray scale:
+
+| Layer | Background | `field` | `raised` |
+| --- | --- | --- | --- |
+| The page | `surface-2` | `surface-1` | `surface-4` |
+| `layer-card` | `surface-3` | `surface-2` | `surface-5` |
+| `layer-elevated` | `surface-4` | `surface-3` | `surface-6` |
+
+Menus, popovers, and select lists open one layer above the one their trigger sits on. Dialogs are cards.
+
+### Customize
+
+Redefine any token to restyle every component that uses it:
 
 ```css
 @theme {
   --color-accent: hsl(210 90% 60%);
+  --radius-md: 8px;
 }
 ```
-
-| Group | Token | Used for |
-| --- | --- | --- |
-| Scale | `surface-1` to `surface-8` | the grays layers and fills pick from, darkest first; use one to match a layer's color |
-| Fills | `field` | a step below the layer: inputs, checkboxes, switch and slider tracks, toggle groups |
-| | `raised`, `raised-hover` | two and three steps above the layer: buttons, selects, selected tabs, toggles, and rows |
-| | `tooltip` | tooltips, darker than any layer |
-| States | `hover`, `pressed` | translucent fills for ghost buttons, chips, and highlighted items |
-| Text | `foreground`, `muted`, `faint`, `disabled` | body text; idle controls and labels; placeholders, units, and hints; disabled items |
-| Accent | `accent`, `accent-hover`, `on-accent` | primary buttons, checked controls, slider thumbs, drop markers, and what sits on them |
-| Other | `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, the shade behind a dialog |
-
-### Layers
-
-A control's fill depends on the layer it sits on, so an input or a button keeps the same contrast everywhere. There are three layers, and a fourth for popups:
-
-| Layer | Background | `field` | `raised` | `raised-hover` |
-| --- | --- | --- | --- | --- |
-| The page | `surface-2` | `surface-1` | `surface-4` | `surface-5` |
-| `layer-card`: panels, notices, cards | `surface-3` | `surface-2` | `surface-5` | `surface-6` |
-| `layer-elevated`: a card inside a card | `surface-4` | `surface-3` | `surface-6` | `surface-7` |
-| `layer-top`: popups opened from an elevated card | `surface-5` | `surface-4` | `surface-7` | `surface-8` |
-
-Give a card or any other container of controls one of these utilities instead of a `bg-*`:
-
-```tsx
-<div className="layer-card rounded-xl p-3 shadow-raised">…</div>
-```
-
-Menus, popovers, and select lists open one layer above their trigger's: from the page they are cards, from a card they are elevated. Each layer names itself in `--layer-name`, which the popup reads when it opens.
-
-## Utilities
-
-`theme.css` also provides utilities: `layer-card`, `layer-elevated`, `layer-top`, `shadow-raised`, `shadow-sunken`, `shadow-float`, `drop-shadow-float`, `focus-ring`, `shimmer`, and the `thumb:` variant for range thumbs.
-
-The site at `site/` documents each component and shows a photo editor built from them.
 
 ## Development
 
@@ -116,4 +106,6 @@ bun install
 bun run dev
 ```
 
-`bun run check` formats, lints, and type-checks. `bun run build` compiles `dist/`, writes the registry to `site/public/r/`, and builds the site.
+`bun run check` formats, lints, and type-checks. `bun run build` compiles the package, the registry, and the docs site.
+
+Publishing a GitHub release publishes the package to npm. The release tag must match the version in `package.json`, such as `v0.5.0`.
