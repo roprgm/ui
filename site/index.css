@@ -24,7 +24,3 @@
   --sh-property: hsl(35 65% 72%);
   --sh-jsxliterals: var(--color-foreground);
 }
-
-.sh__line {
-  display: block;
-}
