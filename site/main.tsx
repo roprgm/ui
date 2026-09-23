@@ -1,5 +1,5 @@
 import "./index.css";
-import { StrictMode } from "react";
+import { type ReactNode, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { TooltipProvider } from "../src/tooltip";
 import {
@@ -245,19 +245,68 @@ const groups: Group[] = [
   },
 ];
 
-const intro = (
-  <header className="flex flex-col gap-4">
-    <h1 className="text-2xl font-medium">@roprgm/ui</h1>
-    <p className="max-w-xl text-muted">A minimal, dark UI library for React.</p>
-    <Code>bun add @roprgm/ui</Code>
-  </header>
+function Step({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="flex flex-col gap-3">
+      <h3 className="text-base font-medium">{title}</h3>
+      {children}
+    </section>
+  );
+}
+
+const usage = (
+  <div className="flex max-w-3xl flex-col gap-10">
+    <header className="flex flex-col gap-2">
+      <h1 className="text-2xl font-medium">@roprgm/ui</h1>
+      <p className="text-muted">
+        A minimal, dark UI library for React. Use it one of two ways: copy each
+        component's source into your app, or install the package.
+      </p>
+    </header>
+    <Step title="Copy the source">
+      <p className="text-muted">
+        The shadcn CLI adds a component's file to your app, with the theme and
+        the other components it needs. The code is yours to change. Every
+        component page shows its command.
+      </p>
+      <Code>npx shadcn@latest add https://ui.roprgm.com/r/button.json</Code>
+    </Step>
+    <Step title="Or install the package">
+      <p className="text-muted">
+        Add it, then import the theme after Tailwind in your CSS. base.css is
+        optional: 13px text, the page background, and dark form controls.
+      </p>
+      <Code>bun add @roprgm/ui</Code>
+      <Code>{`@import "tailwindcss";
+@import "@roprgm/ui/theme.css";
+@import "@roprgm/ui/base.css";`}</Code>
+    </Step>
+    <Step title="Use a component">
+      <p className="text-muted">
+        Each component has its own path. Components without JavaScript, such as
+        Button and Input, render on the server.
+      </p>
+      <Code>{`import { Button } from "@roprgm/ui/button";
+
+<Button variant="primary">Export</Button>`}</Code>
+    </Step>
+    <Step title="Put controls on cards">
+      <p className="text-muted">
+        A field or a button takes its fill from the card it sits on, so it keeps
+        the same contrast on the page, in a card, and in a card inside it.
+      </p>
+      <Code>{`<div className="layer-card rounded-xl p-3 shadow-raised">
+  <Input placeholder="Name" />
+</div>`}</Code>
+    </Step>
+  </div>
 );
 
 // biome-ignore lint/style/noNonNullAssertion: index.html provides #root.
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <TooltipProvider>
-      <Page groups={groups} intro={intro} />
+      <Page groups={groups} usage={usage} />
     </TooltipProvider>
   </StrictMode>,
 );

@@ -1,7 +1,9 @@
 import { cn } from "cn";
 import { type ReactNode, useEffect, useLayoutEffect, useState } from "react";
 import { version } from "../package.json";
+import { IconButton } from "../src/icon-button";
 import { CopyButton } from "./copy-button";
+import { GitHubIcon } from "./icons";
 
 export type Doc = {
   /** The registry item, which also serves as the anchor. */
@@ -36,16 +38,16 @@ function useHash() {
 }
 
 /**
- * The docs page shows one group at a time. The hash picks it, by the group's name or one of
- * its docs; a doc link in another group switches to that group and scrolls to the doc.
+ * The docs page shows the usage guide, or one group at a time. The hash picks the group, by its
+ * name or one of its docs; a doc link in another group switches to that group and scrolls to
+ * the doc. Any other hash, or none, shows the guide.
  */
-export function Page({ groups, intro }: { groups: Group[]; intro: ReactNode }) {
+export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
   const hash = useHash();
-  const current =
-    groups.find(
-      (group) =>
-        slug(group) === hash || group.docs.some((doc) => doc.name === hash),
-    ) ?? groups[0];
+  const current = groups.find(
+    (group) =>
+      slug(group) === hash || group.docs.some((doc) => doc.name === hash),
+  );
 
   // Runs after the group renders, so a doc from another group exists to scroll to.
   useLayoutEffect(() => {
@@ -54,16 +56,40 @@ export function Page({ groups, intro }: { groups: Group[]; intro: ReactNode }) {
     else scrollTo(0, 0);
   }, [hash]);
 
-  if (!current) return null;
   return (
     <div className="mx-auto flex max-w-6xl gap-12 px-6">
       <nav className="sticky top-0 hidden h-dvh w-44 shrink-0 flex-col gap-1 overflow-y-auto py-12 md:flex">
+        <div className="mb-4 -mt-1 flex items-center justify-between">
+          <a
+            href="#usage"
+            className={cn(link, "flex items-baseline gap-2 self-center")}
+          >
+            <span className="font-medium">@roprgm/ui</span>
+            <span className="text-muted">v{version}</span>
+          </a>
+          <IconButton
+            label="GitHub"
+            size="icon-sm"
+            render={
+              <a
+                href="https://github.com/roprgm/ui"
+                target="_blank"
+                rel="noreferrer"
+              />
+            }
+          >
+            <GitHubIcon />
+          </IconButton>
+        </div>
         <a
-          href={`#${slug(groups[0] ?? current)}`}
-          className={cn(link, "mb-5 flex items-baseline gap-2")}
+          href="#usage"
+          className={cn(
+            link,
+            "mb-3 hover:text-foreground",
+            current ? "text-faint" : "text-foreground",
+          )}
         >
-          <span className="font-medium">@roprgm/ui</span>
-          <span className="text-muted">v{version}</span>
+          Usage
         </a>
         {groups.map((group) => (
           <div key={group.title} className="flex flex-col gap-1">
@@ -97,6 +123,12 @@ export function Page({ groups, intro }: { groups: Group[]; intro: ReactNode }) {
       </nav>
       <main className="flex min-w-0 flex-1 flex-col gap-14 py-12">
         <div className="flex flex-wrap gap-x-4 gap-y-1 md:hidden">
+          <a
+            href="#usage"
+            className={cn(link, current ? "text-faint" : "text-foreground")}
+          >
+            Usage
+          </a>
           {groups.map((group) => (
             <a
               key={group.title}
@@ -110,11 +142,15 @@ export function Page({ groups, intro }: { groups: Group[]; intro: ReactNode }) {
             </a>
           ))}
         </div>
-        {current === groups[0] && intro}
-        <h2 className="text-2xl font-medium">{current.title}</h2>
-        {current.docs.map((doc) => (
-          <Article key={doc.name} doc={doc} />
-        ))}
+        {!current && usage}
+        {current && (
+          <>
+            <h2 className="text-2xl font-medium">{current.title}</h2>
+            {current.docs.map((doc) => (
+              <Article key={doc.name} doc={doc} />
+            ))}
+          </>
+        )}
       </main>
     </div>
   );
@@ -154,13 +190,14 @@ function Preview({ doc }: { doc: Doc }) {
   );
 }
 
-/** A one-line command with a copy button. */
+/** Code with a copy button, one line or several. */
 export function Code({ children }: { children: string }) {
   return (
-    <div className="flex items-center gap-2 rounded-xl bg-field py-1.5 pr-1.5 pl-3 shadow-sunken">
-      <code className="flex-1 truncate font-mono text-xs text-foreground">
+    // Each line is 16px in a 6px padding, so the first one centers on the 28px copy button.
+    <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 shadow-sunken">
+      <pre className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground">
         {children}
-      </code>
+      </pre>
       <CopyButton value={children} size="icon-sm" />
     </div>
   );
