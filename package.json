@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "Minimal dark UI components for professional tools, on Tailwind CSS and Base UI.",
   "homepage": "https://ui.roprgm.com",
-  "repository": "github:roprgm/ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roprgm/ui.git"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
