@@ -27,7 +27,7 @@
 }
 
 /* The grays everything is painted with, darkest first. Each step is a third of a point wider than
-   the last, from 4% to 6.7%. */
+   the last, from 4% to 6%. */
 @theme {
   --color-surface-1: hsl(0 0% 4.0%);
   --color-surface-2: hsl(0 0% 8.0%);
@@ -37,8 +37,6 @@
   --color-surface-6: hsl(0 0% 27.3%);
   --color-surface-7: hsl(0 0% 33.0%);
   --color-surface-8: hsl(0 0% 39.0%);
-  --color-surface-9: hsl(0 0% 45.3%);
-  --color-surface-10: hsl(0 0% 52.0%);
 
   --color-tooltip: var(--color-surface-1);
 }
@@ -181,11 +179,6 @@
   input,
   textarea {
     text-shadow: inherit;
-  }
-
-  /* Icons in controls ease their color at the buttons' pace, even when the control has no transition. */
-  button svg {
-    transition: color 200ms var(--default-transition-timing-function);
   }
 
   label:has(input:is([type="checkbox"], [type="radio"]):enabled) {
