@@ -259,25 +259,17 @@ const usage = (
     <header className="flex flex-col gap-2">
       <h1 className="text-2xl font-medium">@roprgm/ui</h1>
       <p className="text-muted">
-        A minimal, dark UI library for React. Use it one of two ways: copy each
-        component's source into your app, or install the package.
+        A minimal, dark UI library for React. Install the package, or copy each
+        component's source into your app.
       </p>
     </header>
-    <Step title="Copy the source">
-      <p className="text-muted">
-        The shadcn CLI adds a component's file to your app, with the theme and
-        the other components it needs. The code is yours to change. Every
-        component page shows its command.
-      </p>
-      <Code>npx shadcn@latest add https://ui.roprgm.com/r/button.json</Code>
-    </Step>
-    <Step title="Or install the package">
+    <Step title="Install the package">
       <p className="text-muted">
         Add it, then import the theme after Tailwind in your CSS. It also sets
         the page: 13px text, the background, and dark form controls.
       </p>
       <Code>bun add @roprgm/ui</Code>
-      <Code>{`@import "tailwindcss";
+      <Code lang="css">{`@import "tailwindcss";
 @import "@roprgm/ui/theme.css";`}</Code>
     </Step>
     <Step title="Use a component">
@@ -285,16 +277,24 @@ const usage = (
         Each component has its own path. Components without JavaScript, such as
         Button and Input, render on the server.
       </p>
-      <Code>{`import { Button } from "@roprgm/ui/button";
+      <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";
 
 <Button variant="primary">Export</Button>`}</Code>
+    </Step>
+    <Step title="Or copy the source">
+      <p className="text-muted">
+        The shadcn CLI adds a component's file to your app, with the theme and
+        the other components it needs. The code is yours to change. Every
+        component page shows its command.
+      </p>
+      <Code>npx shadcn@latest add https://ui.roprgm.com/r/button.json</Code>
     </Step>
     <Step title="Put controls on cards">
       <p className="text-muted">
         A field or a button takes its fill from the card it sits on, so it keeps
         the same contrast on the page, in a card, and in a card inside it.
       </p>
-      <Code>{`<div className="layer-card rounded-xl p-3 shadow-raised">
+      <Code lang="tsx">{`<div className="layer-card rounded-xl p-3 shadow-raised">
   <Input placeholder="Name" />
 </div>`}</Code>
     </Step>
