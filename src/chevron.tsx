@@ -27,7 +27,7 @@ export function Chevron({
       strokeLinecap="round"
       strokeLinejoin="round"
       className={cn(
-        "shrink-0 transition-transform",
+        "shrink-0 transition-[rotate,color] duration-200",
         rotation[direction],
         sizes[size],
         className,

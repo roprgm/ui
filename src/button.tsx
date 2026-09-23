@@ -3,12 +3,13 @@ import { cn } from "cn";
 import { type ComponentProps, cloneElement, type ReactElement } from "react";
 
 const button = cva(
-  "inline-flex h-8 cursor-pointer items-center justify-center gap-2 rounded-md px-3 whitespace-nowrap transition focus-ring active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-40",
+  // Colors ease over 200ms; the 1px press moves faster, since the last entry for a property wins.
+  "inline-flex h-8 cursor-pointer items-center justify-center gap-2 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-40",
   {
     variants: {
       variant: {
         default:
-          "bg-raised text-foreground shadow-raised hover:bg-raised-hover",
+          "bg-raised text-foreground shadow-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
         primary:
           "bg-accent text-on-accent shadow-raised text-shadow-subtle hover:bg-accent-hover",
         ghost:
@@ -19,6 +20,8 @@ const button = cva(
         icon: "w-8 px-0",
         /** For panel headers and rows, where it sits 6px inside a 40px row. */
         "icon-sm": "size-7 px-0",
+        /** For actions inside a field, where it sits 4px in, like the file picker. */
+        "icon-xs": "size-6 px-0",
       },
     },
     defaultVariants: { variant: "default", size: "default" },
