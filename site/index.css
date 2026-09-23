@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import "../src/theme.css";
+
+/* `block` waits for Geist instead of painting a fallback first; index.html preloads the file,
+   so the wait is short and text never shows in another font. */
+@font-face {
+  font-family: "Geist Variable";
+  font-style: normal;
+  font-display: block;
+  font-weight: 100 900;
+  src: url("@fontsource-variable/geist/files/geist-latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+
+@theme {
+  --font-sans: "Geist Variable", sans-serif;
+  /* A step below the neutral-800 panels that components are drawn on. */
+  --color-page: color-mix(
+    in oklab,
+    var(--color-neutral-800) 50%,
+    var(--color-neutral-900)
+  );
+}
+
+@layer base {
+  body {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-neutral-100);
+    background: var(--color-page);
+    color-scheme: dark;
+  }
+}

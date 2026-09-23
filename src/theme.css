@@ -1,0 +1,87 @@
+@source "./";
+
+/* Shadows replace borders: raised surfaces catch light on top and cast a line below; sunken ones invert it. */
+@theme {
+  --shadow-raised:
+    inset 0 1px 0 rgb(240 240 240 / 0.06), 0 1px 1px rgb(0 0 0 / 0.25);
+  --shadow-sunken:
+    inset 0 1px 1px rgb(0 0 0 / 0.3), 0 1px 0 rgb(240 240 240 / 0.04);
+  /* The edge is opaque so it holds over lighter surfaces, not only the page. */
+  --shadow-float:
+    0 0 0 1px var(--color-neutral-900), inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 2px 6px rgb(0 0 0 / 0.3), 0 16px 32px -8px rgb(0 0 0 / 0.35);
+  /* The body's text shadow reads too strong on light fills; they use this one. */
+  --text-shadow-subtle: 0.5px 1px 0.5px rgb(0 0 0 / 0.08);
+}
+
+/* shadow-float as a filter, so it follows a shape such as a popup with its arrow. */
+@utility drop-shadow-float {
+  filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.5))
+    drop-shadow(0 2px 3px rgb(0 0 0 / 0.2))
+    drop-shadow(0 8px 12px rgb(0 0 0 / 0.3));
+}
+
+/* An outline set off by a gap, so it shows on any fill. It stays transparent until
+   the element or a child has keyboard focus, then fades in slowly. */
+@utility focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+
+  &:focus-visible,
+  &:has(:focus-visible) {
+    outline-color: rgb(255 255 255 / 0.25);
+    transition-duration: 300ms;
+  }
+}
+
+/* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the
+   element keeps its own colors; the band is the one place shown at full strength. */
+@utility shimmer {
+  mask-image: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 0.45) 40%,
+    #000 50%,
+    rgb(0 0 0 / 0.45) 60%
+  );
+  mask-size: 300% 100%;
+  animation: shimmer 2s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    mask-image: none;
+    animation: none;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    mask-position: 100% 0;
+  }
+  to {
+    mask-position: 0 0;
+  }
+}
+
+/* A range input's thumb. Separate rules, since one unknown pseudo-element voids a selector list. */
+@custom-variant thumb {
+  &::-webkit-slider-thumb {
+    @slot;
+  }
+  &::-moz-range-thumb {
+    @slot;
+  }
+}
+
+@layer base {
+  body {
+    text-shadow: 0.5px 1px 0.5px rgb(0 0 0 / 0.2);
+  }
+
+  button,
+  input {
+    text-shadow: inherit;
+  }
+
+  label:has(input:is([type="checkbox"], [type="radio"]):enabled) {
+    cursor: pointer;
+  }
+}

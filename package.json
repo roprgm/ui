@@ -1,0 +1,54 @@
+{
+  "name": "@roprgm/ui",
+  "version": "0.1.0",
+  "description": "Minimal dark UI components for professional tools, on Tailwind CSS and Base UI.",
+  "homepage": "https://ui.roprgm.com",
+  "repository": "github:roprgm/ui",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    "./theme.css": "./src/theme.css",
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "check": "biome check --write && tsc",
+    "build": "tsc -p tsconfig.build.json && shadcn build -o site/public/r && vite build",
+    "prepublishOnly": "bun run build"
+  },
+  "peerDependencies": {
+    "react": ">=19"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.8.0",
+    "class-variance-authority": "^0.7.1",
+    "cn": "^0.4.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.2.5",
+    "@vitejs/plugin-react": "^6.1.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "shadcn": "^4.21.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0"
+  }
+}
