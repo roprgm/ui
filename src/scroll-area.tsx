@@ -21,7 +21,7 @@ export function ScrollArea({
     >
       <Primitive.Viewport
         className={cn(
-          "h-full overscroll-contain outline-none",
+          "h-full overscroll-contain outline-none focus-visible:ring-1 focus-visible:ring-focus focus-visible:ring-inset",
           fade &&
             "before:pointer-events-none before:sticky before:top-0 before:z-10 before:-mb-6 before:block before:h-6 before:bg-[linear-gradient(to_bottom,rgb(0_0_0/0.2),30%,transparent)] before:opacity-0 before:transition-opacity data-overflow-y-start:before:opacity-100 after:pointer-events-none after:sticky after:bottom-0 after:z-10 after:-mt-6 after:block after:h-6 after:bg-[linear-gradient(to_top,rgb(0_0_0/0.2),30%,transparent)] after:opacity-0 after:transition-opacity data-overflow-y-end:after:opacity-100",
         )}
