@@ -29,8 +29,9 @@ export function Dialog({
       {trigger && <Primitive.Trigger render={trigger} />}
       <Primitive.Portal>
         <Primitive.Backdrop className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0" />
-        <Primitive.Popup className="fixed top-1/2 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-sm -translate-1/2 flex-col gap-4 rounded-xl layer-card p-4 text-foreground shadow-float outline-none transition-[opacity,scale] duration-150 data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0">
-          <div className="flex flex-col gap-3">
+        {/* Spaced like a Notice: 6px of padding, and the content 6px further in beside and 4px above and below. */}
+        <Primitive.Popup className="fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-sm -translate-1/2 rounded-xl layer-card p-1.5 text-foreground shadow-float outline-none transition-[opacity,scale] duration-150 data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0">
+          <div className="flex flex-col gap-3 px-1.5 py-1">
             <div className="flex flex-col gap-1">
               <Primitive.Title className="font-medium">{title}</Primitive.Title>
               {description && (
@@ -40,8 +41,8 @@ export function Dialog({
               )}
             </div>
             {children}
+            {actions && <div className="flex justify-end gap-2">{actions}</div>}
           </div>
-          {actions && <div className="flex justify-end gap-2">{actions}</div>}
         </Primitive.Popup>
       </Primitive.Portal>
     </Primitive.Root>
