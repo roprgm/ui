@@ -6,6 +6,7 @@ import {
   ButtonDemo,
   CheckboxDemo,
   ChipDemo,
+  DialogDemo,
   FieldDemo,
   IconButtonDemo,
   InputDemo,
@@ -211,6 +212,13 @@ const groups: Group[] = [
         title: "Popover",
         description: "Settings that open beside their trigger.",
         demo: <PopoverDemo />,
+      },
+      {
+        name: "dialog",
+        title: "Dialog",
+        description:
+          "A modal for decisions that need an answer, such as exporting or confirming a delete. DialogClose closes it.",
+        demo: <DialogDemo />,
       },
       {
         name: "notice",

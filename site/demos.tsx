@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "../src/button";
 import { Checkbox } from "../src/checkbox";
 import { Chip } from "../src/chip";
+import { Dialog, DialogClose } from "../src/dialog";
 import { Field } from "../src/field";
 import { IconButton } from "../src/icon-button";
 import { Input } from "../src/input";
@@ -329,6 +330,24 @@ export function MenuDemo() {
         Delete
       </MenuItem>
     </Menu>
+  );
+}
+
+export function DialogDemo() {
+  return (
+    <Dialog
+      trigger={<Button>Export…</Button>}
+      title="Export image"
+      description="Saves a copy with your edits. The original stays as it is."
+      actions={
+        <>
+          <DialogClose render={<Button variant="ghost">Cancel</Button>} />
+          <DialogClose render={<Button variant="primary">Export</Button>} />
+        </>
+      }
+    >
+      <Input defaultValue="portrait-edit.jpg" aria-label="File name" />
+    </Dialog>
   );
 }
 

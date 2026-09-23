@@ -27,6 +27,7 @@
   --color-on-accent: hsl(0 0% 9%);
 
   --color-line: hsl(0 0% 0% / 0.4);
+  --color-backdrop: hsl(0 0% 0% / 0.5);
   --color-focus: hsl(0 0% 100% / 0.25);
   --color-danger: hsl(0 90% 75%);
 }

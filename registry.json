@@ -19,6 +19,7 @@
           "color-accent-hover": "hsl(0 0% 98%)",
           "color-on-accent": "hsl(0 0% 9%)",
           "color-line": "hsl(0 0% 0% / 0.4)",
+          "color-backdrop": "hsl(0 0% 0% / 0.5)",
           "color-focus": "hsl(0 0% 100% / 0.25)",
           "color-danger": "hsl(0 90% 75%)",
           "color-surface-1": "hsl(0 0% 4.0%)",
@@ -357,6 +358,19 @@
       "files": [
         {
           "path": "src/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "categories": ["overlays"],
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/dialog.tsx",
           "type": "registry:ui"
         }
       ]
