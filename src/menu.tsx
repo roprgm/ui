@@ -4,6 +4,7 @@ import { Menu as Primitive } from "@base-ui/react/menu";
 import { cn } from "cn";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 import { Chevron } from "./chevron";
+import { Kbd } from "./kbd";
 import { Surface, usePopupLayer } from "./surface";
 
 /** Commands opened from `trigger`, such as an IconButton. For settings, use a Popover. */
@@ -39,10 +40,13 @@ export function Menu({
   );
 }
 
+/** A command; `shortcut`, written as `Mod Z`, shows at the end. */
 export function MenuItem({
+  shortcut,
   className,
+  children,
   ...props
-}: ComponentProps<typeof Primitive.Item>) {
+}: ComponentProps<typeof Primitive.Item> & { shortcut?: string }) {
   return (
     <Primitive.Item
       className={cn(
@@ -50,7 +54,10 @@ export function MenuItem({
         className,
       )}
       {...props}
-    />
+    >
+      {children}
+      {shortcut && <Kbd className="ml-auto pl-4">{shortcut}</Kbd>}
+    </Primitive.Item>
   );
 }
 

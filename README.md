@@ -38,6 +38,7 @@ Components with Base UI, hooks, or their own handlers are marked `"use client"`;
 | Actions | `Button` (`render` draws it as another element) | none |
 |  | `IconButton` | Tooltip |
 |  | `Chip` | none |
+|  | `Kbd` (`Mod` shows as ⌘ or Ctrl) | none |
 | Inputs | `Input` (`aria-invalid` and file pickers styled) | none |
 |  | `Textarea` | none |
 |  | `Field` (label, control, description or error) | ids only |
@@ -55,7 +56,7 @@ Components with Base UI, hooks, or their own handlers are marked `"use client"`;
 |  | `ListItem` | none |
 |  | `TreeList` (drag to reorder or nest; `canDrop` and `onDrop` keep the data with the caller) | pointer drag and arrow keys |
 | Overlays | `Tooltip`, `TooltipProvider` | Base UI |
-|  | `Menu`, `MenuItem`, `MenuSeparator`, `Submenu` | Base UI |
+|  | `Menu`, `MenuItem` (`shortcut`), `MenuSeparator`, `Submenu` | Base UI |
 |  | `Popover` | Base UI |
 |  | `Notice` | none |
 | Effects | `Spinner` | none |

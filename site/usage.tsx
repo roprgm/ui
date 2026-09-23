@@ -7,7 +7,7 @@ const prompt = `Build this app's interface with @roprgm/ui, a minimal dark UI li
 - Install it with \`bun add @roprgm/ui\`, and import the theme after Tailwind in the main CSS file:
   @import "tailwindcss";
   @import "@roprgm/ui/theme.css";
-- Import each component from its own path, such as \`import { Button } from "@roprgm/ui/button"\`. Components: Button, IconButton, Chip, Input, Textarea, Field, Checkbox, Switch, ToggleGroup, Select, Slider, ScrubInput, VerticalSlider, Panel, ScrollArea, TabList, ListItem, TreeList, Tooltip, Menu, Popover, Notice, Spinner.
+- Import each component from its own path, such as \`import { Button } from "@roprgm/ui/button"\`. Components: Button, IconButton, Chip, Kbd, Input, Textarea, Field, Checkbox, Switch, ToggleGroup, Select, Slider, ScrubInput, VerticalSlider, Panel, ScrollArea, TabList, ListItem, TreeList, Tooltip, Menu, Popover, Notice, Spinner.
 - Put groups of controls on a card with \`layer-card\`, and a card inside a card with \`layer-elevated\`, instead of a background color. Controls take their fills from the card they sit on.
 - Use the theme's colors (\`text-muted\`, \`text-faint\`, \`bg-field\`, \`border-line\`) instead of Tailwind's palette, and \`shadow-raised\`, \`shadow-sunken\`, or \`shadow-float\` instead of borders.
 - See every component and its props at https://ui.roprgm.com.`;
