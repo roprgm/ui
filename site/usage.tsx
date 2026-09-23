@@ -23,7 +23,7 @@ function CopyForAgents() {
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    <Button onClick={copy} className="self-start">
+    <Button onClick={copy} className="shrink-0">
       <CopyIcon />
       {copied ? "Copied" : "Copy for agents"}
     </Button>
@@ -34,7 +34,7 @@ function CopyForAgents() {
 export function Usage() {
   return (
     <div className="flex max-w-3xl flex-col gap-10">
-      <header className="flex flex-col gap-4">
+      <header className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-medium">@roprgm/ui</h1>
           <p className="text-muted">A minimal, dark UI library for React.</p>
