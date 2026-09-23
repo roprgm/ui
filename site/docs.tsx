@@ -132,7 +132,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
         </ScrollArea>
       </nav>
       <main className="flex min-w-0 flex-1 flex-col gap-14 py-12">
-        <div className="flex flex-wrap gap-x-4 gap-y-1 md:hidden">
+        <div className="flex flex-wrap gap-x-4 gap-y-3 md:hidden">
           <a
             href="#usage"
             className={cn(link, current ? "text-faint" : "text-foreground")}
