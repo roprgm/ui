@@ -4,3 +4,5 @@ site/dist
 site/public/r
 .claude
 .DS_Store
+.vercel
+.env*
