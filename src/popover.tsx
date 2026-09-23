@@ -24,7 +24,11 @@ export function Popover({
             // Keyboard users land inside; a click leaves focus on the trigger, so no field starts typing.
             initialFocus={(type) => type === "keyboard"}
             render={(props) => (
-              <Surface {...props} layer={popup.layer} className="p-3 pb-4" />
+              <Surface
+                {...props}
+                layer={popup.layer}
+                className="p-3 pt-2.5 pb-4"
+              />
             )}
           >
             {children}
