@@ -21,7 +21,11 @@ export function Menu({
       <Primitive.Trigger render={trigger} />
       <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} align={align} className="z-50">
-          <Primitive.Popup render={(props) => <Surface {...props} />}>
+          <Primitive.Popup
+            render={(props) => (
+              <Surface {...props} className="flex flex-col gap-0.5" />
+            )}
+          >
             {children}
           </Primitive.Popup>
         </Primitive.Positioner>
@@ -37,7 +41,7 @@ export function MenuItem({
   return (
     <Primitive.Item
       className={cn(
-        "flex cursor-default items-center gap-2 rounded-sm px-2.5 py-1.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-hover",
+        "flex cursor-default items-center gap-2 rounded-md px-2.5 py-1.25 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised",
         className,
       )}
       {...props}
@@ -46,7 +50,7 @@ export function MenuItem({
 }
 
 export function MenuSeparator() {
-  return <Primitive.Separator className="mx-1 my-1 h-px bg-line" />;
+  return <Primitive.Separator className="mx-1 my-0.5 h-px bg-line" />;
 }
 
 /** An item that opens a nested list of commands beside the menu. */
@@ -59,13 +63,17 @@ export function Submenu({
 }) {
   return (
     <Primitive.SubmenuRoot>
-      <Primitive.SubmenuTrigger className="flex cursor-default items-center justify-between gap-4 rounded-sm px-2.5 py-1.5 outline-none select-none data-highlighted:bg-hover data-popup-open:bg-hover">
+      <Primitive.SubmenuTrigger className="flex cursor-default items-center justify-between gap-4 rounded-md px-2.5 py-1.25 outline-none select-none data-highlighted:bg-raised data-popup-open:bg-raised">
         {label}
         <Chevron direction="right" size="sm" className="text-muted" />
       </Primitive.SubmenuTrigger>
       <Primitive.Portal>
-        <Primitive.Positioner sideOffset={4} alignOffset={-4} className="z-50">
-          <Primitive.Popup render={(props) => <Surface {...props} />}>
+        <Primitive.Positioner sideOffset={4} alignOffset={-6} className="z-50">
+          <Primitive.Popup
+            render={(props) => (
+              <Surface {...props} className="flex flex-col gap-0.5" />
+            )}
+          >
             {children}
           </Primitive.Popup>
         </Primitive.Positioner>
