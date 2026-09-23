@@ -258,42 +258,28 @@ const usage = (
   <div className="flex max-w-3xl flex-col gap-10">
     <header className="flex flex-col gap-2">
       <h1 className="text-2xl font-medium">@roprgm/ui</h1>
-      <p className="text-muted">
-        A minimal, dark UI library for React. Install the package, or copy each
-        component's source into your app.
-      </p>
+      <p className="text-muted">A minimal, dark UI library for React.</p>
     </header>
     <Step title="Install the package">
-      <p className="text-muted">
-        Add it, then import the theme after Tailwind in your CSS. It also sets
-        the page: 13px text, the background, and dark form controls.
-      </p>
+      <p className="text-muted">Then import the theme in your CSS.</p>
       <Code>bun add @roprgm/ui</Code>
       <Code lang="css">{`@import "tailwindcss";
 @import "@roprgm/ui/theme.css";`}</Code>
     </Step>
     <Step title="Use a component">
-      <p className="text-muted">
-        Each component has its own path. Components without JavaScript, such as
-        Button and Input, render on the server.
-      </p>
+      <p className="text-muted">Each one has its own path.</p>
       <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";
 
 <Button variant="primary">Export</Button>`}</Code>
     </Step>
     <Step title="Or copy the source">
       <p className="text-muted">
-        The shadcn CLI adds a component's file to your app, with the theme and
-        the other components it needs. The code is yours to change. Every
-        component page shows its command.
+        Add a component's code to your app with shadcn.
       </p>
       <Code>npx shadcn@latest add https://ui.roprgm.com/r/button.json</Code>
     </Step>
     <Step title="Put controls on cards">
-      <p className="text-muted">
-        A field or a button takes its fill from the card it sits on, so it keeps
-        the same contrast on the page, in a card, and in a card inside it.
-      </p>
+      <p className="text-muted">Controls adapt to the card they sit on.</p>
       <Code lang="tsx">{`<div className="layer-card rounded-xl p-3 shadow-raised">
   <Input placeholder="Name" />
 </div>`}</Code>
