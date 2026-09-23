@@ -4,13 +4,7 @@ A minimal, dark UI library for React.
 
 ## Install
 
-Copy the source into your app with the shadcn CLI:
-
-```bash
-npx shadcn@latest add https://ui.roprgm.com/r/button.json
-```
-
-Or use the package:
+Install the package and import the theme after Tailwind:
 
 ```bash
 bun add @roprgm/ui
@@ -30,6 +24,12 @@ import { Button } from "@roprgm/ui/button";
 ```
 
 Components with Base UI, hooks, or their own handlers are marked `"use client"`; the rest, such as `Button`, `Input`, and `Textarea`, render in React Server Components.
+
+Or copy the source into your app with the shadcn CLI, without the package. Each component brings the theme and the components it uses:
+
+```bash
+npx shadcn@latest add https://ui.roprgm.com/r/button.json
+```
 
 ## Components
 
