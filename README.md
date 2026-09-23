@@ -45,7 +45,7 @@ import { Button } from "@roprgm/ui/button";
 | | `TabList`, `Tab` | arrow keys |
 | | `ListItem` | none |
 | | `ScrollArea` | Base UI |
-| Controls | `Slider` (`compact` drops the bar) | none for the bar |
+| Controls | `Slider` (`variant`: `panel`, `toolbar`, or `compact` without the bar) | none for the bar |
 | | `ScrubInput` | drag, typing, and arrow keys |
 | | `VerticalSlider` | none |
 

@@ -8,6 +8,7 @@ export function VerticalSlider({
   min,
   max,
   step = 1,
+  defaultValue,
   stops,
   color,
   className,
@@ -18,6 +19,8 @@ export function VerticalSlider({
   min: number;
   max: number;
   step?: number;
+  /** Restored by double-clicking. */
+  defaultValue?: number;
   stops?: readonly string[];
   /** The thumb's color; neutral when omitted. */
   color?: string;
@@ -40,6 +43,9 @@ export function VerticalSlider({
         max={max}
         step={step}
         onChange={(event) => onChange(event.currentTarget.valueAsNumber)}
+        onDoubleClick={() =>
+          defaultValue !== undefined && onChange(defaultValue)
+        }
         className="relative h-full w-full cursor-ns-resize touch-none appearance-none bg-transparent text-neutral-200 outline-none [direction:rtl] [writing-mode:vertical-lr] thumb:size-3.5 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-current thumb:shadow-raised thumb:ring-1 thumb:ring-black/30 focus-visible:thumb:ring-2 focus-visible:thumb:ring-white/25"
         style={color ? { color } : undefined}
       />

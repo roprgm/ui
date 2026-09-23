@@ -18,6 +18,8 @@ export function Popover({
       <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} align={align} className="z-50">
           <Primitive.Popup
+            // Keyboard users land inside; a click leaves focus on the trigger, so no field starts typing.
+            initialFocus={(type) => type === "keyboard"}
             render={(props) => <Surface {...props} className="p-3" />}
           >
             {children}

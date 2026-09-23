@@ -278,7 +278,7 @@ export function PanelDemo() {
           min={0}
           max={100}
           format={percent}
-          compact
+          variant="compact"
         />
       </PanelSection>
       <PanelBody>
@@ -432,7 +432,7 @@ export function SliderDemo() {
         min={-180}
         max={180}
         format={degrees}
-        compact
+        variant="compact"
       />
     </div>
   );

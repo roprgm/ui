@@ -1,8 +1,24 @@
 import { Select as Primitive } from "@base-ui/react/select";
+import { cva } from "class-variance-authority";
 import { cn } from "cn";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { Chevron } from "./chevron";
 import { Surface } from "./surface";
+import { Tooltip } from "./tooltip";
+
+const trigger = cva(
+  "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-neutral-100 transition focus-ring data-disabled:pointer-events-none data-disabled:opacity-40",
+  {
+    variants: {
+      /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
+      variant: {
+        field:
+          "h-8 rounded-md bg-neutral-700 pr-2 pl-3 shadow-raised hover:bg-neutral-600",
+        pill: "h-7 rounded-full bg-white/10 pr-2 pl-3 hover:bg-white/15 data-popup-open:bg-white/15",
+      },
+    },
+  },
+);
 
 export type SelectItem<T extends string> = {
   value: T;
@@ -14,40 +30,60 @@ export type SelectItem<T extends string> = {
 export function Select<T extends string, Multiple extends boolean = false>({
   items,
   placeholder,
+  tooltip,
+  variant = "field",
   className,
   "aria-label": label,
+  onOpenChange,
   ...props
 }: Omit<Primitive.Root.Props<T, Multiple>, "items"> & {
   items: readonly SelectItem<T>[];
   placeholder?: string;
+  /** Shown on hover while the list is closed. */
+  tooltip?: string;
+  variant?: "field" | "pill";
   className?: string;
   "aria-label"?: string;
 }) {
-  return (
-    <Primitive.Root items={items} {...props}>
-      <Primitive.Trigger
-        aria-label={label}
-        className={cn(
-          "inline-flex h-8 min-w-0 cursor-pointer items-center justify-between gap-2 rounded-md bg-neutral-700 pr-2 pl-3 text-neutral-100 shadow-raised transition focus-ring hover:bg-neutral-600 data-disabled:pointer-events-none data-disabled:opacity-40",
-          className,
+  const [open, setOpen] = useState(false);
+  const control = (
+    <Primitive.Trigger
+      aria-label={label}
+      className={cn(trigger({ variant }), className)}
+    >
+      <Primitive.Value
+        placeholder={placeholder}
+        className="truncate data-placeholder:text-neutral-400"
+      />
+      <Primitive.Icon
+        render={(props, { open }) => (
+          <span {...props}>
+            <Chevron
+              direction={open ? "up" : "down"}
+              size="sm"
+              className="text-neutral-400"
+            />
+          </span>
         )}
-      >
-        <Primitive.Value
-          placeholder={placeholder}
-          className="truncate data-placeholder:text-neutral-400"
-        />
-        <Primitive.Icon
-          render={(props, { open }) => (
-            <span {...props}>
-              <Chevron
-                direction={open ? "up" : "down"}
-                size="sm"
-                className="text-neutral-400"
-              />
-            </span>
-          )}
-        />
-      </Primitive.Trigger>
+      />
+    </Primitive.Trigger>
+  );
+  return (
+    <Primitive.Root
+      items={items}
+      onOpenChange={(next, details) => {
+        setOpen(next);
+        onOpenChange?.(next, details);
+      }}
+      {...props}
+    >
+      {tooltip ? (
+        <Tooltip content={tooltip} disabled={open}>
+          {control}
+        </Tooltip>
+      ) : (
+        control
+      )}
       <Primitive.Portal>
         <Primitive.Positioner
           sideOffset={4}

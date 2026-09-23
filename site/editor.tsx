@@ -42,8 +42,18 @@ export function EditorDemo() {
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="absolute top-3 flex items-center gap-1 rounded-full bg-neutral-800 p-1 shadow-float">
-            <Popover align="center" trigger={<Chip>Size {size}px</Chip>}>
+          <div className="absolute top-3 flex items-center gap-1 rounded-full bg-neutral-800 p-1 pl-3 shadow-float">
+            <Slider
+              label="Size"
+              value={size}
+              onChange={setSize}
+              min={1}
+              max={500}
+              format={(v) => `${v}px`}
+              valueWidth={5}
+              variant="toolbar"
+            />
+            <Popover align="center" trigger={<Chip>More</Chip>}>
               <div className="w-48">
                 <Slider
                   label="Size"
@@ -119,7 +129,7 @@ export function EditorDemo() {
               min={0}
               max={100}
               format={percent}
-              compact
+              variant="compact"
             />
           </PanelSection>
         </PanelBody>

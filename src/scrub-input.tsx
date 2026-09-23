@@ -1,12 +1,18 @@
 import { cn } from "cn";
-import { type KeyboardEvent, type PointerEvent, useRef, useState } from "react";
+import {
+  type FocusEvent,
+  type KeyboardEvent,
+  type PointerEvent,
+  useRef,
+  useState,
+} from "react";
 import { Chevron } from "./chevron";
 
 type Drag = { x: number; dx: number; value: number; moved: boolean };
 
 // Chevrons shown on hover to hint that the value drags sideways; hidden while typing.
 const hint =
-  "pointer-events-none absolute size-[9px] text-neutral-500 opacity-0 transition-opacity group-[:hover:not(:has(input))]:opacity-100";
+  "pointer-events-none absolute size-[9px] text-neutral-500 opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
 
 /**
  * A number shown as text that scrubs on horizontal drag, types on click or focus,
@@ -16,29 +22,37 @@ const hint =
 export function ScrubInput({
   value,
   onChange,
+  onEditingChange,
   min,
   max,
   step = 1,
   defaultValue,
   format,
+  minChars,
   className,
   "aria-label": label,
 }: {
   value: number;
   onChange: (value: number) => void;
+  /** Reports a drag or typing session, so a caller can group its changes into one edit. */
+  onEditingChange?: (editing: boolean) => void;
   min: number;
   max: number;
   step?: number;
   /** Restored by double-clicking the value. */
   defaultValue?: number;
   format?: (value: number) => string;
+  /** Minimum width in characters, so a value whose digit count changes doesn't shift its row. */
+  minChars?: number;
   className?: string;
   "aria-label"?: string;
 }) {
   const [draft, setDraft] = useState<string>();
+  const input = useRef<HTMLInputElement>(null);
   const drag = useRef<Drag>(undefined);
   const decimals = `${step}`.split(".")[1]?.length ?? 0;
-  const text = format?.(value) ?? value.toFixed(decimals);
+  const fixed = value.toFixed(decimals);
+  const text = format?.(Number(fixed)) ?? fixed;
   const [, number = text, unit] = text.match(/^(.*\d)(.*)$/s) ?? [];
 
   const set = (next: number) => {
@@ -46,21 +60,21 @@ export function ScrubInput({
     onChange(Math.min(max, Math.max(min, Number(snapped.toFixed(decimals)))));
   };
 
-  // An untouched draft commits nothing, so a double-click reset isn't undone as the field closes.
   const commit = () => {
     const typed = Number.parseFloat(draft ?? "");
-    if (draft !== value.toFixed(decimals) && !Number.isNaN(typed)) set(typed);
+    if (!Number.isNaN(typed)) set(typed);
     setDraft(undefined);
+    onEditingChange?.(false);
   };
 
   const reset = () => {
     if (defaultValue === undefined) return;
-    setDraft(undefined);
     set(defaultValue);
+    input.current?.blur();
   };
 
   const start = (event: PointerEvent<HTMLElement>) => {
-    if (draft !== undefined) return;
+    if (document.activeElement === input.current) return;
     event.preventDefault();
     event.currentTarget.setPointerCapture(event.pointerId);
     drag.current = { x: event.clientX, dx: 0, value, moved: false };
@@ -75,6 +89,7 @@ export function ScrubInput({
     state.x = event.clientX;
     if (!state.moved && Math.abs(state.dx) > 2) {
       state.moved = true;
+      onEditingChange?.(true);
       // Hides the cursor so the drag isn't stopped by the screen edge.
       Promise.resolve(event.currentTarget.requestPointerLock()).catch(() => {});
     }
@@ -85,8 +100,12 @@ export function ScrubInput({
   const end = () => {
     const state = drag.current;
     drag.current = undefined;
-    if (state?.moved) document.exitPointerLock();
-    else if (state) setDraft(value.toFixed(decimals));
+    if (state?.moved) {
+      document.exitPointerLock();
+      onEditingChange?.(false);
+    } else if (state) {
+      input.current?.focus();
+    }
   };
 
   const key = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -94,30 +113,24 @@ export function ScrubInput({
     if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
     event.preventDefault();
     const sign = event.key === "ArrowUp" ? 1 : -1;
-    const next = value + sign * step * (event.shiftKey ? 10 : 1);
-    set(next);
-    setDraft(Math.min(max, Math.max(min, next)).toFixed(decimals));
+    set(value + sign * step * (event.shiftKey ? 10 : 1));
+    setDraft(undefined);
+  };
+
+  const focus = (event: FocusEvent<HTMLInputElement>) => {
+    event.currentTarget.select();
+    onEditingChange?.(true);
   };
 
   return (
+    // The field inside stays focusable and typeable, with the formatted text over it until then;
+    // dragging is a pointer shortcut on top of it, which the keyboard gets through the arrow keys.
+    // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
-      role="spinbutton"
-      aria-label={label}
-      aria-valuenow={value}
-      aria-valuemin={min}
-      aria-valuemax={max}
-      aria-valuetext={text}
-      tabIndex={draft === undefined ? 0 : -1}
       className={cn(
-        "group relative inline-flex h-6 cursor-ew-resize items-center rounded-sm px-1 tabular-nums outline-none transition has-[input]:cursor-text has-[input]:bg-black/25",
+        "group relative inline-flex h-6 cursor-ew-resize items-center rounded-sm px-1 tabular-nums transition focus-within:cursor-text focus-within:bg-black/25",
         className,
       )}
-      onFocus={(event) => {
-        // Only keyboard focus opens typing; a popup focusing it on open must not.
-        const self = event.target === event.currentTarget;
-        if (self && event.currentTarget.matches(":focus-visible"))
-          setDraft(value.toFixed(decimals));
-      }}
       onDoubleClick={reset}
       onPointerDown={start}
       onPointerMove={move}
@@ -127,11 +140,11 @@ export function ScrubInput({
       }}
     >
       <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
-      {/* While typing, the text stays hidden under the field so the box keeps its width. */}
-      <span className="grid *:[grid-area:1/1]">
-        <span
-          className={cn("text-neutral-100", draft !== undefined && "invisible")}
-        >
+      <span
+        className="grid text-right *:[grid-area:1/1]"
+        style={minChars ? { minWidth: `${minChars}ch` } : undefined}
+      >
+        <span className="text-neutral-100 group-focus-within:invisible">
           {number}
           {/* A unit set flush against the digits, like % or °, gets a hair of space. */}
           <span
@@ -143,20 +156,17 @@ export function ScrubInput({
             {unit}
           </span>
         </span>
-        {draft !== undefined && (
-          <input
-            // biome-ignore lint/a11y/noAutofocus: the field replaces the text the user just chose to edit.
-            autoFocus
-            aria-label={label}
-            inputMode="decimal"
-            className="w-12 min-w-full bg-transparent text-right text-neutral-100 outline-none field-sizing-content selection:bg-white/20 supports-[field-sizing:content]:w-auto"
-            value={draft}
-            onFocus={(event) => event.currentTarget.select()}
-            onChange={(event) => setDraft(event.currentTarget.value)}
-            onBlur={commit}
-            onKeyDown={key}
-          />
-        )}
+        <input
+          ref={input}
+          aria-label={label}
+          inputMode="decimal"
+          className="w-12 min-w-full cursor-[inherit] bg-transparent text-right text-transparent text-shadow-none outline-none field-sizing-content selection:bg-white/20 focus:text-neutral-100 focus:[text-shadow:inherit] supports-[field-sizing:content]:w-auto"
+          value={draft ?? fixed}
+          onFocus={focus}
+          onChange={(event) => setDraft(event.currentTarget.value)}
+          onBlur={commit}
+          onKeyDown={key}
+        />
       </span>
       <Chevron direction="right" className={cn(hint, "left-full -ml-0.75")} />
     </span>
