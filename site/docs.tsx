@@ -202,22 +202,30 @@ function Preview({ doc }: { doc: Doc }) {
 
 const languages = { css, shell, tsx: typescript };
 
-/** Highlighted code with a copy button, one line or several. */
+/** Highlighted code with a copy button, one line or several; `text` wraps and isn't highlighted. */
 export function Code({
   lang = "shell",
   children,
 }: {
-  lang?: keyof typeof languages;
+  lang?: keyof typeof languages | "text";
   children: string;
 }) {
-  const html = render(parse(children, languages[lang]));
   return (
     // Each line is 16px in a 6px padding, so the first one centers on the 28px copy button.
     <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 shadow-sunken">
-      <pre
-        className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      {lang === "text" && (
+        <pre className="flex-1 py-1.5 font-mono text-xs whitespace-pre-wrap text-foreground">
+          {children}
+        </pre>
+      )}
+      {lang !== "text" && (
+        <pre
+          className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground"
+          dangerouslySetInnerHTML={{
+            __html: render(parse(children, languages[lang])),
+          }}
+        />
+      )}
       <CopyButton value={children} size="icon-sm" />
     </div>
   );

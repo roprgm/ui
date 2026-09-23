@@ -1,5 +1,5 @@
 import "./index.css";
-import { type ReactNode, StrictMode } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { TooltipProvider } from "../src/tooltip";
 import {
@@ -29,8 +29,9 @@ import {
   TreeListDemo,
   VerticalSliderDemo,
 } from "./demos";
-import { Code, type Group, Page } from "./docs";
+import { type Group, Page } from "./docs";
 import { EditorDemo } from "./editor";
+import { Usage } from "./usage";
 
 const groups: Group[] = [
   {
@@ -245,53 +246,11 @@ const groups: Group[] = [
   },
 ];
 
-function Step({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <section className="flex flex-col gap-3">
-      <h3 className="text-base font-medium">{title}</h3>
-      {children}
-    </section>
-  );
-}
-
-const usage = (
-  <div className="flex max-w-3xl flex-col gap-10">
-    <header className="flex flex-col gap-2">
-      <h1 className="text-2xl font-medium">@roprgm/ui</h1>
-      <p className="text-muted">A minimal, dark UI library for React.</p>
-    </header>
-    <Step title="Install the package">
-      <p className="text-muted">Then import the theme in your CSS.</p>
-      <Code>bun add @roprgm/ui</Code>
-      <Code lang="css">{`@import "tailwindcss";
-@import "@roprgm/ui/theme.css";`}</Code>
-    </Step>
-    <Step title="Use a component">
-      <p className="text-muted">Each one has its own path.</p>
-      <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";
-
-<Button variant="primary">Export</Button>`}</Code>
-    </Step>
-    <Step title="Or copy the source">
-      <p className="text-muted">
-        Add a component's code to your app with shadcn.
-      </p>
-      <Code>npx shadcn@latest add https://ui.roprgm.com/r/button.json</Code>
-    </Step>
-    <Step title="Put controls on cards">
-      <p className="text-muted">Controls adapt to the card they sit on.</p>
-      <Code lang="tsx">{`<div className="layer-card rounded-xl p-3 shadow-raised">
-  <Input placeholder="Name" />
-</div>`}</Code>
-    </Step>
-  </div>
-);
-
 // biome-ignore lint/style/noNonNullAssertion: index.html provides #root.
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <TooltipProvider>
-      <Page groups={groups} usage={usage} />
+      <Page groups={groups} usage={<Usage />} />
     </TooltipProvider>
   </StrictMode>,
 );
