@@ -6,14 +6,6 @@
  */
 
 @theme {
-  /* Backgrounds, from the page up. */
-  --color-page: hsl(0 0% 12%);
-  --color-field: hsl(0 0% 9%);
-  --color-surface: hsl(0 0% 15%);
-  --color-raised: hsl(0 0% 25%);
-  --color-raised-hover: hsl(0 0% 30%);
-  --color-tooltip: hsl(0 0% 4%);
-
   /* Translucent states over any background. */
   --color-hover: hsl(0 0% 100% / 0.08);
   --color-pressed: hsl(0 0% 100% / 0.15);
@@ -25,8 +17,8 @@
   --color-disabled: hsl(0 0% 32%);
 
   /* What is on: primary buttons, checked controls, slider thumbs, drop markers. */
-  --color-accent: hsl(0 0% 93%);
-  --color-accent-hover: hsl(0 0% 100%);
+  --color-accent: hsl(0 0% 86%);
+  --color-accent-hover: hsl(0 0% 98%);
   --color-on-accent: hsl(0 0% 9%);
 
   --color-line: hsl(0 0% 0% / 0.4);
@@ -34,13 +26,81 @@
   --color-danger: hsl(0 90% 75%);
 }
 
+/* The grays everything is painted with, darkest first. Each step is a third of a point wider than
+   the last, from 4% to 6.7%. */
+@theme {
+  --color-surface-1: hsl(0 0% 4.0%);
+  --color-surface-2: hsl(0 0% 8.0%);
+  --color-surface-3: hsl(0 0% 12.3%);
+  --color-surface-4: hsl(0 0% 17.0%);
+  --color-surface-5: hsl(0 0% 22.0%);
+  --color-surface-6: hsl(0 0% 27.3%);
+  --color-surface-7: hsl(0 0% 33.0%);
+  --color-surface-8: hsl(0 0% 39.0%);
+  --color-surface-9: hsl(0 0% 45.3%);
+  --color-surface-10: hsl(0 0% 52.0%);
+
+  --color-tooltip: var(--color-surface-1);
+}
+
+/*
+ * Layers. A control's fill depends on the layer it sits on, so it keeps the same contrast
+ * everywhere: fields a step below the layer, raised controls two steps above and three on hover.
+ * The page is the first layer; `layer-card` and `layer-elevated` paint the next two and set the
+ * fills inside them. `inline` keeps the var() in each utility, so a control reads the fills of
+ * the layer around it.
+ */
+@theme inline {
+  --color-field: var(--field);
+  --color-raised: var(--raised);
+  --color-raised-hover: var(--raised-hover);
+}
+
+@layer base {
+  :root {
+    --layer: var(--color-surface-2);
+    --field: var(--color-surface-1);
+    --raised: var(--color-surface-4);
+    --raised-hover: var(--color-surface-5);
+  }
+}
+
+/* Panels, notices, and cards on the page. */
+@utility layer-card {
+  --layer: var(--color-surface-3);
+  --field: var(--color-surface-2);
+  --raised: var(--color-surface-5);
+  --raised-hover: var(--color-surface-6);
+  background-color: var(--layer);
+}
+
+/* Menus, popovers, and cards inside a card. */
+@utility layer-elevated {
+  --layer: var(--color-surface-4);
+  --field: var(--color-surface-3);
+  --raised: var(--color-surface-6);
+  --raised-hover: var(--color-surface-7);
+  background-color: var(--layer);
+}
+
+/* Corner radii, used as `rounded-*`. Nested corners stay concentric: the outer radius less the
+   inset is the inner radius, so changing one may mean changing the ones inside it. */
+@theme {
+  --radius-xs: 2.5px;
+  --radius-sm: 4.5px;
+  --radius-md: 7px;
+  --radius-lg: 9px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+}
+
 /* Shadows replace borders: raised surfaces catch light on top and cast a line below; sunken ones invert it. */
 @theme {
   --shadow-raised:
-    inset 0 1px 0 rgba(186, 186, 186, 0.08), 0 1px 1px rgb(0 0 0 / 0.28),
-    0 0 1px rgb(0 0 0 / 0.12);
+    inset 0 1px 0 rgba(240, 240, 240, 0.07), 0 1px 1px rgb(0 0 0 / 0.28),
+    0 0 1px rgb(0 0 0 / 0.14);
   --shadow-sunken:
-    inset 0 1px 1px rgb(0 0 0 / 0.3), 0 1px 0 rgb(240 240 240 / 0.04);
+    inset 0 1px 1px rgb(0 0 0 / 0.3), 0 1px 0 rgb(240 240 240 / 0.05);
   /* The edge is opaque so it holds over lighter surfaces, not only the page. */
   --shadow-float:
     0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 rgb(255 255 255 / 0.08),
@@ -70,16 +130,20 @@
 }
 
 /* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the
-   element keeps its own colors; the band is the one place shown at full strength. */
+   element keeps its own colors; the band is the one place shown at full strength. The band is
+   sized to the element, so put it on a group of blocks rather than on each one, and one band
+   crosses them all at the same pace. */
 @utility shimmer {
   mask-image: linear-gradient(
-    90deg,
-    rgb(0 0 0 / 0.45) 40%,
+    100deg,
+    rgb(0 0 0 / 0.45) 30%,
+    rgb(0 0 0 / 0.6) 40%,
     #000 50%,
-    rgb(0 0 0 / 0.45) 60%
+    rgb(0 0 0 / 0.6) 60%,
+    rgb(0 0 0 / 0.45) 70%
   );
   mask-size: 300% 100%;
-  animation: shimmer 2s linear infinite;
+  animation: shimmer 2.4s ease-in-out infinite;
 
   @media (prefers-reduced-motion: reduce) {
     mask-image: none;
@@ -87,10 +151,12 @@
   }
 }
 
+/* The band crosses in the first three quarters, then rests off the edge before the next pass. */
 @keyframes shimmer {
   from {
     mask-position: 100% 0;
   }
+  75%,
   to {
     mask-position: 0 0;
   }
@@ -108,13 +174,18 @@
 
 @layer base {
   body {
-    text-shadow: 0.5px 1px 0.5px rgb(0 0 0 / 0.2);
+    text-shadow: 0.5px 1px 0.5px rgb(20 20 20 / 0.2);
   }
 
   button,
   input,
   textarea {
     text-shadow: inherit;
+  }
+
+  /* Icons in controls ease their color at the buttons' pace, even when the control has no transition. */
+  button svg {
+    transition: color 200ms var(--default-transition-timing-function);
   }
 
   label:has(input:is([type="checkbox"], [type="radio"]):enabled) {
