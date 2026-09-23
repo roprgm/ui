@@ -50,7 +50,8 @@
  * Layers. A control's fill depends on the layer it sits on, so it keeps the same contrast
  * everywhere: fields a step below the layer, raised controls two steps above and three on hover.
  * The page is the first layer; `layer-card` and `layer-elevated` paint the next two and set the
- * fills inside them. `inline` keeps the var() in each utility, so a control reads the fills of
+ * fills inside them, and `layer-top` is for popups opened from an elevated card. Each names
+ * itself in `--layer-name`, which a popup reads to open one layer above its trigger's. `inline` keeps the var() in each utility, so a control reads the fills of
  * the layer around it.
  */
 @theme inline {
@@ -61,6 +62,7 @@
 
 @layer base {
   :root {
+    --layer-name: page;
     --layer: var(--color-surface-2);
     --field: var(--color-surface-1);
     --raised: var(--color-surface-4);
@@ -68,8 +70,9 @@
   }
 }
 
-/* Panels, notices, and cards on the page. */
+/* Panels, notices, cards on the page, and popups opened from the page. */
 @utility layer-card {
+  --layer-name: card;
   --layer: var(--color-surface-3);
   --field: var(--color-surface-2);
   --raised: var(--color-surface-5);
@@ -77,12 +80,23 @@
   background-color: var(--layer);
 }
 
-/* Menus, popovers, and cards inside a card. */
+/* Cards inside a card, and popups opened from a card. */
 @utility layer-elevated {
+  --layer-name: elevated;
   --layer: var(--color-surface-4);
   --field: var(--color-surface-3);
   --raised: var(--color-surface-6);
   --raised-hover: var(--color-surface-7);
+  background-color: var(--layer);
+}
+
+/* Popups opened from an elevated card. */
+@utility layer-top {
+  --layer-name: top;
+  --layer: var(--color-surface-5);
+  --field: var(--color-surface-4);
+  --raised: var(--color-surface-7);
+  --raised-hover: var(--color-surface-8);
   background-color: var(--layer);
 }
 
