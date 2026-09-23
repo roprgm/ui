@@ -59,7 +59,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
   return (
     <div className="mx-auto flex max-w-6xl gap-12 px-6">
       <nav className="sticky top-0 hidden h-dvh w-44 shrink-0 flex-col gap-1 overflow-y-auto py-12 md:flex">
-        <div className="mb-4 -mt-1 flex items-center justify-between">
+        <div className="mb-4 -mt-px flex items-center justify-between">
           <a
             href="#usage"
             className={cn(link, "flex items-baseline gap-2 self-center")}
