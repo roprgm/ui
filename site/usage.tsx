@@ -23,9 +23,17 @@ function CopyForAgents() {
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    <Button onClick={copy} className="shrink-0">
-      <CopyIcon />
-      {copied ? "Copied" : "Copy for agents"}
+    // Both labels share one cell, so the button keeps the longer one's width while they fade.
+    <Button onClick={copy} data-copied={copied} className="group shrink-0">
+      <span className="grid *:[grid-area:1/1]">
+        <span className="flex items-center gap-2 transition-opacity duration-200 group-data-[copied=true]:opacity-0">
+          <CopyIcon />
+          Copy for agents
+        </span>
+        <span className="justify-self-center opacity-0 transition-opacity duration-200 group-data-[copied=true]:opacity-100">
+          Copied
+        </span>
+      </span>
     </Button>
   );
 }
