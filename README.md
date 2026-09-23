@@ -1,6 +1,6 @@
 # @roprgm/ui
 
-Minimal dark UI components for React and Tailwind CSS v4, meant for professional tools such as photo and video editors. Most are plain styled HTML; Base UI supplies behavior only where CSS can't (Select, Tooltip).
+A minimal, dark UI library for React.
 
 ## Install
 
@@ -37,33 +37,35 @@ Components with Base UI, hooks, or their own handlers are marked `"use client"`;
 
 | Section | Component | JavaScript |
 | --- | --- | --- |
-| Primitives | `Button` (`render` draws it as another element) | none |
-| | `IconButton` | Tooltip |
-| | `Input` (`aria-invalid` and file pickers styled) | none |
-| | `Textarea` | none |
-| | `Field` (label, control, description or error) | ids only |
-| | `Checkbox` | none |
-| | `Switch` | none |
-| | `ToggleGroup`, `Toggle` | none |
-| | `Select` | Base UI |
-| | `Chip` | none |
-| | `Spinner` | none |
+| Actions | `Button` (`render` draws it as another element) | none |
+|  | `IconButton` | Tooltip |
+|  | `Chip` | none |
+| Inputs | `Input` (`aria-invalid` and file pickers styled) | none |
+|  | `Textarea` | none |
+|  | `Field` (label, control, description or error) | ids only |
+|  | `Checkbox` | none |
+|  | `Switch` | none |
+|  | `ToggleGroup`, `Toggle` | none |
+|  | `Select` | Base UI |
+|  | `Slider` (`variant`: `panel`, `toolbar`, or `compact` without the bar; the fill runs from `origin`, the default value, to the value) | none for the bar |
+|  | `ScrubInput` (`chevrons` adds hover arrows; off by default) | drag, typing, and arrow keys |
+|  | `VerticalSlider` | none |
+| Containers | `Panel`, `PanelHeader`, `PanelSection`, `PanelBody` | resizing only |
+|  | `layer-card`, `layer-elevated` (theme utilities for cards) | none |
+|  | `ScrollArea` | Base UI |
+| Navigation | `TabList`, `Tab` | arrow keys |
+|  | `ListItem` | none |
+|  | `TreeList` (drag to reorder or nest; `canDrop` and `onDrop` keep the data with the caller) | pointer drag and arrow keys |
 | Overlays | `Tooltip`, `TooltipProvider` | Base UI |
-| | `Menu`, `MenuItem`, `MenuSeparator`, `Submenu` | Base UI |
-| | `Popover` | Base UI |
-| | `Notice` | none |
-| Panels | `Panel`, `PanelHeader`, `PanelSection`, `PanelBody` | resizing only |
-| | `TabList`, `Tab` | arrow keys |
-| | `ListItem` | none |
-| | `TreeList` (drag to reorder or nest; `canDrop` and `onDrop` keep the data with the caller) | pointer drag and arrow keys |
-| | `ScrollArea` | Base UI |
-| Controls | `Slider` (`variant`: `panel`, `toolbar`, or `compact` without the bar; the fill runs from `origin`, the default value, to the value) | none for the bar |
-| | `ScrubInput` | drag, typing, and arrow keys |
-| | `VerticalSlider` | none |
+|  | `Menu`, `MenuItem`, `MenuSeparator`, `Submenu` | Base UI |
+|  | `Popover` | Base UI |
+|  | `Notice` | none |
+| Effects | `Spinner` | none |
+|  | `shimmer` (a theme utility) | none |
 
 ## Colors
 
-Components use only these tokens, defined in `theme.css` as `--color-*`, so they work with any color utility (`bg-surface`, `text-muted`, `border-line`, `ring-focus`). Redefine one to restyle every component that uses it:
+Components use only these tokens, defined in `theme.css` as `--color-*`, so they work with any color utility (`bg-field`, `text-muted`, `border-line`, `ring-focus`). Redefine one to restyle every component that uses it:
 
 ```css
 @theme {
@@ -73,19 +75,34 @@ Components use only these tokens, defined in `theme.css` as `--color-*`, so they
 
 | Group | Token | Used for |
 | --- | --- | --- |
-| Backgrounds | `page` | the app behind everything |
-| | `field` | inputs, checkboxes, switch and slider tracks, toggle groups |
-| | `surface` | panels, menus, selects, popovers, notices |
-| | `raised`, `raised-hover` | buttons, selected tabs, toggles, and rows |
-| | `tooltip` | tooltips |
+| Scale | `surface-1` to `surface-10` | the grays layers and fills pick from, darkest first; use one to match a layer's color |
+| Fills | `field` | a step below the layer: inputs, checkboxes, switch and slider tracks, toggle groups |
+| | `raised`, `raised-hover` | two and three steps above the layer: buttons, selects, selected tabs, toggles, and rows |
+| | `tooltip` | tooltips, darker than any layer |
 | States | `hover`, `pressed` | translucent fills for ghost buttons, chips, and highlighted items |
 | Text | `foreground`, `muted`, `faint`, `disabled` | body text; idle controls and labels; placeholders, units, and hints; disabled items |
 | Accent | `accent`, `accent-hover`, `on-accent` | primary buttons, checked controls, slider thumbs, drop markers, and what sits on them |
 | Other | `line`, `focus`, `danger` | dividers, the focus ring, errors |
 
+### Layers
+
+A control's fill depends on the layer it sits on, so an input or a button keeps the same contrast everywhere. There are three layers:
+
+| Layer | Background | `field` | `raised` | `raised-hover` |
+| --- | --- | --- | --- | --- |
+| The page | `surface-2` | `surface-1` | `surface-4` | `surface-5` |
+| `layer-card`: panels, notices, cards | `surface-3` | `surface-2` | `surface-5` | `surface-6` |
+| `layer-elevated`: menus, popovers, a card inside a card | `surface-4` | `surface-3` | `surface-6` | `surface-7` |
+
+Give a card or any other container of controls one of these utilities instead of a `bg-*`:
+
+```tsx
+<div className="layer-card rounded-xl p-3 shadow-raised">…</div>
+```
+
 ## Utilities
 
-`theme.css` also provides utilities: `shadow-raised`, `shadow-sunken`, `shadow-float`, `drop-shadow-float`, `focus-ring`, `shimmer`, and the `thumb:` variant for range thumbs.
+`theme.css` also provides utilities: `layer-card`, `layer-elevated`, `shadow-raised`, `shadow-sunken`, `shadow-float`, `drop-shadow-float`, `focus-ring`, `shimmer`, and the `thumb:` variant for range thumbs.
 
 The site at `site/` documents each component and shows a photo editor built from them.
 

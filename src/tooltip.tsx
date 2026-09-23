@@ -40,7 +40,7 @@ export function Tooltip({
               </kbd>
             )}
             {/* A square keeps Base UI's centering right on every side; the clip draws the half outside. */}
-            <Primitive.Arrow className="size-3 bg-tooltipdata-[side=bottom]:bottom-full data-[side=bottom]:[clip-path:polygon(0_100%,50%_50%,100%_100%)] data-[side=left]:left-full data-[side=left]:[clip-path:polygon(0_0,50%_50%,0_100%)] data-[side=right]:right-full data-[side=right]:[clip-path:polygon(100%_0,50%_50%,100%_100%)] data-[side=top]:top-full data-[side=top]:[clip-path:polygon(0_0,50%_50%,100%_0)]" />
+            <Primitive.Arrow className="size-3 bg-tooltip data-[side=bottom]:bottom-full data-[side=bottom]:[clip-path:polygon(0_100%,50%_50%,100%_100%)] data-[side=left]:left-full data-[side=left]:[clip-path:polygon(0_0,50%_50%,0_100%)] data-[side=right]:right-full data-[side=right]:[clip-path:polygon(100%_0,50%_50%,100%_100%)] data-[side=top]:top-full data-[side=top]:[clip-path:polygon(0_0,50%_50%,100%_0)]" />
           </Primitive.Popup>
         </Primitive.Positioner>
       </Primitive.Portal>

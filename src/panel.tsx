@@ -34,7 +34,7 @@ export function Panel({
   return (
     <aside
       className={cn(
-        "relative flex min-h-0 shrink-0 flex-col divide-y divide-line bg-surface",
+        "layer-card relative flex min-h-0 shrink-0 flex-col divide-y divide-line",
         className,
       )}
       style={{ width, ...style }}
