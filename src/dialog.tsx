@@ -4,8 +4,8 @@ import { Dialog as Primitive } from "@base-ui/react/dialog";
 import type { ReactElement, ReactNode } from "react";
 
 /**
- * A modal over the page, opened by `trigger` or by `open`. `actions` sit at the bottom right,
- * 6px from the corner like a Notice's button; render one as a `DialogClose` to close it.
+ * A modal over the page, opened by `trigger` or by `open`. `actions` sit at the bottom right;
+ * render one as a `DialogClose` to close it.
  */
 export function Dialog({
   trigger,
@@ -29,8 +29,8 @@ export function Dialog({
       {trigger && <Primitive.Trigger render={trigger} />}
       <Primitive.Portal>
         <Primitive.Backdrop className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0" />
-        <Primitive.Popup className="fixed top-1/2 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-sm -translate-1/2 flex-col rounded-xl layer-card p-1.5 text-foreground shadow-float outline-none transition-[opacity,scale] duration-150 data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0">
-          <div className="flex flex-col gap-3 p-3">
+        <Primitive.Popup className="fixed top-1/2 left-1/2 z-50 flex w-[calc(100%-2rem)] max-w-sm -translate-1/2 flex-col gap-4 rounded-xl layer-card p-4 text-foreground shadow-float outline-none transition-[opacity,scale] duration-150 data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0">
+          <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-1">
               <Primitive.Title className="font-medium">{title}</Primitive.Title>
               {description && (
@@ -41,7 +41,7 @@ export function Dialog({
             </div>
             {children}
           </div>
-          {actions && <div className="flex justify-end gap-1.5">{actions}</div>}
+          {actions && <div className="flex justify-end gap-2">{actions}</div>}
         </Primitive.Popup>
       </Primitive.Portal>
     </Primitive.Root>
