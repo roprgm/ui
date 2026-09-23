@@ -30,7 +30,7 @@
   "scripts": {
     "dev": "vite",
     "check": "biome check --write && tsc",
-    "build": "tsc -p tsconfig.build.json && shadcn build -o site/public/r && vite build",
+    "build": "bun scripts/registry.ts && biome format --write registry.json && tsc -p tsconfig.build.json && shadcn build -o site/public/r && vite build",
     "prepublishOnly": "bun run build"
   },
   "peerDependencies": {
