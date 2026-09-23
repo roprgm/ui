@@ -1,8 +1,8 @@
 import { readFileSync, writeFileSync } from "node:fs";
 
 /**
- * Writes the `theme` and `base` items of registry.json from theme.css and base.css, so the
- * registry installs the same CSS the package ships. `@theme` variables become `cssVars.theme`;
+ * Writes the `theme` item of registry.json from theme.css, so the registry installs the same
+ * CSS the package ships. `@theme` variables become `cssVars.theme`;
  * everything else goes to `css`. Runs before each build.
  */
 type Rules = { [key: string]: string | Rules };
@@ -72,6 +72,5 @@ function item(path: string) {
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
 for (const entry of registry.items) {
   if (entry.name === "theme") Object.assign(entry, item("src/theme.css"));
-  if (entry.name === "base") Object.assign(entry, item("src/base.css"));
 }
 writeFileSync("registry.json", `${JSON.stringify(registry, null, 2)}\n`);

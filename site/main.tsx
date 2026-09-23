@@ -273,13 +273,12 @@ const usage = (
     </Step>
     <Step title="Or install the package">
       <p className="text-muted">
-        Add it, then import the theme after Tailwind in your CSS. base.css is
-        optional: 13px text, the page background, and dark form controls.
+        Add it, then import the theme after Tailwind in your CSS. It also sets
+        the page: 13px text, the background, and dark form controls.
       </p>
       <Code>bun add @roprgm/ui</Code>
       <Code>{`@import "tailwindcss";
-@import "@roprgm/ui/theme.css";
-@import "@roprgm/ui/base.css";`}</Code>
+@import "@roprgm/ui/theme.css";`}</Code>
     </Step>
     <Step title="Use a component">
       <p className="text-muted">

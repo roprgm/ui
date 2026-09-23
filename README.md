@@ -19,11 +19,9 @@ bun add @roprgm/ui
 ```css
 @import "tailwindcss";
 @import "@roprgm/ui/theme.css";
-/* Optional page defaults: 13px text, the page background, dark form controls, Geist first. */
-@import "@roprgm/ui/base.css";
 ```
 
-`base.css` uses Geist when the app loads it, with `next/font` or `@fontsource-variable/geist`, and the system font otherwise.
+The theme also sets the page: 13px text, the background, and dark form controls. It uses Geist when the app loads it, with `next/font` or `@fontsource-variable/geist`, and the system font otherwise.
 
 ```tsx
 import { Button } from "@roprgm/ui/button";
