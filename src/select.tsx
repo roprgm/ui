@@ -15,8 +15,8 @@ const trigger = cva(
       /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
       variant: {
         field:
-          "h-8 rounded-md bg-raised pr-2.5 pl-3 shadow-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
-        pill: "h-7 rounded-full bg-hover pr-2.5 pl-3 hover:bg-pressed data-popup-open:bg-pressed",
+          "h-(--size-control) rounded-md bg-raised pr-2.5 pl-3 shadow-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
+        pill: "h-(--size-control-sm) rounded-full bg-hover pr-2.5 pl-3 hover:bg-pressed data-popup-open:bg-pressed",
       },
     },
   },

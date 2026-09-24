@@ -88,6 +88,17 @@ The page and each card pick their colors from the gray scale:
 
 Menus, popovers, and select lists open one layer above the one their trigger sits on. Dialogs are cards.
 
+### Sizes
+
+| Token | Default | Use |
+| --- | --- | --- |
+| `--size-control` | 32px | buttons, fields, and selects |
+| `--size-control-sm` | 28px | chips, toggle items, and icon buttons in rows |
+| `--size-control-xs` | 24px | buttons inside a field |
+| `--size-row` | 40px | panel headers and list rows |
+
+The page's text comes from `--text-page` (13px on 20px lines) and `--text-shadow-page`, and `--scheme` sets the color scheme of native controls.
+
 ### Customize
 
 Redefine any token to restyle every component that uses it:
@@ -96,6 +107,7 @@ Redefine any token to restyle every component that uses it:
 @theme {
   --color-accent: hsl(210 90% 60%);
   --radius-md: 8px;
+  --size-control: 2.25rem;
 }
 ```
 

@@ -71,7 +71,7 @@ export function PanelHeader({
     // A small IconButton sits 6px from the top, bottom, and end, so its corner nests in a rounded panel's.
     <div
       className={cn(
-        "flex h-10 shrink-0 items-center gap-1 pr-1.5 pl-3",
+        "flex h-(--size-row) shrink-0 items-center gap-1 pr-1.5 pl-3",
         className,
       )}
     >

@@ -61,6 +61,11 @@
   background-color: var(--layer);
 }
 
+/* shadow-float as a filter, so it follows a shape such as a popup with its arrow. */
+@utility drop-shadow-float {
+  filter: var(--filter-float);
+}
+
 /* An outline set off by a gap, so it shows on any fill. It stays transparent until
    the element or a child has keyboard focus, then fades in slowly. */
 @utility focus-ring {
@@ -118,6 +123,16 @@
 }
 
 @layer base {
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-page);
+    line-height: var(--text-page--line-height);
+    color: var(--color-foreground);
+    background: var(--layer);
+    color-scheme: var(--scheme);
+    text-shadow: var(--text-shadow-page);
+  }
+
   button,
   input,
   textarea {

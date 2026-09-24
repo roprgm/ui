@@ -37,11 +37,20 @@
           "radius-lg": "9px",
           "radius-xl": "12px",
           "radius-2xl": "16px",
+          "size-control": "2rem",
+          "size-control-sm": "1.75rem",
+          "size-control-xs": "1.5rem",
+          "size-row": "2.5rem",
           "shadow-raised": "inset 0 1px 0 rgba(240, 240, 240, 0.07), 0 1px 1px rgb(0 0 0 / 0.28), 0 0 1px rgb(0 0 0 / 0.14)",
           "shadow-sunken": "inset 0 1px 1px rgb(0 0 0 / 0.3), 0 1px 0 rgb(240 240 240 / 0.05)",
           "shadow-divider": "0 1px 0 rgb(240 240 240 / 0.05)",
           "shadow-float": "0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 rgb(255 255 255 / 0.08), 0 2px 6px rgb(0 0 0 / 0.3), 0 16px 32px -8px rgb(0 0 0 / 0.35)",
+          "filter-float": "drop-shadow(0 0 1px rgb(0 0 0 / 0.5)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.2)) drop-shadow(0 8px 12px rgb(0 0 0 / 0.3))",
           "text-shadow-subtle": "0.5px 1px 0.5px rgb(0 0 0 / 0.08)",
+          "text-page": "13px",
+          "text-page--line-height": "20px",
+          "text-shadow-page": "0.5px 1px 0.5px rgb(20 20 20 / 0.2)",
+          "scheme": "dark",
           "color-field": "var(--field)",
           "color-raised": "var(--raised)",
           "color-raised-hover": "var(--raised-hover)"
@@ -56,20 +65,20 @@
             "--raised": "var(--color-surface-4)",
             "--raised-hover": "var(--color-surface-5)"
           },
+          "body": {
+            "font-family": "var(--font-sans)",
+            "font-size": "var(--text-page)",
+            "line-height": "var(--text-page--line-height)",
+            "color": "var(--color-foreground)",
+            "background": "var(--layer)",
+            "color-scheme": "var(--scheme)",
+            "text-shadow": "var(--text-shadow-page)"
+          },
           "button, input, textarea": {
             "text-shadow": "inherit"
           },
           "label:has(input:is([type=\"checkbox\"], [type=\"radio\"]):enabled)": {
             "cursor": "pointer"
-          },
-          "body": {
-            "font-family": "var(--font-sans)",
-            "font-size": "13px",
-            "line-height": "20px",
-            "color": "var(--color-foreground)",
-            "background": "var(--layer)",
-            "color-scheme": "dark",
-            "text-shadow": "0.5px 1px 0.5px rgb(20 20 20 / 0.2)"
           }
         },
         "@utility layer-card": {
@@ -95,6 +104,9 @@
           "--raised": "var(--color-surface-7)",
           "--raised-hover": "var(--color-surface-8)",
           "background-color": "var(--layer)"
+        },
+        "@utility drop-shadow-float": {
+          "filter": "var(--filter-float)"
         },
         "@utility focus-ring": {
           "outline": "2px solid transparent",
@@ -128,9 +140,6 @@
           "&::-moz-range-thumb": {
             "@slot": {}
           }
-        },
-        "@utility drop-shadow-float": {
-          "filter": "drop-shadow(0 0 1px rgb(0 0 0 / 0.5)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.2)) drop-shadow(0 8px 12px rgb(0 0 0 / 0.3))"
         }
       }
     },

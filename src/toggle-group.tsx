@@ -26,7 +26,7 @@ export function Toggle({
   return (
     <label
       className={cn(
-        "inline-flex h-7 cursor-pointer items-center rounded-md px-3 text-muted transition focus-ring hover:text-foreground has-checked:bg-raised has-checked:text-foreground has-checked:shadow-raised has-disabled:pointer-events-none has-disabled:opacity-40",
+        "inline-flex h-(--size-control-sm) cursor-pointer items-center rounded-md px-3 text-muted transition focus-ring hover:text-foreground has-checked:bg-raised has-checked:text-foreground has-checked:shadow-raised has-disabled:pointer-events-none has-disabled:opacity-40",
         className,
       )}
     >
