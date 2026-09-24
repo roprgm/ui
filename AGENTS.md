@@ -13,4 +13,4 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - Start a file with `"use client";` when it uses Base UI, hooks, or its own event handlers, so it works in React Server Components. Markup-only components stay without it and render on the server.
 - `src/` stays flat. Sections (actions, inputs, containers, navigation, overlays, effects) are `categories` in `registry.json` and groups in `site/main.tsx`. Internal pieces (`chevron`, `surface`) have registry items without a category.
 - The goal is for OpenLight to adopt this library; port its patterns and keep APIs close to its usage.
-- Add the component to `registry.json`, a demo in `site/demos.tsx`, its entry in `site/main.tsx`, and `README.md`. Run `bun run check` and `bun run build`.
+- Add the component to `registry.json`, a demo in `site/demos.tsx`, its entry in `site/main.tsx`, and `README.md`. Run `bun run check` and `bun run build`. For a change that shouldn't look different, take screenshots with `bun run snapshots --update-snapshots` before it and compare with `bun run snapshots` after.

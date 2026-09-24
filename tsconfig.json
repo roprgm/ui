@@ -11,5 +11,5 @@
     "skipLibCheck": true,
     "isolatedModules": true
   },
-  "include": ["src", "site", "vite.config.ts"]
+  "include": ["src", "site", "tests", "vite.config.ts", "playwright.config.ts"]
 }
