@@ -1,8 +1,8 @@
 /*
  * What every theme shares: the utilities, variants, and rules the components are built from.
- * They read the theme's tokens and hold no look of their own, so a theme imports this file and
- * only sets values. A theme can still redefine a utility here: Tailwind merges both definitions,
- * and the theme's declarations win.
+ * They read the theme's tokens, and keep a value of their own when nothing else uses it. A theme
+ * imports this file, sets tokens, and redefines a utility or rule to change the rest: Tailwind
+ * merges both definitions of a utility, and the theme's declarations win.
  */
 
 @source "./";
@@ -63,7 +63,9 @@
 
 /* shadow-float as a filter, so it follows a shape such as a popup with its arrow. */
 @utility drop-shadow-float {
-  filter: var(--filter-float);
+  filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.5))
+    drop-shadow(0 2px 3px rgb(0 0 0 / 0.2))
+    drop-shadow(0 8px 12px rgb(0 0 0 / 0.3));
 }
 
 /* An outline set off by a gap, so it shows on any fill. It stays transparent until
@@ -123,14 +125,15 @@
 }
 
 @layer base {
+  /* 13px text in the foreground color on the page's layer, with dark form controls. */
   body {
     font-family: var(--font-sans);
-    font-size: var(--text-page);
-    line-height: var(--text-page--line-height);
+    font-size: 13px;
+    line-height: 20px;
     color: var(--color-foreground);
     background: var(--layer);
-    color-scheme: var(--scheme);
-    text-shadow: var(--text-shadow-page);
+    color-scheme: dark;
+    text-shadow: 0.5px 1px 0.5px rgb(20 20 20 / 0.2);
   }
 
   button,

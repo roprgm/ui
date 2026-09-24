@@ -1,6 +1,6 @@
 /*
- * The default theme: fonts, colors, radii, shadows, and the page. The utilities the components
- * are built from live in base.css and read these values.
+ * The default theme: fonts, colors, radii, sizes, and shadows. The utilities the components are
+ * built from live in base.css and read these values.
  */
 
 @import "./base.css";
@@ -89,18 +89,6 @@
   --shadow-float:
     0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 rgb(255 255 255 / 0.08),
     0 2px 6px rgb(0 0 0 / 0.3), 0 16px 32px -8px rgb(0 0 0 / 0.35);
-  /* shadow-float as a filter, so it follows a shape such as a popup with its arrow. */
-  --filter-float: drop-shadow(0 0 1px rgb(0 0 0 / 0.5))
-    drop-shadow(0 2px 3px rgb(0 0 0 / 0.2))
-    drop-shadow(0 8px 12px rgb(0 0 0 / 0.3));
   /* The body's text shadow reads too strong on light fills; they use this one. */
   --text-shadow-subtle: 0.5px 1px 0.5px rgb(0 0 0 / 0.08);
-}
-
-/* The page: 13px text with a soft shadow, and dark form controls. */
-@theme {
-  --text-page: 13px;
-  --text-page--line-height: 20px;
-  --text-shadow-page: 0.5px 1px 0.5px rgb(20 20 20 / 0.2);
-  --scheme: dark;
 }

@@ -62,7 +62,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ## Theme
 
-`theme.css` holds the values: colors, radii, shadows, and the page, set to 13px text on a dark background in Geist when your app loads it. It imports `base.css`, the utilities the components are built from, which read those values.
+`theme.css` holds the tokens: colors, radii, sizes, and shadows. It imports `base.css`, the utilities the components are built from, which read those tokens. `base.css` also sets the page to 13px text on a dark background, in Geist when your app loads it.
 
 ### Colors
 
@@ -96,8 +96,6 @@ Menus, popovers, and select lists open one layer above the one their trigger sit
 | `--size-control-sm` | 28px | chips, toggle items, and icon buttons in rows |
 | `--size-control-xs` | 24px | buttons inside a field |
 | `--size-row` | 40px | panel headers and list rows |
-
-The page's text comes from `--text-page` (13px on 20px lines) and `--text-shadow-page`, and `--scheme` sets the color scheme of native controls.
 
 ### Customize
 
