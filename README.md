@@ -71,7 +71,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | `foreground`, `muted`, `faint`, `disabled` | text, from strongest to weakest |
 | `field` | inputs, checkboxes, and tracks |
 | `raised`, `raised-hover` | buttons, selects, and selected items |
-| `accent`, `accent-hover`, `on-accent` | primary buttons and checked controls |
+| `primary`, `primary-hover`, `on-primary` | primary buttons and checked controls |
 | `hover`, `pressed` | translucent states for ghost buttons and chips |
 | `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
 | `surface-1` to `surface-8` | the gray scale, darkest first |
@@ -103,7 +103,7 @@ Redefine any token to restyle every component that uses it:
 
 ```css
 @theme {
-  --color-accent: hsl(210 90% 60%);
+  --color-primary: hsl(210 90% 60%);
   --radius-md: 8px;
   --size-control: 2.25rem;
 }

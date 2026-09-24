@@ -26,10 +26,10 @@
   --color-faint: hsl(0 0% 45%);
   --color-disabled: hsl(0 0% 32%);
 
-  /* What is on: primary buttons, checked controls, slider thumbs, drop markers. */
-  --color-accent: hsl(0 0% 86%);
-  --color-accent-hover: hsl(0 0% 98%);
-  --color-on-accent: hsl(0 0% 9%);
+  /* The primary color marks what is on: primary buttons, checked controls, thumbs, drop markers. */
+  --color-primary: hsl(0 0% 86%);
+  --color-primary-hover: hsl(0 0% 98%);
+  --color-on-primary: hsl(0 0% 9%);
 
   --color-line: hsl(0 0% 0% / 0.4);
   --color-backdrop: hsl(0 0% 0% / 0.5);

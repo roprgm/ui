@@ -24,7 +24,7 @@ export function VerticalSlider({
   /** Restored by double-clicking. */
   defaultValue?: number;
   stops?: readonly string[];
-  /** The thumb's color; the accent when omitted. */
+  /** The thumb's color; the primary color when omitted. */
   color?: string;
   className?: string;
 }) {
@@ -48,7 +48,7 @@ export function VerticalSlider({
         onDoubleClick={() =>
           defaultValue !== undefined && onChange(defaultValue)
         }
-        className="relative h-full w-full cursor-ns-resize touch-none appearance-none bg-transparent text-accent outline-none [direction:rtl] [writing-mode:vertical-lr] thumb:size-3.5 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-current thumb:shadow-raised thumb:ring-1 thumb:ring-line focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus"
+        className="relative h-full w-full cursor-ns-resize touch-none appearance-none bg-transparent text-primary outline-none [direction:rtl] [writing-mode:vertical-lr] thumb:size-3.5 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-current thumb:shadow-raised thumb:ring-1 thumb:ring-line focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus"
         style={color ? { color } : undefined}
       />
     </div>

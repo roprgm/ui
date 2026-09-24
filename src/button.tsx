@@ -11,7 +11,7 @@ const button = cva(
         default:
           "bg-raised text-foreground shadow-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
         primary:
-          "bg-accent text-on-accent shadow-raised text-shadow-subtle hover:bg-accent-hover",
+          "bg-primary text-on-primary shadow-raised text-shadow-subtle hover:bg-primary-hover",
         ghost:
           "text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },
