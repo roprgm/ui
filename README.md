@@ -53,7 +53,7 @@ Components without JavaScript, such as `Button` and `Input`, render on the serve
 | --- | --- |
 | Actions | `Button`, `IconButton`, `Chip`, `Kbd` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `Switch`, `ToggleGroup`, `Select`, `Slider`, `ScrubInput`, `VerticalSlider` |
-| Containers | Cards with `layer-card` and `layer-elevated`, `Panel`, `ScrollArea` |
+| Containers | Cards with `layer-card` and `layer-elevated`, the `surface-*` utilities, `Panel`, `ScrollArea` |
 | Navigation | `TabList`, `ListItem`, `TreeList` |
 | Overlays | `Tooltip`, `Menu`, `Popover`, `Dialog`, `Notice` |
 | Effects | `Spinner`, and the `shimmer` utility |
@@ -88,6 +88,16 @@ The page and each card pick their colors from the gray scale:
 
 Menus, popovers, and select lists open one layer above the one their trigger sits on. Dialogs are cards.
 
+### Surfaces
+
+Components paint their controls with three utilities from `base.css`, so a control you build with them follows the theme too:
+
+| Utility | Paints | Used by |
+| --- | --- | --- |
+| `surface-raised` | `raised` with `shadow-raised` | buttons, selects, selected tabs and toggles |
+| `surface-primary` | `primary` with `shadow-raised` | primary buttons, checked checkboxes, slider thumbs |
+| `surface-sunken` | `field` with `shadow-sunken` | fields, tracks, checkboxes, switches |
+
 ### Sizes
 
 | Token | Default | Use |
@@ -106,6 +116,14 @@ Redefine any token to restyle every component that uses it:
   --color-primary: hsl(210 90% 60%);
   --radius-md: 8px;
   --size-control: 2.25rem;
+}
+```
+
+Redefine a utility after the import to change what it paints. Tailwind merges both definitions and yours wins, so this flattens every sunken control:
+
+```css
+@utility surface-sunken {
+  box-shadow: none;
 }
 ```
 

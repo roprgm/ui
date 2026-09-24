@@ -50,7 +50,7 @@ export function Tab({
       aria-selected={selected}
       tabIndex={selected ? 0 : -1}
       className={cn(
-        "aria-selected:bg-raised aria-selected:text-foreground aria-selected:shadow-raised",
+        "aria-selected:surface-raised aria-selected:text-foreground",
         className,
       )}
       {...props}

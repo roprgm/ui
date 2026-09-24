@@ -100,6 +100,15 @@
           "--raised-hover": "var(--color-surface-8)",
           "background-color": "var(--layer)"
         },
+        "@utility surface-raised": {
+          "@apply bg-raised shadow-raised": {}
+        },
+        "@utility surface-primary": {
+          "@apply bg-primary shadow-raised": {}
+        },
+        "@utility surface-sunken": {
+          "@apply bg-field shadow-sunken": {}
+        },
         "@utility drop-shadow-float": {
           "filter": "drop-shadow(0 0 1px rgb(0 0 0 / 0.5)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.2)) drop-shadow(0 8px 12px rgb(0 0 0 / 0.3))"
         },

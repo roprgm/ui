@@ -61,6 +61,27 @@
   background-color: var(--layer);
 }
 
+/*
+ * Surfaces: how a control stands on the layer under it. Components paint themselves with these
+ * rather than a fill and a shadow of their own, so redefining one restyles every control that
+ * uses it, yours included.
+ */
+
+/* Stands out from the layer: buttons, selects, selected tabs and toggles. */
+@utility surface-raised {
+  @apply bg-raised shadow-raised;
+}
+
+/* Raised in the primary color: primary buttons, checked checkboxes, slider thumbs. */
+@utility surface-primary {
+  @apply bg-primary shadow-raised;
+}
+
+/* Set into the layer: fields, tracks, checkboxes, and switches. */
+@utility surface-sunken {
+  @apply bg-field shadow-sunken;
+}
+
 /* shadow-float as a filter, so it follows a shape such as a popup with its arrow. */
 @utility drop-shadow-float {
   filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.5))

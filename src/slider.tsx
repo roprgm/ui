@@ -104,7 +104,7 @@ export function Slider({
         // The margin makes room for the thumb, so the slider's box ends where the thumb does.
         <div
           className={cn(
-            "relative my-1 h-1 rounded-full bg-field shadow-sunken",
+            "relative my-1 h-1 rounded-full surface-sunken",
             cells[variant].bar,
           )}
           style={{
@@ -131,7 +131,7 @@ export function Slider({
             onPointerCancel={() => onEditingChange?.(false)}
             onFocus={() => onEditingChange?.(true)}
             onBlur={() => onEditingChange?.(false)}
-            className="absolute inset-x-0 top-1/2 h-4 w-full pointer-coarse:h-11 -translate-y-1/2 cursor-pointer touch-pan-y appearance-none bg-transparent outline-none thumb:size-3 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-primary thumb:shadow-raised thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus"
+            className="absolute inset-x-0 top-1/2 h-4 w-full pointer-coarse:h-11 -translate-y-1/2 cursor-pointer touch-pan-y appearance-none bg-transparent outline-none thumb:size-3 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-primary thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus"
           />
         </div>
       )}

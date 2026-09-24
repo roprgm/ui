@@ -9,7 +9,7 @@ export function ToggleGroup({
   return (
     <fieldset
       className={cn(
-        "inline-flex gap-0.5 rounded-lg bg-field p-0.5 shadow-sunken",
+        "inline-flex gap-0.5 rounded-lg surface-sunken p-0.5",
         className,
       )}
       {...props}
@@ -26,7 +26,7 @@ export function Toggle({
   return (
     <label
       className={cn(
-        "inline-flex h-(--size-control-sm) cursor-pointer items-center rounded-md px-3 text-muted transition focus-ring hover:text-foreground has-checked:bg-raised has-checked:text-foreground has-checked:shadow-raised has-disabled:pointer-events-none has-disabled:opacity-40",
+        "inline-flex h-(--size-control-sm) cursor-pointer items-center rounded-md px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground has-disabled:pointer-events-none has-disabled:opacity-40",
         className,
       )}
     >
