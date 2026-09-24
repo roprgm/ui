@@ -204,6 +204,17 @@ export function SpinnerDemo() {
   );
 }
 
+export function SurfacesDemo() {
+  return (["surface-raised", "surface-primary", "surface-sunken"] as const).map(
+    (surface) => (
+      <div key={surface} className="flex flex-col items-center gap-3">
+        <div className={cn("size-16 rounded-lg", surface)} />
+        <span className="text-muted">{surface}</span>
+      </div>
+    ),
+  );
+}
+
 export function ShimmerDemo() {
   return (
     <div className="flex w-64 flex-col gap-4">
