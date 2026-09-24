@@ -56,6 +56,12 @@
             "--raised": "var(--color-surface-4)",
             "--raised-hover": "var(--color-surface-5)"
           },
+          "button, input, textarea": {
+            "text-shadow": "inherit"
+          },
+          "label:has(input:is([type=\"checkbox\"], [type=\"radio\"]):enabled)": {
+            "cursor": "pointer"
+          },
           "body": {
             "font-family": "var(--font-sans)",
             "font-size": "13px",
@@ -64,12 +70,6 @@
             "background": "var(--layer)",
             "color-scheme": "dark",
             "text-shadow": "0.5px 1px 0.5px rgb(20 20 20 / 0.2)"
-          },
-          "button, input, textarea": {
-            "text-shadow": "inherit"
-          },
-          "label:has(input:is([type=\"checkbox\"], [type=\"radio\"]):enabled)": {
-            "cursor": "pointer"
           }
         },
         "@utility layer-card": {
@@ -95,9 +95,6 @@
           "--raised": "var(--color-surface-7)",
           "--raised-hover": "var(--color-surface-8)",
           "background-color": "var(--layer)"
-        },
-        "@utility drop-shadow-float": {
-          "filter": "drop-shadow(0 0 1px rgb(0 0 0 / 0.5)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.2)) drop-shadow(0 8px 12px rgb(0 0 0 / 0.3))"
         },
         "@utility focus-ring": {
           "outline": "2px solid transparent",
@@ -131,6 +128,9 @@
           "&::-moz-range-thumb": {
             "@slot": {}
           }
+        },
+        "@utility drop-shadow-float": {
+          "filter": "drop-shadow(0 0 1px rgb(0 0 0 / 0.5)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.2)) drop-shadow(0 8px 12px rgb(0 0 0 / 0.3))"
         }
       }
     },

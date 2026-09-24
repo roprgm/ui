@@ -62,7 +62,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ## Theme
 
-Everything lives in `theme.css`: colors, radii, shadows, and a few utilities. It also sets the page to 13px text on a dark background, in Geist when your app loads it.
+`theme.css` holds the values: colors, radii, shadows, and the page, set to 13px text on a dark background in Geist when your app loads it. It imports `base.css`, the utilities the components are built from, which read those values.
 
 ### Colors
 

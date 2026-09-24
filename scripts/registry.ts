@@ -1,8 +1,9 @@
 import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 /**
- * Writes the `theme` item of registry.json from theme.css, so the registry installs the same
- * CSS the package ships. `@theme` variables become `cssVars.theme`;
+ * Writes the `theme` item of registry.json from theme.css and the files it imports, so the
+ * registry installs the same CSS the package ships. `@theme` variables become `cssVars.theme`;
  * everything else goes to `css`. Runs before each build.
  */
 type Rules = { [key: string]: string | Rules };
@@ -54,12 +55,20 @@ function parse(source: string): Rules {
   return block();
 }
 
+/** A CSS file with its imports of sibling files written in place. */
+function read(path: string): string {
+  return readFileSync(path, "utf8").replace(
+    /@import "\.\/(.+?)";/g,
+    (_, file) => read(join(dirname(path), file)),
+  );
+}
+
 function item(path: string) {
   const {
     "@theme": theme = {},
     "@theme inline": inline = {},
     ...css
-  } = parse(readFileSync(path, "utf8")) as Record<string, Rules>;
+  } = parse(read(path)) as Record<string, Rules>;
   const vars = Object.fromEntries(
     Object.entries({ ...theme, ...inline }).map(([key, value]) => [
       key.replace(/^--/, ""),
