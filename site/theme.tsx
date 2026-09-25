@@ -2,14 +2,16 @@ import { useState } from "react";
 import { Select } from "../src/components/select";
 import standard from "./themes/default.css?inline";
 import flat from "./themes/flat.css?inline";
+import light from "./themes/light.css?inline";
 import lines from "./themes/lines.css?inline";
 
 /** Each theme draws the primitives its own way, so the site builds a stylesheet per theme. */
-const themes = { default: standard, lines, flat };
+const themes = { default: standard, light, lines, flat };
 type Theme = keyof typeof themes;
 
 const items = [
   { value: "default", label: "Default" },
+  { value: "light", label: "Light" },
   { value: "lines", label: "Lines" },
   { value: "flat", label: "Flat" },
 ] as const;
@@ -35,6 +37,8 @@ function stored(): Theme {
 
 function apply(theme: Theme) {
   style.textContent = themes[theme];
+  // The site's own styles, such as code colors, follow the theme through this attribute.
+  document.documentElement.dataset.theme = theme;
   try {
     localStorage.setItem("theme", theme);
   } catch {}

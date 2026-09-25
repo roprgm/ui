@@ -23,3 +23,12 @@
   --sh-property: hsl(35 65% 72%);
   --sh-jsxliterals: var(--color-foreground);
 }
+
+/* Darker code colors, which read on the light theme's white. */
+[data-theme="light"] {
+  --sh-keyword: hsl(350 60% 42%);
+  --sh-string: hsl(95 45% 30%);
+  --sh-class: hsl(200 70% 35%);
+  --sh-entity: hsl(200 70% 35%);
+  --sh-property: hsl(30 70% 35%);
+}

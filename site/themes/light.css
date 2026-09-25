@@ -1,0 +1,3 @@
+/* The docs site in the light theme. */
+@import "tailwindcss";
+@import "../../src/themes/light.css";
