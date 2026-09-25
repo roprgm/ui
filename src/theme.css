@@ -79,7 +79,7 @@
   /* Buttons, chips, menu items, and the thumbnails and icon buttons in rows. */
   --size-control: 1.75rem;
 
-  /* Fields, selects, toggle groups, and the buttons beside them. */
+  /* Fields, selects, and the buttons beside them. */
   --size-control-lg: calc(var(--size-control) + 4px);
   /* Buttons inside a field, and close buttons. */
   --size-control-sm: calc(var(--size-control) - 4px);

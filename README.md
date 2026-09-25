@@ -112,7 +112,7 @@ Four tokens set the density; the rest follow from them. `--padding` and `--size-
 
 | Derived | Default | Use |
 | --- | --- | --- |
-| `--size-control-lg` | 32px | fields, selects, toggle groups, tabs, and the buttons beside them |
+| `--size-control-lg` | 32px | fields, selects, tabs, and the buttons beside them |
 | `--size-control-sm` | 24px | buttons inside a field, and close buttons |
 | `--size-control-inset` | 26px | a toggle in its group, or the file picker in its field |
 | `--size-row` | 40px | panel headers and list rows, holding a control `--padding-sm` in |

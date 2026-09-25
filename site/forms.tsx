@@ -143,8 +143,7 @@ export function FormsDemo() {
         </div>
       </div>
 
-      {/* Sunken and raised controls in one row: a large button matches the sunken one, a default
-          button stands 4px shorter. */}
+      {/* Sunken and raised controls in one row, to judge which heights read as equal. */}
       <div className="flex flex-col gap-3 md:col-span-2">
         <div className="flex items-center gap-2">
           <ToggleGroup>
@@ -158,8 +157,25 @@ export function FormsDemo() {
               Right
             </Toggle>
           </ToggleGroup>
-          <Button size="lg">Large</Button>
           <Button>Default</Button>
+          <Button variant="primary">Apply</Button>
+        </div>
+        <div className="flex items-center gap-2">
+          <ToggleGroup size="lg">
+            <Toggle name="align-lg" value="left" defaultChecked>
+              Left
+            </Toggle>
+            <Toggle name="align-lg" value="center">
+              Center
+            </Toggle>
+            <Toggle name="align-lg" value="right">
+              Right
+            </Toggle>
+          </ToggleGroup>
+          <Button size="lg">Large</Button>
+          <Button size="lg" variant="primary">
+            Apply
+          </Button>
           <Select
             aria-label="Spacing"
             items={sorts}
