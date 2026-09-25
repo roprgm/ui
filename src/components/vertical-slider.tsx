@@ -31,7 +31,8 @@ export function VerticalSlider({
   return (
     <div className={cn("relative flex h-44 w-8 justify-center", className)}>
       <div
-        className="pointer-events-none absolute inset-y-2 w-1 ui-slider-track"
+        data-slot="slider-track"
+        className="pointer-events-none absolute inset-y-2 w-1 rounded-full surface-sunken"
         style={
           stops && { background: `linear-gradient(to top, ${stops.join()})` }
         }
@@ -49,7 +50,7 @@ export function VerticalSlider({
           defaultValue !== undefined && onChange(defaultValue)
         }
         className={cn(
-          "relative h-full w-full cursor-ns-resize touch-none ui-range [direction:rtl] [writing-mode:vertical-lr]",
+          "relative h-full w-full cursor-ns-resize touch-none range-thumb [direction:rtl] [writing-mode:vertical-lr]",
           color && "thumb:bg-current",
         )}
         style={{ color }}

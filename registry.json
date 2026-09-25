@@ -54,152 +54,6 @@
         }
       },
       "css": {
-        "@layer components": {
-          ".ui-popup": {
-            "@apply surface-float": {},
-            "max-height": "var(--available-height)",
-            "min-width": "10rem",
-            "overflow-y": "auto",
-            "border-radius": "var(--radius-xl)",
-            "color": "var(--color-foreground)",
-            "outline": "none",
-            "transform-origin": "var(--transform-origin)",
-            "transition-property": "opacity, scale",
-            "transition-duration": "100ms",
-            "&[data-starting-style], &[data-ending-style]": {
-              "opacity": "0"
-            },
-            "&[data-starting-style]": {
-              "scale": "0.95"
-            }
-          },
-          ".ui-menu-item": {
-            "display": "flex",
-            "flex-shrink": "0",
-            "align-items": "center",
-            "height": "calc(var(--size-control) - 2px)",
-            "padding-inline": "calc(var(--padding) - var(--padding-sm))",
-            "border-radius": "var(--radius-sm)",
-            "cursor": "default",
-            "outline": "none",
-            "user-select": "none",
-            "&[data-disabled]": {
-              "@apply text-disabled": {}
-            },
-            "&[data-highlighted]": {
-              "@apply bg-raised": {}
-            }
-          },
-          ".ui-range": {
-            "appearance": "none",
-            "background": "transparent",
-            "outline": "none",
-            "-webkit-tap-highlight-color": "transparent",
-            "@variant thumb": {
-              "@apply size-(--size-thumb) appearance-none rounded-full border-0 surface-thumb transition": {}
-            },
-            "&:focus-visible": {
-              "@variant thumb": {
-                "@apply ring-2 ring-focus": {}
-              }
-            }
-          },
-          ".ui-slider-track": {
-            "@apply surface-sunken": {},
-            "border-radius": "9999px"
-          },
-          ".ui-switch": {
-            "@apply surface-sunken transition": {},
-            "box-sizing": "content-box",
-            "flex-shrink": "0",
-            "width": "2rem",
-            "height": "1rem",
-            "padding": "2px",
-            "border-radius": "9999px",
-            "appearance": "none",
-            "cursor": "pointer",
-            "&::before": {
-              "@apply surface-thumb transition": {},
-              "@apply bg-muted": {},
-              "content": "\"\"",
-              "display": "block",
-              "width": "1rem",
-              "height": "1rem",
-              "border-radius": "9999px"
-            },
-            "&:checked": {
-              "@apply bg-primary": {}
-            },
-            "&:checked::before": {
-              "@apply bg-on-primary": {},
-              "translate": "1rem 0"
-            }
-          },
-          ".ui-tooltip": {
-            "@apply surface-callout": {},
-            "padding": "0.25rem 0.5rem",
-            "border-radius": "var(--radius-md)",
-            "color": "var(--color-foreground)",
-            "transform-origin": "var(--transform-origin)",
-            "transition-property": "opacity, scale",
-            "transition-duration": "100ms",
-            "&[data-starting-style], &[data-ending-style]": {
-              "opacity": "0"
-            },
-            "&[data-starting-style]": {
-              "scale": "0.95"
-            },
-            "&[data-instant]": {
-              "transition": "none"
-            }
-          },
-          ".ui-tooltip-arrow": {
-            "@apply bg-tooltip": {},
-            "width": "0.75rem",
-            "height": "0.75rem",
-            "&[data-side=\"top\"]": {
-              "top": "100%",
-              "clip-path": "polygon(0 0, 50% 50%, 100% 0)"
-            },
-            "&[data-side=\"bottom\"]": {
-              "bottom": "100%",
-              "clip-path": "polygon(0 100%, 50% 50%, 100% 100%)"
-            },
-            "&[data-side=\"left\"]": {
-              "left": "100%",
-              "clip-path": "polygon(0 0, 50% 50%, 0 100%)"
-            },
-            "&[data-side=\"right\"]": {
-              "right": "100%",
-              "clip-path": "polygon(100% 0, 50% 50%, 100% 100%)"
-            }
-          },
-          ".ui-scroll-fade": {
-            "&::before, &::after": {
-              "content": "\"\"",
-              "position": "sticky",
-              "z-index": "10",
-              "display": "block",
-              "height": "1.5rem",
-              "pointer-events": "none",
-              "opacity": "0",
-              "transition": "opacity 150ms"
-            },
-            "&::before": {
-              "top": "0",
-              "margin-bottom": "-1.5rem",
-              "background": "linear-gradient(to bottom, hsl(0 0% 0% / 0.2), 30%, transparent)"
-            },
-            "&::after": {
-              "bottom": "0",
-              "margin-top": "-1.5rem",
-              "background": "linear-gradient(to top, hsl(0 0% 0% / 0.2), 30%, transparent)"
-            },
-            "&[data-overflow-y-start]::before, &[data-overflow-y-end]::after": {
-              "opacity": "1"
-            }
-          }
-        },
         "@layer base": {
           ":root": {
             "--layer": "var(--color-level-2)"
@@ -268,6 +122,34 @@
           "&:is(:disabled, [data-disabled], :has(:disabled))": {
             "pointer-events": "none",
             "opacity": "40%"
+          }
+        },
+        "@utility range-thumb": {
+          "@apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus": {}
+        },
+        "@utility scroll-fade": {
+          "&::before, &::after": {
+            "content": "\"\"",
+            "position": "sticky",
+            "z-index": "10",
+            "display": "block",
+            "height": "1.5rem",
+            "pointer-events": "none",
+            "opacity": "0",
+            "transition": "opacity 150ms"
+          },
+          "&::before": {
+            "top": "0",
+            "margin-bottom": "-1.5rem",
+            "background": "linear-gradient(to bottom, hsl(0 0% 0% / 0.2), 30%, transparent)"
+          },
+          "&::after": {
+            "bottom": "0",
+            "margin-top": "-1.5rem",
+            "background": "linear-gradient(to top, hsl(0 0% 0% / 0.2), 30%, transparent)"
+          },
+          "&[data-overflow-y-start]::before, &[data-overflow-y-end]::after": {
+            "opacity": "1"
           }
         },
         "@utility shimmer": {

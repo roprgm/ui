@@ -36,9 +36,8 @@
   box-shadow: inset 0 0 0 1px hsl(0 0% 0% / 0.5);
 }
 
-/* A line around a thin groove reads heavy, so a slider's track stays plain, as in the flat theme. */
-@layer components {
-  .ui-slider-track {
-    box-shadow: none;
-  }
+/* A line around a thin groove reads heavy, so a slider's track stays plain, as in the flat theme.
+   Outside any layer, a theme's rule wins over the component's utilities. */
+[data-slot="slider-track"] {
+  box-shadow: none;
 }

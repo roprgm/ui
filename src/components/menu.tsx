@@ -5,7 +5,7 @@ import { cn } from "cn";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
-import { Popup } from "./popup";
+import { Popup, popupItem } from "./popup";
 
 /** Commands opened from `trigger`, such as an IconButton. For settings, use a Popover. */
 export function Menu({
@@ -46,7 +46,7 @@ export function MenuItem({
   ...props
 }: ComponentProps<typeof Primitive.Item> & { shortcut?: string }) {
   return (
-    <Primitive.Item className={cn("ui-menu-item gap-2", className)} {...props}>
+    <Primitive.Item className={cn(popupItem, "gap-2", className)} {...props}>
       {children}
       {shortcut && <Kbd className="ml-auto pl-4">{shortcut}</Kbd>}
     </Primitive.Item>
@@ -67,7 +67,12 @@ export function Submenu({
 }) {
   return (
     <Primitive.SubmenuRoot>
-      <Primitive.SubmenuTrigger className="ui-menu-item justify-between gap-4 data-popup-open:bg-raised">
+      <Primitive.SubmenuTrigger
+        className={cn(
+          popupItem,
+          "justify-between gap-4 data-popup-open:bg-raised",
+        )}
+      >
         {label}
         <Chevron direction="right" size="sm" className="text-muted" />
       </Primitive.SubmenuTrigger>

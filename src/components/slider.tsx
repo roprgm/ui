@@ -103,8 +103,9 @@ export function Slider({
       {variant !== "compact" && (
         // The margin makes room for the thumb, so the slider's box ends where the thumb does.
         <div
+          data-slot="slider-track"
           className={cn(
-            "relative my-[calc(var(--size-thumb)/2-2px)] h-1 ui-slider-track",
+            "relative my-[calc(var(--size-thumb)/2-2px)] h-1 rounded-full surface-sunken",
             cells[variant].bar,
           )}
           style={{
@@ -131,7 +132,7 @@ export function Slider({
             onPointerCancel={() => onEditingChange?.(false)}
             onFocus={() => onEditingChange?.(true)}
             onBlur={() => onEditingChange?.(false)}
-            className="absolute inset-x-0 top-1/2 h-8 w-full -translate-y-1/2 cursor-pointer touch-pan-y ui-range"
+            className="absolute inset-x-0 top-1/2 h-8 w-full -translate-y-1/2 cursor-pointer touch-pan-y range-thumb"
           />
         </div>
       )}

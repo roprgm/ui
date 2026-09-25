@@ -5,7 +5,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { type ReactNode, useState } from "react";
 import { Chevron } from "./chevron";
-import { Popup } from "./popup";
+import { Popup, popupItem } from "./popup";
 import { Tooltip } from "./tooltip";
 
 const trigger = cva(
@@ -116,7 +116,10 @@ export function Select<T extends string, Multiple extends boolean = false>({
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
-                  className="ui-menu-item justify-between gap-4 data-selected:bg-raised"
+                  className={cn(
+                    popupItem,
+                    "justify-between gap-4 data-selected:bg-raised",
+                  )}
                 >
                   <Primitive.ItemText>{item.label}</Primitive.ItemText>
                   <Primitive.ItemIndicator>

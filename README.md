@@ -143,13 +143,11 @@ A theme of your own imports `base.css`, sets again any token it changes, and add
 }
 ```
 
-Some component parts are classes a theme can redraw: `.ui-popup`, `.ui-menu-item`, `.ui-range` (a slider's thumb), `.ui-slider-track`, `.ui-switch`, `.ui-tooltip`, and `.ui-scroll-fade`. They live in the components layer, so a theme's own `@layer components` rule wins over the library's, and your `className` wins over both:
+A theme can also redraw a part of one component through its `data-slot`, such as a slider's track. Write the rule outside any `@layer`, so it wins over the component's utilities:
 
 ```css
-@layer components {
-  .ui-slider-track {
-    box-shadow: none;
-  }
+[data-slot="slider-track"] {
+  box-shadow: none;
 }
 ```
 
