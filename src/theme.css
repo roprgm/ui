@@ -37,19 +37,24 @@
   --color-danger: hsl(0 90% 75%);
 }
 
-/* The grays everything is painted with, darkest first. Each step is a third of a point wider than
-   the last, from 4% to 6%. The layers in base.css pick from them. */
+/* The grays, darkest first, each step a little wider than the last. The page and the layers in
+   base.css pick their backgrounds from them. */
 @theme {
   --color-gray-1: hsl(0 0% 4.0%);
   --color-gray-2: hsl(0 0% 8.0%);
   --color-gray-3: hsl(0 0% 12.3%);
   --color-gray-4: hsl(0 0% 17.0%);
-  --color-gray-5: hsl(0 0% 22.0%);
-  --color-gray-6: hsl(0 0% 27.3%);
-  --color-gray-7: hsl(0 0% 33.0%);
-  --color-gray-8: hsl(0 0% 39.0%);
 
   --color-tooltip: var(--color-gray-1);
+}
+
+/* Control fills, mixed from the layer they sit on: fields below it, raised controls above it and
+   further above on hover. `inline` writes the mix into each utility, so a control reads the layer
+   around it. */
+@theme inline {
+  --color-field: color-mix(in srgb, var(--layer), hsl(0 0% 0%) 35%);
+  --color-raised: color-mix(in srgb, var(--layer), hsl(0 0% 100%) 11%);
+  --color-raised-hover: color-mix(in srgb, var(--layer), hsl(0 0% 100%) 17%);
 }
 
 /* Corner radii, used as `rounded-*`. Nested corners stay concentric: the outer radius less the

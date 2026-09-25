@@ -74,11 +74,11 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
 | `hover`, `pressed` | translucent states for ghost buttons and chips |
 | `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
-| `gray-1` to `gray-8` | the gray scale, darkest first |
+| `gray-1` to `gray-4` | the grays the page, cards, and tooltips are painted with, darkest first |
 
 ### Layers and surfaces
 
-The page, `layer-card`, and `layer-elevated` each paint a background from the gray scale and set the `field` and `raised` colors of the controls on them. Menus, popovers, and select lists open one layer above the one their trigger sits on; dialogs and notices are cards.
+The page, `layer-card`, and `layer-elevated` each set a background, `--layer`, and the `field` and `raised` colors of the controls on them are mixed from it, so they keep the same contrast on any background. A layer of your own only sets `--layer` and paints it. Popups are elevated wherever they open; dialogs and notices are cards.
 
 Controls stand on their layer with four utilities: `surface-raised` (buttons, selects), `surface-primary` (primary buttons, slider thumbs), `surface-sunken` (fields, tracks), and `surface-fill` (checked checkboxes, switches that are on).
 
@@ -98,6 +98,17 @@ Redefine a token to restyle every component that uses it:
   --padding: 16px;
 }
 ```
+
+A layer of your own sets only its background; the controls on it follow:
+
+```css
+@utility layer-panel {
+  --layer: hsl(0 0% 15%);
+  background-color: var(--layer);
+}
+```
+
+The fills are mixes of the layer, so a theme can redefine them too, such as `--color-field` in its own `@theme inline` block.
 
 Redefine a utility after the import to change what it paints. Tailwind merges both definitions and yours wins, so this flattens every sunken control:
 

@@ -20,7 +20,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - `theme.css` holds the tokens and imports `base.css`, the utilities, variants, and rules that read them. `bun run build` writes both into the `theme` item of `registry.json` with `scripts/registry.ts`; don't edit that item by hand.
 - Colors and shadows are always tokens, since they are the look a theme changes. Any other value becomes a token only when more than one utility or component uses it; otherwise it stays in its utility or rule, and a theme that wants it different redefines that utility.
 - Colors come only from the semantic tokens in `theme.css` (`bg-field`, `text-muted`, `border-line`, …), written as `hsl()`. Never use Tailwind palette colors such as `neutral-*` or `white/*` in components; add or reuse a token instead.
-- A background that holds controls takes `layer-card` or `layer-elevated`, which set its color and the fills of the controls on it.
+- A background that holds controls takes `layer-card` or `layer-elevated`. A layer sets only `--layer`; `theme.css` mixes the fills of the controls on it from that color. Popups are `layer-elevated` wherever they open; dialogs and notices are `layer-card`.
 - Paint controls with the surfaces in `base.css`: `surface-raised`, `surface-primary`, `surface-sunken`, and `surface-fill`. Use a bare `bg-*` or `shadow-*` only where none fits. Use shadows, not borders; `shadow-float` lifts popups.
 - Controls take the `focus-ring` and `dim-disabled` utilities. Rows in a popup's list take `menu-item`. Range inputs draw their thumb with `range-thumb`, and stay at least 32px across.
 - Components inherit font size.

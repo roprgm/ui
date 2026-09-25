@@ -5,7 +5,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { type ReactNode, useState } from "react";
 import { Chevron } from "./chevron";
-import { Popup, usePopupLayer } from "./popup";
+import { Popup } from "./popup";
 import { Tooltip } from "./tooltip";
 
 const trigger = cva(
@@ -57,10 +57,8 @@ export function Select<T extends string, Multiple extends boolean = false>({
   "aria-label"?: string;
 }) {
   const [open, setOpen] = useState(false);
-  const popup = usePopupLayer();
   const control = (
     <Primitive.Trigger
-      ref={popup.trigger}
       aria-label={label}
       className={cn(trigger({ variant, size }), className)}
     >
@@ -86,7 +84,6 @@ export function Select<T extends string, Multiple extends boolean = false>({
       items={items}
       onOpenChange={(next, details) => {
         setOpen(next);
-        if (next) popup.measure();
         onOpenChange?.(next, details);
       }}
       {...props}
@@ -108,7 +105,6 @@ export function Select<T extends string, Multiple extends boolean = false>({
             render={(props) => (
               <Popup
                 {...props}
-                layer={popup.layer}
                 className="min-w-(--anchor-width) rounded-lg p-(--padding-sm)"
               />
             )}

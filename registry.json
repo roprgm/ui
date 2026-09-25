@@ -30,10 +30,6 @@
           "color-gray-2": "hsl(0 0% 8.0%)",
           "color-gray-3": "hsl(0 0% 12.3%)",
           "color-gray-4": "hsl(0 0% 17.0%)",
-          "color-gray-5": "hsl(0 0% 22.0%)",
-          "color-gray-6": "hsl(0 0% 27.3%)",
-          "color-gray-7": "hsl(0 0% 33.0%)",
-          "color-gray-8": "hsl(0 0% 39.0%)",
           "color-tooltip": "var(--color-gray-1)",
           "radius-xs": "2.5px",
           "radius-sm": "5px",
@@ -52,19 +48,15 @@
           "shadow-divider": "0 1px 0 hsl(0 0% 94.12% / 0.05)",
           "text-shadow-default": "0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2)",
           "text-shadow-subtle": "0.5px 1px 0.5px hsl(0 0% 0% / 0.08)",
-          "color-field": "var(--field)",
-          "color-raised": "var(--raised)",
-          "color-raised-hover": "var(--raised-hover)"
+          "color-field": "color-mix(in srgb, var(--layer), hsl(0 0% 0%) 35%)",
+          "color-raised": "color-mix(in srgb, var(--layer), hsl(0 0% 100%) 11%)",
+          "color-raised-hover": "color-mix(in srgb, var(--layer), hsl(0 0% 100%) 17%)"
         }
       },
       "css": {
         "@layer base": {
           ":root": {
-            "--layer-name": "page",
-            "--layer": "var(--color-gray-2)",
-            "--field": "var(--color-gray-1)",
-            "--raised": "var(--color-gray-4)",
-            "--raised-hover": "var(--color-gray-5)"
+            "--layer": "var(--color-gray-2)"
           },
           "body": {
             "font-family": "var(--font-sans)",
@@ -83,27 +75,11 @@
           }
         },
         "@utility layer-card": {
-          "--layer-name": "card",
           "--layer": "var(--color-gray-3)",
-          "--field": "var(--color-gray-2)",
-          "--raised": "var(--color-gray-5)",
-          "--raised-hover": "var(--color-gray-6)",
           "background-color": "var(--layer)"
         },
         "@utility layer-elevated": {
-          "--layer-name": "elevated",
           "--layer": "var(--color-gray-4)",
-          "--field": "var(--color-gray-3)",
-          "--raised": "var(--color-gray-6)",
-          "--raised-hover": "var(--color-gray-7)",
-          "background-color": "var(--layer)"
-        },
-        "@utility layer-top": {
-          "--layer-name": "top",
-          "--layer": "var(--color-gray-5)",
-          "--field": "var(--color-gray-4)",
-          "--raised": "var(--color-gray-7)",
-          "--raised-hover": "var(--color-gray-8)",
           "background-color": "var(--layer)"
         },
         "@utility surface-raised": {

@@ -5,7 +5,7 @@ import { cn } from "cn";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
-import { Popup, usePopupLayer } from "./popup";
+import { Popup } from "./popup";
 
 /** Commands opened from `trigger`, such as an IconButton. For settings, use a Popover. */
 export function Menu({
@@ -17,17 +17,15 @@ export function Menu({
   align?: "start" | "center" | "end";
   children: ReactNode;
 }) {
-  const popup = usePopupLayer();
   return (
-    <Primitive.Root onOpenChange={(open) => open && popup.measure()}>
-      <Primitive.Trigger ref={popup.trigger} render={trigger} />
+    <Primitive.Root>
+      <Primitive.Trigger render={trigger} />
       <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} align={align} className="z-50">
           <Primitive.Popup
             render={(props) => (
               <Popup
                 {...props}
-                layer={popup.layer}
                 className="flex flex-col gap-0.5 rounded-lg p-(--padding-sm)"
               />
             )}
@@ -69,13 +67,9 @@ export function Submenu({
   label: ReactNode;
   children: ReactNode;
 }) {
-  const popup = usePopupLayer();
   return (
-    <Primitive.SubmenuRoot onOpenChange={(open) => open && popup.measure()}>
-      <Primitive.SubmenuTrigger
-        ref={popup.trigger}
-        className="menu-item justify-between gap-4 data-popup-open:bg-raised"
-      >
+    <Primitive.SubmenuRoot>
+      <Primitive.SubmenuTrigger className="menu-item justify-between gap-4 data-popup-open:bg-raised">
         {label}
         <Chevron direction="right" size="sm" className="text-muted" />
       </Primitive.SubmenuTrigger>
@@ -86,7 +80,6 @@ export function Submenu({
             render={(props) => (
               <Popup
                 {...props}
-                layer={popup.layer}
                 className="flex flex-col gap-0.5 rounded-lg p-(--padding-sm)"
               />
             )}
