@@ -55,7 +55,7 @@
   @apply bg-raised shadow-raised;
 }
 
-/* Raised in the primary color: primary buttons and slider thumbs. */
+/* Raised in the primary color: primary buttons. */
 @utility surface-primary {
   @apply bg-primary shadow-raised;
 }
@@ -78,11 +78,9 @@
   @apply flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-[calc(var(--padding)-var(--padding-sm))] outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised;
 }
 
-/* shadow-float as a filter, so it follows a shape such as a popup with its arrow. */
+/* The theme's `--filter-float`, so it follows a shape such as a tooltip with its arrow. */
 @utility drop-shadow-float {
-  filter: drop-shadow(0 0 1px hsl(0 0% 0% / 0.5))
-    drop-shadow(0 2px 3px hsl(0 0% 0% / 0.2))
-    drop-shadow(0 8px 12px hsl(0 0% 0% / 0.3));
+  filter: var(--filter-float);
 }
 
 /* An outline set off by a gap, so it shows on any fill. It stays transparent until

@@ -101,11 +101,16 @@
     inset 0 1px 1px hsl(0 0% 0% / 0.3), 0 1px 0 hsl(0 0% 94.12% / 0.05);
   /* The edge is opaque so it holds over lighter surfaces, not only the page. */
   --shadow-float:
-    0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 hsl(0 0% 100% / 0.08),
-    0 2px 6px hsl(0 0% 0% / 0.3), 0 16px 32px -8px hsl(0 0% 0% / 0.35);
+    0 0 2px 1px hsl(0 0% 9% / 0.8), inset 0 1px 0 hsl(0 0% 100% / 0.08),
+    0 2px 6px hsl(0 0% 0% / 0.3), 0 4px 16px 0 hsl(0 0% 4% / 0.1);
+  /* shadow-float as a filter, for `drop-shadow-float`, so it follows a shape such as a tooltip
+     with its arrow. */
+  --filter-float: drop-shadow(0 0 1px hsl(0 0% 0% / 0.5))
+    drop-shadow(0 2px 3px hsl(0 0% 0% / 0.2))
+    drop-shadow(0 8px 12px hsl(0 0% 0% / 0.3));
   /* A slider's thumb: a dark halo stands it off any track, lit on top like a raised control. */
   --shadow-thumb:
-    0 0 2px 1px hsl(0 0% 9% / 0.5), inset 0 1px 0 hsl(0 0% 100% / 0.25),
+    0 0 2px 1px hsl(0 0% 9% / 0.2), inset 0 1px 0 hsl(0 0% 96% / 0.2),
     0 1px 2px hsl(0 0% 9% / 0.5);
   /* A dark line takes it to read engraved: the sunken edge's light, 1px below. */
   --shadow-divider: 0 1px 0 hsl(0 0% 94.12% / 0.05);
