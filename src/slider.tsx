@@ -38,7 +38,7 @@ function barBackground(
   if (stops) return `linear-gradient(to right, ${stops.join()})`;
   const start = position(Math.min(origin, value));
   const end = position(Math.max(origin, value));
-  return `linear-gradient(to right, transparent ${start}, var(--color-muted) ${start} ${end}, transparent ${end})`;
+  return `linear-gradient(to right, transparent ${start}, var(--color-primary) ${start} ${end}, transparent ${end})`;
 }
 
 /**

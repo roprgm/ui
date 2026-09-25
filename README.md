@@ -90,13 +90,14 @@ Menus, popovers, and select lists open one layer above the one their trigger sit
 
 ### Surfaces
 
-Components paint their controls with three utilities from `base.css`, so a control you build with them follows the theme too:
+Components paint their controls with four utilities from `base.css`, so a control you build with them follows the theme too:
 
 | Utility | Paints | Used by |
 | --- | --- | --- |
 | `surface-raised` | `raised` with `shadow-raised` | buttons, selects, selected tabs and toggles |
-| `surface-primary` | `primary` with `shadow-raised` | primary buttons, checked checkboxes, slider thumbs |
+| `surface-primary` | `primary` with `shadow-raised` | primary buttons and slider thumbs |
 | `surface-sunken` | `field` with `shadow-sunken` | fields, tracks, checkboxes, switches |
+| `surface-fill` | `primary` with `shadow-sunken` | checked checkboxes and switches that are on |
 
 ### Sizes
 

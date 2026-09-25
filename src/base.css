@@ -72,7 +72,7 @@
   @apply bg-raised shadow-raised;
 }
 
-/* Raised in the primary color: primary buttons, checked checkboxes, slider thumbs. */
+/* Raised in the primary color: primary buttons and slider thumbs. */
 @utility surface-primary {
   @apply bg-primary shadow-raised;
 }
@@ -80,6 +80,12 @@
 /* Set into the layer: fields, tracks, checkboxes, and switches. */
 @utility surface-sunken {
   @apply bg-field shadow-sunken;
+}
+
+/* Sunken and painted in the primary color: checked checkboxes and switches that are on. Slider
+   bars paint their range in the same color. */
+@utility surface-fill {
+  @apply bg-primary shadow-sunken;
 }
 
 /* shadow-float as a filter, so it follows a shape such as a popup with its arrow. */

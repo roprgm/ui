@@ -156,7 +156,7 @@ const groups: Group[] = [
         name: "surfaces",
         title: "Surfaces",
         description:
-          "Theme utilities: surface-raised, surface-primary, and surface-sunken paint a control as standing out from its layer, in the primary color, or set into it. Every component is painted with them, so a control you build with them follows the theme too.",
+          "Theme utilities: surface-raised and surface-primary lift a control off its layer, surface-sunken sets it in, and surface-fill paints a sunken one in the primary color. Every component is painted with them, so a control you build with them follows the theme too.",
         demo: <SurfacesDemo />,
         code: '<button className="surface-raised rounded-md px-3">…</button>',
       },

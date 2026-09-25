@@ -10,7 +10,7 @@ export function Checkbox({
     <span className={cn("inline-grid shrink-0 *:[grid-area:1/1]", className)}>
       <input
         type="checkbox"
-        className="peer size-4 cursor-pointer appearance-none rounded-sm surface-sunken transition focus-ring checked:surface-primary dim-disabled"
+        className="peer size-4 cursor-pointer appearance-none rounded-sm surface-sunken transition focus-ring checked:surface-fill dim-disabled"
         {...props}
       />
       <svg
