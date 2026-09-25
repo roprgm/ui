@@ -791,7 +791,8 @@ export function VerticalSliderDemo() {
           min={-100}
           max={100}
           defaultValue={0}
-          stops={["#777", hue.color]}
+          // From a gray as light as the hue, so the track neither darkens nor lightens toward it.
+          stops={[`hsl(from ${hue.color} h 0% l)`, hue.color]}
           color={hue.color}
         />
       ))}
