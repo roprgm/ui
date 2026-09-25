@@ -220,35 +220,23 @@ export function SpinnerDemo() {
   );
 }
 
-/** Each surface draws only its edge; the fill beside it is any color. */
+/** Each primitive with the fill the base gives it; the theme draws its edge. */
 const surfaces = [
-  { edge: "surface-raised", fill: "bg-raised" },
-  { edge: "surface-raised", fill: "bg-primary" },
-  { edge: "surface-sunken", fill: "bg-field" },
-  { edge: "surface-sunken", fill: "bg-primary" },
-  { edge: "surface-float", fill: "layer-elevated" },
-  { edge: "surface-thumb", fill: "bg-primary" },
+  { name: "surface-raised", className: "surface-raised" },
+  { name: "surface-sunken", className: "surface-sunken" },
+  { name: "surface-card", className: "layer-card surface-card" },
+  { name: "surface-float", className: "layer-elevated surface-float" },
+  { name: "surface-thumb", className: "surface-thumb rounded-full" },
 ] as const;
 
 export function SurfacesDemo() {
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="grid grid-cols-3 gap-x-8 gap-y-6">
-        {surfaces.map(({ edge, fill }) => (
-          <div
-            key={`${edge} ${fill}`}
-            className="flex flex-col items-center gap-3"
-          >
-            <div
-              className={cn(
-                "size-16 rounded-lg",
-                edge === "surface-thumb" && "rounded-full",
-                edge,
-                fill,
-              )}
-            />
-            <span className="text-muted">{edge}</span>
-            <span className="-mt-3 text-faint">{fill}</span>
+        {surfaces.map(({ name, className }) => (
+          <div key={name} className="flex flex-col items-center gap-3">
+            <div className={cn("size-16 rounded-lg", className)} />
+            <span className="text-muted">{name}</span>
           </div>
         ))}
       </div>
@@ -282,11 +270,11 @@ export function LayersDemo() {
     <div className="grid gap-2 sm:grid-cols-[1fr_2fr]">
       <Layer name="Page" className="py-6 pr-4" />
       {/* 16px corners less 8px of padding leave 8px for the card inside. */}
-      <div className="layer-card grid gap-2 rounded-2xl p-2 surface-raised sm:grid-cols-2">
+      <div className="layer-card grid gap-2 rounded-2xl p-2 surface-card sm:grid-cols-2">
         <Layer name="Card" className="p-4" />
         <Layer
           name="Elevated"
-          className="layer-elevated rounded-lg p-4 surface-raised"
+          className="layer-elevated rounded-lg p-4 surface-card"
         />
       </div>
     </div>

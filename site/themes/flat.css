@@ -1,0 +1,3 @@
+/* The docs site in the flat theme. */
+@import "tailwindcss";
+@import "../../src/themes/flat.css";

@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Select } from "../src/components/select";
-import flat from "../src/themes/flat.css?inline";
+import standard from "./themes/default.css?inline";
+import flat from "./themes/flat.css?inline";
+import lines from "./themes/lines.css?inline";
 
-/** The default theme is the site's stylesheet; another theme only sets the edge variables. */
-const themes = { default: "", flat };
+/** Each theme draws the primitives its own way, so the site builds a stylesheet per theme. */
+const themes = { default: standard, lines, flat };
 type Theme = keyof typeof themes;
 
 const items = [
   { value: "default", label: "Default" },
+  { value: "lines", label: "Lines" },
   { value: "flat", label: "Flat" },
 ] as const;
 
@@ -37,7 +40,7 @@ function apply(theme: Theme) {
   } catch {}
 }
 
-// Before the first render, so the page never paints in the other theme.
+// Before the first render, so the page never paints in another theme.
 apply(stored());
 
 export function ThemeSelect({ className }: { className?: string }) {

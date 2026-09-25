@@ -189,7 +189,7 @@ function Preview({ doc }: { doc: Doc }) {
   return (
     <div
       className={cn(
-        "layer-card rounded-xl surface-raised",
+        "layer-card rounded-xl surface-card",
         doc.block && "overflow-hidden",
         !doc.block &&
           "flex min-h-40 flex-wrap items-center justify-center gap-3 p-10",
