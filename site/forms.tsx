@@ -132,7 +132,7 @@ export function FormsDemo() {
             defaultValue="100"
           />
           <Chip aria-pressed>Overlay</Chip>
-          <IconButton label="Undo" size="icon" className="ml-auto">
+          <IconButton label="Undo" className="ml-auto">
             <UndoIcon />
           </IconButton>
         </div>
@@ -140,6 +140,46 @@ export function FormsDemo() {
         <div className="flex justify-end gap-2">
           <Button variant="ghost">Discard</Button>
           <Button variant="primary">Save</Button>
+        </div>
+      </div>
+
+      {/* Sunken and raised controls in one row: a large button matches the sunken one, a default
+          button stands 4px shorter. */}
+      <div className="flex flex-col gap-3 md:col-span-2">
+        <div className="flex items-center gap-2">
+          <ToggleGroup>
+            <Toggle name="align" value="left" defaultChecked>
+              Left
+            </Toggle>
+            <Toggle name="align" value="center">
+              Center
+            </Toggle>
+            <Toggle name="align" value="right">
+              Right
+            </Toggle>
+          </ToggleGroup>
+          <Button size="lg">Large</Button>
+          <Button>Default</Button>
+          <Select
+            aria-label="Spacing"
+            items={sorts}
+            defaultValue="recent"
+            className="w-32"
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <Input placeholder="Preset name" className="w-60" />
+          <Button size="lg">Large</Button>
+          <Button>Default</Button>
+          <Button size="lg" variant="primary">
+            Save
+          </Button>
+          <Select
+            aria-label="Folder"
+            items={sorts}
+            defaultValue="recent"
+            className="w-32"
+          />
         </div>
       </div>
     </div>
