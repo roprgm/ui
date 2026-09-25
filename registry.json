@@ -22,11 +22,15 @@
           "color-backdrop": "hsl(0 0% 0% / 0.5)",
           "color-focus": "hsl(0 0% 100% / 0.25)",
           "color-danger": "hsl(0 90% 75%)",
-          "color-gray-1": "hsl(0 0% 4.0%)",
-          "color-gray-2": "hsl(0 0% 8.0%)",
-          "color-gray-3": "hsl(0 0% 12.3%)",
-          "color-gray-4": "hsl(0 0% 17.0%)",
-          "color-tooltip": "var(--color-gray-1)",
+          "color-level-1": "hsl(0 0% 4%)",
+          "color-level-2": "hsl(0 0% 8%)",
+          "color-level-3": "hsl(0 0% 12.3%)",
+          "color-level-4": "hsl(0 0% 17%)",
+          "color-level-5": "hsl(0 0% 22%)",
+          "color-level-6": "hsl(0 0% 27.3%)",
+          "color-level-7": "hsl(0 0% 33%)",
+          "color-level-8": "hsl(0 0% 39%)",
+          "color-tooltip": "var(--color-level-1)",
           "radius-xs": "2.5px",
           "radius-sm": "5px",
           "radius-md": "7px",
@@ -52,7 +56,7 @@
       "css": {
         "@layer base": {
           ":root": {
-            "--layer": "var(--color-gray-2)"
+            "--layer": "var(--color-level-2)"
           },
           "body": {
             "font-family": "var(--font-sans)",
@@ -71,11 +75,11 @@
           }
         },
         "@utility layer-card": {
-          "--layer": "var(--color-gray-3)",
+          "--layer": "var(--color-level-3)",
           "background-color": "var(--layer)"
         },
         "@utility layer-elevated": {
-          "--layer": "var(--color-gray-4)",
+          "--layer": "var(--color-level-4)",
           "background-color": "var(--layer)"
         },
         "@utility surface-raised": {

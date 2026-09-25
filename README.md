@@ -74,7 +74,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
 | `hover`, `pressed` | translucent states for ghost buttons and chips |
 | `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
-| `gray-1` to `gray-4` | the grays the page, cards, and tooltips are painted with, darkest first |
+| `level-1` to `level-8` | the interface's backgrounds by role: sunk below the page, the page, a card, elevated, then each more prominent; the layers use 2 to 4, and your own backgrounds can use any |
 
 ### Layers and surfaces
 

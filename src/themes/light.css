@@ -29,11 +29,16 @@
   --color-focus: hsl(0 0% 0% / 0.3);
   --color-danger: hsl(0 72% 46%);
 
-  /* The page is light gray; cards and popups are white. gray-1 sits below the page. */
-  --color-gray-1: hsl(0 0% 90%);
-  --color-gray-2: hsl(0 0% 95%);
-  --color-gray-3: hsl(0 0% 100%);
-  --color-gray-4: hsl(0 0% 100%);
+  /* The page is light gray, and cards and popups are white; past them, levels darken, since white
+     can't get lighter. */
+  --color-level-1: hsl(0 0% 90%);
+  --color-level-2: hsl(0 0% 95%);
+  --color-level-3: hsl(0 0% 100%);
+  --color-level-4: hsl(0 0% 100%);
+  --color-level-5: hsl(0 0% 96%);
+  --color-level-6: hsl(0 0% 92%);
+  --color-level-7: hsl(0 0% 88%);
+  --color-level-8: hsl(0 0% 84%);
 
   --color-tooltip: hsl(0 0% 100%);
 }

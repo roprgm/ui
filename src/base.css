@@ -39,15 +39,28 @@
   --color-danger: hsl(0 90% 75%);
 }
 
-/* The grays, darkest first, each step a little wider than the last. The page and the layers
-   below pick their backgrounds from them. */
+/*
+ * Levels: the backgrounds of the interface, named by their role rather than their color, so a
+ * theme redefines all eight and anything painted with them follows. Here they rise from dark to
+ * light; a light theme lightens up to its cards and darkens after, since white can't get lighter.
+ * Use them for backgrounds of your own, such as `bg-level-3` for a panel.
+ */
 @theme {
-  --color-gray-1: hsl(0 0% 4.0%);
-  --color-gray-2: hsl(0 0% 8.0%);
-  --color-gray-3: hsl(0 0% 12.3%);
-  --color-gray-4: hsl(0 0% 17.0%);
+  /* Sunk below the page. */
+  --color-level-1: hsl(0 0% 4%);
+  /* The page. */
+  --color-level-2: hsl(0 0% 8%);
+  /* A card or panel on the page. */
+  --color-level-3: hsl(0 0% 12.3%);
+  /* Elevated: a card inside a card, and popups. */
+  --color-level-4: hsl(0 0% 17%);
+  /* Each more prominent on the page than the last. */
+  --color-level-5: hsl(0 0% 22%);
+  --color-level-6: hsl(0 0% 27.3%);
+  --color-level-7: hsl(0 0% 33%);
+  --color-level-8: hsl(0 0% 39%);
 
-  --color-tooltip: var(--color-gray-1);
+  --color-tooltip: var(--color-level-1);
 }
 
 /* Control fills, mixed from the layer they sit on: fields below it, raised controls above it and
@@ -115,19 +128,19 @@
  */
 @layer base {
   :root {
-    --layer: var(--color-gray-2);
+    --layer: var(--color-level-2);
   }
 }
 
 /* Panels, dialogs, notices, and cards on the page. */
 @utility layer-card {
-  --layer: var(--color-gray-3);
+  --layer: var(--color-level-3);
   background-color: var(--layer);
 }
 
 /* Cards inside a card, and every popup. */
 @utility layer-elevated {
-  --layer: var(--color-gray-4);
+  --layer: var(--color-level-4);
   background-color: var(--layer);
 }
 
