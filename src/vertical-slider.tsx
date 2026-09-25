@@ -31,7 +31,7 @@ export function VerticalSlider({
   return (
     <div
       className={cn(
-        "relative flex h-44 w-6 justify-center pointer-coarse:w-11",
+        "relative flex h-44 w-8 justify-center pointer-coarse:w-11",
         className,
       )}
     >
