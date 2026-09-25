@@ -50,4 +50,3 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 ## Checks
 
 - Run `bun run check` and `bun run build`.
-- For a change that shouldn't look different, take screenshots with `bun run snapshots --update-snapshots` before it and compare with `bun run snapshots` after.

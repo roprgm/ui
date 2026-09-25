@@ -116,6 +116,4 @@ bun run dev
 
 `bun run check` formats, lints, and type-checks. `bun run build` compiles the package, the registry, and the docs site.
 
-`bun run snapshots` compares every demo on the docs site against screenshots taken before a change, to prove a refactor changes no pixel. Take them first with `bun run snapshots --update-snapshots`; Playwright needs Chromium once, with `bunx playwright install chromium`.
-
 Publishing a GitHub release publishes the package to npm. The release tag must match the version in `package.json`, such as `v0.5.0`.

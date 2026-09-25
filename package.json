@@ -30,7 +30,6 @@
     "dev": "vite",
     "check": "biome check --write && tsc",
     "build": "bun scripts/registry.ts && biome format --write registry.json && tsc -p tsconfig.build.json && shadcn build -o site/public/r && vite build",
-    "snapshots": "playwright test",
     "prepublishOnly": "bun run build"
   },
   "peerDependencies": {
@@ -44,7 +43,6 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.14",
     "@fontsource-variable/geist": "^5.3.0",
-    "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.2.5",

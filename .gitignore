@@ -6,6 +6,3 @@ site/public/r
 .DS_Store
 .vercel
 .env*
-tests/snapshots
-test-results
-playwright-report
