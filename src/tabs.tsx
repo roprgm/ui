@@ -46,7 +46,6 @@ export function Tab({
   return (
     <Button
       variant="ghost"
-      size="lg"
       role="tab"
       aria-selected={selected}
       tabIndex={selected ? 0 : -1}

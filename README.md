@@ -114,7 +114,7 @@ Button's three heights are the scale. Other controls name their sizes after the 
 
 | Derived | Default | Use |
 | --- | --- | --- |
-| `--size-control-lg` | 32px | large buttons, selects, and fields, tabs, and toggle groups |
+| `--size-control-lg` | 32px | large buttons, selects, and fields, and toggle groups |
 | `--size-control-sm` | 24px | buttons inside a large field, and close buttons |
 | `--size-control-inset` | 26px | a toggle in its group |
 | `--size-row` | 40px | panel headers and list rows, holding a control `--padding-sm` in |
