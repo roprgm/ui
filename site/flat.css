@@ -1,4 +1,5 @@
-/* The docs site in the default theme. */
+/* The docs site in the flat theme. */
 @import "tailwindcss";
 @import "../src/theme.css";
+@import "../src/flat.css";
 @import "./site.css";

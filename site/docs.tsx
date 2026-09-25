@@ -8,6 +8,7 @@ import { IconButton } from "../src/icon-button";
 import { ScrollArea } from "../src/scroll-area";
 import { CopyButton } from "./copy-button";
 import { GitHubIcon } from "./icons";
+import { ThemeSelect } from "./theme";
 
 export type Doc = {
   /** The registry item, which also serves as the anchor. */
@@ -87,6 +88,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
                 <GitHubIcon />
               </IconButton>
             </div>
+            <ThemeSelect className="mb-4 w-full" />
             <a
               href="#usage"
               className={cn(

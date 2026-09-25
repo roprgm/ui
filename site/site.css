@@ -1,0 +1,25 @@
+/* The docs site's own styles, shared by every theme's stylesheet. */
+
+/* `block` waits for Geist instead of painting a fallback first; index.html preloads the file,
+   so the wait is short and text never shows in another font. */
+@font-face {
+  font-family: "Geist Variable";
+  font-style: normal;
+  font-display: block;
+  font-weight: 100 900;
+  src: url("@fontsource-variable/geist/files/geist-latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+
+/* Code snippets: Sugar High colors its tokens from these. */
+:root {
+  --sh-identifier: var(--color-foreground);
+  --sh-sign: var(--color-muted);
+  --sh-comment: var(--color-faint);
+  --sh-keyword: hsl(350 70% 76%);
+  --sh-string: hsl(95 35% 70%);
+  --sh-class: hsl(200 60% 74%);
+  --sh-entity: hsl(200 60% 74%);
+  --sh-property: hsl(35 65% 72%);
+  --sh-jsxliterals: var(--color-foreground);
+}
