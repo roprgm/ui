@@ -80,7 +80,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 The page, `layer-card`, and `layer-elevated` each set a background, `--layer`, and the `field` and `raised` colors of the controls on them are mixed from it, so they keep the same contrast on any background. A layer of your own only sets `--layer` and paints it. Popups are elevated wherever they open; dialogs and notices are cards.
 
-Controls stand on their layer with four utilities: `surface-raised` (buttons, selects), `surface-primary` (primary buttons, slider thumbs), `surface-sunken` (fields, tracks), and `surface-fill` (checked checkboxes, switches that are on).
+Controls stand on their layer with four utilities: `surface-raised` (buttons, selects), `surface-primary` (primary buttons), `surface-sunken` (fields, tracks), and `surface-fill` (checked checkboxes, switches that are on).
 
 ### Density
 
@@ -110,13 +110,17 @@ A layer of your own sets only its background; the controls on it follow:
 
 The fills are mixes of the layer, so a theme can redefine them too, such as `--color-field` in its own `@theme inline` block.
 
-Redefine a utility after the import to change what it paints. Tailwind merges both definitions and yours wins, so this flattens every sunken control:
+### Themes
+
+A theme is a stylesheet of tokens imported after `theme.css`. `flat.css` removes every shadow, so controls stand apart from their layer by their fills alone:
 
 ```css
-@utility surface-sunken {
-  box-shadow: none;
-}
+@import "tailwindcss";
+@import "@roprgm/ui/theme.css";
+@import "@roprgm/ui/flat.css";
 ```
+
+Tailwind writes shadows into each utility when it builds, so a theme is chosen by the stylesheet you import, not by changing variables at runtime. In your own theme, write a shadow that goes away as `0 0 hsl(0 0% 0% / 0)` rather than `none`: Tailwind joins each shadow with the focus ring in one `box-shadow`, and a `none` in that list removes the ring too.
 
 ## Development
 

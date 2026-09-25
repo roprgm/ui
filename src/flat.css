@@ -1,0 +1,16 @@
+/*
+ * A flat theme: no shadows at all, so controls and popups stand apart from their layer by their
+ * fills alone. Import it after theme.css. Shadows are transparent rather than `none`, since
+ * Tailwind joins each shadow with the focus ring in one box-shadow, and a `none` in that list voids
+ * the ring too.
+ */
+@theme {
+  --shadow-raised: 0 0 hsl(0 0% 0% / 0);
+  --shadow-sunken: 0 0 hsl(0 0% 0% / 0);
+  --shadow-divider: 0 0 hsl(0 0% 0% / 0);
+  --shadow-thumb: 0 0 hsl(0 0% 0% / 0);
+  --shadow-float: 0 0 hsl(0 0% 0% / 0);
+  --filter-float: none;
+  --text-shadow-default: none;
+  --text-shadow-subtle: 0 0 hsl(0 0% 0% / 0);
+}

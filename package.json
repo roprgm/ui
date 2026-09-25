@@ -21,6 +21,7 @@
   ],
   "exports": {
     "./theme.css": "./src/theme.css",
+    "./flat.css": "./src/flat.css",
     "./*": {
       "types": "./dist/*.d.ts",
       "default": "./dist/*.js"
