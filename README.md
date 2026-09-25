@@ -103,6 +103,8 @@ Components paint their controls with four utilities from `base.css`, so a contro
 
 Four tokens set the density; the rest follow from them. `--padding` and `--size-control` change together: a denser theme lowers both.
 
+Button's three heights are the scale. Other controls name their sizes after the Button they go with and measure whatever looks as tall beside it: Input and Select match it, and ToggleGroup stands 4px taller, since the eye sizes it by its raised toggle.
+
 | Token | Default | Use |
 | --- | --- | --- |
 | `--padding` | 14px | from a container's edge to its content: dialog, notice, popover, and panel sections, and list rows |

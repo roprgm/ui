@@ -65,8 +65,10 @@
 
 /*
  * Density. `--padding` and `--size-control` are the two to change together, for a denser or
- * roomier theme; everything else follows from them. Components read these as `p-(--padding)` or
- * `h-(--size-control)`, so `cn` still merges a caller's `p-*` or `h-*`.
+ * roomier theme; everything else follows from them. Button's heights are the scale: other
+ * controls name their sizes after the Button they go with and measure what looks as tall beside
+ * it. Components read these as `p-(--padding)` or `h-(--size-control)`, so `cn` still merges a
+ * caller's `p-*` or `h-*`.
  */
 @theme {
   /* From a container's edge to its content: the sections of a dialog, notice, popover, or panel,
