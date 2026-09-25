@@ -475,7 +475,10 @@ const tools = [
   { id: "crop", label: "Crop", key: "C", Icon: CropIcon },
 ];
 
-/** Icon tabs in a column with their names and keys as tooltips; `onSelect` makes them live. */
+/**
+ * Icon tabs set into a sunken column, like a vertical toggle group, with their names and keys as
+ * tooltips; `onSelect` makes them live.
+ */
 export function ToolRail({
   selected,
   onSelect,
@@ -484,13 +487,17 @@ export function ToolRail({
   onSelect: (id: string) => void;
 }) {
   return (
-    <TabList aria-label="Tools" className="flex-col">
+    <TabList
+      aria-label="Tools"
+      className="flex-col gap-0.5 rounded-lg surface-sunken p-(--inset)"
+    >
       {tools.map(({ id, label, key, Icon }) => (
         <Tooltip key={id} content={label} shortcut={key} side="right">
           <Tab
             selected={id === selected}
             size="icon"
             aria-label={label}
+            className="size-(--size-control-inset)"
             onClick={() => onSelect(id)}
           >
             <Icon />
@@ -506,9 +513,7 @@ export function TabsDemo() {
   const [tool, setTool] = useState("adjust");
   return (
     <div className="flex items-start gap-10">
-      <div className="rounded-xl bg-field/60 p-1.5">
-        <ToolRail selected={tool} onSelect={setTool} />
-      </div>
+      <ToolRail selected={tool} onSelect={setTool} />
       <TabList aria-label="Sidebar">
         {["layers", "history", "info"].map((id) => (
           <Tab
