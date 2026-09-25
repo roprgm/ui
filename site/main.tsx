@@ -34,6 +34,7 @@ import {
 } from "./demos";
 import { type Group, Page } from "./docs";
 import { EditorDemo } from "./editor";
+import { FormsDemo } from "./forms";
 import { Usage } from "./usage";
 
 const groups: Group[] = [
@@ -265,6 +266,14 @@ const groups: Group[] = [
         description:
           "A tool rail, a canvas with a floating bar, and a resizable panel. Try the Brush tool and drag the panel's edge.",
         demo: <EditorDemo />,
+        block: true,
+      },
+      {
+        name: "forms",
+        title: "Forms",
+        description:
+          "Fields, buttons, selects, and toggles side by side, in a card and on the page, to see how their sizes and paddings sit together.",
+        demo: <FormsDemo />,
         block: true,
       },
     ],
