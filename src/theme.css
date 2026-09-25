@@ -63,8 +63,8 @@
   --radius-2xl: 16px;
 }
 
-/* Control heights, used as `h-(--size-control)`. A small control sits 6px inside a row and 2px
-   inside a control, so changing one may mean changing the paddings around it. */
+/* Control heights, used as `h-(--size-control)`. A small control sits 6px inside a row, so
+   changing one may mean changing the paddings around it. */
 @theme {
   /* Buttons, fields, and selects. */
   --size-control: 2rem;
