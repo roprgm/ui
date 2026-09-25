@@ -43,6 +43,7 @@ Put groups of controls on a card. Fields and buttons take their color from the c
 
 - Use `layer-card` for panels and cards, and `layer-elevated` for a card inside a card.
 - Use the theme's colors, such as `text-muted` or `bg-field`, instead of Tailwind's palette.
+- For one line of text that may not fit, use `scroll-text` rather than `truncate`: it fades at the end and scrolls to show the rest.
 - Build your own controls from the `surface-*` primitives, such as `surface-raised` for a button, rather than shadows or borders of your own, so they follow the theme.
 
 Components without JavaScript, such as `Button` and `Input`, render on the server.
@@ -56,7 +57,7 @@ Components without JavaScript, such as `Button` and `Input`, render on the serve
 | Containers | Cards with `layer-card` and `layer-elevated`, the `surface-*` utilities, `Panel`, `ScrollArea` |
 | Navigation | `TabList`, `ListItem`, `TreeList` |
 | Overlays | `Tooltip`, `Menu`, `Popover`, `Dialog`, `Notice` |
-| Effects | `Spinner`, `ScrollText`, and the `shimmer`, `scroll-fade`, and `scroll-fade-x` utilities |
+| Effects | `Spinner`, and the `shimmer`, `scroll-fade`, `scroll-fade-x`, and `scroll-text` utilities |
 
 Each one has a live demo and its install command on the [docs site](https://ui.roprgm.com).
 

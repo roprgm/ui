@@ -313,9 +313,14 @@
 /* Fades the start and end of a horizontal scroll container's content where more of it lies that
    way, following the scroll position: the end fades while there is more to the right, and the
    start fades in over the first 1.5rem scrolled. A mask, so it fades the content itself and works
-   on any background. When nothing overflows, or the browser can't tie animations to scrolling,
-   nothing fades. */
+   on any background. The fade stands in for a scrollbar, so it hides it. When nothing overflows,
+   or the browser can't tie animations to scrolling, nothing fades. */
 @utility scroll-fade-x {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   mask-image: linear-gradient(
     to right,
     transparent,
@@ -351,6 +356,17 @@
   to {
     --scroll-fade-end: 0px;
   }
+}
+
+/* One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls
+   sideways to show the rest. Use it where you would use `truncate`. It sets its own display, so
+   it works on a lone span, and shrinks in a flex row. */
+@utility scroll-text {
+  @apply scroll-fade-x;
+  display: block;
+  min-width: 0;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 /* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the

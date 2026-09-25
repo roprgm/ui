@@ -221,7 +221,7 @@ export function Code({
       )}
       {lang !== "text" && (
         <pre
-          className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground"
+          className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground scroll-fade-x"
           dangerouslySetInnerHTML={{
             __html: render(parse(children, languages[lang])),
           }}
