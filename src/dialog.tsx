@@ -1,6 +1,7 @@
 "use client";
 
 import { Dialog as Primitive } from "@base-ui/react/dialog";
+import { cn } from "cn";
 import type { ReactElement, ReactNode } from "react";
 import { Popup } from "./popup";
 
@@ -39,7 +40,9 @@ export function Dialog({
             />
           )}
         >
-          <div className="flex flex-col gap-3 p-3 pt-2.5">
+          <div
+            className={cn("flex flex-col gap-3 p-3.5 pt-3", actions && "pb-3")}
+          >
             <div className="flex flex-col gap-1">
               <Primitive.Title className="font-medium">{title}</Primitive.Title>
               {description && (
@@ -49,8 +52,10 @@ export function Dialog({
               )}
             </div>
             {children}
-            {actions && <div className="flex justify-end gap-2">{actions}</div>}
           </div>
+          {actions && (
+            <div className="flex justify-end gap-2 p-3 pt-0">{actions}</div>
+          )}
         </Primitive.Popup>
       </Primitive.Portal>
     </Primitive.Root>

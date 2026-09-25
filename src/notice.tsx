@@ -31,14 +31,11 @@ export function Notice({
       )}
       {...props}
     >
-      <div
-        className={cn(
-          "flex flex-1 flex-col gap-2 p-3 pt-2.5",
-          onDismiss && "pr-0",
-        )}
-      >
-        <p>{children}</p>
-        {actions && <div className="flex gap-2">{actions}</div>}
+      <div className="flex flex-1 flex-col">
+        <p className={cn("p-3.5 pt-3", actions && "pb-2", onDismiss && "pr-0")}>
+          {children}
+        </p>
+        {actions && <div className="flex gap-2 p-3 pt-0">{actions}</div>}
       </div>
       {onDismiss && (
         <IconButton

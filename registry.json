@@ -391,7 +391,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "categories": ["overlays"],
-      "dependencies": ["@base-ui/react"],
+      "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": ["https://ui.roprgm.com/r/popup.json"],
       "files": [
         {

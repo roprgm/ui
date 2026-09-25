@@ -71,7 +71,7 @@ export function PanelHeader({
     // A small IconButton sits 6px from the top, bottom, and end, so its corner nests in a rounded panel's.
     <div
       className={cn(
-        "flex h-(--size-row) shrink-0 items-center gap-1 pr-1.5 pl-3",
+        "flex h-(--size-row) shrink-0 items-center gap-1 pr-1.5 pl-3.5",
         className,
       )}
     >
@@ -84,7 +84,7 @@ export function PanelHeader({
 /** A padded group of controls, such as sliders. */
 export function PanelSection({ className, ...props }: ComponentProps<"div">) {
   return (
-    <div className={cn("flex flex-col gap-3 p-3", className)} {...props} />
+    <div className={cn("flex flex-col gap-3 p-3.5", className)} {...props} />
   );
 }
 

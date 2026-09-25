@@ -42,7 +42,7 @@ export function EditorDemo() {
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-1.5 pl-3 shadow-float">
+          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-1.5 pl-3.5 shadow-float">
             <Slider
               label="Size"
               value={size}
