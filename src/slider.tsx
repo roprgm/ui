@@ -131,7 +131,7 @@ export function Slider({
             onPointerCancel={() => onEditingChange?.(false)}
             onFocus={() => onEditingChange?.(true)}
             onBlur={() => onEditingChange?.(false)}
-            className="absolute inset-x-0 top-1/2 h-8 w-full pointer-coarse:h-11 -translate-y-1/2 cursor-pointer touch-pan-y range-thumb"
+            className="absolute inset-x-0 top-1/2 h-8 w-full -translate-y-1/2 cursor-pointer touch-pan-y range-thumb"
           />
         </div>
       )}

@@ -29,12 +29,7 @@ export function VerticalSlider({
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "relative flex h-44 w-8 justify-center pointer-coarse:w-11",
-        className,
-      )}
-    >
+    <div className={cn("relative flex h-44 w-8 justify-center", className)}>
       <div
         className="pointer-events-none absolute inset-y-2 w-1 rounded-full surface-sunken"
         style={

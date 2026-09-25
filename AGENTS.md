@@ -22,7 +22,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - Colors come only from the semantic tokens in `theme.css` (`bg-field`, `text-muted`, `border-line`, …), written as `hsl()`. Never use Tailwind palette colors such as `neutral-*` or `white/*` in components; add or reuse a token instead.
 - A background that holds controls takes `layer-card` or `layer-elevated`, which set its color and the fills of the controls on it.
 - Paint controls with the surfaces in `base.css`: `surface-raised`, `surface-primary`, `surface-sunken`, and `surface-fill`. Use a bare `bg-*` or `shadow-*` only where none fits. Use shadows, not borders; `shadow-float` lifts popups.
-- Controls take the `focus-ring` and `dim-disabled` utilities. Rows in a popup's list take `menu-item`. Range inputs draw their thumb with `range-thumb`, and stay at least 32px across with a mouse and 44px on touch screens.
+- Controls take the `focus-ring` and `dim-disabled` utilities. Rows in a popup's list take `menu-item`. Range inputs draw their thumb with `range-thumb`, and stay at least 32px across.
 - Components inherit font size.
 
 ## Sizes
