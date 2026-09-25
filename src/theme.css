@@ -89,7 +89,7 @@
   /* Buttons, selects, fields, chips, and the thumbnails and icon buttons in rows. */
   --size-control: 28px;
   /* A range input's thumb. The slider's fill and the room around its bar follow it. */
-  --size-thumb: 14px;
+  --size-thumb: 13px;
 }
 
 /* Shadows replace borders: raised surfaces catch light on top and cast a line below; sunken ones invert it. */
