@@ -220,7 +220,7 @@
       "name": "input",
       "type": "registry:ui",
       "categories": ["inputs"],
-      "dependencies": ["cn"],
+      "dependencies": ["cn", "class-variance-authority"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {

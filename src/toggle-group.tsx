@@ -6,7 +6,7 @@ const group = cva(
   "inline-flex gap-0.5 rounded-lg surface-sunken p-(--padding-xs)",
   {
     variants: {
-      // A sunken group reads shorter than it is, so it stands 4px taller than the buttons it goes
+      // The eye sizes a group by its raised toggle, so it stands 4px taller than the buttons it goes
       // with: `default` beside a default Button, `lg` beside a large one. It sizes its toggles,
       // since a fieldset doesn't stretch its children.
       size: {

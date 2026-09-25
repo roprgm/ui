@@ -92,7 +92,13 @@ export function InputDemo() {
 function CopyInput({ value }: { value: string }) {
   return (
     <div className="relative">
-      <Input readOnly value={value} aria-label="Link" className="pr-8" />
+      <Input
+        readOnly
+        value={value}
+        aria-label="Link"
+        size="lg"
+        className="pr-8"
+      />
       {/* 4px inside the field; concentric corners would be 2px, too sharp at this size. */}
       <CopyButton
         value={value}
