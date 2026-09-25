@@ -7,9 +7,9 @@
 
 @source "./";
 
-/* Geist when the app loads it, with next/font or @fontsource-variable/geist; the system font otherwise. */
+/* The system font; a theme sets its own. */
 @theme {
-  --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
+  --font-sans: system-ui, sans-serif;
 }
 
 /*

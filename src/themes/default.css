@@ -7,6 +7,11 @@
 
 @import "../base.css";
 
+/* Geist when the app loads it, with next/font or @fontsource-variable/geist; the system font otherwise. */
+@theme {
+  --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
+}
+
 /* Text sits a half pixel off the page; on light fills, such as a primary button, it lightens. */
 @theme {
   --text-shadow-default: 0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2);

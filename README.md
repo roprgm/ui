@@ -62,7 +62,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ## Theme
 
-`base.css` holds the tokens (colors, radii, sizes), the primitives the components are built from, and the rules that set the page to 13px text on a dark background, in Geist when your app loads it. A theme in `themes/` imports it and draws the primitives its own way. The comments in the files describe each token.
+`base.css` holds the tokens (colors, radii, sizes), the primitives the components are built from, and the rules that set the page to 13px text on a dark background in the system font. A theme in `themes/` imports it and draws the primitives its own way; the default theme also sets Geist, when your app loads it. The comments in the files describe each token.
 
 ### Colors
 
