@@ -1,3 +1,4 @@
+import "./index.css";
 import "./theme";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -151,15 +152,15 @@ const groups: Group[] = [
           "Theme utilities: layer-card and layer-elevated paint a card and set the fills for the fields and buttons on it, so they keep the same contrast on the page, in a card, and in a card inside it.",
         demo: <LayersDemo />,
         bare: true,
-        code: '<div className="layer-card rounded-xl shadow-raised">…</div>',
+        code: '<div className="layer-card rounded-xl surface-raised">…</div>',
       },
       {
         name: "surfaces",
         title: "Surfaces",
         description:
-          "Theme utilities: surface-raised and surface-primary lift a control off its layer, surface-sunken sets it in, and surface-fill paints a sunken one in the primary color. Every component is painted with them, so a control you build with them follows the theme too.",
+          "Theme utilities: surface-raised lifts a control off its layer, surface-sunken sets it in, surface-float lifts a popup over everything, surface-thumb marks what you grab, and separator draws a line between groups. Each draws only its edge, from the theme, so pair it with any fill. Every component is painted with them, so a control you build with them follows the theme too.",
         demo: <SurfacesDemo />,
-        code: '<button className="surface-raised rounded-md px-3">…</button>',
+        code: '<button className="surface-raised bg-raised hover:bg-raised-hover rounded-md px-3">…</button>',
       },
       {
         name: "panel",

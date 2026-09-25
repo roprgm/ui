@@ -42,12 +42,12 @@
           "padding-row": "6px",
           "size-control": "28px",
           "size-thumb": "13px",
-          "shadow-raised": "inset 0 1px 0 hsl(0 0% 94.12% / 0.07), 0 1px 1px hsl(0 0% 0% / 0.28), 0 0 1px hsl(0 0% 0% / 0.14)",
-          "shadow-sunken": "inset 0 1px 1px hsl(0 0% 0% / 0.3), 0 1px 0 hsl(0 0% 94.12% / 0.05)",
-          "shadow-float": "0 0 2px 1px hsl(0 0% 9% / 0.8), inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 2px 6px hsl(0 0% 0% / 0.3), 0 4px 16px 0 hsl(0 0% 4% / 0.1)",
+          "edge-raised": "inset 0 1px 0 hsl(0 0% 94.12% / 0.07), 0 1px 1px hsl(0 0% 0% / 0.28), 0 0 1px hsl(0 0% 0% / 0.14)",
+          "edge-sunken": "inset 0 1px 1px hsl(0 0% 0% / 0.3), 0 1px 0 hsl(0 0% 94.12% / 0.05)",
+          "edge-float": "0 0 2px 1px hsl(0 0% 9% / 0.8), inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 2px 6px hsl(0 0% 0% / 0.3), 0 4px 16px 0 hsl(0 0% 4% / 0.1)",
           "filter-float": "drop-shadow(0 0 1px hsl(0 0% 0% / 0.5)) drop-shadow(0 2px 3px hsl(0 0% 0% / 0.2)) drop-shadow(0 8px 12px hsl(0 0% 0% / 0.3))",
-          "shadow-thumb": "0 0 2px 1px hsl(0 0% 9% / 0.2), inset 0 1px 0 hsl(0 0% 96% / 0.2), 0 1px 2px hsl(0 0% 9% / 0.5)",
-          "shadow-divider": "0 1px 0 hsl(0 0% 94.12% / 0.05)",
+          "edge-thumb": "0 0 2px 1px hsl(0 0% 9% / 0.2), inset 0 1px 0 hsl(0 0% 96% / 0.2), 0 1px 2px hsl(0 0% 9% / 0.5)",
+          "edge-separator": "0 1px 0 hsl(0 0% 94.12% / 0.05)",
           "text-shadow-default": "0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2)",
           "text-shadow-subtle": "0.5px 1px 0.5px hsl(0 0% 0% / 0.08)",
           "color-field": "color-mix(in srgb, var(--layer), hsl(0 0% 0%) 35%)",
@@ -85,16 +85,19 @@
           "background-color": "var(--layer)"
         },
         "@utility surface-raised": {
-          "@apply bg-raised shadow-raised": {}
-        },
-        "@utility surface-primary": {
-          "@apply bg-primary shadow-raised": {}
+          "@apply shadow-(--edge-raised)": {}
         },
         "@utility surface-sunken": {
-          "@apply bg-field shadow-sunken": {}
+          "@apply shadow-(--edge-sunken)": {}
         },
-        "@utility surface-fill": {
-          "@apply bg-primary shadow-sunken": {}
+        "@utility surface-float": {
+          "@apply shadow-(--edge-float)": {}
+        },
+        "@utility surface-thumb": {
+          "@apply shadow-(--edge-thumb)": {}
+        },
+        "@utility separator": {
+          "@apply bg-line shadow-(--edge-separator)": {}
         },
         "@utility menu-item": {
           "@apply flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-[calc(var(--padding)-var(--padding-sm))] outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised": {}
@@ -117,7 +120,7 @@
           }
         },
         "@utility range-thumb": {
-          "@apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-primary thumb:shadow-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus": {}
+          "@apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-primary thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus": {}
         },
         "@utility shimmer": {
           "mask-image": "linear-gradient(100deg, hsl(0 0% 0% / 0.45) 30%, hsl(0 0% 0% / 0.6) 40%, hsl(0 0% 0%) 50%, hsl(0 0% 0% / 0.6) 60%, hsl(0 0% 0% / 0.45) 70%)",

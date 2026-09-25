@@ -45,30 +45,37 @@
 }
 
 /*
- * Surfaces: how a control stands on the layer under it. Components paint themselves with these
- * rather than a fill and a shadow of their own, so redefining one restyles every control that
- * uses it, yours included.
+ * Surfaces: how something stands off what is under it. Each one draws only its edge, from the
+ * theme's `--edge-*`, so a theme of shadows, borders, or neither restyles every component, and
+ * yours. The fill is separate, as `bg-raised`, `bg-field`, or `bg-primary`, so any fill goes with
+ * any edge and animates on its own. The edges stay variables in each utility, so a theme can
+ * change them at runtime.
  */
 
-/* Stands out from the layer: buttons, selects, selected tabs and toggles. */
+/* Stands out from the layer: buttons, selects, and selected tabs and toggles. */
 @utility surface-raised {
-  @apply bg-raised shadow-raised;
+  @apply shadow-(--edge-raised);
 }
 
-/* Raised in the primary color: primary buttons. */
-@utility surface-primary {
-  @apply bg-primary shadow-raised;
-}
-
-/* Set into the layer: fields, tracks, checkboxes, and switches. */
+/* Set into the layer: fields, tracks, checkboxes, switches, and groups. */
 @utility surface-sunken {
-  @apply bg-field shadow-sunken;
+  @apply shadow-(--edge-sunken);
 }
 
-/* Sunken and painted in the primary color: checked checkboxes and switches that are on. Slider
-   bars paint their range in the same color. */
-@utility surface-fill {
-  @apply bg-primary shadow-sunken;
+/* Floats over everything: popups and anything dragged. Its fill comes from its layer. */
+@utility surface-float {
+  @apply shadow-(--edge-float);
+}
+
+/* Grabbed and moved: a slider's thumb or a switch's knob. */
+@utility surface-thumb {
+  @apply shadow-(--edge-thumb);
+}
+
+/* A line between groups, such as a menu's: dark, with the edge the theme sets under it. Size it
+   with `h-px` or `w-px`. Lines along an edge of a row or section are borders in `border-line`. */
+@utility separator {
+  @apply bg-line shadow-(--edge-separator);
 }
 
 /* A row in a popup's list, as in a menu or select: 2px shorter than a control, so a list reads
@@ -78,7 +85,8 @@
   @apply flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-[calc(var(--padding)-var(--padding-sm))] outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised;
 }
 
-/* The theme's `--filter-float`, so it follows a shape such as a tooltip with its arrow. */
+/* surface-float as the theme's `--filter-float`, so it follows a shape such as a tooltip with
+   its arrow. */
 @utility drop-shadow-float {
   filter: var(--filter-float);
 }
@@ -106,10 +114,10 @@
 }
 
 /* A range input drawn as its thumb alone, over a track the component paints: `--size-thumb` in
-   the primary color with `shadow-thumb`, and the focus ring in its shape. Touch draws no highlight
+   the primary color with `surface-thumb`, and the focus ring in its shape. Touch draws no highlight
    box around it. */
 @utility range-thumb {
-  @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-primary thumb:shadow-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
+  @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-primary thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
 }
 
 /* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the

@@ -189,7 +189,7 @@ function Preview({ doc }: { doc: Doc }) {
   return (
     <div
       className={cn(
-        "layer-card rounded-xl shadow-raised",
+        "layer-card rounded-xl surface-raised",
         doc.block && "overflow-hidden",
         !doc.block &&
           "flex min-h-40 flex-wrap items-center justify-center gap-3 p-10",
@@ -212,7 +212,7 @@ export function Code({
 }) {
   return (
     // Each line is 16px in a 6px padding, so the first one centers on the 28px copy button.
-    <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 shadow-sunken">
+    <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 surface-sunken">
       {lang === "text" && (
         <pre className="flex-1 py-1.5 font-mono text-xs whitespace-pre-wrap text-foreground">
           {children}

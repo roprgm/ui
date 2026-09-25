@@ -31,7 +31,7 @@ export function VerticalSlider({
   return (
     <div className={cn("relative flex h-44 w-8 justify-center", className)}>
       <div
-        className="pointer-events-none absolute inset-y-2 w-1 rounded-full surface-sunken"
+        className="pointer-events-none absolute inset-y-2 w-1 rounded-full surface-sunken bg-field"
         style={
           stops && { background: `linear-gradient(to top, ${stops.join()})` }
         }

@@ -19,7 +19,7 @@ const list = cva("flex", {
       // Set into a sunken strip like a ToggleGroup, and as tall: the tabs read a control height
       // that fits the strip, and their corners nest in its corners.
       segmented:
-        "gap-0.5 rounded-lg surface-sunken p-(--padding-xs) [--size-control:calc(var(--size-control-lg)-2*var(--padding-xs))] *:rounded-[calc(var(--radius-lg)-var(--padding-xs))]",
+        "gap-0.5 rounded-lg surface-sunken bg-field p-(--padding-xs) [--size-control:calc(var(--size-control-lg)-2*var(--padding-xs))] *:rounded-[calc(var(--radius-lg)-var(--padding-xs))]",
     },
   },
   defaultVariants: { variant: "default" },
@@ -71,7 +71,7 @@ export function Tab({
       aria-selected={selected}
       tabIndex={selected ? 0 : -1}
       className={cn(
-        "aria-selected:surface-raised aria-selected:text-foreground",
+        "aria-selected:surface-raised aria-selected:bg-raised aria-selected:text-foreground",
         className,
       )}
       {...props}

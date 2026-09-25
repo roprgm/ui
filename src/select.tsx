@@ -15,7 +15,7 @@ const trigger = cva(
       /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
       variant: {
         field:
-          "rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
+          "rounded-md surface-raised bg-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
         pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
       },
       /** A Button's heights and label padding, 2px less on the chevron's side; `lg` goes with

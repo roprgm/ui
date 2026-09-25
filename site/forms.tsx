@@ -31,7 +31,7 @@ export function FormsDemo() {
   const [quality, setQuality] = useState(90);
   return (
     <div className="grid items-start gap-6 p-6 md:grid-cols-2">
-      <div className="layer-elevated rounded-xl shadow-raised">
+      <div className="layer-elevated rounded-xl surface-raised">
         <div className="flex flex-col gap-3 p-(--padding) pt-(--padding-optical)">
           <h4 className="font-medium">Export</h4>
           <Field label="File name">

@@ -38,11 +38,11 @@ export function EditorDemo() {
       </div>
       <div className="relative grid min-w-0 flex-1 place-items-center p-10">
         <div
-          className="aspect-[3/2] w-full max-w-lg rounded-sm bg-[linear-gradient(to_bottom,#3b6ea5_0%,#f0a868_45%,#f7d59c_52%,#2e4a3a_56%,#16261d_100%)] shadow-float"
+          className="aspect-[3/2] w-full max-w-lg rounded-sm bg-[linear-gradient(to_bottom,#3b6ea5_0%,#f0a868_45%,#f7d59c_52%,#2e4a3a_56%,#16261d_100%)] surface-float"
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-(--padding-sm) pl-(--padding) shadow-float">
+          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-(--padding-sm) pl-(--padding) surface-float">
             <Slider
               label="Size"
               value={size}

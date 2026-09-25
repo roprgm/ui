@@ -215,20 +215,44 @@ export function SpinnerDemo() {
   );
 }
 
+/** Each surface draws only its edge; the fill beside it is any color. */
+const surfaces = [
+  { edge: "surface-raised", fill: "bg-raised" },
+  { edge: "surface-raised", fill: "bg-primary" },
+  { edge: "surface-sunken", fill: "bg-field" },
+  { edge: "surface-sunken", fill: "bg-primary" },
+  { edge: "surface-float", fill: "layer-elevated" },
+  { edge: "surface-thumb", fill: "bg-primary" },
+] as const;
+
 export function SurfacesDemo() {
   return (
-    [
-      "surface-raised",
-      "surface-primary",
-      "surface-sunken",
-      "surface-fill",
-    ] as const
-  ).map((surface) => (
-    <div key={surface} className="flex flex-col items-center gap-3">
-      <div className={cn("size-16 rounded-lg", surface)} />
-      <span className="text-muted">{surface}</span>
+    <div className="flex flex-col items-center gap-8">
+      <div className="grid grid-cols-3 gap-x-8 gap-y-6">
+        {surfaces.map(({ edge, fill }) => (
+          <div
+            key={`${edge} ${fill}`}
+            className="flex flex-col items-center gap-3"
+          >
+            <div
+              className={cn(
+                "size-16 rounded-lg",
+                edge === "surface-thumb" && "rounded-full",
+                edge,
+                fill,
+              )}
+            />
+            <span className="text-muted">{edge}</span>
+            <span className="-mt-3 text-faint">{fill}</span>
+          </div>
+        ))}
+      </div>
+      <div className="flex w-full flex-col items-center gap-3">
+        <div className="h-px w-48 separator" />
+        <span className="text-muted">separator</span>
+      </div>
     </div>
-  ));
+  );
 }
 
 export function ShimmerDemo() {
@@ -253,11 +277,11 @@ export function LayersDemo() {
     <div className="grid gap-2 sm:grid-cols-[1fr_2fr]">
       <Layer name="Page" className="py-6 pr-4" />
       {/* 16px corners less 8px of padding leave 8px for the card inside. */}
-      <div className="layer-card grid gap-2 rounded-2xl p-2 shadow-raised sm:grid-cols-2">
+      <div className="layer-card grid gap-2 rounded-2xl p-2 surface-raised sm:grid-cols-2">
         <Layer name="Card" className="p-4" />
         <Layer
           name="Elevated"
-          className="layer-elevated rounded-lg p-4 shadow-raised"
+          className="layer-elevated rounded-lg p-4 surface-raised"
         />
       </div>
     </div>
@@ -437,7 +461,7 @@ export function PanelDemo() {
   const [grain, setGrain] = useState(20);
   const [size, setSize] = useState(35);
   return (
-    <Panel className="h-80 w-64 overflow-hidden rounded-xl shadow-float">
+    <Panel className="h-80 w-64 overflow-hidden rounded-xl surface-float">
       <PanelHeader title="Effects">
         <IconButton label="Add effect" size="icon">
           <PlusIcon />
@@ -553,7 +577,7 @@ export function ListItemDemo() {
     { id: "image", name: "Image" },
   ];
   return (
-    <div className="layer-elevated w-64 overflow-hidden rounded-lg shadow-float">
+    <div className="layer-elevated w-64 overflow-hidden rounded-lg surface-float">
       {layers.map((layer) => (
         <ListItem
           key={layer.id}
@@ -641,7 +665,7 @@ export function TreeListDemo() {
         if (!moved) return;
         setLayers(placeLayer(withoutLayer(layers, drop.id), moved, drop));
       }}
-      className="layer-elevated w-64 overflow-hidden rounded-lg shadow-float"
+      className="layer-elevated w-64 overflow-hidden rounded-lg surface-float"
     >
       {(layer) => (
         <>

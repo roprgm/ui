@@ -16,7 +16,7 @@ export function Popup({
   return (
     <div
       className={cn(
-        "max-h-(--available-height) min-w-40 origin-(--transform-origin) overflow-y-auto rounded-xl text-foreground shadow-float outline-none transition-[opacity,scale] duration-100 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
+        "max-h-(--available-height) min-w-40 origin-(--transform-origin) overflow-y-auto rounded-xl text-foreground surface-float outline-none transition-[opacity,scale] duration-100 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
         layer,
         className,
       )}
