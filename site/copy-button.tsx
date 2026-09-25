@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import { type ComponentProps, useState } from "react";
-import { IconButton } from "../src/icon-button";
+import { IconButton } from "../src/components/icon-button";
 import { CopyIcon } from "./icons";
 
 /** Copies `value`. The copy icon shrinks away and a check draws itself in, then the reverse. */

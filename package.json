@@ -20,8 +20,7 @@
     "src"
   ],
   "exports": {
-    "./theme.css": "./src/theme.css",
-    "./flat.css": "./src/flat.css",
+    "./themes/*": "./src/themes/*",
     "./*": {
       "types": "./dist/*.d.ts",
       "default": "./dist/*.js"

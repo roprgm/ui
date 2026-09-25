@@ -14,7 +14,7 @@ bun add @roprgm/ui
 
 ```css
 @import "tailwindcss";
-@import "@roprgm/ui/theme.css";
+@import "@roprgm/ui/themes/default.css";
 ```
 
 Or copy components into your app with the shadcn CLI. No package needed: each component brings the theme and the components it uses.
@@ -62,7 +62,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ## Theme
 
-`theme.css` holds what a theme decides: colors, radii, sizes, and the edges its surfaces draw. It imports `base.css`, the utilities the components are built from, and sets the page to 13px text on a dark background, in Geist when your app loads it. The comments in both files describe each token.
+`themes/default.css` holds what a theme decides: colors, radii, sizes, and the edges its surfaces draw. It imports `base.css`, the utilities the components are built from, and sets the page to 13px text on a dark background, in Geist when your app loads it. The comments in both files describe each token.
 
 ### Colors
 
@@ -120,12 +120,12 @@ The fills are mixes of the layer, so a theme can redefine them too, such as `--c
 
 ### Themes
 
-A theme is a stylesheet that sets tokens after `theme.css`. `flat.css` removes every edge, so controls stand apart from their layer by their fills alone:
+A theme is a stylesheet that sets tokens after `themes/default.css`. `themes/flat.css` removes every edge, so controls stand apart from their layer by their fills alone:
 
 ```css
 @import "tailwindcss";
-@import "@roprgm/ui/theme.css";
-@import "@roprgm/ui/flat.css";
+@import "@roprgm/ui/themes/default.css";
+@import "@roprgm/ui/themes/flat.css";
 ```
 
 The surfaces read the `--edge-*` variables when the page renders, so a theme can also be applied at runtime or to part of a page: set them on an element and everything inside follows. An edge can be any `box-shadow`: light and shadow as in the default theme, or a border as `inset 0 0 0 1px`. Write an edge that goes away as `0 0 hsl(0 0% 0% / 0)` rather than `none`: Tailwind joins each edge with the focus ring in one `box-shadow`, and a `none` in that list removes the ring too.

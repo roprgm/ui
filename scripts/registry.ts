@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 /**
- * Writes the `theme` item of registry.json from theme.css and the files it imports, so the
+ * Writes the `theme` item of registry.json from themes/default.css and the files it imports, so the
  * registry installs the same CSS the package ships. `@theme` variables become `cssVars.theme`;
  * everything else goes to `css`. Runs before each build.
  */
@@ -55,10 +55,10 @@ function parse(source: string): Rules {
   return block();
 }
 
-/** A CSS file with its imports of sibling files written in place. */
+/** A CSS file with its relative imports written in place. */
 function read(path: string): string {
   return readFileSync(path, "utf8").replace(
-    /@import "\.\/(.+?)";/g,
+    /@import "(\.{1,2}\/.+?)";/g,
     (_, file) => read(join(dirname(path), file)),
   );
 }
@@ -80,6 +80,7 @@ function item(path: string) {
 
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
 for (const entry of registry.items) {
-  if (entry.name === "theme") Object.assign(entry, item("src/theme.css"));
+  if (entry.name === "theme")
+    Object.assign(entry, item("src/themes/default.css"));
 }
 writeFileSync("registry.json", `${JSON.stringify(registry, null, 2)}\n`);

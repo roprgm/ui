@@ -15,5 +15,5 @@ jobs:
       - run: bunx biome ci
       - run: bunx tsc
       - run: bun run build
-      - name: registry.json matches theme.css
+      - name: registry.json matches the default theme
         run: git diff --exit-code registry.json

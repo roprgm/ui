@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "../src/theme.css";
+@import "../src/themes/default.css";
 
 /* `block` waits for Geist instead of painting a fallback first; index.html preloads the file,
    so the wait is short and text never shows in another font. */

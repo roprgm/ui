@@ -1,30 +1,35 @@
 import { cn } from "cn";
 import { useState } from "react";
-import { Button } from "../src/button";
-import { Checkbox } from "../src/checkbox";
-import { Chip } from "../src/chip";
-import { Dialog, DialogClose } from "../src/dialog";
-import { Field } from "../src/field";
-import { IconButton } from "../src/icon-button";
-import { Input } from "../src/input";
-import { Kbd } from "../src/kbd";
-import { ListItem } from "../src/list-item";
-import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/menu";
-import { Notice } from "../src/notice";
-import { Panel, PanelBody, PanelHeader, PanelSection } from "../src/panel";
-import { Popover } from "../src/popover";
-import { ScrollArea } from "../src/scroll-area";
-import { ScrubInput } from "../src/scrub-input";
-import { Select } from "../src/select";
-import { Slider } from "../src/slider";
-import { Spinner } from "../src/spinner";
-import { Switch } from "../src/switch";
-import { Tab, TabList } from "../src/tabs";
-import { Textarea } from "../src/textarea";
-import { Toggle, ToggleGroup } from "../src/toggle-group";
-import { Tooltip } from "../src/tooltip";
-import { type TreeDrop, TreeList } from "../src/tree-list";
-import { VerticalSlider } from "../src/vertical-slider";
+import { Button } from "../src/components/button";
+import { Checkbox } from "../src/components/checkbox";
+import { Chip } from "../src/components/chip";
+import { Dialog, DialogClose } from "../src/components/dialog";
+import { Field } from "../src/components/field";
+import { IconButton } from "../src/components/icon-button";
+import { Input } from "../src/components/input";
+import { Kbd } from "../src/components/kbd";
+import { ListItem } from "../src/components/list-item";
+import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/components/menu";
+import { Notice } from "../src/components/notice";
+import {
+  Panel,
+  PanelBody,
+  PanelHeader,
+  PanelSection,
+} from "../src/components/panel";
+import { Popover } from "../src/components/popover";
+import { ScrollArea } from "../src/components/scroll-area";
+import { ScrubInput } from "../src/components/scrub-input";
+import { Select } from "../src/components/select";
+import { Slider } from "../src/components/slider";
+import { Spinner } from "../src/components/spinner";
+import { Switch } from "../src/components/switch";
+import { Tab, TabList } from "../src/components/tabs";
+import { Textarea } from "../src/components/textarea";
+import { Toggle, ToggleGroup } from "../src/components/toggle-group";
+import { Tooltip } from "../src/components/tooltip";
+import { type TreeDrop, TreeList } from "../src/components/tree-list";
+import { VerticalSlider } from "../src/components/vertical-slider";
 import { CopyButton } from "./copy-button";
 import {
   AdjustIcon,

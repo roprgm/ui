@@ -1,6 +1,6 @@
 import { type ReactNode, useState } from "react";
 import { version } from "../package.json";
-import { Button } from "../src/button";
+import { Button } from "../src/components/button";
 import { Code } from "./docs";
 import { CopyIcon } from "./icons";
 
@@ -57,7 +57,7 @@ export function Usage() {
         <p className="text-muted">Then import the theme in your CSS.</p>
         <Code>bun add @roprgm/ui</Code>
         <Code lang="css">{`@import "tailwindcss";
-@import "@roprgm/ui/theme.css";`}</Code>
+@import "@roprgm/ui/themes/default.css";`}</Code>
         <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";`}</Code>
       </Section>
       <Section title="Or copy the source">

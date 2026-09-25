@@ -2,7 +2,7 @@ import "./index.css";
 import "./theme";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { TooltipProvider } from "../src/tooltip";
+import { TooltipProvider } from "../src/components/tooltip";
 import {
   ButtonDemo,
   CheckboxDemo,

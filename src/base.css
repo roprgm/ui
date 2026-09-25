@@ -7,7 +7,7 @@
 
 @source "./";
 
-/* Sizes that follow from the density in theme.css. A theme can still redefine one on its own. */
+/* Sizes that follow from the density a theme sets. A theme can still redefine one on its own. */
 @theme {
   /* Large buttons, selects, and fields. */
   --size-control-lg: calc(var(--size-control) + 4px);
@@ -22,7 +22,7 @@
 
 /*
  * Layers. A layer sets only its background, `--layer`; the fills of the controls on it are mixed
- * from it in theme.css, so they keep the same contrast on any background. The page is the first
+ * from it by the theme, so they keep the same contrast on any background. The page is the first
  * layer, and `layer-card` and `layer-elevated` paint the next two. A layer of your own sets
  * `--layer` and paints it, as these do.
  */

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import flat from "../src/flat.css?inline";
-import { Select } from "../src/select";
+import { Select } from "../src/components/select";
+import flat from "../src/themes/flat.css?inline";
 
 /** The default theme is the site's stylesheet; another theme only sets the edge variables. */
 const themes = { default: "", flat };

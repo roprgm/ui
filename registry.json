@@ -155,7 +155,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "src/chevron.tsx",
+          "path": "src/components/chevron.tsx",
           "type": "registry:ui"
         }
       ]
@@ -167,7 +167,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/popup.tsx",
+          "path": "src/components/popup.tsx",
           "type": "registry:ui"
         }
       ]
@@ -180,7 +180,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/button.tsx",
+          "path": "src/components/button.tsx",
           "type": "registry:ui"
         }
       ]
@@ -195,7 +195,7 @@
       ],
       "files": [
         {
-          "path": "src/icon-button.tsx",
+          "path": "src/components/icon-button.tsx",
           "type": "registry:ui"
         }
       ]
@@ -208,7 +208,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/input.tsx",
+          "path": "src/components/input.tsx",
           "type": "registry:ui"
         }
       ]
@@ -221,7 +221,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/textarea.tsx",
+          "path": "src/components/textarea.tsx",
           "type": "registry:ui"
         }
       ]
@@ -233,7 +233,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "src/field.tsx",
+          "path": "src/components/field.tsx",
           "type": "registry:ui"
         }
       ]
@@ -246,7 +246,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/checkbox.tsx",
+          "path": "src/components/checkbox.tsx",
           "type": "registry:ui"
         }
       ]
@@ -259,7 +259,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/switch.tsx",
+          "path": "src/components/switch.tsx",
           "type": "registry:ui"
         }
       ]
@@ -272,7 +272,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/toggle-group.tsx",
+          "path": "src/components/toggle-group.tsx",
           "type": "registry:ui"
         }
       ]
@@ -289,7 +289,7 @@
       ],
       "files": [
         {
-          "path": "src/select.tsx",
+          "path": "src/components/select.tsx",
           "type": "registry:ui"
         }
       ]
@@ -302,7 +302,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/chip.tsx",
+          "path": "src/components/chip.tsx",
           "type": "registry:ui"
         }
       ]
@@ -315,7 +315,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/kbd.tsx",
+          "path": "src/components/kbd.tsx",
           "type": "registry:ui"
         }
       ]
@@ -327,7 +327,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "src/spinner.tsx",
+          "path": "src/components/spinner.tsx",
           "type": "registry:ui"
         }
       ]
@@ -343,7 +343,7 @@
       ],
       "files": [
         {
-          "path": "src/tooltip.tsx",
+          "path": "src/components/tooltip.tsx",
           "type": "registry:ui"
         }
       ]
@@ -360,7 +360,7 @@
       ],
       "files": [
         {
-          "path": "src/menu.tsx",
+          "path": "src/components/menu.tsx",
           "type": "registry:ui"
         }
       ]
@@ -373,7 +373,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/popup.json"],
       "files": [
         {
-          "path": "src/popover.tsx",
+          "path": "src/components/popover.tsx",
           "type": "registry:ui"
         }
       ]
@@ -386,7 +386,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/popup.json"],
       "files": [
         {
-          "path": "src/dialog.tsx",
+          "path": "src/components/dialog.tsx",
           "type": "registry:ui"
         }
       ]
@@ -402,7 +402,7 @@
       ],
       "files": [
         {
-          "path": "src/notice.tsx",
+          "path": "src/components/notice.tsx",
           "type": "registry:ui"
         }
       ]
@@ -415,7 +415,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/scroll-area.json"],
       "files": [
         {
-          "path": "src/panel.tsx",
+          "path": "src/components/panel.tsx",
           "type": "registry:ui"
         }
       ]
@@ -428,7 +428,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/button.json"],
       "files": [
         {
-          "path": "src/tabs.tsx",
+          "path": "src/components/tabs.tsx",
           "type": "registry:ui"
         }
       ]
@@ -440,7 +440,7 @@
       "dependencies": ["cn"],
       "files": [
         {
-          "path": "src/list-item.tsx",
+          "path": "src/components/list-item.tsx",
           "type": "registry:ui"
         }
       ]
@@ -456,7 +456,7 @@
       ],
       "files": [
         {
-          "path": "src/tree-list.tsx",
+          "path": "src/components/tree-list.tsx",
           "type": "registry:ui"
         }
       ]
@@ -468,7 +468,7 @@
       "dependencies": ["cn", "@base-ui/react"],
       "files": [
         {
-          "path": "src/scroll-area.tsx",
+          "path": "src/components/scroll-area.tsx",
           "type": "registry:ui"
         }
       ]
@@ -481,7 +481,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/scrub-input.json"],
       "files": [
         {
-          "path": "src/slider.tsx",
+          "path": "src/components/slider.tsx",
           "type": "registry:ui"
         }
       ]
@@ -497,7 +497,7 @@
       ],
       "files": [
         {
-          "path": "src/scrub-input.tsx",
+          "path": "src/components/scrub-input.tsx",
           "type": "registry:ui"
         }
       ]
@@ -510,7 +510,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/vertical-slider.tsx",
+          "path": "src/components/vertical-slider.tsx",
           "type": "registry:ui"
         }
       ]

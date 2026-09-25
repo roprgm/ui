@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Chip } from "../src/chip";
-import { IconButton } from "../src/icon-button";
-import { ListItem } from "../src/list-item";
-import { Menu, MenuItem, MenuSeparator } from "../src/menu";
-import { Panel, PanelBody, PanelHeader, PanelSection } from "../src/panel";
-import { Popover } from "../src/popover";
-import { Slider } from "../src/slider";
+import { Chip } from "../src/components/chip";
+import { IconButton } from "../src/components/icon-button";
+import { ListItem } from "../src/components/list-item";
+import { Menu, MenuItem, MenuSeparator } from "../src/components/menu";
+import {
+  Panel,
+  PanelBody,
+  PanelHeader,
+  PanelSection,
+} from "../src/components/panel";
+import { Popover } from "../src/components/popover";
+import { Slider } from "../src/components/slider";
 import { percent, ToolRail } from "./demos";
 import { EyeIcon, MoreIcon, PlusIcon } from "./icons";
 

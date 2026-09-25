@@ -3,7 +3,7 @@
  * built from live in base.css and read these values.
  */
 
-@import "./base.css";
+@import "../base.css";
 
 /* Geist when the app loads it, with next/font or @fontsource-variable/geist; the system font otherwise. */
 @theme {
@@ -97,7 +97,7 @@
  * shadow or a border of their own; they take a surface, and a theme decides what its edge is.
  * This one uses light and shadow: raised surfaces catch light on top and cast a line below, and
  * sunken ones invert it. A theme of borders sets `inset 0 0 0 1px` lines here instead, and
- * flat.css sets them transparent.
+ * themes/flat.css sets them transparent.
  */
 @theme {
   /* surface-raised: buttons, selects, and selected tabs and toggles. */

@@ -5,7 +5,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 ## Files
 
 - One component file per entry in `registry.json`. Import only `react`, `cn`, `class-variance-authority`, and `@base-ui/react`, plus sibling files with `./`.
-- `src/` stays flat. Sections (actions, inputs, containers, navigation, overlays, effects) are `categories` in `registry.json` and groups in `site/main.tsx`. Internal pieces (`chevron`, `popup`) have registry items without a category.
+- `src/components/` holds one file per component, flat among themselves, so a component's `./` imports still resolve when shadcn copies it beside its dependencies. `src/themes/` holds the themes, and `src/base.css` the utilities every theme shares. Sections (actions, inputs, containers, navigation, overlays, effects) are `categories` in `registry.json` and groups in `site/main.tsx`. Internal pieces (`chevron`, `popup`) have registry items without a category.
 - Start a file with `"use client";` when it uses Base UI, hooks, or its own event handlers, so it works in React Server Components. Markup-only components stay without it and render on the server.
 - A new component needs its entry in `registry.json`, a demo in `site/demos.tsx`, its entry in `site/main.tsx`, and a line in `README.md`.
 
@@ -17,10 +17,10 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 ## Theme
 
-- `theme.css` holds the tokens and imports `base.css`, the utilities, variants, and rules that read them. `bun run build` writes both into the `theme` item of `registry.json` with `scripts/registry.ts`; don't edit that item by hand.
+- `themes/default.css` holds the tokens and imports `base.css`, the utilities, variants, and rules that read them. Another theme, such as `themes/flat.css`, sets tokens after it. `bun run build` writes both into the `theme` item of `registry.json` with `scripts/registry.ts`; don't edit that item by hand.
 - Colors and edges are always tokens, since they are the look a theme changes. Any other value becomes a token only when more than one utility or component uses it; otherwise it stays in its utility or rule, and a theme that wants it different redefines that utility.
-- Colors come only from the semantic tokens in `theme.css` (`bg-field`, `text-muted`, `border-line`, …), written as `hsl()`. Never use Tailwind palette colors such as `neutral-*` or `white/*` in components; add or reuse a token instead.
-- A background that holds controls takes `layer-card` or `layer-elevated`. A layer sets only `--layer`; `theme.css` mixes the fills of the controls on it from that color. Popups are `layer-elevated` wherever they open; dialogs and notices are `layer-card`.
+- Colors come only from the semantic tokens in the theme (`bg-field`, `text-muted`, `border-line`, …), written as `hsl()`. Never use Tailwind palette colors such as `neutral-*` or `white/*` in components; add or reuse a token instead.
+- A background that holds controls takes `layer-card` or `layer-elevated`. A layer sets only `--layer`; the theme mixes the fills of the controls on it from that color. Popups are `layer-elevated` wherever they open; dialogs and notices are `layer-card`.
 - Give anything that stands off its layer a surface from `base.css`: `surface-raised`, `surface-sunken`, `surface-float`, or `surface-thumb`, and `separator` for a line between groups. A surface draws only its edge, from the theme's `--edge-*`; pair it with a fill such as `bg-raised`, `bg-field`, or `bg-primary`. Never draw depth with a `shadow-*` or a border of your own. Lines along a row or section are borders in `border-line`.
 - Controls take the `focus-ring` and `dim-disabled` utilities. Rows in a popup's list take `menu-item`. Range inputs draw their thumb with `range-thumb`, and stay at least 32px across.
 - Components inherit font size.
@@ -30,7 +30,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - Button sets the scale, with a text and an icon size for each of three heights: `sm` (24px, `--size-control-sm`), `default` (28px, `--size-control`), and `lg` (32px, `--size-control-lg`).
 - Every other control's sizes are named after the Button they go with, and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup and a segmented TabList stand 4px taller, since the eye sizes them by the raised control inside.
 - Panel headers and list rows are `h-(--size-row)`, 40px, and hold a control `--padding-row` (6px) in.
-- `--padding` and `--size-control` set the density and change together; `base.css` derives the other sizes from them, so `theme.css` holds only what a theme decides.
+- `--padding` and `--size-control` set the density and change together; `base.css` derives the other sizes from them, so a theme holds only what it decides.
 - The density sets heights and container padding. Each control sets its own side padding in fixed values chosen by eye, such as Button's `px-3`; don't derive it from a height.
 - Use the `(--var)` form, such as `h-(--size-control)`, rather than naming a spacing value, so `cn` still merges a caller's `h-*` or `p-*`.
 
