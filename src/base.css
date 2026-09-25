@@ -221,8 +221,11 @@
   @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
 }
 
-/* A shade at the top and bottom of a scroll area that shows while there is more to scroll that
-   way, on a viewport Base UI marks with `data-overflow-y-start` and `-end`. */
+/* A shade at the top and bottom of a scroll container that shows while there is more to scroll
+   that way. Where the browser ties animations to scrolling, each shade follows the position: the
+   top one fades in over the first 1.5rem scrolled and the bottom one fades out over the last, and
+   neither shows when nothing overflows. Elsewhere it fades by time, from the attributes Base UI's
+   ScrollArea sets on its viewport. */
 @utility scroll-fade {
   &::before,
   &::after {
@@ -233,7 +236,6 @@
     height: 1.5rem;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 150ms;
   }
   &::before {
     top: 0;
@@ -250,9 +252,47 @@
     margin-top: -1.5rem;
     background: linear-gradient(to top, hsl(0 0% 0% / 0.2), 30%, transparent);
   }
-  &[data-overflow-y-start]::before,
-  &[data-overflow-y-end]::after {
+
+  @supports (animation-timeline: scroll()) {
+    &::before {
+      animation: scroll-fade-in linear both;
+      animation-timeline: scroll();
+      animation-range: 0 1.5rem;
+    }
+    &::after {
+      animation: scroll-fade-out linear both;
+      animation-timeline: scroll();
+      animation-range: calc(100% - 1.5rem) 100%;
+    }
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    &::before,
+    &::after {
+      transition: opacity 150ms;
+    }
+    &[data-overflow-y-start]::before,
+    &[data-overflow-y-end]::after {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes scroll-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
     opacity: 1;
+  }
+}
+
+@keyframes scroll-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 

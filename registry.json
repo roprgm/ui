@@ -135,8 +135,7 @@
             "display": "block",
             "height": "1.5rem",
             "pointer-events": "none",
-            "opacity": "0",
-            "transition": "opacity 150ms"
+            "opacity": "0"
           },
           "&::before": {
             "top": "0",
@@ -148,8 +147,41 @@
             "margin-top": "-1.5rem",
             "background": "linear-gradient(to top, hsl(0 0% 0% / 0.2), 30%, transparent)"
           },
-          "&[data-overflow-y-start]::before, &[data-overflow-y-end]::after": {
+          "@supports (animation-timeline: scroll())": {
+            "&::before": {
+              "animation": "scroll-fade-in linear both",
+              "animation-timeline": "scroll()",
+              "animation-range": "0 1.5rem"
+            },
+            "&::after": {
+              "animation": "scroll-fade-out linear both",
+              "animation-timeline": "scroll()",
+              "animation-range": "calc(100% - 1.5rem) 100%"
+            }
+          },
+          "@supports not (animation-timeline: scroll())": {
+            "&::before, &::after": {
+              "transition": "opacity 150ms"
+            },
+            "&[data-overflow-y-start]::before, &[data-overflow-y-end]::after": {
+              "opacity": "1"
+            }
+          }
+        },
+        "@keyframes scroll-fade-in": {
+          "from": {
+            "opacity": "0"
+          },
+          "to": {
             "opacity": "1"
+          }
+        },
+        "@keyframes scroll-fade-out": {
+          "from": {
+            "opacity": "1"
+          },
+          "to": {
+            "opacity": "0"
           }
         },
         "@utility shimmer": {
