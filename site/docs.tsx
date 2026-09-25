@@ -64,9 +64,10 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
   return (
     <div className="mx-auto flex max-w-6xl gap-12 px-6">
       <nav className="sticky top-0 hidden h-dvh w-48 shrink-0 md:block">
-        {/* The right padding keeps the scrollbar clear of the links. */}
-        <ScrollArea className="h-full">
-          <div className="flex flex-col gap-1 py-12 pr-4">
+        {/* The right padding keeps the scrollbar clear of the links; the area reaches 4px past the
+            left edge, padded back, so it doesn't clip a control's edge or focus ring there. */}
+        <ScrollArea className="-ml-1 h-full">
+          <div className="flex flex-col gap-1 py-12 pr-4 pl-1">
             <div className="mb-4 -mt-px flex items-center gap-1">
               <a
                 href="#usage"
