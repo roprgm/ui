@@ -92,7 +92,7 @@ export function FormsDemo() {
       <div className="flex flex-col gap-4">
         <div className="flex gap-2">
           <Input placeholder="Search presets" />
-          <Button size="lg">Search</Button>
+          <Button>Search</Button>
         </div>
         <div className="flex gap-2">
           <Input
@@ -100,7 +100,7 @@ export function FormsDemo() {
             value="https://ui.roprgm.com/p/lisbon"
             aria-label="Link"
           />
-          <CopyButton value="https://ui.roprgm.com/p/lisbon" size="icon-lg" />
+          <CopyButton value="https://ui.roprgm.com/p/lisbon" />
         </div>
         <div className="flex gap-2">
           <Select
@@ -109,7 +109,7 @@ export function FormsDemo() {
             defaultValue="recent"
             className="flex-1"
           />
-          <IconButton label="More" size="icon-lg">
+          <IconButton label="More">
             <MoreIcon />
           </IconButton>
         </div>
@@ -159,6 +159,12 @@ export function FormsDemo() {
           </ToggleGroup>
           <Button>Default</Button>
           <Button variant="primary">Apply</Button>
+          <Select
+            aria-label="Spacing"
+            items={sorts}
+            defaultValue="recent"
+            className="w-32"
+          />
         </div>
         <div className="flex items-center gap-2">
           <ToggleGroup size="lg">
@@ -180,16 +186,14 @@ export function FormsDemo() {
             aria-label="Spacing"
             items={sorts}
             defaultValue="recent"
+            size="lg"
             className="w-32"
           />
         </div>
         <div className="flex items-center gap-2">
           <Input placeholder="Preset name" className="w-60" />
-          <Button size="lg">Large</Button>
           <Button>Default</Button>
-          <Button size="lg" variant="primary">
-            Save
-          </Button>
+          <Button variant="primary">Save</Button>
           <Select
             aria-label="Folder"
             items={sorts}

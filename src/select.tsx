@@ -15,10 +15,16 @@ const trigger = cva(
       /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
       variant: {
         field:
-          "h-(--size-control-lg) rounded-md surface-raised pr-2.5 pl-3 hover:bg-raised-hover data-popup-open:bg-raised-hover",
-        pill: "h-(--size-control) rounded-full bg-hover pr-2 pl-2.5 hover:bg-pressed data-popup-open:bg-pressed",
+          "rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
+        pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
+      },
+      /** A Button's heights; `lg` goes with large buttons and a large ToggleGroup. */
+      size: {
+        default: "h-(--size-control) pr-2 pl-2.5",
+        lg: "h-(--size-control-lg) pr-2.5 pl-3",
       },
     },
+    defaultVariants: { size: "default" },
   },
 );
 
@@ -34,6 +40,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
   placeholder,
   tooltip,
   variant = "field",
+  size,
   className,
   "aria-label": label,
   onOpenChange,
@@ -44,6 +51,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
   /** Shown on hover while the list is closed. */
   tooltip?: string;
   variant?: "field" | "pill";
+  size?: "default" | "lg";
   className?: string;
   "aria-label"?: string;
 }) {
@@ -53,7 +61,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
     <Primitive.Trigger
       ref={popup.trigger}
       aria-label={label}
-      className={cn(trigger({ variant }), className)}
+      className={cn(trigger({ variant, size }), className)}
     >
       <Primitive.Value
         placeholder={placeholder}

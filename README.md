@@ -108,11 +108,11 @@ Four tokens set the density; the rest follow from them. `--padding` and `--size-
 | `--padding` | 14px | from a container's edge to its content: dialog, notice, popover, and panel sections, and list rows |
 | `--padding-sm` | 6px | around a list of items, as in a menu, and around a control in a row |
 | `--padding-xs` | 3px | around a raised control set into a sunken one, as a toggle in its group |
-| `--size-control` | 28px | buttons, chips, menu items, and row thumbnails and icon buttons |
+| `--size-control` | 28px | buttons, selects, chips, menu items, and row thumbnails and icon buttons |
 
 | Derived | Default | Use |
 | --- | --- | --- |
-| `--size-control-lg` | 32px | fields, selects, tabs, and the buttons beside them |
+| `--size-control-lg` | 32px | fields, large buttons and selects, and tabs. A sunken field reads 4px shorter, so it goes with 28px buttons |
 | `--size-control-sm` | 24px | buttons inside a field, and close buttons |
 | `--size-control-inset` | 26px | a toggle in its group, or the file picker in its field |
 | `--size-row` | 40px | panel headers and list rows, holding a control `--padding-sm` in |

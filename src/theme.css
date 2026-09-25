@@ -76,10 +76,10 @@
   --padding-sm: 6px;
   /* Around a raised control set into a sunken one, so thin the two read as one piece. */
   --padding-xs: 3px;
-  /* Buttons, chips, menu items, and the thumbnails and icon buttons in rows. */
+  /* Buttons, selects, chips, menu items, and the thumbnails and icon buttons in rows. */
   --size-control: 1.75rem;
 
-  /* Fields, selects, and the buttons beside them. */
+  /* Large buttons and selects, and fields, which read 4px shorter as they're sunken. */
   --size-control-lg: calc(var(--size-control) + 4px);
   /* Buttons inside a field, and close buttons. */
   --size-control-sm: calc(var(--size-control) - 4px);

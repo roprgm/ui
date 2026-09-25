@@ -6,6 +6,7 @@ export function Input({ className, ...props }: ComponentProps<"input">) {
   return (
     <input
       className={cn(
+        // A sunken field reads 4px shorter than it is, so it stands 4px taller than the buttons beside it.
         "h-(--size-control-lg) w-full min-w-0 rounded-md surface-sunken px-2.5 text-foreground transition focus-ring placeholder:text-faint dim-disabled aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger/60",
         // The picker button is set into the field by the inset, as a toggle is into its group.
         "file:mt-(--padding-xs) file:mr-3 file:-ml-[calc(10px-var(--padding-xs))] file:h-(--size-control-inset) file:cursor-pointer file:rounded-sm file:border-0 file:surface-raised file:px-2 file:text-foreground file:transition hover:file:bg-raised-hover",
