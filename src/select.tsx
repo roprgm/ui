@@ -9,7 +9,7 @@ import { Surface, usePopupLayer } from "./surface";
 import { Tooltip } from "./tooltip";
 
 const trigger = cva(
-  "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring data-disabled:pointer-events-none data-disabled:opacity-40",
+  "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring dim-disabled",
   {
     variants: {
       /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */

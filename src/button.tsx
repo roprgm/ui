@@ -4,7 +4,7 @@ import { type ComponentProps, cloneElement, type ReactElement } from "react";
 
 const button = cva(
   // Colors ease over 200ms; the 1px press moves faster, since the last entry for a property wins.
-  "inline-flex h-(--size-control) cursor-pointer items-center justify-center gap-2 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-40",
+  "inline-flex h-(--size-control) cursor-pointer items-center justify-center gap-2 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
   {
     variants: {
       variant: {

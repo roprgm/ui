@@ -102,6 +102,15 @@
   }
 }
 
+/* Fades a disabled control and stops it reacting, whether it is disabled natively, through Base
+   UI's `data-disabled`, or by a disabled input inside it, as a toggle's radio is. */
+@utility dim-disabled {
+  &:is(:disabled, [data-disabled], :has(:disabled)) {
+    pointer-events: none;
+    opacity: 40%;
+  }
+}
+
 /* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the
    element keeps its own colors; the band is the one place shown at full strength. The band is
    sized to the element, so put it on a group of blocks rather than on each one, and one band
