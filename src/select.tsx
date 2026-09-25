@@ -18,10 +18,10 @@ const trigger = cva(
           "rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
         pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
       },
-      /** A Button's heights; `lg` goes with large buttons and a large ToggleGroup. */
+      /** A Button's heights and label padding, 2px less on the chevron's side; `lg` goes with large buttons and a large ToggleGroup. */
       size: {
-        default: "h-(--size-control) pr-2 pl-2.5",
-        lg: "h-(--size-control-lg) pr-2.5 pl-3",
+        default: "h-(--size-control) pr-2.5 pl-3",
+        lg: "h-(--size-control-lg) pr-3 pl-3.5",
       },
     },
     defaultVariants: { size: "default" },
