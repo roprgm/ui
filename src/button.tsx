@@ -15,13 +15,16 @@ const button = cva(
         ghost:
           "text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },
+      // Three heights, shared with every control: 32px like a field, 28px, and 24px.
       size: {
         default: "",
+        sm: "h-(--size-control-sm) px-2.5",
+        xs: "h-(--size-control-xs) px-2",
         icon: "w-(--size-control) px-0",
         /** For panel headers and rows, where it sits 6px inside a 40px row. */
         "icon-sm": "size-(--size-control-sm) px-0",
-        /** For ghost actions inside a field, where it sits 4px in. */
-        "icon-xs": "size-6 px-0",
+        /** For ghost actions inside a field, where it sits 4px in, and close buttons. */
+        "icon-xs": "size-(--size-control-xs) px-0",
       },
     },
     defaultVariants: { variant: "default", size: "default" },

@@ -56,6 +56,8 @@ export function ButtonDemo() {
       <Button variant="ghost" render={<a href="#icon-button" />}>
         Link
       </Button>
+      <Button size="sm">Small</Button>
+      <Button size="xs">Extra small</Button>
     </>
   );
 }
@@ -67,6 +69,9 @@ export function IconButtonDemo() {
         <UndoIcon />
       </IconButton>
       <IconButton label="More" size="icon-sm">
+        <MoreIcon />
+      </IconButton>
+      <IconButton label="More" size="icon-xs">
         <MoreIcon />
       </IconButton>
     </>

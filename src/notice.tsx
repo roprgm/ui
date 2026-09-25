@@ -40,9 +40,9 @@ export function Notice({
       {onDismiss && (
         <IconButton
           label="Dismiss"
-          size="icon-sm"
+          size="icon-xs"
           onClick={onDismiss}
-          className="m-1.5"
+          className="m-2"
         >
           <svg
             viewBox="0 0 24 24"

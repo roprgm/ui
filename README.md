@@ -104,7 +104,8 @@ Components paint their controls with four utilities from `base.css`, so a contro
 | Token | Default | Use |
 | --- | --- | --- |
 | `--size-control` | 32px | buttons, fields, and selects |
-| `--size-control-sm` | 28px | chips, toggle items, and icon buttons in rows |
+| `--size-control-sm` | 28px | chips, toggle items, menu items, and icon buttons in rows |
+| `--size-control-xs` | 24px | buttons inside a field, and close buttons |
 | `--size-row` | 40px | panel headers and list rows |
 
 ### Customize
