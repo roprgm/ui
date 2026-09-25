@@ -119,7 +119,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
-                  className="flex cursor-default items-center justify-between gap-4 h-(--size-control) shrink-0 rounded-md px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised data-selected:bg-raised"
+                  className="menu-item justify-between gap-4 data-selected:bg-raised"
                 >
                   <Primitive.ItemText>{item.label}</Primitive.ItemText>
                   <Primitive.ItemIndicator>

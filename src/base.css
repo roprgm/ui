@@ -88,6 +88,12 @@
   @apply bg-primary shadow-sunken;
 }
 
+/* A row in a popup's list, as in a menu or select: a control's height, its text `--padding` from
+   the popup's edge, and a flat highlight under the pointer or keys. */
+@utility menu-item {
+  @apply flex h-(--size-control) shrink-0 cursor-default items-center rounded-md px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised;
+}
+
 /* shadow-float as a filter, so it follows a shape such as a popup with its arrow. */
 @utility drop-shadow-float {
   filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.5))

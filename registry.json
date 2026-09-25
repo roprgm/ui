@@ -118,6 +118,9 @@
         "@utility surface-fill": {
           "@apply bg-primary shadow-sunken": {}
         },
+        "@utility menu-item": {
+          "@apply flex h-(--size-control) shrink-0 cursor-default items-center rounded-md px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised": {}
+        },
         "@utility drop-shadow-float": {
           "filter": "drop-shadow(0 0 1px rgb(0 0 0 / 0.5)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.2)) drop-shadow(0 8px 12px rgb(0 0 0 / 0.3))"
         },

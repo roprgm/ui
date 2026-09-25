@@ -48,13 +48,7 @@ export function MenuItem({
   ...props
 }: ComponentProps<typeof Primitive.Item> & { shortcut?: string }) {
   return (
-    <Primitive.Item
-      className={cn(
-        "flex cursor-default items-center gap-2 h-(--size-control) shrink-0 rounded-md px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised",
-        className,
-      )}
-      {...props}
-    >
+    <Primitive.Item className={cn("menu-item gap-2", className)} {...props}>
       {children}
       {shortcut && <Kbd className="ml-auto pl-4">{shortcut}</Kbd>}
     </Primitive.Item>
@@ -80,7 +74,7 @@ export function Submenu({
     <Primitive.SubmenuRoot onOpenChange={(open) => open && popup.measure()}>
       <Primitive.SubmenuTrigger
         ref={popup.trigger}
-        className="flex cursor-default items-center justify-between gap-4 h-(--size-control) shrink-0 rounded-md px-(--padding-item) outline-none select-none data-highlighted:bg-raised data-popup-open:bg-raised"
+        className="menu-item justify-between gap-4 data-popup-open:bg-raised"
       >
         {label}
         <Chevron direction="right" size="sm" className="text-muted" />
