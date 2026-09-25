@@ -28,7 +28,7 @@ export function Menu({
               <Popup
                 {...props}
                 layer={popup.layer}
-                className="flex flex-col gap-0.5 p-(--padding-sm)"
+                className="flex flex-col gap-0.5 rounded-lg p-(--padding-sm)"
               />
             )}
           >
@@ -80,13 +80,14 @@ export function Submenu({
         <Chevron direction="right" size="sm" className="text-muted" />
       </Primitive.SubmenuTrigger>
       <Primitive.Portal>
-        <Primitive.Positioner sideOffset={4} alignOffset={-6} className="z-50">
+        {/* Up by the list's padding, so the first item lines up with its trigger. */}
+        <Primitive.Positioner sideOffset={4} alignOffset={-5} className="z-50">
           <Primitive.Popup
             render={(props) => (
               <Popup
                 {...props}
                 layer={popup.layer}
-                className="flex flex-col gap-0.5 p-(--padding-sm)"
+                className="flex flex-col gap-0.5 rounded-lg p-(--padding-sm)"
               />
             )}
           >

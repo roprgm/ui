@@ -38,13 +38,13 @@
           "radius-xl": "12px",
           "radius-2xl": "16px",
           "padding": "14px",
-          "padding-sm": "6px",
+          "padding-sm": "5px",
           "padding-xs": "3px",
           "size-control": "1.75rem",
           "size-control-lg": "calc(var(--size-control) + 4px)",
           "size-control-sm": "calc(var(--size-control) - 4px)",
           "size-control-inset": "calc(var(--size-control-lg) - 2 * var(--padding-xs))",
-          "size-row": "calc(var(--size-control) + 2 * var(--padding-sm))",
+          "size-row": "calc(var(--size-control) + 12px)",
           "padding-item": "calc(var(--padding) - var(--padding-sm))",
           "padding-optical": "calc(var(--padding) - 2px)",
           "size-thumb": "14px",
@@ -120,7 +120,7 @@
           "@apply bg-primary shadow-sunken": {}
         },
         "@utility menu-item": {
-          "@apply flex h-(--size-control) shrink-0 cursor-default items-center rounded-md px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised": {}
+          "@apply flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised": {}
         },
         "@utility drop-shadow-float": {
           "filter": "drop-shadow(0 0 1px hsl(0 0% 0% / 0.5)) drop-shadow(0 2px 3px hsl(0 0% 0% / 0.2)) drop-shadow(0 8px 12px hsl(0 0% 0% / 0.3))"

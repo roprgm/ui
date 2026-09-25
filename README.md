@@ -108,7 +108,7 @@ Button's three heights are the scale. Other controls name their sizes after the 
 | Token | Default | Use |
 | --- | --- | --- |
 | `--padding` | 14px | from a container's edge to its content: dialog, notice, popover, and panel sections, and list rows |
-| `--padding-sm` | 6px | around a list of items, as in a menu, and around a control in a row |
+| `--padding-sm` | 5px | around a list of items, as in a menu or select |
 | `--padding-xs` | 3px | around a raised control set into a sunken one, as a toggle in its group |
 | `--size-control` | 28px | buttons, selects, fields, chips, menu items, and row thumbnails and icon buttons |
 
@@ -117,7 +117,7 @@ Button's three heights are the scale. Other controls name their sizes after the 
 | `--size-control-lg` | 32px | large buttons, selects, and fields, and toggle groups |
 | `--size-control-sm` | 24px | buttons inside a large field, and close buttons |
 | `--size-control-inset` | 26px | a toggle in its group |
-| `--size-row` | 40px | panel headers and list rows, holding a control `--padding-sm` in |
+| `--size-row` | 40px | panel headers and list rows, holding a control 6px in |
 | `--padding-item` | 8px | menu and select items, so their text lands `--padding` in |
 | `--padding-optical` | 12px | buttons against an edge, and a section's top when it opens with text |
 | `--size-thumb` | 14px | a range input's thumb; the slider's fill and bar follow it |

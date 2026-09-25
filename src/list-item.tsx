@@ -14,7 +14,7 @@ export function ListItem({
       data-muted={muted}
       className={cn(
         // A trailing ghost IconButton sits 6px in, so its icon lands 12px in.
-        "group relative flex h-(--size-row) items-center gap-2 border-line border-b px-(--padding) text-foreground has-[>button:last-child]:pr-(--padding-sm) data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
+        "group relative flex h-(--size-row) items-center gap-2 border-line border-b px-(--padding) text-foreground has-[>button:last-child]:pr-[calc((var(--size-row)-var(--size-control))/2)] data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
         className,
       )}
       {...props}

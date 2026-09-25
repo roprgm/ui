@@ -29,7 +29,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 - Button sets the scale, with a text and an icon size for each of three heights: `sm` (24px, `--size-control-sm`), `default` (28px, `--size-control`), and `lg` (32px, `--size-control-lg`).
 - Every other control's sizes are named after the Button they go with, and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup stands 4px taller, since the eye sizes it by the raised toggle inside it.
-- Panel headers and list rows are `h-(--size-row)`.
+- Panel headers and list rows are `h-(--size-row)`, 40px, and hold a control 6px in.
 - `--padding` and `--size-control` set the density and change together; the other sizes derive from them in `theme.css`.
 - Use the `(--var)` form, such as `h-(--size-control)`, rather than naming a spacing value, so `cn` still merges a caller's `h-*` or `p-*`.
 
@@ -37,7 +37,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 - Three paddings space the library:
   - `--padding` (14px) for the sections of a dialog, notice, popover, or panel, and list rows.
-  - `--padding-sm` (6px) around a list of items, as in a menu or a select. Items take `--padding-item`, so their text lands `--padding` in too.
+  - `--padding-sm` (5px) around a list of items, as in a menu or a select, whose popup takes `rounded-lg`. Items take the `menu-item` utility: 2px shorter than a control, `rounded-sm`, and `--padding-item` at their sides, so their text lands `--padding` in too.
   - `--padding-xs` (3px) around a raised control set into a sunken one, as in a toggle group, whose toggles take `h-(--size-control-inset)`.
 - Everything floating is a `Popup`, which has no padding of its own: lists put theirs on it, and other content sits in sections. Anything edge to edge simply sits outside them, with no negative margins.
 - Three optical exceptions:

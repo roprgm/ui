@@ -5,9 +5,10 @@ import { type ComponentProps, useRef, useState } from "react";
 
 /**
  * The box everything floating is drawn in: menus, selects, popovers, dialogs, and notices. It has
- * no padding of its own: a list of items takes `p-(--padding-sm)` on it, and other content sits
- * in `p-(--padding)` sections. Render a Base UI popup as one: `<Menu.Popup render={(props) => <Popup {...props} />} />`.
- * `layer` paints it, one above its trigger's from `usePopupLayer`.
+ * no padding of its own: a list of items takes `p-(--padding-sm)` and `rounded-lg` on it, and other
+ * content sits in `p-(--padding)` sections. Render a Base UI popup as one:
+ * `<Menu.Popup render={(props) => <Popup {...props} />} />`. `layer` paints it, one above its
+ * trigger's from `usePopupLayer`.
  */
 export function Popup({
   layer = "layer-elevated",

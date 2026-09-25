@@ -74,8 +74,8 @@
   /* From a container's edge to its content: the sections of a dialog, notice, popover, or panel,
      and list rows. */
   --padding: 14px;
-  /* Around a list of items, as in a menu or select, and around a control in a row. */
-  --padding-sm: 6px;
+  /* Around a list of items, as in a menu or select. */
+  --padding-sm: 5px;
   /* Around a raised control set into a sunken one, so thin the two read as one piece. */
   --padding-xs: 3px;
   /* Buttons, selects, fields, chips, menu items, and the thumbnails and icon buttons in rows. */
@@ -87,8 +87,8 @@
   --size-control-sm: calc(var(--size-control) - 4px);
   /* A toggle in its group: a large control less the gap around it. */
   --size-control-inset: calc(var(--size-control-lg) - 2 * var(--padding-xs));
-  /* Panel headers and list rows, which hold a control `--padding-sm` in. */
-  --size-row: calc(var(--size-control) + 2 * var(--padding-sm));
+  /* Panel headers and list rows, which hold a control 6px in. */
+  --size-row: calc(var(--size-control) + 12px);
   /* A menu or select item's own padding, so its text lands `--padding` in, like a panel's. */
   --padding-item: calc(var(--padding) - var(--padding-sm));
   /* Buttons against an edge, whose box shows where text doesn't, and a section's top when it opens
