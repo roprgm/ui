@@ -37,7 +37,8 @@ export function Toggle({
   return (
     <label
       className={cn(
-        "inline-flex h-(--size-toggle) cursor-pointer items-center rounded-md px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled",
+        // Its group sets its height, or it takes a control's; its corners nest in the group's.
+        "inline-flex h-[var(--size-toggle,var(--size-control))] cursor-pointer items-center rounded-[calc(var(--radius-lg)-var(--padding-xs))] px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled",
         className,
       )}
     >
