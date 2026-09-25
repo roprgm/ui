@@ -141,7 +141,7 @@
           "@apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-primary thumb:ring-1 thumb:ring-line thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus": {}
         },
         "@utility shimmer": {
-          "mask-image": "linear-gradient(100deg, hsl(0 0% 0% / 0.45) 30%, hsl(0 0% 0% / 0.6) 40%, #000 50%, hsl(0 0% 0% / 0.6) 60%, hsl(0 0% 0% / 0.45) 70%)",
+          "mask-image": "linear-gradient(100deg, hsl(0 0% 0% / 0.45) 30%, hsl(0 0% 0% / 0.6) 40%, hsl(0 0% 0%) 50%, hsl(0 0% 0% / 0.6) 60%, hsl(0 0% 0% / 0.45) 70%)",
           "mask-size": "300% 100%",
           "animation": "shimmer 2.4s ease-in-out infinite",
           "@media (prefers-reduced-motion: reduce)": {

@@ -25,8 +25,8 @@
  * everywhere: fields a step below the layer, raised controls two steps above and three on hover.
  * The page is the first layer; `layer-card` and `layer-elevated` paint the next two and set the
  * fills inside them, and `layer-top` is for popups opened from an elevated card. Each names
- * itself in `--layer-name`, which a popup reads to open one layer above its trigger's. `inline` keeps the var() in each utility, so a control reads the fills of
- * the layer around it.
+ * itself in `--layer-name`, which a popup reads to open one layer above its trigger's. `inline`
+ * keeps the var() in each utility, so a control reads the fills of the layer around it.
  */
 @theme inline {
   --color-field: var(--field);
@@ -153,7 +153,7 @@
     100deg,
     hsl(0 0% 0% / 0.45) 30%,
     hsl(0 0% 0% / 0.6) 40%,
-    #000 50%,
+    hsl(0 0% 0%) 50%,
     hsl(0 0% 0% / 0.6) 60%,
     hsl(0 0% 0% / 0.45) 70%
   );
