@@ -85,7 +85,7 @@ export function Slider({
 
   return (
     <div className={cn(root({ variant }), className)}>
-      <span className="text-muted">{label}</span>
+      <span className="relative z-10 text-muted">{label}</span>
       <ScrubInput
         aria-label={label}
         value={value}
@@ -97,7 +97,7 @@ export function Slider({
         defaultValue={defaultValue}
         format={format}
         minChars={valueWidth}
-        // Above the bar, whose taller touch target would otherwise overlap it on coarse pointers.
+        // Above the bar, like the label, since the bar's taller target reaches into their row.
         className={cn("z-10", cells[variant].value)}
       />
       {variant !== "compact" && (
@@ -131,7 +131,7 @@ export function Slider({
             onPointerCancel={() => onEditingChange?.(false)}
             onFocus={() => onEditingChange?.(true)}
             onBlur={() => onEditingChange?.(false)}
-            className="absolute inset-x-0 top-1/2 h-4 w-full pointer-coarse:h-11 -translate-y-1/2 cursor-pointer touch-pan-y range-thumb"
+            className="absolute inset-x-0 top-1/2 h-8 w-full pointer-coarse:h-11 -translate-y-1/2 cursor-pointer touch-pan-y range-thumb"
           />
         </div>
       )}
