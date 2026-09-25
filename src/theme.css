@@ -101,16 +101,16 @@
 /* Shadows replace borders: raised surfaces catch light on top and cast a line below; sunken ones invert it. */
 @theme {
   --shadow-raised:
-    inset 0 1px 0 rgba(240, 240, 240, 0.07), 0 1px 1px rgb(0 0 0 / 0.28),
-    0 0 1px rgb(0 0 0 / 0.14);
+    inset 0 1px 0 hsl(0 0% 94.12% / 0.07), 0 1px 1px hsl(0 0% 0% / 0.28),
+    0 0 1px hsl(0 0% 0% / 0.14);
   --shadow-sunken:
-    inset 0 1px 1px rgb(0 0 0 / 0.3), 0 1px 0 rgb(240 240 240 / 0.05);
+    inset 0 1px 1px hsl(0 0% 0% / 0.3), 0 1px 0 hsl(0 0% 94.12% / 0.05);
   /* A dark line takes it to read engraved: the sunken edge's light, 1px below. */
-  --shadow-divider: 0 1px 0 rgb(240 240 240 / 0.05);
+  --shadow-divider: 0 1px 0 hsl(0 0% 94.12% / 0.05);
   /* The edge is opaque so it holds over lighter surfaces, not only the page. */
   --shadow-float:
-    0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 2px 6px rgb(0 0 0 / 0.3), 0 16px 32px -8px rgb(0 0 0 / 0.35);
+    0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 hsl(0 0% 100% / 0.08),
+    0 2px 6px hsl(0 0% 0% / 0.3), 0 16px 32px -8px hsl(0 0% 0% / 0.35);
   /* The body's text shadow reads too strong on light fills; they use this one. */
-  --text-shadow-subtle: 0.5px 1px 0.5px rgb(0 0 0 / 0.08);
+  --text-shadow-subtle: 0.5px 1px 0.5px hsl(0 0% 0% / 0.08);
 }

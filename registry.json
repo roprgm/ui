@@ -48,11 +48,11 @@
           "padding-item": "calc(var(--padding) - var(--padding-sm))",
           "padding-optical": "calc(var(--padding) - 2px)",
           "size-thumb": "14px",
-          "shadow-raised": "inset 0 1px 0 rgba(240, 240, 240, 0.07), 0 1px 1px rgb(0 0 0 / 0.28), 0 0 1px rgb(0 0 0 / 0.14)",
-          "shadow-sunken": "inset 0 1px 1px rgb(0 0 0 / 0.3), 0 1px 0 rgb(240 240 240 / 0.05)",
-          "shadow-divider": "0 1px 0 rgb(240 240 240 / 0.05)",
-          "shadow-float": "0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 rgb(255 255 255 / 0.08), 0 2px 6px rgb(0 0 0 / 0.3), 0 16px 32px -8px rgb(0 0 0 / 0.35)",
-          "text-shadow-subtle": "0.5px 1px 0.5px rgb(0 0 0 / 0.08)",
+          "shadow-raised": "inset 0 1px 0 hsl(0 0% 94.12% / 0.07), 0 1px 1px hsl(0 0% 0% / 0.28), 0 0 1px hsl(0 0% 0% / 0.14)",
+          "shadow-sunken": "inset 0 1px 1px hsl(0 0% 0% / 0.3), 0 1px 0 hsl(0 0% 94.12% / 0.05)",
+          "shadow-divider": "0 1px 0 hsl(0 0% 94.12% / 0.05)",
+          "shadow-float": "0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 2px 6px hsl(0 0% 0% / 0.3), 0 16px 32px -8px hsl(0 0% 0% / 0.35)",
+          "text-shadow-subtle": "0.5px 1px 0.5px hsl(0 0% 0% / 0.08)",
           "color-field": "var(--field)",
           "color-raised": "var(--raised)",
           "color-raised-hover": "var(--raised-hover)"
@@ -74,7 +74,7 @@
             "color": "var(--color-foreground)",
             "background": "var(--layer)",
             "color-scheme": "dark",
-            "text-shadow": "0.5px 1px 0.5px rgb(20 20 20 / 0.2)"
+            "text-shadow": "0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2)"
           },
           "button, input, textarea": {
             "text-shadow": "inherit"
@@ -123,7 +123,7 @@
           "@apply flex h-(--size-control) shrink-0 cursor-default items-center rounded-md px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised": {}
         },
         "@utility drop-shadow-float": {
-          "filter": "drop-shadow(0 0 1px rgb(0 0 0 / 0.5)) drop-shadow(0 2px 3px rgb(0 0 0 / 0.2)) drop-shadow(0 8px 12px rgb(0 0 0 / 0.3))"
+          "filter": "drop-shadow(0 0 1px hsl(0 0% 0% / 0.5)) drop-shadow(0 2px 3px hsl(0 0% 0% / 0.2)) drop-shadow(0 8px 12px hsl(0 0% 0% / 0.3))"
         },
         "@utility focus-ring": {
           "outline": "2px solid transparent",
@@ -143,7 +143,7 @@
           "@apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-primary thumb:ring-1 thumb:ring-line thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus": {}
         },
         "@utility shimmer": {
-          "mask-image": "linear-gradient(100deg, rgb(0 0 0 / 0.45) 30%, rgb(0 0 0 / 0.6) 40%, #000 50%, rgb(0 0 0 / 0.6) 60%, rgb(0 0 0 / 0.45) 70%)",
+          "mask-image": "linear-gradient(100deg, hsl(0 0% 0% / 0.45) 30%, hsl(0 0% 0% / 0.6) 40%, #000 50%, hsl(0 0% 0% / 0.6) 60%, hsl(0 0% 0% / 0.45) 70%)",
           "mask-size": "300% 100%",
           "animation": "shimmer 2.4s ease-in-out infinite",
           "@media (prefers-reduced-motion: reduce)": {

@@ -120,6 +120,7 @@ Button's three heights are the scale. Other controls name their sizes after the 
 | `--size-row` | 40px | panel headers and list rows, holding a control `--padding-sm` in |
 | `--padding-item` | 8px | menu and select items, so their text lands `--padding` in |
 | `--padding-optical` | 12px | buttons against an edge, and a section's top when it opens with text |
+| `--size-thumb` | 14px | a range input's thumb; the slider's fill and bar follow it |
 
 ### Customize
 

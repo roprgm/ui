@@ -23,7 +23,7 @@ export function ScrollArea({
         className={cn(
           "h-full overscroll-contain outline-none",
           fade &&
-            "before:pointer-events-none before:sticky before:top-0 before:z-10 before:-mb-6 before:block before:h-6 before:bg-[linear-gradient(to_bottom,rgb(0_0_0/0.2),30%,transparent)] before:opacity-0 before:transition-opacity data-overflow-y-start:before:opacity-100 after:pointer-events-none after:sticky after:bottom-0 after:z-10 after:-mt-6 after:block after:h-6 after:bg-[linear-gradient(to_top,rgb(0_0_0/0.2),30%,transparent)] after:opacity-0 after:transition-opacity data-overflow-y-end:after:opacity-100",
+            "before:pointer-events-none before:sticky before:top-0 before:z-10 before:-mb-6 before:block before:h-6 before:bg-[linear-gradient(to_bottom,hsl(0_0%_0%/0.2),30%,transparent)] before:opacity-0 before:transition-opacity data-overflow-y-start:before:opacity-100 after:pointer-events-none after:sticky after:bottom-0 after:z-10 after:-mt-6 after:block after:h-6 after:bg-[linear-gradient(to_top,hsl(0_0%_0%/0.2),30%,transparent)] after:opacity-0 after:transition-opacity data-overflow-y-end:after:opacity-100",
         )}
       >
         <Primitive.Content className="min-w-0">{children}</Primitive.Content>
