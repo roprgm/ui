@@ -107,11 +107,11 @@
   }
 }
 
-/* A range input drawn as its thumb alone, over a track the component paints: `--size-thumb` and
-   raised in the primary color, edged so it holds over a colored track, with the focus ring in its
-   shape. Touch draws no highlight box around it. */
+/* A range input drawn as its thumb alone, over a track the component paints: `--size-thumb` in
+   the primary color with `shadow-thumb`, and the focus ring in its shape. Touch draws no highlight
+   box around it. */
 @utility range-thumb {
-  @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-primary thumb:ring-1 thumb:ring-line thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
+  @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-primary thumb:shadow-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
 }
 
 /* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the
