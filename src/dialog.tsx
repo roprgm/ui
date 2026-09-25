@@ -41,7 +41,10 @@ export function Dialog({
           )}
         >
           <div
-            className={cn("flex flex-col gap-3 p-3.5 pt-3", actions && "pb-3")}
+            className={cn(
+              "flex flex-col gap-3 p-(--padding) pt-(--padding-optical)",
+              actions && "pb-(--padding-optical)",
+            )}
           >
             <div className="flex flex-col gap-1">
               <Primitive.Title className="font-medium">{title}</Primitive.Title>
@@ -54,7 +57,9 @@ export function Dialog({
             {children}
           </div>
           {actions && (
-            <div className="flex justify-end gap-2 p-3 pt-0">{actions}</div>
+            <div className="flex justify-end gap-2 p-(--padding-optical) pt-0">
+              {actions}
+            </div>
           )}
         </Primitive.Popup>
       </Primitive.Portal>

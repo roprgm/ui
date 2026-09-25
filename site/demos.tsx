@@ -57,7 +57,7 @@ export function ButtonDemo() {
         Link
       </Button>
       <Button size="sm">Small</Button>
-      <Button size="xs">Extra small</Button>
+      <Button size="lg">Large</Button>
     </>
   );
 }
@@ -71,7 +71,7 @@ export function IconButtonDemo() {
       <IconButton label="More" size="icon-sm">
         <MoreIcon />
       </IconButton>
-      <IconButton label="More" size="icon-xs">
+      <IconButton label="More" size="icon-lg">
         <MoreIcon />
       </IconButton>
     </>
@@ -96,7 +96,7 @@ function CopyInput({ value }: { value: string }) {
       {/* 4px inside the field; concentric corners would be 2px, too sharp at this size. */}
       <CopyButton
         value={value}
-        size="icon-xs"
+        size="icon-sm"
         className="absolute top-1 right-1 rounded-sm"
       />
     </div>
@@ -433,7 +433,7 @@ export function PanelDemo() {
   return (
     <Panel className="h-80 w-64 overflow-hidden rounded-xl shadow-float">
       <PanelHeader title="Effects">
-        <IconButton label="Add effect" size="icon-sm">
+        <IconButton label="Add effect" size="icon">
           <PlusIcon />
         </IconButton>
       </PanelHeader>
@@ -489,7 +489,7 @@ export function ToolRail({
   return (
     <TabList
       aria-label="Tools"
-      className="flex-col gap-0.5 rounded-lg surface-sunken p-(--inset)"
+      className="flex-col gap-0.5 rounded-lg surface-sunken p-(--padding-xs)"
     >
       {tools.map(({ id, label, key, Icon }) => (
         <Tooltip key={id} content={label} shortcut={key} side="right">
@@ -547,11 +547,11 @@ export function ListItemDemo() {
           muted={layer.muted}
           onClick={() => setSelected(layer.id)}
         >
-          <span className="size-(--size-control-sm) rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
+          <span className="size-(--size-control) rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <span className="flex-1">{layer.name}</span>
           <IconButton
             label="Hide"
-            size="icon-sm"
+            size="icon"
             className="opacity-0 group-hover:opacity-100"
           >
             <EyeIcon />
@@ -635,7 +635,7 @@ export function TreeListDemo() {
           <span className="flex-1 truncate">{layer.name}</span>
           <IconButton
             label="Hide"
-            size="icon-sm"
+            size="icon"
             className="opacity-0 group-hover:opacity-100"
           >
             <EyeIcon />

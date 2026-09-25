@@ -4,7 +4,7 @@ import { type ComponentProps, cloneElement, type ReactElement } from "react";
 
 const button = cva(
   // Colors ease over 200ms; the 1px press moves faster, since the last entry for a property wins.
-  "inline-flex h-(--size-control) cursor-pointer items-center justify-center gap-2 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
+  "inline-flex h-(--size-control) cursor-pointer items-center justify-center gap-2 rounded-md px-2.5 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
   {
     variants: {
       variant: {
@@ -15,16 +15,16 @@ const button = cva(
         ghost:
           "text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },
-      // Three heights, shared with every control: 32px like a field, 28px, and 24px.
+      // The three control heights. Text sits half the height less 4px in.
       size: {
         default: "",
-        sm: "h-(--size-control-sm) px-2.5",
-        xs: "h-(--size-control-xs) px-2",
+        sm: "h-(--size-control-sm) px-2",
+        /** Beside a field, to match its height. */
+        lg: "h-(--size-control-lg) px-3",
         icon: "w-(--size-control) px-0",
-        /** For panel headers and rows, where it sits 6px inside a 40px row. */
-        "icon-sm": "size-(--size-control-sm) px-0",
         /** For ghost actions inside a field, where it sits 4px in, and close buttons. */
-        "icon-xs": "size-(--size-control-xs) px-0",
+        "icon-sm": "size-(--size-control-sm) px-0",
+        "icon-lg": "size-(--size-control-lg) px-0",
       },
     },
     defaultVariants: { variant: "default", size: "default" },

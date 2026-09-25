@@ -9,7 +9,7 @@ export function ToggleGroup({
   return (
     <fieldset
       className={cn(
-        "inline-flex gap-0.5 rounded-lg surface-sunken p-(--inset)",
+        "inline-flex gap-0.5 rounded-lg surface-sunken p-(--padding-xs)",
         className,
       )}
       {...props}

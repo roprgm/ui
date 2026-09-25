@@ -33,7 +33,7 @@ export function EditorDemo() {
 
   return (
     <div className="flex h-[560px] bg-field">
-      <div className="layer-card border-line border-r p-1.5">
+      <div className="layer-card border-line border-r p-(--padding-sm)">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <div className="relative grid min-w-0 flex-1 place-items-center p-10">
@@ -42,7 +42,7 @@ export function EditorDemo() {
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-1.5 pl-3.5 shadow-float">
+          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-(--padding-sm) pl-(--padding) shadow-float">
             <Slider
               label="Size"
               value={size}
@@ -75,7 +75,7 @@ export function EditorDemo() {
         <PanelHeader title={layer}>
           <Menu
             trigger={
-              <IconButton label="Layer actions" size="icon-sm">
+              <IconButton label="Layer actions" size="icon">
                 <MoreIcon />
               </IconButton>
             }
@@ -134,7 +134,7 @@ export function EditorDemo() {
           </PanelSection>
         </PanelBody>
         <PanelHeader title="Layers">
-          <IconButton label="Add mask" size="icon-sm">
+          <IconButton label="Add mask" size="icon">
             <PlusIcon />
           </IconButton>
         </PanelHeader>
@@ -145,11 +145,11 @@ export function EditorDemo() {
               selected={name === layer}
               onClick={() => setLayer(name)}
             >
-              <span className="size-(--size-control-sm) rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
+              <span className="size-(--size-control) rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
               <span className="flex-1">{name}</span>
               <IconButton
                 label="Hide"
-                size="icon-sm"
+                size="icon"
                 className="opacity-0 group-hover:opacity-100"
               >
                 <EyeIcon />

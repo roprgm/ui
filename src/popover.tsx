@@ -25,7 +25,9 @@ export function Popover({
             initialFocus={(type) => type === "keyboard"}
             render={(props) => <Popup {...props} layer={popup.layer} />}
           >
-            <div className="p-3.5 pt-3">{children}</div>
+            <div className="p-(--padding) pt-(--padding-optical)">
+              {children}
+            </div>
           </Primitive.Popup>
         </Primitive.Positioner>
       </Primitive.Portal>

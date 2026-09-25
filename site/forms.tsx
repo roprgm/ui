@@ -32,7 +32,7 @@ export function FormsDemo() {
   return (
     <div className="grid items-start gap-6 p-6 md:grid-cols-2">
       <div className="layer-elevated rounded-xl shadow-raised">
-        <div className="flex flex-col gap-3 p-3.5 pt-3">
+        <div className="flex flex-col gap-3 p-(--padding) pt-(--padding-optical)">
           <h4 className="font-medium">Export</h4>
           <Field label="File name">
             <Input defaultValue="Lisbon sunset" />
@@ -83,7 +83,7 @@ export function FormsDemo() {
             <Switch /> Open when done
           </label>
         </div>
-        <div className="flex justify-end gap-2 p-3 pt-0">
+        <div className="flex justify-end gap-2 p-(--padding-optical) pt-0">
           <Button>Cancel</Button>
           <Button variant="primary">Export</Button>
         </div>
@@ -92,7 +92,7 @@ export function FormsDemo() {
       <div className="flex flex-col gap-4">
         <div className="flex gap-2">
           <Input placeholder="Search presets" />
-          <Button>Search</Button>
+          <Button size="lg">Search</Button>
         </div>
         <div className="flex gap-2">
           <Input
@@ -100,7 +100,7 @@ export function FormsDemo() {
             value="https://ui.roprgm.com/p/lisbon"
             aria-label="Link"
           />
-          <CopyButton value="https://ui.roprgm.com/p/lisbon" />
+          <CopyButton value="https://ui.roprgm.com/p/lisbon" size="icon-lg" />
         </div>
         <div className="flex gap-2">
           <Select
@@ -109,7 +109,7 @@ export function FormsDemo() {
             defaultValue="recent"
             className="flex-1"
           />
-          <IconButton label="More">
+          <IconButton label="More" size="icon-lg">
             <MoreIcon />
           </IconButton>
         </div>
@@ -132,7 +132,7 @@ export function FormsDemo() {
             defaultValue="100"
           />
           <Chip aria-pressed>Overlay</Chip>
-          <IconButton label="Undo" size="icon-sm" className="ml-auto">
+          <IconButton label="Undo" size="icon" className="ml-auto">
             <UndoIcon />
           </IconButton>
         </div>

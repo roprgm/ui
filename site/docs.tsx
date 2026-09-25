@@ -75,7 +75,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
               </a>
               <IconButton
                 label="GitHub"
-                size="icon-sm"
+                size="icon"
                 render={
                   <a
                     href="https://github.com/roprgm/ui"
@@ -224,7 +224,7 @@ export function Code({
           }}
         />
       )}
-      <CopyButton value={children} size="icon-sm" />
+      <CopyButton value={children} size="icon" />
     </div>
   );
 }

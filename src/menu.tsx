@@ -28,7 +28,7 @@ export function Menu({
               <Popup
                 {...props}
                 layer={popup.layer}
-                className="flex flex-col gap-0.5 p-1.5"
+                className="flex flex-col gap-0.5 p-(--padding-sm)"
               />
             )}
           >
@@ -50,7 +50,7 @@ export function MenuItem({
   return (
     <Primitive.Item
       className={cn(
-        "flex cursor-default items-center gap-2 h-(--size-control-sm) shrink-0 rounded-md px-2 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised",
+        "flex cursor-default items-center gap-2 h-(--size-control) shrink-0 rounded-md px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised",
         className,
       )}
       {...props}
@@ -80,7 +80,7 @@ export function Submenu({
     <Primitive.SubmenuRoot onOpenChange={(open) => open && popup.measure()}>
       <Primitive.SubmenuTrigger
         ref={popup.trigger}
-        className="flex cursor-default items-center justify-between gap-4 h-(--size-control-sm) shrink-0 rounded-md px-2 outline-none select-none data-highlighted:bg-raised data-popup-open:bg-raised"
+        className="flex cursor-default items-center justify-between gap-4 h-(--size-control) shrink-0 rounded-md px-(--padding-item) outline-none select-none data-highlighted:bg-raised data-popup-open:bg-raised"
       >
         {label}
         <Chevron direction="right" size="sm" className="text-muted" />
@@ -92,7 +92,7 @@ export function Submenu({
               <Popup
                 {...props}
                 layer={popup.layer}
-                className="flex flex-col gap-0.5 p-1.5"
+                className="flex flex-col gap-0.5 p-(--padding-sm)"
               />
             )}
           >

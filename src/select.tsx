@@ -15,8 +15,8 @@ const trigger = cva(
       /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
       variant: {
         field:
-          "h-(--size-control) rounded-md surface-raised pr-2.5 pl-3 hover:bg-raised-hover data-popup-open:bg-raised-hover",
-        pill: "h-(--size-control-sm) rounded-full bg-hover pr-2 pl-2.5 hover:bg-pressed data-popup-open:bg-pressed",
+          "h-(--size-control-lg) rounded-md surface-raised pr-2.5 pl-3 hover:bg-raised-hover data-popup-open:bg-raised-hover",
+        pill: "h-(--size-control) rounded-full bg-hover pr-2 pl-2.5 hover:bg-pressed data-popup-open:bg-pressed",
       },
     },
   },
@@ -100,7 +100,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
               <Popup
                 {...props}
                 layer={popup.layer}
-                className="min-w-(--anchor-width) p-1.5"
+                className="min-w-(--anchor-width) p-(--padding-sm)"
               />
             )}
           >
@@ -111,7 +111,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
-                  className="flex cursor-default items-center justify-between gap-4 h-(--size-control-sm) shrink-0 rounded-md px-2 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised data-selected:bg-raised"
+                  className="flex cursor-default items-center justify-between gap-4 h-(--size-control) shrink-0 rounded-md px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised data-selected:bg-raised"
                 >
                   <Primitive.ItemText>{item.label}</Primitive.ItemText>
                   <Primitive.ItemIndicator>

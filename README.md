@@ -99,16 +99,25 @@ Components paint their controls with four utilities from `base.css`, so a contro
 | `surface-sunken` | `field` with `shadow-sunken` | fields, tracks, checkboxes, switches |
 | `surface-fill` | `primary` with `shadow-sunken` | checked checkboxes and switches that are on |
 
-### Sizes
+### Density
+
+Four tokens set the density; the rest follow from them. `--padding` and `--size-control` change together: a denser theme lowers both.
 
 | Token | Default | Use |
 | --- | --- | --- |
-| `--size-control` | 32px | buttons, fields, and selects |
-| `--size-control-sm` | 28px | chips, menu items, and row thumbnails and icon buttons |
-| `--size-control-xs` | 24px | buttons inside a field, and close buttons |
-| `--size-row` | 40px | panel headers and list rows |
-| `--inset` | 3px | the gap around a toggle in its group, or the file picker in its field |
-| `--size-control-inset` | 26px | a control less the inset on each side: toggles and the file picker |
+| `--padding` | 14px | from a container's edge to its content: dialog, notice, popover, and panel sections, and list rows |
+| `--padding-sm` | 6px | around a list of items, as in a menu, and around a control in a row |
+| `--padding-xs` | 3px | around a raised control set into a sunken one, as a toggle in its group |
+| `--size-control` | 28px | buttons, chips, menu items, and row thumbnails and icon buttons |
+
+| Derived | Default | Use |
+| --- | --- | --- |
+| `--size-control-lg` | 32px | fields, selects, toggle groups, tabs, and the buttons beside them |
+| `--size-control-sm` | 24px | buttons inside a field, and close buttons |
+| `--size-control-inset` | 26px | a toggle in its group, or the file picker in its field |
+| `--size-row` | 40px | panel headers and list rows, holding a control `--padding-sm` in |
+| `--padding-item` | 8px | menu and select items, so their text lands `--padding` in |
+| `--padding-optical` | 12px | buttons against an edge, and a section's top when it opens with text |
 
 ### Customize
 
@@ -118,7 +127,8 @@ Redefine any token to restyle every component that uses it:
 @theme {
   --color-primary: hsl(210 90% 60%);
   --radius-md: 8px;
-  --size-control: 2.25rem;
+  --padding: 16px;
+  --size-control: 2rem;
 }
 ```
 

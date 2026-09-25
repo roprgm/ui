@@ -63,21 +63,35 @@
   --radius-2xl: 16px;
 }
 
-/* Control heights, used as `h-(--size-control)`. A small control sits 6px inside a row, so
-   changing one may mean changing the paddings around it. */
+/*
+ * Density. `--padding` and `--size-control` are the two to change together, for a denser or
+ * roomier theme; everything else follows from them. Components read these as `p-(--padding)` or
+ * `h-(--size-control)`, so `cn` still merges a caller's `p-*` or `h-*`.
+ */
 @theme {
-  /* Buttons, fields, and selects. */
-  --size-control: 2rem;
-  /* Chips, menu items, and the thumbnails and icon buttons in rows. */
-  --size-control-sm: 1.75rem;
+  /* From a container's edge to its content: the sections of a dialog, notice, popover, or panel,
+     and list rows. */
+  --padding: 14px;
+  /* Around a list of items, as in a menu or select, and around a control in a row. */
+  --padding-sm: 6px;
+  /* Around a raised control set into a sunken one, so thin the two read as one piece. */
+  --padding-xs: 3px;
+  /* Buttons, chips, menu items, and the thumbnails and icon buttons in rows. */
+  --size-control: 1.75rem;
+
+  /* Fields, selects, toggle groups, and the buttons beside them. */
+  --size-control-lg: calc(var(--size-control) + 4px);
   /* Buttons inside a field, and close buttons. */
-  --size-control-xs: 1.5rem;
-  /* Panel headers and list rows. */
-  --size-row: 2.5rem;
-  /* The gap around a raised control set into a sunken one, so thin the two read as one piece. */
-  --inset: 3px;
-  /* Toggles in their group and the file picker in its field: a control less the inset on each side. */
-  --size-control-inset: calc(var(--size-control) - 2 * var(--inset));
+  --size-control-sm: calc(var(--size-control) - 4px);
+  /* A toggle in its group or the file picker in its field: a large control less the gap around it. */
+  --size-control-inset: calc(var(--size-control-lg) - 2 * var(--padding-xs));
+  /* Panel headers and list rows, which hold a control `--padding-sm` in. */
+  --size-row: calc(var(--size-control) + 2 * var(--padding-sm));
+  /* A menu or select item's own padding, so its text lands `--padding` in, like a panel's. */
+  --padding-item: calc(var(--padding) - var(--padding-sm));
+  /* Buttons against an edge, whose box shows where text doesn't, and a section's top when it opens
+     with a line of text, which brings air above its capitals. */
+  --padding-optical: calc(var(--padding) - 2px);
 }
 
 /* Shadows replace borders: raised surfaces catch light on top and cast a line below; sunken ones invert it. */
