@@ -1,10 +1,7 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-/**
- * A row in a panel collection, such as a layer, with hover, selected, and muted states. Mark a
- * leading thumbnail with `data-thumbnail`.
- */
+/** A row in a panel collection, such as a layer, with hover, selected, and muted states. */
 export function ListItem({
   selected = false,
   muted = false,
@@ -16,8 +13,8 @@ export function ListItem({
       data-selected={selected}
       data-muted={muted}
       className={cn(
-        // A leading thumbnail sits 10px in, since stacked thumbnails are 12px apart; a trailing ghost IconButton 6px in, so its icon lands 12px in.
-        "group relative flex h-(--size-row) items-center gap-2 border-line border-b px-3.5 text-foreground has-[>[data-thumbnail]:first-child]:pl-2.5 has-[>button:last-child]:pr-1.5 data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
+        // A trailing ghost IconButton sits 6px in, so its icon lands 12px in.
+        "group relative flex h-(--size-row) items-center gap-2 border-line border-b px-3.5 text-foreground has-[>button:last-child]:pr-1.5 data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
         className,
       )}
       {...props}

@@ -547,10 +547,7 @@ export function ListItemDemo() {
           muted={layer.muted}
           onClick={() => setSelected(layer.id)}
         >
-          <span
-            data-thumbnail
-            className="size-(--size-control-sm) rounded-md bg-linear-to-br from-sky-700 to-amber-600"
-          />
+          <span className="size-(--size-control-sm) rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <span className="flex-1">{layer.name}</span>
           <IconButton
             label="Hide"
