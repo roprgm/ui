@@ -18,7 +18,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 ## Theme
 
 - `theme.css` holds the tokens and imports `base.css`, the utilities, variants, and rules that read them. `bun run build` writes both into the `theme` item of `registry.json` with `scripts/registry.ts`; don't edit that item by hand.
-- A value becomes a token only when more than one utility or component uses it. Otherwise it stays in its utility or rule, and a theme that wants it different redefines that utility.
+- Colors and shadows are always tokens, since they are the look a theme changes. Any other value becomes a token only when more than one utility or component uses it; otherwise it stays in its utility or rule, and a theme that wants it different redefines that utility.
 - Colors come only from the semantic tokens in `theme.css` (`bg-field`, `text-muted`, `border-line`, …), written as `hsl()`. Never use Tailwind palette colors such as `neutral-*` or `white/*` in components; add or reuse a token instead.
 - A background that holds controls takes `layer-card` or `layer-elevated`, which set its color and the fills of the controls on it.
 - Paint controls with the surfaces in `base.css`: `surface-raised`, `surface-primary`, `surface-sunken`, and `surface-fill`. Use a bare `bg-*` or `shadow-*` only where none fits. Use shadows, not borders; `shadow-float` lifts popups.

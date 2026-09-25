@@ -95,4 +95,9 @@
   --shadow-float:
     0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 hsl(0 0% 100% / 0.08),
     0 2px 6px hsl(0 0% 0% / 0.3), 0 16px 32px -8px hsl(0 0% 0% / 0.35);
+  /* A dark line takes it to read engraved: the sunken edge's light, 1px below. */
+  --shadow-divider: 0 1px 0 hsl(0 0% 94.12% / 0.05);
+  /* Text sits a half pixel off the page; on light fills, such as a primary button, it lightens. */
+  --text-shadow-default: 0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2);
+  --text-shadow-subtle: 0.5px 1px 0.5px hsl(0 0% 0% / 0.08);
 }

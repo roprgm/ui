@@ -196,7 +196,7 @@
     color: var(--color-foreground);
     background: var(--layer);
     color-scheme: dark;
-    text-shadow: 0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2);
+    text-shadow: var(--text-shadow-default);
   }
 
   button,
