@@ -762,7 +762,7 @@ const hues = [
 export function VerticalSliderDemo() {
   const [values, setValues] = useState(hues.map(() => 0));
   return (
-    <div className="flex gap-3">
+    <div className="flex">
       {hues.map((hue, index) => (
         <VerticalSlider
           key={hue.name}
@@ -773,6 +773,7 @@ export function VerticalSliderDemo() {
           }
           min={-100}
           max={100}
+          defaultValue={0}
           stops={["#777", hue.color]}
           color={hue.color}
         />
