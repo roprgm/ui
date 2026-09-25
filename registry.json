@@ -10,7 +10,8 @@
         "theme": {
           "size-control-lg": "calc(var(--size-control) + 4px)",
           "size-control-sm": "calc(var(--size-control) - 4px)",
-          "size-row": "calc(var(--size-control) + 12px)",
+          "padding-row": "6px",
+          "size-row": "calc(var(--size-control) + 2 * var(--padding-row))",
           "padding-optical": "calc(var(--padding) - 2px)",
           "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
           "color-hover": "hsl(0 0% 100% / 0.08)",

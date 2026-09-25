@@ -33,7 +33,7 @@ export function EditorDemo() {
 
   return (
     <div className="flex h-[560px] bg-field">
-      <div className="layer-card border-line border-r p-1.5">
+      <div className="layer-card border-line border-r p-(--padding-row)">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <div className="relative grid min-w-0 flex-1 place-items-center p-10">

@@ -29,7 +29,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 - Button sets the scale, with a text and an icon size for each of three heights: `sm` (24px, `--size-control-sm`), `default` (28px, `--size-control`), and `lg` (32px, `--size-control-lg`).
 - Every other control's sizes are named after the Button they go with, and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup stands 4px taller, since the eye sizes it by the raised toggle inside it.
-- Panel headers and list rows are `h-(--size-row)`, 40px, and hold a control 6px in.
+- Panel headers and list rows are `h-(--size-row)`, 40px, and hold a control `--padding-row` (6px) in.
 - `--padding` and `--size-control` set the density and change together; `base.css` derives the other sizes from them, so `theme.css` holds only what a theme decides.
 - The density sets heights and container padding. Each control sets its own side padding in fixed values chosen by eye, such as Button's `px-3`; don't derive it from a height.
 - Use the `(--var)` form, such as `h-(--size-control)`, rather than naming a spacing value, so `cn` still merges a caller's `h-*` or `p-*`.
