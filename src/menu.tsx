@@ -28,7 +28,7 @@ export function Menu({
               <Popup
                 {...props}
                 layer={popup.layer}
-                className="flex flex-col gap-0.5"
+                className="flex flex-col gap-0.5 p-1.5"
               />
             )}
           >
@@ -92,7 +92,7 @@ export function Submenu({
               <Popup
                 {...props}
                 layer={popup.layer}
-                className="flex flex-col gap-0.5"
+                className="flex flex-col gap-0.5 p-1.5"
               />
             )}
           >

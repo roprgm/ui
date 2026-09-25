@@ -4,9 +4,9 @@ import { cn } from "cn";
 import { type ComponentProps, useRef, useState } from "react";
 
 /**
- * The box everything floating is drawn in: menus, selects, popovers, dialogs, and notices. Its
- * 6px of padding holds items and buttons in the corners; text and other content add their own
- * inset. Render a Base UI popup as one: `<Menu.Popup render={(props) => <Popup {...props} />} />`.
+ * The box everything floating is drawn in: menus, selects, popovers, dialogs, and notices. It has
+ * no padding of its own: a list of items takes `p-1.5` on it, and other content sits in `p-3`
+ * sections. Render a Base UI popup as one: `<Menu.Popup render={(props) => <Popup {...props} />} />`.
  * `layer` paints it, one above its trigger's from `usePopupLayer`.
  */
 export function Popup({
@@ -17,7 +17,7 @@ export function Popup({
   return (
     <div
       className={cn(
-        "max-h-(--available-height) min-w-40 origin-(--transform-origin) overflow-y-auto rounded-xl p-1.5 text-foreground shadow-float outline-none transition-[opacity,scale] duration-100 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
+        "max-h-(--available-height) min-w-40 origin-(--transform-origin) overflow-y-auto rounded-xl text-foreground shadow-float outline-none transition-[opacity,scale] duration-100 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
         layer,
         className,
       )}

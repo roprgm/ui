@@ -63,15 +63,13 @@
   --radius-2xl: 16px;
 }
 
-/* Control heights, used as `h-(--size-control)`. A small icon button sits 6px inside a row and
-   the file picker 4px inside a field, so changing one may mean changing the ones around it. */
+/* Control heights, used as `h-(--size-control)`. A small control sits 6px inside a row and 2px
+   inside a control, so changing one may mean changing the paddings around it. */
 @theme {
   /* Buttons, fields, and selects. */
   --size-control: 2rem;
-  /* Chips, toggle items, and icon buttons in rows. */
+  /* Chips, toggle items, the file picker, and icon buttons in rows. */
   --size-control-sm: 1.75rem;
-  /* Buttons inside a field. */
-  --size-control-xs: 1.5rem;
   /* Panel headers and list rows. */
   --size-row: 2.5rem;
 }

@@ -25,7 +25,7 @@ export function Notice({
       role={tone}
       layer="layer-card"
       className={cn(
-        "flex max-w-sm items-start gap-2",
+        "flex max-w-sm items-start",
         tone === "alert" && "text-danger",
         className,
       )}
@@ -33,15 +33,20 @@ export function Notice({
     >
       <div
         className={cn(
-          "flex flex-1 flex-col gap-2 py-1 pl-1.5",
-          !onDismiss && "pr-1.5",
+          "flex flex-1 flex-col gap-2 p-3 pt-2.5",
+          onDismiss && "pr-0",
         )}
       >
         <p>{children}</p>
         {actions && <div className="flex gap-2">{actions}</div>}
       </div>
       {onDismiss && (
-        <IconButton label="Dismiss" size="icon-sm" onClick={onDismiss}>
+        <IconButton
+          label="Dismiss"
+          size="icon-sm"
+          onClick={onDismiss}
+          className="m-1.5"
+        >
           <svg
             viewBox="0 0 24 24"
             fill="none"

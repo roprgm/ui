@@ -100,7 +100,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
               <Popup
                 {...props}
                 layer={popup.layer}
-                className="min-w-(--anchor-width)"
+                className="min-w-(--anchor-width) p-1.5"
               />
             )}
           >
