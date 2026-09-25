@@ -313,9 +313,11 @@
 /* Fades the start and end of a horizontal scroll container's content where more of it lies that
    way, following the scroll position: the end fades while there is more to the right, and the
    start fades in over the first 1.5rem scrolled. A mask, so it fades the content itself and works
-   on any background. The fade stands in for a scrollbar, so it hides it. When nothing overflows,
-   or the browser can't tie animations to scrolling, nothing fades. */
+   on any background. The fade stands in for a scrollbar, so it hides it, and a sideways swipe that
+   reaches an end stops there rather than scrolling the page or going back a page. When nothing
+   overflows, or the browser can't tie animations to scrolling, nothing fades. */
 @utility scroll-fade-x {
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;

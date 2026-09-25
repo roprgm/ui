@@ -195,6 +195,7 @@
           "initial-value": "0px"
         },
         "@utility scroll-fade-x": {
+          "overscroll-behavior-x": "contain",
           "scrollbar-width": "none",
           "&::-webkit-scrollbar": {
             "display": "none"
