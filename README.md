@@ -122,7 +122,7 @@ The fills are mixes of the layer, so a theme can redefine them too, such as `--c
 
 ### Themes
 
-Import one theme. Each draws the primitives' edges its own way: `default.css` with light and shadow, `lines.css` with 1px lines, and `flat.css` with nothing, so controls stand apart by their fills alone.
+Import one theme. Each draws the primitives' edges its own way: `default.css` with light and shadow, `lines.css` with 1px lines, and `flat.css` with nothing, so controls stand apart by their fills alone. `light.css` is the default theme's light counterpart: dark text on a light-gray page with white cards, and its own colors and fills.
 
 ```css
 @import "tailwindcss";
