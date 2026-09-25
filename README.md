@@ -122,7 +122,7 @@ The fills are mixes of the layer, so a theme can redefine them too, such as `--c
 
 ### Themes
 
-Import one theme. Each draws the primitives' edges its own way: `default.css` with light and shadow, `lines.css` with 1px borders, and `flat.css` with nothing, so controls stand apart by their fills alone.
+Import one theme. Each draws the primitives' edges its own way: `default.css` with light and shadow, `lines.css` with 1px lines, and `flat.css` with nothing, so controls stand apart by their fills alone.
 
 ```css
 @import "tailwindcss";
@@ -139,7 +139,7 @@ A theme of your own imports `base.css`, sets again any token it changes, and add
 }
 
 @utility surface-raised {
-  border: 1px solid hsl(0 0% 100% / 0.12);
+  box-shadow: inset 0 0 0 1px hsl(0 0% 100% / 0.12);
 }
 ```
 
