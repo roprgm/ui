@@ -36,10 +36,11 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 ## Spacing
 
-- Three paddings space the library:
+- Four paddings space the library:
   - `--padding` (14px) for the sections of a dialog, notice, popover, or panel, and list rows.
   - `--padding-sm` (5px) around a list of items, as in a menu or a select, whose popup takes `rounded-lg`. Items take the `menu-item` utility: 2px shorter than a control, `rounded-sm`, and padded so their text lands `--padding` in too.
   - `--padding-xs` (3px) around a raised control set into a sunken one, as in a toggle group or segmented tabs, whose controls fill the rest.
+  - `--padding-row` (6px) around a control in a panel header or list row, so a ghost icon button's icon lands 12px in.
 - Everything floating is a `Popup`, which has no padding of its own: lists put theirs on it, and other content sits in sections. Anything edge to edge simply sits outside them, with no negative margins.
 - Three optical exceptions:
   - A section that opens with a line of text takes `pt-(--padding-optical)`, since the line adds air above the capitals.
