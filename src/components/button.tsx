@@ -9,9 +9,9 @@ const button = cva(
     variants: {
       variant: {
         default:
-          "surface-raised bg-raised text-foreground hover:bg-raised-hover data-popup-open:bg-raised-hover",
+          "surface-raised text-foreground hover:bg-raised-hover data-popup-open:bg-raised-hover",
         primary:
-          "surface-raised bg-primary text-on-primary text-shadow-(--text-shadow-subtle) hover:bg-primary-hover",
+          "surface-raised bg-primary! text-on-primary text-shadow-(--text-shadow-subtle) hover:bg-primary-hover!",
         ghost:
           "text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },

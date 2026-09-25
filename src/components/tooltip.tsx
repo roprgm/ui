@@ -29,7 +29,7 @@ export function Tooltip({
       <Primitive.Trigger render={children} />
       <Primitive.Portal>
         <Primitive.Positioner side={side} sideOffset={8} className="z-50">
-          <Primitive.Popup className="flex max-w-64 origin-(--transform-origin) items-center gap-2 rounded-md bg-tooltip px-2 py-1 text-foreground drop-shadow-float transition-[opacity,scale] duration-100 data-ending-style:opacity-0 data-instant:transition-none data-starting-style:scale-95 data-starting-style:opacity-0">
+          <Primitive.Popup className="flex max-w-64 origin-(--transform-origin) items-center gap-2 rounded-md surface-callout px-2 py-1 text-foreground transition-[opacity,scale] duration-100 data-ending-style:opacity-0 data-instant:transition-none data-starting-style:scale-95 data-starting-style:opacity-0">
             {content}
             {shortcut && <Kbd>{shortcut}</Kbd>}
             {/* A square keeps Base UI's centering right on every side; the clip draws the half outside. */}

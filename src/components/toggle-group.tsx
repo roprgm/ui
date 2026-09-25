@@ -3,7 +3,7 @@ import { cn } from "cn";
 import type { ComponentProps } from "react";
 
 const group = cva(
-  "inline-flex gap-0.5 rounded-lg surface-sunken bg-field p-(--padding-xs)",
+  "inline-flex gap-0.5 rounded-lg surface-sunken p-(--padding-xs)",
   {
     variants: {
       // The eye sizes a group by its raised toggle, so it stands 4px taller than the buttons it goes
@@ -38,7 +38,7 @@ export function Toggle({
     <label
       className={cn(
         // Its group sets its height, or it takes a control's; its corners nest in the group's.
-        "inline-flex h-[var(--size-toggle,var(--size-control))] cursor-pointer items-center rounded-[calc(var(--radius-lg)-var(--padding-xs))] px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:bg-raised has-checked:text-foreground dim-disabled",
+        "inline-flex h-[var(--size-toggle,var(--size-control))] cursor-pointer items-center rounded-[calc(var(--radius-lg)-var(--padding-xs))] px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled",
         className,
       )}
     >

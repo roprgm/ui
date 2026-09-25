@@ -20,6 +20,7 @@
     "src"
   ],
   "exports": {
+    "./base.css": "./src/base.css",
     "./themes/*": "./src/themes/*",
     "./*": {
       "types": "./dist/*.d.ts",

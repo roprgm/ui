@@ -1,17 +1,6 @@
 /*
- * A flat theme: no edges at all, so controls and popups stand apart from their layer by their
- * fills alone. Import it after themes/default.css, or apply it at runtime: the surfaces read these
- * variables, so any stylesheet that sets them restyles the page. An edge that goes away is
- * transparent rather than `none`, since Tailwind joins each edge with the focus ring in one
- * box-shadow, and a `none` in that list voids the ring too.
+ * A flat theme: the primitives keep the fills the base gives them and draw no edge at all, so
+ * controls and popups stand apart from their layer by their fills alone.
  */
-:root {
-  --edge-raised: 0 0 hsl(0 0% 0% / 0);
-  --edge-sunken: 0 0 hsl(0 0% 0% / 0);
-  --edge-float: 0 0 hsl(0 0% 0% / 0);
-  --edge-thumb: 0 0 hsl(0 0% 0% / 0);
-  --edge-separator: 0 0 hsl(0 0% 0% / 0);
-  --filter-float: none;
-  --text-shadow-default: none;
-  --text-shadow-subtle: none;
-}
+
+@import "../base.css";

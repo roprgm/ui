@@ -5,7 +5,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { type ReactNode, useState } from "react";
 import { Chevron } from "./chevron";
-import { Popup } from "./popup";
+import { Popup, popupItem } from "./popup";
 import { Tooltip } from "./tooltip";
 
 const trigger = cva(
@@ -15,7 +15,7 @@ const trigger = cva(
       /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
       variant: {
         field:
-          "rounded-md surface-raised bg-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
+          "rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
         pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
       },
       /** A Button's heights and label padding, 2px less on the chevron's side; `lg` goes with
@@ -116,7 +116,10 @@ export function Select<T extends string, Multiple extends boolean = false>({
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
-                  className="menu-item justify-between gap-4 data-selected:bg-raised"
+                  className={cn(
+                    popupItem,
+                    "justify-between gap-4 data-selected:bg-raised",
+                  )}
                 >
                   <Primitive.ItemText>{item.label}</Primitive.ItemText>
                   <Primitive.ItemIndicator>

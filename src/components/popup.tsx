@@ -24,3 +24,11 @@ export function Popup({
     />
   );
 }
+
+/**
+ * A row in a popup's list, as in a menu or select: 2px shorter than a control, so a list reads
+ * dense, padded so its text lands `--padding` from the popup's edge past the list's own padding,
+ * and a flat highlight under the pointer or keys.
+ */
+export const popupItem =
+  "flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-[calc(var(--padding)-var(--padding-sm))] outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised";

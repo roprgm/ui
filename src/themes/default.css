@@ -1,130 +1,63 @@
 /*
- * The default theme: fonts, colors, radii, sizes, and shadows. The utilities the components are
- * built from live in base.css and read these values.
+ * The default theme: surfaces drawn with light and shadow. Raised ones catch light on top and cast
+ * a line below, sunken ones invert it, and what floats casts a soft shadow. While a ring shows on
+ * the same element, as a thumb's keyboard focus or an invalid field's red ring, the ring takes
+ * the shadow's place.
  */
 
 @import "../base.css";
 
-/* Geist when the app loads it, with next/font or @fontsource-variable/geist; the system font otherwise. */
+/* Text sits a half pixel off the page; on light fills, such as a primary button, it lightens. */
 @theme {
-  --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
-}
-
-/*
- * Semantic colors. Components use only these, so redefining one in :root or your own theme
- * restyles every component that uses it.
- */
-
-@theme {
-  /* Translucent states over any background. */
-  --color-hover: hsl(0 0% 100% / 0.08);
-  --color-pressed: hsl(0 0% 100% / 0.15);
-
-  /* Text, strongest first. */
-  --color-foreground: hsl(0 0% 95%);
-  --color-muted: hsl(0 0% 63%);
-  --color-faint: hsl(0 0% 45%);
-  --color-disabled: hsl(0 0% 32%);
-
-  /* The primary color marks what is on: primary buttons, checked controls, thumbs, drop markers. */
-  --color-primary: hsl(0 0% 86%);
-  --color-primary-hover: hsl(0 0% 98%);
-  --color-on-primary: hsl(0 0% 9%);
-
-  --color-line: hsl(0 0% 0% / 0.4);
-  --color-backdrop: hsl(0 0% 0% / 0.5);
-  --color-focus: hsl(0 0% 100% / 0.25);
-  --color-danger: hsl(0 90% 75%);
-}
-
-/* The grays, darkest first, each step a little wider than the last. The page and the layers in
-   base.css pick their backgrounds from them. */
-@theme {
-  --color-gray-1: hsl(0 0% 4.0%);
-  --color-gray-2: hsl(0 0% 8.0%);
-  --color-gray-3: hsl(0 0% 12.3%);
-  --color-gray-4: hsl(0 0% 17.0%);
-
-  --color-tooltip: var(--color-gray-1);
-}
-
-/* Control fills, mixed from the layer they sit on: fields below it, raised controls above it and
-   further above on hover. `inline` writes the mix into each utility, so a control reads the layer
-   around it. */
-@theme inline {
-  --color-field: color-mix(in srgb, var(--layer), hsl(0 0% 0%) 35%);
-  --color-raised: color-mix(in srgb, var(--layer), hsl(0 0% 100%) 11%);
-  --color-raised-hover: color-mix(in srgb, var(--layer), hsl(0 0% 100%) 17%);
-}
-
-/* Corner radii, used as `rounded-*`. Nested corners stay concentric: the outer radius less the
-   inset is the inner radius, so changing one may mean changing the ones inside it. */
-@theme {
-  --radius-xs: 2.5px;
-  --radius-sm: 5px;
-  --radius-md: 7px;
-  --radius-lg: 9px;
-  --radius-xl: 12px;
-}
-
-/*
- * Density. `--padding` and `--size-control` are the two to change together, for a denser or
- * roomier theme; base.css derives the other sizes from them. Button's heights are the scale:
- * other controls name their sizes after the Button they go with and measure what looks as tall
- * beside it. They set heights and container padding; each control sets its own side padding, by
- * eye. Components read these as `p-(--padding)` or `h-(--size-control)`, so `cn` still merges a
- * caller's `p-*` or `h-*`.
- */
-@theme {
-  /* From a container's edge to its content: the sections of a dialog, notice, popover, or panel,
-     and list rows. */
-  --padding: 14px;
-  /* Around a list of items, as in a menu or select. Menu's submenus are offset by it as a number,
-     so change `alignOffset` in menu.tsx with it. */
-  --padding-sm: 5px;
-  /* Around a raised control set into a sunken one, so thin the two read as one piece. */
-  --padding-xs: 3px;
-  /* Around a control in a panel header or list row, so its icon lands 12px from the edge. */
-  --padding-row: 6px;
-  /* Buttons, selects, fields, chips, and the thumbnails and icon buttons in rows. */
-  --size-control: 28px;
-  /* A range input's thumb. The slider's fill and the room around its bar follow it. */
-  --size-thumb: 13px;
-}
-
-/*
- * Edges: how each surface in base.css stands off what is under it. Components never draw a
- * shadow or a border of their own; they take a surface, and a theme decides what its edge is.
- * This one uses light and shadow: raised surfaces catch light on top and cast a line below, and
- * sunken ones invert it. A theme of borders sets `inset 0 0 0 1px` lines here instead, and
- * themes/flat.css sets them transparent.
- */
-@theme {
-  /* surface-raised: buttons, selects, and selected tabs and toggles. */
-  --edge-raised:
-    inset 0 1px 0 hsl(0 0% 94.12% / 0.07), 0 1px 1px hsl(0 0% 0% / 0.28),
-    0 0 1px hsl(0 0% 0% / 0.14);
-  /* surface-sunken: fields, tracks, checkboxes, switches, and groups. */
-  --edge-sunken:
-    inset 0 1px 1px hsl(0 0% 0% / 0.3), 0 1px 0 hsl(0 0% 94.12% / 0.05);
-  /* surface-float: popups and anything dragged. The edge is opaque so it holds over lighter
-     surfaces, not only the page. */
-  --edge-float:
-    0 0 2px 1px hsl(0 0% 9% / 0.8), inset 0 1px 0 hsl(0 0% 100% / 0.08),
-    0 2px 6px hsl(0 0% 0% / 0.3), 0 4px 16px 0 hsl(0 0% 4% / 0.1);
-  /* surface-float as a filter, for `drop-shadow-float`, so it follows a shape such as a tooltip
-     with its arrow. */
-  --filter-float: drop-shadow(0 0 1px hsl(0 0% 0% / 0.5))
-    drop-shadow(0 2px 3px hsl(0 0% 0% / 0.2))
-    drop-shadow(0 8px 12px hsl(0 0% 0% / 0.3));
-  /* surface-thumb: a slider's thumb or a switch's knob. A dark halo stands it off any track, lit
-     on top like a raised control. */
-  --edge-thumb:
-    0 0 2px 1px hsl(0 0% 9% / 0.2), inset 0 1px 0 hsl(0 0% 96% / 0.2),
-    0 1px 2px hsl(0 0% 9% / 0.5);
-  /* separator: the light under a separator's dark line, so it reads engraved. */
-  --edge-separator: 0 1px 0 hsl(0 0% 94.12% / 0.05);
-  /* Text sits a half pixel off the page; on light fills, such as a primary button, it lightens. */
   --text-shadow-default: 0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2);
   --text-shadow-subtle: 0.5px 1px 0.5px hsl(0 0% 0% / 0.08);
+}
+
+@utility surface-raised {
+  box-shadow:
+    inset 0 1px 0 hsl(0 0% 94.12% / 0.07),
+    0 1px 1px hsl(0 0% 0% / 0.28),
+    0 0 1px hsl(0 0% 0% / 0.14);
+}
+
+@utility surface-card {
+  box-shadow:
+    inset 0 1px 0 hsl(0 0% 94.12% / 0.07),
+    0 1px 1px hsl(0 0% 0% / 0.28),
+    0 0 1px hsl(0 0% 0% / 0.14);
+}
+
+@utility surface-sunken {
+  box-shadow:
+    inset 0 1px 1px hsl(0 0% 0% / 0.3),
+    0 1px 0 hsl(0 0% 94.12% / 0.05);
+}
+
+/* The outer edge is nearly opaque, so it holds over lighter surfaces, not only the page. */
+@utility surface-float {
+  box-shadow:
+    0 0 2px 1px hsl(0 0% 9% / 0.8),
+    inset 0 1px 0 hsl(0 0% 100% / 0.08),
+    0 2px 6px hsl(0 0% 0% / 0.3),
+    0 4px 16px 0 hsl(0 0% 4% / 0.1);
+}
+
+/* surface-float as a filter, so the shadow follows the tooltip's arrow. */
+@utility surface-callout {
+  filter: drop-shadow(0 0 1px hsl(0 0% 0% / 0.5))
+    drop-shadow(0 2px 3px hsl(0 0% 0% / 0.2))
+    drop-shadow(0 8px 12px hsl(0 0% 0% / 0.3));
+}
+
+/* A dark halo stands it off any track, lit on top like a raised control. */
+@utility surface-thumb {
+  box-shadow:
+    0 0 2px 1px hsl(0 0% 9% / 0.2),
+    inset 0 1px 0 hsl(0 0% 96% / 0.2),
+    0 1px 2px hsl(0 0% 9% / 0.5);
+}
+
+/* The light under a separator's dark line, so it reads engraved. */
+@utility separator {
+  box-shadow: 0 1px 0 hsl(0 0% 94.12% / 0.05);
 }

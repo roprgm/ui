@@ -1,0 +1,36 @@
+/*
+ * A theme of lines: every surface is outlined with a 1px border instead of shaded, and dividers
+ * turn light to match. The borders sit inside each control's box, so a control of fixed height
+ * keeps it; the Switch is sized by its content, so its track grows around the border.
+ */
+
+@import "../base.css";
+
+@theme {
+  --color-line: hsl(0 0% 100% / 0.1);
+}
+
+@utility surface-raised {
+  border: 1px solid hsl(0 0% 100% / 0.14);
+}
+
+@utility surface-card {
+  border: 1px solid hsl(0 0% 100% / 0.1);
+}
+
+@utility surface-sunken {
+  border: 1px solid hsl(0 0% 100% / 0.1);
+}
+
+@utility surface-float {
+  border: 1px solid hsl(0 0% 100% / 0.16);
+}
+
+/* A border can't follow the arrow, so a hairline filter outlines the whole shape. */
+@utility surface-callout {
+  filter: drop-shadow(0 0 0.5px hsl(0 0% 100% / 0.5));
+}
+
+@utility surface-thumb {
+  border: 1px solid hsl(0 0% 0% / 0.5);
+}

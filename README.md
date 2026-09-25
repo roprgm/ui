@@ -36,14 +36,14 @@ import { Button } from "@roprgm/ui/button";
 Put groups of controls on a card. Fields and buttons take their color from the card they sit on, so they keep the same contrast everywhere:
 
 ```tsx
-<div className="layer-card rounded-xl p-(--padding) surface-raised">
+<div className="layer-card rounded-xl p-(--padding) surface-card">
   <Input placeholder="Name" />
 </div>
 ```
 
 - Use `layer-card` for panels and cards, and `layer-elevated` for a card inside a card.
 - Use the theme's colors, such as `text-muted` or `bg-field`, instead of Tailwind's palette.
-- Give your own controls a `surface-*` utility and a fill, such as `surface-raised bg-raised`, rather than shadows or borders of your own.
+- Build your own controls from the `surface-*` primitives, such as `surface-raised` for a button, rather than shadows or borders of your own, so they follow the theme.
 
 Components without JavaScript, such as `Button` and `Input`, render on the server.
 
@@ -62,7 +62,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ## Theme
 
-`themes/default.css` holds what a theme decides: colors, radii, sizes, and the edges its surfaces draw. It imports `base.css`, the utilities the components are built from, and sets the page to 13px text on a dark background, in Geist when your app loads it. The comments in both files describe each token.
+`base.css` holds the tokens (colors, radii, sizes), the primitives the components are built from, and the rules that set the page to 13px text on a dark background, in Geist when your app loads it. A theme in `themes/` imports it and draws the primitives its own way. The comments in the files describe each token.
 
 ### Colors
 
@@ -80,13 +80,15 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 The page, `layer-card`, and `layer-elevated` each set a background, `--layer`, and the `field` and `raised` colors of the controls on them are mixed from it, so they keep the same contrast on any background. A layer of your own only sets `--layer` and paints it. Popups are elevated wherever they open; dialogs and notices are cards.
 
-Surfaces set how something stands off its layer. Each draws only its edge, from the theme, so pair it with any fill:
+Components are built from primitives: surfaces, which set how something stands off its layer, and lines. Each takes its fill from a color token, and the theme draws its edge:
 
 | Utility | Stands | Used by |
 | --- | --- | --- |
-| `surface-raised` | out from the layer | buttons (`bg-raised`, or `bg-primary` for primary), selects, selected tabs and toggles |
-| `surface-sunken` | into the layer | fields (`bg-field`), tracks, checkboxes and switches (`bg-primary` when on) |
-| `surface-float` | over everything | popups and anything dragged |
+| `surface-raised` | out from the layer | buttons, selects, selected tabs and toggles |
+| `surface-sunken` | into the layer | fields, tracks, checkboxes and switches |
+| `surface-card` | on the layer under it | cards and panels of controls; its fill is its own layer |
+| `surface-float` | over everything | popups and anything dragged; its fill is its layer |
+| `surface-callout` | over everything, in a shape | tooltips with their arrow |
 | `surface-thumb` | under your finger | slider thumbs and switch knobs |
 | `separator` | between groups | a menu's separators |
 
@@ -120,15 +122,26 @@ The fills are mixes of the layer, so a theme can redefine them too, such as `--c
 
 ### Themes
 
-A theme is a stylesheet that sets tokens after `themes/default.css`. `themes/flat.css` removes every edge, so controls stand apart from their layer by their fills alone:
+Import one theme. Each draws the primitives' edges its own way: `default.css` with light and shadow, `lines.css` with 1px borders, and `flat.css` with nothing, so controls stand apart by their fills alone.
 
 ```css
 @import "tailwindcss";
-@import "@roprgm/ui/themes/default.css";
-@import "@roprgm/ui/themes/flat.css";
+@import "@roprgm/ui/themes/lines.css";
 ```
 
-The surfaces read the `--edge-*` variables when the page renders, so a theme can also be applied at runtime or to part of a page: set them on an element and everything inside follows. An edge can be any `box-shadow`: light and shadow as in the default theme, or a border as `inset 0 0 0 1px`. Write an edge that goes away as `0 0 hsl(0 0% 0% / 0)` rather than `none`: Tailwind joins each edge with the focus ring in one `box-shadow`, and a `none` in that list removes the ring too.
+A theme of your own imports `base.css`, sets again any token it changes, and adds its edges to the primitives. Change a fill through its token rather than redeclaring `background-color`: Tailwind orders the merged definitions of a utility by how many properties each has, so the base's could win.
+
+```css
+@import "@roprgm/ui/base.css";
+
+@theme {
+  --color-primary: hsl(210 90% 60%);
+}
+
+@utility surface-raised {
+  border: 1px solid hsl(0 0% 100% / 0.12);
+}
+```
 
 ## Development
 
