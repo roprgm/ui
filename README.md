@@ -104,9 +104,11 @@ Components paint their controls with four utilities from `base.css`, so a contro
 | Token | Default | Use |
 | --- | --- | --- |
 | `--size-control` | 32px | buttons, fields, and selects |
-| `--size-control-sm` | 28px | chips, toggle items, menu items, and icon buttons in rows |
+| `--size-control-sm` | 28px | chips, menu items, and row thumbnails and icon buttons |
 | `--size-control-xs` | 24px | buttons inside a field, and close buttons |
 | `--size-row` | 40px | panel headers and list rows |
+| `--inset` | 3px | the gap around a toggle in its group, or the file picker in its field |
+| `--size-control-inset` | 26px | a control less the inset on each side: toggles and the file picker |
 
 ### Customize
 

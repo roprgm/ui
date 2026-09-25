@@ -68,12 +68,16 @@
 @theme {
   /* Buttons, fields, and selects. */
   --size-control: 2rem;
-  /* Chips, toggle items, menu items, the file picker, and icon buttons in rows. */
+  /* Chips, menu items, and the thumbnails and icon buttons in rows. */
   --size-control-sm: 1.75rem;
   /* Buttons inside a field, and close buttons. */
   --size-control-xs: 1.5rem;
   /* Panel headers and list rows. */
   --size-row: 2.5rem;
+  /* The gap around a raised control set into a sunken one, so thin the two read as one piece. */
+  --inset: 3px;
+  /* Toggles in their group and the file picker in its field: a control less the inset on each side. */
+  --size-control-inset: calc(var(--size-control) - 2 * var(--inset));
 }
 
 /* Shadows replace borders: raised surfaces catch light on top and cast a line below; sunken ones invert it. */

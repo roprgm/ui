@@ -145,7 +145,10 @@ export function EditorDemo() {
               selected={name === layer}
               onClick={() => setLayer(name)}
             >
-              <span className="size-6 rounded-sm bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
+              <span
+                data-thumbnail
+                className="size-(--size-control-sm) rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]"
+              />
               <span className="flex-1">{name}</span>
               <IconButton
                 label="Hide"
