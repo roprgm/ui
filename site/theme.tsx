@@ -1,13 +1,9 @@
 import { useState } from "react";
+import flat from "../src/flat.css?inline";
 import { Select } from "../src/select";
-import flat from "./flat.css?inline";
-import standard from "./index.css?inline";
 
-/**
- * Tailwind writes a theme's shadows into each utility when it builds, so a theme can't be swapped
- * by redefining variables at runtime. The site builds a stylesheet per theme and swaps them.
- */
-const themes = { default: standard, flat };
+/** The default theme is the site's stylesheet; another theme only sets the edge variables. */
+const themes = { default: "", flat };
 type Theme = keyof typeof themes;
 
 const items = [
