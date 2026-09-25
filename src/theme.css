@@ -74,12 +74,15 @@
   /* From a container's edge to its content: the sections of a dialog, notice, popover, or panel,
      and list rows. */
   --padding: 14px;
-  /* Around a list of items, as in a menu or select. */
+  /* Around a list of items, as in a menu or select. Menu's submenus are offset by it as a number,
+     so change `alignOffset` in menu.tsx with it. */
   --padding-sm: 5px;
   /* Around a raised control set into a sunken one, so thin the two read as one piece. */
   --padding-xs: 3px;
+  /* Around a control in a panel header or list row, so its icon lands 12px from the edge. */
+  --padding-row: 6px;
   /* Buttons, selects, fields, chips, and the thumbnails and icon buttons in rows. */
-  --size-control: 1.75rem;
+  --size-control: 28px;
   /* A range input's thumb. The slider's fill and the room around its bar follow it. */
   --size-thumb: 14px;
 }

@@ -10,7 +10,6 @@
         "theme": {
           "size-control-lg": "calc(var(--size-control) + 4px)",
           "size-control-sm": "calc(var(--size-control) - 4px)",
-          "padding-row": "6px",
           "size-row": "calc(var(--size-control) + 2 * var(--padding-row))",
           "padding-optical": "calc(var(--padding) - 2px)",
           "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
@@ -44,7 +43,8 @@
           "padding": "14px",
           "padding-sm": "5px",
           "padding-xs": "3px",
-          "size-control": "1.75rem",
+          "padding-row": "6px",
+          "size-control": "28px",
           "size-thumb": "14px",
           "shadow-raised": "inset 0 1px 0 hsl(0 0% 94.12% / 0.07), 0 1px 1px hsl(0 0% 0% / 0.28), 0 0 1px hsl(0 0% 0% / 0.14)",
           "shadow-sunken": "inset 0 1px 1px hsl(0 0% 0% / 0.3), 0 1px 0 hsl(0 0% 94.12% / 0.05)",
@@ -443,7 +443,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "categories": ["navigation"],
-      "dependencies": ["cn"],
+      "dependencies": ["cn", "class-variance-authority"],
       "registryDependencies": ["https://ui.roprgm.com/r/button.json"],
       "files": [
         {

@@ -13,8 +13,6 @@
   --size-control-lg: calc(var(--size-control) + 4px);
   /* Buttons inside a large field, and close buttons. */
   --size-control-sm: calc(var(--size-control) - 4px);
-  /* Around a control in a panel header or list row, so its icon lands 12px from the edge. */
-  --padding-row: 6px;
   /* Panel headers and list rows, holding a control `--padding-row` in. */
   --size-row: calc(var(--size-control) + 2 * var(--padding-row));
   /* Buttons against an edge, whose box shows where text doesn't, and a section's top when it opens

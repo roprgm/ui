@@ -80,7 +80,7 @@ export function Submenu({
         <Chevron direction="right" size="sm" className="text-muted" />
       </Primitive.SubmenuTrigger>
       <Primitive.Portal>
-        {/* Up by the list's padding, so the first item lines up with its trigger. */}
+        {/* Up by the list's padding, `--padding-sm`, so the first item lines up with its trigger. */}
         <Primitive.Positioner sideOffset={4} alignOffset={-5} className="z-50">
           <Primitive.Popup
             render={(props) => (
