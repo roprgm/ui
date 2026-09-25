@@ -32,7 +32,7 @@
           "color-surface-8": "hsl(0 0% 39.0%)",
           "color-tooltip": "var(--color-surface-1)",
           "radius-xs": "2.5px",
-          "radius-sm": "4.5px",
+          "radius-sm": "5px",
           "radius-md": "7px",
           "radius-lg": "9px",
           "radius-xl": "12px",

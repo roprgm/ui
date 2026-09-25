@@ -56,7 +56,7 @@
    inset is the inner radius, so changing one may mean changing the ones inside it. */
 @theme {
   --radius-xs: 2.5px;
-  --radius-sm: 4.5px;
+  --radius-sm: 5px;
   --radius-md: 7px;
   --radius-lg: 9px;
   --radius-xl: 12px;
