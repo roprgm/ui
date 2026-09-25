@@ -184,6 +184,40 @@
             "opacity": "0"
           }
         },
+        "@property --scroll-fade-start": {
+          "syntax": "\"<length>\"",
+          "inherits": "false",
+          "initial-value": "0px"
+        },
+        "@property --scroll-fade-end": {
+          "syntax": "\"<length>\"",
+          "inherits": "false",
+          "initial-value": "0px"
+        },
+        "@utility scroll-fade-x": {
+          "mask-image": "linear-gradient(to right, transparent, hsl(0 0% 0%) var(--scroll-fade-start), hsl(0 0% 0%) calc(100% - var(--scroll-fade-end)), transparent)",
+          "@supports (animation-timeline: scroll())": {
+            "animation": "scroll-fade-x-start linear both, scroll-fade-x-end linear both",
+            "animation-timeline": "scroll(self inline), scroll(self inline)",
+            "animation-range": "0 1.5rem, calc(100% - 1.5rem) 100%"
+          }
+        },
+        "@keyframes scroll-fade-x-start": {
+          "from": {
+            "--scroll-fade-start": "0px"
+          },
+          "to": {
+            "--scroll-fade-start": "1.5rem"
+          }
+        },
+        "@keyframes scroll-fade-x-end": {
+          "from": {
+            "--scroll-fade-end": "1.5rem"
+          },
+          "to": {
+            "--scroll-fade-end": "0px"
+          }
+        },
         "@utility shimmer": {
           "mask-image": "linear-gradient(100deg, hsl(0 0% 0% / 0.45) 30%, hsl(0 0% 0% / 0.6) 40%, hsl(0 0% 0%) 50%, hsl(0 0% 0% / 0.6) 60%, hsl(0 0% 0% / 0.45) 70%)",
           "mask-size": "300% 100%",
@@ -390,6 +424,19 @@
       "files": [
         {
           "path": "src/components/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "scroll-text",
+      "type": "registry:ui",
+      "categories": ["effects"],
+      "dependencies": ["cn"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/scroll-text.tsx",
           "type": "registry:ui"
         }
       ]

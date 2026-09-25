@@ -296,6 +296,63 @@
   }
 }
 
+/* How far in each edge of a scroll-fade-x element fades, animated as it scrolls. Registered, so
+   an animation can move them. */
+@property --scroll-fade-start {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --scroll-fade-end {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+/* Fades the start and end of a horizontal scroll container's content where more of it lies that
+   way, following the scroll position: the end fades while there is more to the right, and the
+   start fades in over the first 1.5rem scrolled. A mask, so it fades the content itself and works
+   on any background. When nothing overflows, or the browser can't tie animations to scrolling,
+   nothing fades. */
+@utility scroll-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    hsl(0 0% 0%) var(--scroll-fade-start),
+    hsl(0 0% 0%) calc(100% - var(--scroll-fade-end)),
+    transparent
+  );
+
+  @supports (animation-timeline: scroll()) {
+    animation:
+      scroll-fade-x-start linear both,
+      scroll-fade-x-end linear both;
+    animation-timeline: scroll(self inline), scroll(self inline);
+    animation-range:
+      0 1.5rem,
+      calc(100% - 1.5rem) 100%;
+  }
+}
+
+@keyframes scroll-fade-x-start {
+  from {
+    --scroll-fade-start: 0px;
+  }
+  to {
+    --scroll-fade-start: 1.5rem;
+  }
+}
+
+@keyframes scroll-fade-x-end {
+  from {
+    --scroll-fade-end: 1.5rem;
+  }
+  to {
+    --scroll-fade-end: 0px;
+  }
+}
+
 /* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the
    element keeps its own colors; the band is the one place shown at full strength. The band is
    sized to the element, so put it on a group of blocks rather than on each one, and one band

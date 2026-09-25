@@ -19,6 +19,7 @@ import {
 } from "../src/components/panel";
 import { Popover } from "../src/components/popover";
 import { ScrollArea } from "../src/components/scroll-area";
+import { ScrollText } from "../src/components/scroll-text";
 import { ScrubInput } from "../src/components/scrub-input";
 import { Select } from "../src/components/select";
 import { Slider } from "../src/components/slider";
@@ -205,6 +206,25 @@ export function ChipDemo() {
         Erase
       </Chip>
       <Chip>Reset</Chip>
+    </div>
+  );
+}
+
+export function ScrollTextDemo() {
+  return (
+    <div className="flex w-56 flex-col gap-2">
+      {[
+        "Sky",
+        "Golden hour warmth, lifted shadows",
+        "Subject mask from the brush, feathered",
+      ].map((name) => (
+        <div
+          key={name}
+          className="flex h-(--size-control) items-center gap-2 rounded-md surface-sunken px-2.5"
+        >
+          <ScrollText>{name}</ScrollText>
+        </div>
+      ))}
     </div>
   );
 }

@@ -56,7 +56,7 @@ Components without JavaScript, such as `Button` and `Input`, render on the serve
 | Containers | Cards with `layer-card` and `layer-elevated`, the `surface-*` utilities, `Panel`, `ScrollArea` |
 | Navigation | `TabList`, `ListItem`, `TreeList` |
 | Overlays | `Tooltip`, `Menu`, `Popover`, `Dialog`, `Notice` |
-| Effects | `Spinner`, and the `shimmer` utility |
+| Effects | `Spinner`, `ScrollText`, and the `shimmer`, `scroll-fade`, and `scroll-fade-x` utilities |
 
 Each one has a live demo and its install command on the [docs site](https://ui.roprgm.com).
 

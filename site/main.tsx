@@ -19,6 +19,7 @@ import {
   PanelDemo,
   PopoverDemo,
   ScrollAreaDemo,
+  ScrollTextDemo,
   ScrubInputDemo,
   SelectDemo,
   ShimmerDemo,
@@ -255,6 +256,13 @@ const groups: Group[] = [
           "A theme utility: a bright band sweeps across text, icons, or placeholder blocks while work is pending.",
         demo: <ShimmerDemo />,
         code: '<span className="shimmer">Decoding RAW…</span>',
+      },
+      {
+        name: "scroll-text",
+        title: "Scroll text",
+        description:
+          "One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls sideways to show the rest. The fade follows the scroll: the start fades in as it moves and the end clears at the end.",
+        demo: <ScrollTextDemo />,
       },
     ],
   },
