@@ -16,7 +16,7 @@ export function ListItem({
       data-selected={selected}
       data-muted={muted}
       className={cn(
-        // A leading thumbnail sits 12px in, like a button against an edge; a trailing ghost IconButton 6px in, so its icon does too.
+        // A leading thumbnail sits 10px in, since stacked thumbnails are 12px apart; a trailing ghost IconButton 6px in, so its icon lands 12px in.
         "group relative flex h-(--size-row) items-center gap-2 border-line border-b px-3.5 text-foreground has-[>[data-thumbnail]:first-child]:pl-2.5 has-[>button:last-child]:pr-1.5 data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
         className,
       )}
