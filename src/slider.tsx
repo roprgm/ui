@@ -22,11 +22,11 @@ const cells = {
   compact: { value: "-mr-1", bar: "" },
 };
 
-/** Where the thumb's center sits at a fraction of the range: from 7px to 100% - 7px, or the bar's own ends. */
+/** Where the thumb's center sits at a fraction of the range: half a thumb in from either end, or the bar's ends. */
 function position(fraction: number) {
   if (fraction <= 0) return "0%";
   if (fraction >= 1) return "100%";
-  return `calc(0.4375rem + (100% - 0.875rem) * ${fraction})`;
+  return `calc(var(--size-thumb) / 2 + (100% - var(--size-thumb)) * ${fraction})`;
 }
 
 /** The bar's paint: its color stops, or a fill between the origin and the value, in fractions of the range. */
@@ -104,7 +104,7 @@ export function Slider({
         // The margin makes room for the thumb, so the slider's box ends where the thumb does.
         <div
           className={cn(
-            "relative my-1.25 h-1 rounded-full surface-sunken",
+            "relative my-[calc(var(--size-thumb)/2-2px)] h-1 rounded-full surface-sunken",
             cells[variant].bar,
           )}
           style={{

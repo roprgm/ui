@@ -94,6 +94,8 @@
   /* Buttons against an edge, whose box shows where text doesn't, and a section's top when it opens
      with a line of text, which brings air above its capitals. */
   --padding-optical: calc(var(--padding) - 2px);
+  /* A range input's thumb. The slider's fill and the room around its bar follow it. */
+  --size-thumb: 14px;
 }
 
 /* Shadows replace borders: raised surfaces catch light on top and cast a line below; sunken ones invert it. */
