@@ -15,8 +15,8 @@ const button = cva(
         ghost:
           "text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },
-      // The three control heights. Text sits half the height less 2px in: a label needs more room
-      // at its sides than a field's text to look balanced in its box.
+      // The three control heights. Labels sit 10px, 12px, and 14px in, set by eye: a label needs
+      // more room at its sides than a field's text to look balanced in its box.
       size: {
         default: "",
         sm: "h-(--size-control-sm) px-2.5",

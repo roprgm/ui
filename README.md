@@ -36,14 +36,14 @@ import { Button } from "@roprgm/ui/button";
 Put groups of controls on a card. Fields and buttons take their color from the card they sit on, so they keep the same contrast everywhere:
 
 ```tsx
-<div className="layer-card rounded-xl p-3 shadow-raised">
+<div className="layer-card rounded-xl p-(--padding) shadow-raised">
   <Input placeholder="Name" />
 </div>
 ```
 
 - Use `layer-card` for panels and cards, and `layer-elevated` for a card inside a card.
 - Use the theme's colors, such as `text-muted` or `bg-field`, instead of Tailwind's palette.
-- Use `shadow-raised`, `shadow-sunken`, and `shadow-float` instead of borders.
+- Paint your own controls with the `surface-*` utilities, and use shadows instead of borders.
 
 Components without JavaScript, such as `Button` and `Input`, render on the server.
 
@@ -62,7 +62,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ## Theme
 
-`theme.css` holds the tokens: colors, radii, sizes, and shadows. It imports `base.css`, the utilities the components are built from, which read those tokens. `base.css` also sets the page to 13px text on a dark background, in Geist when your app loads it.
+`theme.css` holds what a theme decides: colors, radii, sizes, and shadows. It imports `base.css`, the utilities the components are built from, and sets the page to 13px text on a dark background, in Geist when your app loads it. The comments in both files describe each token.
 
 ### Colors
 
@@ -71,65 +71,31 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | `foreground`, `muted`, `faint`, `disabled` | text, from strongest to weakest |
 | `field` | inputs, checkboxes, and tracks |
 | `raised`, `raised-hover` | buttons, selects, and selected items |
-| `primary`, `primary-hover`, `on-primary` | primary buttons and checked controls |
+| `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
 | `hover`, `pressed` | translucent states for ghost buttons and chips |
 | `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
 | `gray-1` to `gray-8` | the gray scale, darkest first |
 
-### Layers
+### Layers and surfaces
 
-The page and each card pick their colors from the gray scale:
+The page, `layer-card`, and `layer-elevated` each paint a background from the gray scale and set the `field` and `raised` colors of the controls on them. Menus, popovers, and select lists open one layer above the one their trigger sits on; dialogs and notices are cards.
 
-| Layer | Background | `field` | `raised` |
-| --- | --- | --- | --- |
-| The page | `gray-2` | `gray-1` | `gray-4` |
-| `layer-card` | `gray-3` | `gray-2` | `gray-5` |
-| `layer-elevated` | `gray-4` | `gray-3` | `gray-6` |
-
-Menus, popovers, and select lists open one layer above the one their trigger sits on. Dialogs are cards.
-
-### Surfaces
-
-Components paint their controls with four utilities from `base.css`, so a control you build with them follows the theme too:
-
-| Utility | Paints | Used by |
-| --- | --- | --- |
-| `surface-raised` | `raised` with `shadow-raised` | buttons, selects, selected tabs and toggles |
-| `surface-primary` | `primary` with `shadow-raised` | primary buttons and slider thumbs |
-| `surface-sunken` | `field` with `shadow-sunken` | fields, tracks, checkboxes, switches |
-| `surface-fill` | `primary` with `shadow-sunken` | checked checkboxes and switches that are on |
+Controls stand on their layer with four utilities: `surface-raised` (buttons, selects), `surface-primary` (primary buttons, slider thumbs), `surface-sunken` (fields, tracks), and `surface-fill` (checked checkboxes, switches that are on).
 
 ### Density
 
-Five tokens in `theme.css` set spacing and size; `base.css` derives the rest from them. `--padding` and `--size-control` are the density and change together: a denser theme lowers both.
-
-Button's three heights are the scale. Other controls name their sizes after the Button they go with and measure whatever looks as tall beside it: Input and Select match it, and ToggleGroup stands 4px taller, since the eye sizes it by its raised toggle.
-
-| Token | Default | Use |
-| --- | --- | --- |
-| `--padding` | 14px | from a container's edge to its content: dialog, notice, popover, and panel sections, and list rows |
-| `--padding-sm` | 5px | around a list of items, as in a menu or select |
-| `--padding-xs` | 3px | around a raised control set into a sunken one, as a toggle in its group |
-| `--size-control` | 28px | buttons, selects, fields, chips, and row thumbnails and icon buttons |
-| `--size-thumb` | 14px | a range input's thumb; the slider's fill and bar follow it |
-
-| Derived in `base.css` | Default | Use |
-| --- | --- | --- |
-| `--size-control-lg` | 32px | large buttons, selects, and fields, and toggle groups |
-| `--size-control-sm` | 24px | buttons inside a large field, and close buttons |
-| `--size-row` | 40px | panel headers and list rows, holding a control 6px in |
-| `--padding-optical` | 12px | buttons against an edge, and a section's top when it opens with text |
+`--size-control` (28px) sets the height of buttons, selects, and fields, and `--padding` (14px) the space from a container's edge to its content. `base.css` derives the rest from them, such as 32px large controls and 40px list rows. Each control sets its own side padding.
 
 ### Customize
 
-Redefine any token to restyle every component that uses it:
+Redefine a token to restyle every component that uses it:
 
 ```css
 @theme {
   --color-primary: hsl(210 90% 60%);
   --radius-md: 8px;
+  --size-control: 32px;
   --padding: 16px;
-  --size-control: 2rem;
 }
 ```
 
