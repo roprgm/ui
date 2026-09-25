@@ -1,7 +1,6 @@
 /*
  * A theme of lines: surfaces are outlined with a 1px line instead of shaded, and dividers turn
- * light to match. Tracks stay plain, as in the flat theme, since a line around a thin groove reads
- * heavy. The lines are drawn as inset box-shadows rather than borders, so they take no room and
+ * light to match. Slider tracks stay plain. The lines are drawn as inset box-shadows rather than borders, so they take no room and
  * every control keeps its size. While a ring shows on the same element, as a thumb's keyboard
  * focus or an invalid field's red ring, the ring takes the line's place.
  */
@@ -35,4 +34,11 @@
 
 @utility surface-thumb {
   box-shadow: inset 0 0 0 1px hsl(0 0% 0% / 0.5);
+}
+
+/* A line around a thin groove reads heavy, so a slider's track stays plain, as in the flat theme. */
+@layer components {
+  .ui-slider-track {
+    box-shadow: none;
+  }
 }

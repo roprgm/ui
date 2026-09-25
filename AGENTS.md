@@ -21,8 +21,10 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - Colors are always tokens, since they are the look a theme changes. Any other value becomes a token only when more than one utility or component uses it; otherwise it stays in its utility or rule, and a theme that wants it different redefines that utility.
 - Colors come only from the semantic tokens in the theme (`bg-field`, `text-muted`, `border-line`, …), written as `hsl()`. Never use Tailwind palette colors such as `neutral-*` or `white/*` in components; add or reuse a token instead.
 - A background that holds controls takes `layer-card` or `layer-elevated`. A layer sets only `--layer`; the theme mixes the fills of the controls on it from that color. Popups are `layer-elevated` wherever they open; dialogs and notices are `layer-card`.
-- Build components from the primitives in `base.css`: `surface-raised`, `surface-sunken`, `surface-track`, `surface-card`, `surface-float`, `surface-callout`, `surface-thumb`, and `separator`. Each sets its fill from a color token, and the theme draws its edge. For another fill, add it with `!`, as `bg-primary!`, since a plain `bg-*` sorts before a primitive; a variant such as `hover:` or `checked:` needs no `!`. Never draw depth with a `shadow-*` or a border of your own. Lines along a row or section are borders in `border-line`.
-- Controls take the `focus-ring` and `dim-disabled` utilities. Rows in a popup's list take `popupItem` from `popup.tsx`. Range inputs draw their thumb with `range-thumb`, and stay at least 32px across.
+- Build components from the primitives in `base.css`: `surface-raised`, `surface-sunken`, `surface-card`, `surface-float`, `surface-callout`, `surface-thumb`, and `separator`. Each sets its fill from a color token, and the theme draws its edge. For another fill, add it with `!`, as `bg-primary!`, since a plain `bg-*` sorts before a primitive; a variant such as `hover:` or `checked:` needs no `!`. Never draw depth with a `shadow-*` or a border of your own. Lines along a row or section are borders in `border-line`.
+- Controls take the `focus-ring` and `dim-disabled` utilities. Range inputs stay at least 32px across.
+- A part moves from class strings to a `.ui-*` class in `src/components.css`, in `@layer components`, only when several components share it, when it's drawn on pseudo-elements or through many states, or when a theme may want to redraw it beyond the primitives: today the popup, menu items, range thumbs, slider tracks, the switch, the tooltip, and the scroll fade. Apply primitives inside it with `@apply`, in their own `@apply` when a fill follows, since one `@apply` sorts its utilities. Everything else stays in class strings.
+- A theme changes tokens and primitives for what is general, and redefines a `.ui-*` class in its own `@layer components` block for what is particular to a component. It never changes markup. A caller's `className` utilities still win over both.
 - Components inherit font size.
 
 ## Sizes
@@ -38,7 +40,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 - Four paddings space the library:
   - `--padding` (14px) for the sections of a dialog, notice, popover, or panel, and list rows.
-  - `--padding-sm` (5px) around a list of items, as in a menu or a select, whose popup takes `rounded-lg`. Items take `popupItem` from `popup.tsx`: 2px shorter than a control, `rounded-sm`, and padded so their text lands `--padding` in too.
+  - `--padding-sm` (5px) around a list of items, as in a menu or a select, whose popup takes `rounded-lg`. Items take `.ui-menu-item`: 2px shorter than a control, `rounded-sm`, and padded so their text lands `--padding` in too.
   - `--padding-xs` (3px) around a raised control set into a sunken one, as in a toggle group or segmented tabs, whose controls fill the rest.
   - `--padding-row` (6px) around a control in a panel header or list row, so a ghost icon button's icon lands 12px in.
 - Everything floating is a `Popup`, which has no padding of its own: lists put theirs on it, and other content sits in sections. Anything edge to edge simply sits outside them, with no negative margins.

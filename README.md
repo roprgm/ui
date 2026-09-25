@@ -86,7 +86,6 @@ Components are built from primitives: surfaces, which set how something stands o
 | --- | --- | --- |
 | `surface-raised` | out from the layer | buttons, selects, selected tabs and toggles |
 | `surface-sunken` | into the layer | fields, checkboxes and switches |
-| `surface-track` | into the layer, thin | slider tracks |
 | `surface-card` | on the layer under it | cards and panels of controls; its fill is its own layer |
 | `surface-float` | over everything | popups and anything dragged; its fill is its layer |
 | `surface-callout` | over everything, in a shape | tooltips with their arrow |
@@ -141,6 +140,16 @@ A theme of your own imports `base.css`, sets again any token it changes, and add
 
 @utility surface-raised {
   box-shadow: inset 0 0 0 1px hsl(0 0% 100% / 0.12);
+}
+```
+
+Some component parts are classes a theme can redraw: `.ui-popup`, `.ui-menu-item`, `.ui-range` (a slider's thumb), `.ui-slider-track`, `.ui-switch`, `.ui-tooltip`, and `.ui-scroll-fade`. They live in the components layer, so a theme's own `@layer components` rule wins over the library's, and your `className` wins over both:
+
+```css
+@layer components {
+  .ui-slider-track {
+    box-shadow: none;
+  }
 }
 ```
 
