@@ -2,7 +2,7 @@
 
 import { Popover as Primitive } from "@base-ui/react/popover";
 import type { ReactElement, ReactNode } from "react";
-import { Surface, usePopupLayer } from "./surface";
+import { Popup, usePopupLayer } from "./popup";
 
 /** Settings opened beside `trigger`, such as bar controls that no longer fit. */
 export function Popover({
@@ -23,15 +23,9 @@ export function Popover({
           <Primitive.Popup
             // Keyboard users land inside; a click leaves focus on the trigger, so no field starts typing.
             initialFocus={(type) => type === "keyboard"}
-            render={(props) => (
-              <Surface
-                {...props}
-                layer={popup.layer}
-                className="p-3 pt-2.5 pb-4"
-              />
-            )}
+            render={(props) => <Popup {...props} layer={popup.layer} />}
           >
-            {children}
+            <div className="px-1.5 pt-1 pb-2.5">{children}</div>
           </Primitive.Popup>
         </Primitive.Positioner>
       </Primitive.Portal>

@@ -5,7 +5,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { type ReactNode, useState } from "react";
 import { Chevron } from "./chevron";
-import { Surface, usePopupLayer } from "./surface";
+import { Popup, usePopupLayer } from "./popup";
 import { Tooltip } from "./tooltip";
 
 const trigger = cva(
@@ -97,7 +97,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
         >
           <Primitive.Popup
             render={(props) => (
-              <Surface
+              <Popup
                 {...props}
                 layer={popup.layer}
                 className="min-w-(--anchor-width)"

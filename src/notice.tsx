@@ -1,6 +1,7 @@
 import { cn } from "cn";
 import type { ComponentProps, ReactNode } from "react";
 import { IconButton } from "./icon-button";
+import { Popup } from "./popup";
 
 /**
  * A message that floats without blocking the app; the caller positions it. An `alert` is red
@@ -20,11 +21,11 @@ export function Notice({
   onDismiss?: () => void;
 }) {
   return (
-    <div
+    <Popup
       role={tone}
+      layer="layer-card"
       className={cn(
-        // 12px corners less 6px of padding fit the dismiss button's 6px corners.
-        "layer-card flex max-w-sm items-start gap-2 rounded-xl p-1.5 text-foreground shadow-float",
+        "flex max-w-sm items-start gap-2",
         tone === "alert" && "text-danger",
         className,
       )}
@@ -54,6 +55,6 @@ export function Notice({
           </svg>
         </IconButton>
       )}
-    </div>
+    </Popup>
   );
 }

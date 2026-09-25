@@ -171,13 +171,13 @@
       ]
     },
     {
-      "name": "surface",
+      "name": "popup",
       "type": "registry:ui",
       "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/surface.tsx",
+          "path": "src/popup.tsx",
           "type": "registry:ui"
         }
       ]
@@ -295,7 +295,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/chevron.json",
-        "https://ui.roprgm.com/r/surface.json"
+        "https://ui.roprgm.com/r/popup.json"
       ],
       "files": [
         {
@@ -365,7 +365,7 @@
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/chevron.json",
-        "https://ui.roprgm.com/r/surface.json",
+        "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/kbd.json"
       ],
       "files": [
@@ -380,7 +380,7 @@
       "type": "registry:ui",
       "categories": ["overlays"],
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["https://ui.roprgm.com/r/surface.json"],
+      "registryDependencies": ["https://ui.roprgm.com/r/popup.json"],
       "files": [
         {
           "path": "src/popover.tsx",
@@ -393,7 +393,7 @@
       "type": "registry:ui",
       "categories": ["overlays"],
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "registryDependencies": ["https://ui.roprgm.com/r/popup.json"],
       "files": [
         {
           "path": "src/dialog.tsx",
@@ -406,7 +406,10 @@
       "type": "registry:ui",
       "categories": ["overlays"],
       "dependencies": ["cn"],
-      "registryDependencies": ["https://ui.roprgm.com/r/icon-button.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/icon-button.json",
+        "https://ui.roprgm.com/r/popup.json"
+      ],
       "files": [
         {
           "path": "src/notice.tsx",

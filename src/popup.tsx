@@ -4,12 +4,12 @@ import { cn } from "cn";
 import { type ComponentProps, useRef, useState } from "react";
 
 /**
- * The floating panel under menus, selects, and popovers. Its 12px corners less 6px of padding
- * leave 6px (`rounded-md`) for the items inside. Render a Base UI popup as one:
- * `<Menu.Popup render={(props) => <Surface {...props} />} />`. `layer` paints it, one above
- * its trigger's from `usePopupLayer`.
+ * The box everything floating is drawn in: menus, selects, popovers, dialogs, and notices. Its
+ * 6px of padding holds items and buttons in the corners; text and other content add their own
+ * inset. Render a Base UI popup as one: `<Menu.Popup render={(props) => <Popup {...props} />} />`.
+ * `layer` paints it, one above its trigger's from `usePopupLayer`.
  */
-export function Surface({
+export function Popup({
   layer = "layer-elevated",
   className,
   ...props
@@ -37,7 +37,7 @@ const above: Record<string, string> = {
 /**
  * A popup renders in a portal, away from its trigger's layer, so it reads the trigger's
  * `--layer-name` when it opens. Pass `trigger` as the trigger's ref, call `measure` when the
- * popup opens, and give the Surface `layer`.
+ * popup opens, and give the Popup `layer`.
  */
 export function usePopupLayer() {
   const element = useRef<Element>(null);

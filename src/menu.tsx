@@ -5,7 +5,7 @@ import { cn } from "cn";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
-import { Surface, usePopupLayer } from "./surface";
+import { Popup, usePopupLayer } from "./popup";
 
 /** Commands opened from `trigger`, such as an IconButton. For settings, use a Popover. */
 export function Menu({
@@ -25,7 +25,7 @@ export function Menu({
         <Primitive.Positioner sideOffset={4} align={align} className="z-50">
           <Primitive.Popup
             render={(props) => (
-              <Surface
+              <Popup
                 {...props}
                 layer={popup.layer}
                 className="flex flex-col gap-0.5"
@@ -89,7 +89,7 @@ export function Submenu({
         <Primitive.Positioner sideOffset={4} alignOffset={-6} className="z-50">
           <Primitive.Popup
             render={(props) => (
-              <Surface
+              <Popup
                 {...props}
                 layer={popup.layer}
                 className="flex flex-col gap-0.5"
