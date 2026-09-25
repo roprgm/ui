@@ -36,7 +36,7 @@ export function Dialog({
             <Popup
               {...props}
               layer="layer-card"
-              className="fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-sm -translate-1/2 duration-150 data-ending-style:scale-95"
+              className="fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 duration-150 data-ending-style:scale-95"
             />
           )}
         >
