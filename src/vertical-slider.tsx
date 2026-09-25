@@ -29,7 +29,12 @@ export function VerticalSlider({
   className?: string;
 }) {
   return (
-    <div className={cn("relative flex h-44 w-6 justify-center", className)}>
+    <div
+      className={cn(
+        "relative flex h-44 w-6 justify-center pointer-coarse:w-11",
+        className,
+      )}
+    >
       <div
         className="pointer-events-none absolute inset-y-2 w-1 rounded-full surface-sunken"
         style={
@@ -48,8 +53,11 @@ export function VerticalSlider({
         onDoubleClick={() =>
           defaultValue !== undefined && onChange(defaultValue)
         }
-        className="relative h-full w-full cursor-ns-resize touch-none appearance-none bg-transparent text-primary outline-none [direction:rtl] [writing-mode:vertical-lr] thumb:size-3.5 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:bg-current thumb:shadow-raised thumb:ring-1 thumb:ring-line focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus"
-        style={color ? { color } : undefined}
+        className={cn(
+          "relative h-full w-full cursor-ns-resize touch-none range-thumb [direction:rtl] [writing-mode:vertical-lr]",
+          color && "thumb:bg-current",
+        )}
+        style={{ color }}
       />
     </div>
   );

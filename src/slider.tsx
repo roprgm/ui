@@ -22,11 +22,11 @@ const cells = {
   compact: { value: "-mr-1", bar: "" },
 };
 
-/** Where the thumb's center sits at a fraction of the range: from 6px to 100% - 6px, or the bar's own ends. */
+/** Where the thumb's center sits at a fraction of the range: from 7px to 100% - 7px, or the bar's own ends. */
 function position(fraction: number) {
   if (fraction <= 0) return "0%";
   if (fraction >= 1) return "100%";
-  return `calc(0.375rem + (100% - 0.75rem) * ${fraction})`;
+  return `calc(0.4375rem + (100% - 0.875rem) * ${fraction})`;
 }
 
 /** The bar's paint: its color stops, or a fill between the origin and the value, in fractions of the range. */
@@ -104,7 +104,7 @@ export function Slider({
         // The margin makes room for the thumb, so the slider's box ends where the thumb does.
         <div
           className={cn(
-            "relative my-1 h-1 rounded-full surface-sunken",
+            "relative my-1.25 h-1 rounded-full surface-sunken",
             cells[variant].bar,
           )}
           style={{
@@ -131,7 +131,7 @@ export function Slider({
             onPointerCancel={() => onEditingChange?.(false)}
             onFocus={() => onEditingChange?.(true)}
             onBlur={() => onEditingChange?.(false)}
-            className="absolute inset-x-0 top-1/2 h-4 w-full pointer-coarse:h-11 -translate-y-1/2 cursor-pointer touch-pan-y appearance-none bg-transparent outline-none thumb:size-3 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-primary thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus"
+            className="absolute inset-x-0 top-1/2 h-4 w-full pointer-coarse:h-11 -translate-y-1/2 cursor-pointer touch-pan-y range-thumb"
           />
         </div>
       )}

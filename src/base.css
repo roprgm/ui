@@ -117,6 +117,13 @@
   }
 }
 
+/* A range input drawn as its thumb alone, over a track the component paints: 14px and raised in
+   the primary color, edged so it holds over a colored track, with the focus ring in its shape.
+   Touch draws no highlight box around it. */
+@utility range-thumb {
+  @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-3.5 thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-primary thumb:ring-1 thumb:ring-line thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
+}
+
 /* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the
    element keeps its own colors; the band is the one place shown at full strength. The band is
    sized to the element, so put it on a group of blocks rather than on each one, and one band
