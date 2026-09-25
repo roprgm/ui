@@ -183,7 +183,7 @@ const groups: Group[] = [
         name: "tabs",
         title: "Tab list",
         description:
-          "Rows or columns of tabs with arrow-key navigation, such as a tool rail.",
+          "Rows or columns of tabs with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views.",
         demo: <TabsDemo />,
       },
       {

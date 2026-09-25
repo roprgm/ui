@@ -28,7 +28,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 ## Sizes
 
 - Button sets the scale, with a text and an icon size for each of three heights: `sm` (24px, `--size-control-sm`), `default` (28px, `--size-control`), and `lg` (32px, `--size-control-lg`).
-- Every other control's sizes are named after the Button they go with, and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup stands 4px taller, since the eye sizes it by the raised toggle inside it.
+- Every other control's sizes are named after the Button they go with, and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup and a segmented TabList stand 4px taller, since the eye sizes them by the raised control inside.
 - Panel headers and list rows are `h-(--size-row)`, 40px, and hold a control `--padding-row` (6px) in.
 - `--padding` and `--size-control` set the density and change together; `base.css` derives the other sizes from them, so `theme.css` holds only what a theme decides.
 - The density sets heights and container padding. Each control sets its own side padding in fixed values chosen by eye, such as Button's `px-3`; don't derive it from a height.
@@ -39,7 +39,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - Three paddings space the library:
   - `--padding` (14px) for the sections of a dialog, notice, popover, or panel, and list rows.
   - `--padding-sm` (5px) around a list of items, as in a menu or a select, whose popup takes `rounded-lg`. Items take the `menu-item` utility: 2px shorter than a control, `rounded-sm`, and padded so their text lands `--padding` in too.
-  - `--padding-xs` (3px) around a raised control set into a sunken one, as in a toggle group, whose toggles fill the rest.
+  - `--padding-xs` (3px) around a raised control set into a sunken one, as in a toggle group or segmented tabs, whose controls fill the rest.
 - Everything floating is a `Popup`, which has no padding of its own: lists put theirs on it, and other content sits in sections. Anything edge to edge simply sits outside them, with no negative margins.
 - Three optical exceptions:
   - A section that opens with a line of text takes `pt-(--padding-optical)`, since the line adds air above the capitals.

@@ -481,10 +481,7 @@ const tools = [
   { id: "crop", label: "Crop", key: "C", Icon: CropIcon },
 ];
 
-/**
- * Icon tabs set into a sunken column, like a vertical toggle group, with their names and keys as
- * tooltips; `onSelect` makes them live.
- */
+/** Segmented icon tabs in a column, with their names and keys as tooltips; `onSelect` makes them live. */
 export function ToolRail({
   selected,
   onSelect,
@@ -493,17 +490,13 @@ export function ToolRail({
   onSelect: (id: string) => void;
 }) {
   return (
-    <TabList
-      aria-label="Tools"
-      className="flex-col gap-0.5 rounded-lg surface-sunken p-(--padding-xs)"
-    >
+    <TabList aria-label="Tools" variant="segmented" className="flex-col">
       {tools.map(({ id, label, key, Icon }) => (
         <Tooltip key={id} content={label} shortcut={key} side="right">
           <Tab
             selected={id === selected}
             size="icon"
             aria-label={label}
-            className="size-[calc(var(--size-control-lg)-2*var(--padding-xs))]"
             onClick={() => onSelect(id)}
           >
             <Icon />
@@ -517,21 +510,36 @@ export function ToolRail({
 export function TabsDemo() {
   const [tab, setTab] = useState("layers");
   const [tool, setTool] = useState("adjust");
+  const [channel, setChannel] = useState("hue");
   return (
     <div className="flex items-start gap-10">
       <ToolRail selected={tool} onSelect={setTool} />
-      <TabList aria-label="Sidebar">
-        {["layers", "history", "info"].map((id) => (
-          <Tab
-            key={id}
-            selected={id === tab}
-            className="capitalize"
-            onClick={() => setTab(id)}
-          >
-            {id}
-          </Tab>
-        ))}
-      </TabList>
+      <div className="flex flex-col items-start gap-6">
+        <TabList aria-label="Sidebar">
+          {["layers", "history", "info"].map((id) => (
+            <Tab
+              key={id}
+              selected={id === tab}
+              className="capitalize"
+              onClick={() => setTab(id)}
+            >
+              {id}
+            </Tab>
+          ))}
+        </TabList>
+        <TabList aria-label="Channel" variant="segmented">
+          {["hue", "saturation", "luminance"].map((id) => (
+            <Tab
+              key={id}
+              selected={id === channel}
+              className="capitalize"
+              onClick={() => setChannel(id)}
+            >
+              {id}
+            </Tab>
+          ))}
+        </TabList>
+      </div>
     </div>
   );
 }
