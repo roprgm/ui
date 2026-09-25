@@ -85,7 +85,8 @@ Components are built from primitives: surfaces, which set how something stands o
 | Utility | Stands | Used by |
 | --- | --- | --- |
 | `surface-raised` | out from the layer | buttons, selects, selected tabs and toggles |
-| `surface-sunken` | into the layer | fields, tracks, checkboxes and switches |
+| `surface-sunken` | into the layer | fields, checkboxes and switches |
+| `surface-track` | into the layer, thin | slider tracks |
 | `surface-card` | on the layer under it | cards and panels of controls; its fill is its own layer |
 | `surface-float` | over everything | popups and anything dragged; its fill is its layer |
 | `surface-callout` | over everything, in a shape | tooltips with their arrow |

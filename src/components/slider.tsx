@@ -104,7 +104,7 @@ export function Slider({
         // The margin makes room for the thumb, so the slider's box ends where the thumb does.
         <div
           className={cn(
-            "relative my-[calc(var(--size-thumb)/2-2px)] h-1 rounded-full surface-sunken",
+            "relative my-[calc(var(--size-thumb)/2-2px)] h-1 rounded-full surface-track",
             cells[variant].bar,
           )}
           style={{

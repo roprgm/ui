@@ -1,8 +1,9 @@
 /*
- * A theme of lines: every surface is outlined with a 1px line instead of shaded, and dividers turn
- * light to match. The lines are drawn as inset box-shadows rather than borders, so they take no
- * room and every control keeps its size. While a ring shows on the same element, as a thumb's
- * keyboard focus or an invalid field's red ring, the ring takes the line's place.
+ * A theme of lines: surfaces are outlined with a 1px line instead of shaded, and dividers turn
+ * light to match. Tracks stay plain, as in the flat theme, since a line around a thin groove reads
+ * heavy. The lines are drawn as inset box-shadows rather than borders, so they take no room and
+ * every control keeps its size. While a ring shows on the same element, as a thumb's keyboard
+ * focus or an invalid field's red ring, the ring takes the line's place.
  */
 
 @import "../base.css";

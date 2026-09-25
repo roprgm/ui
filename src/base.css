@@ -159,8 +159,14 @@
   @apply bg-raised;
 }
 
-/* Set into the layer: fields, tracks, checkboxes, switches, and groups. */
+/* Set into the layer: fields, checkboxes, switches, and groups. */
 @utility surface-sunken {
+  @apply bg-field;
+}
+
+/* A thin groove a thumb runs along, as a slider's bar. Sunken too, but a theme may keep it plainer
+   than a field. */
+@utility surface-track {
   @apply bg-field;
 }
 
