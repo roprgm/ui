@@ -74,7 +74,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | `primary`, `primary-hover`, `on-primary` | primary buttons and checked controls |
 | `hover`, `pressed` | translucent states for ghost buttons and chips |
 | `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
-| `surface-1` to `surface-8` | the gray scale, darkest first |
+| `gray-1` to `gray-8` | the gray scale, darkest first |
 
 ### Layers
 
@@ -82,9 +82,9 @@ The page and each card pick their colors from the gray scale:
 
 | Layer | Background | `field` | `raised` |
 | --- | --- | --- | --- |
-| The page | `surface-2` | `surface-1` | `surface-4` |
-| `layer-card` | `surface-3` | `surface-2` | `surface-5` |
-| `layer-elevated` | `surface-4` | `surface-3` | `surface-6` |
+| The page | `gray-2` | `gray-1` | `gray-4` |
+| `layer-card` | `gray-3` | `gray-2` | `gray-5` |
+| `layer-elevated` | `gray-4` | `gray-3` | `gray-6` |
 
 Menus, popovers, and select lists open one layer above the one their trigger sits on. Dialogs are cards.
 
@@ -101,7 +101,7 @@ Components paint their controls with four utilities from `base.css`, so a contro
 
 ### Density
 
-Four tokens set the density; the rest follow from them. `--padding` and `--size-control` change together: a denser theme lowers both.
+Five tokens in `theme.css` set spacing and size; `base.css` derives the rest from them. `--padding` and `--size-control` are the density and change together: a denser theme lowers both.
 
 Button's three heights are the scale. Other controls name their sizes after the Button they go with and measure whatever looks as tall beside it: Input and Select match it, and ToggleGroup stands 4px taller, since the eye sizes it by its raised toggle.
 
@@ -110,17 +110,15 @@ Button's three heights are the scale. Other controls name their sizes after the 
 | `--padding` | 14px | from a container's edge to its content: dialog, notice, popover, and panel sections, and list rows |
 | `--padding-sm` | 5px | around a list of items, as in a menu or select |
 | `--padding-xs` | 3px | around a raised control set into a sunken one, as a toggle in its group |
-| `--size-control` | 28px | buttons, selects, fields, chips, menu items, and row thumbnails and icon buttons |
+| `--size-control` | 28px | buttons, selects, fields, chips, and row thumbnails and icon buttons |
+| `--size-thumb` | 14px | a range input's thumb; the slider's fill and bar follow it |
 
-| Derived | Default | Use |
+| Derived in `base.css` | Default | Use |
 | --- | --- | --- |
 | `--size-control-lg` | 32px | large buttons, selects, and fields, and toggle groups |
 | `--size-control-sm` | 24px | buttons inside a large field, and close buttons |
-| `--size-control-inset` | 26px | a toggle in its group |
 | `--size-row` | 40px | panel headers and list rows, holding a control 6px in |
-| `--padding-item` | 8px | menu and select items, so their text lands `--padding` in |
 | `--padding-optical` | 12px | buttons against an edge, and a section's top when it opens with text |
-| `--size-thumb` | 14px | a range input's thumb; the slider's fill and bar follow it |
 
 ### Customize
 

@@ -503,7 +503,7 @@ export function ToolRail({
             selected={id === selected}
             size="icon"
             aria-label={label}
-            className="size-(--size-control-inset)"
+            className="size-[calc(var(--size-control-lg)-2*var(--padding-xs))]"
             onClick={() => onSelect(id)}
           >
             <Icon />

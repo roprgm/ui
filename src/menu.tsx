@@ -57,7 +57,7 @@ export function MenuItem({
 
 export function MenuSeparator() {
   return (
-    <Primitive.Separator className="mx-1.5 my-0.5 h-px bg-line shadow-divider" />
+    <Primitive.Separator className="mx-1.5 my-0.5 h-px bg-line shadow-[0_1px_0_hsl(0_0%_94.12%/0.05)]" />
   );
 }
 

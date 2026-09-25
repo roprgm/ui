@@ -7,6 +7,19 @@
 
 @source "./";
 
+/* Sizes that follow from the density in theme.css. A theme can still redefine one on its own. */
+@theme {
+  /* Large buttons, selects, and fields. */
+  --size-control-lg: calc(var(--size-control) + 4px);
+  /* Buttons inside a large field, and close buttons. */
+  --size-control-sm: calc(var(--size-control) - 4px);
+  /* Panel headers and list rows, which hold a control 6px in. */
+  --size-row: calc(var(--size-control) + 12px);
+  /* Buttons against an edge, whose box shows where text doesn't, and a section's top when it opens
+     with a line of text, which brings air above its capitals. */
+  --padding-optical: calc(var(--padding) - 2px);
+}
+
 /*
  * Layers. A control's fill depends on the layer it sits on, so it keeps the same contrast
  * everywhere: fields a step below the layer, raised controls two steps above and three on hover.
@@ -24,40 +37,40 @@
 @layer base {
   :root {
     --layer-name: page;
-    --layer: var(--color-surface-2);
-    --field: var(--color-surface-1);
-    --raised: var(--color-surface-4);
-    --raised-hover: var(--color-surface-5);
+    --layer: var(--color-gray-2);
+    --field: var(--color-gray-1);
+    --raised: var(--color-gray-4);
+    --raised-hover: var(--color-gray-5);
   }
 }
 
 /* Panels, notices, cards on the page, and popups opened from the page. */
 @utility layer-card {
   --layer-name: card;
-  --layer: var(--color-surface-3);
-  --field: var(--color-surface-2);
-  --raised: var(--color-surface-5);
-  --raised-hover: var(--color-surface-6);
+  --layer: var(--color-gray-3);
+  --field: var(--color-gray-2);
+  --raised: var(--color-gray-5);
+  --raised-hover: var(--color-gray-6);
   background-color: var(--layer);
 }
 
 /* Cards inside a card, and popups opened from a card. */
 @utility layer-elevated {
   --layer-name: elevated;
-  --layer: var(--color-surface-4);
-  --field: var(--color-surface-3);
-  --raised: var(--color-surface-6);
-  --raised-hover: var(--color-surface-7);
+  --layer: var(--color-gray-4);
+  --field: var(--color-gray-3);
+  --raised: var(--color-gray-6);
+  --raised-hover: var(--color-gray-7);
   background-color: var(--layer);
 }
 
 /* Popups opened from an elevated card. */
 @utility layer-top {
   --layer-name: top;
-  --layer: var(--color-surface-5);
-  --field: var(--color-surface-4);
-  --raised: var(--color-surface-7);
-  --raised-hover: var(--color-surface-8);
+  --layer: var(--color-gray-5);
+  --field: var(--color-gray-4);
+  --raised: var(--color-gray-7);
+  --raised-hover: var(--color-gray-8);
   background-color: var(--layer);
 }
 
@@ -89,9 +102,10 @@
 }
 
 /* A row in a popup's list, as in a menu or select: 2px shorter than a control, so a list reads
-   dense, its text `--padding` from the popup's edge, and a flat highlight under the pointer or keys. */
+   dense, padded so its text lands `--padding` from the popup's edge past the list's own padding,
+   and a flat highlight under the pointer or keys. */
 @utility menu-item {
-  @apply flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised;
+  @apply flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-[calc(var(--padding)-var(--padding-sm))] outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised;
 }
 
 /* shadow-float as a filter, so it follows a shape such as a popup with its arrow. */

@@ -10,8 +10,9 @@ const group = cva(
       // with: `default` beside a default Button, `lg` beside a large one. It sizes its toggles,
       // since a fieldset doesn't stretch its children.
       size: {
-        default: "[--size-toggle:var(--size-control-inset)]",
-        lg: "[--size-toggle:calc(var(--size-control-inset)+4px)]",
+        default:
+          "[--size-toggle:calc(var(--size-control-lg)-2*var(--padding-xs))]",
+        lg: "[--size-toggle:calc(var(--size-control-lg)+4px-2*var(--padding-xs))]",
       },
     },
     defaultVariants: { size: "default" },

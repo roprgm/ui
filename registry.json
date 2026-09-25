@@ -8,6 +8,10 @@
       "type": "registry:theme",
       "cssVars": {
         "theme": {
+          "size-control-lg": "calc(var(--size-control) + 4px)",
+          "size-control-sm": "calc(var(--size-control) - 4px)",
+          "size-row": "calc(var(--size-control) + 12px)",
+          "padding-optical": "calc(var(--padding) - 2px)",
           "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
           "color-hover": "hsl(0 0% 100% / 0.08)",
           "color-pressed": "hsl(0 0% 100% / 0.15)",
@@ -22,37 +26,28 @@
           "color-backdrop": "hsl(0 0% 0% / 0.5)",
           "color-focus": "hsl(0 0% 100% / 0.25)",
           "color-danger": "hsl(0 90% 75%)",
-          "color-surface-1": "hsl(0 0% 4.0%)",
-          "color-surface-2": "hsl(0 0% 8.0%)",
-          "color-surface-3": "hsl(0 0% 12.3%)",
-          "color-surface-4": "hsl(0 0% 17.0%)",
-          "color-surface-5": "hsl(0 0% 22.0%)",
-          "color-surface-6": "hsl(0 0% 27.3%)",
-          "color-surface-7": "hsl(0 0% 33.0%)",
-          "color-surface-8": "hsl(0 0% 39.0%)",
-          "color-tooltip": "var(--color-surface-1)",
+          "color-gray-1": "hsl(0 0% 4.0%)",
+          "color-gray-2": "hsl(0 0% 8.0%)",
+          "color-gray-3": "hsl(0 0% 12.3%)",
+          "color-gray-4": "hsl(0 0% 17.0%)",
+          "color-gray-5": "hsl(0 0% 22.0%)",
+          "color-gray-6": "hsl(0 0% 27.3%)",
+          "color-gray-7": "hsl(0 0% 33.0%)",
+          "color-gray-8": "hsl(0 0% 39.0%)",
+          "color-tooltip": "var(--color-gray-1)",
           "radius-xs": "2.5px",
           "radius-sm": "5px",
           "radius-md": "7px",
           "radius-lg": "9px",
           "radius-xl": "12px",
-          "radius-2xl": "16px",
           "padding": "14px",
           "padding-sm": "5px",
           "padding-xs": "3px",
           "size-control": "1.75rem",
-          "size-control-lg": "calc(var(--size-control) + 4px)",
-          "size-control-sm": "calc(var(--size-control) - 4px)",
-          "size-control-inset": "calc(var(--size-control-lg) - 2 * var(--padding-xs))",
-          "size-row": "calc(var(--size-control) + 12px)",
-          "padding-item": "calc(var(--padding) - var(--padding-sm))",
-          "padding-optical": "calc(var(--padding) - 2px)",
           "size-thumb": "14px",
           "shadow-raised": "inset 0 1px 0 hsl(0 0% 94.12% / 0.07), 0 1px 1px hsl(0 0% 0% / 0.28), 0 0 1px hsl(0 0% 0% / 0.14)",
           "shadow-sunken": "inset 0 1px 1px hsl(0 0% 0% / 0.3), 0 1px 0 hsl(0 0% 94.12% / 0.05)",
-          "shadow-divider": "0 1px 0 hsl(0 0% 94.12% / 0.05)",
           "shadow-float": "0 0 0 1px hsl(0 0% 9%), inset 0 1px 0 hsl(0 0% 100% / 0.08), 0 2px 6px hsl(0 0% 0% / 0.3), 0 16px 32px -8px hsl(0 0% 0% / 0.35)",
-          "text-shadow-subtle": "0.5px 1px 0.5px hsl(0 0% 0% / 0.08)",
           "color-field": "var(--field)",
           "color-raised": "var(--raised)",
           "color-raised-hover": "var(--raised-hover)"
@@ -62,10 +57,10 @@
         "@layer base": {
           ":root": {
             "--layer-name": "page",
-            "--layer": "var(--color-surface-2)",
-            "--field": "var(--color-surface-1)",
-            "--raised": "var(--color-surface-4)",
-            "--raised-hover": "var(--color-surface-5)"
+            "--layer": "var(--color-gray-2)",
+            "--field": "var(--color-gray-1)",
+            "--raised": "var(--color-gray-4)",
+            "--raised-hover": "var(--color-gray-5)"
           },
           "body": {
             "font-family": "var(--font-sans)",
@@ -85,26 +80,26 @@
         },
         "@utility layer-card": {
           "--layer-name": "card",
-          "--layer": "var(--color-surface-3)",
-          "--field": "var(--color-surface-2)",
-          "--raised": "var(--color-surface-5)",
-          "--raised-hover": "var(--color-surface-6)",
+          "--layer": "var(--color-gray-3)",
+          "--field": "var(--color-gray-2)",
+          "--raised": "var(--color-gray-5)",
+          "--raised-hover": "var(--color-gray-6)",
           "background-color": "var(--layer)"
         },
         "@utility layer-elevated": {
           "--layer-name": "elevated",
-          "--layer": "var(--color-surface-4)",
-          "--field": "var(--color-surface-3)",
-          "--raised": "var(--color-surface-6)",
-          "--raised-hover": "var(--color-surface-7)",
+          "--layer": "var(--color-gray-4)",
+          "--field": "var(--color-gray-3)",
+          "--raised": "var(--color-gray-6)",
+          "--raised-hover": "var(--color-gray-7)",
           "background-color": "var(--layer)"
         },
         "@utility layer-top": {
           "--layer-name": "top",
-          "--layer": "var(--color-surface-5)",
-          "--field": "var(--color-surface-4)",
-          "--raised": "var(--color-surface-7)",
-          "--raised-hover": "var(--color-surface-8)",
+          "--layer": "var(--color-gray-5)",
+          "--field": "var(--color-gray-4)",
+          "--raised": "var(--color-gray-7)",
+          "--raised-hover": "var(--color-gray-8)",
           "background-color": "var(--layer)"
         },
         "@utility surface-raised": {
@@ -120,7 +115,7 @@
           "@apply bg-primary shadow-sunken": {}
         },
         "@utility menu-item": {
-          "@apply flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-(--padding-item) outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised": {}
+          "@apply flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-[calc(var(--padding)-var(--padding-sm))] outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised": {}
         },
         "@utility drop-shadow-float": {
           "filter": "drop-shadow(0 0 1px hsl(0 0% 0% / 0.5)) drop-shadow(0 2px 3px hsl(0 0% 0% / 0.2)) drop-shadow(0 8px 12px hsl(0 0% 0% / 0.3))"
