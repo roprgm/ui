@@ -254,17 +254,18 @@
 }
 
 /* A row that holds ghost icon buttons as well as text and buttons with a box, such as a card's
-   header or footer. An icon button at an end bleeds out by the 6px around its icon, so the icon
-   lines up with the row's text and boxes, and above and below, so it doesn't make the row taller. */
+   header or footer. An icon button bleeds out by the 6px around its icon above and below, so it
+   doesn't make the row taller, and by 8px at the row's ends, so its icon sits as far from the side
+   as from the top and bottom: 12px in a card's row. */
 @utility row-ends {
   & > [data-slot="icon-button"] {
     margin-block: -6px;
   }
   & > [data-slot="icon-button"]:first-child {
-    margin-inline-start: -6px;
+    margin-inline-start: -8px;
   }
   & > [data-slot="icon-button"]:last-child {
-    margin-inline-end: -6px;
+    margin-inline-end: -8px;
   }
 }
 

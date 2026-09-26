@@ -150,10 +150,10 @@
             "margin-block": "-6px"
           },
           "& > [data-slot=\"icon-button\"]:first-child": {
-            "margin-inline-start": "-6px"
+            "margin-inline-start": "-8px"
           },
           "& > [data-slot=\"icon-button\"]:last-child": {
-            "margin-inline-end": "-6px"
+            "margin-inline-end": "-8px"
           }
         },
         "@utility focus-ring": {
