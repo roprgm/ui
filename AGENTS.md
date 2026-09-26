@@ -34,21 +34,21 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 ## Sizes
 
-- Button sets the scale, with a text and an icon size for each of three heights: `sm` (24px, `--size-control-sm`), `default` (28px, `--size-control`), and `lg` (32px, `--size-control-lg`).
-- Other controls name their sizes after the Button they go with and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup and a segmented TabList stand 4px taller, since the eye sizes them by the raised control inside.
-- Card rows pad `px-3.5 py-2.5`, so a line of text makes a 40px row, and a button with a box 12px from every edge (`row-ends`), where text sits 14px from the sides, and sections `px-3.5 py-3`. Both take their height from what they hold, never a fixed height. A ghost icon button at a row's end bleeds out (`row-ends`), so its icon sits 12px from the side, as from the top and bottom. List rows, from `ListItem`, are `h-row`, 40px, since a list stays dense.
-- `--padding` and `--size-control` set the density, and the other sizes follow from them. They set heights and container padding; each control sets its own side padding by eye, such as Button's `px-3`.
-- The density is global: change it in `@theme`. The derived sizes resolve once at the root, so a local `--size-control` changes only what reads it directly. The segmented TabList uses one on purpose, for its default and `icon` tabs.
-- Each size token is also a spacing utility, from `@theme inline` in `base.css`: `h-control`, `size-control-sm`, `h-row`, `h-item`, `h-segment`, `p-pad`, `px-pad-item`, `pt-pad-optical`, `rounded-segment`. Use them rather than `(--var)` forms or `calc()` in a class; a size that follows from others becomes a token in the derived sizes, with its utility beside the rest. `cn` merges them with a caller's `h-*` or `p-*`.
+- `--size-control` (28px) sets the density: Button's heights are the scale, `sm` (24px, `h-control-sm`), `default` (28px, `h-control`), and `lg` (32px, `h-control-lg`), and every size in `base.css` follows from it. Change the density in `@theme`.
+- Other controls name their sizes after the Button they go with and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup and a segmented TabList stand 4px taller (`h-segment`), since the eye sizes them by the raised control inside.
+- Heights are these utilities, never a number, so they follow the density and `cn` merges a caller's `h-*`. The derived sizes resolve once at the root, so a local `--size-control` changes only what reads it directly, as the segmented TabList does for its tabs.
 
 ## Spacing
 
-- `--padding` (14px) is where text starts: the sides of the sections of a dialog, notice, popover, or panel, and of rows.
-- `--padding-sm` (5px) goes around a list of items, as in a menu or select, whose `Popup` takes `list`. Items, from `popupItem`, are `h-item`, 2px shorter than a control, and `px-pad-item`, so their text lands `--padding` in too.
-- `--padding-xs` (3px) goes around a raised control set into a sunken one, as in a toggle group or segmented tabs.
-- Everything floating is a `Popup`, which has no padding of its own: lists put theirs on it, and other content sits in card parts (`CardHeader`, `CardSection`, `CardFooter`), stacked by `cardParts` from `card.tsx`, as in a `Card`, `Panel`, or `Popover`.
+- Spacing is Tailwind's own scale, written as it is (`px-3.5`, `p-1`), not a token. Each control sets its own side padding by eye, such as Button's `px-3`.
+- Text and fields sit 14px from a container's sides. Everything inside a surface is card parts from `card.tsx`: `CardHeader` and `CardFooter` rows pad `px-3.5 py-2.5`, so a line of text makes a 40px row, and `CardSection`s pad `px-3.5 py-3`. Both take their height from what they hold. `cardParts` stacks them with a line between, as in a `Card`, `Panel`, or `Popover`.
+- A row's ends follow one rule, `row-ends`: a button with a box sits 12px from every edge, since its box shows where text doesn't, and a ghost icon button bleeds out so its icon sits 12px from the side and lines up with the text. `CardHeader`, `CardFooter`, and `ListItem` take it.
+- A Dialog or Notice stacks a section and its actions without a line; the section drops its bottom padding when the actions follow it (`not-last:pb-0`), so they sit 12px under it.
+- List rows, from `ListItem`, are `h-row`, 40px, since a list stays dense.
+- Everything floating is a `Popup`, which has no padding of its own. A list of items takes `list`: 4px around the rows, which are `popupItem`s, `h-item` tall and `px-2.5`, so their text lands 14px in too. Other content sits in card parts.
+- A raised control set into a sunken group, as in a toggle group or segmented tabs, sits 3px in (`p-0.75`), with `rounded-segment` corners.
 - A container sizes itself and its parts fill it: a width goes on the `Card`, `Panel`, or `Popover`, never on a header or section, which would spill out of a container left narrower by a scrollbar or the screen's edge. A `Popup` never scrolls sideways, and a `Card` clips what doesn't fit.
-- Nested corners are concentric: the outer radius less the inset is the inner radius (a 12px card holds a 6px button 6px in). Below about 5px, round the inner corner up a little, and prefer radii other components already use over exact math.
+- Nested corners are concentric: the outer radius less the inset is the inner radius (a 9px list popup holds 5px rows 4px in). Below about 5px, round the inner corner up a little, and prefer radii other components already use over exact math.
 
 ## Checks
 

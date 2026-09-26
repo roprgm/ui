@@ -15,15 +15,15 @@ export function Popup({
   ...props
 }: ComponentProps<"div"> & {
   layer?: string;
-  /** Holds a list of `popupItem` rows, as a menu or select does: padded by `--padding-sm`, with
-      its corners nested around the rows'. */
+  /** Holds a list of `popupItem` rows, as a menu or select does: 4px around them, so its 9px
+      corners nest around their 5px ones. */
   list?: boolean;
 }) {
   return (
     <div
       className={cn(
         "max-h-(--available-height) min-w-40 overflow-x-hidden overflow-y-auto rounded-xl text-foreground surface-float outline-none popup-motion",
-        list && "rounded-lg p-pad-sm",
+        list && "rounded-lg p-1",
         layer,
         className,
       )}
@@ -34,11 +34,8 @@ export function Popup({
 
 /**
  * A row in a popup's list, as in a menu or select: 2px shorter than a control, so a list reads
- * dense, padded so its text lands `--padding` from the popup's edge past the list's own padding,
- * and a flat highlight under the pointer or keys. The rows sit in a column: `popupRows`.
+ * dense, padded so its text lands 14px from the popup's edge past the list's 4px, and a flat
+ * highlight under the pointer or keys. Rows stack in a `flex flex-col gap-0.5` list.
  */
 export const popupItem =
-  "flex h-item shrink-0 cursor-default items-center rounded-sm px-pad-item outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised";
-
-/** The column a popup's rows stack in, 2px apart: the Popup itself, or a list inside it. */
-export const popupRows = "flex flex-col gap-0.5";
+  "flex h-item shrink-0 cursor-default items-center rounded-sm px-2.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised";

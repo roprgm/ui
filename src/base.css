@@ -83,63 +83,40 @@
 }
 
 /*
- * Density. `--padding` and `--size-control` are the two to change together, for a denser or
- * roomier theme; the sizes after them follow from them. Button's heights are the scale:
- * other controls name their sizes after the Button they go with and measure what looks as tall
- * beside it. They set heights and container padding; each control sets its own side padding, by
- * eye. Components read them through the spacing utilities below, as `p-pad` or `h-control`, so
- * `cn` still merges a caller's `p-*` or `h-*`. The density is global: set these in `@theme`. The sizes that follow
- * from them resolve once, at the root, so redefining `--size-control` on one element changes
- * only what reads it directly, not `--size-control-lg`, `-sm`, or `--size-row` below it.
+ * Sizes. `--size-control` sets the density: Button's heights are the scale, and the sizes after it
+ * follow from it. Other controls name their sizes after the Button they go with and measure what
+ * looks as tall beside it. Spacing is Tailwind's own, as `px-3.5`; these are heights. Components
+ * read them as utilities, `h-control` or `size-control-sm`, so `cn` still merges a caller's `h-*`.
+ * The sizes that follow resolve once, at the root, so redefining `--size-control` on one element
+ * changes only what reads it directly, as the segmented TabList does for its tabs.
  */
 @theme {
-  /* From a container's edge to its content: the sections of a dialog, notice, popover, or panel,
-     and list rows. */
-  --padding: 14px;
-  /* Around a list of items, as in a menu or select. Menu's submenus are offset by it as a number,
-     so change `alignOffset` in menu.tsx with it. */
-  --padding-sm: 5px;
-  /* Around a raised control set into a sunken one, so thin the two read as one piece. */
-  --padding-xs: 3px;
-  /* Above and below a control in a panel header or list row. */
-  --padding-row: 6px;
   /* Buttons, selects, fields, chips, and the thumbnails and icon buttons in rows. */
   --size-control: 28px;
   /* A range input's thumb. The slider's fill and the room around its bar follow it. */
   --size-thumb: 13px;
 }
 
-/* Sizes that follow from the density above, resolved once at the root. A theme can still redefine
-   one on its own. */
 @theme {
   /* Large buttons, selects, and fields. */
   --size-control-lg: calc(var(--size-control) + 4px);
   /* Buttons inside a large field, and close buttons. */
   --size-control-sm: calc(var(--size-control) - 4px);
-  /* List rows, holding a control `--padding-row` in. */
-  --size-row: calc(var(--size-control) + 2 * var(--padding-row));
-  /* From a top, bottom, or end edge to what brings air of its own: a button's box, which shows
-     where text doesn't, and a line of text, which has air above its capitals. A section's top and
-     bottom. */
-  --padding-optical: calc(var(--padding) - 2px);
-  /* A row in a popup's list, 2px shorter than a control so a list reads dense, and its side
-     padding, which lands its text `--padding` from the popup's edge past the list's own. */
+  /* List rows: a control and 6px above and below it. */
+  --size-row: calc(var(--size-control) + 12px);
+  /* A row in a popup's list, 2px shorter than a control so a list reads dense. */
   --size-item: calc(var(--size-control) - 2px);
-  --padding-item: calc(var(--padding) - var(--padding-sm));
-  /* A raised control set `--padding-xs` into a sunken group, as a toggle or a segmented tab: the
-     group stands as tall as a large control, or 4px taller beside large buttons. */
-  --size-segment: calc(var(--size-control-lg) - 2 * var(--padding-xs));
+  /* A raised control set 3px into a sunken group, as a toggle or a segmented tab: the group stands
+     as tall as a large control, or 4px taller beside large buttons. */
+  --size-segment: calc(var(--size-control-lg) - 6px);
   --size-segment-lg: calc(var(--size-segment) + 4px);
   /* Its corners, nested in the group's `rounded-lg`. */
-  --radius-segment: calc(var(--radius-lg) - var(--padding-xs));
+  --radius-segment: calc(var(--radius-lg) - 3px);
 }
 
-/*
- * The sizes above as spacing, so each is a utility: `h-control`, `size-control-sm`, `h-row`,
- * `h-item`, `p-pad`, `px-pad-item`, `gap-pad-sm`, `right-pad`. `inline` writes the token itself
- * into each utility, so a token redefined on an element, as the segmented TabList redefines
- * `--size-control`, reaches the utilities inside it.
- */
+/* The sizes as utilities: `h-control`, `size-control-sm`, `h-row`, `h-item`, `h-segment`.
+   `inline` writes the token itself into each, so a token redefined on an element reaches the
+   utilities inside it. */
 @theme inline {
   --spacing-control: var(--size-control);
   --spacing-control-sm: var(--size-control-sm);
@@ -149,12 +126,6 @@
   --spacing-segment: var(--size-segment);
   --spacing-segment-lg: var(--size-segment-lg);
   --spacing-thumb: var(--size-thumb);
-  --spacing-pad: var(--padding);
-  --spacing-pad-sm: var(--padding-sm);
-  --spacing-pad-xs: var(--padding-xs);
-  --spacing-pad-row: var(--padding-row);
-  --spacing-pad-optical: var(--padding-optical);
-  --spacing-pad-item: var(--padding-item);
 }
 
 /*

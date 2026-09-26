@@ -6,7 +6,7 @@ import { type ReactNode, useMemo } from "react";
 import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Input } from "./input";
-import { Popup, popupItem, popupRows } from "./popup";
+import { Popup, popupItem } from "./popup";
 
 export type ComboboxItem<T extends string> = {
   value: T;
@@ -71,7 +71,7 @@ export function Combobox<T extends string>({
             >
               {empty}
             </Primitive.Empty>
-            <Primitive.List className={popupRows}>
+            <Primitive.List className="flex flex-col gap-0.5">
               {(item: ComboboxItem<T>) => (
                 <Primitive.Item
                   key={item.value}

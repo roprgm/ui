@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-const group = cva("inline-flex gap-0.5 rounded-lg surface-sunken p-pad-xs", {
+const group = cva("inline-flex gap-0.5 rounded-lg surface-sunken p-0.75", {
   variants: {
     // The eye sizes a group by its raised toggle, so it stands 4px taller than the buttons it goes
     // with: `default` beside a default Button, `lg` beside a large one. It sizes its toggles,

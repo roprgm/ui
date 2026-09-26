@@ -34,7 +34,7 @@ export function EditorDemo() {
 
   return (
     <div className="grid grid-cols-[auto_minmax(0,1fr)] bg-field @2xl:flex @2xl:h-[560px]">
-      <div className="layer-card border-line border-r p-pad-row">
+      <div className="layer-card border-line border-r p-1.5">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <div className="relative grid min-h-64 min-w-0 flex-1 place-items-center p-4 @2xl:p-10">
@@ -43,7 +43,7 @@ export function EditorDemo() {
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="layer-elevated absolute top-3 right-2 left-2 flex flex-wrap items-center justify-center gap-1 @2xl:right-auto @2xl:left-auto rounded-full p-pad-sm pl-pad surface-float">
+          <div className="layer-elevated absolute top-3 right-2 left-2 flex flex-wrap items-center justify-center gap-1 @2xl:right-auto @2xl:left-auto rounded-full p-1.25 pl-3.5 surface-float">
             <Slider
               label="Size"
               value={size}

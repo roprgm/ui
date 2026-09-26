@@ -36,7 +36,7 @@ import { Button } from "@roprgm/ui/button";
 Put groups of controls on a card. Controls take their fills from the layer they sit on, so they keep the same contrast everywhere:
 
 ```tsx
-<div className="layer-card surface-card rounded-xl p-pad">
+<div className="layer-card surface-card rounded-xl p-3.5">
   <Input placeholder="Name" />
 </div>
 ```
@@ -96,7 +96,7 @@ Components are built from primitives. Each sets its fill from a color token, and
 
 ### Density
 
-`--size-control` (28px) sets the height of buttons, selects, and fields, and `--padding` (14px) the space from a container's edge to its content. The other sizes follow from them, such as 32px large controls and 40px list rows. Each is also a utility, for controls of your own: `h-control`, `h-control-lg`, `h-row`, `p-pad`, `p-pad-sm`, and the rest listed in `base.css`.
+`--size-control` (28px) sets the height of buttons, selects, and fields, and the other sizes follow from it, such as 32px large controls and 40px list rows. Each is also a utility, for controls of your own: `h-control`, `h-control-lg`, `h-row`, and the rest listed in `base.css`. Spacing is Tailwind's own.
 
 ### Customize
 

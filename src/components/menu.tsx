@@ -5,7 +5,7 @@ import { cn } from "cn";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
-import { Popup, popupItem, popupRows } from "./popup";
+import { Popup, popupItem } from "./popup";
 
 /** Commands opened from `trigger`, such as an IconButton. For settings, use a Popover. */
 export function Menu({
@@ -23,7 +23,9 @@ export function Menu({
       <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} align={align} className="z-50">
           <Primitive.Popup
-            render={(props) => <Popup {...props} list className={popupRows} />}
+            render={(props) => (
+              <Popup {...props} list className="flex flex-col gap-0.5" />
+            )}
           >
             {children}
           </Primitive.Popup>
@@ -72,10 +74,12 @@ export function Submenu({
         <Chevron direction="right" size="sm" className="text-muted" />
       </Primitive.SubmenuTrigger>
       <Primitive.Portal>
-        {/* Up by the list's padding, `--padding-sm`, so the first item lines up with its trigger. */}
-        <Primitive.Positioner sideOffset={4} alignOffset={-5} className="z-50">
+        {/* Up by the list's 4px padding, so the first item lines up with its trigger. */}
+        <Primitive.Positioner sideOffset={4} alignOffset={-4} className="z-50">
           <Primitive.Popup
-            render={(props) => <Popup {...props} list className={popupRows} />}
+            render={(props) => (
+              <Popup {...props} list className="flex flex-col gap-0.5" />
+            )}
           >
             {children}
           </Primitive.Popup>

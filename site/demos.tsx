@@ -899,7 +899,7 @@ function PresetsCard() {
       <CardHeader title="Presets" />
       {/* The row runs to the card's edges, so it fades there rather than inside the padding. */}
       <CardSection className="px-0">
-        <div className="flex gap-2 overflow-fade-x px-pad">
+        <div className="flex gap-2 overflow-fade-x px-3.5">
           {presets.map((preset) => (
             <button
               key={preset.name}

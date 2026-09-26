@@ -6,7 +6,7 @@ import { cn } from "cn";
 import { type ReactNode, useState } from "react";
 import { Check } from "./check";
 import { Chevron } from "./chevron";
-import { Popup, popupItem, popupRows } from "./popup";
+import { Popup, popupItem } from "./popup";
 import { Tooltip } from "./tooltip";
 
 const trigger = cva(
@@ -107,7 +107,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
               <Popup {...props} list className="min-w-(--anchor-width)" />
             )}
           >
-            <Primitive.List className={popupRows}>
+            <Primitive.List className="flex flex-col gap-0.5">
               {items.map((item, index) => (
                 <Primitive.Item
                   // Two items may share a value, such as an "Original" ratio equal to a preset.

@@ -20,7 +20,7 @@ const list = cva("flex", {
       // that fits the strip, and their corners nest in its corners. Only default and `icon` tabs
       // follow it; the other sizes resolve at the root.
       segmented:
-        "gap-0.5 rounded-lg surface-sunken p-pad-xs [--size-control:var(--size-segment)] *:rounded-segment",
+        "gap-0.5 rounded-lg surface-sunken p-0.75 [--size-control:var(--size-segment)] *:rounded-segment",
     },
   },
   defaultVariants: { variant: "default" },

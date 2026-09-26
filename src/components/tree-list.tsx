@@ -267,7 +267,7 @@ export function TreeList<T extends TreeNode<T>>({
       const branch = Boolean(item.children?.length);
       const expanded = branch && !collapsed.has(item.id);
       const indent = {
-        "--indent": `calc(var(--padding) + ${depth}rem)`,
+        "--indent": `calc(14px + ${depth}rem)`,
       } as CSSProperties;
       return (
         <Fragment key={item.id}>

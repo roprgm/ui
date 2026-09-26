@@ -3,7 +3,7 @@
 import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog as Primitive } from "@base-ui/react/dialog";
 import type { ReactElement, ReactNode } from "react";
-import { CardFooter } from "./card";
+import { CardFooter, CardSection } from "./card";
 import { Popup } from "./popup";
 
 /**
@@ -47,7 +47,7 @@ export function Dialog({
             />
           )}
         >
-          <div className="flex flex-col gap-3 px-3.5 py-3 not-last:pb-0">
+          <CardSection className="not-last:pb-0">
             <div className="flex flex-col gap-1">
               <Primitive.Title className="font-medium">{title}</Primitive.Title>
               {description && (
@@ -57,7 +57,7 @@ export function Dialog({
               )}
             </div>
             {children}
-          </div>
+          </CardSection>
           {actions && (
             <CardFooter className="justify-end">{actions}</CardFooter>
           )}

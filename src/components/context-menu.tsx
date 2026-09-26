@@ -2,7 +2,7 @@
 
 import { ContextMenu as Primitive } from "@base-ui/react/context-menu";
 import type { ReactElement, ReactNode } from "react";
-import { Popup, popupRows } from "./popup";
+import { Popup } from "./popup";
 
 /**
  * Commands opened at the pointer by a right-click or long press on `trigger`, such as a row. Its
@@ -21,7 +21,9 @@ export function ContextMenu({
       <Primitive.Portal>
         <Primitive.Positioner className="z-50">
           <Primitive.Popup
-            render={(props) => <Popup {...props} list className={popupRows} />}
+            render={(props) => (
+              <Popup {...props} list className="flex flex-col gap-0.5" />
+            )}
           >
             {children}
           </Primitive.Popup>
