@@ -4,7 +4,7 @@ import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog as Primitive } from "@base-ui/react/dialog";
 import { cn } from "cn";
 import type { ReactElement, ReactNode } from "react";
-import { CardActions } from "./card";
+import { CardFooter } from "./card";
 import { Popup } from "./popup";
 
 /**
@@ -50,8 +50,8 @@ export function Dialog({
         >
           <div
             className={cn(
-              "flex flex-col gap-3 p-pad pt-pad-optical",
-              actions && "pb-pad-optical",
+              "flex flex-col gap-3 px-pad py-pad-optical",
+              actions && "pb-0",
             )}
           >
             <div className="flex flex-col gap-1">
@@ -64,7 +64,9 @@ export function Dialog({
             </div>
             {children}
           </div>
-          {actions && <CardActions className="pt-0">{actions}</CardActions>}
+          {actions && (
+            <CardFooter className="justify-end">{actions}</CardFooter>
+          )}
         </Primitive.Popup>
       </Primitive.Portal>
     </Root>

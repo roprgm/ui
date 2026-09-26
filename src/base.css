@@ -101,7 +101,7 @@
   --padding-sm: 5px;
   /* Around a raised control set into a sunken one, so thin the two read as one piece. */
   --padding-xs: 3px;
-  /* Around a control in a panel header or list row, so its icon lands 12px from the edge. */
+  /* Above and below a control in a panel header or list row. */
   --padding-row: 6px;
   /* Buttons, selects, fields, chips, and the thumbnails and icon buttons in rows. */
   --size-control: 28px;
@@ -118,8 +118,9 @@
   --size-control-sm: calc(var(--size-control) - 4px);
   /* Panel headers and list rows, holding a control `--padding-row` in. */
   --size-row: calc(var(--size-control) + 2 * var(--padding-row));
-  /* Buttons against an edge, whose box shows where text doesn't, and a section's top when it opens
-     with a line of text, which brings air above its capitals. */
+  /* From a top, bottom, or end edge to what brings air of its own: a button's box, which shows
+     where text doesn't, and a line of text, which has air above its capitals. A section's top and
+     bottom. */
   --padding-optical: calc(var(--padding) - 2px);
   /* A row in a popup's list, 2px shorter than a control so a list reads dense, and its side
      padding, which lands its text `--padding` from the popup's edge past the list's own. */
@@ -131,6 +132,8 @@
   --size-segment-lg: calc(var(--size-segment) + 4px);
   /* Its corners, nested in the group's `rounded-lg`. */
   --radius-segment: calc(var(--radius-lg) - var(--padding-xs));
+  /* The air around a ghost icon button's 16px icon, which `row-ends` gives back at a row's ends. */
+  --padding-icon: calc((var(--size-control) - 1rem) / 2);
 }
 
 /*
@@ -154,6 +157,7 @@
   --spacing-pad-row: var(--padding-row);
   --spacing-pad-optical: var(--padding-optical);
   --spacing-pad-item: var(--padding-item);
+  --spacing-pad-icon: var(--padding-icon);
 }
 
 /*
@@ -249,6 +253,23 @@
   }
   &[data-ending-style] {
     opacity: 0;
+  }
+}
+
+/* The ends of a row that holds text, buttons, and ghost icon buttons, such as a card's header or
+   footer, padded `--padding` at the start and `--padding-optical` at the end. A button's box sits
+   `--padding-optical` from the row's edges, so a row that holds one pads it above and below too.
+   A ghost icon button at either end bleeds out by the air around its icon, so the icon lands where
+   a box would. It measures an `icon`-size button, the size rows hold. */
+@utility row-ends {
+  &:has(> [data-slot="button"]) {
+    padding-block: var(--padding-optical);
+  }
+  & > [data-slot="icon-button"]:first-child {
+    margin-inline-start: calc(-1 * var(--padding-icon));
+  }
+  & > [data-slot="icon-button"]:last-child {
+    margin-inline-end: calc(-1 * var(--padding-icon));
   }
 }
 

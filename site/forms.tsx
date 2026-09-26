@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../src/components/button";
-import { Card, CardActions, CardSection } from "../src/components/card";
+import { Card, CardFooter, CardSection } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chip } from "../src/components/chip";
 import { Field } from "../src/components/field";
@@ -33,7 +33,7 @@ export function FormsDemo() {
   return (
     <div className="grid min-w-0 grid-cols-1 items-start gap-6 p-3 @sm:p-6 @2xl:grid-cols-2">
       <Card>
-        <CardSection className="pt-pad-optical">
+        <CardSection>
           <h4 className="font-medium">Export</h4>
           <Field label="File name">
             <Input defaultValue="Lisbon sunset" />
@@ -84,10 +84,10 @@ export function FormsDemo() {
             <Switch /> Open when done
           </label>
         </CardSection>
-        <CardActions>
+        <CardFooter className="justify-end">
           <Button>Cancel</Button>
           <Button variant="primary">Export</Button>
-        </CardActions>
+        </CardFooter>
       </Card>
 
       <div className="flex flex-col gap-4">

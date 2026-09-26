@@ -54,8 +54,12 @@ export function EditorDemo() {
               valueWidth={3}
               variant="toolbar"
             />
-            <Popover align="center" trigger={<Chip>More</Chip>}>
-              <CardSection className="w-56 pt-pad-optical">
+            <Popover
+              align="center"
+              trigger={<Chip>More</Chip>}
+              className="w-56"
+            >
+              <CardSection>
                 <Slider
                   label="Size"
                   value={size}

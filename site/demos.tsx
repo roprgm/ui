@@ -531,13 +531,14 @@ export function PopoverDemo() {
   return (
     <Popover
       align="center"
+      className="w-64"
       trigger={
         <Chip>
           <BrushIcon /> Brush
         </Chip>
       }
     >
-      <CardSection className="w-64 pt-pad-optical">
+      <CardSection>
         <Slider
           label="Size"
           value={size}

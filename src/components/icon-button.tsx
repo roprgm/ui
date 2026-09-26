@@ -17,7 +17,13 @@ export function IconButton({
 }) {
   return (
     <Tooltip content={label} shortcut={shortcut} side={side}>
-      <Button variant="ghost" size="icon" aria-label={label} {...props} />
+      <Button
+        data-slot="icon-button"
+        variant="ghost"
+        size="icon"
+        aria-label={label}
+        {...props}
+      />
     </Tooltip>
   );
 }

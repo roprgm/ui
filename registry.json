@@ -51,6 +51,7 @@
           "size-segment": "calc(var(--size-control-lg) - 2 * var(--padding-xs))",
           "size-segment-lg": "calc(var(--size-segment) + 4px)",
           "radius-segment": "calc(var(--radius-lg) - var(--padding-xs))",
+          "padding-icon": "calc((var(--size-control) - 1rem) / 2)",
           "text-shadow-default": "0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2)",
           "text-shadow-subtle": "0.5px 1px 0.5px hsl(0 0% 0% / 0.08)",
           "color-field": "color-mix(in srgb, var(--layer), hsl(0 0% 0%) 35%)",
@@ -69,7 +70,8 @@
           "spacing-pad-xs": "var(--padding-xs)",
           "spacing-pad-row": "var(--padding-row)",
           "spacing-pad-optical": "var(--padding-optical)",
-          "spacing-pad-item": "var(--padding-item)"
+          "spacing-pad-item": "var(--padding-item)",
+          "spacing-pad-icon": "var(--padding-icon)"
         }
       },
       "css": {
@@ -143,6 +145,17 @@
           },
           "&[data-ending-style]": {
             "opacity": "0"
+          }
+        },
+        "@utility row-ends": {
+          "&:has(> [data-slot=\"button\"])": {
+            "padding-block": "var(--padding-optical)"
+          },
+          "& > [data-slot=\"icon-button\"]:first-child": {
+            "margin-inline-start": "calc(-1 * var(--padding-icon))"
+          },
+          "& > [data-slot=\"icon-button\"]:last-child": {
+            "margin-inline-end": "calc(-1 * var(--padding-icon))"
           }
         },
         "@utility focus-ring": {

@@ -45,14 +45,17 @@ export function Button({
   ...props
 }: ComponentProps<"button"> &
   VariantProps<typeof button> & {
-    render?: ReactElement<{ className?: string }>;
+    render?: ReactElement<{ className?: string; "data-slot"?: string }>;
   }) {
   const classes = cn(button({ variant, size }), className);
   if (render) {
     return cloneElement(render, {
+      "data-slot": "button",
       ...props,
       className: cn(classes, render.props.className),
     });
   }
-  return <button type="button" className={classes} {...props} />;
+  return (
+    <button type="button" data-slot="button" className={classes} {...props} />
+  );
 }
