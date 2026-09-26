@@ -19,6 +19,7 @@ import {
 } from "../src/components/panel";
 import { Popover } from "../src/components/popover";
 import { ScrollArea } from "../src/components/scroll-area";
+import { ScrollText } from "../src/components/scroll-text";
 import { ScrubInput } from "../src/components/scrub-input";
 import { Select } from "../src/components/select";
 import { Slider } from "../src/components/slider";
@@ -56,6 +57,10 @@ export function ButtonDemo() {
     <>
       <Button>Default</Button>
       <Button variant="primary">Primary</Button>
+      <Button variant="primary">
+        <PlusIcon />
+        Import
+      </Button>
       <Button variant="ghost">Ghost</Button>
       <Button disabled>Disabled</Button>
       <Button variant="ghost" render={<a href="#icon-button" />}>
@@ -221,7 +226,7 @@ export function ScrollTextDemo() {
           key={name}
           className="flex h-(--size-control) items-center gap-2 rounded-md surface-sunken px-2.5"
         >
-          <span className="scroll-text">{name}</span>
+          <ScrollText>{name}</ScrollText>
         </div>
       ))}
     </div>
@@ -682,7 +687,7 @@ export function TreeListDemo() {
       {(layer) => (
         <>
           <span className="size-(--size-control) shrink-0 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
-          <span className="flex-1 scroll-text">{layer.name}</span>
+          <ScrollText className="flex-1">{layer.name}</ScrollText>
           <IconButton
             label="Hide"
             size="icon"

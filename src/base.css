@@ -365,8 +365,9 @@
 
 /* One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls
    sideways to show the rest. Use it where you would use `truncate`, except inside something you
-   click, where a scroller would fight the click. It sets its own display, so
-   it works on a lone span, and shrinks in a flex row. */
+   click, where a scroller would fight the click. It sets its own display, so it works on a lone
+   span, and shrinks in a flex row. A box that scrolls is a tab stop when nothing in it is one, so
+   give it `tabIndex={-1}`, as the ScrollText component does. */
 @utility scroll-text {
   @apply scroll-fade-x;
   display: block;
