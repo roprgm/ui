@@ -4,14 +4,16 @@ import { type ComponentProps, cloneElement, type ReactElement } from "react";
 
 const button = cva(
   // Colors ease over 200ms; the 1px press moves faster, since the last entry for a property wins.
-  "inline-flex h-control cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
+  "inline-flex h-control cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap flush [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
   {
     variants: {
+      // A box sits 2px closer to a padded container's edge than text does, since its edge shows
+      // where text's doesn't.
       variant: {
         default:
-          "surface-raised text-foreground hover:bg-raised-hover data-popup-open:bg-raised-hover",
+          "surface-raised text-foreground flush-x-0.5 hover:bg-raised-hover data-popup-open:bg-raised-hover",
         primary:
-          "surface-raised bg-primary! text-on-primary text-shadow-(--text-shadow-subtle) hover:bg-primary-hover!",
+          "surface-raised bg-primary! text-on-primary text-shadow-(--text-shadow-subtle) flush-x-0.5 hover:bg-primary-hover!",
         ghost:
           "text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },
