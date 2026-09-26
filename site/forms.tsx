@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../src/components/button";
-import { Card, CardFooter, CardSection } from "../src/components/card";
+import { Card, CardActions, CardSection } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chip } from "../src/components/chip";
 import { Field } from "../src/components/field";
@@ -84,10 +84,10 @@ export function FormsDemo() {
             <Switch /> Open when done
           </label>
         </CardSection>
-        <CardFooter className="justify-end">
+        <CardActions>
           <Button>Cancel</Button>
           <Button variant="primary">Export</Button>
-        </CardFooter>
+        </CardActions>
       </Card>
 
       <div className="flex flex-col gap-4">

@@ -66,3 +66,17 @@ export function CardSection({ className, ...props }: ComponentProps<"div">) {
 export function CardFooter({ className, ...props }: ComponentProps<"div">) {
   return <div className={cn(row, className)} {...props} />;
 }
+
+/**
+ * Buttons at the end of a card, such as Cancel and Export. They sit `--padding-optical` from its
+ * edges, since a button's box shows where a ghost icon's doesn't; a ghost icon button goes in a
+ * `CardFooter`. Under content that already ends in padding, as in a Dialog, drop its top: `pt-0`.
+ */
+export function CardActions({ className, ...props }: ComponentProps<"div">) {
+  return (
+    <div
+      className={cn("flex justify-end gap-1 p-pad-optical", className)}
+      {...props}
+    />
+  );
+}

@@ -1,5 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps, ReactNode } from "react";
+import { CardActions } from "./card";
 import { IconButton } from "./icon-button";
 import { Popup } from "./popup";
 
@@ -42,7 +43,7 @@ export function Notice({
           {children}
         </div>
         {actions && (
-          <div className="flex gap-1 p-pad-optical pt-0">{actions}</div>
+          <CardActions className="justify-start pt-0">{actions}</CardActions>
         )}
       </div>
       {onDismiss && (

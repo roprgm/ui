@@ -607,7 +607,8 @@
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/popup.json"
+        "https://ui.roprgm.com/r/popup.json",
+        "https://ui.roprgm.com/r/card.json"
       ],
       "files": [
         {
@@ -624,7 +625,8 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/icon-button.json",
-        "https://ui.roprgm.com/r/popup.json"
+        "https://ui.roprgm.com/r/popup.json",
+        "https://ui.roprgm.com/r/card.json"
       ],
       "files": [
         {
