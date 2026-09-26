@@ -37,17 +37,17 @@ export function EditorDemo() {
   ].join(" ");
 
   return (
-    <div className="flex h-[560px] bg-field">
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] bg-field @2xl:flex @2xl:h-[560px]">
       <div className="layer-card border-line border-r p-(--padding-row)">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
-      <div className="relative grid min-w-0 flex-1 place-items-center p-10">
+      <div className="relative grid min-h-64 min-w-0 flex-1 place-items-center p-4 @2xl:p-10">
         <div
           className="aspect-[3/2] w-full max-w-lg rounded-sm bg-[linear-gradient(to_bottom,#3b6ea5_0%,#f0a868_45%,#f7d59c_52%,#2e4a3a_56%,#16261d_100%)] surface-float"
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-(--padding-sm) pl-(--padding) surface-float">
+          <div className="layer-elevated absolute top-3 right-2 left-2 flex flex-wrap items-center justify-center gap-1 @2xl:right-auto @2xl:left-auto rounded-full p-(--padding-sm) pl-(--padding) surface-float">
             <Slider
               label="Size"
               value={size}
@@ -76,7 +76,13 @@ export function EditorDemo() {
           </div>
         )}
       </div>
-      <Panel width={width} onWidthChange={setWidth} min={240} max={360}>
+      <Panel
+        width={width}
+        onWidthChange={setWidth}
+        min={240}
+        max={360}
+        className="col-span-2 @max-2xl:w-full! @max-2xl:[&>div:first-child]:hidden"
+      >
         <PanelHeader title={layer}>
           <Menu
             trigger={

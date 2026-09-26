@@ -30,7 +30,7 @@ const sorts = [
 export function FormsDemo() {
   const [quality, setQuality] = useState(90);
   return (
-    <div className="grid items-start gap-6 p-6 md:grid-cols-2">
+    <div className="grid min-w-0 grid-cols-1 items-start gap-6 p-3 @sm:p-6 @2xl:grid-cols-2">
       <div className="layer-elevated rounded-xl surface-card">
         <div className="flex flex-col gap-3 p-(--padding) pt-(--padding-optical)">
           <h4 className="font-medium">Export</h4>
@@ -45,7 +45,7 @@ export function FormsDemo() {
               <Input defaultValue="2160" />
             </Field>
           </div>
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-muted">Format</span>
             <ToggleGroup>
               <Toggle name="format" value="jpeg" defaultChecked>
@@ -59,7 +59,7 @@ export function FormsDemo() {
               </Toggle>
             </ToggleGroup>
           </div>
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-muted">Color space</span>
             <Select
               aria-label="Color space"
@@ -76,10 +76,10 @@ export function FormsDemo() {
             max={100}
             format={percent}
           />
-          <label className="flex items-center gap-2">
+          <label className="flex flex-wrap items-center gap-2">
             <Checkbox defaultChecked /> Include metadata
           </label>
-          <label className="flex items-center gap-2">
+          <label className="flex flex-wrap items-center gap-2">
             <Switch /> Open when done
           </label>
         </div>
@@ -113,7 +113,7 @@ export function FormsDemo() {
             <MoreIcon />
           </IconButton>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <ToggleGroup>
             <Toggle name="view" value="fit" defaultChecked>
               Fit
@@ -144,8 +144,8 @@ export function FormsDemo() {
       </div>
 
       {/* Sunken and raised controls in one row, to judge which heights read as equal. */}
-      <div className="flex flex-col gap-3 md:col-span-2">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col gap-3 @2xl:col-span-2">
+        <div className="flex flex-wrap items-center gap-2">
           <ToggleGroup>
             <Toggle name="align" value="left" defaultChecked>
               Left
@@ -166,7 +166,7 @@ export function FormsDemo() {
             className="w-32"
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <ToggleGroup size="lg">
             <Toggle name="align-lg" value="left" defaultChecked>
               Left
@@ -190,8 +190,8 @@ export function FormsDemo() {
             className="w-32"
           />
         </div>
-        <div className="flex items-center gap-2">
-          <Input placeholder="Preset name" className="w-60" />
+        <div className="flex flex-wrap items-center gap-2">
+          <Input placeholder="Preset name" className="w-60 max-w-full" />
           <Button>Default</Button>
           <Button variant="primary">Save</Button>
           <Select
