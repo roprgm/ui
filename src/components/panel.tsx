@@ -68,14 +68,16 @@ export function PanelHeader({
   children?: ReactNode;
 }) {
   return (
-    // A small IconButton sits 6px from the top, bottom, and end, so its corner nests in a rounded panel's.
+    // An IconButton sits 6px from the top, bottom, and end, so its corner nests in a rounded panel's.
     <div
       className={cn(
-        "flex h-10 shrink-0 items-center gap-1 pr-1.5 pl-3",
+        "flex h-(--size-row) shrink-0 items-center gap-1 pr-(--padding-row) pl-(--padding)",
         className,
       )}
     >
-      <h2 className="flex-1 truncate font-medium text-foreground">{title}</h2>
+      <h2 className="flex-1 scroll-text font-medium text-foreground">
+        {title}
+      </h2>
       {children}
     </div>
   );
@@ -84,7 +86,10 @@ export function PanelHeader({
 /** A padded group of controls, such as sliders. */
 export function PanelSection({ className, ...props }: ComponentProps<"div">) {
   return (
-    <div className={cn("flex flex-col gap-3 p-3", className)} {...props} />
+    <div
+      className={cn("flex flex-col gap-3 p-(--padding)", className)}
+      {...props}
+    />
   );
 }
 

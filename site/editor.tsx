@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Chip } from "../src/chip";
-import { IconButton } from "../src/icon-button";
-import { ListItem } from "../src/list-item";
-import { Menu, MenuItem, MenuSeparator } from "../src/menu";
-import { Panel, PanelBody, PanelHeader, PanelSection } from "../src/panel";
-import { Popover } from "../src/popover";
-import { Slider } from "../src/slider";
+import { Chip } from "../src/components/chip";
+import { IconButton } from "../src/components/icon-button";
+import { ListItem } from "../src/components/list-item";
+import { Menu, MenuItem, MenuSeparator } from "../src/components/menu";
+import {
+  Panel,
+  PanelBody,
+  PanelHeader,
+  PanelSection,
+} from "../src/components/panel";
+import { Popover } from "../src/components/popover";
+import { Slider } from "../src/components/slider";
 import { percent, ToolRail } from "./demos";
 import { EyeIcon, MoreIcon, PlusIcon } from "./icons";
 
@@ -33,16 +38,16 @@ export function EditorDemo() {
 
   return (
     <div className="flex h-[560px] bg-field">
-      <div className="layer-card border-line border-r p-1.5">
+      <div className="layer-card border-line border-r p-(--padding-row)">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <div className="relative grid min-w-0 flex-1 place-items-center p-10">
         <div
-          className="aspect-[3/2] w-full max-w-lg rounded-sm bg-[linear-gradient(to_bottom,#3b6ea5_0%,#f0a868_45%,#f7d59c_52%,#2e4a3a_56%,#16261d_100%)] shadow-float"
+          className="aspect-[3/2] w-full max-w-lg rounded-sm bg-[linear-gradient(to_bottom,#3b6ea5_0%,#f0a868_45%,#f7d59c_52%,#2e4a3a_56%,#16261d_100%)] surface-float"
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-1 pl-3 shadow-float">
+          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-(--padding-sm) pl-(--padding) surface-float">
             <Slider
               label="Size"
               value={size}
@@ -75,7 +80,7 @@ export function EditorDemo() {
         <PanelHeader title={layer}>
           <Menu
             trigger={
-              <IconButton label="Layer actions" size="icon-sm">
+              <IconButton label="Layer actions" size="icon">
                 <MoreIcon />
               </IconButton>
             }
@@ -134,7 +139,7 @@ export function EditorDemo() {
           </PanelSection>
         </PanelBody>
         <PanelHeader title="Layers">
-          <IconButton label="Add mask" size="icon-sm">
+          <IconButton label="Add mask" size="icon">
             <PlusIcon />
           </IconButton>
         </PanelHeader>
@@ -145,11 +150,11 @@ export function EditorDemo() {
               selected={name === layer}
               onClick={() => setLayer(name)}
             >
-              <span className="size-6 rounded-sm bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
+              <span className="size-(--size-control) rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
               <span className="flex-1">{name}</span>
               <IconButton
                 label="Hide"
-                size="icon-sm"
+                size="icon"
                 className="opacity-0 group-hover:opacity-100"
               >
                 <EyeIcon />

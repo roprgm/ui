@@ -1,6 +1,7 @@
 import { cn } from "cn";
 import type { ComponentProps, ReactNode } from "react";
 import { IconButton } from "./icon-button";
+import { Popup } from "./popup";
 
 /**
  * A message that floats without blocking the app; the caller positions it. An `alert` is red
@@ -20,27 +21,37 @@ export function Notice({
   onDismiss?: () => void;
 }) {
   return (
-    <div
+    <Popup
       role={tone}
+      layer="layer-card"
       className={cn(
-        // 12px corners less 6px of padding fit the dismiss button's 6px corners.
-        "layer-card flex max-w-sm items-start gap-2 rounded-xl p-1.5 text-foreground shadow-float",
+        "flex max-w-sm items-start",
         tone === "alert" && "text-danger",
         className,
       )}
       {...props}
     >
-      <div
-        className={cn(
-          "flex flex-1 flex-col gap-2 py-1 pl-1.5",
-          !onDismiss && "pr-1.5",
+      <div className="flex flex-1 flex-col">
+        <p
+          className={cn(
+            "p-(--padding) pt-(--padding-optical)",
+            actions && "pb-2",
+            onDismiss && "pr-0",
+          )}
+        >
+          {children}
+        </p>
+        {actions && (
+          <div className="flex gap-2 p-(--padding-optical) pt-0">{actions}</div>
         )}
-      >
-        <p>{children}</p>
-        {actions && <div className="flex gap-2">{actions}</div>}
       </div>
       {onDismiss && (
-        <IconButton label="Dismiss" size="icon-sm" onClick={onDismiss}>
+        <IconButton
+          label="Dismiss"
+          size="icon-sm"
+          onClick={onDismiss}
+          className="m-2"
+        >
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -54,6 +65,6 @@ export function Notice({
           </svg>
         </IconButton>
       )}
-    </div>
+    </Popup>
   );
 }

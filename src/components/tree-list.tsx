@@ -266,7 +266,9 @@ export function TreeList<T extends TreeNode<T>>({
     return list.map((item) => {
       const branch = Boolean(item.children?.length);
       const expanded = branch && !collapsed.has(item.id);
-      const indent = { "--indent": `${0.75 + depth}rem` } as CSSProperties;
+      const indent = {
+        "--indent": `calc(var(--padding) + ${depth}rem)`,
+      } as CSSProperties;
       return (
         <Fragment key={item.id}>
           <ListItem
@@ -292,8 +294,8 @@ export function TreeList<T extends TreeNode<T>>({
             className={cn(
               "gap-1.5 pl-(--indent) outline-none select-none [-webkit-touch-callout:none] focus-visible:bg-hover focus-visible:ring-1 focus-visible:ring-focus focus-visible:ring-inset",
               "data-[dragging=true]:opacity-40",
-              "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-accent/60 data-[drop=inside]:ring-inset",
-              "before:absolute before:right-2 before:left-(--indent) before:z-10 before:h-0.5 before:rounded-full before:bg-accent before:opacity-0",
+              "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-primary/60 data-[drop=inside]:ring-inset",
+              "before:absolute before:right-2 before:left-(--indent) before:z-10 before:h-0.5 before:rounded-full before:bg-primary before:opacity-0",
               "data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100",
             )}
           >
@@ -356,7 +358,7 @@ export function TreeList<T extends TreeNode<T>>({
         <div
           ref={ghost}
           style={{ translate: `${dragging.x}px ${dragging.y}px` }}
-          className="pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 truncate rounded-md bg-raised px-2.5 py-1 text-foreground shadow-float"
+          className="pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 scroll-text rounded-md bg-raised px-2.5 py-1 text-foreground surface-float"
         >
           {label(active.item)}
         </div>

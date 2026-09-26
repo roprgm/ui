@@ -1,0 +1,6 @@
+/*
+ * A flat theme: the primitives keep the fills the base gives them and draw no edge at all, so
+ * controls and popups stand apart from their layer by their fills alone.
+ */
+
+@import "../base.css";

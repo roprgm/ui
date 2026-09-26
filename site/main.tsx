@@ -1,7 +1,7 @@
 import "./index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { TooltipProvider } from "../src/tooltip";
+import { TooltipProvider } from "../src/components/tooltip";
 import {
   ButtonDemo,
   CheckboxDemo,
@@ -18,11 +18,13 @@ import {
   PanelDemo,
   PopoverDemo,
   ScrollAreaDemo,
+  ScrollTextDemo,
   ScrubInputDemo,
   SelectDemo,
   ShimmerDemo,
   SliderDemo,
   SpinnerDemo,
+  SurfacesDemo,
   SwitchDemo,
   TabsDemo,
   TextareaDemo,
@@ -33,6 +35,7 @@ import {
 } from "./demos";
 import { type Group, Page } from "./docs";
 import { EditorDemo } from "./editor";
+import { FormsDemo } from "./forms";
 import { Usage } from "./usage";
 
 const groups: Group[] = [
@@ -149,7 +152,15 @@ const groups: Group[] = [
           "Theme utilities: layer-card and layer-elevated paint a card and set the fills for the fields and buttons on it, so they keep the same contrast on the page, in a card, and in a card inside it.",
         demo: <LayersDemo />,
         bare: true,
-        code: '<div className="layer-card rounded-xl shadow-raised">…</div>',
+        code: '<div className="layer-card rounded-xl surface-card">…</div>',
+      },
+      {
+        name: "surfaces",
+        title: "Surfaces",
+        description:
+          "The primitives components are built from: surface-raised lifts a control off its layer, surface-sunken sets it in, surface-card stands a card on the page, surface-float lifts a popup over everything, surface-thumb marks what you grab, and separator draws a line between groups. The base gives each its fill and the theme draws its edge, so a control you build with them follows the theme too.",
+        demo: <SurfacesDemo />,
+        code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
       },
       {
         name: "panel",
@@ -173,7 +184,7 @@ const groups: Group[] = [
         name: "tabs",
         title: "Tab list",
         description:
-          "Rows or columns of tabs with arrow-key navigation, such as a tool rail.",
+          "Rows or columns of tabs with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views.",
         demo: <TabsDemo />,
       },
       {
@@ -245,6 +256,14 @@ const groups: Group[] = [
         demo: <ShimmerDemo />,
         code: '<span className="shimmer">Decoding RAW…</span>',
       },
+      {
+        name: "scroll-text",
+        title: "Scroll text",
+        description:
+          "A theme utility: one line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls sideways to show the rest. Use it where you would use truncate. The fade follows the scroll, and scroll-fade-x gives the same fade to anything that scrolls sideways.",
+        demo: <ScrollTextDemo />,
+        code: '<span className="scroll-text">{layer.name}</span>',
+      },
     ],
   },
   {
@@ -256,6 +275,14 @@ const groups: Group[] = [
         description:
           "A tool rail, a canvas with a floating bar, and a resizable panel. Try the Brush tool and drag the panel's edge.",
         demo: <EditorDemo />,
+        block: true,
+      },
+      {
+        name: "forms",
+        title: "Forms",
+        description:
+          "Fields, buttons, selects, and toggles side by side, in a card and on the page, to see how their sizes and paddings sit together.",
+        demo: <FormsDemo />,
         block: true,
       },
     ],

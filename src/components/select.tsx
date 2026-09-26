@@ -5,20 +5,27 @@ import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { type ReactNode, useState } from "react";
 import { Chevron } from "./chevron";
-import { Surface, usePopupLayer } from "./surface";
+import { Popup, popupItem } from "./popup";
 import { Tooltip } from "./tooltip";
 
 const trigger = cva(
-  "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring data-disabled:pointer-events-none data-disabled:opacity-40",
+  "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring dim-disabled",
   {
     variants: {
       /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
       variant: {
         field:
-          "h-8 rounded-md bg-raised pr-2.5 pl-3 shadow-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
-        pill: "h-7 rounded-full bg-hover pr-2.5 pl-3 hover:bg-pressed data-popup-open:bg-pressed",
+          "rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
+        pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
+      },
+      /** A Button's heights and label padding, 2px less on the chevron's side; `lg` goes with
+          large buttons and a large ToggleGroup. */
+      size: {
+        default: "h-(--size-control) pr-2.5 pl-3",
+        lg: "h-(--size-control-lg) pr-3 pl-3.5",
       },
     },
+    defaultVariants: { size: "default" },
   },
 );
 
@@ -34,6 +41,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
   placeholder,
   tooltip,
   variant = "field",
+  size,
   className,
   "aria-label": label,
   onOpenChange,
@@ -44,16 +52,15 @@ export function Select<T extends string, Multiple extends boolean = false>({
   /** Shown on hover while the list is closed. */
   tooltip?: string;
   variant?: "field" | "pill";
+  size?: "default" | "lg";
   className?: string;
   "aria-label"?: string;
 }) {
   const [open, setOpen] = useState(false);
-  const popup = usePopupLayer();
   const control = (
     <Primitive.Trigger
-      ref={popup.trigger}
       aria-label={label}
-      className={cn(trigger({ variant }), className)}
+      className={cn(trigger({ variant, size }), className)}
     >
       <Primitive.Value
         placeholder={placeholder}
@@ -77,7 +84,6 @@ export function Select<T extends string, Multiple extends boolean = false>({
       items={items}
       onOpenChange={(next, details) => {
         setOpen(next);
-        if (next) popup.measure();
         onOpenChange?.(next, details);
       }}
       {...props}
@@ -97,10 +103,9 @@ export function Select<T extends string, Multiple extends boolean = false>({
         >
           <Primitive.Popup
             render={(props) => (
-              <Surface
+              <Popup
                 {...props}
-                layer={popup.layer}
-                className="min-w-(--anchor-width)"
+                className="min-w-(--anchor-width) rounded-lg p-(--padding-sm)"
               />
             )}
           >
@@ -111,7 +116,10 @@ export function Select<T extends string, Multiple extends boolean = false>({
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
-                  className="flex cursor-default items-center justify-between gap-4 rounded-md px-2.5 py-1.25 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised data-selected:bg-raised"
+                  className={cn(
+                    popupItem,
+                    "justify-between gap-4 data-selected:bg-raised",
+                  )}
                 >
                   <Primitive.ItemText>{item.label}</Primitive.ItemText>
                   <Primitive.ItemIndicator>

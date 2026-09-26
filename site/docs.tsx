@@ -4,8 +4,8 @@ import { parse, render } from "sugar-high/core";
 import * as css from "sugar-high/lang/css";
 import * as shell from "sugar-high/lang/shell";
 import * as typescript from "sugar-high/lang/typescript";
-import { IconButton } from "../src/icon-button";
-import { ScrollArea } from "../src/scroll-area";
+import { IconButton } from "../src/components/icon-button";
+import { ScrollArea } from "../src/components/scroll-area";
 import { CopyButton } from "./copy-button";
 import { GitHubIcon } from "./icons";
 
@@ -63,9 +63,10 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
   return (
     <div className="mx-auto flex max-w-6xl gap-12 px-6">
       <nav className="sticky top-0 hidden h-dvh w-48 shrink-0 md:block">
-        {/* The right padding keeps the scrollbar clear of the links. */}
-        <ScrollArea className="h-full">
-          <div className="flex flex-col gap-1 py-12 pr-4">
+        {/* The right padding keeps the scrollbar clear of the links; the area reaches 4px past the
+            left edge, padded back, so it doesn't clip a control's edge or focus ring there. */}
+        <ScrollArea className="-ml-1 h-full">
+          <div className="flex flex-col gap-1 py-12 pr-4 pl-1">
             <div className="mb-4 -mt-px flex items-center gap-1">
               <a
                 href="#usage"
@@ -75,7 +76,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
               </a>
               <IconButton
                 label="GitHub"
-                size="icon-sm"
+                size="icon"
                 render={
                   <a
                     href="https://github.com/roprgm/ui"
@@ -187,7 +188,7 @@ function Preview({ doc }: { doc: Doc }) {
   return (
     <div
       className={cn(
-        "layer-card rounded-xl shadow-raised",
+        "layer-card rounded-xl surface-card",
         doc.block && "overflow-hidden",
         !doc.block &&
           "flex min-h-40 flex-wrap items-center justify-center gap-3 p-10",
@@ -210,7 +211,7 @@ export function Code({
 }) {
   return (
     // Each line is 16px in a 6px padding, so the first one centers on the 28px copy button.
-    <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 shadow-sunken">
+    <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 surface-sunken">
       {lang === "text" && (
         <pre className="flex-1 py-1.5 font-mono text-xs whitespace-pre-wrap text-foreground">
           {children}
@@ -218,13 +219,13 @@ export function Code({
       )}
       {lang !== "text" && (
         <pre
-          className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground"
+          className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground scroll-fade-x"
           dangerouslySetInnerHTML={{
             __html: render(parse(children, languages[lang])),
           }}
         />
       )}
-      <CopyButton value={children} size="icon-sm" />
+      <CopyButton value={children} size="icon" />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import type { ComponentProps, KeyboardEvent } from "react";
 import { Button } from "./button";
@@ -11,8 +12,29 @@ const steps: Record<string, number> = {
   ArrowUp: -1,
 };
 
-/** Tabs in a row, or a column with `flex-col`; arrow keys in any direction move between them. */
-export function TabList({ className, ...props }: ComponentProps<"div">) {
+const list = cva("flex", {
+  variants: {
+    variant: {
+      default: "gap-1",
+      // Set into a sunken strip like a ToggleGroup, and as tall: the tabs read a control height
+      // that fits the strip, and their corners nest in its corners. Only default and `icon` tabs
+      // follow it; the other sizes resolve at the root.
+      segmented:
+        "gap-0.5 rounded-lg surface-sunken p-(--padding-xs) [--size-control:calc(var(--size-control-lg)-2*var(--padding-xs))] *:rounded-[calc(var(--radius-lg)-var(--padding-xs))]",
+    },
+  },
+  defaultVariants: { variant: "default" },
+});
+
+/**
+ * Tabs in a row, or a column with `flex-col`; arrow keys in any direction move between them.
+ * `segmented` sets them into a sunken strip, as a tool rail or a switch between views.
+ */
+export function TabList({
+  variant,
+  className,
+  ...props
+}: ComponentProps<"div"> & VariantProps<typeof list>) {
   const selectNeighbor = (event: KeyboardEvent<HTMLDivElement>) => {
     const step = steps[event.key];
     if (!step) return;
@@ -31,7 +53,7 @@ export function TabList({ className, ...props }: ComponentProps<"div">) {
     <div
       role="tablist"
       onKeyDown={selectNeighbor}
-      className={cn("flex gap-1", className)}
+      className={cn(list({ variant }), className)}
       {...props}
     />
   );
@@ -50,7 +72,7 @@ export function Tab({
       aria-selected={selected}
       tabIndex={selected ? 0 : -1}
       className={cn(
-        "aria-selected:bg-raised aria-selected:text-foreground aria-selected:shadow-raised",
+        "aria-selected:surface-raised aria-selected:text-foreground",
         className,
       )}
       {...props}

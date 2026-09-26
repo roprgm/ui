@@ -1,8 +1,9 @@
 import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 /**
- * Writes the `theme` item of registry.json from theme.css, so the registry installs the same
- * CSS the package ships. `@theme` variables become `cssVars.theme`;
+ * Writes the `theme` item of registry.json from themes/default.css and the files it imports, so the
+ * registry installs the same CSS the package ships. `@theme` variables become `cssVars.theme`;
  * everything else goes to `css`. Runs before each build.
  */
 type Rules = { [key: string]: string | Rules };
@@ -54,12 +55,20 @@ function parse(source: string): Rules {
   return block();
 }
 
+/** A CSS file with its relative imports written in place. */
+function read(path: string): string {
+  return readFileSync(path, "utf8").replace(
+    /@import "(\.{1,2}\/.+?)";/g,
+    (_, file) => read(join(dirname(path), file)),
+  );
+}
+
 function item(path: string) {
   const {
     "@theme": theme = {},
     "@theme inline": inline = {},
     ...css
-  } = parse(readFileSync(path, "utf8")) as Record<string, Rules>;
+  } = parse(read(path)) as Record<string, Rules>;
   const vars = Object.fromEntries(
     Object.entries({ ...theme, ...inline }).map(([key, value]) => [
       key.replace(/^--/, ""),
@@ -69,8 +78,13 @@ function item(path: string) {
   return { cssVars: { theme: vars }, css };
 }
 
+const theme = "https://ui.roprgm.com/r/theme.json";
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
 for (const entry of registry.items) {
-  if (entry.name === "theme") Object.assign(entry, item("src/theme.css"));
+  if (entry.name === "theme")
+    Object.assign(entry, item("src/themes/default.css"));
+  // Installed alone with shadcn, an item gets the theme's CSS only if it lists the theme itself.
+  else if (!entry.registryDependencies?.includes(theme))
+    throw new Error(`registry.json: "${entry.name}" must list ${theme}`);
 }
 writeFileSync("registry.json", `${JSON.stringify(registry, null, 2)}\n`);

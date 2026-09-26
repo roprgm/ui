@@ -1,0 +1,442 @@
+/*
+ * The base every theme builds on: the tokens, the primitives components are made of, and the
+ * utilities, variants, and page rules around them. A theme imports this file, sets again any
+ * token it changes in its own `@theme`, and draws the primitives' edges its own way: with
+ * shadows, borders, or nothing.
+ */
+
+@source "./";
+
+/* The system font; a theme sets its own. */
+@theme {
+  --font-sans: system-ui, sans-serif;
+}
+
+/*
+ * Semantic colors. Components use only these, so redefining one in :root or your own theme
+ * restyles every component that uses it.
+ */
+
+@theme {
+  /* Translucent states over any background. */
+  --color-hover: hsl(0 0% 100% / 0.08);
+  --color-pressed: hsl(0 0% 100% / 0.15);
+
+  /* Text, strongest first. */
+  --color-foreground: hsl(0 0% 95%);
+  --color-muted: hsl(0 0% 63%);
+  --color-faint: hsl(0 0% 45%);
+  --color-disabled: hsl(0 0% 32%);
+
+  /* The primary color marks what is on: primary buttons, checked controls, thumbs, drop markers. */
+  --color-primary: hsl(0 0% 86%);
+  --color-primary-hover: hsl(0 0% 98%);
+  --color-on-primary: hsl(0 0% 9%);
+
+  --color-line: hsl(0 0% 0% / 0.4);
+  --color-backdrop: hsl(0 0% 0% / 0.5);
+  --color-focus: hsl(0 0% 100% / 0.25);
+  --color-danger: hsl(0 90% 75%);
+}
+
+/*
+ * Levels: the backgrounds of the interface, named by their role rather than their color, so a
+ * theme redefines all eight and anything painted with them follows. Here they rise from dark to
+ * light; a light theme lightens up to its cards and darkens after, since white can't get lighter.
+ * Use them for backgrounds of your own, such as `bg-level-3` for a panel.
+ */
+@theme {
+  /* Sunk below the page. */
+  --color-level-1: hsl(0 0% 4%);
+  /* The page. */
+  --color-level-2: hsl(0 0% 8%);
+  /* A card or panel on the page. */
+  --color-level-3: hsl(0 0% 12.3%);
+  /* Elevated: a card inside a card, and popups. */
+  --color-level-4: hsl(0 0% 17%);
+  /* Each more prominent on the page than the last. */
+  --color-level-5: hsl(0 0% 22%);
+  --color-level-6: hsl(0 0% 27.3%);
+  --color-level-7: hsl(0 0% 33%);
+  --color-level-8: hsl(0 0% 39%);
+
+  --color-tooltip: var(--color-level-1);
+}
+
+/* Control fills, mixed from the layer they sit on: fields below it, raised controls above it and
+   further above on hover. `inline` writes the mix into each utility, so a control reads the layer
+   around it. */
+@theme inline {
+  --color-field: color-mix(in srgb, var(--layer), hsl(0 0% 0%) 35%);
+  --color-raised: color-mix(in srgb, var(--layer), hsl(0 0% 100%) 11%);
+  --color-raised-hover: color-mix(in srgb, var(--layer), hsl(0 0% 100%) 17%);
+}
+
+/* Corner radii, used as `rounded-*`. Nested corners stay concentric: the outer radius less the
+   inset is the inner radius, so changing one may mean changing the ones inside it. */
+@theme {
+  --radius-xs: 2.5px;
+  --radius-sm: 5px;
+  --radius-md: 7px;
+  --radius-lg: 9px;
+  --radius-xl: 12px;
+}
+
+/*
+ * Density. `--padding` and `--size-control` are the two to change together, for a denser or
+ * roomier theme; the sizes after them follow from them. Button's heights are the scale:
+ * other controls name their sizes after the Button they go with and measure what looks as tall
+ * beside it. They set heights and container padding; each control sets its own side padding, by
+ * eye. Components read these as `p-(--padding)` or `h-(--size-control)`, so `cn` still merges a
+ * caller's `p-*` or `h-*`. The density is global: set these in `@theme`. The sizes that follow
+ * from them resolve once, at the root, so redefining `--size-control` on one element changes
+ * only what reads it directly, not `--size-control-lg`, `-sm`, or `--size-row` below it.
+ */
+@theme {
+  /* From a container's edge to its content: the sections of a dialog, notice, popover, or panel,
+     and list rows. */
+  --padding: 14px;
+  /* Around a list of items, as in a menu or select. Menu's submenus are offset by it as a number,
+     so change `alignOffset` in menu.tsx with it. */
+  --padding-sm: 5px;
+  /* Around a raised control set into a sunken one, so thin the two read as one piece. */
+  --padding-xs: 3px;
+  /* Around a control in a panel header or list row, so its icon lands 12px from the edge. */
+  --padding-row: 6px;
+  /* Buttons, selects, fields, chips, and the thumbnails and icon buttons in rows. */
+  --size-control: 28px;
+  /* A range input's thumb. The slider's fill and the room around its bar follow it. */
+  --size-thumb: 13px;
+}
+
+/* Sizes that follow from the density above, resolved once at the root. A theme can still redefine
+   one on its own. */
+@theme {
+  /* Large buttons, selects, and fields. */
+  --size-control-lg: calc(var(--size-control) + 4px);
+  /* Buttons inside a large field, and close buttons. */
+  --size-control-sm: calc(var(--size-control) - 4px);
+  /* Panel headers and list rows, holding a control `--padding-row` in. */
+  --size-row: calc(var(--size-control) + 2 * var(--padding-row));
+  /* Buttons against an edge, whose box shows where text doesn't, and a section's top when it opens
+     with a line of text, which brings air above its capitals. */
+  --padding-optical: calc(var(--padding) - 2px);
+}
+
+/*
+ * Layers. A layer sets only its background, `--layer`; the fills of the controls on it are mixed
+ * from it above, so they keep the same contrast on any background. The page is the first
+ * layer, and `layer-card` and `layer-elevated` paint the next two. A layer of your own sets
+ * `--layer` and paints it, as these do.
+ */
+@layer base {
+  :root {
+    --layer: var(--color-level-2);
+  }
+}
+
+/* Panels, dialogs, notices, and cards on the page. */
+@utility layer-card {
+  --layer: var(--color-level-3);
+  background-color: var(--layer);
+}
+
+/* Cards inside a card, and every popup. */
+@utility layer-elevated {
+  --layer: var(--color-level-4);
+  background-color: var(--layer);
+}
+
+/*
+ * Primitives: surfaces and lines, the only look components use, so a theme restyles every
+ * component, and yours, by implementing these. Here each sets its fill from the color tokens
+ * above; a theme changes a fill by setting the token again, and draws the edge by adding what
+ * this file leaves out (a `box-shadow`, `border`, or `filter`). A theme that redeclared a property
+ * set here could lose to it: Tailwind orders the merged definitions of a utility by how many
+ * properties each has. A component that needs another fill says so with `!`, as the primary
+ * Button does, since a plain `bg-*` sorts before these.
+ */
+
+/* Stands out from the layer: buttons, selects, and selected tabs and toggles. */
+@utility surface-raised {
+  @apply bg-raised;
+}
+
+/* Set into the layer: fields, tracks, checkboxes, switches, and groups. */
+@utility surface-sunken {
+  @apply bg-field;
+}
+
+/* A card standing on the layer under it, such as a panel of controls on the page. Its fill is its
+   own layer, as `layer-card` or `layer-elevated` set it. */
+@utility surface-card {
+  background-color: var(--layer);
+}
+
+/* Floats over everything: popups and anything dragged. Its fill comes from its layer, so this
+   only marks it, since a utility needs a property. */
+@utility surface-float {
+  --surface: float;
+}
+
+/* Floats in a shape that isn't a box, such as a tooltip with its arrow, so a theme draws its edge
+   as a filter that follows the shape. */
+@utility surface-callout {
+  @apply bg-tooltip;
+}
+
+/* Grabbed and moved: a slider's thumb or a switch's knob. */
+@utility surface-thumb {
+  @apply bg-primary;
+}
+
+/* A line between groups, such as a menu's. Size it with `h-px` or `w-px`. Lines along an edge of
+   a row or section are borders in `border-line`, the same color. */
+@utility separator {
+  @apply bg-line;
+}
+
+/* An outline set off by a gap, so it shows on any fill. It stays transparent until
+   the element or a child has keyboard focus, then fades in slowly. */
+@utility focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+
+  &:focus-visible,
+  &:has(:focus-visible) {
+    outline-color: var(--color-focus);
+    transition-duration: 300ms;
+  }
+}
+
+/* Fades a disabled control and stops it reacting, whether it is disabled natively, through Base
+   UI's `data-disabled`, or by a disabled input inside it, as a toggle's radio is. */
+@utility dim-disabled {
+  &:is(:disabled, [data-disabled], :has(:disabled)) {
+    pointer-events: none;
+    opacity: 40%;
+  }
+}
+
+/* A range input drawn as its thumb alone, over a track the component paints: a `--size-thumb`
+   `surface-thumb`, with the focus ring in its shape. Touch draws no highlight box around it. */
+@utility range-thumb {
+  @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
+}
+
+/* A shade at the top and bottom of a scroll container that shows while there is more to scroll
+   that way. Where the browser ties animations to scrolling, each shade follows the position: the
+   top one fades in over the first 1.5rem scrolled and the bottom one fades out over the last, and
+   neither shows when nothing overflows. Elsewhere it fades by time, from the attributes Base UI's
+   ScrollArea sets on its viewport. */
+@utility scroll-fade {
+  &::before,
+  &::after {
+    content: "";
+    position: sticky;
+    z-index: 10;
+    display: block;
+    height: 1.5rem;
+    pointer-events: none;
+    opacity: 0;
+  }
+  &::before {
+    top: 0;
+    margin-bottom: -1.5rem;
+    background: linear-gradient(
+      to bottom,
+      hsl(0 0% 0% / 0.2),
+      30%,
+      transparent
+    );
+  }
+  &::after {
+    bottom: 0;
+    margin-top: -1.5rem;
+    background: linear-gradient(to top, hsl(0 0% 0% / 0.2), 30%, transparent);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    &::before {
+      animation: scroll-fade-in linear both;
+      animation-timeline: scroll();
+      animation-range: 0 1.5rem;
+    }
+    &::after {
+      animation: scroll-fade-out linear both;
+      animation-timeline: scroll();
+      animation-range: calc(100% - 1.5rem) 100%;
+    }
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    &::before,
+    &::after {
+      transition: opacity 150ms;
+    }
+    &[data-overflow-y-start]::before,
+    &[data-overflow-y-end]::after {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes scroll-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* How far in each edge of a scroll-fade-x element fades, animated as it scrolls. Registered, so
+   an animation can move them. */
+@property --scroll-fade-start {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --scroll-fade-end {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+/* Fades the start and end of a horizontal scroll container's content where more of it lies that
+   way, following the scroll position: the end fades while there is more to the right, and the
+   start fades in over the first 1.5rem scrolled. A mask, so it fades the content itself and works
+   on any background. The fade stands in for a scrollbar, so it hides it, and a sideways swipe that
+   reaches an end stops there rather than scrolling the page or going back a page. When nothing
+   overflows, or the browser can't tie animations to scrolling, nothing fades. */
+@utility scroll-fade-x {
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    hsl(0 0% 0%) var(--scroll-fade-start),
+    hsl(0 0% 0%) calc(100% - var(--scroll-fade-end)),
+    transparent
+  );
+
+  @supports (animation-timeline: scroll()) {
+    animation:
+      scroll-fade-x-start linear both,
+      scroll-fade-x-end linear both;
+    animation-timeline: scroll(self inline), scroll(self inline);
+    animation-range:
+      0 1.5rem,
+      calc(100% - 1.5rem) 100%;
+  }
+}
+
+@keyframes scroll-fade-x-start {
+  from {
+    --scroll-fade-start: 0px;
+  }
+  to {
+    --scroll-fade-start: 1.5rem;
+  }
+}
+
+@keyframes scroll-fade-x-end {
+  from {
+    --scroll-fade-end: 1.5rem;
+  }
+  to {
+    --scroll-fade-end: 0px;
+  }
+}
+
+/* One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls
+   sideways to show the rest. Use it where you would use `truncate`, except inside something you
+   click, where a scroller would fight the click. It sets its own display, so
+   it works on a lone span, and shrinks in a flex row. */
+@utility scroll-text {
+  @apply scroll-fade-x;
+  display: block;
+  min-width: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the
+   element keeps its own colors; the band is the one place shown at full strength. The band is
+   sized to the element, so put it on a group of blocks rather than on each one, and one band
+   crosses them all at the same pace. */
+@utility shimmer {
+  mask-image: linear-gradient(
+    100deg,
+    hsl(0 0% 0% / 0.45) 30%,
+    hsl(0 0% 0% / 0.6) 40%,
+    hsl(0 0% 0%) 50%,
+    hsl(0 0% 0% / 0.6) 60%,
+    hsl(0 0% 0% / 0.45) 70%
+  );
+  mask-size: 300% 100%;
+  animation: shimmer 2.4s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    mask-image: none;
+    animation: none;
+  }
+}
+
+/* The band crosses in the first three quarters, then rests off the edge before the next pass. */
+@keyframes shimmer {
+  from {
+    mask-position: 100% 0;
+  }
+  75%,
+  to {
+    mask-position: 0 0;
+  }
+}
+
+/* A range input's thumb. Separate rules, since one unknown pseudo-element voids a selector list. */
+@custom-variant thumb {
+  &::-webkit-slider-thumb {
+    @slot;
+  }
+  &::-moz-range-thumb {
+    @slot;
+  }
+}
+
+@layer base {
+  /* 13px text in the foreground color on the page's layer, with dark form controls. */
+  body {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-foreground);
+    background: var(--layer);
+    color-scheme: dark;
+    text-shadow: var(--text-shadow-default);
+  }
+
+  button,
+  input,
+  textarea {
+    text-shadow: inherit;
+  }
+
+  label:has(input:is([type="checkbox"], [type="radio"]):enabled) {
+    cursor: pointer;
+  }
+}

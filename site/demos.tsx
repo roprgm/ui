@@ -1,30 +1,35 @@
 import { cn } from "cn";
 import { useState } from "react";
-import { Button } from "../src/button";
-import { Checkbox } from "../src/checkbox";
-import { Chip } from "../src/chip";
-import { Dialog, DialogClose } from "../src/dialog";
-import { Field } from "../src/field";
-import { IconButton } from "../src/icon-button";
-import { Input } from "../src/input";
-import { Kbd } from "../src/kbd";
-import { ListItem } from "../src/list-item";
-import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/menu";
-import { Notice } from "../src/notice";
-import { Panel, PanelBody, PanelHeader, PanelSection } from "../src/panel";
-import { Popover } from "../src/popover";
-import { ScrollArea } from "../src/scroll-area";
-import { ScrubInput } from "../src/scrub-input";
-import { Select } from "../src/select";
-import { Slider } from "../src/slider";
-import { Spinner } from "../src/spinner";
-import { Switch } from "../src/switch";
-import { Tab, TabList } from "../src/tabs";
-import { Textarea } from "../src/textarea";
-import { Toggle, ToggleGroup } from "../src/toggle-group";
-import { Tooltip } from "../src/tooltip";
-import { type TreeDrop, TreeList } from "../src/tree-list";
-import { VerticalSlider } from "../src/vertical-slider";
+import { Button } from "../src/components/button";
+import { Checkbox } from "../src/components/checkbox";
+import { Chip } from "../src/components/chip";
+import { Dialog, DialogClose } from "../src/components/dialog";
+import { Field } from "../src/components/field";
+import { IconButton } from "../src/components/icon-button";
+import { Input } from "../src/components/input";
+import { Kbd } from "../src/components/kbd";
+import { ListItem } from "../src/components/list-item";
+import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/components/menu";
+import { Notice } from "../src/components/notice";
+import {
+  Panel,
+  PanelBody,
+  PanelHeader,
+  PanelSection,
+} from "../src/components/panel";
+import { Popover } from "../src/components/popover";
+import { ScrollArea } from "../src/components/scroll-area";
+import { ScrubInput } from "../src/components/scrub-input";
+import { Select } from "../src/components/select";
+import { Slider } from "../src/components/slider";
+import { Spinner } from "../src/components/spinner";
+import { Switch } from "../src/components/switch";
+import { Tab, TabList } from "../src/components/tabs";
+import { Textarea } from "../src/components/textarea";
+import { Toggle, ToggleGroup } from "../src/components/toggle-group";
+import { Tooltip } from "../src/components/tooltip";
+import { type TreeDrop, TreeList } from "../src/components/tree-list";
+import { VerticalSlider } from "../src/components/vertical-slider";
 import { CopyButton } from "./copy-button";
 import {
   AdjustIcon,
@@ -56,6 +61,8 @@ export function ButtonDemo() {
       <Button variant="ghost" render={<a href="#icon-button" />}>
         Link
       </Button>
+      <Button size="sm">Small</Button>
+      <Button size="lg">Large</Button>
     </>
   );
 }
@@ -67,6 +74,9 @@ export function IconButtonDemo() {
         <UndoIcon />
       </IconButton>
       <IconButton label="More" size="icon-sm">
+        <MoreIcon />
+      </IconButton>
+      <IconButton label="More" size="icon-lg">
         <MoreIcon />
       </IconButton>
     </>
@@ -87,11 +97,17 @@ export function InputDemo() {
 function CopyInput({ value }: { value: string }) {
   return (
     <div className="relative">
-      <Input readOnly value={value} aria-label="Link" className="pr-8" />
+      <Input
+        readOnly
+        value={value}
+        aria-label="Link"
+        size="lg"
+        className="pr-8"
+      />
       {/* 4px inside the field; concentric corners would be 2px, too sharp at this size. */}
       <CopyButton
         value={value}
-        size="icon-xs"
+        size="icon-sm"
         className="absolute top-1 right-1 rounded-sm"
       />
     </div>
@@ -193,6 +209,25 @@ export function ChipDemo() {
   );
 }
 
+export function ScrollTextDemo() {
+  return (
+    <div className="flex w-56 flex-col gap-2">
+      {[
+        "Sky",
+        "Golden hour warmth, lifted shadows",
+        "Subject mask from the brush, feathered",
+      ].map((name) => (
+        <div
+          key={name}
+          className="flex h-(--size-control) items-center gap-2 rounded-md surface-sunken px-2.5"
+        >
+          <span className="scroll-text">{name}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function SpinnerDemo() {
   return (
     <>
@@ -201,6 +236,34 @@ export function SpinnerDemo() {
         <Spinner className="size-3 border" /> Decoding RAW…
       </span>
     </>
+  );
+}
+
+/** Each primitive with the fill the base gives it; the theme draws its edge. */
+const surfaces = [
+  { name: "surface-raised", className: "surface-raised" },
+  { name: "surface-sunken", className: "surface-sunken" },
+  { name: "surface-card", className: "layer-card surface-card" },
+  { name: "surface-float", className: "layer-elevated surface-float" },
+  { name: "surface-thumb", className: "surface-thumb rounded-full" },
+] as const;
+
+export function SurfacesDemo() {
+  return (
+    <div className="flex flex-col items-center gap-8">
+      <div className="grid grid-cols-3 gap-x-8 gap-y-6">
+        {surfaces.map(({ name, className }) => (
+          <div key={name} className="flex flex-col items-center gap-3">
+            <div className={cn("size-16 rounded-lg", className)} />
+            <span className="text-muted">{name}</span>
+          </div>
+        ))}
+      </div>
+      <div className="flex w-full flex-col items-center gap-3">
+        <div className="h-px w-48 separator" />
+        <span className="text-muted">separator</span>
+      </div>
+    </div>
   );
 }
 
@@ -226,11 +289,11 @@ export function LayersDemo() {
     <div className="grid gap-2 sm:grid-cols-[1fr_2fr]">
       <Layer name="Page" className="py-6 pr-4" />
       {/* 16px corners less 8px of padding leave 8px for the card inside. */}
-      <div className="layer-card grid gap-2 rounded-2xl p-2 shadow-raised sm:grid-cols-2">
+      <div className="layer-card grid gap-2 rounded-2xl p-2 surface-card sm:grid-cols-2">
         <Layer name="Card" className="p-4" />
         <Layer
           name="Elevated"
-          className="layer-elevated rounded-lg p-4 shadow-raised"
+          className="layer-elevated rounded-lg p-4 surface-card"
         />
       </div>
     </div>
@@ -410,9 +473,9 @@ export function PanelDemo() {
   const [grain, setGrain] = useState(20);
   const [size, setSize] = useState(35);
   return (
-    <Panel className="h-80 w-64 overflow-hidden rounded-xl shadow-float">
+    <Panel className="h-80 w-64 overflow-hidden rounded-xl surface-float">
       <PanelHeader title="Effects">
-        <IconButton label="Add effect" size="icon-sm">
+        <IconButton label="Add effect" size="icon">
           <PlusIcon />
         </IconButton>
       </PanelHeader>
@@ -454,7 +517,7 @@ const tools = [
   { id: "crop", label: "Crop", key: "C", Icon: CropIcon },
 ];
 
-/** Icon tabs in a column with their names and keys as tooltips; `onSelect` makes them live. */
+/** Segmented icon tabs in a column, with their names and keys as tooltips; `onSelect` makes them live. */
 export function ToolRail({
   selected,
   onSelect,
@@ -463,7 +526,7 @@ export function ToolRail({
   onSelect: (id: string) => void;
 }) {
   return (
-    <TabList aria-label="Tools" className="flex-col">
+    <TabList aria-label="Tools" variant="segmented" className="flex-col">
       {tools.map(({ id, label, key, Icon }) => (
         <Tooltip key={id} content={label} shortcut={key} side="right">
           <Tab
@@ -483,23 +546,36 @@ export function ToolRail({
 export function TabsDemo() {
   const [tab, setTab] = useState("layers");
   const [tool, setTool] = useState("adjust");
+  const [channel, setChannel] = useState("hue");
   return (
     <div className="flex items-start gap-10">
-      <div className="rounded-xl bg-field/60 p-1.5">
-        <ToolRail selected={tool} onSelect={setTool} />
+      <ToolRail selected={tool} onSelect={setTool} />
+      <div className="flex flex-col items-start gap-6">
+        <TabList aria-label="Sidebar">
+          {["layers", "history", "info"].map((id) => (
+            <Tab
+              key={id}
+              selected={id === tab}
+              className="capitalize"
+              onClick={() => setTab(id)}
+            >
+              {id}
+            </Tab>
+          ))}
+        </TabList>
+        <TabList aria-label="Channel" variant="segmented">
+          {["hue", "saturation", "luminance"].map((id) => (
+            <Tab
+              key={id}
+              selected={id === channel}
+              className="capitalize"
+              onClick={() => setChannel(id)}
+            >
+              {id}
+            </Tab>
+          ))}
+        </TabList>
       </div>
-      <TabList aria-label="Sidebar">
-        {["layers", "history", "info"].map((id) => (
-          <Tab
-            key={id}
-            selected={id === tab}
-            className="capitalize"
-            onClick={() => setTab(id)}
-          >
-            {id}
-          </Tab>
-        ))}
-      </TabList>
     </div>
   );
 }
@@ -513,7 +589,7 @@ export function ListItemDemo() {
     { id: "image", name: "Image" },
   ];
   return (
-    <div className="layer-elevated w-64 overflow-hidden rounded-lg shadow-float">
+    <div className="layer-elevated w-64 overflow-hidden rounded-lg surface-float">
       {layers.map((layer) => (
         <ListItem
           key={layer.id}
@@ -521,11 +597,11 @@ export function ListItemDemo() {
           muted={layer.muted}
           onClick={() => setSelected(layer.id)}
         >
-          <span className="size-6 rounded-sm bg-linear-to-br from-sky-700 to-amber-600" />
+          <span className="size-(--size-control) rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <span className="flex-1">{layer.name}</span>
           <IconButton
             label="Hide"
-            size="icon-sm"
+            size="icon"
             className="opacity-0 group-hover:opacity-100"
           >
             <EyeIcon />
@@ -601,15 +677,15 @@ export function TreeListDemo() {
         if (!moved) return;
         setLayers(placeLayer(withoutLayer(layers, drop.id), moved, drop));
       }}
-      className="layer-elevated w-64 overflow-hidden rounded-lg shadow-float"
+      className="layer-elevated w-64 overflow-hidden rounded-lg surface-float"
     >
       {(layer) => (
         <>
-          <span className="size-6 shrink-0 rounded-sm bg-linear-to-br from-sky-700 to-amber-600" />
-          <span className="flex-1 truncate">{layer.name}</span>
+          <span className="size-(--size-control) shrink-0 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
+          <span className="flex-1 scroll-text">{layer.name}</span>
           <IconButton
             label="Hide"
-            size="icon-sm"
+            size="icon"
             className="opacity-0 group-hover:opacity-100"
           >
             <EyeIcon />
@@ -722,7 +798,7 @@ const hues = [
 export function VerticalSliderDemo() {
   const [values, setValues] = useState(hues.map(() => 0));
   return (
-    <div className="flex gap-3">
+    <div className="flex">
       {hues.map((hue, index) => (
         <VerticalSlider
           key={hue.name}
@@ -733,7 +809,9 @@ export function VerticalSliderDemo() {
           }
           min={-100}
           max={100}
-          stops={["#777", hue.color]}
+          defaultValue={0}
+          // From a gray as light as the hue, so the track neither darkens nor lightens toward it.
+          stops={[`hsl(from ${hue.color} h 0% l)`, hue.color]}
           color={hue.color}
         />
       ))}
