@@ -528,6 +528,19 @@
       ]
     },
     {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "categories": ["containers"],
+      "dependencies": ["cn", "@base-ui/react"],
+      "files": [
+        {
+          "path": "src/components/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+    },
+    {
       "name": "panel",
       "type": "registry:ui",
       "categories": ["containers"],

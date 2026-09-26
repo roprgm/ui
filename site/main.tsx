@@ -6,6 +6,7 @@ import {
   ButtonDemo,
   CheckboxDemo,
   ChipDemo,
+  CollapsibleDemo,
   DialogDemo,
   FieldDemo,
   IconButtonDemo,
@@ -168,6 +169,13 @@ const groups: Group[] = [
         description:
           "A side panel of sections with dividers, a scrolling body, and an optional resize edge.",
         demo: <PanelDemo />,
+      },
+      {
+        name: "collapsible",
+        title: "Collapsible",
+        description:
+          "A section whose trigger shows and hides its panel, such as a card that opens to its details. The panel slides open, and find-in-page opens it.",
+        demo: <CollapsibleDemo />,
       },
       {
         name: "scroll-area",

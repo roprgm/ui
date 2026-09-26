@@ -2,7 +2,13 @@ import { cn } from "cn";
 import { useState } from "react";
 import { Button } from "../src/components/button";
 import { Checkbox } from "../src/components/checkbox";
+import { Chevron } from "../src/components/chevron";
 import { Chip } from "../src/components/chip";
+import {
+  Collapsible,
+  CollapsiblePanel,
+  CollapsibleTrigger,
+} from "../src/components/collapsible";
 import { Dialog, DialogClose } from "../src/components/dialog";
 import { Field } from "../src/components/field";
 import { IconButton } from "../src/components/icon-button";
@@ -698,6 +704,44 @@ export function TreeListDemo() {
         </>
       )}
     </TreeList>
+  );
+}
+
+const edits = [
+  {
+    title: "Golden hour",
+    when: "2 min ago",
+    steps: ["Exposure +0.35", "Temperature +12", "Shadows +20"],
+  },
+  { title: "Crop", when: "5 min ago", steps: ["Aspect 3:2", "Angle 1.5°"] },
+];
+
+export function CollapsibleDemo() {
+  return (
+    <div className="flex w-72 flex-col gap-2">
+      {edits.map((edit) => (
+        <Collapsible
+          key={edit.title}
+          className="rounded-lg layer-card surface-card"
+        >
+          <CollapsibleTrigger>
+            <Chevron
+              direction="right"
+              className="text-muted group-data-open/collapsible:rotate-90"
+            />
+            <span className="flex-1">{edit.title}</span>
+            <span className="text-faint">{edit.when}</span>
+          </CollapsibleTrigger>
+          <CollapsiblePanel>
+            <ol className="flex flex-col gap-1 border-line border-t px-(--padding) py-2.5 text-muted">
+              {edit.steps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+          </CollapsiblePanel>
+        </Collapsible>
+      ))}
+    </div>
   );
 }
 
