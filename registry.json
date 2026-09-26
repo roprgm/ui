@@ -147,7 +147,13 @@
         },
         "@utility row-ends": {
           "&:has(> [data-slot=\"button\"])": {
-            "padding-block": "14px"
+            "padding-block": "12px"
+          },
+          "& > [data-slot=\"button\"]:first-child": {
+            "margin-inline-start": "-2px"
+          },
+          "& > [data-slot=\"button\"]:last-child": {
+            "margin-inline-end": "-2px"
           },
           "& > [data-slot=\"icon-button\"]": {
             "margin-block": "-4px"

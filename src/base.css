@@ -253,14 +253,20 @@
   }
 }
 
-/* A row that holds buttons as well as text, such as a card's header or footer. A button with a box
-   sits as far from the top and bottom as from the sides, 14px, where text needs less. A ghost icon
-   button bleeds out 4px above and below, so it stands as tall as a line of text and its icon lines
-   up with the line, and 8px at the row's ends, so its icon sits as far from the side as from the
-   top: 12px in a card's row. */
+/* A row that holds buttons as well as text, such as a card's header or footer. Text sits 14px from
+   the sides; a button, whose box shows where text doesn't, sits 12px from every edge, so a row that
+   holds one pads 12px above and below and a button at an end bleeds 2px toward it. A ghost icon
+   button bleeds 4px above and below, so it stands as tall as a line of text and its icon lines up
+   with the line, and 8px at the row's ends, so its icon sits 12px from the side too. */
 @utility row-ends {
   &:has(> [data-slot="button"]) {
-    padding-block: 14px;
+    padding-block: 12px;
+  }
+  & > [data-slot="button"]:first-child {
+    margin-inline-start: -2px;
+  }
+  & > [data-slot="button"]:last-child {
+    margin-inline-end: -2px;
   }
   & > [data-slot="icon-button"] {
     margin-block: -4px;
