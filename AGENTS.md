@@ -47,7 +47,8 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - `--padding-sm` (5px) goes around a list of items, as in a menu or select, whose popup takes `rounded-lg`. Items, from `popupItem`, are 2px shorter than a control and padded so their text lands `--padding` in too.
 - `--padding-xs` (3px) goes around a raised control set into a sunken one, as in a toggle group or segmented tabs.
 - `--padding-row` (6px) goes around a control in a panel header or list row, so a ghost icon button's icon lands 12px in.
-- Everything floating is a `Popup`, which has no padding of its own: lists put theirs on it, and other content sits in sections.
+- Everything floating is a `Popup`, which has no padding of its own: lists put theirs on it, and other content sits in card parts (`CardHeader`, `CardSection`, `CardFooter`), as in a `Card`, `Panel`, or `Popover`.
+- A container sizes itself and its parts fill it: a width goes on the `Card`, `Panel`, or `Popover`, never on a header or section, which would spill out of a container left narrower by a scrollbar or the screen's edge. A `Popup` never scrolls sideways, and a `Card` clips what doesn't fit.
 - Three optical exceptions: a section that opens with a line of text takes `pt-(--padding-optical)`; buttons against an edge sit `--padding-optical` in; a ghost icon button sits so its icon lands 12px in (`icon` 6px in, `icon-sm` 8px in).
 - Nested corners are concentric: the outer radius less the inset is the inner radius (a 12px card holds a 6px button 6px in). Below about 5px, round the inner corner up a little, and prefer radii other components already use over exact math.
 

@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { TooltipProvider } from "../src/components/tooltip";
 import {
   ButtonDemo,
+  CardDemo,
   CheckboxDemo,
   ChipDemo,
   CollapsibleDemo,
@@ -147,13 +148,20 @@ const groups: Group[] = [
     title: "Containers",
     docs: [
       {
-        name: "card",
-        title: "Card",
+        name: "layers",
+        title: "Layers",
         description:
           "Theme utilities: layer-card and layer-elevated paint a card and set the fills for the fields and buttons on it, so they keep the same contrast on the page, in a card, and in a card inside it.",
         demo: <LayersDemo />,
         bare: true,
         code: '<div className="layer-card rounded-xl surface-card">…</div>',
+      },
+      {
+        name: "card",
+        title: "Card",
+        description:
+          "A surface whose header, sections, and footer stack with a line between each. Panel, Popover, and a Collapsible styled as a card hold the same parts.",
+        demo: <CardDemo />,
       },
       {
         name: "surfaces",
@@ -167,7 +175,7 @@ const groups: Group[] = [
         name: "panel",
         title: "Panel",
         description:
-          "A side panel of sections with dividers, a scrolling body, and an optional resize edge.",
+          "A card docked at the side, with a scrolling body and an optional resize edge.",
         demo: <PanelDemo />,
       },
       {

@@ -485,7 +485,8 @@
       "dependencies": ["@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/popup.json"
+        "https://ui.roprgm.com/r/popup.json",
+        "https://ui.roprgm.com/r/card.json"
       ],
       "files": [
         {
@@ -528,6 +529,19 @@
       ]
     },
     {
+      "name": "card",
+      "type": "registry:ui",
+      "categories": ["containers"],
+      "dependencies": ["cn"],
+      "files": [
+        {
+          "path": "src/components/card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+    },
+    {
       "name": "collapsible",
       "type": "registry:ui",
       "categories": ["containers"],
@@ -547,7 +561,8 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/scroll-area.json"
+        "https://ui.roprgm.com/r/scroll-area.json",
+        "https://ui.roprgm.com/r/card.json"
       ],
       "files": [
         {

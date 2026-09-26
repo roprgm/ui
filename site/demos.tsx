@@ -1,6 +1,12 @@
 import { cn } from "cn";
 import { useState } from "react";
 import { Button } from "../src/components/button";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardSection,
+} from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chevron } from "../src/components/chevron";
 import { Chip } from "../src/components/chip";
@@ -17,12 +23,7 @@ import { Kbd } from "../src/components/kbd";
 import { ListItem } from "../src/components/list-item";
 import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/components/menu";
 import { Notice } from "../src/components/notice";
-import {
-  Panel,
-  PanelBody,
-  PanelHeader,
-  PanelSection,
-} from "../src/components/panel";
+import { Panel, PanelBody } from "../src/components/panel";
 import { Popover } from "../src/components/popover";
 import { ScrollArea } from "../src/components/scroll-area";
 import { ScrollText } from "../src/components/scroll-text";
@@ -437,7 +438,7 @@ export function PopoverDemo() {
         </Chip>
       }
     >
-      <div className="flex w-56 flex-col gap-3">
+      <CardSection className="w-64 pt-(--padding-optical)">
         <Slider
           label="Size"
           value={size}
@@ -455,7 +456,7 @@ export function PopoverDemo() {
           max={100}
           format={percent}
         />
-      </div>
+      </CardSection>
     </Popover>
   );
 }
@@ -485,12 +486,12 @@ export function PanelDemo() {
   const [size, setSize] = useState(35);
   return (
     <Panel className="h-80 w-64 overflow-hidden rounded-xl surface-float">
-      <PanelHeader title="Effects">
+      <CardHeader title="Effects">
         <IconButton label="Add effect" size="icon">
           <PlusIcon />
         </IconButton>
-      </PanelHeader>
-      <PanelSection>
+      </CardHeader>
+      <CardSection>
         <Slider
           label="Grain"
           value={grain}
@@ -509,7 +510,7 @@ export function PanelDemo() {
           format={percent}
           variant="compact"
         />
-      </PanelSection>
+      </CardSection>
       <PanelBody>
         {["Vignette", "Grain", "Clarity", "Dehaze", "Sharpen", "Noise"].map(
           (name) => (
@@ -715,6 +716,29 @@ const edits = [
   },
   { title: "Crop", when: "5 min ago", steps: ["Aspect 3:2", "Angle 1.5°"] },
 ];
+
+export function CardDemo() {
+  return (
+    <Card className="w-72">
+      <CardHeader title="Golden hour">
+        <IconButton label="Add adjustment" size="icon">
+          <PlusIcon />
+        </IconButton>
+      </CardHeader>
+      <CardSection className="gap-1 text-muted">
+        <span>Exposure +0.35</span>
+        <span>Temperature +12</span>
+        <span>Shadows +20</span>
+      </CardSection>
+      <CardFooter className="text-faint">
+        <span className="flex-1">Edited 2 min ago</span>
+        <IconButton label="More" size="icon">
+          <MoreIcon />
+        </IconButton>
+      </CardFooter>
+    </Card>
+  );
+}
 
 export function CollapsibleDemo() {
   return (

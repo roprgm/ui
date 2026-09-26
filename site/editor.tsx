@@ -1,14 +1,10 @@
 import { useState } from "react";
+import { CardHeader, CardSection } from "../src/components/card";
 import { Chip } from "../src/components/chip";
 import { IconButton } from "../src/components/icon-button";
 import { ListItem } from "../src/components/list-item";
 import { Menu, MenuItem, MenuSeparator } from "../src/components/menu";
-import {
-  Panel,
-  PanelBody,
-  PanelHeader,
-  PanelSection,
-} from "../src/components/panel";
+import { Panel, PanelBody } from "../src/components/panel";
 import { Popover } from "../src/components/popover";
 import { Slider } from "../src/components/slider";
 import { percent, ToolRail } from "./demos";
@@ -59,7 +55,7 @@ export function EditorDemo() {
               variant="toolbar"
             />
             <Popover align="center" trigger={<Chip>More</Chip>}>
-              <div className="w-48">
+              <CardSection className="w-56 pt-(--padding-optical)">
                 <Slider
                   label="Size"
                   value={size}
@@ -68,7 +64,7 @@ export function EditorDemo() {
                   max={500}
                   format={(v) => `${v}px`}
                 />
-              </div>
+              </CardSection>
             </Popover>
             <Chip aria-pressed={overlay} onClick={() => setOverlay(!overlay)}>
               Overlay
@@ -77,7 +73,7 @@ export function EditorDemo() {
         )}
       </div>
       <Panel width={width} onWidthChange={setWidth} min={240} max={360}>
-        <PanelHeader title={layer}>
+        <CardHeader title={layer}>
           <Menu
             trigger={
               <IconButton label="Layer actions" size="icon">
@@ -90,9 +86,9 @@ export function EditorDemo() {
             <MenuSeparator />
             <MenuItem className="text-danger">Delete</MenuItem>
           </Menu>
-        </PanelHeader>
+        </CardHeader>
         <PanelBody>
-          <PanelSection>
+          <CardSection>
             <Slider
               label="Exposure"
               value={exposure}
@@ -136,13 +132,13 @@ export function EditorDemo() {
               format={percent}
               variant="compact"
             />
-          </PanelSection>
+          </CardSection>
         </PanelBody>
-        <PanelHeader title="Layers">
+        <CardHeader title="Layers">
           <IconButton label="Add mask" size="icon">
             <PlusIcon />
           </IconButton>
-        </PanelHeader>
+        </CardHeader>
         <div>
           {layers.map((name) => (
             <ListItem

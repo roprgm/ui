@@ -53,10 +53,12 @@ function revealSection(event: TransitionEvent<HTMLDivElement>) {
 
 /**
  * What the trigger shows. It slides and fades open and closed, and stays in the page while
- * closed, so the browser's find-in-page reaches it and opens it.
+ * closed, so the browser's find-in-page reaches it and opens it. `className` styles a box inside
+ * the part that slides, so padding and borders fold away with it.
  */
 export function CollapsiblePanel({
   className,
+  children,
   ...props
 }: Omit<ComponentProps<typeof Primitive.Panel>, "className"> & {
   className?: string;
@@ -65,11 +67,10 @@ export function CollapsiblePanel({
     <Primitive.Panel
       hiddenUntilFound
       onTransitionEnd={revealSection}
-      className={cn(
-        "h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none",
-        className,
-      )}
+      className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none"
       {...props}
-    />
+    >
+      <div className={className}>{children}</div>
+    </Primitive.Panel>
   );
 }

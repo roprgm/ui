@@ -1,11 +1,12 @@
 "use client";
 
 import { cn } from "cn";
-import type { ComponentProps, PointerEvent, ReactNode } from "react";
+import type { ComponentProps, PointerEvent } from "react";
 import { ScrollArea } from "./scroll-area";
 
 /**
- * A side panel whose sections stack in the order written, with a divider between each.
+ * A card docked at the side of the app: its `CardHeader`s and `CardSection`s stack in the order
+ * written, with a line between each, and a `PanelBody` takes the height left and scrolls.
  * Passing `onWidthChange` adds a drag handle on its `edge`, the side facing the content.
  */
 export function Panel({
@@ -54,45 +55,6 @@ export function Panel({
       )}
       {children}
     </aside>
-  );
-}
-
-/** A title row with optional actions after it. */
-export function PanelHeader({
-  title,
-  className,
-  children,
-}: {
-  title: ReactNode;
-  className?: string;
-  children?: ReactNode;
-}) {
-  return (
-    // An IconButton sits 6px from the top, bottom, and end, so its corner nests in a rounded panel's.
-    <div
-      className={cn(
-        "flex h-(--size-row) shrink-0 items-center gap-1 pr-(--padding-row) pl-(--padding)",
-        className,
-      )}
-    >
-      <h2
-        tabIndex={-1}
-        className="flex-1 scroll-text font-medium text-foreground"
-      >
-        {title}
-      </h2>
-      {children}
-    </div>
-  );
-}
-
-/** A padded group of controls, such as sliders. */
-export function PanelSection({ className, ...props }: ComponentProps<"div">) {
-  return (
-    <div
-      className={cn("flex flex-col gap-3 p-(--padding)", className)}
-      {...props}
-    />
   );
 }
 
