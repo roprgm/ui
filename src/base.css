@@ -87,8 +87,8 @@
  * roomier theme; the sizes after them follow from them. Button's heights are the scale:
  * other controls name their sizes after the Button they go with and measure what looks as tall
  * beside it. They set heights and container padding; each control sets its own side padding, by
- * eye. Components read these as `p-(--padding)` or `h-(--size-control)`, so `cn` still merges a
- * caller's `p-*` or `h-*`. The density is global: set these in `@theme`. The sizes that follow
+ * eye. Components read them through the spacing utilities below, as `p-pad` or `h-control`, so
+ * `cn` still merges a caller's `p-*` or `h-*`. The density is global: set these in `@theme`. The sizes that follow
  * from them resolve once, at the root, so redefining `--size-control` on one element changes
  * only what reads it directly, not `--size-control-lg`, `-sm`, or `--size-row` below it.
  */
@@ -121,6 +121,39 @@
   /* Buttons against an edge, whose box shows where text doesn't, and a section's top when it opens
      with a line of text, which brings air above its capitals. */
   --padding-optical: calc(var(--padding) - 2px);
+  /* A row in a popup's list, 2px shorter than a control so a list reads dense, and its side
+     padding, which lands its text `--padding` from the popup's edge past the list's own. */
+  --size-item: calc(var(--size-control) - 2px);
+  --padding-item: calc(var(--padding) - var(--padding-sm));
+  /* A raised control set `--padding-xs` into a sunken group, as a toggle or a segmented tab: the
+     group stands as tall as a large control, or 4px taller beside large buttons. */
+  --size-segment: calc(var(--size-control-lg) - 2 * var(--padding-xs));
+  --size-segment-lg: calc(var(--size-segment) + 4px);
+  /* Its corners, nested in the group's `rounded-lg`. */
+  --radius-segment: calc(var(--radius-lg) - var(--padding-xs));
+}
+
+/*
+ * The sizes above as spacing, so each is a utility: `h-control`, `size-control-sm`, `min-h-row`,
+ * `h-item`, `p-pad`, `px-pad-item`, `gap-pad-sm`, `right-pad`. `inline` writes the token itself
+ * into each utility, so a token redefined on an element, as the segmented TabList redefines
+ * `--size-control`, reaches the utilities inside it.
+ */
+@theme inline {
+  --spacing-control: var(--size-control);
+  --spacing-control-sm: var(--size-control-sm);
+  --spacing-control-lg: var(--size-control-lg);
+  --spacing-row: var(--size-row);
+  --spacing-item: var(--size-item);
+  --spacing-segment: var(--size-segment);
+  --spacing-segment-lg: var(--size-segment-lg);
+  --spacing-thumb: var(--size-thumb);
+  --spacing-pad: var(--padding);
+  --spacing-pad-sm: var(--padding-sm);
+  --spacing-pad-xs: var(--padding-xs);
+  --spacing-pad-row: var(--padding-row);
+  --spacing-pad-optical: var(--padding-optical);
+  --spacing-pad-item: var(--padding-item);
 }
 
 /*
@@ -135,13 +168,18 @@
   }
 }
 
-/* Panels, dialogs, notices, and cards on the page. */
+/* Panels, dialogs, notices, and cards on the page. A card inside a card or a popup rises to the
+   elevated level on its own, so it never takes the color of what holds it. */
 @utility layer-card {
   --layer: var(--color-level-3);
   background-color: var(--layer);
+
+  :where(.layer-card, .layer-elevated) & {
+    --layer: var(--color-level-4);
+  }
 }
 
-/* Cards inside a card, and every popup. */
+/* Every popup, and a card inside a card. */
 @utility layer-elevated {
   --layer: var(--color-level-4);
   background-color: var(--layer);
@@ -196,6 +234,23 @@
   @apply bg-line;
 }
 
+/* How a popup opens and closes: it grows from where it was opened as it fades in, and fades out.
+   Base UI sets the attributes and `--transform-origin`. */
+@utility popup-motion {
+  transform-origin: var(--transform-origin);
+  transition-property: opacity, scale;
+  transition-timing-function: var(--default-transition-timing-function);
+  transition-duration: 100ms;
+
+  &[data-starting-style] {
+    opacity: 0;
+    scale: 0.95;
+  }
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+
 /* An outline set off by a gap, so it shows on any fill. It stays transparent until
    the element or a child has keyboard focus, then fades in slowly. */
 @utility focus-ring {
@@ -221,15 +276,21 @@
 /* A range input drawn as its thumb alone, over a track the component paints: a `--size-thumb`
    `surface-thumb`, with the focus ring in its shape. Touch draws no highlight box around it. */
 @utility range-thumb {
-  @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
+  @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-thumb thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
 }
 
-/* A shade at the top and bottom of a scroll container that shows while there is more to scroll
+/*
+ * Overflow that scrolls and fades where more lies that way, rather than showing a scrollbar or
+ * cutting the content off: `overflow-fade-y` for a column, `overflow-fade-x` for a row.
+ */
+
+/* Scrolls vertically, with a shade at the top and bottom that shows while there is more to scroll
    that way. Where the browser ties animations to scrolling, each shade follows the position: the
    top one fades in over the first 1.5rem scrolled and the bottom one fades out over the last, and
    neither shows when nothing overflows. Elsewhere it fades by time, from the attributes Base UI's
    ScrollArea sets on its viewport. */
-@utility scroll-fade {
+@utility overflow-fade-y {
+  overflow-y: auto;
   &::before,
   &::after {
     content: "";
@@ -258,12 +319,12 @@
 
   @supports (animation-timeline: scroll()) {
     &::before {
-      animation: scroll-fade-in linear both;
+      animation: overflow-fade-in linear both;
       animation-timeline: scroll();
       animation-range: 0 1.5rem;
     }
     &::after {
-      animation: scroll-fade-out linear both;
+      animation: overflow-fade-out linear both;
       animation-timeline: scroll();
       animation-range: calc(100% - 1.5rem) 100%;
     }
@@ -281,7 +342,7 @@
   }
 }
 
-@keyframes scroll-fade-in {
+@keyframes overflow-fade-in {
   from {
     opacity: 0;
   }
@@ -290,7 +351,7 @@
   }
 }
 
-@keyframes scroll-fade-out {
+@keyframes overflow-fade-out {
   from {
     opacity: 1;
   }
@@ -299,27 +360,32 @@
   }
 }
 
-/* How far in each edge of a scroll-fade-x element fades, animated as it scrolls. Registered, so
+/* How far in each edge of an overflow-fade-x element fades, animated as it scrolls. Registered, so
    an animation can move them. */
-@property --scroll-fade-start {
+@property --overflow-fade-start {
   syntax: "<length>";
   inherits: false;
   initial-value: 0px;
 }
 
-@property --scroll-fade-end {
+@property --overflow-fade-end {
   syntax: "<length>";
   inherits: false;
   initial-value: 0px;
 }
 
-/* Fades the start and end of a horizontal scroll container's content where more of it lies that
-   way, following the scroll position: the end fades while there is more to the right, and the
-   start fades in over the first 1.5rem scrolled. A mask, so it fades the content itself and works
-   on any background. The fade stands in for a scrollbar, so it hides it, and a sideways swipe that
-   reaches an end stops there rather than scrolling the page or going back a page. When nothing
-   overflows, or the browser can't tie animations to scrolling, nothing fades. */
-@utility scroll-fade-x {
+/* Scrolls horizontally, fading the start and end of its content where more of it lies that way,
+   following the scroll position: the end fades while there is more to the right, and the start
+   fades in over the first 1.5rem scrolled. A mask, so it fades the content itself and works on any
+   background. The fade stands in for a scrollbar, so it hides it, and a sideways swipe that
+   reaches an end stops there rather than scrolling the page or going back a page. It shrinks in a
+   flex row, so a row of chips or tabs, or a line of text with `whitespace-nowrap`, scrolls inside
+   whatever holds it. When nothing overflows, or the browser can't tie animations to scrolling,
+   nothing fades. A box that scrolls is a tab stop when nothing in it is one, so give one that holds
+   only text `tabIndex={-1}`, as the ScrollText component does. */
+@utility overflow-fade-x {
+  min-width: 0;
+  overflow-x: auto;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -329,15 +395,15 @@
   mask-image: linear-gradient(
     to right,
     transparent,
-    hsl(0 0% 0%) var(--scroll-fade-start),
-    hsl(0 0% 0%) calc(100% - var(--scroll-fade-end)),
+    hsl(0 0% 0%) var(--overflow-fade-start),
+    hsl(0 0% 0%) calc(100% - var(--overflow-fade-end)),
     transparent
   );
 
   @supports (animation-timeline: scroll()) {
     animation:
-      scroll-fade-x-start linear both,
-      scroll-fade-x-end linear both;
+      overflow-fade-x-start linear both,
+      overflow-fade-x-end linear both;
     animation-timeline: scroll(self inline), scroll(self inline);
     animation-range:
       0 1.5rem,
@@ -345,35 +411,22 @@
   }
 }
 
-@keyframes scroll-fade-x-start {
+@keyframes overflow-fade-x-start {
   from {
-    --scroll-fade-start: 0px;
+    --overflow-fade-start: 0px;
   }
   to {
-    --scroll-fade-start: 1.5rem;
+    --overflow-fade-start: 1.5rem;
   }
 }
 
-@keyframes scroll-fade-x-end {
+@keyframes overflow-fade-x-end {
   from {
-    --scroll-fade-end: 1.5rem;
+    --overflow-fade-end: 1.5rem;
   }
   to {
-    --scroll-fade-end: 0px;
+    --overflow-fade-end: 0px;
   }
-}
-
-/* One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls
-   sideways to show the rest. Use it where you would use `truncate`, except inside something you
-   click, where a scroller would fight the click. It sets its own display, so it works on a lone
-   span, and shrinks in a flex row. A box that scrolls is a tab stop when nothing in it is one, so
-   give it `tabIndex={-1}`, as the ScrollText component does. */
-@utility scroll-text {
-  @apply scroll-fade-x;
-  display: block;
-  min-width: 0;
-  overflow-x: auto;
-  white-space: nowrap;
 }
 
 /* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the

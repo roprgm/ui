@@ -4,7 +4,7 @@ import { type ComponentProps, cloneElement, type ReactElement } from "react";
 
 const button = cva(
   // Colors ease over 200ms; the 1px press moves faster, since the last entry for a property wins.
-  "inline-flex h-(--size-control) cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
+  "inline-flex h-control cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
   {
     variants: {
       variant: {
@@ -20,13 +20,13 @@ const button = cva(
       // sits 2px closer to the edge, since its box has air of its own around the stroke.
       size: {
         default: "has-[>svg:first-child]:pl-2.5",
-        sm: "h-(--size-control-sm) px-2.5 has-[>svg:first-child]:pl-2",
+        sm: "h-control-sm px-2.5 has-[>svg:first-child]:pl-2",
         /** With large fields and selects. */
-        lg: "h-(--size-control-lg) px-3.5 has-[>svg:first-child]:pl-3",
-        icon: "w-(--size-control) px-0",
+        lg: "h-control-lg px-3.5 has-[>svg:first-child]:pl-3",
+        icon: "w-control px-0",
         /** For ghost actions inside a field, where it sits 4px in, and close buttons. */
-        "icon-sm": "size-(--size-control-sm) px-0",
-        "icon-lg": "size-(--size-control-lg) px-0",
+        "icon-sm": "size-control-sm px-0",
+        "icon-lg": "size-control-lg px-0",
       },
     },
     defaultVariants: { variant: "default", size: "default" },

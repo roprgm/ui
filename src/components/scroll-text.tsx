@@ -8,6 +8,10 @@ import type { ComponentProps } from "react";
  */
 export function ScrollText({ className, ...props }: ComponentProps<"span">) {
   return (
-    <span tabIndex={-1} className={cn("scroll-text", className)} {...props} />
+    <span
+      tabIndex={-1}
+      className={cn("block overflow-fade-x whitespace-nowrap", className)}
+      {...props}
+    />
   );
 }

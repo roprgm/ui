@@ -1,13 +1,18 @@
 import "./index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Toaster } from "../src/components/toast";
 import { TooltipProvider } from "../src/components/tooltip";
 import {
+  AlertDialogDemo,
+  BadgeDemo,
   ButtonDemo,
   CardDemo,
   CheckboxDemo,
   ChipDemo,
   CollapsibleDemo,
+  ComboboxDemo,
+  ContextMenuDemo,
   DialogDemo,
   FieldDemo,
   IconButtonDemo,
@@ -19,6 +24,7 @@ import {
   NoticeDemo,
   PanelDemo,
   PopoverDemo,
+  RadioDemo,
   ScrollAreaDemo,
   ScrollTextDemo,
   ScrubInputDemo,
@@ -30,6 +36,7 @@ import {
   SwitchDemo,
   TabsDemo,
   TextareaDemo,
+  ToastDemo,
   ToggleGroupDemo,
   TooltipDemo,
   TreeListDemo,
@@ -72,6 +79,13 @@ const groups: Group[] = [
           "A shortcut written as Mod Z: Mod shows as ⌘ on a Mac and Ctrl elsewhere. Tooltips and menu items take one as shortcut.",
         demo: <KbdDemo />,
       },
+      {
+        name: "badge",
+        title: "Badge",
+        description:
+          "A short label that isn't a control, such as a status or a count. primary marks what is new; it renders on the server.",
+        demo: <BadgeDemo />,
+      },
     ],
   },
   {
@@ -104,6 +118,13 @@ const groups: Group[] = [
         demo: <CheckboxDemo />,
       },
       {
+        name: "radio",
+        title: "Radio",
+        description:
+          "A native radio: radios that share a name choose one, without JavaScript.",
+        demo: <RadioDemo />,
+      },
+      {
         name: "switch",
         title: "Switch",
         description: "A native checkbox with the switch role.",
@@ -121,6 +142,13 @@ const groups: Group[] = [
         title: "Select",
         description: "One value, or several with multiple, from a list.",
         demo: <SelectDemo />,
+      },
+      {
+        name: "combobox",
+        title: "Combobox",
+        description:
+          "A choice from a list, filtered as you type, for lists too long to scan, such as fonts.",
+        demo: <ComboboxDemo />,
       },
       {
         name: "slider",
@@ -151,7 +179,7 @@ const groups: Group[] = [
         name: "layers",
         title: "Layers",
         description:
-          "Theme utilities: layer-card and layer-elevated paint a card and set the fills for the fields and buttons on it, so they keep the same contrast on the page, in a card, and in a card inside it.",
+          "Theme utilities: layer-card and layer-elevated paint a card and set the fills for the fields and buttons on it, so they keep the same contrast on the page, in a card, and in a card inside it. A layer-card inside a card rises to layer-elevated on its own.",
         demo: <LayersDemo />,
         bare: true,
         code: '<div className="layer-card rounded-xl surface-card">…</div>',
@@ -235,6 +263,13 @@ const groups: Group[] = [
         demo: <MenuDemo />,
       },
       {
+        name: "context-menu",
+        title: "Context menu",
+        description:
+          "A menu's commands at the pointer, opened by a right-click or a long press on its trigger.",
+        demo: <ContextMenuDemo />,
+      },
+      {
         name: "popover",
         title: "Popover",
         description: "Settings that open beside their trigger.",
@@ -244,14 +279,26 @@ const groups: Group[] = [
         name: "dialog",
         title: "Dialog",
         description:
-          "A modal for decisions that need an answer, such as exporting or confirming a delete. DialogClose closes it.",
-        demo: <DialogDemo />,
+          "A modal for decisions that need an answer, such as exporting. DialogClose closes it; alert asks before what can't be undone, and a click outside doesn't dismiss it.",
+        demo: (
+          <>
+            <DialogDemo />
+            <AlertDialogDemo />
+          </>
+        ),
       },
       {
         name: "notice",
         title: "Notice",
         description: "A message that floats without blocking the app.",
         demo: <NoticeDemo />,
+      },
+      {
+        name: "toast",
+        title: "Toast",
+        description:
+          "Notices in a corner, shown with toast.add from anywhere once a Toaster is mounted. They close on their own, wait while the pointer rests on them, and swipe away.",
+        demo: <ToastDemo />,
       },
     ],
   },
@@ -276,7 +323,7 @@ const groups: Group[] = [
         name: "scroll-text",
         title: "Scroll text",
         description:
-          "One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls sideways to show the rest, without becoming a tab stop. Use it where you would use truncate. The fade follows the scroll, and scroll-fade-x gives the same fade to anything that scrolls sideways.",
+          "One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls sideways to show the rest, without becoming a tab stop. Use it where you would use truncate. It is the overflow-fade-x utility on a line of text: the same fade, following the scroll, works on anything that may not fit a row, such as tabs or chips.",
         demo: <ScrollTextDemo />,
       },
     ],
@@ -309,6 +356,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <TooltipProvider>
       <Page groups={groups} usage={<Usage />} />
+      <Toaster />
     </TooltipProvider>
   </StrictMode>,
 );

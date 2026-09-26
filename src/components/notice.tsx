@@ -4,8 +4,8 @@ import { IconButton } from "./icon-button";
 import { Popup } from "./popup";
 
 /**
- * A message that floats without blocking the app; the caller positions it. An `alert` is red
- * and interrupts assistive technology; a `status` waits its turn.
+ * A message that floats without blocking the app; the caller positions it, or `toast` shows one
+ * in a corner. An `alert` is red and interrupts assistive technology; a `status` waits its turn.
  */
 export function Notice({
   tone = "status",
@@ -32,17 +32,17 @@ export function Notice({
       {...props}
     >
       <div className="flex flex-1 flex-col">
-        <p
+        <div
           className={cn(
-            "p-(--padding) pt-(--padding-optical)",
+            "flex flex-col gap-0.5 p-pad pt-pad-optical",
             actions && "pb-2",
             onDismiss && "pr-0",
           )}
         >
           {children}
-        </p>
+        </div>
         {actions && (
-          <div className="flex gap-2 p-(--padding-optical) pt-0">{actions}</div>
+          <div className="flex gap-1 p-pad-optical pt-0">{actions}</div>
         )}
       </div>
       {onDismiss && (

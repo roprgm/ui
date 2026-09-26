@@ -1,5 +1,6 @@
 import { cn } from "cn";
 import { useState } from "react";
+import { Badge } from "../src/components/badge";
 import { Button } from "../src/components/button";
 import {
   Card,
@@ -15,6 +16,8 @@ import {
   CollapsiblePanel,
   CollapsibleTrigger,
 } from "../src/components/collapsible";
+import { Combobox } from "../src/components/combobox";
+import { ContextMenu } from "../src/components/context-menu";
 import { Dialog, DialogClose } from "../src/components/dialog";
 import { Field } from "../src/components/field";
 import { IconButton } from "../src/components/icon-button";
@@ -25,6 +28,7 @@ import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/components/menu";
 import { Notice } from "../src/components/notice";
 import { Panel, PanelBody } from "../src/components/panel";
 import { Popover } from "../src/components/popover";
+import { Radio } from "../src/components/radio";
 import { ScrollArea } from "../src/components/scroll-area";
 import { ScrollText } from "../src/components/scroll-text";
 import { ScrubInput } from "../src/components/scrub-input";
@@ -34,6 +38,7 @@ import { Spinner } from "../src/components/spinner";
 import { Switch } from "../src/components/switch";
 import { Tab, TabList } from "../src/components/tabs";
 import { Textarea } from "../src/components/textarea";
+import { toast } from "../src/components/toast";
 import { Toggle, ToggleGroup } from "../src/components/toggle-group";
 import { Tooltip } from "../src/components/tooltip";
 import { type TreeDrop, TreeList } from "../src/components/tree-list";
@@ -156,6 +161,23 @@ export function CheckboxDemo() {
   );
 }
 
+export function RadioDemo() {
+  return (
+    <fieldset className="flex flex-col gap-2">
+      <label className="flex items-center gap-2">
+        <Radio name="export-size" value="original" defaultChecked /> Original
+        size
+      </label>
+      <label className="flex items-center gap-2">
+        <Radio name="export-size" value="web" /> Web, 2048px
+      </label>
+      <label className="flex items-center gap-2">
+        <Radio name="export-size" value="thumbnail" disabled /> Thumbnail
+      </label>
+    </fieldset>
+  );
+}
+
 export function SwitchDemo() {
   return (
     <>
@@ -205,6 +227,29 @@ export function SelectDemo() {
   );
 }
 
+const fonts = [
+  "Geist",
+  "Geist Mono",
+  "Helvetica Neue",
+  "IBM Plex Sans",
+  "Inter",
+  "JetBrains Mono",
+  "Söhne",
+  "SF Pro",
+].map((font) => ({ value: font, label: font }));
+
+export function ComboboxDemo() {
+  return (
+    <Combobox
+      aria-label="Font"
+      items={fonts}
+      placeholder="Search fonts"
+      defaultValue="Geist"
+      className="w-48"
+    />
+  );
+}
+
 export function ChipDemo() {
   const [overlay, setOverlay] = useState(true);
   const [erase, setErase] = useState(false);
@@ -231,7 +276,7 @@ export function ScrollTextDemo() {
       ].map((name) => (
         <div
           key={name}
-          className="flex h-(--size-control) items-center gap-2 rounded-md surface-sunken px-2.5"
+          className="flex h-control items-center gap-2 rounded-md surface-sunken px-2.5"
         >
           <ScrollText>{name}</ScrollText>
         </div>
@@ -305,7 +350,7 @@ export function LayersDemo() {
         <Layer name="Card" className="p-4" />
         <Layer
           name="Elevated"
-          className="layer-elevated rounded-lg p-4 surface-card"
+          className="layer-card rounded-lg p-4 surface-card"
         />
       </div>
     </div>
@@ -385,6 +430,18 @@ export function KbdDemo() {
   );
 }
 
+export function BadgeDemo() {
+  return (
+    <>
+      <Badge>Draft</Badge>
+      <Badge variant="primary">New</Badge>
+      <span className="flex items-center gap-2">
+        Comments <Badge>3</Badge>
+      </span>
+    </>
+  );
+}
+
 export function MenuDemo() {
   return (
     <Menu
@@ -408,6 +465,29 @@ export function MenuDemo() {
   );
 }
 
+export function ContextMenuDemo() {
+  return (
+    <ContextMenu
+      trigger={
+        <div className="flex h-32 w-64 items-center justify-center rounded-lg surface-sunken text-muted select-none">
+          Right-click here
+        </div>
+      }
+    >
+      <MenuItem shortcut="Mod C">Copy</MenuItem>
+      <MenuItem shortcut="Mod V">Paste</MenuItem>
+      <Submenu label="Arrange">
+        <MenuItem>Bring to front</MenuItem>
+        <MenuItem>Send to back</MenuItem>
+      </Submenu>
+      <MenuSeparator />
+      <MenuItem shortcut="⌫" className="text-danger">
+        Delete
+      </MenuItem>
+    </ContextMenu>
+  );
+}
+
 export function DialogDemo() {
   return (
     <Dialog
@@ -426,6 +506,25 @@ export function DialogDemo() {
   );
 }
 
+export function AlertDialogDemo() {
+  return (
+    <Dialog
+      alert
+      trigger={<Button>Delete layer…</Button>}
+      title="Delete “Sky”?"
+      description="Its mask and adjustments go with it."
+      actions={
+        <>
+          <DialogClose render={<Button variant="ghost">Cancel</Button>} />
+          <DialogClose
+            render={<Button className="text-danger">Delete</Button>}
+          />
+        </>
+      }
+    />
+  );
+}
+
 export function PopoverDemo() {
   const [size, setSize] = useState(40);
   const [feather, setFeather] = useState(50);
@@ -438,7 +537,7 @@ export function PopoverDemo() {
         </Chip>
       }
     >
-      <CardSection className="w-64 pt-(--padding-optical)">
+      <CardSection className="w-64 pt-pad-optical">
         <Slider
           label="Size"
           value={size}
@@ -478,6 +577,41 @@ export function NoticeDemo() {
     >
       An unsaved draft from yesterday can be restored.
     </Notice>
+  );
+}
+
+export function ToastDemo() {
+  return (
+    <>
+      <Button
+        onClick={() =>
+          toast.add({ title: "Exported", description: "portrait-edit.jpg" })
+        }
+      >
+        Export
+      </Button>
+      <Button
+        onClick={() =>
+          toast.add({
+            description: "Layer deleted.",
+            actionProps: { children: "Undo" },
+          })
+        }
+      >
+        Delete layer
+      </Button>
+      <Button
+        onClick={() =>
+          toast.add({
+            title: "Export failed",
+            description: "The disk is full.",
+            priority: "high",
+          })
+        }
+      >
+        Fail
+      </Button>
+    </>
   );
 }
 
@@ -533,12 +667,18 @@ const tools = [
 export function ToolRail({
   selected,
   onSelect,
+  className,
 }: {
   selected: string;
   onSelect: (id: string) => void;
+  className?: string;
 }) {
   return (
-    <TabList aria-label="Tools" variant="segmented" className="flex-col">
+    <TabList
+      aria-label="Tools"
+      variant="segmented"
+      className={cn("flex-col", className)}
+    >
       {tools.map(({ id, label, key, Icon }) => (
         <Tooltip key={id} content={label} shortcut={key} side="right">
           <Tab
@@ -555,12 +695,24 @@ export function ToolRail({
   );
 }
 
+const panels = [
+  "Basic",
+  "Tone curve",
+  "Color mixer",
+  "Color grading",
+  "Detail",
+  "Lens",
+  "Geometry",
+  "Effects",
+];
+
 export function TabsDemo() {
   const [tab, setTab] = useState("layers");
   const [tool, setTool] = useState("adjust");
   const [channel, setChannel] = useState("hue");
+  const [section, setSection] = useState(panels[0]);
   return (
-    <div className="flex items-start gap-10">
+    <div className="flex flex-wrap items-start justify-center gap-x-10 gap-y-6">
       <ToolRail selected={tool} onSelect={setTool} />
       <div className="flex flex-col items-start gap-6">
         <TabList aria-label="Sidebar">
@@ -587,6 +739,17 @@ export function TabsDemo() {
             </Tab>
           ))}
         </TabList>
+        <TabList aria-label="Panels" className="max-w-64 overflow-fade-x">
+          {panels.map((panel) => (
+            <Tab
+              key={panel}
+              selected={panel === section}
+              onClick={() => setSection(panel)}
+            >
+              {panel}
+            </Tab>
+          ))}
+        </TabList>
       </div>
     </div>
   );
@@ -609,7 +772,7 @@ export function ListItemDemo() {
           muted={layer.muted}
           onClick={() => setSelected(layer.id)}
         >
-          <span className="size-(--size-control) rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
+          <span className="size-control rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <span className="flex-1">{layer.name}</span>
           <IconButton
             label="Hide"
@@ -693,7 +856,7 @@ export function TreeListDemo() {
     >
       {(layer) => (
         <>
-          <span className="size-(--size-control) shrink-0 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
+          <span className="size-control shrink-0 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <ScrollText className="flex-1">{layer.name}</ScrollText>
           <IconButton
             label="Hide"
@@ -717,9 +880,61 @@ const edits = [
   { title: "Crop", when: "5 min ago", steps: ["Aspect 3:2", "Angle 1.5°"] },
 ];
 
+const presets = [
+  { name: "Golden hour", tint: "from-amber-500 to-rose-700" },
+  { name: "Blue hour", tint: "from-sky-500 to-indigo-800" },
+  { name: "Matte", tint: "from-stone-400 to-stone-700" },
+  { name: "Portra", tint: "from-orange-300 to-teal-700" },
+  { name: "Noir", tint: "from-neutral-300 to-neutral-900" },
+  { name: "Fjord", tint: "from-cyan-300 to-slate-700" },
+];
+
 export function CardDemo() {
   return (
-    <Card className="w-72">
+    <>
+      <EditCard />
+      <PresetsCard />
+    </>
+  );
+}
+
+function PresetsCard() {
+  return (
+    <Card className="w-72 max-w-full">
+      <CardHeader title="Presets" />
+      {/* The row runs to the card's edges, so it fades there rather than inside the padding. */}
+      <CardSection className="px-0">
+        <div className="flex gap-2 overflow-fade-x px-pad">
+          {presets.map((preset) => (
+            <button
+              key={preset.name}
+              type="button"
+              className="flex w-16 shrink-0 cursor-pointer flex-col gap-1.5 rounded-md text-muted focus-ring hover:text-foreground"
+            >
+              <span
+                className={cn(
+                  "aspect-square rounded-md bg-linear-to-br",
+                  preset.tint,
+                )}
+              />
+              <span className="truncate">{preset.name}</span>
+            </button>
+          ))}
+        </div>
+      </CardSection>
+      <CardFooter className="text-faint">
+        <ScrollText className="flex-1">
+          Canon EOS R5 · RF 24–70mm F2.8 · ƒ/2.8 · 1/250 s · ISO 100 · 8192 ×
+          5464
+        </ScrollText>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function EditCard() {
+  return (
+    <Card className="w-72 max-w-full">
       <CardHeader title="Golden hour">
         <IconButton label="Add adjustment" size="icon">
           <PlusIcon />
@@ -744,26 +959,25 @@ export function CollapsibleDemo() {
   return (
     <div className="flex w-72 flex-col gap-2">
       {edits.map((edit) => (
-        <Collapsible
-          key={edit.title}
-          className="rounded-lg layer-card surface-card"
-        >
-          <CollapsibleTrigger>
-            <Chevron
-              direction="right"
-              className="text-muted group-data-open/collapsible:rotate-90"
-            />
-            <span className="flex-1">{edit.title}</span>
-            <span className="text-faint">{edit.when}</span>
-          </CollapsibleTrigger>
-          <CollapsiblePanel>
-            <ol className="flex flex-col gap-1 border-line border-t px-(--padding) py-2.5 text-muted">
-              {edit.steps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
-          </CollapsiblePanel>
-        </Collapsible>
+        <Card key={edit.title} className="rounded-lg">
+          <Collapsible>
+            <CollapsibleTrigger>
+              <Chevron
+                direction="right"
+                className="text-muted group-data-open/collapsible:rotate-90"
+              />
+              <span className="flex-1">{edit.title}</span>
+              <span className="text-faint">{edit.when}</span>
+            </CollapsibleTrigger>
+            <CollapsiblePanel>
+              <ol className="flex flex-col gap-1 border-line border-t px-pad py-2.5 text-muted">
+                {edit.steps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+            </CollapsiblePanel>
+          </Collapsible>
+        </Card>
       ))}
     </div>
   );

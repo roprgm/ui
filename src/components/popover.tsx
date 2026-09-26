@@ -3,6 +3,7 @@
 import { Popover as Primitive } from "@base-ui/react/popover";
 import { cn } from "cn";
 import type { ReactElement, ReactNode } from "react";
+import { cardParts } from "./card";
 import { Popup } from "./popup";
 
 /**
@@ -30,10 +31,7 @@ export function Popover({
             // Keyboard users land inside; a click leaves focus on the trigger, so no field starts typing.
             initialFocus={(type) => type === "keyboard"}
             render={(props) => (
-              <Popup
-                {...props}
-                className={cn("flex flex-col divide-y divide-line", className)}
-              />
+              <Popup {...props} className={cn(cardParts, className)} />
             )}
           >
             {children}

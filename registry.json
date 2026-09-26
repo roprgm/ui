@@ -46,11 +46,30 @@
           "size-control-sm": "calc(var(--size-control) - 4px)",
           "size-row": "calc(var(--size-control) + 2 * var(--padding-row))",
           "padding-optical": "calc(var(--padding) - 2px)",
+          "size-item": "calc(var(--size-control) - 2px)",
+          "padding-item": "calc(var(--padding) - var(--padding-sm))",
+          "size-segment": "calc(var(--size-control-lg) - 2 * var(--padding-xs))",
+          "size-segment-lg": "calc(var(--size-segment) + 4px)",
+          "radius-segment": "calc(var(--radius-lg) - var(--padding-xs))",
           "text-shadow-default": "0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2)",
           "text-shadow-subtle": "0.5px 1px 0.5px hsl(0 0% 0% / 0.08)",
           "color-field": "color-mix(in srgb, var(--layer), hsl(0 0% 0%) 35%)",
           "color-raised": "color-mix(in srgb, var(--layer), hsl(0 0% 100%) 11%)",
-          "color-raised-hover": "color-mix(in srgb, var(--layer), hsl(0 0% 100%) 17%)"
+          "color-raised-hover": "color-mix(in srgb, var(--layer), hsl(0 0% 100%) 17%)",
+          "spacing-control": "var(--size-control)",
+          "spacing-control-sm": "var(--size-control-sm)",
+          "spacing-control-lg": "var(--size-control-lg)",
+          "spacing-row": "var(--size-row)",
+          "spacing-item": "var(--size-item)",
+          "spacing-segment": "var(--size-segment)",
+          "spacing-segment-lg": "var(--size-segment-lg)",
+          "spacing-thumb": "var(--size-thumb)",
+          "spacing-pad": "var(--padding)",
+          "spacing-pad-sm": "var(--padding-sm)",
+          "spacing-pad-xs": "var(--padding-xs)",
+          "spacing-pad-row": "var(--padding-row)",
+          "spacing-pad-optical": "var(--padding-optical)",
+          "spacing-pad-item": "var(--padding-item)"
         }
       },
       "css": {
@@ -76,7 +95,10 @@
         },
         "@utility layer-card": {
           "--layer": "var(--color-level-3)",
-          "background-color": "var(--layer)"
+          "background-color": "var(--layer)",
+          ":where(.layer-card, .layer-elevated) &": {
+            "--layer": "var(--color-level-4)"
+          }
         },
         "@utility layer-elevated": {
           "--layer": "var(--color-level-4)",
@@ -110,6 +132,19 @@
           "@apply bg-line": {},
           "box-shadow": "0 1px 0 hsl(0 0% 94.12% / 0.05)"
         },
+        "@utility popup-motion": {
+          "transform-origin": "var(--transform-origin)",
+          "transition-property": "opacity, scale",
+          "transition-timing-function": "var(--default-transition-timing-function)",
+          "transition-duration": "100ms",
+          "&[data-starting-style]": {
+            "opacity": "0",
+            "scale": "0.95"
+          },
+          "&[data-ending-style]": {
+            "opacity": "0"
+          }
+        },
         "@utility focus-ring": {
           "outline": "2px solid transparent",
           "outline-offset": "1px",
@@ -125,9 +160,10 @@
           }
         },
         "@utility range-thumb": {
-          "@apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-(--size-thumb) thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus": {}
+          "@apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-thumb thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus": {}
         },
-        "@utility scroll-fade": {
+        "@utility overflow-fade-y": {
+          "overflow-y": "auto",
           "&::before, &::after": {
             "content": "\"\"",
             "position": "sticky",
@@ -149,12 +185,12 @@
           },
           "@supports (animation-timeline: scroll())": {
             "&::before": {
-              "animation": "scroll-fade-in linear both",
+              "animation": "overflow-fade-in linear both",
               "animation-timeline": "scroll()",
               "animation-range": "0 1.5rem"
             },
             "&::after": {
-              "animation": "scroll-fade-out linear both",
+              "animation": "overflow-fade-out linear both",
               "animation-timeline": "scroll()",
               "animation-range": "calc(100% - 1.5rem) 100%"
             }
@@ -168,7 +204,7 @@
             }
           }
         },
-        "@keyframes scroll-fade-in": {
+        "@keyframes overflow-fade-in": {
           "from": {
             "opacity": "0"
           },
@@ -176,7 +212,7 @@
             "opacity": "1"
           }
         },
-        "@keyframes scroll-fade-out": {
+        "@keyframes overflow-fade-out": {
           "from": {
             "opacity": "1"
           },
@@ -184,51 +220,46 @@
             "opacity": "0"
           }
         },
-        "@property --scroll-fade-start": {
+        "@property --overflow-fade-start": {
           "syntax": "\"<length>\"",
           "inherits": "false",
           "initial-value": "0px"
         },
-        "@property --scroll-fade-end": {
+        "@property --overflow-fade-end": {
           "syntax": "\"<length>\"",
           "inherits": "false",
           "initial-value": "0px"
         },
-        "@utility scroll-fade-x": {
+        "@utility overflow-fade-x": {
+          "min-width": "0",
+          "overflow-x": "auto",
           "overscroll-behavior-x": "contain",
           "scrollbar-width": "none",
           "&::-webkit-scrollbar": {
             "display": "none"
           },
-          "mask-image": "linear-gradient(to right, transparent, hsl(0 0% 0%) var(--scroll-fade-start), hsl(0 0% 0%) calc(100% - var(--scroll-fade-end)), transparent)",
+          "mask-image": "linear-gradient(to right, transparent, hsl(0 0% 0%) var(--overflow-fade-start), hsl(0 0% 0%) calc(100% - var(--overflow-fade-end)), transparent)",
           "@supports (animation-timeline: scroll())": {
-            "animation": "scroll-fade-x-start linear both, scroll-fade-x-end linear both",
+            "animation": "overflow-fade-x-start linear both, overflow-fade-x-end linear both",
             "animation-timeline": "scroll(self inline), scroll(self inline)",
             "animation-range": "0 1.5rem, calc(100% - 1.5rem) 100%"
           }
         },
-        "@keyframes scroll-fade-x-start": {
+        "@keyframes overflow-fade-x-start": {
           "from": {
-            "--scroll-fade-start": "0px"
+            "--overflow-fade-start": "0px"
           },
           "to": {
-            "--scroll-fade-start": "1.5rem"
+            "--overflow-fade-start": "1.5rem"
           }
         },
-        "@keyframes scroll-fade-x-end": {
+        "@keyframes overflow-fade-x-end": {
           "from": {
-            "--scroll-fade-end": "1.5rem"
+            "--overflow-fade-end": "1.5rem"
           },
           "to": {
-            "--scroll-fade-end": "0px"
+            "--overflow-fade-end": "0px"
           }
-        },
-        "@utility scroll-text": {
-          "@apply scroll-fade-x": {},
-          "display": "block",
-          "min-width": "0",
-          "overflow-x": "auto",
-          "white-space": "nowrap"
         },
         "@utility shimmer": {
           "mask-image": "linear-gradient(100deg, hsl(0 0% 0% / 0.45) 30%, hsl(0 0% 0% / 0.6) 40%, hsl(0 0% 0%) 50%, hsl(0 0% 0% / 0.6) 60%, hsl(0 0% 0% / 0.45) 70%)",
@@ -277,6 +308,18 @@
       "files": [
         {
           "path": "src/components/popup.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "check",
+      "type": "registry:ui",
+      "dependencies": ["cn"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/check.tsx",
           "type": "registry:ui"
         }
       ]
@@ -363,6 +406,18 @@
       ]
     },
     {
+      "name": "radio",
+      "type": "registry:ui",
+      "dependencies": ["cn"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/radio.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "switch",
       "type": "registry:ui",
       "categories": ["inputs"],
@@ -395,12 +450,32 @@
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/check.json",
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/popup.json"
       ],
       "files": [
         {
           "path": "src/components/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "categories": ["inputs"],
+      "dependencies": ["cn", "@base-ui/react"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/check.json",
+        "https://ui.roprgm.com/r/chevron.json",
+        "https://ui.roprgm.com/r/input.json",
+        "https://ui.roprgm.com/r/popup.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/combobox.tsx",
           "type": "registry:ui"
         }
       ]
@@ -427,6 +502,19 @@
       "files": [
         {
           "path": "src/components/kbd.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "categories": ["actions"],
+      "dependencies": ["cn", "class-variance-authority"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/badge.tsx",
           "type": "registry:ui"
         }
       ]
@@ -479,6 +567,23 @@
       ]
     },
     {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "categories": ["overlays"],
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/popup.json",
+        "https://ui.roprgm.com/r/menu.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/context-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "popover",
       "type": "registry:ui",
       "categories": ["overlays"],
@@ -524,6 +629,23 @@
       "files": [
         {
           "path": "src/components/notice.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "categories": ["overlays"],
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/button.json",
+        "https://ui.roprgm.com/r/notice.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/toast.tsx",
           "type": "registry:ui"
         }
       ]

@@ -33,17 +33,22 @@ export function EditorDemo() {
   ].join(" ");
 
   return (
-    <div className="flex h-[560px] bg-field">
-      <div className="layer-card border-line border-r p-(--padding-row)">
-        <ToolRail selected={tool} onSelect={setTool} />
+    // Three columns from `md`; below it, the rail runs along the top and the panel under the canvas.
+    <div className="flex flex-col bg-field md:h-[560px] md:flex-row">
+      <div className="layer-card border-line p-pad-row max-md:border-b md:border-r">
+        <ToolRail
+          selected={tool}
+          onSelect={setTool}
+          className="max-md:w-fit max-md:flex-row"
+        />
       </div>
-      <div className="relative grid min-w-0 flex-1 place-items-center p-10">
+      <div className="relative grid min-h-72 min-w-0 flex-1 place-items-center px-6 pt-16 pb-6 md:p-10">
         <div
           className="aspect-[3/2] w-full max-w-lg rounded-sm bg-[linear-gradient(to_bottom,#3b6ea5_0%,#f0a868_45%,#f7d59c_52%,#2e4a3a_56%,#16261d_100%)] surface-float"
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="layer-elevated absolute top-3 flex items-center gap-1 rounded-full p-(--padding-sm) pl-(--padding) surface-float">
+          <div className="layer-elevated absolute inset-x-3 top-3 mx-auto flex w-fit items-center gap-1 rounded-full p-pad-sm pl-pad surface-float">
             <Slider
               label="Size"
               value={size}
@@ -55,7 +60,7 @@ export function EditorDemo() {
               variant="toolbar"
             />
             <Popover align="center" trigger={<Chip>More</Chip>}>
-              <CardSection className="w-56 pt-(--padding-optical)">
+              <CardSection className="w-56 pt-pad-optical">
                 <Slider
                   label="Size"
                   value={size}
@@ -72,7 +77,14 @@ export function EditorDemo() {
           </div>
         )}
       </div>
-      <Panel width={width} onWidthChange={setWidth} min={240} max={360}>
+      {/* Under the canvas, the panel spans the frame; its dragged width applies from `md`. */}
+      <Panel
+        width={width}
+        onWidthChange={setWidth}
+        min={240}
+        max={360}
+        className="max-md:w-full!"
+      >
         <CardHeader title={layer}>
           <Menu
             trigger={
@@ -146,7 +158,7 @@ export function EditorDemo() {
               selected={name === layer}
               onClick={() => setLayer(name)}
             >
-              <span className="size-(--size-control) rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
+              <span className="size-control rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
               <span className="flex-1">{name}</span>
               <IconButton
                 label="Hide"

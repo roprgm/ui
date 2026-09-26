@@ -4,8 +4,9 @@ import { Select as Primitive } from "@base-ui/react/select";
 import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { type ReactNode, useState } from "react";
+import { Check } from "./check";
 import { Chevron } from "./chevron";
-import { Popup, popupItem } from "./popup";
+import { Popup, popupItem, popupRows } from "./popup";
 import { Tooltip } from "./tooltip";
 
 const trigger = cva(
@@ -21,8 +22,8 @@ const trigger = cva(
       /** A Button's heights and label padding, 2px less on the chevron's side; `lg` goes with
           large buttons and a large ToggleGroup. */
       size: {
-        default: "h-(--size-control) pr-2.5 pl-3",
-        lg: "h-(--size-control-lg) pr-3 pl-3.5",
+        default: "h-control pr-2.5 pl-3",
+        lg: "h-control-lg pr-3 pl-3.5",
       },
     },
     defaultVariants: { size: "default" },
@@ -103,13 +104,10 @@ export function Select<T extends string, Multiple extends boolean = false>({
         >
           <Primitive.Popup
             render={(props) => (
-              <Popup
-                {...props}
-                className="min-w-(--anchor-width) rounded-lg p-(--padding-sm)"
-              />
+              <Popup {...props} list className="min-w-(--anchor-width)" />
             )}
           >
-            <Primitive.List className="flex flex-col gap-0.5">
+            <Primitive.List className={popupRows}>
               {items.map((item, index) => (
                 <Primitive.Item
                   // Two items may share a value, such as an "Original" ratio equal to a preset.
@@ -132,22 +130,5 @@ export function Select<T extends string, Multiple extends boolean = false>({
         </Primitive.Positioner>
       </Primitive.Portal>
     </Primitive.Root>
-  );
-}
-
-function Check() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="size-3.5"
-      aria-hidden
-    >
-      <path d="m5 13 4 4L19 7" />
-    </svg>
   );
 }

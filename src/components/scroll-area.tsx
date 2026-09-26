@@ -22,7 +22,7 @@ export function ScrollArea({
       <Primitive.Viewport
         className={cn(
           "h-full overscroll-contain outline-none",
-          fade && "scroll-fade",
+          fade && "overflow-fade-y",
         )}
       >
         <Primitive.Content className="min-w-0">{children}</Primitive.Content>

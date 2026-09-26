@@ -2,6 +2,7 @@
 
 import { cn } from "cn";
 import type { ComponentProps, PointerEvent } from "react";
+import { cardParts } from "./card";
 import { ScrollArea } from "./scroll-area";
 
 /**
@@ -35,7 +36,8 @@ export function Panel({
   return (
     <aside
       className={cn(
-        "layer-card relative flex min-h-0 shrink-0 flex-col divide-y divide-line",
+        cardParts,
+        "layer-card relative min-h-0 shrink-0",
         className,
       )}
       style={{ width, ...style }}

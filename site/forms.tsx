@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "../src/components/button";
+import { Card, CardFooter, CardSection } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chip } from "../src/components/chip";
 import { Field } from "../src/components/field";
@@ -30,9 +31,9 @@ const sorts = [
 export function FormsDemo() {
   const [quality, setQuality] = useState(90);
   return (
-    <div className="grid items-start gap-6 p-6 md:grid-cols-2">
-      <div className="layer-elevated rounded-xl surface-card">
-        <div className="flex flex-col gap-3 p-(--padding) pt-(--padding-optical)">
+    <div className="grid grid-cols-1 items-start gap-6 p-pad sm:p-6 md:grid-cols-2">
+      <Card>
+        <CardSection className="pt-pad-optical">
           <h4 className="font-medium">Export</h4>
           <Field label="File name">
             <Input defaultValue="Lisbon sunset" />
@@ -45,7 +46,7 @@ export function FormsDemo() {
               <Input defaultValue="2160" />
             </Field>
           </div>
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-muted">Format</span>
             <ToggleGroup>
               <Toggle name="format" value="jpeg" defaultChecked>
@@ -59,7 +60,7 @@ export function FormsDemo() {
               </Toggle>
             </ToggleGroup>
           </div>
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-muted">Color space</span>
             <Select
               aria-label="Color space"
@@ -82,12 +83,12 @@ export function FormsDemo() {
           <label className="flex items-center gap-2">
             <Switch /> Open when done
           </label>
-        </div>
-        <div className="flex justify-end gap-2 p-(--padding-optical) pt-0">
+        </CardSection>
+        <CardFooter className="justify-end">
           <Button>Cancel</Button>
           <Button variant="primary">Export</Button>
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
 
       <div className="flex flex-col gap-4">
         <div className="flex gap-2">
@@ -113,7 +114,7 @@ export function FormsDemo() {
             <MoreIcon />
           </IconButton>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <ToggleGroup>
             <Toggle name="view" value="fit" defaultChecked>
               Fit
@@ -145,7 +146,7 @@ export function FormsDemo() {
 
       {/* Sunken and raised controls in one row, to judge which heights read as equal. */}
       <div className="flex flex-col gap-3 md:col-span-2">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <ToggleGroup>
             <Toggle name="align" value="left" defaultChecked>
               Left
@@ -166,7 +167,7 @@ export function FormsDemo() {
             className="w-32"
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <ToggleGroup size="lg">
             <Toggle name="align-lg" value="left" defaultChecked>
               Left
@@ -190,7 +191,7 @@ export function FormsDemo() {
             className="w-32"
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Input placeholder="Preset name" className="w-60" />
           <Button>Default</Button>
           <Button variant="primary">Save</Button>

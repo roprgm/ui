@@ -4,6 +4,7 @@ import { parse, render } from "sugar-high/core";
 import * as css from "sugar-high/lang/css";
 import * as shell from "sugar-high/lang/shell";
 import * as typescript from "sugar-high/lang/typescript";
+import { Card } from "../src/components/card";
 import { IconButton } from "../src/components/icon-button";
 import { ScrollArea } from "../src/components/scroll-area";
 import { CopyButton } from "./copy-button";
@@ -185,17 +186,19 @@ function Article({ doc }: { doc: Doc }) {
 
 function Preview({ doc }: { doc: Doc }) {
   if (doc.bare) return doc.demo;
+  // A block is an app's page, so its frame stays on the page's layer and the cards inside it are
+  // cards, not cards in a card.
+  if (doc.block) {
+    return (
+      <div className="overflow-hidden rounded-xl surface-card">{doc.demo}</div>
+    );
+  }
   return (
-    <div
-      className={cn(
-        "layer-card rounded-xl surface-card",
-        doc.block && "overflow-hidden",
-        !doc.block &&
-          "flex min-h-40 flex-wrap items-center justify-center gap-3 p-10",
-      )}
-    >
-      {doc.demo}
-    </div>
+    <Card>
+      <div className="flex min-h-40 flex-wrap items-center justify-center-safe gap-3 p-6 sm:p-10">
+        {doc.demo}
+      </div>
+    </Card>
   );
 }
 
@@ -219,7 +222,7 @@ export function Code({
       )}
       {lang !== "text" && (
         <pre
-          className="flex-1 overflow-x-auto py-1.5 font-mono text-xs text-foreground scroll-fade-x"
+          className="flex-1 overflow-fade-x py-1.5 font-mono text-xs text-foreground"
           dangerouslySetInnerHTML={{
             __html: render(parse(children, languages[lang])),
           }}

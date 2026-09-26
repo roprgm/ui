@@ -5,7 +5,7 @@ import { cn } from "cn";
 import type { ComponentProps, ReactElement, ReactNode } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
-import { Popup, popupItem } from "./popup";
+import { Popup, popupItem, popupRows } from "./popup";
 
 /** Commands opened from `trigger`, such as an IconButton. For settings, use a Popover. */
 export function Menu({
@@ -23,12 +23,7 @@ export function Menu({
       <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} align={align} className="z-50">
           <Primitive.Popup
-            render={(props) => (
-              <Popup
-                {...props}
-                className="flex flex-col gap-0.5 rounded-lg p-(--padding-sm)"
-              />
-            )}
+            render={(props) => <Popup {...props} list className={popupRows} />}
           >
             {children}
           </Primitive.Popup>
@@ -80,12 +75,7 @@ export function Submenu({
         {/* Up by the list's padding, `--padding-sm`, so the first item lines up with its trigger. */}
         <Primitive.Positioner sideOffset={4} alignOffset={-5} className="z-50">
           <Primitive.Popup
-            render={(props) => (
-              <Popup
-                {...props}
-                className="flex flex-col gap-0.5 rounded-lg p-(--padding-sm)"
-              />
-            )}
+            render={(props) => <Popup {...props} list className={popupRows} />}
           >
             {children}
           </Primitive.Popup>
