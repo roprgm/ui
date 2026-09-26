@@ -266,7 +266,8 @@
           "path": "src/components/chevron.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
       "name": "popup",
@@ -298,6 +299,7 @@
       "type": "registry:ui",
       "categories": ["actions"],
       "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/button.json",
         "https://ui.roprgm.com/r/tooltip.json"
       ],
@@ -344,7 +346,8 @@
           "path": "src/components/field.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
       "name": "checkbox",
@@ -438,7 +441,8 @@
           "path": "src/components/spinner.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
       "name": "tooltip",
@@ -462,6 +466,7 @@
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/kbd.json"
@@ -478,7 +483,10 @@
       "type": "registry:ui",
       "categories": ["overlays"],
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["https://ui.roprgm.com/r/popup.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/popup.json"
+      ],
       "files": [
         {
           "path": "src/components/popover.tsx",
@@ -491,7 +499,10 @@
       "type": "registry:ui",
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
-      "registryDependencies": ["https://ui.roprgm.com/r/popup.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/popup.json"
+      ],
       "files": [
         {
           "path": "src/components/dialog.tsx",
@@ -505,6 +516,7 @@
       "categories": ["overlays"],
       "dependencies": ["cn"],
       "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/icon-button.json",
         "https://ui.roprgm.com/r/popup.json"
       ],
@@ -520,7 +532,10 @@
       "type": "registry:ui",
       "categories": ["containers"],
       "dependencies": ["cn"],
-      "registryDependencies": ["https://ui.roprgm.com/r/scroll-area.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/scroll-area.json"
+      ],
       "files": [
         {
           "path": "src/components/panel.tsx",
@@ -533,7 +548,10 @@
       "type": "registry:ui",
       "categories": ["navigation"],
       "dependencies": ["cn", "class-variance-authority"],
-      "registryDependencies": ["https://ui.roprgm.com/r/button.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/button.json"
+      ],
       "files": [
         {
           "path": "src/components/tabs.tsx",
@@ -551,7 +569,8 @@
           "path": "src/components/list-item.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
       "name": "tree-list",
@@ -559,6 +578,7 @@
       "categories": ["navigation"],
       "dependencies": ["cn"],
       "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/list-item.json",
         "https://ui.roprgm.com/r/chevron.json"
       ],
@@ -579,14 +599,18 @@
           "path": "src/components/scroll-area.tsx",
           "type": "registry:ui"
         }
-      ]
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
       "name": "slider",
       "type": "registry:ui",
       "categories": ["inputs"],
       "dependencies": ["cn"],
-      "registryDependencies": ["https://ui.roprgm.com/r/scrub-input.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/scrub-input.json"
+      ],
       "files": [
         {
           "path": "src/components/slider.tsx",

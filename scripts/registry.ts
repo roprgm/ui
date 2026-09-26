@@ -78,9 +78,13 @@ function item(path: string) {
   return { cssVars: { theme: vars }, css };
 }
 
+const theme = "https://ui.roprgm.com/r/theme.json";
 const registry = JSON.parse(readFileSync("registry.json", "utf8"));
 for (const entry of registry.items) {
   if (entry.name === "theme")
     Object.assign(entry, item("src/themes/default.css"));
+  // Installed alone with shadcn, an item gets the theme's CSS only if it lists the theme itself.
+  else if (!entry.registryDependencies?.includes(theme))
+    throw new Error(`registry.json: "${entry.name}" must list ${theme}`);
 }
 writeFileSync("registry.json", `${JSON.stringify(registry, null, 2)}\n`);
