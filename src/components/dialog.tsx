@@ -2,7 +2,6 @@
 
 import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog as Primitive } from "@base-ui/react/dialog";
-import { cn } from "cn";
 import type { ReactElement, ReactNode } from "react";
 import { CardFooter } from "./card";
 import { Popup } from "./popup";
@@ -48,9 +47,7 @@ export function Dialog({
             />
           )}
         >
-          <div
-            className={cn("flex flex-col gap-3 px-3.5 py-3", actions && "pb-0")}
-          >
+          <div className="flex flex-col gap-3 px-3.5 py-3 not-last:pb-0">
             <div className="flex flex-col gap-1">
               <Primitive.Title className="font-medium">{title}</Primitive.Title>
               {description && (

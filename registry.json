@@ -150,7 +150,7 @@
             "padding-block": "14px"
           },
           "& > [data-slot=\"icon-button\"]": {
-            "margin-block": "-6px"
+            "margin-block": "-4px"
           },
           "& > [data-slot=\"icon-button\"]:first-child": {
             "margin-inline-start": "-8px"
@@ -618,7 +618,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "categories": ["overlays"],
-      "dependencies": ["cn", "@base-ui/react"],
+      "dependencies": ["@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
