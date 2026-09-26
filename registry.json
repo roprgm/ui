@@ -590,6 +590,19 @@
       ]
     },
     {
+      "name": "scroll-text",
+      "type": "registry:ui",
+      "categories": ["effects"],
+      "dependencies": ["cn"],
+      "files": [
+        {
+          "path": "src/components/scroll-text.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+    },
+    {
       "name": "scroll-area",
       "type": "registry:ui",
       "categories": ["containers"],

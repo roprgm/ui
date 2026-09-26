@@ -260,9 +260,8 @@ const groups: Group[] = [
         name: "scroll-text",
         title: "Scroll text",
         description:
-          "A theme utility: one line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls sideways to show the rest. Use it where you would use truncate. The fade follows the scroll, and scroll-fade-x gives the same fade to anything that scrolls sideways.",
+          "One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls sideways to show the rest, without becoming a tab stop. Use it where you would use truncate. The fade follows the scroll, and scroll-fade-x gives the same fade to anything that scrolls sideways.",
         demo: <ScrollTextDemo />,
-        code: '<span className="scroll-text">{layer.name}</span>',
       },
     ],
   },

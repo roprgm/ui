@@ -75,7 +75,10 @@ export function PanelHeader({
         className,
       )}
     >
-      <h2 className="flex-1 scroll-text font-medium text-foreground">
+      <h2
+        tabIndex={-1}
+        className="flex-1 scroll-text font-medium text-foreground"
+      >
         {title}
       </h2>
       {children}
