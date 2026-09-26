@@ -49,10 +49,7 @@ export function Dialog({
           )}
         >
           <div
-            className={cn(
-              "flex flex-col gap-3 px-pad py-pad-optical",
-              actions && "pb-0",
-            )}
+            className={cn("flex flex-col gap-3 px-3.5 py-3", actions && "pb-0")}
           >
             <div className="flex flex-col gap-1">
               <Primitive.Title className="font-medium">{title}</Primitive.Title>

@@ -116,7 +116,7 @@
   --size-control-lg: calc(var(--size-control) + 4px);
   /* Buttons inside a large field, and close buttons. */
   --size-control-sm: calc(var(--size-control) - 4px);
-  /* Panel headers and list rows, holding a control `--padding-row` in. */
+  /* List rows, holding a control `--padding-row` in. */
   --size-row: calc(var(--size-control) + 2 * var(--padding-row));
   /* From a top, bottom, or end edge to what brings air of its own: a button's box, which shows
      where text doesn't, and a line of text, which has air above its capitals. A section's top and
@@ -132,12 +132,10 @@
   --size-segment-lg: calc(var(--size-segment) + 4px);
   /* Its corners, nested in the group's `rounded-lg`. */
   --radius-segment: calc(var(--radius-lg) - var(--padding-xs));
-  /* The air around a ghost icon button's 16px icon, which `row-ends` gives back at a row's ends. */
-  --padding-icon: calc((var(--size-control) - 1rem) / 2);
 }
 
 /*
- * The sizes above as spacing, so each is a utility: `h-control`, `size-control-sm`, `min-h-row`,
+ * The sizes above as spacing, so each is a utility: `h-control`, `size-control-sm`, `h-row`,
  * `h-item`, `p-pad`, `px-pad-item`, `gap-pad-sm`, `right-pad`. `inline` writes the token itself
  * into each utility, so a token redefined on an element, as the segmented TabList redefines
  * `--size-control`, reaches the utilities inside it.
@@ -157,7 +155,6 @@
   --spacing-pad-row: var(--padding-row);
   --spacing-pad-optical: var(--padding-optical);
   --spacing-pad-item: var(--padding-item);
-  --spacing-pad-icon: var(--padding-icon);
 }
 
 /*
@@ -256,20 +253,18 @@
   }
 }
 
-/* The ends of a row that holds text, buttons, and ghost icon buttons, such as a card's header or
-   footer, padded `--padding` at the start and `--padding-optical` at the end. A button's box sits
-   `--padding-optical` from the row's edges, so a row that holds one pads it above and below too.
-   A ghost icon button at either end bleeds out by the air around its icon, so the icon lands where
-   a box would. It measures an `icon`-size button, the size rows hold. */
+/* A row that holds ghost icon buttons as well as text and buttons with a box, such as a card's
+   header or footer. An icon button at an end bleeds out by the 6px around its icon, so the icon
+   lines up with the row's text and boxes, and above and below, so it doesn't make the row taller. */
 @utility row-ends {
-  &:has(> [data-slot="button"]) {
-    padding-block: var(--padding-optical);
+  & > [data-slot="icon-button"] {
+    margin-block: -6px;
   }
   & > [data-slot="icon-button"]:first-child {
-    margin-inline-start: calc(-1 * var(--padding-icon));
+    margin-inline-start: -6px;
   }
   & > [data-slot="icon-button"]:last-child {
-    margin-inline-end: calc(-1 * var(--padding-icon));
+    margin-inline-end: -6px;
   }
 }
 

@@ -35,7 +35,7 @@ export function Notice({
       <div className="flex flex-1 flex-col">
         <div
           className={cn(
-            "flex flex-col gap-0.5 px-pad py-pad-optical",
+            "flex flex-col gap-0.5 px-3.5 py-3",
             actions && "pb-0",
             onDismiss && "pr-0",
           )}

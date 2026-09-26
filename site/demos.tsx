@@ -965,7 +965,7 @@ export function CollapsibleDemo() {
               <span className="text-faint">{edit.when}</span>
             </CollapsibleTrigger>
             <CollapsiblePanel>
-              <ol className="flex flex-col gap-1 border-line border-t px-pad py-2.5 text-muted">
+              <ol className="flex flex-col gap-1 border-line border-t px-3.5 py-3 text-muted">
                 {edit.steps.map((step) => (
                   <li key={step}>{step}</li>
                 ))}

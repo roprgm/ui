@@ -27,9 +27,8 @@ export function Card({
   );
 }
 
-// A row holds a control and `--padding-row` above and below it; `row-ends` places what's at its ends.
-const row =
-  "flex min-h-row shrink-0 items-center gap-1 pr-pad-optical pl-pad row-ends";
+// A row takes its height from what it holds, as a section does.
+const row = "flex shrink-0 items-center gap-1 px-3.5 py-3 row-ends";
 
 /** A title row with optional actions after it; without a title, the row holds what it's given. */
 export function CardHeader({
@@ -56,12 +55,11 @@ export function CardHeader({
   );
 }
 
-/** A padded group, such as sliders or a card's details. Its sides are a row's, `--padding`, and its
-    top and bottom `--padding-optical`, which a line of text needs for its own air. */
+/** A padded group, such as sliders or a card's details. */
 export function CardSection({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      className={cn("flex flex-col gap-3 px-pad py-pad-optical", className)}
+      className={cn("flex flex-col gap-3 px-3.5 py-3", className)}
       {...props}
     />
   );
