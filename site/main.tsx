@@ -1,5 +1,4 @@
-import "./site.css";
-import "./theme";
+import "./index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { TooltipProvider } from "../src/components/tooltip";

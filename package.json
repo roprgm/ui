@@ -21,7 +21,7 @@
   ],
   "exports": {
     "./base.css": "./src/base.css",
-    "./themes/*": "./src/themes/*",
+    "./themes/default.css": "./src/themes/default.css",
     "./*": {
       "types": "./dist/*.d.ts",
       "default": "./dist/*.js"
