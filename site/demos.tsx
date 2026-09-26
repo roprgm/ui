@@ -56,6 +56,10 @@ export function ButtonDemo() {
     <>
       <Button>Default</Button>
       <Button variant="primary">Primary</Button>
+      <Button variant="primary">
+        <PlusIcon />
+        Import
+      </Button>
       <Button variant="ghost">Ghost</Button>
       <Button disabled>Disabled</Button>
       <Button variant="ghost" render={<a href="#icon-button" />}>
