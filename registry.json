@@ -146,6 +146,9 @@
           }
         },
         "@utility row-ends": {
+          "&:has(> [data-slot=\"button\"])": {
+            "padding-block": "14px"
+          },
           "& > [data-slot=\"icon-button\"]": {
             "margin-block": "-6px"
           },
