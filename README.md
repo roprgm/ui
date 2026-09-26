@@ -44,7 +44,7 @@ Put groups of controls on a card. Controls take their fills from the layer they 
 - Use `layer-card` for panels and cards, and `layer-elevated` for a card inside a card.
 - Use the theme's colors, such as `text-muted`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette.
 - Build your own controls from the `surface-*` primitives rather than shadows or borders of your own, so they follow the theme.
-- For one line of text that may not fit, use `scroll-text` rather than `truncate`: it fades at the end and scrolls to show the rest.
+- For one line of text that may not fit, use `scroll-text` rather than `truncate`: it fades at the end and scrolls to show the rest. Inside something you click, such as a button, keep `truncate`.
 
 Components without JavaScript, such as `Button` and `Input`, render on the server.
 

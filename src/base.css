@@ -364,7 +364,8 @@
 }
 
 /* One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls
-   sideways to show the rest. Use it where you would use `truncate`. It sets its own display, so
+   sideways to show the rest. Use it where you would use `truncate`, except inside something you
+   click, where a scroller would fight the click. It sets its own display, so
    it works on a lone span, and shrinks in a flex row. */
 @utility scroll-text {
   @apply scroll-fade-x;

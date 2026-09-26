@@ -75,7 +75,9 @@ export function PanelHeader({
         className,
       )}
     >
-      <h2 className="flex-1 truncate font-medium text-foreground">{title}</h2>
+      <h2 className="flex-1 scroll-text font-medium text-foreground">
+        {title}
+      </h2>
       {children}
     </div>
   );

@@ -682,7 +682,7 @@ export function TreeListDemo() {
       {(layer) => (
         <>
           <span className="size-(--size-control) shrink-0 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
-          <span className="flex-1 truncate">{layer.name}</span>
+          <span className="flex-1 scroll-text">{layer.name}</span>
           <IconButton
             label="Hide"
             size="icon"

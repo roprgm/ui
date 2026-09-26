@@ -24,7 +24,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - Build components from the primitives: `surface-raised`, `surface-sunken`, `surface-card`, `surface-float`, `surface-callout`, `surface-thumb`, and `separator`. Each sets its fill from a token and the theme draws its edge. Never draw depth with a `shadow-*` or a border of your own. Lines along a row or section are borders in `border-line`.
 - For another fill on a primitive, add it with `!`, as `bg-primary!`, since a plain `bg-*` sorts before a primitive; a variant such as `hover:` or `checked:` needs none.
 - `base.css` holds only primitives and utilities that aren't one component: `focus-ring`, `dim-disabled`, `range-thumb`, `scroll-fade`, `scroll-fade-x`, `scroll-text`, and `shimmer`. Rows in a popup's list take `popupItem` from `popup.tsx`.
-- Controls take `focus-ring` and `dim-disabled`. Range inputs stay at least 32px across. For one line of text that may not fit, use `scroll-text` rather than `truncate`. Components inherit font size.
+- Controls take `focus-ring` and `dim-disabled`. Range inputs stay at least 32px across. For one line of text that may not fit, use `scroll-text` rather than `truncate`, except inside something you click, such as a Select's trigger, where a scroller would fight the click. Components inherit font size.
 
 ## Themes
 

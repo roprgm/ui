@@ -358,7 +358,7 @@ export function TreeList<T extends TreeNode<T>>({
         <div
           ref={ghost}
           style={{ translate: `${dragging.x}px ${dragging.y}px` }}
-          className="pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 truncate rounded-md bg-raised px-2.5 py-1 text-foreground surface-float"
+          className="pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 scroll-text rounded-md bg-raised px-2.5 py-1 text-foreground surface-float"
         >
           {label(active.item)}
         </div>
