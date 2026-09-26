@@ -2,6 +2,7 @@
 
 import { cva } from "class-variance-authority";
 import { cn } from "cn";
+import type { PointerEvent } from "react";
 import { ScrubInput } from "./scrub-input";
 
 const root = cva("grid items-center", {
@@ -83,6 +84,21 @@ export function Slider({
 }) {
   const fraction = (x: number) => (x - min) / (max - min);
 
+  // Native touch dragging can lock to scrolling before the finger moves along the track.
+  // Keep the native range for keyboard/mouse input and let it clamp and snap touch values.
+  const changeFromTouch = (event: PointerEvent<HTMLInputElement>) => {
+    const input = event.currentTarget;
+    const bounds = input.getBoundingClientRect();
+    const style = getComputedStyle(input);
+    const thumb = Number.parseFloat(style.getPropertyValue("--size-thumb"));
+    const travel = bounds.width - thumb;
+    if (travel <= 0) return;
+    let progress = (event.clientX - bounds.left - thumb / 2) / travel;
+    if (style.direction === "rtl") progress = 1 - progress;
+    input.valueAsNumber = min + progress * (max - min);
+    onChange(input.valueAsNumber);
+  };
+
   return (
     <div className={cn(root({ variant }), className)}>
       <span className="relative z-10 text-muted">{label}</span>
@@ -127,12 +143,29 @@ export function Slider({
             onDoubleClick={() =>
               defaultValue !== undefined && onChange(defaultValue)
             }
-            onPointerDown={() => onEditingChange?.(true)}
+            onPointerDown={(event) => {
+              if (event.pointerType === "touch") {
+                event.preventDefault();
+                event.currentTarget.focus({ preventScroll: true });
+                event.currentTarget.setPointerCapture(event.pointerId);
+                changeFromTouch(event);
+              }
+              onEditingChange?.(true);
+            }}
+            onPointerMove={(event) => {
+              if (
+                event.pointerType === "touch" &&
+                event.currentTarget.hasPointerCapture(event.pointerId)
+              ) {
+                changeFromTouch(event);
+              }
+            }}
             onPointerUp={() => onEditingChange?.(false)}
             onPointerCancel={() => onEditingChange?.(false)}
             onFocus={() => onEditingChange?.(true)}
             onBlur={() => onEditingChange?.(false)}
-            className="absolute inset-x-0 top-1/2 h-8 w-full -translate-y-1/2 cursor-pointer touch-pan-y range-thumb"
+            // Keep a touch on the bar attached to the range, even when the finger drifts vertically.
+            className="absolute inset-x-0 top-1/2 h-8 w-full -translate-y-1/2 cursor-pointer touch-none range-thumb"
           />
         </div>
       )}
