@@ -667,18 +667,12 @@ const tools = [
 export function ToolRail({
   selected,
   onSelect,
-  className,
 }: {
   selected: string;
   onSelect: (id: string) => void;
-  className?: string;
 }) {
   return (
-    <TabList
-      aria-label="Tools"
-      variant="segmented"
-      className={cn("flex-col", className)}
-    >
+    <TabList aria-label="Tools" variant="segmented" className="flex-col">
       {tools.map(({ id, label, key, Icon }) => (
         <Tooltip key={id} content={label} shortcut={key} side="right">
           <Tab

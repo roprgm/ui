@@ -20,7 +20,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 ## Look
 
 - Colors come only from the tokens in `base.css` (`text-muted`, `bg-field`, `bg-level-3`, `border-line`, …), written as `hsl()`. Never use Tailwind's palette, such as `neutral-*` or `white/*`; add or reuse a token.
-- A background that holds controls takes `layer-card` or `layer-elevated`. A layer sets only `--layer`, and the fills of the controls on it mix from it. Popups are `layer-elevated`; dialogs and notices are `layer-card`.
+- A background that holds controls takes `layer-card` or `layer-elevated`. A layer sets only `--layer`, and the fills of the controls on it mix from it. Popups are `layer-elevated`; dialogs and notices are `layer-card`. A box drawn as a card is a `Card`: `surface-card` without a layer paints the layer under it.
 - Build components from the primitives: `surface-raised`, `surface-sunken`, `surface-card`, `surface-float`, `surface-callout`, `surface-thumb`, and `separator`. Each sets its fill from a token and the theme draws its edge. Never draw depth with a `shadow-*` or a border of your own. Lines along a row or section are borders in `border-line`.
 - For another fill on a primitive, add it with `!`, as `bg-primary!`, since a plain `bg-*` sorts before a primitive; a variant such as `hover:` or `checked:` needs none.
 - `base.css` holds only primitives and utilities that aren't one component: `focus-ring`, `dim-disabled`, `popup-motion`, `range-thumb`, `overflow-fade-x`, `overflow-fade-y`, and `shimmer`. A popup that holds a list takes `Popup`'s `list`; its rows take `popupItem` and stack in `popupRows`, both from `popup.tsx`.

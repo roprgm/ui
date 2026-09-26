@@ -206,7 +206,8 @@
 }
 
 /* A card standing on the layer under it, such as a panel of controls on the page. Its fill is its
-   own layer, as `layer-card` or `layer-elevated` set it. */
+   own layer, so it goes with `layer-card` or `layer-elevated`: alone, it paints the layer under it
+   and vanishes into it. The Card component pairs them. */
 @utility surface-card {
   background-color: var(--layer);
 }

@@ -186,13 +186,8 @@ function Article({ doc }: { doc: Doc }) {
 
 function Preview({ doc }: { doc: Doc }) {
   if (doc.bare) return doc.demo;
-  // A block is an app's page, so its frame stays on the page's layer and the cards inside it are
-  // cards, not cards in a card.
-  if (doc.block) {
-    return (
-      <div className="overflow-hidden rounded-xl surface-card">{doc.demo}</div>
-    );
-  }
+  // Blocks lay themselves out by the width of this frame, not the screen's.
+  if (doc.block) return <Card className="@container">{doc.demo}</Card>;
   return (
     <Card>
       <div className="flex min-h-40 flex-wrap items-center justify-center-safe gap-3 p-6 sm:p-10">

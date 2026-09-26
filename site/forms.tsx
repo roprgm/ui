@@ -31,7 +31,7 @@ const sorts = [
 export function FormsDemo() {
   const [quality, setQuality] = useState(90);
   return (
-    <div className="grid grid-cols-1 items-start gap-6 p-pad sm:p-6 md:grid-cols-2">
+    <div className="grid min-w-0 grid-cols-1 items-start gap-6 p-3 @sm:p-6 @2xl:grid-cols-2">
       <Card>
         <CardSection className="pt-pad-optical">
           <h4 className="font-medium">Export</h4>
@@ -77,10 +77,10 @@ export function FormsDemo() {
             max={100}
             format={percent}
           />
-          <label className="flex items-center gap-2">
+          <label className="flex flex-wrap items-center gap-2">
             <Checkbox defaultChecked /> Include metadata
           </label>
-          <label className="flex items-center gap-2">
+          <label className="flex flex-wrap items-center gap-2">
             <Switch /> Open when done
           </label>
         </CardSection>
@@ -145,7 +145,7 @@ export function FormsDemo() {
       </div>
 
       {/* Sunken and raised controls in one row, to judge which heights read as equal. */}
-      <div className="flex flex-col gap-3 md:col-span-2">
+      <div className="flex flex-col gap-3 @2xl:col-span-2">
         <div className="flex flex-wrap items-center gap-2">
           <ToggleGroup>
             <Toggle name="align" value="left" defaultChecked>
@@ -192,7 +192,7 @@ export function FormsDemo() {
           />
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Input placeholder="Preset name" className="w-60" />
+          <Input placeholder="Preset name" className="w-60 max-w-full" />
           <Button>Default</Button>
           <Button variant="primary">Save</Button>
           <Select

@@ -33,22 +33,17 @@ export function EditorDemo() {
   ].join(" ");
 
   return (
-    // Three columns from `md`; below it, the rail runs along the top and the panel under the canvas.
-    <div className="flex flex-col bg-field md:h-[560px] md:flex-row">
-      <div className="layer-card border-line p-pad-row max-md:border-b md:border-r">
-        <ToolRail
-          selected={tool}
-          onSelect={setTool}
-          className="max-md:w-fit max-md:flex-row"
-        />
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] bg-field @2xl:flex @2xl:h-[560px]">
+      <div className="layer-card border-line border-r p-pad-row">
+        <ToolRail selected={tool} onSelect={setTool} />
       </div>
-      <div className="relative grid min-h-72 min-w-0 flex-1 place-items-center px-6 pt-16 pb-6 md:p-10">
+      <div className="relative grid min-h-64 min-w-0 flex-1 place-items-center p-4 @2xl:p-10">
         <div
           className="aspect-[3/2] w-full max-w-lg rounded-sm bg-[linear-gradient(to_bottom,#3b6ea5_0%,#f0a868_45%,#f7d59c_52%,#2e4a3a_56%,#16261d_100%)] surface-float"
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="layer-elevated absolute inset-x-3 top-3 mx-auto flex w-fit items-center gap-1 rounded-full p-pad-sm pl-pad surface-float">
+          <div className="layer-elevated absolute top-3 right-2 left-2 flex flex-wrap items-center justify-center gap-1 @2xl:right-auto @2xl:left-auto rounded-full p-pad-sm pl-pad surface-float">
             <Slider
               label="Size"
               value={size}
@@ -77,13 +72,12 @@ export function EditorDemo() {
           </div>
         )}
       </div>
-      {/* Under the canvas, the panel spans the frame; its dragged width applies from `md`. */}
       <Panel
         width={width}
         onWidthChange={setWidth}
         min={240}
         max={360}
-        className="max-md:w-full!"
+        className="col-span-2 @max-2xl:w-full! @max-2xl:[&>div:first-child]:hidden"
       >
         <CardHeader title={layer}>
           <Menu
