@@ -17,7 +17,8 @@ const list = cva("flex", {
     variant: {
       default: "gap-1",
       // Set into a sunken strip like a ToggleGroup, and as tall: the tabs read a control height
-      // that fits the strip, and their corners nest in its corners.
+      // that fits the strip, and their corners nest in its corners. Only default and `icon` tabs
+      // follow it; the other sizes resolve at the root.
       segmented:
         "gap-0.5 rounded-lg surface-sunken p-(--padding-xs) [--size-control:calc(var(--size-control-lg)-2*var(--padding-xs))] *:rounded-[calc(var(--radius-lg)-var(--padding-xs))]",
     },

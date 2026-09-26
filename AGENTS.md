@@ -38,6 +38,7 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 - Other controls name their sizes after the Button they go with and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup and a segmented TabList stand 4px taller, since the eye sizes them by the raised control inside.
 - Panel headers and list rows are `h-(--size-row)`, 40px, and hold a control `--padding-row` (6px) in.
 - `--padding` and `--size-control` set the density, and the other sizes follow from them. They set heights and container padding; each control sets its own side padding by eye, such as Button's `px-3`.
+- The density is global: change it in `@theme`. The derived sizes resolve once at the root, so a local `--size-control` changes only what reads it directly. The segmented TabList uses one on purpose, for its default and `icon` tabs.
 - Use the `(--var)` form, such as `h-(--size-control)`, rather than naming a spacing value, so `cn` still merges a caller's `h-*` or `p-*`.
 
 ## Spacing
