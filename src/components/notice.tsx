@@ -28,10 +28,10 @@ export function Notice({
       className={cn("max-w-sm", tone === "alert" && "text-danger", className)}
       {...props}
     >
-      <div className="flex items-start gap-3 px-3.5 py-3 padded not-last:pb-0">
+      <div className="flex items-start gap-3 px-3.5 py-3 not-last:pb-0">
         <div className="flex flex-1 flex-col gap-0.5">{children}</div>
         {onDismiss && (
-          <IconButton label="Dismiss" onClick={onDismiss}>
+          <IconButton label="Dismiss" inline onClick={onDismiss}>
             <svg
               viewBox="0 0 24 24"
               fill="none"

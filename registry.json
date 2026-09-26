@@ -115,36 +115,6 @@
           "@apply bg-line": {},
           "box-shadow": "0 1px 0 hsl(0 0% 94.12% / 0.05)"
         },
-        "@utility padded": {
-          "--padded": "1"
-        },
-        "@utility flush": {
-          ":where(.padded) > &": {
-            "margin-block": "calc(var(--flush-y) * -1)"
-          },
-          ":where(.padded) > &:first-child": {
-            "margin-inline-start": "calc(var(--flush-x) * -1)"
-          },
-          ":where(.padded) > &:last-child": {
-            "margin-inline-end": "calc(var(--flush-x) * -1)"
-          }
-        },
-        "@utility flush-x-*": {
-          "--flush-x": "calc(var(--spacing) * --value(number))"
-        },
-        "@utility flush-y-*": {
-          "--flush-y": "calc(var(--spacing) * --value(number))"
-        },
-        "@property --flush-x": {
-          "syntax": "\"<length>\"",
-          "inherits": "false",
-          "initial-value": "0px"
-        },
-        "@property --flush-y": {
-          "syntax": "\"<length>\"",
-          "inherits": "false",
-          "initial-value": "0px"
-        },
         "@utility popup-motion": {
           "transform-origin": "var(--transform-origin)",
           "transition-property": "opacity, scale",

@@ -22,8 +22,8 @@ export function Card({ className, ...props }: ComponentProps<"div">) {
   );
 }
 
-/** A row of text, such as a title, with buttons after it. Its text sits 14px from the sides, and a
-    line of it makes a 40px row. */
+/** A row of text, such as a title, 14px from the sides; a line of it makes a 40px row. Icon buttons
+    after the title take `inline`, so their icons line up with it. */
 export function CardHeader({
   title,
   className,
@@ -36,7 +36,7 @@ export function CardHeader({
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center gap-1 px-3.5 py-2.5 padded",
+        "flex shrink-0 items-center gap-3 px-3.5 py-2.5",
         className,
       )}
     >
@@ -58,20 +58,18 @@ export function CardHeader({
 export function CardSection({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      className={cn("flex flex-col gap-3 px-3.5 py-3 padded", className)}
+      className={cn("flex flex-col gap-3 px-3.5 py-3", className)}
       {...props}
     />
   );
 }
 
-/** A closing row, such as the card's actions, with `justify-end`; padded as a section is. */
+/** The card's actions, such as Cancel and Export, with `justify-end`. A button's box shows where
+    text doesn't, so it sits closer to the edges than text does: 12px from each. */
 export function CardFooter({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      className={cn(
-        "flex shrink-0 items-center gap-1 px-3.5 py-3 padded",
-        className,
-      )}
+      className={cn("flex shrink-0 items-center gap-1 p-3", className)}
       {...props}
     />
   );

@@ -4,16 +4,14 @@ import { type ComponentProps, cloneElement, type ReactElement } from "react";
 
 const button = cva(
   // Colors ease over 200ms; the 1px press moves faster, since the last entry for a property wins.
-  "inline-flex h-control cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap flush [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
+  "inline-flex h-control cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
   {
     variants: {
-      // A box sits 2px closer to a padded container's edge than text does, since its edge shows
-      // where text's doesn't.
       variant: {
         default:
-          "surface-raised text-foreground flush-x-0.5 hover:bg-raised-hover data-popup-open:bg-raised-hover",
+          "surface-raised text-foreground hover:bg-raised-hover data-popup-open:bg-raised-hover",
         primary:
-          "surface-raised bg-primary! text-on-primary text-shadow-(--text-shadow-subtle) flush-x-0.5 hover:bg-primary-hover!",
+          "surface-raised bg-primary! text-on-primary text-shadow-(--text-shadow-subtle) hover:bg-primary-hover!",
         ghost:
           "text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },
@@ -35,21 +33,39 @@ const button = cva(
   },
 );
 
+// Inline, a button lays out as its content, as text does: its margins take back its side padding
+// and whatever makes it taller than a line, and its box shows past them on hover.
+const inlineMargins = {
+  default: "-mx-3 -my-1",
+  sm: "-mx-2.5 -my-0.5",
+  lg: "-mx-3.5 -my-1.5",
+  icon: "-mx-1.5 -my-1",
+  "icon-sm": "-mx-1 -my-0.5",
+  "icon-lg": "-mx-2 -my-1.5",
+};
+
 /**
  * An action. `render` draws it as another element, such as a link:
- * `<Button render={<Link href="/" />}>Home</Button>`.
+ * `<Button render={<Link href="/" />}>Home</Button>`. `inline` lays a ghost out as its content, so
+ * it lines up with text beside it or with a container's edge, as a card header's icon buttons do.
  */
 export function Button({
   className,
   variant,
   size,
+  inline = false,
   render,
   ...props
 }: ComponentProps<"button"> &
   VariantProps<typeof button> & {
+    inline?: boolean;
     render?: ReactElement<{ className?: string }>;
   }) {
-  const classes = cn(button({ variant, size }), className);
+  const classes = cn(
+    button({ variant, size }),
+    inline && inlineMargins[size ?? "default"],
+    className,
+  );
   if (render) {
     return cloneElement(render, {
       ...props,

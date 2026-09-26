@@ -622,7 +622,7 @@ export function PanelDemo() {
   return (
     <Panel className="h-80 w-64 overflow-hidden rounded-xl surface-float">
       <CardHeader title="Effects">
-        <IconButton label="Add effect">
+        <IconButton label="Add effect" inline>
           <PlusIcon />
         </IconButton>
       </CardHeader>
@@ -771,6 +771,7 @@ export function ListItemDemo() {
           <span className="flex-1">{layer.name}</span>
           <IconButton
             label="Hide"
+            inline
             className="opacity-0 group-hover:opacity-100"
           >
             <EyeIcon />
@@ -854,6 +855,7 @@ export function TreeListDemo() {
           <ScrollText className="flex-1">{layer.name}</ScrollText>
           <IconButton
             label="Hide"
+            inline
             className="opacity-0 group-hover:opacity-100"
           >
             <EyeIcon />
@@ -929,10 +931,10 @@ function EditCard() {
   return (
     <Card className="w-72 max-w-full">
       <CardHeader title="Golden hour">
-        <IconButton label="Add adjustment">
+        <IconButton label="Add adjustment" inline>
           <PlusIcon />
         </IconButton>
-        <IconButton label="More">
+        <IconButton label="More" inline>
           <MoreIcon />
         </IconButton>
       </CardHeader>

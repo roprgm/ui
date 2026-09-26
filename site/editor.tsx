@@ -86,7 +86,7 @@ export function EditorDemo() {
         <CardHeader title={layer}>
           <Menu
             trigger={
-              <IconButton label="Layer actions">
+              <IconButton label="Layer actions" inline>
                 <MoreIcon />
               </IconButton>
             }
@@ -145,7 +145,7 @@ export function EditorDemo() {
           </CardSection>
         </PanelBody>
         <CardHeader title="Layers">
-          <IconButton label="Add mask">
+          <IconButton label="Add mask" inline>
             <PlusIcon />
           </IconButton>
         </CardHeader>
@@ -160,6 +160,7 @@ export function EditorDemo() {
               <span className="flex-1">{name}</span>
               <IconButton
                 label="Hide"
+                inline
                 className="opacity-0 group-hover:opacity-100"
               >
                 <EyeIcon />

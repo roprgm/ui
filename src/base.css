@@ -194,48 +194,6 @@
   @apply bg-line;
 }
 
-/* A container that pads what it holds, such as a card's rows and sections. It is the scope a
-   `flush` element reaches into. */
-@utility padded {
-  --padded: 1;
-}
-
-/* Reaches into a `padded` container's padding at the edges it touches, by `flush-x-*` at its sides
-   and `flush-y-*` above and below: the air between its box and what it shows, so what it shows
-   lines up with the container's content. Anywhere else, as in a toolbar, it keeps its box. */
-@utility flush {
-  :where(.padded) > & {
-    margin-block: calc(var(--flush-y) * -1);
-  }
-  :where(.padded) > &:first-child {
-    margin-inline-start: calc(var(--flush-x) * -1);
-  }
-  :where(.padded) > &:last-child {
-    margin-inline-end: calc(var(--flush-x) * -1);
-  }
-}
-
-@utility flush-x-* {
-  --flush-x: calc(var(--spacing) * --value(number));
-}
-
-@utility flush-y-* {
-  --flush-y: calc(var(--spacing) * --value(number));
-}
-
-/* Not inherited, so a flush element's amounts reach no one inside it. */
-@property --flush-x {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-@property --flush-y {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
 /* How a popup opens and closes: it grows from where it was opened as it fades in, and fades out.
    Base UI sets the attributes and `--transform-origin`. */
 @utility popup-motion {
