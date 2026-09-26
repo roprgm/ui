@@ -1,13 +1,22 @@
 import { cn } from "cn";
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
-/** A row in a panel collection, such as a layer, with hover, selected, and muted states. */
+/**
+ * A row in a panel collection, such as a layer, with hover, selected, and muted states. `actions`,
+ * ghost icon buttons, sit at its end in `row-actions`.
+ */
 export function ListItem({
   selected = false,
   muted = false,
+  actions,
   className,
+  children,
   ...props
-}: ComponentProps<"div"> & { selected?: boolean; muted?: boolean }) {
+}: ComponentProps<"div"> & {
+  selected?: boolean;
+  muted?: boolean;
+  actions?: ReactNode;
+}) {
   return (
     <div
       data-selected={selected}
@@ -17,6 +26,9 @@ export function ListItem({
         className,
       )}
       {...props}
-    />
+    >
+      {children}
+      {actions && <div className="row-actions">{actions}</div>}
+    </div>
   );
 }

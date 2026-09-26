@@ -31,19 +31,21 @@ export function Notice({
       <div className="flex items-start gap-3 px-3.5 py-3 not-last:pb-0">
         <div className="flex flex-1 flex-col gap-0.5">{children}</div>
         {onDismiss && (
-          <IconButton label="Dismiss" onClick={onDismiss}>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              className="size-4"
-              aria-hidden
-            >
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          </IconButton>
+          <div className="row-actions">
+            <IconButton label="Dismiss" onClick={onDismiss}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                className="size-4"
+                aria-hidden
+              >
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </IconButton>
+          </div>
         )}
       </div>
       {actions && <CardFooter>{actions}</CardFooter>}

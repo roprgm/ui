@@ -22,14 +22,16 @@ export function Card({ className, ...props }: ComponentProps<"div">) {
   );
 }
 
-/** A row of text, such as a title, with ghost actions after it. Its text sits 14px from the sides,
-    and a line of it makes a 40px row. */
+/** A row of text, such as a title, 14px from the sides; a line of it makes a 40px row. `actions`,
+    ghost icon buttons, sit at its end in `row-actions`. */
 export function CardHeader({
   title,
+  actions,
   className,
   children,
 }: {
   title?: ReactNode;
+  actions?: ReactNode;
   className?: string;
   children?: ReactNode;
 }) {
@@ -49,6 +51,7 @@ export function CardHeader({
         </h2>
       )}
       {children}
+      {actions && <div className="row-actions">{actions}</div>}
     </div>
   );
 }

@@ -115,6 +115,14 @@
           "@apply bg-line": {},
           "box-shadow": "0 1px 0 hsl(0 0% 94.12% / 0.05)"
         },
+        "@utility row-actions": {
+          "display": "flex",
+          "flex-shrink": "0",
+          "align-items": "center",
+          "gap": "4px",
+          "margin-block": "-4px",
+          "margin-inline-end": "-8px"
+        },
         "@utility popup-motion": {
           "transform-origin": "var(--transform-origin)",
           "transition-property": "opacity, scale",

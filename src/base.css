@@ -194,6 +194,19 @@
   @apply bg-line;
 }
 
+/* Where a row puts ghost icon buttons against its end, such as a card header's actions. Their box
+   is air around the icon, so the slot reaches past the row's padding by it: each icon sits 12px
+   from the end and the top, and the row stays as tall as a line of text. Buttons elsewhere, as in
+   a toolbar, keep their box. */
+@utility row-actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  margin-block: -4px;
+  margin-inline-end: -8px;
+}
+
 /* How a popup opens and closes: it grows from where it was opened as it fades in, and fades out.
    Base UI sets the attributes and `--transform-origin`. */
 @utility popup-motion {

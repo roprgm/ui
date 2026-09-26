@@ -83,20 +83,23 @@ export function EditorDemo() {
         max={360}
         className="col-span-2 @max-2xl:w-full! @max-2xl:[&>div:first-child]:hidden"
       >
-        <CardHeader title={layer}>
-          <Menu
-            trigger={
-              <IconButton label="Layer actions">
-                <MoreIcon />
-              </IconButton>
-            }
-          >
-            <MenuItem>Duplicate</MenuItem>
-            <MenuItem>Rename</MenuItem>
-            <MenuSeparator />
-            <MenuItem className="text-danger">Delete</MenuItem>
-          </Menu>
-        </CardHeader>
+        <CardHeader
+          title={layer}
+          actions={
+            <Menu
+              trigger={
+                <IconButton label="Layer actions">
+                  <MoreIcon />
+                </IconButton>
+              }
+            >
+              <MenuItem>Duplicate</MenuItem>
+              <MenuItem>Rename</MenuItem>
+              <MenuSeparator />
+              <MenuItem className="text-danger">Delete</MenuItem>
+            </Menu>
+          }
+        />
         <PanelBody>
           <CardSection>
             <Slider
@@ -144,26 +147,31 @@ export function EditorDemo() {
             />
           </CardSection>
         </PanelBody>
-        <CardHeader title="Layers">
-          <IconButton label="Add mask">
-            <PlusIcon />
-          </IconButton>
-        </CardHeader>
+        <CardHeader
+          title="Layers"
+          actions={
+            <IconButton label="Add mask">
+              <PlusIcon />
+            </IconButton>
+          }
+        />
         <div>
           {layers.map((name) => (
             <ListItem
               key={name}
               selected={name === layer}
               onClick={() => setLayer(name)}
+              actions={
+                <IconButton
+                  label="Hide"
+                  className="opacity-0 group-hover:opacity-100"
+                >
+                  <EyeIcon />
+                </IconButton>
+              }
             >
               <span className="size-control rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
               <span className="flex-1">{name}</span>
-              <IconButton
-                label="Hide"
-                className="opacity-0 group-hover:opacity-100"
-              >
-                <EyeIcon />
-              </IconButton>
             </ListItem>
           ))}
         </div>

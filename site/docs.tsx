@@ -68,7 +68,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
             left edge, padded back, so it doesn't clip a control's edge or focus ring there. */}
         <ScrollArea className="-ml-1 h-full">
           <div className="flex flex-col gap-1 py-12 pr-4 pl-1">
-            <div className="mb-4 -mt-px flex items-center gap-2.5">
+            <div className="mb-4 -mt-px flex items-center gap-1">
               <a
                 href="#usage"
                 className={cn(link, "flex items-baseline gap-2 self-center")}
@@ -207,16 +207,16 @@ export function Code({
   children: string;
 }) {
   return (
-    // Each 16px line takes 2px above and below, so the first centers on the copy button's 20px line.
-    <div className="flex items-start gap-3 rounded-xl bg-field px-3 py-2.5 surface-sunken">
+    // Each line is 16px in a 6px padding, so the first one centers on the 28px copy button.
+    <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 surface-sunken">
       {lang === "text" && (
-        <pre className="flex-1 py-0.5 font-mono text-xs whitespace-pre-wrap text-foreground">
+        <pre className="flex-1 py-1.5 font-mono text-xs whitespace-pre-wrap text-foreground">
           {children}
         </pre>
       )}
       {lang !== "text" && (
         <pre
-          className="flex-1 overflow-fade-x py-0.5 font-mono text-xs text-foreground"
+          className="flex-1 overflow-fade-x py-1.5 font-mono text-xs text-foreground"
           dangerouslySetInnerHTML={{
             __html: render(parse(children, languages[lang])),
           }}

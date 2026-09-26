@@ -95,7 +95,7 @@ export function FormsDemo() {
           <Input placeholder="Search presets" />
           <Button>Search</Button>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex gap-2">
           <Input
             readOnly
             value="https://ui.roprgm.com/p/lisbon"
@@ -103,7 +103,7 @@ export function FormsDemo() {
           />
           <CopyButton value="https://ui.roprgm.com/p/lisbon" />
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex gap-2">
           <Select
             aria-label="Sort by"
             items={sorts}
