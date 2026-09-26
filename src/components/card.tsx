@@ -28,7 +28,7 @@ export function Card({
 }
 
 // A row takes its height from what it holds, as a section does.
-const row = "flex shrink-0 items-center gap-1 px-3.5 py-3 row-ends";
+const row = "flex shrink-0 items-center gap-1 px-3.5 py-2.5 row-ends";
 
 /** A title row with optional actions after it; without a title, the row holds what it's given. */
 export function CardHeader({
