@@ -80,9 +80,9 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ### Layers and primitives
 
-The page, `layer-card`, and `layer-elevated` set a background, `--layer`, that the fills of the controls on them mix from. A layer of your own sets `--layer` and paints it. Popups are elevated wherever they open; dialogs and notices are cards.
+A layer is what a container is filled with. The page, `layer-card`, and `layer-elevated` set a background, `--layer`, that the fills of the controls on them mix from, and a `layer-card` inside a card rises to the elevated level on its own. A layer of your own sets `--layer` and paints it. Popups are elevated wherever they open; dialogs and notices are cards.
 
-Components are built from primitives. Each sets its fill from a color token, and the theme draws its edge:
+A surface is how a box stands against what's under it, and the theme draws it. A container's surface is only its edge, so a container is a layer and a surface, as a card is `layer-card surface-card`; a control's surface also fills it, from the layer it sits on:
 
 | Primitive | Stands | Used by |
 | --- | --- | --- |

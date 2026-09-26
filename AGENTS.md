@@ -19,11 +19,13 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 ## Look
 
-- Colors come only from the tokens in `base.css` (`text-muted`, `bg-field`, `bg-level-3`, `border-line`, …), written as `hsl()`. Never use Tailwind's palette, such as `neutral-*` or `white/*`; add or reuse a token.
-- A background that holds controls takes `layer-card` or `layer-elevated`. A layer sets only `--layer`, and the fills of the controls on it mix from it. Popups are `layer-elevated`; dialogs and notices are `layer-card`. A box drawn as a card is a `Card`: `surface-card` without a layer paints the layer under it.
-- Build components from the primitives: `surface-raised`, `surface-sunken`, `surface-card`, `surface-float`, `surface-callout`, `surface-thumb`, and `separator`. Each sets its fill from a token and the theme draws its edge. Never draw depth with a `shadow-*` or a border of your own. Lines along a row or section are borders in `border-line`.
-- For another fill on a primitive, add it with `!`, as `bg-primary!`, since a plain `bg-*` sorts before a primitive; a variant such as `hover:` or `checked:` needs none.
-- `base.css` holds only primitives and utilities that aren't one component: `focus-ring`, `dim-disabled`, `popup-motion`, `range-thumb`, `overflow-fade-x`, `overflow-fade-y`, and `shimmer`. A popup that holds a list takes `Popup`'s `list`; its rows take `popupItem` and stack in `popupRows`, both from `popup.tsx`.
+The look is built in layers, each using only the one below: tokens, then primitives, then parts, then components.
+
+- Tokens, in `base.css`, are colors, radii, and sizes. Colors come only from them (`text-muted`, `bg-field`, `bg-level-3`, `border-line`, …), written as `hsl()`; never use Tailwind's palette, such as `neutral-*` or `white/*`, and add or reuse a token instead.
+- Primitives, in `base.css`, are layers and surfaces. A layer is what a container is filled with: `layer-card` or `layer-elevated` sets `--layer` and paints it, and the fills of the controls on it mix from it. A `layer-card` inside another card or a popup rises to the elevated level on its own. A surface is how a box stands against what's under it, drawn by the theme: `surface-card` and `surface-float` are only a container's edge, so a container is a layer and a surface, as a `Card` is `layer-card surface-card` and a `Popup` `layer-elevated surface-float`; `surface-raised`, `surface-sunken`, `surface-thumb`, and `surface-callout` also fill the control they draw. `separator` draws a line between groups. Never draw depth with a `shadow-*` or a border of your own; lines along a row or section are borders in `border-line`.
+- For another fill on a control's surface, add it with `!`, as `bg-primary!`, since a plain `bg-*` sorts before a primitive; a variant such as `hover:` or `checked:` needs none.
+- The other utilities in `base.css` are behaviors no one component owns: `focus-ring`, `dim-disabled`, `popup-motion`, `range-thumb`, `overflow-fade-x`, `overflow-fade-y`, and `shimmer`.
+- Parts, in `card.tsx` and `popup.tsx`, are what containers hold: card parts and popup lists, under Spacing.
 - Controls take `focus-ring` and `dim-disabled`. Range inputs stay at least 32px across. For one line of text that may not fit, use `ScrollText` rather than `truncate`, except inside something you click, such as a Select's trigger, where a scroller would fight the click. Content that may not fit a row, such as tabs, chips, or a line of text with `whitespace-nowrap`, scrolls in `overflow-fade-x`, and a column in `overflow-fade-y`, rather than being cut off. Where a component puts `overflow-fade-x` on an element that holds only text, it adds `tabIndex={-1}`, since a box that scrolls is a tab stop when nothing in it is one. Components inherit font size.
 
 ## Themes
@@ -34,21 +36,19 @@ A minimal, dark, neutral component library. Every file in `src/` ships to npm an
 
 ## Sizes
 
-- `--size-control` (28px) sets the density: Button's heights are the scale, `sm` (24px, `h-control-sm`), `default` (28px, `h-control`), and `lg` (32px, `h-control-lg`), and every size in `base.css` follows from it. Change the density in `@theme`.
-- Other controls name their sizes after the Button they go with and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup and a segmented TabList stand 4px taller (`h-segment`), since the eye sizes them by the raised control inside.
-- Heights are these utilities, never a number, so they follow the density and `cn` merges a caller's `h-*`. The derived sizes resolve once at the root, so a local `--size-control` changes only what reads it directly, as the segmented TabList does for its tabs.
+- Sizes are the only spacing kept as tokens, since they set the density. `--size-control` (28px) is Button's height, and the scale the other controls measure against: `h-control-sm` (24px), `h-control`, and `h-control-lg` (32px), with `h-item` (26px) for a popup's rows, `h-row` (40px) for a panel's list rows, and `size-thumb`. Heights are these utilities, never a number, so they follow the density and `cn` merges a caller's `h-*`.
+- Controls name their sizes after the Button they go with and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup and a segmented TabList stand 4px taller, since the eye sizes them by the raised control inside.
+- The derived sizes resolve once at the root, so a `--size-control` redefined on an element changes only what reads it directly, as a segmented group does for the controls set into it.
 
 ## Spacing
 
-- Spacing is Tailwind's own scale, written as it is (`px-3.5`, `p-1`), not a token. Each control sets its own side padding by eye, such as Button's `px-3`.
-- Text and fields sit 14px from a container's sides. Everything inside a surface is card parts from `card.tsx`: `CardHeader` and `CardFooter` rows pad `px-3.5 py-2.5`, so a line of text makes a 40px row, and `CardSection`s pad `px-3.5 py-3`. Both take their height from what they hold. `cardParts` stacks them with a line between, as in a `Card`, `Panel`, or `Popover`.
-- A row's ends follow one rule, `row-ends`: a button with a box sits 12px from every edge, since its box shows where text doesn't, and a ghost icon button bleeds out so its icon sits 12px from the side and lines up with the text. `CardHeader`, `CardFooter`, and `ListItem` take it.
-- A Dialog or Notice stacks a section and its actions without a line; the section drops its bottom padding when the actions follow it (`not-last:pb-0`), so they sit 12px under it.
-- List rows, from `ListItem`, are `h-row`, 40px, since a list stays dense.
-- Everything floating is a `Popup`, which has no padding of its own. A list of items takes `list`: 4px around the rows, which are `popupItem`s, `h-item` tall and `px-2.5`, so their text lands 14px in too. Other content sits in card parts.
-- A raised control set into a sunken group, as in a toggle group or segmented tabs, sits 3px in (`p-0.75`), with `rounded-segment` corners.
+- Padding and gaps are Tailwind's scale, written as they are (`px-3.5`, `p-1`), never a token. Each control sets its own side padding by eye, such as Button's `px-3`.
+- A container pads by what it holds, never by looking at its children. Card parts, from `card.tsx`, hold what's inside a card, panel, popover, dialog, or notice: a `CardHeader` is a row of text, `px-3.5 py-2.5`, so a line makes a 40px row; a `CardSection` is content, `px-3.5 py-3`; a `CardFooter` is actions, `p-3`, since a button's box shows where text doesn't and sits closer to the edge. Each takes its height from what it holds. `cardParts` stacks them with a line between, as in a `Card`, `Panel`, or `Popover`; a `Dialog` or `Notice` stacks a section and its actions without one, and the section drops its bottom padding when the actions follow it (`not-last:pb-0`).
+- A ghost has no box to show, so it lays out as what it shows: an `IconButton` is as wide as its icon and as tall as a line of text, and its hover box reaches past that. Its icon lines up with the text around it in any container; give it room from its neighbors with the gap, as `gap-3` between two.
+- A container of items pads them 4px (`p-1`), with `rounded-sm` items nested in its `rounded-lg`: a `Popup` with `list`, whose `popupItem` rows are `h-item` and `px-2.5`, so their text lands 14px in, and a segmented group, whose controls are a size smaller than the Buttons beside it.
+- List rows, from `ListItem`, are `h-row`, since a list stays dense.
 - A container sizes itself and its parts fill it: a width goes on the `Card`, `Panel`, or `Popover`, never on a header or section, which would spill out of a container left narrower by a scrollbar or the screen's edge. A `Popup` never scrolls sideways, and a `Card` clips what doesn't fit.
-- Nested corners are concentric: the outer radius less the inset is the inner radius (a 9px list popup holds 5px rows 4px in). Below about 5px, round the inner corner up a little, and prefer radii other components already use over exact math.
+- Nested corners are concentric: the outer radius less the inset is the inner radius, as a 9px list holds 5px items 4px in. Below about 5px, round the inner corner up a little, and prefer radii other components already use over exact math.
 
 ## Checks
 

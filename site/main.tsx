@@ -195,7 +195,7 @@ const groups: Group[] = [
         name: "surfaces",
         title: "Surfaces",
         description:
-          "The primitives components are built from: surface-raised lifts a control off its layer, surface-sunken sets it in, surface-card stands a card on the page, surface-float lifts a popup over everything, surface-thumb marks what you grab, and separator draws a line between groups. The base gives each its fill and the theme draws its edge, so a control you build with them follows the theme too.",
+          "The primitives components are built from: surface-raised lifts a control off its layer, surface-sunken sets it in, surface-thumb marks what you grab, and separator draws a line between groups, each filling itself from the layer it sits on. surface-card stands a card on the page and surface-float lifts a popup over everything; they are only an edge, since a layer, layer-card or layer-elevated, fills the container. The theme draws every edge, so a control you build with them follows the theme too.",
         demo: <SurfacesDemo />,
         code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
       },

@@ -17,7 +17,7 @@ export function Toaster() {
   return (
     <Primitive.Provider toastManager={toast}>
       <Primitive.Portal>
-        <Primitive.Viewport className="fixed inset-x-pad bottom-pad z-50 flex flex-col-reverse gap-2 sm:left-auto sm:w-sm">
+        <Primitive.Viewport className="fixed inset-x-3.5 bottom-3.5 z-50 flex flex-col-reverse gap-2 sm:left-auto sm:w-sm">
           <Toasts />
         </Primitive.Viewport>
       </Primitive.Portal>

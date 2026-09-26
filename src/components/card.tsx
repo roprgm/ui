@@ -6,20 +6,15 @@ import type { ComponentProps, ReactNode } from "react";
 export const cardParts = "flex flex-col divide-y divide-line";
 
 /**
- * A surface that holds `CardHeader`, `CardSection`s, and `CardFooter`, stacked as `cardParts`.
- * `layer` paints it; a card inside a card rises to `layer-elevated` on its own.
+ * A box of `CardHeader`, `CardSection`s, and `CardFooter`, stacked as `cardParts`. A card inside
+ * a card rises to the elevated level on its own.
  */
-export function Card({
-  layer = "layer-card",
-  className,
-  ...props
-}: ComponentProps<"div"> & { layer?: string }) {
+export function Card({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       className={cn(
         cardParts,
-        "overflow-hidden rounded-xl surface-card",
-        layer,
+        "overflow-hidden rounded-xl layer-card surface-card",
         className,
       )}
       {...props}
@@ -27,10 +22,8 @@ export function Card({
   );
 }
 
-// A row takes its height from what it holds, as a section does.
-const row = "flex shrink-0 items-center gap-1 px-3.5 py-2.5 row-ends";
-
-/** A title row with optional actions after it; without a title, the row holds what it's given. */
+/** A row of text, such as a title, with ghost actions after it. Its text sits 14px from the sides,
+    and a line of it makes a 40px row. */
 export function CardHeader({
   title,
   className,
@@ -41,7 +34,12 @@ export function CardHeader({
   children?: ReactNode;
 }) {
   return (
-    <div className={cn(row, className)}>
+    <div
+      className={cn(
+        "flex shrink-0 items-center gap-3 px-3.5 py-2.5",
+        className,
+      )}
+    >
       {title && (
         <h2
           tabIndex={-1}
@@ -55,7 +53,8 @@ export function CardHeader({
   );
 }
 
-/** A padded group, such as sliders or a card's details. */
+/** A group of content, such as sliders or a card's details, 14px from the sides and 12px from the
+    top and bottom. */
 export function CardSection({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
@@ -65,8 +64,13 @@ export function CardSection({ className, ...props }: ComponentProps<"div">) {
   );
 }
 
-/** A closing row: where a card's content came from and a menu, or buttons such as Cancel and
-    Export, with `justify-end`. */
+/** The card's actions, such as Cancel and Export, with `justify-end`. A button's box shows where
+    text doesn't, so it sits closer to the edges than text does: 12px from each. */
 export function CardFooter({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn(row, className)} {...props} />;
+  return (
+    <div
+      className={cn("flex shrink-0 items-center gap-1 p-3", className)}
+      {...props}
+    />
+  );
 }

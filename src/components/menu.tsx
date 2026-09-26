@@ -22,11 +22,7 @@ export function Menu({
       <Primitive.Trigger render={trigger} />
       <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} align={align} className="z-50">
-          <Primitive.Popup
-            render={(props) => (
-              <Popup {...props} list className="flex flex-col gap-0.5" />
-            )}
-          >
+          <Primitive.Popup render={(props) => <Popup {...props} list />}>
             {children}
           </Primitive.Popup>
         </Primitive.Positioner>
@@ -76,11 +72,7 @@ export function Submenu({
       <Primitive.Portal>
         {/* Up by the list's 4px padding, so the first item lines up with its trigger. */}
         <Primitive.Positioner sideOffset={4} alignOffset={-4} className="z-50">
-          <Primitive.Popup
-            render={(props) => (
-              <Popup {...props} list className="flex flex-col gap-0.5" />
-            )}
-          >
+          <Primitive.Popup render={(props) => <Popup {...props} list />}>
             {children}
           </Primitive.Popup>
         </Primitive.Positioner>

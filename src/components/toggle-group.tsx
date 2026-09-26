@@ -2,14 +2,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-const group = cva("inline-flex gap-0.5 rounded-lg surface-sunken p-0.75", {
+const group = cva("inline-flex gap-0.5 rounded-lg surface-sunken p-1", {
   variants: {
     // The eye sizes a group by its raised toggle, so it stands 4px taller than the buttons it goes
-    // with: `default` beside a default Button, `lg` beside a large one. It sizes its toggles,
-    // since a fieldset doesn't stretch its children.
+    // with: its toggles are a size smaller, 4px in. `default` goes beside a default Button, with
+    // small toggles; `lg` beside a large one, with default toggles.
     size: {
-      default: "*:h-segment",
-      lg: "*:h-segment-lg",
+      default: "[--size-control:var(--size-control-sm)]",
+      lg: "",
     },
   },
   defaultVariants: { size: "default" },
@@ -33,10 +33,10 @@ export function Toggle({
   return (
     <label
       className={cn(
-        // Its group sets its height, or it takes a control's; its corners nest in the group's.
+        // A control's height, which its group sets; its corners nest in the group's.
         // `relative` holds the hidden radio, which is absolute, inside it: otherwise the radio sits
         // outside any container that clips or scrolls the group and widens the page.
-        "relative inline-flex h-control cursor-pointer items-center rounded-segment px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled",
+        "relative inline-flex h-control cursor-pointer items-center rounded-sm px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled",
         className,
       )}
     >

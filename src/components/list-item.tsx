@@ -13,7 +13,7 @@ export function ListItem({
       data-selected={selected}
       data-muted={muted}
       className={cn(
-        "group relative flex h-row items-center gap-2 border-line border-b px-3.5 text-foreground row-ends data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
+        "group relative flex h-row items-center gap-2 border-line border-b px-3.5 text-foreground data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
         className,
       )}
       {...props}

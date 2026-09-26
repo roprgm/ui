@@ -622,7 +622,7 @@ export function PanelDemo() {
   return (
     <Panel className="h-80 w-64 overflow-hidden rounded-xl surface-float">
       <CardHeader title="Effects">
-        <IconButton label="Add effect" size="icon">
+        <IconButton label="Add effect">
           <PlusIcon />
         </IconButton>
       </CardHeader>
@@ -771,7 +771,6 @@ export function ListItemDemo() {
           <span className="flex-1">{layer.name}</span>
           <IconButton
             label="Hide"
-            size="icon"
             className="opacity-0 group-hover:opacity-100"
           >
             <EyeIcon />
@@ -855,7 +854,6 @@ export function TreeListDemo() {
           <ScrollText className="flex-1">{layer.name}</ScrollText>
           <IconButton
             label="Hide"
-            size="icon"
             className="opacity-0 group-hover:opacity-100"
           >
             <EyeIcon />
@@ -917,12 +915,12 @@ function PresetsCard() {
           ))}
         </div>
       </CardSection>
-      <CardFooter className="text-faint">
-        <ScrollText className="flex-1">
+      <CardSection className="text-faint">
+        <ScrollText>
           Canon EOS R5 · RF 24–70mm F2.8 · ƒ/2.8 · 1/250 s · ISO 100 · 8192 ×
           5464
         </ScrollText>
-      </CardFooter>
+      </CardSection>
     </Card>
   );
 }
@@ -931,20 +929,22 @@ function EditCard() {
   return (
     <Card className="w-72 max-w-full">
       <CardHeader title="Golden hour">
-        <IconButton label="Add adjustment" size="icon">
+        <IconButton label="Add adjustment">
           <PlusIcon />
+        </IconButton>
+        <IconButton label="More">
+          <MoreIcon />
         </IconButton>
       </CardHeader>
       <CardSection className="gap-1 text-muted">
         <span>Exposure +0.35</span>
         <span>Temperature +12</span>
         <span>Shadows +20</span>
+        <span className="text-faint">Edited 2 min ago</span>
       </CardSection>
-      <CardFooter className="text-faint">
-        <span className="flex-1">Edited 2 min ago</span>
-        <IconButton label="More" size="icon">
-          <MoreIcon />
-        </IconButton>
+      <CardFooter className="justify-end">
+        <Button variant="ghost">Revert</Button>
+        <Button variant="primary">Apply</Button>
       </CardFooter>
     </Card>
   );

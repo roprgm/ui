@@ -20,11 +20,7 @@ export function ContextMenu({
       <Primitive.Trigger render={trigger} />
       <Primitive.Portal>
         <Primitive.Positioner className="z-50">
-          <Primitive.Popup
-            render={(props) => (
-              <Popup {...props} list className="flex flex-col gap-0.5" />
-            )}
-          >
+          <Primitive.Popup render={(props) => <Popup {...props} list />}>
             {children}
           </Primitive.Popup>
         </Primitive.Positioner>
