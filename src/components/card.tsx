@@ -1,9 +1,11 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-/** How a card's parts stack: in the order written, with a line between each. A Panel and a
+/** How a card's parts stack: in the order written, with a line between each. The line is an inset
+    shadow rather than a border, so it takes no room and a header stays 40px. A Panel and a
     Popover hold the same parts. */
-export const cardParts = "flex flex-col divide-y divide-line";
+export const cardParts =
+  "flex flex-col *:not-last:shadow-[inset_0_-1px_0_var(--color-line)]";
 
 /**
  * A box of `CardHeader`, `CardSection`s, and `CardFooter`, stacked as `cardParts`. A card inside
