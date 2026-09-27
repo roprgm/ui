@@ -36,7 +36,7 @@ The look is built in layers, each using only the one below: tokens, then primiti
 
 ## Sizes
 
-- Sizes are the only spacing kept as tokens, since they set the density. `--size-control` (28px) is Button's height, and the scale the other controls measure against: `h-control-sm` (24px), `h-control`, and `h-control-lg` (32px), with `h-item` (26px) for a popup's rows, `h-row` (40px) for a panel's list rows, and `size-thumb`. Heights are these utilities, never a number, so they follow the density and `cn` merges a caller's `h-*`.
+- Sizes are the only spacing kept as tokens, since they set the density. `--size-control` (28px) is Button's height, and the scale the other controls measure against: `h-control-sm` (24px), `h-control`, and `h-control-lg` (32px), with `h-item` (26px) for a popup's rows, `h-row` (40px) for a panel's list rows, and `size-thumb`. Heights are these utilities, never a number, so they follow the density. `cn` doesn't know their names, so it can't merge two of them: a component sets each height once, in the variant that needs it, rather than overriding a base one.
 - Controls name their sizes after the Button they go with and measure whatever looks as tall beside it. Input and Select match its height; ToggleGroup and a segmented TabList stand 4px taller, since the eye sizes them by the raised control inside.
 - The derived sizes resolve once at the root, so a `--size-control` redefined on an element changes only what reads it directly, as a segmented group does for the controls set into it.
 

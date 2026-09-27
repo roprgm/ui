@@ -443,12 +443,13 @@
       "name": "select",
       "type": "registry:ui",
       "categories": ["inputs"],
-      "dependencies": ["cn", "@base-ui/react"],
+      "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/check.json",
         "https://ui.roprgm.com/r/chevron.json",
-        "https://ui.roprgm.com/r/popup.json"
+        "https://ui.roprgm.com/r/popup.json",
+        "https://ui.roprgm.com/r/tooltip.json"
       ],
       "files": [
         {
@@ -583,7 +584,7 @@
       "name": "popover",
       "type": "registry:ui",
       "categories": ["overlays"],
-      "dependencies": ["@base-ui/react"],
+      "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
@@ -750,7 +751,7 @@
       "name": "slider",
       "type": "registry:ui",
       "categories": ["inputs"],
-      "dependencies": ["cn"],
+      "dependencies": ["cn", "class-variance-authority"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/scrub-input.json"

@@ -33,7 +33,7 @@ import { Button } from "@roprgm/ui/button";
 <Button variant="primary">Export</Button>;
 ```
 
-Put groups of controls on a card. Controls take their fills from the layer they sit on, so they keep the same contrast everywhere:
+Put groups of controls on a card. Controls take their fills from the surface they sit on, so they keep the same contrast everywhere:
 
 ```tsx
 <div className="surface-card rounded-xl p-3.5">
@@ -71,12 +71,13 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 | Token | Use |
 | --- | --- |
+| `level-1` to `level-8` | the backgrounds of the interface, darkest first; every fill is one of them |
+| `field`, `raised`, `raised-hover` | fills of fields and raised controls, levels relative to where they sit: a field one below, a raised control two above, three on hover |
 | `foreground`, `muted`, `faint`, `disabled` | text, strongest first |
 | `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
-| `field`, `raised`, `raised-hover` | fills of fields and of raised controls, levels relative to where they sit: a field one below, a raised control two above, three on hover |
 | `hover`, `pressed` | translucent states for ghost buttons and chips |
-| `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
-| `level-1` to `level-8` | backgrounds by role: sunk below the page, the page, a card, elevated, then each more prominent |
+| `line`, `focus`, `backdrop` | dividers, the focus ring, and the shade behind a dialog |
+| `danger` | errors |
 
 ### Surfaces
 
