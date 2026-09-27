@@ -362,11 +362,13 @@ const levels = [
   "bg-level-8",
   "bg-level-9",
   "bg-level-10",
+  "bg-level-11",
+  "bg-level-12",
 ] as const;
 
 export function LevelsDemo() {
   return (
-    <div className="grid grid-cols-10 rounded-2xl bg-[oklch(0%_0_0)] p-2">
+    <div className="grid grid-cols-12 rounded-2xl bg-[oklch(0%_0_0)] p-2">
       {levels.map((level, index) => (
         <div
           key={level}

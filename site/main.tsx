@@ -172,7 +172,7 @@ const groups: Group[] = [
         name: "levels",
         title: "Levels",
         description:
-          "The backgrounds, darkest first, each 4.5% lighter in OKLCH so the steps look even, over black. Every fill is one of them: the page is level-2 and a card level-3, and the controls on a surface sit two levels above it, or two below for a field.",
+          "The backgrounds, darkest first, each 3.7% lighter in OKLCH so the steps look even, over black. Every fill is one of them: the page is level-2 and a card level-4, and a control on a surface sits three levels above it, and a field two below.",
         demo: <LevelsDemo />,
         bare: true,
         code: '<div className="bg-level-4">…</div>',

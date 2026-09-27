@@ -9,18 +9,21 @@
 
 /* Colors. Components use only these. */
 @theme {
-  /* Backgrounds: black, then darkest first in even steps of lightness. Every fill is one of them. */
+  /* Backgrounds: black, then darkest first in even steps of lightness. Every fill is one of them.
+     Level 1 is 15%, and each level after adds 3.7%. */
   --color-level-0: oklch(0% 0 0);
   --color-level-1: oklch(15% 0 0);
-  --color-level-2: oklch(19.5% 0 0);
-  --color-level-3: oklch(24% 0 0);
-  --color-level-4: oklch(28.5% 0 0);
-  --color-level-5: oklch(33% 0 0);
-  --color-level-6: oklch(37.5% 0 0);
-  --color-level-7: oklch(42% 0 0);
-  --color-level-8: oklch(46.5% 0 0);
-  --color-level-9: oklch(51% 0 0);
-  --color-level-10: oklch(55.5% 0 0);
+  --color-level-2: oklch(18.7% 0 0);
+  --color-level-3: oklch(22.4% 0 0);
+  --color-level-4: oklch(26.1% 0 0);
+  --color-level-5: oklch(29.8% 0 0);
+  --color-level-6: oklch(33.5% 0 0);
+  --color-level-7: oklch(37.2% 0 0);
+  --color-level-8: oklch(40.9% 0 0);
+  --color-level-9: oklch(44.6% 0 0);
+  --color-level-10: oklch(48.3% 0 0);
+  --color-level-11: oklch(52% 0 0);
+  --color-level-12: oklch(55.7% 0 0);
 
   /* Text: the foreground, and faded, so it keeps its contrast on any level. */
   --color-foreground: oklch(96% 0 0);
@@ -42,13 +45,13 @@
 }
 
 /* The page's fills, for what sits on it: its own, a field two levels below, a raised control
-   two above and three on hover, and a hover one above. `surface-card` sets them again for what
+   three above and four on hover, and a hover one above. `surface-card` sets them again for what
    sits on a card. */
 @theme {
   --color-surface: var(--color-level-2);
   --color-field: var(--color-level-0);
-  --color-raised: var(--color-level-4);
-  --color-raised-hover: var(--color-level-5);
+  --color-raised: var(--color-level-5);
+  --color-raised-hover: var(--color-level-6);
   --color-hover: var(--color-level-3);
 }
 
@@ -68,33 +71,33 @@
 /* Surfaces: a fill, and an edge the theme draws. A theme changes a fill through its tokens, never
    by redeclaring `background-color` here. */
 
-/* A card, a level over what it sits on, a card too, three deep at most; it sets the fills of what
-   sits on it, as the page does. */
+/* A card, two levels over what it sits on, a card too, three deep at most; it sets the fills of
+   what sits on it, as the page does. */
 @utility surface-card {
-  --color-surface: var(--color-level-3);
-  --color-field: var(--color-level-1);
-  --color-raised: var(--color-level-5);
-  --color-raised-hover: var(--color-level-6);
-  --color-hover: var(--color-level-4);
+  --color-surface: var(--color-level-4);
+  --color-field: var(--color-level-2);
+  --color-raised: var(--color-level-7);
+  --color-raised-hover: var(--color-level-8);
+  --color-hover: var(--color-level-5);
   background-color: var(--color-surface);
 
   :where(.surface-card, .surface-float) & {
-    --color-surface: var(--color-level-4);
-    --color-field: var(--color-level-2);
-    --color-raised: var(--color-level-6);
-    --color-raised-hover: var(--color-level-7);
-    --color-hover: var(--color-level-5);
+    --color-surface: var(--color-level-6);
+    --color-field: var(--color-level-4);
+    --color-raised: var(--color-level-9);
+    --color-raised-hover: var(--color-level-10);
+    --color-hover: var(--color-level-7);
   }
 
   /* Not nested in the rule above, where both ancestors could be the same one. */
   :where(.surface-card, .surface-float)
     :where(.surface-card, .surface-float)
     & {
-    --color-surface: var(--color-level-5);
-    --color-field: var(--color-level-3);
-    --color-raised: var(--color-level-7);
-    --color-raised-hover: var(--color-level-8);
-    --color-hover: var(--color-level-6);
+    --color-surface: var(--color-level-8);
+    --color-field: var(--color-level-6);
+    --color-raised: var(--color-level-11);
+    --color-raised-hover: var(--color-level-12);
+    --color-hover: var(--color-level-9);
   }
 }
 
