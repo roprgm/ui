@@ -34,7 +34,7 @@ export function EditorDemo() {
   ].join(" ");
 
   return (
-    <div className="grid grid-cols-[auto_minmax(0,1fr)] bg-field @2xl:flex @2xl:h-[560px]">
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] bg-level-1 @2xl:flex @2xl:h-[560px]">
       <div className="border-line border-r p-1.5 surface-panel">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
