@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps, ReactNode } from "react";
-import { CardFooter } from "./card";
+import { CardSection } from "./card";
 import { IconButton } from "./icon-button";
 import { Popup } from "./popup";
 
@@ -51,7 +51,10 @@ export function Notice({
           </IconButton>
         )}
       </div>
-      {actions && <CardFooter>{actions}</CardFooter>}
+      {actions && (
+        // Buttons sit 10px from every edge, 4px closer to the sides than text.
+        <CardSection className="flex-row gap-1 px-2.5">{actions}</CardSection>
+      )}
     </Popup>
   );
 }

@@ -3,8 +3,7 @@ import type { ComponentProps } from "react";
 
 /**
  * The box everything floating is drawn in: menus, selects, popovers, dialogs, and notices. It has
- * no padding of its own: a list of items takes `list`, and other content sits in card parts, such
- * as `CardSection`. Render a Base UI popup as one:
+ * no padding of its own: a list of items takes `list`, and other content sits in `CardSection`s. Render a Base UI popup as one:
  * `<Menu.Popup render={(props) => <Popup {...props} />} />`. `layer` paints it: popups are
  * elevated wherever they open, and dialogs and notices are cards.
  */

@@ -3,7 +3,7 @@
 import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog as Primitive } from "@base-ui/react/dialog";
 import type { ReactElement, ReactNode } from "react";
-import { CardFooter, CardSection } from "./card";
+import { CardSection } from "./card";
 import { Popup } from "./popup";
 
 /**
@@ -59,7 +59,10 @@ export function Dialog({
             {children}
           </CardSection>
           {actions && (
-            <CardFooter className="justify-end">{actions}</CardFooter>
+            // Buttons sit 10px from every edge, 4px closer to the sides than text.
+            <CardSection className="flex-row justify-end gap-1 px-2.5">
+              {actions}
+            </CardSection>
           )}
         </Primitive.Popup>
       </Primitive.Portal>

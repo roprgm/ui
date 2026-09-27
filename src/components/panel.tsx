@@ -6,8 +6,8 @@ import { cardParts } from "./card";
 import { ScrollArea } from "./scroll-area";
 
 /**
- * A card docked at the side of the app: its `CardHeader`s and `CardSection`s stack in the order
- * written, with a line between each, and a `PanelBody` takes the height left and scrolls.
+ * A card docked at the side of the app, which a caller can resize: its `CardSection`s stack with a
+ * line between each, and a `PanelBody` takes the height left and scrolls.
  * Passing `onWidthChange` adds a drag handle on its `edge`, the side facing the content.
  */
 export function Panel({

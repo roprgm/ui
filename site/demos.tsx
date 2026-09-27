@@ -2,14 +2,7 @@ import { cn } from "cn";
 import { useState } from "react";
 import { Badge } from "../src/components/badge";
 import { Button } from "../src/components/button";
-import {
-  Card,
-  CardAction,
-  CardFooter,
-  CardHeader,
-  CardSection,
-  CardTitle,
-} from "../src/components/card";
+import { Card, CardAction, CardSection } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chevron } from "../src/components/chevron";
 import { Chip } from "../src/components/chip";
@@ -623,14 +616,14 @@ export function PanelDemo() {
   const [size, setSize] = useState(35);
   return (
     <Panel className="h-80 w-64 overflow-hidden rounded-xl surface-float">
-      <CardHeader>
-        <CardTitle>Effects</CardTitle>
+      <CardSection className="flex-row items-center">
+        <h2 className="flex-1 font-medium">Effects</h2>
         <CardAction>
           <IconButton label="Add effect">
             <PlusIcon />
           </IconButton>
         </CardAction>
-      </CardHeader>
+      </CardSection>
       <CardSection>
         <Slider
           label="Grain"
@@ -903,9 +896,9 @@ export function CardDemo() {
 function PresetsCard() {
   return (
     <Card className="w-72 max-w-full">
-      <CardHeader>
-        <CardTitle>Presets</CardTitle>
-      </CardHeader>
+      <CardSection>
+        <h2 className="font-medium">Presets</h2>
+      </CardSection>
       {/* The row runs to the card's edges, so it fades there rather than inside the padding. */}
       <CardSection className="px-0">
         <div className="flex gap-2 overflow-fade-x px-3.5">
@@ -939,8 +932,8 @@ function PresetsCard() {
 function EditCard() {
   return (
     <Card className="w-72 max-w-full">
-      <CardHeader>
-        <CardTitle>Golden hour</CardTitle>
+      <CardSection className="flex-row items-center">
+        <h2 className="flex-1 font-medium">Golden hour</h2>
         <CardAction>
           <IconButton label="Add adjustment">
             <PlusIcon />
@@ -949,17 +942,17 @@ function EditCard() {
             <MoreIcon />
           </IconButton>
         </CardAction>
-      </CardHeader>
+      </CardSection>
       <CardSection className="gap-1 text-muted">
         <span>Exposure +0.35</span>
         <span>Temperature +12</span>
         <span>Shadows +20</span>
         <span className="text-faint">Edited 2 min ago</span>
       </CardSection>
-      <CardFooter className="justify-end">
+      <CardSection className="flex-row justify-end gap-1 px-2.5">
         <Button variant="ghost">Revert</Button>
         <Button variant="primary">Apply</Button>
-      </CardFooter>
+      </CardSection>
     </Card>
   );
 }

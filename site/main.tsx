@@ -188,7 +188,7 @@ const groups: Group[] = [
         name: "card",
         title: "Card",
         description:
-          "A surface whose header, sections, and footer stack with a line between each. Panel, Popover, and a Collapsible styled as a card hold the same parts.",
+          "A stack of sections with a line between each: the first reads as a header and the last as a footer, with no parts of their own. CardAction holds a header's icon buttons at its end. Panel and Popover stack sections the same way.",
         demo: <CardDemo />,
       },
       {

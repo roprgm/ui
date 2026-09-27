@@ -7,8 +7,8 @@ import { cardParts } from "./card";
 import { Popup } from "./popup";
 
 /**
- * Settings opened beside `trigger`, such as bar controls that no longer fit. Its content is a
- * card's parts, stacked with a line between each: a `CardSection` for a group of controls.
+ * Settings opened beside `trigger`, such as bar controls that no longer fit. Its content is
+ * `CardSection`s, stacked with a line between each, as in a card.
  * `className` sizes its box, such as a width its parts fill.
  */
 export function Popover({

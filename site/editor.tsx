@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  CardAction,
-  CardHeader,
-  CardSection,
-  CardTitle,
-} from "../src/components/card";
+import { CardAction, CardSection } from "../src/components/card";
 import { Chip } from "../src/components/chip";
 import { IconButton } from "../src/components/icon-button";
 import { ListItem, ListItemAction } from "../src/components/list-item";
@@ -88,8 +83,8 @@ export function EditorDemo() {
         max={360}
         className="col-span-2 @max-2xl:w-full! @max-2xl:[&>div:first-child]:hidden"
       >
-        <CardHeader>
-          <CardTitle>{layer}</CardTitle>
+        <CardSection className="flex-row items-center">
+          <h2 className="flex-1 font-medium">{layer}</h2>
           <CardAction>
             <Menu
               trigger={
@@ -104,7 +99,7 @@ export function EditorDemo() {
               <MenuItem className="text-danger">Delete</MenuItem>
             </Menu>
           </CardAction>
-        </CardHeader>
+        </CardSection>
         <PanelBody>
           <CardSection>
             <Slider
@@ -152,14 +147,14 @@ export function EditorDemo() {
             />
           </CardSection>
         </PanelBody>
-        <CardHeader>
-          <CardTitle>Layers</CardTitle>
+        <CardSection className="flex-row items-center">
+          <h2 className="flex-1 font-medium">Layers</h2>
           <CardAction>
             <IconButton label="Add mask">
               <PlusIcon />
             </IconButton>
           </CardAction>
-        </CardHeader>
+        </CardSection>
         <div>
           {layers.map((name) => (
             <ListItem
