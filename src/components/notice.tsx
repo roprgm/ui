@@ -3,13 +3,15 @@ import { cn } from "cn";
 import type { ComponentProps } from "react";
 import { IconButton } from "./icon-button";
 import { Popup } from "./popup";
+import { sections } from "./section";
 
-const notice = cva("flex max-w-sm flex-col *:not-last:pb-0", {
+const notice = cva("max-w-sm", {
   variants: { tone: { status: "", alert: "text-danger" } },
 });
 
 /**
- * A message that floats without blocking the app, as `CardSection`s stacked without a line. An
+ * A message that floats without blocking the app, padded as its content needs; its `Section`s
+ * stack without a line. An
  * `alert` is red and interrupts assistive technology; a `status` waits its turn.
  */
 export function Notice({
@@ -18,11 +20,15 @@ export function Notice({
   ...props
 }: ComponentProps<"div"> & { tone?: "status" | "alert" }) {
   return (
-    <Popup role={tone} className={cn(notice({ tone }), className)} {...props} />
+    <Popup
+      role={tone}
+      className={cn(sections({ lines: false }), notice({ tone }), className)}
+      {...props}
+    />
   );
 }
 
-/** Dismisses a notice, from a `CardAction` beside its message. */
+/** Dismisses a notice, from a `SectionAction` beside its message. */
 export function NoticeClose(
   props: Omit<ComponentProps<typeof IconButton>, "label">,
 ) {

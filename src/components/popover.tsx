@@ -2,14 +2,14 @@
 
 import { Popover as Primitive } from "@base-ui/react/popover";
 import { cn } from "cn";
-import { cardParts } from "./card";
 import { Popup } from "./popup";
+import { sections } from "./section";
 
 /** Settings beside their trigger, such as bar controls that no longer fit. */
 export const Popover = Primitive.Root;
 export const PopoverTrigger = Primitive.Trigger;
 
-/** `CardSection`s with a line between each, as in a card. */
+/** Padded as its content needs; its `Section`s stack with a line between each, as in a card. */
 export function PopoverContent({
   align = "end",
   ...props
@@ -21,7 +21,7 @@ export function PopoverContent({
           // A click leaves focus on the trigger, so no field starts typing.
           initialFocus={(type) => type === "keyboard"}
           render={(popup) => (
-            <Popup {...popup} className={cn(cardParts, popup.className)} />
+            <Popup {...popup} className={cn(sections(), popup.className)} />
           )}
           {...props}
         />

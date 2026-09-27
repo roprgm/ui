@@ -2,8 +2,8 @@
 
 import { Toast as Primitive } from "@base-ui/react/toast";
 import { Button } from "./button";
-import { CardAction, CardSection } from "./card";
 import { Notice, NoticeClose } from "./notice";
+import { Section, SectionAction } from "./section";
 
 /**
  * Shows notices in a corner from anywhere, once a `Toaster` is mounted:
@@ -36,19 +36,19 @@ function Toasts() {
       className="translate-x-(--toast-swipe-movement-x) data-limited:hidden"
       render={<Notice tone={item.priority === "high" ? "alert" : "status"} />}
     >
-      <CardSection className="flex-row items-start">
+      <Section className="flex-row items-start">
         <div className="flex flex-1 flex-col gap-0.5">
           <Primitive.Title className="font-medium" />
           <Primitive.Description />
         </div>
-        <CardAction>
+        <SectionAction>
           <NoticeClose onClick={() => toast.close(item.id)} />
-        </CardAction>
-      </CardSection>
+        </SectionAction>
+      </Section>
       {item.actionProps && (
-        <CardSection className="flex-row gap-1 px-2.5">
+        <Section className="flex-row gap-1 px-2.5">
           <Primitive.Action render={<Button size="sm" />} />
-        </CardSection>
+        </Section>
       )}
     </Primitive.Root>
   ));

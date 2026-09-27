@@ -3,7 +3,7 @@
 import { Collapsible as Primitive } from "@base-ui/react/collapsible";
 import { cn } from "cn";
 import type { ComponentProps, TransitionEvent } from "react";
-import { cardParts } from "./card";
+import { sections } from "./section";
 
 /**
  * A trigger that shows and hides a panel. A chevron inside turns with
@@ -51,7 +51,7 @@ function revealSection(event: TransitionEvent<HTMLDivElement>) {
 }
 
 /**
- * What the trigger shows: `CardSection`s, as in a card, under a line that folds away with them.
+ * What the trigger shows, padded as a card is, under a line that folds away with it.
  * `className` styles the box that holds them, inside the part that slides.
  */
 export function CollapsiblePanel({
@@ -74,7 +74,7 @@ export function CollapsiblePanel({
     >
       <div
         className={cn(
-          cardParts,
+          sections(),
           "shadow-[inset_0_1px_0_var(--color-line)]",
           className,
         )}

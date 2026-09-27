@@ -4,6 +4,7 @@ import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog as Primitive } from "@base-ui/react/dialog";
 import { cn } from "cn";
 import { Popup } from "./popup";
+import { sections } from "./section";
 
 /** A modal. An `alert` asks before what can't be undone: a click outside doesn't close it. */
 export function Dialog(
@@ -24,7 +25,7 @@ export const DialogTrigger = Primitive.Trigger;
 /** Closes its dialog: `<DialogClose render={<Button />}>Cancel</DialogClose>`. */
 export const DialogClose = Primitive.Close;
 
-/** `CardSection`s stacked without a line. */
+/** Padded as its content needs; its `Section`s stack without a line, and the last of several sits apart. */
 export function DialogContent(props: Primitive.Popup.Props) {
   return (
     <Primitive.Portal>
@@ -34,7 +35,8 @@ export function DialogContent(props: Primitive.Popup.Props) {
           <Popup
             {...popup}
             className={cn(
-              "fixed top-1/2 left-1/2 z-50 flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 flex-col duration-150 *:not-last:pb-0 *:last:pt-4 data-ending-style:scale-95",
+              sections({ lines: false }),
+              "fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 duration-150 *:data-[slot=section]:not-first:last:pt-4 data-ending-style:scale-95",
               popup.className,
             )}
           />

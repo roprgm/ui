@@ -1,6 +1,5 @@
 import { cn } from "cn";
 import { useState } from "react";
-import { CardAction, CardSection, cardParts } from "../src/components/card";
 import { Chip } from "../src/components/chip";
 import { IconButton } from "../src/components/icon-button";
 import { ListItem, ListItemAction } from "../src/components/list-item";
@@ -17,6 +16,7 @@ import {
   PopoverTrigger,
 } from "../src/components/popover";
 import { ScrollArea } from "../src/components/scroll-area";
+import { Section, SectionAction, sections } from "../src/components/section";
 import { Slider } from "../src/components/slider";
 import { percent, ToolRail } from "./demos";
 import { EyeIcon, MoreIcon, PlusIcon } from "./icons";
@@ -68,7 +68,7 @@ export function EditorDemo() {
             <Popover>
               <PopoverTrigger render={<Chip />}>More</PopoverTrigger>
               <PopoverContent align="center" className="w-56">
-                <CardSection>
+                <Section>
                   <Slider
                     label="Size"
                     value={size}
@@ -77,7 +77,7 @@ export function EditorDemo() {
                     max={500}
                     format={(v) => `${v}px`}
                   />
-                </CardSection>
+                </Section>
               </PopoverContent>
             </Popover>
             <Chip aria-pressed={overlay} onClick={() => setOverlay(!overlay)}>
@@ -89,15 +89,15 @@ export function EditorDemo() {
       {/* A panel docked beside the canvas, or under it in a narrow frame. */}
       <aside
         className={cn(
-          cardParts,
+          sections(),
           "relative col-span-2 min-h-0 shrink-0 surface-panel @max-2xl:w-full!",
         )}
         style={{ width }}
       >
         <ResizeEdge width={width} onWidthChange={setWidth} />
-        <CardSection className="flex-row items-center">
+        <Section className="flex-row items-center">
           <h2 className="flex-1 font-medium">{layer}</h2>
-          <CardAction>
+          <SectionAction>
             <Menu>
               <MenuTrigger render={<IconButton label="Layer actions" />}>
                 <MoreIcon />
@@ -109,10 +109,10 @@ export function EditorDemo() {
                 <MenuItem className="text-danger">Delete</MenuItem>
               </MenuContent>
             </Menu>
-          </CardAction>
-        </CardSection>
+          </SectionAction>
+        </Section>
         <ScrollArea fade className="flex-1">
-          <CardSection>
+          <Section>
             <Slider
               label="Exposure"
               value={exposure}
@@ -156,16 +156,16 @@ export function EditorDemo() {
               format={percent}
               variant="compact"
             />
-          </CardSection>
+          </Section>
         </ScrollArea>
-        <CardSection className="flex-row items-center">
+        <Section className="flex-row items-center">
           <h2 className="flex-1 font-medium">Layers</h2>
-          <CardAction>
+          <SectionAction>
             <IconButton label="Add mask">
               <PlusIcon />
             </IconButton>
-          </CardAction>
-        </CardSection>
+          </SectionAction>
+        </Section>
         <div>
           {layers.map((name) => (
             <ListItem

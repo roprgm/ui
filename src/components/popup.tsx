@@ -3,7 +3,7 @@ import type { ComponentProps } from "react";
 
 /**
  * The floating box of menus, selects, popovers, dialogs, and notices. `list` pads a column of
- * `popupItem` rows; other content goes in `CardSection`s.
+ * `popupItem` rows; other content goes in `Section`s.
  */
 export function Popup({
   list = false,

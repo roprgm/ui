@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Button } from "../src/components/button";
-import { Card, CardSection } from "../src/components/card";
+import { Card } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chip } from "../src/components/chip";
 import { Field } from "../src/components/field";
 import { IconButton } from "../src/components/icon-button";
 import { Input } from "../src/components/input";
+import { Section } from "../src/components/section";
 import { Select } from "../src/components/select";
 import { Slider } from "../src/components/slider";
 import { Switch } from "../src/components/switch";
@@ -33,7 +34,7 @@ export function FormsDemo() {
   return (
     <div className="grid min-w-0 grid-cols-1 items-start gap-6 p-3 @sm:p-6 @2xl:grid-cols-2">
       <Card>
-        <CardSection>
+        <Section>
           <h4 className="font-medium">Export</h4>
           <Field label="File name">
             <Input defaultValue="Lisbon sunset" />
@@ -83,11 +84,11 @@ export function FormsDemo() {
           <label className="flex flex-wrap items-center gap-2">
             <Switch /> Open when done
           </label>
-        </CardSection>
-        <CardSection className="flex-row justify-end gap-1 px-2.5">
+        </Section>
+        <Section className="flex-row justify-end gap-1 px-2.5">
           <Button>Cancel</Button>
           <Button variant="primary">Export</Button>
-        </CardSection>
+        </Section>
       </Card>
 
       <div className="flex flex-col gap-4">

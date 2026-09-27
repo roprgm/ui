@@ -2,7 +2,7 @@ import { cn } from "cn";
 import { useState } from "react";
 import { Badge } from "../src/components/badge";
 import { Button } from "../src/components/button";
-import { Card, CardAction, CardSection } from "../src/components/card";
+import { Card } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chevron } from "../src/components/chevron";
 import { Chip } from "../src/components/chip";
@@ -50,6 +50,7 @@ import { Radio } from "../src/components/radio";
 import { ScrollArea } from "../src/components/scroll-area";
 import { ScrollText } from "../src/components/scroll-text";
 import { ScrubInput } from "../src/components/scrub-input";
+import { Section, SectionAction } from "../src/components/section";
 import { Select } from "../src/components/select";
 import { Slider } from "../src/components/slider";
 import { Spinner } from "../src/components/spinner";
@@ -521,19 +522,19 @@ export function DialogDemo() {
     <Dialog>
       <DialogTrigger render={<Button />}>Export…</DialogTrigger>
       <DialogContent>
-        <CardSection className="gap-1">
+        <Section className="gap-1">
           <DialogTitle>Export image</DialogTitle>
           <DialogDescription>
             Saves a copy with your edits. The original stays as it is.
           </DialogDescription>
-        </CardSection>
-        <CardSection>
+        </Section>
+        <Section>
           <Input defaultValue="portrait-edit.jpg" aria-label="File name" />
-        </CardSection>
-        <CardSection className="flex-row justify-end gap-1 px-2.5">
+        </Section>
+        <Section className="flex-row justify-end gap-1 px-2.5">
           <DialogClose render={<Button variant="ghost" />}>Cancel</DialogClose>
           <DialogClose render={<Button />}>Export</DialogClose>
-        </CardSection>
+        </Section>
       </DialogContent>
     </Dialog>
   );
@@ -544,18 +545,18 @@ export function AlertDialogDemo() {
     <Dialog alert>
       <DialogTrigger render={<Button />}>Delete layer…</DialogTrigger>
       <DialogContent>
-        <CardSection className="gap-1">
+        <Section className="gap-1">
           <DialogTitle>Delete “Sky”?</DialogTitle>
           <DialogDescription>
             Its mask and adjustments go with it.
           </DialogDescription>
-        </CardSection>
-        <CardSection className="flex-row justify-end gap-1 px-2.5">
+        </Section>
+        <Section className="flex-row justify-end gap-1 px-2.5">
           <DialogClose render={<Button variant="ghost" />}>Cancel</DialogClose>
           <DialogClose render={<Button className="text-danger" />}>
             Delete
           </DialogClose>
-        </CardSection>
+        </Section>
       </DialogContent>
     </Dialog>
   );
@@ -570,7 +571,7 @@ export function PopoverDemo() {
         <BrushIcon /> Brush
       </PopoverTrigger>
       <PopoverContent align="center" className="w-64">
-        <CardSection>
+        <Section>
           <Slider
             label="Size"
             value={size}
@@ -588,7 +589,7 @@ export function PopoverDemo() {
             max={100}
             format={percent}
           />
-        </CardSection>
+        </Section>
       </PopoverContent>
     </Popover>
   );
@@ -601,20 +602,20 @@ export function NoticeDemo() {
   }
   return (
     <Notice>
-      <CardSection className="flex-row items-start">
+      <Section className="flex-row items-start">
         <p className="flex-1">
           An unsaved draft from yesterday can be restored.
         </p>
-        <CardAction>
+        <SectionAction>
           <NoticeClose onClick={() => setShown(false)} />
-        </CardAction>
-      </CardSection>
-      <CardSection className="flex-row gap-1 px-2.5">
+        </SectionAction>
+      </Section>
+      <Section className="flex-row gap-1 px-2.5">
         <Button size="sm">Restore</Button>
         <Button size="sm" variant="ghost">
           Forget
         </Button>
-      </CardSection>
+      </Section>
     </Notice>
   );
 }
@@ -901,15 +902,15 @@ function EffectsCard() {
   const [size, setSize] = useState(35);
   return (
     <Card className="h-80 w-64 max-w-full">
-      <CardSection className="flex-row items-center">
+      <Section className="flex-row items-center">
         <h2 className="flex-1 font-medium">Effects</h2>
-        <CardAction>
+        <SectionAction>
           <IconButton label="Add effect">
             <PlusIcon />
           </IconButton>
-        </CardAction>
-      </CardSection>
-      <CardSection>
+        </SectionAction>
+      </Section>
+      <Section>
         <Slider
           label="Grain"
           value={grain}
@@ -928,7 +929,7 @@ function EffectsCard() {
           format={percent}
           variant="compact"
         />
-      </CardSection>
+      </Section>
       <ScrollArea fade className="flex-1">
         {["Vignette", "Grain", "Clarity", "Dehaze", "Sharpen", "Noise"].map(
           (name) => (
@@ -943,11 +944,11 @@ function EffectsCard() {
 function PresetsCard() {
   return (
     <Card className="w-72 max-w-full">
-      <CardSection>
+      <Section>
         <h2 className="font-medium">Presets</h2>
-      </CardSection>
+      </Section>
       {/* The row runs to the card's edges, so it fades there. */}
-      <CardSection className="px-0">
+      <Section className="px-0">
         <div className="flex gap-2 overflow-fade-x px-3.5">
           {presets.map((preset) => (
             <button
@@ -965,13 +966,13 @@ function PresetsCard() {
             </button>
           ))}
         </div>
-      </CardSection>
-      <CardSection className="text-faint">
+      </Section>
+      <Section className="text-faint">
         <ScrollText>
           Canon EOS R5 · RF 24–70mm F2.8 · ƒ/2.8 · 1/250 s · ISO 100 · 8192 ×
           5464
         </ScrollText>
-      </CardSection>
+      </Section>
     </Card>
   );
 }
@@ -979,27 +980,27 @@ function PresetsCard() {
 function EditCard() {
   return (
     <Card className="w-72 max-w-full">
-      <CardSection className="flex-row items-center">
+      <Section className="flex-row items-center">
         <h2 className="flex-1 font-medium">Golden hour</h2>
-        <CardAction>
+        <SectionAction>
           <IconButton label="Add adjustment">
             <PlusIcon />
           </IconButton>
           <IconButton label="More">
             <MoreIcon />
           </IconButton>
-        </CardAction>
-      </CardSection>
-      <CardSection className="gap-1 text-muted">
+        </SectionAction>
+      </Section>
+      <Section className="gap-1 text-muted">
         <span>Exposure +0.35</span>
         <span>Temperature +12</span>
         <span>Shadows +20</span>
         <span className="text-faint">Edited 2 min ago</span>
-      </CardSection>
-      <CardSection className="flex-row justify-end gap-1 px-2.5">
+      </Section>
+      <Section className="flex-row justify-end gap-1 px-2.5">
         <Button variant="ghost">Revert</Button>
         <Button variant="primary">Apply</Button>
-      </CardSection>
+      </Section>
     </Card>
   );
 }
@@ -1019,13 +1020,13 @@ export function CollapsibleDemo() {
               <span className="text-faint">{edit.when}</span>
             </CollapsibleTrigger>
             <CollapsiblePanel>
-              <CardSection>
+              <Section>
                 <ol className="flex flex-col gap-1 text-muted">
                   {edit.steps.map((step) => (
                     <li key={step}>{step}</li>
                   ))}
                 </ol>
-              </CardSection>
+              </Section>
             </CollapsiblePanel>
           </Collapsible>
         </Card>

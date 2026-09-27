@@ -299,6 +299,20 @@
       ]
     },
     {
+      "name": "section",
+      "type": "registry:ui",
+      "dependencies": ["cn", "class-variance-authority"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/section.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "title": "Section",
+      "description": "A container's padding, which Sections take over, and the Section and SectionAction parts."
+    },
+    {
       "name": "check",
       "type": "registry:ui",
       "dependencies": ["cn"],
@@ -579,7 +593,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/card.json"
+        "https://ui.roprgm.com/r/section.json"
       ],
       "files": [
         {
@@ -596,7 +610,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/card.json"
+        "https://ui.roprgm.com/r/section.json"
       ],
       "files": [
         {
@@ -614,7 +628,7 @@
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/icon-button.json",
         "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/card.json"
+        "https://ui.roprgm.com/r/section.json"
       ],
       "files": [
         {
@@ -631,8 +645,8 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/button.json",
-        "https://ui.roprgm.com/r/card.json",
-        "https://ui.roprgm.com/r/notice.json"
+        "https://ui.roprgm.com/r/notice.json",
+        "https://ui.roprgm.com/r/section.json"
       ],
       "files": [
         {
@@ -652,7 +666,10 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/section.json"
+      ]
     },
     {
       "name": "collapsible",
@@ -667,7 +684,7 @@
       ],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/card.json"
+        "https://ui.roprgm.com/r/section.json"
       ]
     },
     {

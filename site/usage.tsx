@@ -68,9 +68,9 @@ export function Usage() {
       <Section title="Put controls on cards">
         <p className="text-muted">Controls adapt to the card they sit on.</p>
         <Code lang="tsx">{`<Card>
-  <CardSection>
+  <Section>
     <Input placeholder="Name" />
-  </CardSection>
+  </Section>
 </Card>`}</Code>
       </Section>
     </div>
