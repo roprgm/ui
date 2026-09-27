@@ -80,7 +80,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ### Surfaces
 
-A surface is what a box is filled with and how it stands against what's under it; the theme draws its edge. Each fills itself relative to where it sits, and a container's surface stands at a level, which also sets the fills of the controls on it from the levels, so they keep their contrast anywhere and every color is one of the palette's:
+A surface is what a box is filled with and how it stands against what's under it; the theme draws its edge. Each fills itself relative to where it sits, and a container's surface also sets the fills of the controls on it from the levels, so they keep their contrast anywhere and every color is one of the palette's:
 
 | Surface | Fill | Used by |
 | --- | --- | --- |
@@ -109,11 +109,14 @@ Redefine a token to restyle every component that uses it:
 }
 ```
 
-A surface of your own applies a level and paints it; the controls on it follow:
+A surface of your own sets its fill and the fills of the controls on it, from the levels, and paints its fill:
 
 ```css
 @utility surface-sidebar {
-  @apply level-2;
+  --layer: var(--color-level-1);
+  --field: var(--color-level-1);
+  --raised: var(--color-level-3);
+  --raised-hover: var(--color-level-4);
   background-color: var(--layer);
 }
 ```
