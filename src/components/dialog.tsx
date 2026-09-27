@@ -1,71 +1,63 @@
 "use client";
 
+import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog as Primitive } from "@base-ui/react/dialog";
 import { cn } from "cn";
-import type { ReactElement, ReactNode } from "react";
 import { Popup } from "./popup";
+import { sections } from "./section";
 
-/**
- * A modal over the page, opened by `trigger` or by `open`. `actions` sit at the bottom right;
- * render one as a `DialogClose` to close it.
- */
-export function Dialog({
-  trigger,
-  title,
-  description,
-  actions,
-  children,
-  open,
-  onOpenChange,
-}: {
-  trigger?: ReactElement;
-  title: ReactNode;
-  description?: ReactNode;
-  actions?: ReactNode;
-  children?: ReactNode;
-  open?: boolean;
-  onOpenChange?: Primitive.Root.Props["onOpenChange"];
-}) {
+/** A modal. An `alert` asks before what can't be undone: a click outside doesn't close it. */
+export function Dialog(
+  props:
+    | (Primitive.Root.Props & { alert?: false })
+    | (AlertDialog.Root.Props & { alert: true }),
+) {
+  if (props.alert) {
+    const { alert, ...rest } = props;
+    return <AlertDialog.Root {...rest} />;
+  }
+  const { alert, ...rest } = props;
+  return <Primitive.Root {...rest} />;
+}
+
+export const DialogTrigger = Primitive.Trigger;
+
+/** Closes its dialog: `<DialogClose render={<Button />}>Cancel</DialogClose>`. */
+export const DialogClose = Primitive.Close;
+
+/** Padded as its content needs; its `Section`s stack without a line, and the last of several sits apart. */
+export function DialogContent(props: Primitive.Popup.Props) {
   return (
-    <Primitive.Root open={open} onOpenChange={onOpenChange}>
-      {trigger && <Primitive.Trigger render={trigger} />}
-      <Primitive.Portal>
-        <Primitive.Backdrop className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0" />
-        <Primitive.Popup
-          render={(props) => (
-            <Popup
-              {...props}
-              layer="layer-card"
-              className="fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 duration-150 data-ending-style:scale-95"
-            />
-          )}
-        >
-          <div
+    <Primitive.Portal>
+      <Primitive.Backdrop className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0" />
+      <Primitive.Popup
+        render={(popup) => (
+          <Popup
+            {...popup}
             className={cn(
-              "flex flex-col gap-3 p-(--padding) pt-(--padding-optical)",
-              actions && "pb-(--padding-optical)",
+              sections({ lines: false }),
+              "fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 duration-150 *:data-[slot=section]:not-first:last:pt-4 data-ending-style:scale-95",
+              popup.className,
             )}
-          >
-            <div className="flex flex-col gap-1">
-              <Primitive.Title className="font-medium">{title}</Primitive.Title>
-              {description && (
-                <Primitive.Description className="text-muted">
-                  {description}
-                </Primitive.Description>
-              )}
-            </div>
-            {children}
-          </div>
-          {actions && (
-            <div className="flex justify-end gap-2 p-(--padding-optical) pt-0">
-              {actions}
-            </div>
-          )}
-        </Primitive.Popup>
-      </Primitive.Portal>
-    </Primitive.Root>
+          />
+        )}
+        {...props}
+      />
+    </Primitive.Portal>
   );
 }
 
-/** Closes its dialog; render a Button as one: `<DialogClose render={<Button>Cancel</Button>} />`. */
-export const DialogClose = Primitive.Close;
+export function DialogTitle({ className, ...props }: Primitive.Title.Props) {
+  return (
+    <Primitive.Title className={cn("font-medium", className)} {...props} />
+  );
+}
+
+export function DialogDescription({
+  className,
+  ...props
+}: Primitive.Description.Props) {
+  return (
+    <Primitive.Description className={cn("text-muted", className)} {...props} />
+  );
+}

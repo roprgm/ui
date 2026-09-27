@@ -7,7 +7,8 @@ import { CopyIcon } from "./icons";
 const prompt =
   "Use @roprgm/ui for this app's UI. Its README explains setup and usage: https://github.com/roprgm/ui#readme";
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+/** One way to use the library, from nothing to a component on screen. */
+function Way({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="flex flex-col gap-3">
       <h2 className="text-base font-medium">{title}</h2>
@@ -24,7 +25,7 @@ function CopyForAgents() {
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    // Both labels share one cell, so the button keeps the longer one's width while they fade.
+    // Both labels share one cell, so the width holds while they fade.
     <Button onClick={copy} data-copied={copied} className="group shrink-0">
       <span className="grid *:[grid-area:1/1]">
         <span className="flex items-center gap-2 transition-opacity duration-200 group-data-[copied=true]:opacity-0">
@@ -39,8 +40,8 @@ function CopyForAgents() {
   );
 }
 
-/** The docs' opening page: how to add the library, and how cards work. */
-export function Usage() {
+/** What the library looks like, then how to start. */
+export function Overview() {
   return (
     <div className="flex max-w-3xl flex-col gap-10">
       <header className="flex items-start justify-between gap-4">
@@ -49,29 +50,51 @@ export function Usage() {
             <h1 className="text-2xl font-medium">@roprgm/ui</h1>
             <span className="text-muted">v{version}</span>
           </div>
-          <p className="text-muted">A minimal, dark UI library for React.</p>
+          <p className="text-muted">
+            The design library behind my apps: minimal, dark React components on
+            Tailwind CSS v4 and Base UI. Use it as a package, or copy its source
+            into your app.
+          </p>
         </div>
         <CopyForAgents />
       </header>
-      <Section title="Install the package">
-        <p className="text-muted">Then import the theme in your CSS.</p>
+      <Way title="Install the package">
+        <p className="text-muted">
+          Add it, then import its theme after Tailwind in your CSS.
+        </p>
         <Code>bun add @roprgm/ui</Code>
         <Code lang="css">{`@import "tailwindcss";
 @import "@roprgm/ui/themes/default.css";`}</Code>
-        <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";`}</Code>
-      </Section>
-      <Section title="Or copy the source">
+        <p className="text-muted">Each component imports from its own path.</p>
+        <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";
+
+export function SaveButton() {
+  return <Button variant="primary">Save</Button>;
+}`}</Code>
+      </Way>
+      <Way title="Or copy the source">
         <p className="text-muted">
-          No package needed: shadcn adds a component's code to your app.
+          In an app set up for shadcn, its CLI copies a component into
+          components/ui, with the components it uses, and adds the theme to your
+          CSS. The code is yours to change.
         </p>
         <Code>npx shadcn@latest add https://ui.roprgm.com/r/button.json</Code>
-      </Section>
-      <Section title="Put controls on cards">
-        <p className="text-muted">Controls adapt to the card they sit on.</p>
-        <Code lang="tsx">{`<div className="layer-card rounded-xl p-3 surface-card">
-  <Input placeholder="Name" />
-</div>`}</Code>
-      </Section>
+        <Code lang="tsx">{`import { Button } from "@/components/ui/button";
+
+export function SaveButton() {
+  return <Button variant="primary">Save</Button>;
+}`}</Code>
+      </Way>
+      <p className="text-muted">
+        Then browse the{" "}
+        <a
+          href="#button"
+          className="rounded-sm text-foreground underline decoration-muted underline-offset-4 transition focus-ring hover:decoration-foreground"
+        >
+          components
+        </a>
+        .
+      </p>
     </div>
   );
 }

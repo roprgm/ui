@@ -67,11 +67,7 @@ function preventScroll(event: TouchEvent) {
   event.preventDefault();
 }
 
-/**
- * A tree of rows, such as layers and groups, that drag to reorder or nest. Arrow keys move
- * through it and open or close groups. The caller owns the data: `canDrop` adds its rules to the
- * tree's own (nothing drops into itself) and `onDrop` commits the move.
- */
+/** Rows that nest and drag to reorder; `canDrop` adds rules and `onDrop` commits a move. */
 export function TreeList<T extends TreeNode<T>>({
   items,
   label,
@@ -260,14 +256,13 @@ export function TreeList<T extends TreeNode<T>>({
     action();
   }
 
-  // Every row renders, so a group can animate open and closed; closed groups are inert, and
-  // `rows` holds only the open ones for keys and drops.
+  // Closed groups still render, inert, so they can animate; `rows` holds only the open ones.
   function renderItems(list: readonly T[], depth: number): ReactNode {
     return list.map((item) => {
       const branch = Boolean(item.children?.length);
       const expanded = branch && !collapsed.has(item.id);
       const indent = {
-        "--indent": `calc(var(--padding) + ${depth}rem)`,
+        "--indent": `calc(14px + ${depth}rem)`,
       } as CSSProperties;
       return (
         <Fragment key={item.id}>
@@ -308,16 +303,16 @@ export function TreeList<T extends TreeNode<T>>({
                   event.stopPropagation();
                   toggle(item.id, !expanded);
                 }}
-                className="-mr-0.5 -ml-1 grid size-5 shrink-0 place-items-center rounded-xs text-faint focus-ring hover:text-foreground"
+                className="-mr-0.5 -ml-2 grid size-5 shrink-0 place-items-center rounded-xs text-muted focus-ring hover:text-foreground"
               >
                 <Chevron direction={expanded ? "down" : "right"} size="sm" />
               </button>
             )}
-            {!branch && <span className="-mr-0.5 -ml-1 w-5 shrink-0" />}
+            {!branch && <span className="-mr-0.5 -ml-2 w-5 shrink-0" />}
             {children(item)}
           </ListItem>
           {branch && (
-            // Rows 0fr to 1fr animates the group's height to its content, like an accordion.
+            // 0fr to 1fr animates the group's height.
             <div
               inert={!expanded}
               data-expanded={expanded}
@@ -359,7 +354,7 @@ export function TreeList<T extends TreeNode<T>>({
           ref={ghost}
           tabIndex={-1}
           style={{ translate: `${dragging.x}px ${dragging.y}px` }}
-          className="pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 scroll-text rounded-md bg-raised px-2.5 py-1 text-foreground surface-float"
+          className="pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 overflow-fade-x rounded-md whitespace-nowrap px-2.5 py-1 text-foreground surface-float"
         >
           {label(active.item)}
         </div>

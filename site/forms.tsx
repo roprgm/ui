@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Button } from "../src/components/button";
+import { Card } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chip } from "../src/components/chip";
+import { CopyButton } from "../src/components/copy-button";
 import { Field } from "../src/components/field";
 import { IconButton } from "../src/components/icon-button";
 import { Input } from "../src/components/input";
+import { Section } from "../src/components/section";
 import { Select } from "../src/components/select";
 import { Slider } from "../src/components/slider";
 import { Switch } from "../src/components/switch";
 import { Textarea } from "../src/components/textarea";
 import { Toggle, ToggleGroup } from "../src/components/toggle-group";
-import { CopyButton } from "./copy-button";
 import { percent } from "./demos";
 import { MoreIcon, UndoIcon } from "./icons";
 
@@ -26,13 +28,13 @@ const sorts = [
   { value: "rating", label: "Rating" },
 ];
 
-/** Fields, buttons, and toggles side by side, to judge how their sizes and paddings sit together. */
+/** Controls side by side, to judge their sizes together. */
 export function FormsDemo() {
   const [quality, setQuality] = useState(90);
   return (
     <div className="grid min-w-0 grid-cols-1 items-start gap-6 p-3 @sm:p-6 @2xl:grid-cols-2">
-      <div className="layer-elevated rounded-xl surface-card">
-        <div className="flex flex-col gap-3 p-(--padding) pt-(--padding-optical)">
+      <Card>
+        <Section>
           <h4 className="font-medium">Export</h4>
           <Field label="File name">
             <Input defaultValue="Lisbon sunset" />
@@ -62,6 +64,7 @@ export function FormsDemo() {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-muted">Color space</span>
             <Select
+              raised
               aria-label="Color space"
               items={spaces}
               defaultValue="srgb"
@@ -82,12 +85,12 @@ export function FormsDemo() {
           <label className="flex flex-wrap items-center gap-2">
             <Switch /> Open when done
           </label>
-        </div>
-        <div className="flex justify-end gap-2 p-(--padding-optical) pt-0">
+        </Section>
+        <Section className="flex-row justify-end gap-1.5 px-2.5">
           <Button>Cancel</Button>
           <Button variant="primary">Export</Button>
-        </div>
-      </div>
+        </Section>
+      </Card>
 
       <div className="flex flex-col gap-4">
         <div className="flex gap-2">
@@ -104,6 +107,7 @@ export function FormsDemo() {
         </div>
         <div className="flex gap-2">
           <Select
+            raised
             aria-label="Sort by"
             items={sorts}
             defaultValue="recent"
@@ -123,6 +127,7 @@ export function FormsDemo() {
             </Toggle>
           </ToggleGroup>
           <Select
+            raised
             aria-label="Zoom"
             variant="pill"
             items={[
@@ -143,7 +148,7 @@ export function FormsDemo() {
         </div>
       </div>
 
-      {/* Sunken and raised controls in one row, to judge which heights read as equal. */}
+      {/* To judge which heights read as equal. */}
       <div className="flex flex-col gap-3 @2xl:col-span-2">
         <div className="flex flex-wrap items-center gap-2">
           <ToggleGroup>
@@ -160,6 +165,7 @@ export function FormsDemo() {
           <Button>Default</Button>
           <Button variant="primary">Apply</Button>
           <Select
+            raised
             aria-label="Spacing"
             items={sorts}
             defaultValue="recent"
@@ -183,6 +189,7 @@ export function FormsDemo() {
             Apply
           </Button>
           <Select
+            raised
             aria-label="Spacing"
             items={sorts}
             defaultValue="recent"
@@ -195,6 +202,7 @@ export function FormsDemo() {
           <Button>Default</Button>
           <Button variant="primary">Save</Button>
           <Select
+            raised
             aria-label="Folder"
             items={sorts}
             defaultValue="recent"

@@ -1,70 +1,50 @@
+import { cva } from "class-variance-authority";
 import { cn } from "cn";
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps } from "react";
 import { IconButton } from "./icon-button";
 import { Popup } from "./popup";
+import { sections } from "./section";
+
+const notice = cva("max-w-sm", {
+  variants: { tone: { status: "", alert: "text-danger" } },
+});
 
 /**
- * A message that floats without blocking the app; the caller positions it. An `alert` is red
- * and interrupts assistive technology; a `status` waits its turn.
+ * A message that floats without blocking the app, padded as its content needs; its `Section`s
+ * stack without a line. An
+ * `alert` is red and interrupts assistive technology; a `status` waits its turn.
  */
 export function Notice({
   tone = "status",
-  actions,
-  onDismiss,
   className,
-  children,
   ...props
-}: ComponentProps<"div"> & {
-  tone?: "status" | "alert";
-  /** Buttons shown under the message. */
-  actions?: ReactNode;
-  onDismiss?: () => void;
-}) {
+}: ComponentProps<"div"> & { tone?: "status" | "alert" }) {
   return (
     <Popup
       role={tone}
-      layer="layer-card"
-      className={cn(
-        "flex max-w-sm items-start",
-        tone === "alert" && "text-danger",
-        className,
-      )}
+      className={cn(sections({ lines: false }), notice({ tone }), className)}
       {...props}
-    >
-      <div className="flex flex-1 flex-col">
-        <p
-          className={cn(
-            "p-(--padding) pt-(--padding-optical)",
-            actions && "pb-2",
-            onDismiss && "pr-0",
-          )}
-        >
-          {children}
-        </p>
-        {actions && (
-          <div className="flex gap-2 p-(--padding-optical) pt-0">{actions}</div>
-        )}
-      </div>
-      {onDismiss && (
-        <IconButton
-          label="Dismiss"
-          size="icon-sm"
-          onClick={onDismiss}
-          className="m-2"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            strokeLinecap="round"
-            className="size-4"
-            aria-hidden
-          >
-            <path d="M18 6 6 18M6 6l12 12" />
-          </svg>
-        </IconButton>
-      )}
-    </Popup>
+    />
+  );
+}
+
+/** Dismisses a notice, from a `SectionAction` beside its message. */
+export function NoticeClose(
+  props: Omit<ComponentProps<typeof IconButton>, "label">,
+) {
+  return (
+    <IconButton label="Dismiss" {...props}>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+        strokeLinecap="round"
+        className="size-4"
+        aria-hidden
+      >
+        <path d="M18 6 6 18M6 6l12 12" />
+      </svg>
+    </IconButton>
   );
 }

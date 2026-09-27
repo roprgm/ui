@@ -4,10 +4,7 @@ import { ScrollArea as Primitive } from "@base-ui/react/scroll-area";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-/**
- * Scrolls vertically with a thin overlay bar; `fade` shades an edge while content continues past it.
- * The fade's 30% color hint eases it: dense at the edge, a third of its strength halfway, a long soft tail.
- */
+/** Scrolls vertically with a thin bar; `fade` shades an edge while more lies past it. */
 export function ScrollArea({
   fade,
   className,
@@ -22,13 +19,13 @@ export function ScrollArea({
       <Primitive.Viewport
         className={cn(
           "h-full overscroll-contain outline-none",
-          fade && "scroll-fade",
+          fade && "overflow-fade-y",
         )}
       >
         <Primitive.Content className="min-w-0">{children}</Primitive.Content>
       </Primitive.Viewport>
       <Primitive.Scrollbar className="group z-10 my-1 mr-px flex w-1.5 justify-center opacity-0 transition-opacity data-hovering:opacity-100 data-scrolling:opacity-100">
-        <Primitive.Thumb className="w-1 rounded-full bg-faint group-hover:bg-muted" />
+        <Primitive.Thumb className="w-1 rounded-full bg-disabled group-hover:bg-muted" />
       </Primitive.Scrollbar>
     </Primitive.Root>
   );

@@ -33,31 +33,55 @@ import { Button } from "@roprgm/ui/button";
 <Button variant="primary">Export</Button>;
 ```
 
-Put groups of controls on a card. Controls take their fills from the layer they sit on, so they keep the same contrast everywhere:
+Components compose from their parts. An overlay's trigger renders your own element:
 
 ```tsx
-<div className="layer-card surface-card rounded-xl p-(--padding)">
-  <Input placeholder="Name" />
-</div>
+<Menu>
+  <MenuTrigger render={<Button />}>Edit</MenuTrigger>
+  <MenuContent>
+    <MenuItem>Duplicate</MenuItem>
+  </MenuContent>
+</Menu>
 ```
 
-- Use `layer-card` for panels and cards, and `layer-elevated` for a card inside a card.
+Put groups of controls on a card. Controls take their fills from the surface they sit on, so they keep the same contrast everywhere:
+
+```tsx
+<Card>
+  <Input placeholder="Name" />
+</Card>
+```
+
+A card, popover, dialog, or notice pads its content as one section. To split it, put its parts in `Section`s: one reads the same as none, and several stack with a line between each, or, in a dialog or notice, without one. A `Collapsible` counts as a section. For content that runs edge to edge, such as a frame around an app, remove the padding with `p-0`:
+
+```tsx
+<Card>
+  <Section className="flex-row items-center">Layers</Section>
+  <Section>
+    <Input placeholder="Name" />
+  </Section>
+</Card>
+```
+
+- Use `surface-card` for cards, which rise two levels over what they sit on, even another card, and `surface-raised` for controls, three levels up. Dock a card in your layout with `surface-panel`, which has no edge. What floats is `surface-float`, a card drawn floating: a popup opens as a card on the page, and with `raised`, a level up, for one that opens over a card.
 - Use the theme's colors, such as `text-muted`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette.
 - Build your own controls from the `surface-*` primitives rather than shadows or borders of your own, so they follow the theme.
-- For one line of text that may not fit, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
+- For content that may not fit, use `overflow-fade-x` or `overflow-fade-y`: it scrolls, and fades where more lies that way. For one line of text, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
 
 Components without JavaScript, such as `Button` and `Input`, render on the server.
+
+Mount one `<Toaster />` near the root, then show a toast from anywhere, even outside React: `toast.add({ title: "Exported" })`.
 
 ## Components
 
 | Section | Components |
 | --- | --- |
-| Actions | `Button`, `IconButton`, `Chip`, `Kbd` |
-| Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `Switch`, `ToggleGroup`, `Select`, `Slider`, `ScrubInput`, `VerticalSlider` |
-| Containers | cards with `layer-card` and `layer-elevated`, the `surface-*` primitives, `Panel`, `ScrollArea` |
-| Navigation | `TabList`, `ListItem`, `TreeList` |
-| Overlays | `Tooltip`, `Menu`, `Popover`, `Dialog`, `Notice` |
-| Effects | `Spinner`, `ScrollText`, and the `shimmer`, `scroll-fade`, `scroll-fade-x`, and `scroll-text` utilities |
+| Actions | `Button`, `IconButton`, `CopyButton`, `Chip`, `Kbd`, `Badge` |
+| Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput` |
+| Containers | `Card`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `surface-*` primitives; `Collapsible`, `ScrollArea`, `CodeBlock` |
+| Navigation | `Tabs`, `ListItem`, `TreeList` |
+| Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
+| Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, and `overflow-fade-y` utilities |
 
 Each one has a live demo and its install command on the [docs site](https://ui.roprgm.com).
 
@@ -69,32 +93,31 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 | Token | Use |
 | --- | --- |
-| `foreground`, `muted`, `faint`, `disabled` | text, strongest first |
+| `level-0` to `level-12` | the backgrounds of the interface: black, then darkest first in even steps of lightness; every fill is one of them |
+| `surface`, `field`, `raised`, `raised-hover`, `hover` | fills relative to the surface they sit on: its own, a field two levels below, a raised control three above and four on hover, and a ghost's hover one above |
+| `foreground`, `muted`, `faint`, `disabled` | text, strongest first: `faint` for what should barely show, such as a disclaimer |
 | `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
-| `field`, `raised`, `raised-hover` | fills of fields and of raised controls, mixed from the layer they sit on |
-| `hover`, `pressed` | translucent states for ghost buttons and chips |
-| `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
-| `level-1` to `level-8` | backgrounds by role: sunk below the page, the page, a card, elevated, then each more prominent |
+| `pressed` | a translucent state for ghost buttons and chips |
+| `line`, `separator`, `focus`, `backdrop` | the lines between a card's parts, a separator's translucent dark, the focus ring, and the shade behind a dialog |
+| `danger` | errors |
 
-### Layers and primitives
+### Surfaces
 
-The page, `layer-card`, and `layer-elevated` set a background, `--layer`, that the fills of the controls on them mix from. A layer of your own sets `--layer` and paints it. Popups are elevated wherever they open; dialogs and notices are cards.
+A surface is what a box is filled with and how it stands against what's under it; the theme draws its edge. A raised surface fills itself two levels over where it sits and sets the fills of what sits on it, so everything keeps its contrast at any depth and every color is one of the palette's:
 
-Components are built from primitives. Each sets its fill from a color token, and the theme draws its edge:
-
-| Primitive | Stands | Used by |
+| Surface | Fill | Used by |
 | --- | --- | --- |
-| `surface-raised` | out from its layer | buttons, selects, selected tabs and toggles |
-| `surface-sunken` | into its layer | fields, tracks, checkboxes, switches, groups |
-| `surface-card` | on the layer under it | cards and panels of controls |
-| `surface-float` | over everything | popups and anything dragged |
-| `surface-callout` | over everything, in a shape | tooltips with their arrow |
-| `surface-thumb` | under your finger | slider thumbs and switch knobs |
-| `separator` | between groups | a menu's separators |
+| `surface-card` | two levels up from what it sits on | cards |
+| `surface-panel` | a card's, with no edge | a card docked in your layout, such as a sidebar |
+| `surface-float` | a card's, drawn floating; with `raised`, a level up | popups, dialogs, notices, anything dragged |
+| `surface-raised` | three levels up from what it sits on | buttons, selects, selected tabs and toggles |
+| `surface-sunken` | two levels down from what it sits on | fields, tracks, checkboxes, switches, groups |
+| `surface-primary` | the primary color | primary buttons, checked switches, slider thumbs |
+| `separator` | a line | a menu's separators |
 
-### Density
+### Sizes
 
-`--size-control` (28px) sets the height of buttons, selects, and fields, and `--padding` (14px) the space from a container's edge to its content. The other sizes follow from them, such as 32px large controls and 40px list rows.
+Controls are 28px tall (`h-7`), with 24px and 32px sizes, and list rows 40px. Heights and spacing are Tailwind's own, so a control of your own takes the same classes.
 
 ### Customize
 
@@ -102,18 +125,21 @@ Redefine a token to restyle every component that uses it:
 
 ```css
 @theme {
-  --color-primary: hsl(210 90% 60%);
+  --color-primary: oklch(67% 0.16 252);
   --radius-md: 8px;
-  --size-control: 32px;
 }
 ```
 
-A layer of your own sets only its background; the controls on it follow:
+A theme changes what a surface is by setting its fills again, at each depth, in its own `@utility surface-card`. A surface of your own sets the fills of what sits on it and paints its own:
 
 ```css
-@utility layer-panel {
-  --layer: var(--color-level-3);
-  background-color: var(--layer);
+@utility surface-sidebar {
+  --color-surface: var(--color-level-1);
+  --color-field: var(--color-level-0);
+  --color-raised: var(--color-level-4);
+  --color-raised-hover: var(--color-level-5);
+  --color-hover: var(--color-level-2);
+  background-color: var(--color-surface);
 }
 ```
 

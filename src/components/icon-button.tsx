@@ -2,9 +2,9 @@
 
 import type { ComponentProps } from "react";
 import { Button } from "./button";
-import { Tooltip } from "./tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
-/** A ghost icon button; `label` names it for assistive technology and shows as its tooltip. */
+/** A ghost icon button; `label` names it and shows as its tooltip. */
 export function IconButton({
   label,
   shortcut,
@@ -13,11 +13,18 @@ export function IconButton({
 }: ComponentProps<typeof Button> & {
   label: string;
   shortcut?: string;
-  side?: ComponentProps<typeof Tooltip>["side"];
+  side?: ComponentProps<typeof TooltipContent>["side"];
 }) {
   return (
-    <Tooltip content={label} shortcut={shortcut} side={side}>
-      <Button variant="ghost" size="icon" aria-label={label} {...props} />
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <Button variant="ghost" size="icon" aria-label={label} {...props} />
+        }
+      />
+      <TooltipContent side={side} shortcut={shortcut}>
+        {label}
+      </TooltipContent>
     </Tooltip>
   );
 }

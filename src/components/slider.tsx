@@ -1,51 +1,103 @@
 "use client";
 
+import { Slider as Primitive } from "@base-ui/react/slider";
 import { cva } from "class-variance-authority";
 import { cn } from "cn";
-import type { PointerEvent } from "react";
+import { useRef } from "react";
 import { ScrubInput } from "./scrub-input";
 
-const root = cva("grid items-center", {
+// Upright, the bar stands alone and the layouts' grids don't apply.
+const root = cva("", {
   variants: {
+    orientation: {
+      horizontal: "grid items-center",
+      vertical: "flex h-44 w-8 justify-center",
+    },
     variant: {
       panel: "grid-cols-[1fr_auto] gap-x-3 gap-y-0.5",
       toolbar: "grid-cols-[auto_4rem_auto] gap-x-2",
       compact: "grid-cols-[1fr_auto] gap-x-2",
     },
   },
+  compoundVariants: [
+    // Last in what holds it, a bar has none of the room text leaves under its letters.
+    { orientation: "horizontal", variant: "panel", className: "last:mb-1" },
+  ],
 });
 
-// Where the value and the bar sit in each layout's grid. In a panel the digits end with the bar,
-// and the hover chevron reaches ~8px past it.
-const cells = {
-  panel: { value: "-mr-1", bar: "col-span-2" },
-  toolbar: { value: "col-start-3", bar: "col-start-2 row-start-1" },
-  compact: { value: "-mr-1", bar: "" },
-};
+// Above the bar's hit area, which reaches into its row. In a panel, the digits end where the
+// bar does.
+const digits = cva("z-10", {
+  variants: {
+    variant: { panel: "-mr-1", toolbar: "col-start-3", compact: "-mr-1" },
+  },
+});
 
-/** Where the thumb's center sits at a fraction of the range: half a thumb in from either end, or the bar's ends. */
-function position(fraction: number) {
-  if (fraction <= 0) return "0%";
-  if (fraction >= 1) return "100%";
-  return `calc(var(--size-thumb) / 2 + (100% - var(--size-thumb)) * ${fraction})`;
+// As thick as the thumb, padded 10px past it on either side, or 16px for a finger, with the
+// room given back by margins.
+const bar = cva("box-content flex cursor-pointer touch-none select-none", {
+  variants: {
+    orientation: {
+      horizontal:
+        "-my-2.5 h-thumb items-center py-2.5 pointer-coarse:-my-4 pointer-coarse:py-4",
+      vertical:
+        "-mx-2.5 w-thumb justify-center px-2.5 pointer-coarse:-mx-4 pointer-coarse:px-4",
+    },
+    variant: {
+      panel: "col-span-2",
+      toolbar: "col-start-2 row-start-1",
+      compact: "",
+    },
+  },
+});
+
+const track = cva("rounded-full surface-sunken", {
+  variants: {
+    orientation: { horizontal: "h-1 w-full", vertical: "h-full w-1" },
+  },
+});
+
+/** The thumb's center at a fraction of the range: its edge meets the bar's end at either end. */
+function thumbCenter(fraction: number) {
+  return `calc(var(--spacing-thumb) / 2 + (100% - var(--spacing-thumb)) * ${fraction})`;
 }
 
-/** The bar's paint: its color stops, or a fill between the origin and the value, in fractions of the range. */
+/** Where the fill ends: under the thumb's center, or at the bar's end at either end of the range. */
+function fillEdge(fraction: number) {
+  if (fraction <= 0) return "0%";
+  if (fraction >= 1) return "100%";
+  return thumbCenter(fraction);
+}
+
+/** The bar's color stops, or a fill from the origin to the value. */
 function barBackground(
+  side: "right" | "top",
   origin: number,
   value: number,
   stops?: readonly string[],
 ) {
-  if (stops) return `linear-gradient(to right, ${stops.join()})`;
-  const start = position(Math.min(origin, value));
-  const end = position(Math.max(origin, value));
-  return `linear-gradient(to right, transparent ${start}, var(--color-muted) ${start} ${end}, transparent ${end})`;
+  if (stops) return `linear-gradient(to ${side}, ${stops.join()})`;
+  const start = fillEdge(Math.min(origin, value));
+  const end = fillEdge(Math.max(origin, value));
+  return `linear-gradient(to ${side}, transparent ${start}, var(--color-muted) ${start} ${end}, transparent ${end})`;
 }
 
 /**
- * A labeled number with a bar. "panel" stacks the bar under its row, "toolbar" keeps one short
- * row for a bar over a canvas, and "compact" drops the bar and edits by dragging the value.
+ * A labeled number with a bar. `toolbar` fits a bar over a canvas and `compact` drops the bar;
+ * `orientation="vertical"` stands the bar upright alone.
  */
+/** The keys that move a thumb. */
+const valueKeys = new Set([
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowUp",
+  "ArrowDown",
+  "PageUp",
+  "PageDown",
+  "Home",
+  "End",
+]);
+
 export function Slider({
   label,
   value,
@@ -58,117 +110,109 @@ export function Slider({
   origin = defaultValue ?? min,
   format,
   stops,
+  color,
   valueWidth,
   variant = "panel",
+  orientation = "horizontal",
   className,
 }: {
   label: string;
   value: number;
   onChange: (value: number) => void;
-  /** Reports a gesture on the bar or the value, so a caller can group its changes into one edit. */
+  /** True while a pointer or key is down on it, so a caller can group its changes into one edit. */
   onEditingChange?: (editing: boolean) => void;
   min: number;
   max: number;
   step?: number;
-  /** Restored by double-clicking the value or the bar. */
+  /** Restored by a double-click. */
   defaultValue?: number;
-  /** Where the bar's fill starts; the default value when there is one, otherwise the minimum. */
+  /** Where the bar's fill starts: `defaultValue`, or else `min`. */
   origin?: number;
   format?: (value: number) => string;
-  /** CSS colors painting the bar left to right, in place of the progress fill. */
+  /** Colors painting the bar, in place of the fill. */
   stops?: readonly string[];
-  /** Minimum width of the value's digits in characters; the unit follows them. */
+  /** The thumb's color. */
+  color?: string;
+  /** Minimum width of the digits, in characters. */
   valueWidth?: number;
   variant?: "panel" | "toolbar" | "compact";
+  orientation?: "horizontal" | "vertical";
   className?: string;
 }) {
-  const fraction = (x: number) => (x - min) / (max - min);
-
-  // Native touch dragging can lock to scrolling before the finger moves along the track.
-  // Keep the native range for keyboard/mouse input and let it clamp and snap touch values.
-  const changeFromTouch = (event: PointerEvent<HTMLInputElement>) => {
-    const input = event.currentTarget;
-    const bounds = input.getBoundingClientRect();
-    const style = getComputedStyle(input);
-    const thumb = Number.parseFloat(style.getPropertyValue("--size-thumb"));
-    const travel = bounds.width - thumb;
-    if (travel <= 0) return;
-    let progress = (event.clientX - bounds.left - thumb / 2) / travel;
-    if (style.direction === "rtl") progress = 1 - progress;
-    input.valueAsNumber = min + progress * (max - min);
-    onChange(input.valueAsNumber);
+  const editing = useRef(false);
+  const edit = (next: boolean) => {
+    if (editing.current === next) return;
+    editing.current = next;
+    onEditingChange?.(next);
   };
+  const fraction = (x: number) =>
+    Math.min(1, Math.max(0, (x - min) / (max - min)));
+  const vertical = orientation === "vertical";
 
   return (
-    <div className={cn(root({ variant }), className)}>
-      <span className="relative z-10 text-muted">{label}</span>
-      <ScrubInput
-        aria-label={label}
-        value={value}
-        onChange={onChange}
-        onEditingChange={onEditingChange}
-        min={min}
-        max={max}
-        step={step}
-        defaultValue={defaultValue}
-        format={format}
-        minChars={valueWidth}
-        // Above the bar, like the label, since the bar's taller target reaches into their row.
-        className={cn("z-10", cells[variant].value)}
-      />
-      {variant !== "compact" && (
-        // The margin makes room for the thumb, so the slider's box ends where the thumb does.
-        <div
-          data-slot="slider-track"
-          className={cn(
-            "relative my-[calc(var(--size-thumb)/2-2px)] h-1 rounded-full surface-sunken",
-            cells[variant].bar,
-          )}
-          style={{
-            backgroundImage: barBackground(
-              fraction(origin),
-              fraction(value),
-              stops,
-            ),
-          }}
-        >
-          <input
-            type="range"
+    <Primitive.Root
+      value={value}
+      onValueChange={onChange}
+      min={min}
+      max={max}
+      step={step}
+      largeStep={step * 10}
+      orientation={orientation}
+      thumbAlignment="edge"
+      className={cn(root({ orientation, variant }), className)}
+    >
+      {!vertical && (
+        <>
+          <span className="relative z-10 text-muted">{label}</span>
+          <ScrubInput
             aria-label={label}
             value={value}
+            onChange={onChange}
+            onEditingChange={onEditingChange}
             min={min}
             max={max}
             step={step}
-            onChange={(event) => onChange(event.currentTarget.valueAsNumber)}
-            onDoubleClick={() =>
-              defaultValue !== undefined && onChange(defaultValue)
-            }
-            onPointerDown={(event) => {
-              if (event.pointerType === "touch") {
-                event.preventDefault();
-                event.currentTarget.focus({ preventScroll: true });
-                event.currentTarget.setPointerCapture(event.pointerId);
-                changeFromTouch(event);
-              }
-              onEditingChange?.(true);
-            }}
-            onPointerMove={(event) => {
-              if (
-                event.pointerType === "touch" &&
-                event.currentTarget.hasPointerCapture(event.pointerId)
-              ) {
-                changeFromTouch(event);
-              }
-            }}
-            onPointerUp={() => onEditingChange?.(false)}
-            onPointerCancel={() => onEditingChange?.(false)}
-            onFocus={() => onEditingChange?.(true)}
-            onBlur={() => onEditingChange?.(false)}
-            // Keep a touch on the bar attached to the range, even when the finger drifts vertically.
-            className="absolute inset-x-0 top-1/2 h-8 w-full -translate-y-1/2 cursor-pointer touch-none range-thumb"
+            defaultValue={defaultValue}
+            format={format}
+            minChars={valueWidth}
+            className={digits({ variant })}
           />
-        </div>
+        </>
       )}
-    </div>
+      {(vertical || variant !== "compact") && (
+        <Primitive.Control
+          onPointerDown={(event) => event.button === 0 && edit(true)}
+          onPointerUp={() => edit(false)}
+          onPointerCancel={() => edit(false)}
+          onDoubleClick={() =>
+            defaultValue !== undefined && onChange(defaultValue)
+          }
+          className={bar({ orientation, variant })}
+        >
+          <Primitive.Track
+            data-slot="slider-track"
+            className={track({ orientation })}
+            style={{
+              backgroundImage: barBackground(
+                vertical ? "top" : "right",
+                fraction(origin),
+                fraction(value),
+                stops,
+              ),
+            }}
+          >
+            <Primitive.Thumb
+              aria-label={label}
+              getAriaValueText={format && ((_, next) => format(next))}
+              onKeyDown={(event) => valueKeys.has(event.key) && edit(true)}
+              onKeyUp={() => edit(false)}
+              onBlur={() => edit(false)}
+              className="size-thumb rounded-full surface-primary has-focus-visible:ring-2 has-focus-visible:ring-focus"
+              style={{ backgroundColor: color }}
+            />
+          </Primitive.Track>
+        </Primitive.Control>
+      )}
+    </Primitive.Root>
   );
 }

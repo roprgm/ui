@@ -11,7 +11,7 @@
       "a11y": {
         "noLabelWithoutControl": {
           "level": "error",
-          "options": { "inputComponents": ["Checkbox", "Switch"] }
+          "options": { "inputComponents": ["Checkbox", "Radio", "Switch"] }
         }
       }
     }

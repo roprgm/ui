@@ -9,10 +9,7 @@ type Control = ReactElement<{
   "aria-describedby"?: string;
 }>;
 
-/**
- * A label, one control such as an Input or Textarea, and a description or error under it.
- * It connects them: the label names the control, the text describes it, and an error marks it invalid.
- */
+/** A label, one control, and a description or error, connected for assistive technology. */
 export function Field({
   label,
   description,
@@ -41,7 +38,7 @@ export function Field({
       {note && (
         <p
           id={`${id}-note`}
-          className={cn("text-faint", error && "text-danger")}
+          className={cn("text-muted", error && "text-danger")}
         >
           {note}
         </p>

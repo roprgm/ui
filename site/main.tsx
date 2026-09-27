@@ -1,42 +1,53 @@
 import "./index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Toaster } from "../src/components/toast";
 import { TooltipProvider } from "../src/components/tooltip";
 import {
+  AlertDialogDemo,
+  BadgeDemo,
   ButtonDemo,
+  CardDemo,
   CheckboxDemo,
   ChipDemo,
+  CodeBlockDemo,
+  CollapsibleDemo,
+  ColorsDemo,
+  ComboboxDemo,
+  ContextMenuDemo,
+  CopyButtonDemo,
+  DepthDemo,
   DialogDemo,
   FieldDemo,
   IconButtonDemo,
   InputDemo,
   KbdDemo,
-  LayersDemo,
   ListItemDemo,
   MenuDemo,
   NoticeDemo,
-  PanelDemo,
   PopoverDemo,
+  RadioDemo,
   ScrollAreaDemo,
   ScrollTextDemo,
   ScrubInputDemo,
   SelectDemo,
   ShimmerDemo,
+  SizesDemo,
   SliderDemo,
   SpinnerDemo,
   SurfacesDemo,
   SwitchDemo,
   TabsDemo,
   TextareaDemo,
+  ToastDemo,
   ToggleGroupDemo,
   TooltipDemo,
   TreeListDemo,
-  VerticalSliderDemo,
 } from "./demos";
 import { type Group, Page } from "./docs";
 import { EditorDemo } from "./editor";
 import { FormsDemo } from "./forms";
-import { Usage } from "./usage";
+import { Overview } from "./overview";
 
 const groups: Group[] = [
   {
@@ -57,11 +68,20 @@ const groups: Group[] = [
         demo: <IconButtonDemo />,
       },
       {
+        name: "copy-button",
+        title: "Copy button",
+        description:
+          "Copies a value, such as a link or a snippet, and draws a check once it has.",
+        demo: <CopyButtonDemo />,
+        half: true,
+      },
+      {
         name: "chip",
         title: "Chip",
         description:
           "Pill buttons for bars over a canvas; aria-pressed shows one on.",
         demo: <ChipDemo />,
+        half: true,
       },
       {
         name: "kbd",
@@ -69,6 +89,15 @@ const groups: Group[] = [
         description:
           "A shortcut written as Mod Z: Mod shows as ⌘ on a Mac and Ctrl elsewhere. Tooltips and menu items take one as shortcut.",
         demo: <KbdDemo />,
+        half: true,
+      },
+      {
+        name: "badge",
+        title: "Badge",
+        description:
+          "A short label that isn't a control, such as a status or a count. primary marks what is new; it renders on the server.",
+        demo: <BadgeDemo />,
+        half: true,
       },
     ],
   },
@@ -100,12 +129,22 @@ const groups: Group[] = [
         title: "Checkbox",
         description: "A native checkbox; its label is clickable too.",
         demo: <CheckboxDemo />,
+        half: true,
+      },
+      {
+        name: "radio",
+        title: "Radio",
+        description:
+          "A native radio: radios that share a name choose one, without JavaScript.",
+        demo: <RadioDemo />,
+        half: true,
       },
       {
         name: "switch",
         title: "Switch",
         description: "A native checkbox with the switch role.",
         demo: <SwitchDemo />,
+        half: true,
       },
       {
         name: "toggle-group",
@@ -113,19 +152,29 @@ const groups: Group[] = [
         description:
           "Segmented choices from hidden radios, without JavaScript.",
         demo: <ToggleGroupDemo />,
+        half: true,
       },
       {
         name: "select",
         title: "Select",
         description: "One value, or several with multiple, from a list.",
         demo: <SelectDemo />,
+        bare: true,
+      },
+      {
+        name: "combobox",
+        title: "Combobox",
+        description:
+          "A choice from a list, filtered as you type, for lists too long to scan, such as fonts.",
+        demo: <ComboboxDemo />,
       },
       {
         name: "slider",
         title: "Slider",
         description:
-          "A labeled value with a bar; compact drops the bar and edits by dragging the value.",
+          "A labeled value with a bar. Compact drops the bar and edits by dragging the value; a vertical orientation stands the bar upright alone.",
         demo: <SliderDemo />,
+        bare: true,
       },
       {
         name: "scrub-input",
@@ -133,12 +182,6 @@ const groups: Group[] = [
         description:
           "A number that drags sideways, types on click, and steps with the arrow keys.",
         demo: <ScrubInputDemo />,
-      },
-      {
-        name: "vertical-slider",
-        title: "Vertical slider",
-        description: "An upright range with an optional painted track.",
-        demo: <VerticalSliderDemo />,
       },
     ],
   },
@@ -149,31 +192,29 @@ const groups: Group[] = [
         name: "card",
         title: "Card",
         description:
-          "Theme utilities: layer-card and layer-elevated paint a card and set the fills for the fields and buttons on it, so they keep the same contrast on the page, in a card, and in a card inside it.",
-        demo: <LayersDemo />,
-        bare: true,
-        code: '<div className="layer-card rounded-xl surface-card">…</div>',
+          "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-card, without its edge, and sections() on your own element, as the Photo editor block does.",
+        demo: <CardDemo />,
       },
       {
-        name: "surfaces",
-        title: "Surfaces",
+        name: "collapsible",
+        title: "Collapsible",
         description:
-          "The primitives components are built from: surface-raised lifts a control off its layer, surface-sunken sets it in, surface-card stands a card on the page, surface-float lifts a popup over everything, surface-thumb marks what you grab, and separator draws a line between groups. The base gives each its fill and the theme draws its edge, so a control you build with them follows the theme too.",
-        demo: <SurfacesDemo />,
-        code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
-      },
-      {
-        name: "panel",
-        title: "Panel",
-        description:
-          "A side panel of sections with dividers, a scrolling body, and an optional resize edge.",
-        demo: <PanelDemo />,
+          "A section whose trigger shows and hides its panel, such as a card that opens to its details. The panel slides open, and find-in-page opens it.",
+        demo: <CollapsibleDemo />,
       },
       {
         name: "scroll-area",
         title: "Scroll area",
         description: "Vertical scrolling with a thin bar and faded edges.",
         demo: <ScrollAreaDemo />,
+      },
+      {
+        name: "code-block",
+        title: "Code block",
+        description:
+          "Code with a copy button; a line that doesn't fit scrolls. Pass html from any highlighter, such as Sugar High, and the theme colors it.",
+        demo: <CodeBlockDemo />,
+        code: "<CodeBlock code={source} html={highlight(source)} />",
       },
     ],
   },
@@ -182,10 +223,11 @@ const groups: Group[] = [
     docs: [
       {
         name: "tabs",
-        title: "Tab list",
+        title: "Tabs",
         description:
-          "Rows or columns of tabs with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views.",
+          "Tabs and the panels they show, in a row or a column, with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views.",
         demo: <TabsDemo />,
+        bare: true,
       },
       {
         name: "list-item",
@@ -219,6 +261,13 @@ const groups: Group[] = [
         demo: <MenuDemo />,
       },
       {
+        name: "context-menu",
+        title: "Context menu",
+        description:
+          "A menu's commands at the pointer, opened by a right-click or a long press on its trigger.",
+        demo: <ContextMenuDemo />,
+      },
+      {
         name: "popover",
         title: "Popover",
         description: "Settings that open beside their trigger.",
@@ -228,14 +277,27 @@ const groups: Group[] = [
         name: "dialog",
         title: "Dialog",
         description:
-          "A modal for decisions that need an answer, such as exporting or confirming a delete. DialogClose closes it.",
-        demo: <DialogDemo />,
+          "A modal for decisions that need an answer, such as exporting. DialogClose closes it; alert asks before what can't be undone.",
+        demo: (
+          <>
+            <DialogDemo />
+            <AlertDialogDemo />
+          </>
+        ),
       },
       {
         name: "notice",
         title: "Notice",
-        description: "A message that floats without blocking the app.",
+        description:
+          "A message that floats without blocking the app; NoticeClose dismisses it.",
         demo: <NoticeDemo />,
+      },
+      {
+        name: "toast",
+        title: "Toast",
+        description:
+          "Notices in a corner, shown with toast.add from anywhere once a Toaster is mounted. They close on their own, or swipe away.",
+        demo: <ToastDemo />,
       },
     ],
   },
@@ -247,6 +309,7 @@ const groups: Group[] = [
         title: "Spinner",
         description: "Work in progress.",
         demo: <SpinnerDemo />,
+        half: true,
       },
       {
         name: "shimmer",
@@ -254,14 +317,54 @@ const groups: Group[] = [
         description:
           "A theme utility: a bright band sweeps across text, icons, or placeholder blocks while work is pending.",
         demo: <ShimmerDemo />,
+        half: true,
         code: '<span className="shimmer">Decoding RAW…</span>',
       },
       {
         name: "scroll-text",
         title: "Scroll text",
         description:
-          "One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls sideways to show the rest, without becoming a tab stop. Use it where you would use truncate. The fade follows the scroll, and scroll-fade-x gives the same fade to anything that scrolls sideways.",
+          "One line of text that fades and scrolls where it doesn't fit, instead of an ellipsis. It's the overflow-fade-x utility, which works on any row that may not fit, such as tabs or chips.",
         demo: <ScrollTextDemo />,
+      },
+    ],
+  },
+  {
+    title: "Foundations",
+    docs: [
+      {
+        name: "surfaces",
+        title: "Surfaces",
+        description:
+          "What every component is built from: a fill, and an edge the theme draws. Build your own controls from them and they follow the theme.",
+        demo: <SurfacesDemo />,
+        code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
+      },
+      {
+        name: "depth",
+        title: "Depth",
+        description:
+          "A card rises two levels over what it sits on, and what sits on it follows, so controls keep their contrast at any depth.",
+        demo: <DepthDemo />,
+        bare: true,
+        code: '<div className="rounded-xl surface-card">…</div>',
+      },
+      {
+        name: "colors",
+        title: "Colors",
+        description:
+          "Every fill is a level, 3.7% apart in lightness. Text comes in four opaque steps, from foreground to disabled.",
+        demo: <ColorsDemo />,
+        bare: true,
+        code: '<div className="bg-level-4 text-muted">…</div>',
+      },
+      {
+        name: "sizes",
+        title: "Sizes",
+        description:
+          "Controls are 28px tall, with 24px and 32px sizes. List rows are 40px.",
+        demo: <SizesDemo />,
+        code: '<Button size="sm">…</Button>',
       },
     ],
   },
@@ -292,7 +395,8 @@ const groups: Group[] = [
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <TooltipProvider>
-      <Page groups={groups} usage={<Usage />} />
+      <Page groups={groups} overview={<Overview />} />
+      <Toaster />
     </TooltipProvider>
   </StrictMode>,
 );

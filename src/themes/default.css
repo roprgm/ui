@@ -1,68 +1,60 @@
-/*
- * The default theme: surfaces drawn with light and shadow. Raised ones catch light on top and cast
- * a line below, sunken ones invert it, and what floats casts a soft shadow. While a ring shows on
- * the same element, as a thumb's keyboard focus or an invalid field's red ring, the ring takes
- * the shadow's place.
- */
+/* Surfaces drawn with light and shadow. */
 
 @import "../base.css";
 
-/* Geist when the app loads it, with next/font or @fontsource-variable/geist; the system font otherwise. */
+/* Geist, when the app loads it. */
 @theme {
   --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
 }
 
-/* Text sits a half pixel off the page; on light fills, such as a primary button, it lightens. */
+/* Text sits a half pixel off the page, lighter on light fills. */
 @theme {
-  --text-shadow-default: 0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2);
-  --text-shadow-subtle: 0.5px 1px 0.5px hsl(0 0% 0% / 0.08);
+  --text-shadow-default: 0.5px 1px 0.5px oklch(19.1% 0 0 / 0.2);
+  --text-shadow-subtle: 0.5px 1px 0.5px oklch(0% 0 0 / 0.08);
 }
 
 @utility surface-raised {
   box-shadow:
-    inset 0 1px 0 hsl(0 0% 94.12% / 0.07),
-    0 1px 1px hsl(0 0% 0% / 0.28),
-    0 0 1px hsl(0 0% 0% / 0.14);
+    inset 0 1px 0 oklch(95% 0 0 / 0.08),
+    0 1px 1px oklch(0% 0 0 / 0.28),
+    0 0 1px oklch(0% 0 0 / 0.14);
 }
 
 @utility surface-card {
   box-shadow:
-    inset 0 1px 0 hsl(0 0% 94.12% / 0.07),
-    0 1px 1px hsl(0 0% 0% / 0.28),
-    0 0 1px hsl(0 0% 0% / 0.14);
+    inset 0 1px 0 oklch(95% 0 0 / 0.08),
+    0 1px 1px oklch(0% 0 0 / 0.28),
+    0 0 1px oklch(0% 0 0 / 0.14);
 }
 
 @utility surface-sunken {
   box-shadow:
-    inset 0 1px 1px hsl(0 0% 0% / 0.3),
-    0 1px 0 hsl(0 0% 94.12% / 0.05);
+    inset 0 1px 1px oklch(0% 0 0 / 0.3),
+    0 1px 0 oklch(95% 0 0 / 0.08);
 }
 
-/* The outer edge is nearly opaque, so it holds over lighter surfaces, not only the page. */
+/* A nearly opaque outer edge, so it holds over light surfaces too. */
 @utility surface-float {
   box-shadow:
-    0 0 2px 1px hsl(0 0% 9% / 0.8),
-    inset 0 1px 0 hsl(0 0% 100% / 0.08),
-    0 2px 6px hsl(0 0% 0% / 0.3),
-    0 4px 16px 0 hsl(0 0% 4% / 0.1);
+    0 0 0px 1px oklch(10% 0 0 / 0.25),
+    inset 0 1px 0 oklch(100% 0 0 / 0.08),
+    0 2px 6px oklch(0% 0 0 / 0.3),
+    0 4px 16px 0 oklch(10% 0 0 / 0.1);
 }
 
-/* surface-float as a filter, so the shadow follows the tooltip's arrow. */
-@utility surface-callout {
-  filter: drop-shadow(0 0 1px hsl(0 0% 0% / 0.5))
-    drop-shadow(0 2px 3px hsl(0 0% 0% / 0.2))
-    drop-shadow(0 8px 12px hsl(0 0% 0% / 0.3));
-}
-
-/* A dark halo stands it off any track, lit on top like a raised control. */
-@utility surface-thumb {
+/* A dark halo stands it off any track or surface, lit on top like a raised control. */
+@utility surface-primary {
   box-shadow:
-    0 0 2px 1px hsl(0 0% 9% / 0.2),
-    inset 0 1px 0 hsl(0 0% 96% / 0.2),
-    0 1px 2px hsl(0 0% 9% / 0.5);
+    0 0 2px 1px oklch(10% 0 0 / 0.3),
+    inset 0 1px 0 oklch(95% 0 0 / 0.2),
+    0 1px 2px oklch(10% 0 0 / 0.5);
 }
 
-/* The light under a separator's dark line, so it reads engraved. */
+/* The light beside a separator's dark line, so it reads engraved: under it, or after it upright. */
 @utility separator {
-  box-shadow: 0 1px 0 hsl(0 0% 94.12% / 0.05);
+  box-shadow: 0 1px 0 oklch(95.5% 0 0 / 0.05);
+
+  &[aria-orientation="vertical"] {
+    box-shadow: 1px 0 0 oklch(95.5% 0 0 / 0.05);
+  }
 }

@@ -2,22 +2,22 @@ import { cn } from "cn";
 import type { ComponentProps } from "react";
 
 /**
- * The box everything floating is drawn in: menus, selects, popovers, dialogs, and notices. It has
- * no padding of its own: a list of items takes `p-(--padding-sm)` and `rounded-lg` on it, and other
- * content sits in `p-(--padding)` sections. Render a Base UI popup as one:
- * `<Menu.Popup render={(props) => <Popup {...props} />} />`. `layer` paints it: popups are
- * elevated wherever they open, and dialogs and notices are cards.
+ * The floating box of menus, selects, popovers, dialogs, and notices. `list` pads a column of
+ * `popupItem` rows; other content goes in `Section`s. `raised` lifts it a level more, to stand
+ * out where it opens over a card.
  */
 export function Popup({
-  layer = "layer-elevated",
+  list = false,
+  raised = false,
   className,
   ...props
-}: ComponentProps<"div"> & { layer?: string }) {
+}: ComponentProps<"div"> & { list?: boolean; raised?: boolean }) {
   return (
     <div
+      data-raised={raised || undefined}
       className={cn(
-        "max-h-(--available-height) min-w-40 origin-(--transform-origin) overflow-y-auto rounded-xl text-foreground surface-float outline-none transition-[opacity,scale] duration-100 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
-        layer,
+        "max-h-(--available-height) min-w-40 overflow-x-hidden overflow-y-auto rounded-xl text-foreground surface-float outline-none popup-motion",
+        list && "flex flex-col gap-0.5 rounded-lg p-1",
         className,
       )}
       {...props}
@@ -25,10 +25,6 @@ export function Popup({
   );
 }
 
-/**
- * A row in a popup's list, as in a menu or select: 2px shorter than a control, so a list reads
- * dense, padded so its text lands `--padding` from the popup's edge past the list's own padding,
- * and a flat highlight under the pointer or keys.
- */
+/** A row in a popup's list, as in a menu or select. */
 export const popupItem =
-  "flex h-[calc(var(--size-control)-2px)] shrink-0 cursor-default items-center rounded-sm px-[calc(var(--padding)-var(--padding-sm))] outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised";
+  "flex h-6.5 shrink-0 cursor-default items-center rounded-sm px-2.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised";

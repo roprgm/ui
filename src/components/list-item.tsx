@@ -1,7 +1,7 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-/** A row in a panel collection, such as a layer, with hover, selected, and muted states. */
+/** A row in a panel's list, such as a layer. */
 export function ListItem({
   selected = false,
   muted = false,
@@ -13,10 +13,19 @@ export function ListItem({
       data-selected={selected}
       data-muted={muted}
       className={cn(
-        // A trailing ghost IconButton sits 6px in, so its icon lands 12px in.
-        "group relative flex h-(--size-row) items-center gap-2 border-line border-b px-(--padding) text-foreground has-[>button:last-child]:pr-(--padding-row) data-[muted=true]:text-faint data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
+        "group relative flex h-10 items-center gap-2 px-3.5 text-foreground shadow-[inset_0_-1px_0_var(--color-line)] data-[muted=true]:text-muted data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised",
         className,
       )}
+      {...props}
+    />
+  );
+}
+
+/** Ghost icon buttons at the row's end, reaching into its padding so each icon sits 12px in. */
+export function ListItemAction({ className, ...props }: ComponentProps<"div">) {
+  return (
+    <div
+      className={cn("-mr-2 flex shrink-0 items-center gap-1", className)}
       {...props}
     />
   );

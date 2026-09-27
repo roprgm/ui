@@ -1,35 +1,40 @@
 "use client";
 
 import { Popover as Primitive } from "@base-ui/react/popover";
-import type { ReactElement, ReactNode } from "react";
+import { cn } from "cn";
 import { Popup } from "./popup";
+import { sections } from "./section";
 
-/** Settings opened beside `trigger`, such as bar controls that no longer fit. */
-export function Popover({
-  trigger,
+/** Settings beside their trigger, such as bar controls that no longer fit. */
+export const Popover = Primitive.Root;
+export const PopoverTrigger = Primitive.Trigger;
+
+/**
+ * Padded as its content needs; its `Section`s stack with a line between each, as in a card.
+ * `raised` lifts it a level more, for a popover that opens over a card.
+ */
+export function PopoverContent({
   align = "end",
-  children,
-}: {
-  trigger: ReactElement;
-  align?: "start" | "center" | "end";
-  children: ReactNode;
-}) {
+  raised = false,
+  ...props
+}: Primitive.Popup.Props &
+  Pick<Primitive.Positioner.Props, "align"> & { raised?: boolean }) {
   return (
-    <Primitive.Root>
-      <Primitive.Trigger render={trigger} />
-      <Primitive.Portal>
-        <Primitive.Positioner sideOffset={4} align={align} className="z-50">
-          <Primitive.Popup
-            // Keyboard users land inside; a click leaves focus on the trigger, so no field starts typing.
-            initialFocus={(type) => type === "keyboard"}
-            render={(props) => <Popup {...props} />}
-          >
-            <div className="p-(--padding) pt-(--padding-optical)">
-              {children}
-            </div>
-          </Primitive.Popup>
-        </Primitive.Positioner>
-      </Primitive.Portal>
-    </Primitive.Root>
+    <Primitive.Portal>
+      <Primitive.Positioner sideOffset={4} align={align} className="z-50">
+        <Primitive.Popup
+          // A click leaves focus on the trigger, so no field starts typing.
+          initialFocus={(type) => type === "keyboard"}
+          render={(popup) => (
+            <Popup
+              {...popup}
+              raised={raised}
+              className={cn(sections(), popup.className)}
+            />
+          )}
+          {...props}
+        />
+      </Primitive.Positioner>
+    </Primitive.Portal>
   );
 }

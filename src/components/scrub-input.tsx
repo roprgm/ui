@@ -5,27 +5,25 @@ import {
   type FocusEvent,
   type KeyboardEvent,
   type PointerEvent,
+  useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
 import { Chevron } from "./chevron";
 
-type Drag = { x: number; dx: number; value: number; moved: boolean };
-
-// Chevrons shown on hover to hint that the value drags sideways; hidden while typing.
 const hint =
-  "pointer-events-none absolute size-[9px] text-faint opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
+  "pointer-events-none absolute size-[9px] text-muted opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
 
-/** Whole characters, as tabular digits can differ from `ch` by a fraction of a pixel and shift a row. */
+/** Whole `ch`, since tabular digits can differ from it by a fraction of a pixel. */
 function digitsWidth(digits: string, minChars?: number) {
   if (!minChars) return undefined;
   return `${Math.max(minChars, digits.length)}ch`;
 }
 
 /**
- * A number shown as text that scrubs on horizontal drag, types on click or focus,
- * and steps with the arrow keys. `format` writes the text; whatever follows its last
- * digit reads as the unit, e.g. `(v) => `${v}px`` or `Intl.NumberFormat(…).format`.
+ * A number that drags sideways, types on click, and steps with the arrow keys. What `format`
+ * writes after the last digit reads as the unit.
  */
 export function ScrubInput({
   value,
@@ -43,24 +41,25 @@ export function ScrubInput({
 }: {
   value: number;
   onChange: (value: number) => void;
-  /** Reports a drag or typing session, so a caller can group its changes into one edit. */
+  /** Brackets a drag or typing, so a caller can group its changes into one edit. */
   onEditingChange?: (editing: boolean) => void;
   min: number;
   max: number;
   step?: number;
-  /** Restored by double-clicking the value. */
+  /** Restored by a double-click. */
   defaultValue?: number;
   format?: (value: number) => string;
-  /** Minimum width of the digits in characters, so a value whose digit count changes doesn't shift its row. */
+  /** Minimum width of the digits, in characters, so the row doesn't shift. */
   minChars?: number;
-  /** Shows chevrons beside the value on hover, hinting that it drags sideways. */
+  /** Chevrons on hover, hinting that it drags. */
   chevrons?: boolean;
   className?: string;
   "aria-label"?: string;
 }) {
   const [draft, setDraft] = useState<string>();
   const input = useRef<HTMLInputElement>(null);
-  const drag = useRef<Drag>(undefined);
+  const stopDrag = useRef<() => void>(undefined);
+  useEffect(() => () => stopDrag.current?.(), []);
   const decimals = `${step}`.split(".")[1]?.length ?? 0;
   const fixed = value.toFixed(decimals);
   const text = format?.(Number(fixed)) ?? fixed;
@@ -70,6 +69,12 @@ export function ScrubInput({
     const snapped = Math.round(next / step) * step;
     onChange(Math.min(max, Math.max(min, Number(snapped.toFixed(decimals)))));
   };
+
+  // A drag's window listeners outlive the render that added them, so they read the latest props.
+  const latest = useRef({ set, onEditingChange });
+  useLayoutEffect(() => {
+    latest.current = { set, onEditingChange };
+  });
 
   const commit = () => {
     const typed = Number.parseFloat(draft ?? "");
@@ -84,39 +89,58 @@ export function ScrubInput({
     input.current?.blur();
   };
 
+  // Follows the pointer on the window, so a drag holds once it leaves the value.
   const start = (event: PointerEvent<HTMLElement>) => {
-    if (document.activeElement === input.current) return;
+    if (event.button !== 0 || document.activeElement === input.current) return;
     event.preventDefault();
-    event.currentTarget.setPointerCapture(event.pointerId);
-    drag.current = { x: event.clientX, dx: 0, value, moved: false };
-  };
+    const target = event.currentTarget;
+    const mouse = event.pointerType === "mouse";
+    const pointer = event.pointerId;
+    const from = value;
+    let x = event.clientX;
+    let dx = 0;
+    let moved = false;
 
-  const move = (event: PointerEvent<HTMLElement>) => {
-    const state = drag.current;
-    if (!state) return;
-    // Under pointer lock clientX freezes, so deltas come from movementX.
-    const locked = document.pointerLockElement === event.currentTarget;
-    state.dx += locked ? event.movementX : event.clientX - state.x;
-    state.x = event.clientX;
-    if (!state.moved && Math.abs(state.dx) > 2) {
-      state.moved = true;
-      onEditingChange?.(true);
-      // Hides the cursor so the drag isn't stopped by the screen edge.
-      Promise.resolve(event.currentTarget.requestPointerLock()).catch(() => {});
+    function move(event: globalThis.PointerEvent) {
+      if (event.pointerId !== pointer) return;
+      // Under pointer lock clientX freezes, so deltas come from movementX.
+      const locked = document.pointerLockElement === target;
+      dx += locked ? event.movementX : event.clientX - x;
+      x = event.clientX;
+      if (!moved && Math.abs(dx) > 2) {
+        moved = true;
+        latest.current.onEditingChange?.(true);
+        // Hides the cursor so the drag isn't stopped by the screen edge.
+        if (mouse) Promise.resolve(target.requestPointerLock()).catch(() => {});
+      }
+      // Every range sweeps end to end in about 250px.
+      if (moved) latest.current.set(from + (dx * (max - min)) / 250);
     }
-    // Every range sweeps end to end in about 250px.
-    if (state.moved) set(state.value + (state.dx * (max - min)) / 250);
-  };
 
-  const end = () => {
-    const state = drag.current;
-    drag.current = undefined;
-    if (state?.moved) {
+    function end(event: globalThis.PointerEvent) {
+      if (event.pointerId !== pointer) return;
+      finish();
+      if (!moved && event.type === "pointerup") input.current?.focus();
+    }
+
+    function finish() {
+      stop();
+      if (!moved) return;
       document.exitPointerLock();
-      onEditingChange?.(false);
-    } else if (state) {
-      input.current?.focus();
+      latest.current.onEditingChange?.(false);
     }
+
+    function stop() {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", end);
+      window.removeEventListener("pointercancel", end);
+      stopDrag.current = undefined;
+    }
+
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", end);
+    window.addEventListener("pointercancel", end);
+    stopDrag.current = finish;
   };
 
   const key = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -134,22 +158,15 @@ export function ScrubInput({
   };
 
   return (
-    // The field inside stays focusable and typeable, with the formatted text over it until then;
-    // dragging is a pointer shortcut on top of it, which the keyboard gets through the arrow keys.
+    // The input is the control; dragging is a pointer shortcut over it.
     // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
       className={cn(
-        // A line of text plus 2px above and below, so it follows the app's text size; the unit never wraps off the digits.
-        "group relative inline-flex cursor-ew-resize items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
+        "group relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
         className,
       )}
       onDoubleClick={reset}
       onPointerDown={start}
-      onPointerMove={move}
-      onPointerUp={end}
-      onPointerCancel={() => {
-        drag.current = undefined;
-      }}
     >
       {chevrons && (
         <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
@@ -162,9 +179,9 @@ export function ScrubInput({
           >
             {number}
           </span>
-          {/* A unit set flush against the digits, like % or °, gets a hair of space. */}
+          {/* A unit flush against the digits, such as %, gets a hair of space. */}
           <span
-            className={cn("text-faint", /^\S/.test(unit ?? "") && "ml-0.5")}
+            className={cn("text-muted", /^\S/.test(unit ?? "") && "ml-0.5")}
           >
             {unit}
           </span>
