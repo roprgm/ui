@@ -36,7 +36,7 @@ export function Toggle({
     <label
       className={cn(
         // `relative` keeps the hidden radio inside, or it can widen the page.
-        "relative inline-flex cursor-pointer items-center rounded-sm px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled",
+        "relative inline-flex cursor-pointer items-center rounded-[calc(var(--radius-lg)-3px)] px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled",
         className,
       )}
     >
