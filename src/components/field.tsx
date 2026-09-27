@@ -38,7 +38,7 @@ export function Field({
       {note && (
         <p
           id={`${id}-note`}
-          className={cn("text-faint", error && "text-danger")}
+          className={cn("text-muted", error && "text-danger")}
         >
           {note}
         </p>

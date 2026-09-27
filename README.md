@@ -63,7 +63,7 @@ A card, popover, dialog, or notice pads its content as one section. To split it,
 </Card>
 ```
 
-- Use `surface-card` for cards, which rise a level inside another card on their own, and `surface-panel` for a card docked in your layout. What floats is `surface-float`, elevated wherever it opens.
+- Use `surface-card` for cards, which rise a level over what they sit on, even another card, and `surface-raised` for controls, two levels up. What floats is `surface-float`, a card drawn floating; a popup rises from where its trigger is.
 - Use the theme's colors, such as `text-muted`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette.
 - Build your own controls from the `surface-*` primitives rather than shadows or borders of your own, so they follow the theme.
 - For content that may not fit, use `overflow-fade-x` or `overflow-fade-y`: it scrolls, and fades where more lies that way. For one line of text, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
@@ -93,27 +93,25 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 | Token | Use |
 | --- | --- |
-| `level-1` to `level-8` | the backgrounds of the interface, darkest first; every fill is one of them |
-| `field`, `raised`, `raised-hover` | fills of fields and raised controls, levels relative to where they sit: a field one below, a raised control two above, three on hover |
-| `foreground`, `muted`, `faint`, `disabled` | text, strongest first |
+| `level-0` to `level-10` | the backgrounds of the interface: black, then darkest first in even steps of lightness; every fill is one of them |
+| `surface`, `field`, `raised`, `raised-hover`, `hover` | fills relative to the surface they sit on: its own, a field two levels below, a raised control two above and three on hover, and a ghost's hover one above |
+| `foreground`, `muted`, `disabled` | text: the foreground, and faded, so it keeps its contrast on any level |
 | `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
-| `hover`, `pressed` | translucent states for ghost buttons and chips |
+| `pressed` | a translucent state for ghost buttons and chips |
 | `line`, `focus`, `backdrop` | dividers, the focus ring, and the shade behind a dialog |
 | `danger` | errors |
 
 ### Surfaces
 
-A surface is what a box is filled with and how it stands against what's under it; the theme draws its edge. Each fills itself relative to where it sits, and a container's surface also sets the fills of the controls on it from the levels, so they keep their contrast anywhere and every color is one of the palette's:
+A surface is what a box is filled with and how it stands against what's under it; the theme draws its edge. A raised surface fills itself two levels over where it sits and sets the fills of what sits on it, so everything keeps its contrast at any depth and every color is one of the palette's:
 
 | Surface | Fill | Used by |
 | --- | --- | --- |
-| `surface-card` | a level up from what's under it | cards |
-| `surface-panel` | a card's, with no edge | a card docked in your layout |
-| `surface-float` | elevated, wherever it opens | popups, dialogs, notices, anything dragged |
-| `surface-raised` | a step up from its container | buttons, selects, selected tabs and toggles |
-| `surface-sunken` | a step down from its container | fields, tracks, checkboxes, switches, groups |
-| `surface-callout` | its own, in a shape | tooltips with their arrow |
-| `surface-thumb` | the primary color | slider thumbs and switch knobs |
+| `surface-card` | a level up from what it sits on | cards, and panels docked in your layout without its edge |
+| `surface-float` | a card's, drawn floating; a popup, from where its trigger is | popups, dialogs, notices, anything dragged |
+| `surface-raised` | two levels up from what it sits on | buttons, selects, selected tabs and toggles |
+| `surface-sunken` | two levels down from what it sits on | fields, tracks, checkboxes, switches, groups |
+| `surface-primary` | the primary color | primary buttons, checked switches, slider thumbs |
 | `separator` | a line | a menu's separators |
 
 ### Sizes
@@ -126,20 +124,21 @@ Redefine a token to restyle every component that uses it:
 
 ```css
 @theme {
-  --color-primary: hsl(210 90% 60%);
+  --color-primary: oklch(67% 0.16 252);
   --radius-md: 8px;
 }
 ```
 
-A surface of your own sets its fill and the fills of the controls on it, from the levels, and paints its fill:
+A theme changes what a surface is by setting its fills again, at each depth, in its own `@utility surface-card`. A surface of your own sets the fills of what sits on it and paints its own:
 
 ```css
 @utility surface-sidebar {
-  --layer: var(--color-level-1);
-  --field: var(--color-level-1);
-  --raised: var(--color-level-3);
-  --raised-hover: var(--color-level-4);
-  background-color: var(--layer);
+  --color-surface: var(--color-level-1);
+  --color-field: var(--color-level-1);
+  --color-raised: var(--color-level-3);
+  --color-raised-hover: var(--color-level-4);
+  --color-hover: var(--color-level-2);
+  background-color: var(--color-surface);
 }
 ```
 

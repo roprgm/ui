@@ -88,7 +88,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
               className={cn(
                 link,
                 "mb-3 hover:text-foreground",
-                current ? "text-faint" : "text-foreground",
+                current ? "text-muted" : "text-foreground",
               )}
             >
               Usage
@@ -100,7 +100,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
                   className={cn(
                     link,
                     "hover:text-foreground",
-                    group === current ? "text-foreground" : "text-faint",
+                    group === current ? "text-foreground" : "text-muted",
                   )}
                 >
                   {group.title}
@@ -129,7 +129,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
         <div className="flex flex-wrap gap-x-4 gap-y-3 md:hidden">
           <a
             href="#usage"
-            className={cn(link, current ? "text-faint" : "text-foreground")}
+            className={cn(link, current ? "text-muted" : "text-foreground")}
           >
             Usage
           </a>
@@ -139,7 +139,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
               href={`#${slug(group)}`}
               className={cn(
                 link,
-                group === current ? "text-foreground" : "text-faint",
+                group === current ? "text-foreground" : "text-muted",
               )}
             >
               {group.title}

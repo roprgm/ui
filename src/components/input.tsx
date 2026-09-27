@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 
 const field = cva(
   [
-    "w-full min-w-0 rounded-md surface-sunken px-2.5 text-foreground transition focus-ring placeholder:text-faint dim-disabled aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger/60",
+    "w-full min-w-0 rounded-md surface-sunken px-2.5 text-foreground transition focus-ring placeholder:text-muted dim-disabled aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger/60",
     // The file picker's button, 3px into the field.
     "file:mt-0.75 file:mr-3 file:-ml-1.75 file:cursor-pointer file:rounded-sm file:border-0 file:surface-raised file:px-2 file:text-foreground file:transition hover:file:bg-raised-hover",
   ],

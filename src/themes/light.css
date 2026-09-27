@@ -8,34 +8,32 @@
 }
 
 @theme {
-  --color-hover: hsl(0 0% 0% / 0.05);
-  --color-pressed: hsl(0 0% 0% / 0.09);
+  --color-pressed: oklch(0% 0 0 / 0.09);
 
-  --color-foreground: hsl(0 0% 9%);
-  --color-muted: hsl(0 0% 40%);
-  --color-faint: hsl(0 0% 56%);
-  --color-disabled: hsl(0 0% 72%);
+  --color-foreground: oklch(20.4% 0 0);
+  --color-muted: oklch(20.4% 0 0 / 0.66);
+  --color-disabled: oklch(20.4% 0 0 / 0.31);
 
-  --color-primary: hsl(0 0% 12%);
-  --color-primary-hover: hsl(0 0% 26%);
-  --color-on-primary: hsl(0 0% 98%);
+  --color-primary: oklch(23.8% 0 0);
+  --color-primary-hover: oklch(38% 0 0);
+  --color-on-primary: oklch(98.5% 0 0);
 
-  --color-line: hsl(0 0% 0% / 0.1);
-  --color-backdrop: hsl(0 0% 0% / 0.3);
-  --color-focus: hsl(0 0% 0% / 0.3);
-  --color-danger: hsl(0 72% 46%);
+  --color-line: oklch(0% 0 0 / 0.1);
+  --color-backdrop: oklch(0% 0 0 / 0.3);
+  --color-focus: oklch(0% 0 0 / 0.3);
+  --color-danger: oklch(54% 0.202 27);
 
   /* White can't get lighter, so levels darken past cards and popups. */
-  --color-level-1: hsl(0 0% 90%);
-  --color-level-2: hsl(0 0% 95%);
-  --color-level-3: hsl(0 0% 100%);
-  --color-level-4: hsl(0 0% 100%);
-  --color-level-5: hsl(0 0% 96%);
-  --color-level-6: hsl(0 0% 92%);
-  --color-level-7: hsl(0 0% 88%);
-  --color-level-8: hsl(0 0% 84%);
-
-  --color-tooltip: hsl(0 0% 100%);
+  --color-level-1: oklch(92.3% 0 0);
+  --color-level-2: oklch(96.2% 0 0);
+  --color-level-3: oklch(100% 0 0);
+  --color-level-4: oklch(100% 0 0);
+  --color-level-5: oklch(97% 0 0);
+  --color-level-6: oklch(93.9% 0 0);
+  --color-level-7: oklch(90.8% 0 0);
+  --color-level-8: oklch(87.7% 0 0);
+  --color-level-9: oklch(84.5% 0 0);
+  --color-level-10: oklch(81.3% 0 0);
 }
 
 @layer base {
@@ -46,45 +44,32 @@
 
 @utility surface-raised {
   box-shadow:
-    0 0 0 1px hsl(0 0% 0% / 0.08),
-    0 1px 2px hsl(0 0% 0% / 0.06);
+    0 0 0 1px oklch(0% 0 0 / 0.08),
+    0 1px 2px oklch(0% 0 0 / 0.06);
 }
 
 @utility surface-card {
   box-shadow:
-    0 0 0 1px hsl(0 0% 0% / 0.06),
-    0 1px 3px hsl(0 0% 0% / 0.06);
+    0 0 0 1px oklch(0% 0 0 / 0.08),
+    0 1px 2px oklch(0% 0 0 / 0.06);
 }
 
 @utility surface-sunken {
   box-shadow:
-    inset 0 1px 2px hsl(0 0% 0% / 0.08),
-    inset 0 0 0 1px hsl(0 0% 0% / 0.05);
+    inset 0 1px 2px oklch(0% 0 0 / 0.08),
+    inset 0 0 0 1px oklch(0% 0 0 / 0.05);
 }
 
 @utility surface-float {
   box-shadow:
-    0 0 0 1px hsl(0 0% 0% / 0.08),
-    0 4px 12px hsl(0 0% 0% / 0.08),
-    0 12px 32px -8px hsl(0 0% 0% / 0.14);
-}
-
-/* surface-float as a filter, so the shadow follows the tooltip's arrow. */
-@utility surface-callout {
-  filter: drop-shadow(0 0 1px hsl(0 0% 0% / 0.25))
-    drop-shadow(0 2px 6px hsl(0 0% 0% / 0.12));
+    0 0 0 1px oklch(0% 0 0 / 0.08),
+    0 4px 12px oklch(0% 0 0 / 0.08),
+    0 12px 32px -8px oklch(0% 0 0 / 0.14);
 }
 
 /* A light ring stands the dark thumb off a dark track, and a soft shadow lifts it. */
-@utility surface-thumb {
+@utility surface-primary {
   box-shadow:
-    0 0 0 1px hsl(0 0% 100% / 0.9),
-    0 1px 3px hsl(0 0% 0% / 0.3);
-}
-
-/* Popups and cards in cards are white like the cards under them, so their fields darken rather
-   than take the white level below. Outside any layer, so it wins over the base's utilities. */
-.surface-float,
-:where(.surface-card, .surface-panel) .surface-card {
-  --field: var(--color-level-5);
+    0 0 0 1px oklch(100% 0 0 / 0.9),
+    0 1px 3px oklch(0% 0 0 / 0.3);
 }

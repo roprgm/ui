@@ -203,7 +203,7 @@ export function Slider({
               onKeyDown={(event) => valueKeys.has(event.key) && edit(true)}
               onKeyUp={() => edit(false)}
               onBlur={() => edit(false)}
-              className="size-thumb rounded-full surface-thumb has-focus-visible:ring-2 has-focus-visible:ring-focus"
+              className="size-thumb rounded-full surface-primary has-focus-visible:ring-2 has-focus-visible:ring-focus"
               style={{ backgroundColor: color }}
             />
           </Primitive.Track>

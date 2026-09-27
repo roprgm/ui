@@ -9,43 +9,47 @@
 
 /* Colors. Components use only these. */
 @theme {
-  /* Backgrounds, darkest first. Every fill is one of them. */
-  --color-level-1: hsl(0 0% 4%);
-  --color-level-2: hsl(0 0% 8%);
-  --color-level-3: hsl(0 0% 12.3%);
-  --color-level-4: hsl(0 0% 17%);
-  --color-level-5: hsl(0 0% 22%);
-  --color-level-6: hsl(0 0% 27.3%);
-  --color-level-7: hsl(0 0% 33%);
-  --color-level-8: hsl(0 0% 39%);
+  /* Backgrounds: black, then darkest first in even steps of lightness. Every fill is one of them. */
+  --color-level-0: oklch(0% 0 0);
+  --color-level-1: oklch(15% 0 0);
+  --color-level-2: oklch(19.5% 0 0);
+  --color-level-3: oklch(24% 0 0);
+  --color-level-4: oklch(28.5% 0 0);
+  --color-level-5: oklch(33% 0 0);
+  --color-level-6: oklch(37.5% 0 0);
+  --color-level-7: oklch(42% 0 0);
+  --color-level-8: oklch(46.5% 0 0);
+  --color-level-9: oklch(51% 0 0);
+  --color-level-10: oklch(55.5% 0 0);
 
-  /* Text, strongest first. */
-  --color-foreground: hsl(0 0% 95%);
-  --color-muted: hsl(0 0% 63%);
-  --color-faint: hsl(0 0% 45%);
-  --color-disabled: hsl(0 0% 32%);
+  /* Text: the foreground, and faded, so it keeps its contrast on any level. */
+  --color-foreground: oklch(96% 0 0);
+  --color-muted: oklch(96% 0 0 / 0.55);
+  --color-disabled: oklch(96% 0 0 / 0.21);
 
   /* What is on: primary buttons, checked controls, thumbs. */
-  --color-primary: hsl(0 0% 86%);
-  --color-primary-hover: hsl(0 0% 98%);
-  --color-on-primary: hsl(0 0% 9%);
+  --color-primary: oklch(89% 0 0);
+  --color-primary-hover: oklch(98.5% 0 0);
+  --color-on-primary: oklch(18% 0 0);
 
   /* Translucent, over any level. */
-  --color-hover: hsl(0 0% 100% / 0.08);
-  --color-pressed: hsl(0 0% 100% / 0.15);
-  --color-line: hsl(0 0% 0% / 0.4);
-  --color-focus: hsl(0 0% 100% / 0.25);
-  --color-backdrop: hsl(0 0% 0% / 0.5);
+  --color-pressed: oklch(100% 0 0 / 0.15);
+  --color-focus: oklch(100% 0 0 / 0.25);
+  --color-backdrop: oklch(0% 0 0 / 0.5);
 
-  --color-danger: hsl(0 90% 75%);
-  --color-tooltip: var(--color-level-1);
+  --color-line: var(--color-level-2);
+  --color-danger: oklch(75% 0.14 21);
 }
 
-/* The fills of controls, set by the surface they sit on. */
-@theme inline {
-  --color-field: var(--field);
-  --color-raised: var(--raised);
-  --color-raised-hover: var(--raised-hover);
+/* The page's fills, for what sits on it: its own, a field two levels below, a raised control
+   two above and three on hover, and a hover one above. `surface-card` sets them again for what
+   sits on a card. */
+@theme {
+  --color-surface: var(--color-level-2);
+  --color-field: var(--color-level-0);
+  --color-raised: var(--color-level-4);
+  --color-raised-hover: var(--color-level-5);
+  --color-hover: var(--color-level-3);
 }
 
 @theme {
@@ -61,78 +65,56 @@
   --spacing-thumb: 13px;
 }
 
-/* Surfaces: a fill, and an edge the theme draws. A container's surface also sets the fills of the
-   controls on it: a field a level below, a raised control two above, three on hover. A theme
-   changes a fill through its token, never by redeclaring `background-color` here. */
+/* Surfaces: a fill, and an edge the theme draws. A theme changes a fill through its tokens, never
+   by redeclaring `background-color` here. */
 
-@layer base {
-  :root {
-    --layer: var(--color-level-2);
-    --field: var(--color-level-1);
-    --raised: var(--color-level-4);
-    --raised-hover: var(--color-level-5);
-  }
-}
-
-/* A card, a level up from what's under it: the page, a card or panel, or a popup. */
+/* A card, a level over what it sits on, a card too, three deep at most; it sets the fills of what
+   sits on it, as the page does. */
 @utility surface-card {
-  --layer: var(--color-level-3);
-  --field: var(--color-level-2);
-  --raised: var(--color-level-5);
-  --raised-hover: var(--color-level-6);
-  background-color: var(--layer);
+  --color-surface: var(--color-level-3);
+  --color-field: var(--color-level-1);
+  --color-raised: var(--color-level-5);
+  --color-raised-hover: var(--color-level-6);
+  --color-hover: var(--color-level-4);
+  background-color: var(--color-surface);
 
-  :where(.surface-card, .surface-panel) & {
-    --layer: var(--color-level-4);
-    --field: var(--color-level-3);
-    --raised: var(--color-level-6);
-    --raised-hover: var(--color-level-7);
+  :where(.surface-card, .surface-float) & {
+    --color-surface: var(--color-level-4);
+    --color-field: var(--color-level-2);
+    --color-raised: var(--color-level-6);
+    --color-raised-hover: var(--color-level-7);
+    --color-hover: var(--color-level-5);
   }
 
-  :where(.surface-float, :where(.surface-card, .surface-panel) .surface-card)
+  /* Not nested in the rule above, where both ancestors could be the same one. */
+  :where(.surface-card, .surface-float)
+    :where(.surface-card, .surface-float)
     & {
-    --layer: var(--color-level-5);
-    --field: var(--color-level-4);
-    --raised: var(--color-level-7);
-    --raised-hover: var(--color-level-8);
+    --color-surface: var(--color-level-5);
+    --color-field: var(--color-level-3);
+    --color-raised: var(--color-level-7);
+    --color-raised-hover: var(--color-level-8);
+    --color-hover: var(--color-level-6);
   }
 }
 
-/* A card docked in a layout, with no edge. */
-@utility surface-panel {
-  --layer: var(--color-level-3);
-  --field: var(--color-level-2);
-  --raised: var(--color-level-5);
-  --raised-hover: var(--color-level-6);
-  background-color: var(--layer);
-}
-
-/* What floats: popups, dialogs, notices, anything dragged. */
+/* What floats, a card drawn floating by the theme: popups, dialogs, notices, anything dragged. */
 @utility surface-float {
-  --layer: var(--color-level-4);
-  --field: var(--color-level-3);
-  --raised: var(--color-level-6);
-  --raised-hover: var(--color-level-7);
-  background-color: var(--layer);
+  @apply surface-card;
 }
 
-/* A floating shape that isn't a box, such as a tooltip with its arrow. */
-@utility surface-callout {
-  @apply bg-tooltip;
-}
-
-/* Buttons, selects, selected tabs and toggles. */
+/* A control that stands up from what it sits on: buttons, selects, selected tabs and toggles. */
 @utility surface-raised {
-  @apply bg-raised;
+  background-color: var(--color-raised);
 }
 
-/* Fields, tracks, checkboxes, switches, segmented groups. */
+/* Sets a control into what it sits on: fields, tracks, checkboxes, switches, segmented groups. */
 @utility surface-sunken {
-  @apply bg-field;
+  background-color: var(--color-field);
 }
 
-/* A slider's thumb or a switch's knob. */
-@utility surface-thumb {
+/* What is on: a primary button, a checked switch, a slider's thumb. */
+@utility surface-primary {
   @apply bg-primary;
 }
 
@@ -196,7 +178,7 @@
     margin-bottom: -1.5rem;
     background: linear-gradient(
       to bottom,
-      hsl(0 0% 0% / 0.2),
+      oklch(0% 0 0 / 0.2),
       30%,
       transparent
     );
@@ -204,7 +186,7 @@
   &::after {
     bottom: 0;
     margin-top: -1.5rem;
-    background: linear-gradient(to top, hsl(0 0% 0% / 0.2), 30%, transparent);
+    background: linear-gradient(to top, oklch(0% 0 0 / 0.2), 30%, transparent);
   }
 
   @supports (animation-timeline: scroll()) {
@@ -282,8 +264,8 @@
   mask-image: linear-gradient(
     to right,
     transparent,
-    hsl(0 0% 0%) var(--overflow-fade-start),
-    hsl(0 0% 0%) calc(100% - var(--overflow-fade-end)),
+    oklch(0% 0 0) var(--overflow-fade-start),
+    oklch(0% 0 0) calc(100% - var(--overflow-fade-end)),
     transparent
   );
 
@@ -320,11 +302,11 @@
 @utility shimmer {
   mask-image: linear-gradient(
     100deg,
-    hsl(0 0% 0% / 0.45) 30%,
-    hsl(0 0% 0% / 0.6) 40%,
-    hsl(0 0% 0%) 50%,
-    hsl(0 0% 0% / 0.6) 60%,
-    hsl(0 0% 0% / 0.45) 70%
+    oklch(0% 0 0 / 0.45) 30%,
+    oklch(0% 0 0 / 0.6) 40%,
+    oklch(0% 0 0) 50%,
+    oklch(0% 0 0 / 0.6) 60%,
+    oklch(0% 0 0 / 0.45) 70%
   );
   mask-size: 300% 100%;
   animation: shimmer 2.4s ease-in-out infinite;
@@ -351,7 +333,7 @@
     font-size: 13px;
     line-height: 20px;
     color: var(--color-foreground);
-    background: var(--layer);
+    background: var(--color-surface);
     color-scheme: dark;
     text-shadow: var(--text-shadow-default);
   }

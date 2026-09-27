@@ -15,7 +15,7 @@ export function Kbd({
     // The server can't tell the platform, so it writes Ctrl and a Mac corrects it.
     <kbd
       suppressHydrationWarning
-      className={cn("font-sans text-faint", className)}
+      className={cn("font-sans text-muted", className)}
       {...props}
     >
       {children.replace(/Mod ?/, mac ? "⌘" : "Ctrl ")}

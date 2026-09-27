@@ -19,6 +19,7 @@ import {
   InputDemo,
   KbdDemo,
   LayersDemo,
+  LevelsDemo,
   ListItemDemo,
   MenuDemo,
   NoticeDemo,
@@ -168,10 +169,19 @@ const groups: Group[] = [
     title: "Containers",
     docs: [
       {
+        name: "levels",
+        title: "Levels",
+        description:
+          "The backgrounds, darkest first, each 4.5% lighter in OKLCH so the steps look even, over black. Every fill is one of them: the page is level-2 and a card level-3, and the controls on a surface sit two levels above it, or two below for a field.",
+        demo: <LevelsDemo />,
+        bare: true,
+        code: '<div className="bg-level-4">…</div>',
+      },
+      {
         name: "layers",
         title: "Layers",
         description:
-          "Each surface sets the fills of the controls on it, so they keep their contrast on the page, in a card, and in a card inside it, which rises a level on its own.",
+          "A card rises over whatever it sits on and sets the fills of what sits on it, so controls keep their contrast on the page, in a card, and in a card inside it.",
         demo: <LayersDemo />,
         bare: true,
         code: '<div className="rounded-xl surface-card">…</div>',
@@ -180,14 +190,14 @@ const groups: Group[] = [
         name: "card",
         title: "Card",
         description:
-          "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-panel and sections() on your own element, as the Photo editor block does.",
+          "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-card, without its edge, and sections() on your own element, as the Photo editor block does.",
         demo: <CardDemo />,
       },
       {
         name: "surfaces",
         title: "Surfaces",
         description:
-          "The primitives components are built from: a fill, and an edge the theme draws. surface-raised lifts a control and surface-sunken sets it in; surface-card stands a card a level up, surface-panel docks one with no edge, and surface-float lifts a popup over everything. A control you build with them follows the theme too.",
+          "The primitives components are built from: a fill, and an edge the theme draws. surface-card lifts a card over what it sits on, and what sits on it follows; surface-float does the same, drawn floating, for popups and dialogs, and a popup rises from where its trigger is; surface-raised stands a control up; surface-sunken sets a field in; surface-primary fills what is on. A control you build with them follows the theme too.",
         demo: <SurfacesDemo />,
         code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
       },

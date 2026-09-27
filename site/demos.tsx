@@ -319,25 +319,24 @@ export function SpinnerDemo() {
 }
 
 const surfaces = [
+  "surface-card",
   "surface-raised",
   "surface-sunken",
-  "surface-thumb",
-  "surface-card",
-  "surface-panel",
+  "surface-primary",
   "surface-float",
 ] as const;
 
 export function SurfacesDemo() {
   return (
     <div className="flex flex-col items-center gap-8">
-      <div className="grid grid-cols-3 gap-x-8 gap-y-6">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3">
         {surfaces.map((name) => (
           <div key={name} className="flex flex-col items-center gap-3">
             <div
               className={cn(
                 "size-16 rounded-lg",
                 name,
-                name === "surface-thumb" && "rounded-full",
+                name === "surface-primary" && "rounded-full",
               )}
             />
             <span className="text-muted">{name}</span>
@@ -352,6 +351,37 @@ export function SurfacesDemo() {
   );
 }
 
+const levels = [
+  "bg-level-1",
+  "bg-level-2",
+  "bg-level-3",
+  "bg-level-4",
+  "bg-level-5",
+  "bg-level-6",
+  "bg-level-7",
+  "bg-level-8",
+  "bg-level-9",
+  "bg-level-10",
+] as const;
+
+export function LevelsDemo() {
+  return (
+    <div className="grid grid-cols-10 rounded-2xl bg-[oklch(0%_0_0)] p-2">
+      {levels.map((level, index) => (
+        <div
+          key={level}
+          className={cn(
+            "flex h-28 items-end justify-center pb-2.5 text-muted tabular-nums first:rounded-l-lg last:rounded-r-lg",
+            level,
+          )}
+        >
+          {index + 1}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function ShimmerDemo() {
   return (
     <div className="flex w-64 flex-col gap-4">
@@ -359,10 +389,10 @@ export function ShimmerDemo() {
         <BrushIcon /> Finding a source for the patch…
       </span>
       <div className="shimmer flex items-center gap-3">
-        <span className="size-10 rounded-md bg-raised-hover" />
+        <span className="size-10 rounded-md bg-raised" />
         <span className="flex flex-1 flex-col gap-2">
-          <span className="h-2.5 w-3/4 rounded-full bg-raised-hover" />
-          <span className="h-2.5 w-1/2 rounded-full bg-raised-hover" />
+          <span className="h-2.5 w-3/4 rounded-full bg-raised" />
+          <span className="h-2.5 w-1/2 rounded-full bg-raised" />
         </span>
       </div>
     </div>
@@ -385,7 +415,7 @@ export function LayersDemo() {
 function Layer({ name, className }: { name: string; className: string }) {
   return (
     <div className={cn("flex flex-col gap-3", className)}>
-      <span className="text-faint">{name}</span>
+      <span className="text-muted">{name}</span>
       <LayerControls name={name} />
     </div>
   );
@@ -967,7 +997,7 @@ function PresetsCard() {
           ))}
         </div>
       </Section>
-      <Section className="text-faint">
+      <Section className="text-muted">
         <ScrollText>
           Canon EOS R5 · RF 24–70mm F2.8 · ƒ/2.8 · 1/250 s · ISO 100 · 8192 ×
           5464
@@ -995,7 +1025,7 @@ function EditCard() {
         <span>Exposure +0.35</span>
         <span>Temperature +12</span>
         <span>Shadows +20</span>
-        <span className="text-faint">Edited 2 min ago</span>
+        <span className="text-muted">Edited 2 min ago</span>
       </Section>
       <Section className="flex-row justify-end gap-1 px-2.5">
         <Button variant="ghost">Revert</Button>
@@ -1017,7 +1047,7 @@ export function CollapsibleDemo() {
                 className="text-muted group-data-open/collapsible:rotate-90"
               />
               <span className="flex-1">{edit.title}</span>
-              <span className="text-faint">{edit.when}</span>
+              <span className="text-muted">{edit.when}</span>
             </CollapsibleTrigger>
             <CollapsiblePanel>
               <Section>
@@ -1153,8 +1183,8 @@ function HueSliders() {
           min={-100}
           max={100}
           defaultValue={0}
-          // From a gray as light as the hue.
-          stops={[`hsl(from ${hue.color} h 0% l)`, hue.color]}
+          // From a gray as light as the hue, to the eye.
+          stops={[`oklch(from ${hue.color} l 0 h)`, hue.color]}
           color={hue.color}
         />
       ))}

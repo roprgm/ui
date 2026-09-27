@@ -25,7 +25,7 @@ export function ScrollArea({
         <Primitive.Content className="min-w-0">{children}</Primitive.Content>
       </Primitive.Viewport>
       <Primitive.Scrollbar className="group z-10 my-1 mr-px flex w-1.5 justify-center opacity-0 transition-opacity data-hovering:opacity-100 data-scrolling:opacity-100">
-        <Primitive.Thumb className="w-1 rounded-full bg-faint group-hover:bg-muted" />
+        <Primitive.Thumb className="w-1 rounded-full bg-disabled group-hover:bg-muted" />
       </Primitive.Scrollbar>
     </Primitive.Root>
   );

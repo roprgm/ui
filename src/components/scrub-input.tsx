@@ -13,7 +13,7 @@ import {
 import { Chevron } from "./chevron";
 
 const hint =
-  "pointer-events-none absolute size-[9px] text-faint opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
+  "pointer-events-none absolute size-[9px] text-muted opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
 
 /** Whole `ch`, since tabular digits can differ from it by a fraction of a pixel. */
 function digitsWidth(digits: string, minChars?: number) {
@@ -181,7 +181,7 @@ export function ScrubInput({
           </span>
           {/* A unit flush against the digits, such as %, gets a hair of space. */}
           <span
-            className={cn("text-faint", /^\S/.test(unit ?? "") && "ml-0.5")}
+            className={cn("text-muted", /^\S/.test(unit ?? "") && "ml-0.5")}
           >
             {unit}
           </span>

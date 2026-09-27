@@ -7,6 +7,7 @@ import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Input } from "./input";
 import { Popup, popupItem } from "./popup";
+import { useTriggerSurface } from "./popup-surface";
 
 export type ComboboxItem<T extends string> = {
   value: T;
@@ -22,6 +23,7 @@ export function Combobox<T extends string>({
   size,
   className,
   "aria-label": label,
+  onOpenChange,
   ...props
 }: Omit<
   Primitive.Root.Props<T, false, ComboboxItem<T>>,
@@ -43,8 +45,13 @@ export function Combobox<T extends string>({
       }),
     [items],
   );
+  const surface = useTriggerSurface(onOpenChange);
   return (
-    <Primitive.Root items={collection} {...props}>
+    <Primitive.Root
+      items={collection}
+      onOpenChange={surface.onOpenChange}
+      {...props}
+    >
       <Primitive.InputGroup className={cn("relative", className)}>
         <Primitive.Input
           aria-label={label}
@@ -59,7 +66,7 @@ export function Combobox<T extends string>({
           <Chevron size="sm" />
         </Primitive.Trigger>
       </Primitive.InputGroup>
-      <Primitive.Portal>
+      <Primitive.Portal container={surface.container}>
         <Primitive.Positioner sideOffset={4} className="z-50">
           <Primitive.Popup
             render={(props) => (

@@ -6,9 +6,10 @@ import type { ComponentProps } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
 import { Popup, popupItem } from "./popup";
+import { usePopupContainer, withTriggerSurface } from "./popup-surface";
 
 /** Commands, such as a row's actions. For settings, use a Popover. */
-export const Menu = Primitive.Root;
+export const Menu = withTriggerSurface(Primitive.Root);
 export const MenuTrigger = Primitive.Trigger;
 
 export function MenuContent({
@@ -18,7 +19,7 @@ export function MenuContent({
 }: Primitive.Popup.Props &
   Pick<Primitive.Positioner.Props, "align" | "alignOffset">) {
   return (
-    <Primitive.Portal>
+    <Primitive.Portal container={usePopupContainer()}>
       <Primitive.Positioner
         sideOffset={4}
         align={align}
@@ -53,7 +54,9 @@ export function MenuSeparator() {
   return <Primitive.Separator className="mx-1.5 my-0.5 h-px separator" />;
 }
 
-export const Submenu = Primitive.SubmenuRoot;
+export const Submenu = withTriggerSurface(Primitive.SubmenuRoot, {
+  beside: true,
+});
 
 export function SubmenuTrigger({
   className,
