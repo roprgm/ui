@@ -1,11 +1,12 @@
+import { cn } from "cn";
 import { useState } from "react";
-import { CardAction, CardSection } from "../src/components/card";
+import { CardAction, CardSection, cardParts } from "../src/components/card";
 import { Chip } from "../src/components/chip";
 import { IconButton } from "../src/components/icon-button";
 import { ListItem, ListItemAction } from "../src/components/list-item";
 import { Menu, MenuItem, MenuSeparator } from "../src/components/menu";
-import { Panel, PanelBody } from "../src/components/panel";
 import { Popover } from "../src/components/popover";
+import { ScrollArea } from "../src/components/scroll-area";
 import { Slider } from "../src/components/slider";
 import { percent, ToolRail } from "./demos";
 import { EyeIcon, MoreIcon, PlusIcon } from "./icons";
@@ -76,13 +77,16 @@ export function EditorDemo() {
           </div>
         )}
       </div>
-      <Panel
-        width={width}
-        onWidthChange={setWidth}
-        min={240}
-        max={360}
-        className="col-span-2 @max-2xl:w-full! @max-2xl:[&>div:first-child]:hidden"
+      {/* A card docked beside the canvas: its sections without a card's corners or edge. Under the
+          canvas it spans the frame and its dragged width waits for a wider one. */}
+      <aside
+        className={cn(
+          cardParts,
+          "relative col-span-2 min-h-0 shrink-0 layer-card @max-2xl:w-full!",
+        )}
+        style={{ width }}
       >
+        <ResizeEdge width={width} onWidthChange={setWidth} />
         <CardSection className="flex-row items-center">
           <h2 className="flex-1 font-medium">{layer}</h2>
           <CardAction>
@@ -100,7 +104,7 @@ export function EditorDemo() {
             </Menu>
           </CardAction>
         </CardSection>
-        <PanelBody>
+        <ScrollArea fade className="flex-1">
           <CardSection>
             <Slider
               label="Exposure"
@@ -146,7 +150,7 @@ export function EditorDemo() {
               variant="compact"
             />
           </CardSection>
-        </PanelBody>
+        </ScrollArea>
         <CardSection className="flex-row items-center">
           <h2 className="flex-1 font-medium">Layers</h2>
           <CardAction>
@@ -175,7 +179,29 @@ export function EditorDemo() {
             </ListItem>
           ))}
         </div>
-      </Panel>
+      </aside>
     </div>
+  );
+}
+
+/** The panel's edge facing the canvas, which drags to resize it between 240px and 360px. */
+function ResizeEdge({
+  width,
+  onWidthChange,
+}: {
+  width: number;
+  onWidthChange: (width: number) => void;
+}) {
+  return (
+    <div
+      className="absolute inset-y-0 -left-1 z-20 w-2 cursor-col-resize touch-none after:absolute after:inset-y-0 after:left-1 after:w-px after:transition-colors hover:after:bg-raised-hover @max-2xl:hidden"
+      onPointerDown={(event) =>
+        event.currentTarget.setPointerCapture(event.pointerId)
+      }
+      onPointerMove={(event) => {
+        if (event.buttons !== 1) return;
+        onWidthChange(Math.min(360, Math.max(240, width - event.movementX)));
+      }}
+    />
   );
 }

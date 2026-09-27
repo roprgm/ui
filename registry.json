@@ -662,23 +662,6 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
-      "name": "panel",
-      "type": "registry:ui",
-      "categories": ["containers"],
-      "dependencies": ["cn"],
-      "registryDependencies": [
-        "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/scroll-area.json",
-        "https://ui.roprgm.com/r/card.json"
-      ],
-      "files": [
-        {
-          "path": "src/components/panel.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "tabs",
       "type": "registry:ui",
       "categories": ["navigation"],

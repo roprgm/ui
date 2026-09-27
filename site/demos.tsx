@@ -21,7 +21,6 @@ import { Kbd } from "../src/components/kbd";
 import { ListItem, ListItemAction } from "../src/components/list-item";
 import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/components/menu";
 import { Notice } from "../src/components/notice";
-import { Panel, PanelBody } from "../src/components/panel";
 import { Popover } from "../src/components/popover";
 import { Radio } from "../src/components/radio";
 import { ScrollArea } from "../src/components/scroll-area";
@@ -611,50 +610,6 @@ export function ToastDemo() {
   );
 }
 
-export function PanelDemo() {
-  const [grain, setGrain] = useState(20);
-  const [size, setSize] = useState(35);
-  return (
-    <Panel className="h-80 w-64 overflow-hidden rounded-xl surface-float">
-      <CardSection className="flex-row items-center">
-        <h2 className="flex-1 font-medium">Effects</h2>
-        <CardAction>
-          <IconButton label="Add effect">
-            <PlusIcon />
-          </IconButton>
-        </CardAction>
-      </CardSection>
-      <CardSection>
-        <Slider
-          label="Grain"
-          value={grain}
-          defaultValue={0}
-          onChange={setGrain}
-          min={0}
-          max={100}
-          format={percent}
-        />
-        <Slider
-          label="Size"
-          value={size}
-          onChange={setSize}
-          min={0}
-          max={100}
-          format={percent}
-          variant="compact"
-        />
-      </CardSection>
-      <PanelBody>
-        {["Vignette", "Grain", "Clarity", "Dehaze", "Sharpen", "Noise"].map(
-          (name) => (
-            <ListItem key={name}>{name}</ListItem>
-          ),
-        )}
-      </PanelBody>
-    </Panel>
-  );
-}
-
 const tools = [
   { id: "adjust", label: "Adjust", key: "A", Icon: AdjustIcon },
   { id: "brush", label: "Brush", key: "B", Icon: BrushIcon },
@@ -889,7 +844,53 @@ export function CardDemo() {
     <>
       <EditCard />
       <PresetsCard />
+      <EffectsCard />
     </>
+  );
+}
+
+/** A card of a fixed height whose last section, a list, takes the room left and scrolls. */
+function EffectsCard() {
+  const [grain, setGrain] = useState(20);
+  const [size, setSize] = useState(35);
+  return (
+    <Card className="h-80 w-64 max-w-full">
+      <CardSection className="flex-row items-center">
+        <h2 className="flex-1 font-medium">Effects</h2>
+        <CardAction>
+          <IconButton label="Add effect">
+            <PlusIcon />
+          </IconButton>
+        </CardAction>
+      </CardSection>
+      <CardSection>
+        <Slider
+          label="Grain"
+          value={grain}
+          defaultValue={0}
+          onChange={setGrain}
+          min={0}
+          max={100}
+          format={percent}
+        />
+        <Slider
+          label="Size"
+          value={size}
+          onChange={setSize}
+          min={0}
+          max={100}
+          format={percent}
+          variant="compact"
+        />
+      </CardSection>
+      <ScrollArea fade className="flex-1">
+        {["Vignette", "Grain", "Clarity", "Dehaze", "Sharpen", "Noise"].map(
+          (name) => (
+            <ListItem key={name}>{name}</ListItem>
+          ),
+        )}
+      </ScrollArea>
+    </Card>
   );
 }
 

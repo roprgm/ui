@@ -22,7 +22,6 @@ import {
   ListItemDemo,
   MenuDemo,
   NoticeDemo,
-  PanelDemo,
   PopoverDemo,
   RadioDemo,
   ScrollAreaDemo,
@@ -188,7 +187,7 @@ const groups: Group[] = [
         name: "card",
         title: "Card",
         description:
-          "A stack of sections with a line between each: the first reads as a header and the last as a footer, with no parts of their own. CardAction holds a header's icon buttons at its end. Panel and Popover stack sections the same way.",
+          "A stack of sections with a line between each: the first reads as a header and the last as a footer, with no parts of their own. CardAction holds a header's icon buttons at its end. A panel docked at an app's side is the same sections without a card's corners or edge: layer-card and cardParts on an element of its own, as in the Photo editor block.",
         demo: <CardDemo />,
       },
       {
@@ -198,13 +197,6 @@ const groups: Group[] = [
           "The primitives components are built from: surface-raised lifts a control off its layer, surface-sunken sets it in, surface-thumb marks what you grab, and separator draws a line between groups, each filling itself from the layer it sits on. surface-card stands a card on the page and surface-float lifts a popup over everything; they are only an edge, since a layer, layer-card or layer-elevated, fills the container. The theme draws every edge, so a control you build with them follows the theme too.",
         demo: <SurfacesDemo />,
         code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
-      },
-      {
-        name: "panel",
-        title: "Panel",
-        description:
-          "A card docked at the side, with a scrolling body and an optional resize edge.",
-        demo: <PanelDemo />,
       },
       {
         name: "collapsible",
