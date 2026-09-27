@@ -63,13 +63,13 @@
   --color-tooltip: var(--color-level-1);
 }
 
-/* Control fills, mixed from the layer they sit on: fields below it, raised controls above it and
-   further above on hover. `inline` writes the mix into each utility, so a control reads the layer
-   around it. */
+/* Control fills, which the level a control sits on sets from the levels: a field one below it, a
+   raised control two above and three on hover. `inline` writes the variable into each utility,
+   so a control reads the level around it. */
 @theme inline {
-  --color-field: color-mix(in srgb, var(--layer), hsl(0 0% 0%) 35%);
-  --color-raised: color-mix(in srgb, var(--layer), hsl(0 0% 100%) 11%);
-  --color-raised-hover: color-mix(in srgb, var(--layer), hsl(0 0% 100%) 17%);
+  --color-field: var(--field);
+  --color-raised: var(--raised);
+  --color-raised-hover: var(--raised-hover);
 }
 
 /* Corner radii, used as `rounded-*`. Nested corners stay concentric: the outer radius less the
@@ -122,31 +122,63 @@
  * Surfaces: what a box is filled with and how it stands against what's under it, the one look
  * components use. Each fills itself from the levels above, relative to where it sits, and a theme
  * draws its edge with shadows, lines, or nothing, so a theme restyles every component, and yours,
- * by drawing these. A container's surface also sets `--layer`, its fill, which the fills of the
- * controls on it mix from, so they keep their contrast at any level. The page is the first layer.
+ * by drawing these. A container's surface stands at a level, which sets its fill, `--layer`, and
+ * the fills of the controls on it, all from the levels, so every color is one of the palette's.
  *
  * A theme changes a fill by setting its color token again, never by redeclaring the property here:
  * Tailwind orders a utility's merged definitions by how many properties each has, so this file's
  * could win. A component that needs another fill says so with `!`, as the primary Button does,
  * since a plain `bg-*` sorts before these.
  */
+/* The levels a surface can stand at, each with the fills of the controls on it: `--layer` is the
+   surface's own, a field sits a level below it, and a raised control two above, three on hover. A
+   surface of your own applies one and paints `--layer`. */
+@utility level-2 {
+  --layer: var(--color-level-2);
+  --field: var(--color-level-1);
+  --raised: var(--color-level-4);
+  --raised-hover: var(--color-level-5);
+}
+
+@utility level-3 {
+  --layer: var(--color-level-3);
+  --field: var(--color-level-2);
+  --raised: var(--color-level-5);
+  --raised-hover: var(--color-level-6);
+}
+
+@utility level-4 {
+  --layer: var(--color-level-4);
+  --field: var(--color-level-3);
+  --raised: var(--color-level-6);
+  --raised-hover: var(--color-level-7);
+}
+
+@utility level-5 {
+  --layer: var(--color-level-5);
+  --field: var(--color-level-4);
+  --raised: var(--color-level-7);
+  --raised-hover: var(--color-level-8);
+}
+
+/* The page is the first level. */
 @layer base {
   :root {
-    --layer: var(--color-level-2);
+    @apply level-2;
   }
 }
 
 /* A card on what's under it: a level up from the page, and from a card or panel it sits in; two up
    in a popup. So a card never takes the color of what holds it. */
 @utility surface-card {
-  --layer: var(--color-level-3);
+  @apply level-3;
   background-color: var(--layer);
 
   :where(.surface-card, .surface-panel) & {
-    --layer: var(--color-level-4);
+    @apply level-4;
   }
   :where(.surface-float) & {
-    --layer: var(--color-level-5);
+    @apply level-5;
   }
 }
 
@@ -154,21 +186,21 @@
    fill, and no edge unless a theme draws one. Written out rather than applied from surface-card,
    which would bring a theme's card edge with it. */
 @utility surface-panel {
-  --layer: var(--color-level-3);
+  @apply level-3;
   background-color: var(--layer);
 
   :where(.surface-card, .surface-panel) & {
-    --layer: var(--color-level-4);
+    @apply level-4;
   }
   :where(.surface-float) & {
-    --layer: var(--color-level-5);
+    @apply level-5;
   }
 }
 
 /* Floats over everything, so it's elevated wherever it opens: popups, dialogs, notices, and
    anything dragged. */
 @utility surface-float {
-  --layer: var(--color-level-4);
+  @apply level-4;
   background-color: var(--layer);
 }
 

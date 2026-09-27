@@ -43,13 +43,6 @@
   --color-tooltip: hsl(0 0% 100%);
 }
 
-/* Mixed from the layer as in the base, but darker, since a white layer can't get lighter. */
-@theme inline {
-  --color-field: color-mix(in srgb, var(--layer), hsl(0 0% 0%) 6%);
-  --color-raised: color-mix(in srgb, var(--layer), hsl(0 0% 0%) 3%);
-  --color-raised-hover: color-mix(in srgb, var(--layer), hsl(0 0% 0%) 7%);
-}
-
 @layer base {
   body {
     color-scheme: light;

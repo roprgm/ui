@@ -178,7 +178,7 @@ const groups: Group[] = [
         name: "layers",
         title: "Layers",
         description:
-          "A card's surface sets the fill that the fields and buttons on it mix from, so they keep the same contrast on the page, in a card, and in a card inside it, which rises a level on its own.",
+          "A surface stands at a level of the palette, which also sets the fills of the fields and buttons on it: a field a level below, a button two above. So they keep the same contrast on the page, in a card, and in a card inside it, which rises a level on its own.",
         demo: <LayersDemo />,
         bare: true,
         code: '<div className="rounded-xl surface-card">…</div>',

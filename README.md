@@ -73,14 +73,14 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | --- | --- |
 | `foreground`, `muted`, `faint`, `disabled` | text, strongest first |
 | `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
-| `field`, `raised`, `raised-hover` | fills of fields and of raised controls, mixed from the layer they sit on |
+| `field`, `raised`, `raised-hover` | fills of fields and of raised controls, levels relative to where they sit: a field one below, a raised control two above, three on hover |
 | `hover`, `pressed` | translucent states for ghost buttons and chips |
 | `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
 | `level-1` to `level-8` | backgrounds by role: sunk below the page, the page, a card, elevated, then each more prominent |
 
 ### Surfaces
 
-A surface is what a box is filled with and how it stands against what's under it; the theme draws its edge. Each fills itself relative to where it sits, and a container's surface sets `--layer`, the fill the controls on it mix from, so they keep their contrast at any level:
+A surface is what a box is filled with and how it stands against what's under it; the theme draws its edge. Each fills itself relative to where it sits, and a container's surface stands at a level, which also sets the fills of the controls on it from the levels, so they keep their contrast anywhere and every color is one of the palette's:
 
 | Surface | Fill | Used by |
 | --- | --- | --- |
@@ -109,11 +109,11 @@ Redefine a token to restyle every component that uses it:
 }
 ```
 
-A surface of your own sets `--layer` and paints it; the controls on it follow:
+A surface of your own applies a level and paints it; the controls on it follow:
 
 ```css
 @utility surface-sidebar {
-  --layer: var(--color-level-1);
+  @apply level-2;
   background-color: var(--layer);
 }
 ```
