@@ -292,20 +292,27 @@ export function SpinnerDemo() {
 
 /** Each primitive with the fill the base gives it; the theme draws its edge. */
 const surfaces = [
-  { name: "surface-raised", className: "surface-raised" },
-  { name: "surface-sunken", className: "surface-sunken" },
-  { name: "surface-card", className: "layer-card surface-card" },
-  { name: "surface-float", className: "layer-elevated surface-float" },
-  { name: "surface-thumb", className: "surface-thumb rounded-full" },
+  "surface-raised",
+  "surface-sunken",
+  "surface-thumb",
+  "surface-card",
+  "surface-panel",
+  "surface-float",
 ] as const;
 
 export function SurfacesDemo() {
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="grid grid-cols-3 gap-x-8 gap-y-6">
-        {surfaces.map(({ name, className }) => (
+        {surfaces.map((name) => (
           <div key={name} className="flex flex-col items-center gap-3">
-            <div className={cn("size-16 rounded-lg", className)} />
+            <div
+              className={cn(
+                "size-16 rounded-lg",
+                name,
+                name === "surface-thumb" && "rounded-full",
+              )}
+            />
             <span className="text-muted">{name}</span>
           </div>
         ))}
@@ -340,12 +347,9 @@ export function LayersDemo() {
     <div className="grid gap-2 sm:grid-cols-[1fr_2fr]">
       <Layer name="Page" className="py-6 pr-4" />
       {/* 16px corners less 8px of padding leave 8px for the card inside. */}
-      <div className="layer-card grid gap-2 rounded-2xl p-2 surface-card sm:grid-cols-2">
+      <div className="grid gap-2 rounded-2xl p-2 surface-card sm:grid-cols-2">
         <Layer name="Card" className="p-4" />
-        <Layer
-          name="Elevated"
-          className="layer-card rounded-lg p-4 surface-card"
-        />
+        <Layer name="Card in a card" className="rounded-lg p-4 surface-card" />
       </div>
     </div>
   );
@@ -712,7 +716,7 @@ export function ListItemDemo() {
     { id: "image", name: "Image" },
   ];
   return (
-    <div className="layer-elevated w-64 overflow-hidden rounded-lg surface-float">
+    <div className="w-64 overflow-hidden rounded-lg surface-float">
       {layers.map((layer) => (
         <ListItem
           key={layer.id}
@@ -801,7 +805,7 @@ export function TreeListDemo() {
         if (!moved) return;
         setLayers(placeLayer(withoutLayer(layers, drop.id), moved, drop));
       }}
-      className="layer-elevated w-64 overflow-hidden rounded-lg surface-float"
+      className="w-64 overflow-hidden rounded-lg surface-float"
     >
       {(layer) => (
         <>

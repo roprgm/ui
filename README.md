@@ -36,12 +36,12 @@ import { Button } from "@roprgm/ui/button";
 Put groups of controls on a card. Controls take their fills from the layer they sit on, so they keep the same contrast everywhere:
 
 ```tsx
-<div className="layer-card surface-card rounded-xl p-3.5">
+<div className="surface-card rounded-xl p-3.5">
   <Input placeholder="Name" />
 </div>
 ```
 
-- Use `layer-card` for panels and cards; one inside another card rises to `layer-elevated` on its own. Popups are `layer-elevated`.
+- Use `surface-card` for cards, which rise a level inside another card on their own, and `surface-panel` for a card docked in your layout. What floats is `surface-float`, elevated wherever it opens.
 - Use the theme's colors, such as `text-muted`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette.
 - Build your own controls from the `surface-*` primitives rather than shadows or borders of your own, so they follow the theme.
 - For content that may not fit, use `overflow-fade-x` or `overflow-fade-y`: it scrolls, and fades where more lies that way. For one line of text, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
@@ -56,7 +56,7 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 | --- | --- |
 | Actions | `Button`, `IconButton`, `Chip`, `Kbd`, `Badge` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput`, `VerticalSlider` |
-| Containers | `Card` with `CardSection` and `CardAction`, and `cardParts` for a panel docked at your app's side; `layer-card` and `layer-elevated`; the `surface-*` primitives; `Collapsible`, `ScrollArea` |
+| Containers | `Card` with `CardSection` and `CardAction`, and `cardParts` for a panel docked at your app's side; the `surface-*` primitives; `Collapsible`, `ScrollArea` |
 | Navigation | `TabList`, `ListItem`, `TreeList` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
 | Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, and `overflow-fade-y` utilities |
@@ -78,21 +78,20 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | `line`, `focus`, `danger`, `backdrop` | dividers, the focus ring, errors, and the shade behind a dialog |
 | `level-1` to `level-8` | backgrounds by role: sunk below the page, the page, a card, elevated, then each more prominent |
 
-### Layers and primitives
+### Surfaces
 
-A layer is what a container is filled with. The page, `layer-card`, and `layer-elevated` set a background, `--layer`, that the fills of the controls on them mix from, and a `layer-card` inside a card rises to the elevated level on its own. A layer of your own sets `--layer` and paints it. Popups are elevated wherever they open; dialogs and notices are cards.
+A surface is what a box is filled with and how it stands against what's under it; the theme draws its edge. Each fills itself relative to where it sits, and a container's surface sets `--layer`, the fill the controls on it mix from, so they keep their contrast at any level:
 
-A surface is how a box stands against what's under it, and the theme draws it. A container's surface is only its edge, so a container is a layer and a surface, as a card is `layer-card surface-card`; a control's surface also fills it, from the layer it sits on:
-
-| Primitive | Stands | Used by |
+| Surface | Fill | Used by |
 | --- | --- | --- |
-| `surface-raised` | out from its layer | buttons, selects, selected tabs and toggles |
-| `surface-sunken` | into its layer | fields, tracks, checkboxes, switches, groups |
-| `surface-card` | on the layer under it | cards and panels of controls |
-| `surface-float` | over everything | popups and anything dragged |
-| `surface-callout` | over everything, in a shape | tooltips with their arrow |
-| `surface-thumb` | under your finger | slider thumbs and switch knobs |
-| `separator` | between groups | a menu's separators |
+| `surface-card` | a level up from what's under it | cards |
+| `surface-panel` | a card's, with no edge | a card docked in your layout |
+| `surface-float` | elevated, wherever it opens | popups, dialogs, notices, anything dragged |
+| `surface-raised` | a step up from its container | buttons, selects, selected tabs and toggles |
+| `surface-sunken` | a step down from its container | fields, tracks, checkboxes, switches, groups |
+| `surface-callout` | its own, in a shape | tooltips with their arrow |
+| `surface-thumb` | the primary color | slider thumbs and switch knobs |
+| `separator` | a line | a menu's separators |
 
 ### Density
 
@@ -110,11 +109,11 @@ Redefine a token to restyle every component that uses it:
 }
 ```
 
-A layer of your own sets only its background; the controls on it follow:
+A surface of your own sets `--layer` and paints it; the controls on it follow:
 
 ```css
-@utility layer-panel {
-  --layer: var(--color-level-3);
+@utility surface-sidebar {
+  --layer: var(--color-level-1);
   background-color: var(--layer);
 }
 ```

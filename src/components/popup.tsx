@@ -4,16 +4,14 @@ import type { ComponentProps } from "react";
 /**
  * The box everything floating is drawn in: menus, selects, popovers, dialogs, and notices. It has
  * no padding of its own: a list of items takes `list`, and other content sits in `CardSection`s. Render a Base UI popup as one:
- * `<Menu.Popup render={(props) => <Popup {...props} />} />`. `layer` paints it: popups are
- * elevated wherever they open, and dialogs and notices are cards.
+ * `<Menu.Popup render={(props) => <Popup {...props} />} />`. It floats, so it's elevated wherever
+ * it opens.
  */
 export function Popup({
-  layer = "layer-elevated",
   list = false,
   className,
   ...props
 }: ComponentProps<"div"> & {
-  layer?: string;
   /** Holds a column of `popupItem` rows, as a menu does: 4px around them, so its 9px corners nest
       around their 5px ones. A list inside it, as a select's, stacks its rows the same way. */
   list?: boolean;
@@ -23,7 +21,6 @@ export function Popup({
       className={cn(
         "max-h-(--available-height) min-w-40 overflow-x-hidden overflow-y-auto rounded-xl text-foreground surface-float outline-none popup-motion",
         list && "flex flex-col gap-0.5 rounded-lg p-1",
-        layer,
         className,
       )}
       {...props}

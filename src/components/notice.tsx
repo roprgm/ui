@@ -24,7 +24,6 @@ export function Notice({
   return (
     <Popup
       role={tone}
-      layer="layer-card"
       className={cn("max-w-sm", tone === "alert" && "text-danger", className)}
       {...props}
     >

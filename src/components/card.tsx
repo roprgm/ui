@@ -3,7 +3,8 @@ import type { ComponentProps } from "react";
 
 /** How a card's sections stack: in the order written, with a line between each. The line is an
     inset shadow rather than a border, so it takes no room. A Popover stacks the same way, and so
-    does a panel docked at an app's side: `layer-card` and `cardParts` on an element of its own. */
+    does a panel docked at an app's side: `surface-panel` and `cardParts` on an element of its
+    own. */
 export const cardParts =
   "flex flex-col *:not-last:shadow-[inset_0_-1px_0_var(--color-line)]";
 
@@ -16,7 +17,7 @@ export function Card({ className, ...props }: ComponentProps<"div">) {
     <div
       className={cn(
         cardParts,
-        "overflow-hidden rounded-xl layer-card surface-card",
+        "overflow-hidden rounded-xl surface-card",
         className,
       )}
       {...props}

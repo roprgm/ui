@@ -178,23 +178,23 @@ const groups: Group[] = [
         name: "layers",
         title: "Layers",
         description:
-          "Theme utilities: layer-card and layer-elevated paint a card and set the fills for the fields and buttons on it, so they keep the same contrast on the page, in a card, and in a card inside it. A layer-card inside a card rises to layer-elevated on its own.",
+          "A card's surface sets the fill that the fields and buttons on it mix from, so they keep the same contrast on the page, in a card, and in a card inside it, which rises a level on its own.",
         demo: <LayersDemo />,
         bare: true,
-        code: '<div className="layer-card rounded-xl surface-card">…</div>',
+        code: '<div className="rounded-xl surface-card">…</div>',
       },
       {
         name: "card",
         title: "Card",
         description:
-          "A stack of sections with a line between each: the first reads as a header and the last as a footer, with no parts of their own. CardAction holds a header's icon buttons at its end. A panel docked at an app's side is the same sections without a card's corners or edge: layer-card and cardParts on an element of its own, as in the Photo editor block.",
+          "A stack of sections with a line between each: the first reads as a header and the last as a footer, with no parts of their own. CardAction holds a header's icon buttons at its end. A panel docked at an app's side is the same sections on surface-panel, a card's fill with no edge: surface-panel and cardParts on an element of its own, as in the Photo editor block.",
         demo: <CardDemo />,
       },
       {
         name: "surfaces",
         title: "Surfaces",
         description:
-          "The primitives components are built from: surface-raised lifts a control off its layer, surface-sunken sets it in, surface-thumb marks what you grab, and separator draws a line between groups, each filling itself from the layer it sits on. surface-card stands a card on the page and surface-float lifts a popup over everything; they are only an edge, since a layer, layer-card or layer-elevated, fills the container. The theme draws every edge, so a control you build with them follows the theme too.",
+          "The primitives components are built from, each a fill and an edge the theme draws. surface-raised lifts a control off where it sits and surface-sunken sets it in; surface-thumb marks what you grab. surface-card stands a card on what's under it, a level up; surface-panel is a card docked in a layout, with no edge; surface-float lifts a popup over everything. separator draws a line between groups. A control you build with them follows the theme too.",
         demo: <SurfacesDemo />,
         code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
       },
