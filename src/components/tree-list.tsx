@@ -303,12 +303,12 @@ export function TreeList<T extends TreeNode<T>>({
                   event.stopPropagation();
                   toggle(item.id, !expanded);
                 }}
-                className="-mr-0.5 -ml-1 grid size-5 shrink-0 place-items-center rounded-xs text-faint focus-ring hover:text-foreground"
+                className="-mr-0.5 -ml-2 grid size-5 shrink-0 place-items-center rounded-xs text-faint focus-ring hover:text-foreground"
               >
                 <Chevron direction={expanded ? "down" : "right"} size="sm" />
               </button>
             )}
-            {!branch && <span className="-mr-0.5 -ml-1 w-5 shrink-0" />}
+            {!branch && <span className="-mr-0.5 -ml-2 w-5 shrink-0" />}
             {children(item)}
           </ListItem>
           {branch && (
