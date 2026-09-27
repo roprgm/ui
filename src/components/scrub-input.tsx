@@ -6,6 +6,7 @@ import {
   type KeyboardEvent,
   type PointerEvent,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -69,6 +70,12 @@ export function ScrubInput({
     onChange(Math.min(max, Math.max(min, Number(snapped.toFixed(decimals)))));
   };
 
+  // A drag's window listeners outlive the render that added them, so they read the latest props.
+  const latest = useRef({ set, onEditingChange });
+  useLayoutEffect(() => {
+    latest.current = { set, onEditingChange };
+  });
+
   const commit = () => {
     const typed = Number.parseFloat(draft ?? "");
     if (!Number.isNaN(typed)) set(typed);
@@ -102,23 +109,25 @@ export function ScrubInput({
       x = event.clientX;
       if (!moved && Math.abs(dx) > 2) {
         moved = true;
-        onEditingChange?.(true);
+        latest.current.onEditingChange?.(true);
         // Hides the cursor so the drag isn't stopped by the screen edge.
         if (mouse) Promise.resolve(target.requestPointerLock()).catch(() => {});
       }
       // Every range sweeps end to end in about 250px.
-      if (moved) set(from + (dx * (max - min)) / 250);
+      if (moved) latest.current.set(from + (dx * (max - min)) / 250);
     }
 
     function end(event: globalThis.PointerEvent) {
       if (event.pointerId !== pointer) return;
+      finish();
+      if (!moved && event.type === "pointerup") input.current?.focus();
+    }
+
+    function finish() {
       stop();
-      if (moved) {
-        document.exitPointerLock();
-        onEditingChange?.(false);
-      } else if (event.type === "pointerup") {
-        input.current?.focus();
-      }
+      if (!moved) return;
+      document.exitPointerLock();
+      latest.current.onEditingChange?.(false);
     }
 
     function stop() {
@@ -131,7 +140,7 @@ export function ScrubInput({
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", end);
     window.addEventListener("pointercancel", end);
-    stopDrag.current = stop;
+    stopDrag.current = finish;
   };
 
   const key = (event: KeyboardEvent<HTMLInputElement>) => {
