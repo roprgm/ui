@@ -49,45 +49,6 @@ import { Overview } from "./overview";
 
 const groups: Group[] = [
   {
-    title: "Foundations",
-    docs: [
-      {
-        name: "colors",
-        title: "Colors",
-        description:
-          "Every fill is a level: black, then 15% up in steps of 3.7% of lightness, so they look even. The page is level 2 and a card level 4. Muted and disabled text are the foreground faded, so they read on any level.",
-        demo: <ColorsDemo />,
-        bare: true,
-        code: '<div className="bg-level-4 text-muted">…</div>',
-      },
-      {
-        name: "surfaces",
-        title: "Surfaces",
-        description:
-          "What components are built from: a fill, and an edge the theme draws. A card rises over what it sits on and a floating card does too, drawn floating; a raised control stands up, a sunken one sets in, and a primary one is on. A separator parts groups. A control you build with them follows the theme too.",
-        demo: <SurfacesDemo />,
-        code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
-      },
-      {
-        name: "depth",
-        title: "Depth",
-        description:
-          "A card rises two levels over what it sits on, a card too, and sets the fills of what sits on it: a control three levels up, a field two down. The same controls keep their contrast on the page, in a card, and in a card inside it, and a popup rises from where its trigger is.",
-        demo: <DepthDemo />,
-        bare: true,
-        code: '<div className="rounded-xl surface-card">…</div>',
-      },
-      {
-        name: "sizes",
-        title: "Sizes",
-        description:
-          "Controls stand 28px tall, with 24px and 32px sizes, and what goes together takes the same height. A list's rows are 40px.",
-        demo: <SizesDemo />,
-        code: '<Button size="sm">…</Button>',
-      },
-    ],
-  },
-  {
     title: "Actions",
     docs: [
       {
@@ -347,6 +308,45 @@ const groups: Group[] = [
         description:
           "One line of text that fades and scrolls where it doesn't fit, instead of an ellipsis. It's the overflow-fade-x utility, which works on any row that may not fit, such as tabs or chips.",
         demo: <ScrollTextDemo />,
+      },
+    ],
+  },
+  {
+    title: "Foundations",
+    docs: [
+      {
+        name: "surfaces",
+        title: "Surfaces",
+        description:
+          "What every component is built from: a fill, and an edge the theme draws. Build your own controls from them and they follow the theme.",
+        demo: <SurfacesDemo />,
+        code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
+      },
+      {
+        name: "depth",
+        title: "Depth",
+        description:
+          "A card rises two levels over what it sits on, and what sits on it follows, so controls keep their contrast at any depth.",
+        demo: <DepthDemo />,
+        bare: true,
+        code: '<div className="rounded-xl surface-card">…</div>',
+      },
+      {
+        name: "colors",
+        title: "Colors",
+        description:
+          "Every fill is a level, 3.7% apart in lightness. Muted and disabled text fade the foreground, so they read on any level.",
+        demo: <ColorsDemo />,
+        bare: true,
+        code: '<div className="bg-level-4 text-muted">…</div>',
+      },
+      {
+        name: "sizes",
+        title: "Sizes",
+        description:
+          "Controls are 28px tall, with 24px and 32px sizes. List rows are 40px.",
+        demo: <SizesDemo />,
+        code: '<Button size="sm">…</Button>',
       },
     ],
   },
