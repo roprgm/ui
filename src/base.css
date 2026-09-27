@@ -27,7 +27,7 @@
 
   /* Text: the foreground, and faded, so it keeps its contrast on any level. */
   --color-foreground: oklch(96% 0 0);
-  --color-muted: oklch(96% 0 0 / 0.55);
+  --color-muted: oklch(96% 0 0 / 0.6);
   --color-disabled: oklch(96% 0 0 / 0.21);
 
   /* What is on: primary buttons, checked controls, thumbs. */
