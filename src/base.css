@@ -13,14 +13,22 @@
 }
 
 /*
- * Semantic colors. Components use only these, so redefining one in :root or your own theme
- * restyles every component that uses it.
+ * Colors. Components use only these, so a theme, or your own `@theme`, restyles every component by
+ * setting them again.
  */
-
 @theme {
-  /* Translucent states over any background. */
-  --color-hover: hsl(0 0% 100% / 0.08);
-  --color-pressed: hsl(0 0% 100% / 0.15);
+  /* Levels, the backgrounds of the interface, darkest first. Every fill is one of them: a surface
+     stands at a level, a field sits one below it, and a raised control two above, three on hover.
+     A theme redefines all eight; a light one lightens up to its cards and darkens after, since
+     white can't get lighter. */
+  --color-level-1: hsl(0 0% 4%);
+  --color-level-2: hsl(0 0% 8%);
+  --color-level-3: hsl(0 0% 12.3%);
+  --color-level-4: hsl(0 0% 17%);
+  --color-level-5: hsl(0 0% 22%);
+  --color-level-6: hsl(0 0% 27.3%);
+  --color-level-7: hsl(0 0% 33%);
+  --color-level-8: hsl(0 0% 39%);
 
   /* Text, strongest first. */
   --color-foreground: hsl(0 0% 95%);
@@ -28,44 +36,25 @@
   --color-faint: hsl(0 0% 45%);
   --color-disabled: hsl(0 0% 32%);
 
-  /* The primary color marks what is on: primary buttons, checked controls, thumbs, drop markers. */
+  /* What is on: primary buttons, checked controls, thumbs, drop markers. */
   --color-primary: hsl(0 0% 86%);
   --color-primary-hover: hsl(0 0% 98%);
   --color-on-primary: hsl(0 0% 9%);
 
+  /* Translucent, over any level: the states of ghost buttons and chips, lines, the focus ring, and
+     the shade behind a dialog. */
+  --color-hover: hsl(0 0% 100% / 0.08);
+  --color-pressed: hsl(0 0% 100% / 0.15);
   --color-line: hsl(0 0% 0% / 0.4);
-  --color-backdrop: hsl(0 0% 0% / 0.5);
   --color-focus: hsl(0 0% 100% / 0.25);
+  --color-backdrop: hsl(0 0% 0% / 0.5);
+
   --color-danger: hsl(0 90% 75%);
-}
-
-/*
- * Levels: the backgrounds of the interface, named by their role rather than their color, so a
- * theme redefines all eight and anything painted with them follows. Here they rise from dark to
- * light; a light theme lightens up to its cards and darkens after, since white can't get lighter.
- * Use them for backgrounds of your own, such as `bg-level-3` for a panel.
- */
-@theme {
-  /* Sunk below the page. */
-  --color-level-1: hsl(0 0% 4%);
-  /* The page. */
-  --color-level-2: hsl(0 0% 8%);
-  /* A card or panel on the page. */
-  --color-level-3: hsl(0 0% 12.3%);
-  /* Elevated: a card inside a card, and popups. */
-  --color-level-4: hsl(0 0% 17%);
-  /* Each more prominent on the page than the last. */
-  --color-level-5: hsl(0 0% 22%);
-  --color-level-6: hsl(0 0% 27.3%);
-  --color-level-7: hsl(0 0% 33%);
-  --color-level-8: hsl(0 0% 39%);
-
   --color-tooltip: var(--color-level-1);
 }
 
-/* Control fills, which the level a control sits on sets from the levels: a field one below it, a
-   raised control two above and three on hover. `inline` writes the variable into each utility,
-   so a control reads the level around it. */
+/* The fills of controls, which the level they sit on sets (see `level-*` below). `inline` writes
+   the variable into each utility, so a control reads the level around it. */
 @theme inline {
   --color-field: var(--field);
   --color-raised: var(--raised);
@@ -92,11 +81,6 @@
 @theme {
   /* Buttons, selects, fields, chips, and the thumbnails and icon buttons in rows. */
   --size-control: 28px;
-  /* A range input's thumb. The slider's fill and the room around its bar follow it. */
-  --size-thumb: 13px;
-}
-
-@theme {
   /* Large buttons, selects, and fields. */
   --size-control-lg: calc(var(--size-control) + 4px);
   /* Small buttons, the controls set into a segmented group, and close buttons. */
@@ -105,6 +89,8 @@
   --size-item: calc(var(--size-control) - 2px);
   /* A row in a panel's list: a control and 6px above and below it. */
   --size-row: calc(var(--size-control) + 12px);
+  /* A range input's thumb. The slider's fill and the room around its bar follow it. */
+  --size-thumb: 13px;
 }
 
 /* The sizes as utilities: `h-control`, `size-control-sm`, `h-item`, `h-row`, `size-thumb`. `inline`
@@ -130,6 +116,7 @@
  * could win. A component that needs another fill says so with `!`, as the primary Button does,
  * since a plain `bg-*` sorts before these.
  */
+
 /* The levels a surface can stand at, each with the fills of the controls on it: `--layer` is the
    surface's own, a field sits a level below it, and a raised control two above, three on hover. A
    surface of your own applies one and paints `--layer`. */
@@ -210,12 +197,12 @@
   @apply bg-tooltip;
 }
 
-/* Stands out from the layer: buttons, selects, and selected tabs and toggles. */
+/* Stands out from where it sits: buttons, selects, and selected tabs and toggles. */
 @utility surface-raised {
   @apply bg-raised;
 }
 
-/* Set into the layer: fields, tracks, checkboxes, switches, and segmented groups. */
+/* Set into where it sits: fields, tracks, checkboxes, switches, and segmented groups. */
 @utility surface-sunken {
   @apply bg-field;
 }
@@ -225,8 +212,8 @@
   @apply bg-primary;
 }
 
-/* A line between groups, such as a menu's. Size it with `h-px` or `w-px`. Lines along an edge of
-   a row or section are borders in `border-line`, the same color. */
+/* A line between groups, such as a menu's. Size it with `h-px` or `w-px`. The lines between a
+   card's sections and along a list row are inset shadows in `--color-line`, the same color. */
 @utility separator {
   @apply bg-line;
 }
