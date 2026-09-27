@@ -532,9 +532,7 @@ export function DialogDemo() {
         </CardSection>
         <CardSection className="flex-row justify-end gap-1 px-2.5">
           <DialogClose render={<Button variant="ghost" />}>Cancel</DialogClose>
-          <DialogClose render={<Button variant="primary" />}>
-            Export
-          </DialogClose>
+          <DialogClose render={<Button />}>Export</DialogClose>
         </CardSection>
       </DialogContent>
     </Dialog>

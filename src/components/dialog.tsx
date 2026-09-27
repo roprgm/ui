@@ -34,7 +34,7 @@ export function DialogContent(props: Primitive.Popup.Props) {
           <Popup
             {...popup}
             className={cn(
-              "fixed top-1/2 left-1/2 z-50 flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 flex-col duration-150 *:not-last:pb-0 data-ending-style:scale-95",
+              "fixed top-1/2 left-1/2 z-50 flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 flex-col duration-150 *:not-last:pb-0 *:last:pt-4 data-ending-style:scale-95",
               popup.className,
             )}
           />
