@@ -19,6 +19,10 @@ const root = cva("", {
       compact: "grid-cols-[1fr_auto] gap-x-2",
     },
   },
+  compoundVariants: [
+    // Last in what holds it, a bar has none of the room text leaves under its letters.
+    { orientation: "horizontal", variant: "panel", className: "last:mb-1" },
+  ],
 });
 
 // Above the bar's hit area, which reaches into its row. In a panel, the digits end where the

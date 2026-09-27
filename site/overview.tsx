@@ -1,9 +1,8 @@
 import { type ReactNode, useState } from "react";
 import { version } from "../package.json";
 import { Button } from "../src/components/button";
-import { Card } from "../src/components/card";
+import { ButtonDemo } from "./demos";
 import { Code } from "./docs";
-import { EditorDemo } from "./editor";
 import { CopyIcon } from "./icons";
 
 const prompt =
@@ -55,10 +54,7 @@ export function Overview() {
         </div>
         <CopyForAgents />
       </header>
-      {/* Blocks lay out by this frame's width. */}
-      <Card className="@container p-0">
-        <EditorDemo />
-      </Card>
+      <ButtonDemo />
       <div className="flex max-w-3xl flex-col gap-10">
         <Section title="Install the package">
           <p className="text-muted">Then import the theme in your CSS.</p>
