@@ -81,3 +81,10 @@
     0 0 0 1px hsl(0 0% 100% / 0.9),
     0 1px 3px hsl(0 0% 0% / 0.3);
 }
+
+/* Popups and cards in cards are white like the cards under them, so their fields darken rather
+   than take the white level below. Outside any layer, so it wins over the base's utilities. */
+.surface-float,
+:where(.surface-card, .surface-panel) .surface-card {
+  --field: var(--color-level-5);
+}
