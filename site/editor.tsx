@@ -93,7 +93,7 @@ export function EditorDemo() {
           <CardAction>
             <Menu
               trigger={
-                <IconButton label="Layer actions" size="icon-sm">
+                <IconButton label="Layer actions">
                   <MoreIcon />
                 </IconButton>
               }
@@ -155,7 +155,7 @@ export function EditorDemo() {
         <CardHeader>
           <CardTitle>Layers</CardTitle>
           <CardAction>
-            <IconButton label="Add mask" size="icon-sm">
+            <IconButton label="Add mask">
               <PlusIcon />
             </IconButton>
           </CardAction>
@@ -172,7 +172,6 @@ export function EditorDemo() {
               <ListItemAction>
                 <IconButton
                   label="Hide"
-                  size="icon-sm"
                   className="opacity-0 group-hover:opacity-100"
                 >
                   <EyeIcon />

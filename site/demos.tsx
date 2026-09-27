@@ -626,7 +626,7 @@ export function PanelDemo() {
       <CardHeader>
         <CardTitle>Effects</CardTitle>
         <CardAction>
-          <IconButton label="Add effect" size="icon-sm">
+          <IconButton label="Add effect">
             <PlusIcon />
           </IconButton>
         </CardAction>
@@ -777,7 +777,6 @@ export function ListItemDemo() {
           <ListItemAction>
             <IconButton
               label="Hide"
-              size="icon-sm"
               className="opacity-0 group-hover:opacity-100"
             >
               <EyeIcon />
@@ -863,7 +862,6 @@ export function TreeListDemo() {
           <ListItemAction>
             <IconButton
               label="Hide"
-              size="icon-sm"
               className="opacity-0 group-hover:opacity-100"
             >
               <EyeIcon />
@@ -944,10 +942,10 @@ function EditCard() {
       <CardHeader>
         <CardTitle>Golden hour</CardTitle>
         <CardAction>
-          <IconButton label="Add adjustment" size="icon-sm">
+          <IconButton label="Add adjustment">
             <PlusIcon />
           </IconButton>
-          <IconButton label="More" size="icon-sm">
+          <IconButton label="More">
             <MoreIcon />
           </IconButton>
         </CardAction>

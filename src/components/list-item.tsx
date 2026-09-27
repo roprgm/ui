@@ -21,11 +21,12 @@ export function ListItem({
   );
 }
 
-/** Small ghost icon buttons at the row's end, 4px closer to it, as a card header's are. */
+/** Ghost icon buttons at the row's end, reaching past its padding as a card header's do, so each
+    icon sits 12px from the end. */
 export function ListItemAction({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      className={cn("-mr-1 flex shrink-0 items-center gap-1", className)}
+      className={cn("-mr-2 flex shrink-0 items-center gap-1", className)}
       {...props}
     />
   );

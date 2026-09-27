@@ -51,17 +51,13 @@ export function CardTitle({ className, ...props }: ComponentProps<"h2">) {
 }
 
 /**
- * Small ghost icon buttons at the header's end. They sit 4px closer to the end, as a footer's
- * buttons do, so each box is 10px from it and its icon, 4px inside, lands where text would; and
- * 2px out above and below, so the row stays 40px.
+ * Ghost icon buttons at the header's end. Their box is air around the icon, so they reach past the
+ * header's padding by it: each icon sits 12px from the end and the top, and the row stays 40px.
  */
 export function CardAction({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      className={cn(
-        "-my-0.5 -mr-1 flex shrink-0 items-center gap-1",
-        className,
-      )}
+      className={cn("-my-1 -mr-2 flex shrink-0 items-center gap-1", className)}
       {...props}
     />
   );
