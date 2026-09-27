@@ -694,7 +694,7 @@ export function DialogDemo() {
         <Section>
           <Input defaultValue="portrait-edit.jpg" aria-label="File name" />
         </Section>
-        <Section className="flex-row justify-end gap-1 px-2.5">
+        <Section className="flex-row justify-end gap-1.5 px-2.5">
           <DialogClose render={<Button variant="ghost" />}>Cancel</DialogClose>
           <DialogClose render={<Button />}>Export</DialogClose>
         </Section>
@@ -714,7 +714,7 @@ export function AlertDialogDemo() {
             Its mask and adjustments go with it.
           </DialogDescription>
         </Section>
-        <Section className="flex-row justify-end gap-1 px-2.5">
+        <Section className="flex-row justify-end gap-1.5 px-2.5">
           <DialogClose render={<Button variant="ghost" />}>Cancel</DialogClose>
           <DialogClose render={<Button className="text-danger" />}>
             Delete
@@ -773,7 +773,7 @@ export function NoticeDemo() {
           <NoticeClose onClick={() => setShown(false)} />
         </SectionAction>
       </Section>
-      <Section className="flex-row gap-1 px-2.5">
+      <Section className="flex-row gap-1.5 px-2.5">
         <Button size="sm">Restore</Button>
         <Button size="sm" variant="ghost">
           Forget
@@ -1166,7 +1166,7 @@ function EditCard() {
         <span>Shadows +20</span>
         <span className="text-muted">Edited 2 min ago</span>
       </Section>
-      <Section className="flex-row justify-end gap-1 px-2.5">
+      <Section className="flex-row justify-end gap-1.5 px-2.5">
         <Button variant="ghost">Revert</Button>
         <Button variant="primary">Apply</Button>
       </Section>

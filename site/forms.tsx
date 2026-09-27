@@ -85,7 +85,7 @@ export function FormsDemo() {
             <Switch /> Open when done
           </label>
         </Section>
-        <Section className="flex-row justify-end gap-1 px-2.5">
+        <Section className="flex-row justify-end gap-1.5 px-2.5">
           <Button>Cancel</Button>
           <Button variant="primary">Export</Button>
         </Section>

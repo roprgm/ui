@@ -46,7 +46,7 @@ function Toasts() {
         </SectionAction>
       </Section>
       {item.actionProps && (
-        <Section className="flex-row gap-1 px-2.5">
+        <Section className="flex-row gap-1.5 px-2.5">
           <Primitive.Action render={<Button size="sm" />} />
         </Section>
       )}
