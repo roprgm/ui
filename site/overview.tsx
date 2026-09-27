@@ -86,12 +86,12 @@ export function SaveButton() {
 }`}</Code>
       </Way>
       <p className="text-muted">
-        Then browse the components, starting with the{" "}
+        Then browse the{" "}
         <a
           href="#button"
           className="rounded-sm text-foreground underline decoration-muted underline-offset-4 transition focus-ring hover:decoration-foreground"
         >
-          Button
+          components
         </a>
         .
       </p>

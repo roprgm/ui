@@ -16,7 +16,7 @@
 :root {
   --sh-identifier: var(--color-foreground);
   --sh-sign: var(--color-muted);
-  --sh-comment: var(--color-faint);
+  --sh-comment: var(--color-muted);
   --sh-keyword: oklch(76.7% 0.104 9);
   --sh-string: oklch(81.2% 0.08 133);
   --sh-class: oklch(81.1% 0.067 230);
