@@ -57,6 +57,7 @@ function revealSection(event: TransitionEvent<HTMLDivElement>) {
 export function CollapsiblePanel({
   className,
   children,
+  onTransitionEnd,
   ...props
 }: Omit<ComponentProps<typeof Primitive.Panel>, "className"> & {
   className?: string;
@@ -64,7 +65,10 @@ export function CollapsiblePanel({
   return (
     <Primitive.Panel
       hiddenUntilFound
-      onTransitionEnd={revealSection}
+      onTransitionEnd={(event) => {
+        revealSection(event);
+        onTransitionEnd?.(event);
+      }}
       className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none"
       {...props}
     >
