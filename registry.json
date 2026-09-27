@@ -265,7 +265,7 @@
     {
       "name": "chevron",
       "type": "registry:ui",
-      "dependencies": ["cn"],
+      "dependencies": ["cn", "class-variance-authority"],
       "files": [
         {
           "path": "src/components/chevron.tsx",
@@ -597,7 +597,7 @@
       "name": "notice",
       "type": "registry:ui",
       "categories": ["overlays"],
-      "dependencies": ["cn"],
+      "dependencies": ["cn", "class-variance-authority"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/icon-button.json",
@@ -659,7 +659,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "categories": ["navigation"],
-      "dependencies": ["cn", "class-variance-authority"],
+      "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/button.json"
@@ -731,7 +731,7 @@
       "name": "slider",
       "type": "registry:ui",
       "categories": ["inputs"],
-      "dependencies": ["cn", "@base-ui/react"],
+      "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/scrub-input.json"

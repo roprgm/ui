@@ -1,18 +1,15 @@
 "use client";
 
+import { Tabs as Primitive } from "@base-ui/react/tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
-import type { ComponentProps, KeyboardEvent } from "react";
+import type { ComponentProps } from "react";
 import { Button } from "./button";
 
-const steps: Record<string, number> = {
-  ArrowRight: 1,
-  ArrowDown: 1,
-  ArrowLeft: -1,
-  ArrowUp: -1,
-};
+/** Tabs and the panels they show; `orientation="vertical"` stacks the tabs in a column. */
+export const Tabs = Primitive.Root;
 
-const list = cva("flex", {
+const list = cva("flex data-[orientation=vertical]:flex-col", {
   variants: {
     variant: {
       default: "gap-1",
@@ -24,51 +21,43 @@ const list = cva("flex", {
   defaultVariants: { variant: "default" },
 });
 
-/** Tabs in a row, or a column with `flex-col`. `segmented` sets them into a sunken strip. */
+/** The tabs; the arrow keys move between them and select. `segmented` sets them into a sunken strip. */
 export function TabList({
   variant,
   className,
   ...props
-}: ComponentProps<"div"> & VariantProps<typeof list>) {
-  const selectNeighbor = (event: KeyboardEvent<HTMLDivElement>) => {
-    const step = steps[event.key];
-    if (!step) return;
-    event.preventDefault();
-    const tabs = [
-      ...event.currentTarget.querySelectorAll<HTMLElement>('[role="tab"]'),
-    ];
-    const index = tabs.findIndex(
-      (tab) => tab.getAttribute("aria-selected") === "true",
-    );
-    const next = tabs.at((index + step) % tabs.length);
-    next?.focus();
-    next?.click();
-  };
+}: Primitive.List.Props & VariantProps<typeof list>) {
   return (
-    <div
-      role="tablist"
-      onKeyDown={selectNeighbor}
+    <Primitive.List
+      activateOnFocus
       className={cn(list({ variant }), className)}
       {...props}
     />
   );
 }
 
+/** A tab, drawn as a ghost Button of any size. */
 export function Tab({
-  selected,
+  size,
   className,
   ...props
-}: ComponentProps<typeof Button> & { selected: boolean }) {
+}: Primitive.Tab.Props & Pick<ComponentProps<typeof Button>, "size">) {
   return (
-    <Button
-      variant="ghost"
-      role="tab"
-      aria-selected={selected}
-      tabIndex={selected ? 0 : -1}
+    <Primitive.Tab
+      render={<Button variant="ghost" size={size} />}
       className={cn(
-        "aria-selected:surface-raised aria-selected:text-foreground",
+        "data-active:surface-raised data-active:text-foreground",
         className,
       )}
+      {...props}
+    />
+  );
+}
+
+export function TabPanel({ className, ...props }: Primitive.Panel.Props) {
+  return (
+    <Primitive.Panel
+      className={cn("rounded-sm focus-ring", className)}
       {...props}
     />
   );

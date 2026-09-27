@@ -1,7 +1,12 @@
+import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 import { IconButton } from "./icon-button";
 import { Popup } from "./popup";
+
+const notice = cva("flex max-w-sm flex-col *:not-last:pb-0", {
+  variants: { tone: { status: "", alert: "text-danger" } },
+});
 
 /**
  * A message that floats without blocking the app, as `CardSection`s stacked without a line. An
@@ -13,15 +18,7 @@ export function Notice({
   ...props
 }: ComponentProps<"div"> & { tone?: "status" | "alert" }) {
   return (
-    <Popup
-      role={tone}
-      className={cn(
-        "flex max-w-sm flex-col *:not-last:pb-0",
-        tone === "alert" && "text-danger",
-        className,
-      )}
-      {...props}
-    />
+    <Popup role={tone} className={cn(notice({ tone }), className)} {...props} />
   );
 }
 

@@ -70,7 +70,7 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 | Actions | `Button`, `IconButton`, `Chip`, `Kbd`, `Badge` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput` |
 | Containers | `Card` with `CardSection` and `CardAction`, and `cardParts` for a panel docked at your app's side; the `surface-*` primitives; `Collapsible`, `ScrollArea` |
-| Navigation | `TabList`, `ListItem`, `TreeList` |
+| Navigation | `Tabs`, `ListItem`, `TreeList` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
 | Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, and `overflow-fade-y` utilities |
 

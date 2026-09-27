@@ -211,9 +211,9 @@ const groups: Group[] = [
     docs: [
       {
         name: "tabs",
-        title: "Tab list",
+        title: "Tabs",
         description:
-          "Rows or columns of tabs with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views.",
+          "Tabs and the panels they show, in a row or a column, with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views.",
         demo: <TabsDemo />,
       },
       {

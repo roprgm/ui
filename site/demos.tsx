@@ -54,7 +54,7 @@ import { Select } from "../src/components/select";
 import { Slider } from "../src/components/slider";
 import { Spinner } from "../src/components/spinner";
 import { Switch } from "../src/components/switch";
-import { Tab, TabList } from "../src/components/tabs";
+import { Tab, TabList, TabPanel, Tabs } from "../src/components/tabs";
 import { Textarea } from "../src/components/textarea";
 import { toast } from "../src/components/toast";
 import { Toggle, ToggleGroup } from "../src/components/toggle-group";
@@ -670,27 +670,22 @@ export function ToolRail({
   onSelect: (id: string) => void;
 }) {
   return (
-    <TabList aria-label="Tools" variant="segmented" className="flex-col">
-      {tools.map(({ id, label, key, Icon }) => (
-        <Tooltip key={id}>
-          <TooltipTrigger
-            render={
-              <Tab
-                selected={id === selected}
-                size="icon"
-                aria-label={label}
-                onClick={() => onSelect(id)}
-              />
-            }
-          >
-            <Icon />
-          </TooltipTrigger>
-          <TooltipContent side="right" shortcut={key}>
-            {label}
-          </TooltipContent>
-        </Tooltip>
-      ))}
-    </TabList>
+    <Tabs value={selected} onValueChange={onSelect} orientation="vertical">
+      <TabList aria-label="Tools" variant="segmented">
+        {tools.map(({ id, label, key, Icon }) => (
+          <Tooltip key={id}>
+            <TooltipTrigger
+              render={<Tab value={id} size="icon" aria-label={label} />}
+            >
+              <Icon />
+            </TooltipTrigger>
+            <TooltipContent side="right" shortcut={key}>
+              {label}
+            </TooltipContent>
+          </Tooltip>
+        ))}
+      </TabList>
+    </Tabs>
   );
 }
 
@@ -705,50 +700,50 @@ const panels = [
   "Effects",
 ];
 
+const sidebar = [
+  { id: "layers", text: "Sky, Subject, and Image." },
+  { id: "history", text: "Three edits since the import." },
+  { id: "info", text: "Canon EOS R5, 1/250 s at ƒ/2.8." },
+];
+
 export function TabsDemo() {
-  const [tab, setTab] = useState("layers");
   const [tool, setTool] = useState("adjust");
-  const [channel, setChannel] = useState("hue");
-  const [section, setSection] = useState(panels[0]);
   return (
     <div className="flex flex-wrap items-start justify-center gap-x-10 gap-y-6">
       <ToolRail selected={tool} onSelect={setTool} />
-      <div className="flex flex-col items-start gap-6">
-        <TabList aria-label="Sidebar">
-          {["layers", "history", "info"].map((id) => (
-            <Tab
-              key={id}
-              selected={id === tab}
-              className="capitalize"
-              onClick={() => setTab(id)}
-            >
-              {id}
-            </Tab>
+      <div className="flex w-64 flex-col gap-6">
+        <Tabs defaultValue="layers" className="flex flex-col gap-3">
+          <TabList aria-label="Sidebar">
+            {sidebar.map(({ id }) => (
+              <Tab key={id} value={id} className="capitalize">
+                {id}
+              </Tab>
+            ))}
+          </TabList>
+          {sidebar.map(({ id, text }) => (
+            <TabPanel key={id} value={id} className="px-3 text-muted">
+              {text}
+            </TabPanel>
           ))}
-        </TabList>
-        <TabList aria-label="Channel" variant="segmented">
-          {["hue", "saturation", "luminance"].map((id) => (
-            <Tab
-              key={id}
-              selected={id === channel}
-              className="capitalize"
-              onClick={() => setChannel(id)}
-            >
-              {id}
-            </Tab>
-          ))}
-        </TabList>
-        <TabList aria-label="Panels" className="max-w-64 overflow-fade-x">
-          {panels.map((panel) => (
-            <Tab
-              key={panel}
-              selected={panel === section}
-              onClick={() => setSection(panel)}
-            >
-              {panel}
-            </Tab>
-          ))}
-        </TabList>
+        </Tabs>
+        <Tabs defaultValue="hue" className="self-start">
+          <TabList aria-label="Channel" variant="segmented">
+            {["hue", "saturation", "luminance"].map((id) => (
+              <Tab key={id} value={id} className="capitalize">
+                {id}
+              </Tab>
+            ))}
+          </TabList>
+        </Tabs>
+        <Tabs defaultValue={panels[0]}>
+          <TabList aria-label="Panels" className="overflow-fade-x">
+            {panels.map((panel) => (
+              <Tab key={panel} value={panel}>
+                {panel}
+              </Tab>
+            ))}
+          </TabList>
+        </Tabs>
       </div>
     </div>
   );

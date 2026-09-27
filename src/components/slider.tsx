@@ -1,39 +1,57 @@
 "use client";
 
 import { Slider as Primitive } from "@base-ui/react/slider";
+import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { useRef } from "react";
 import { ScrubInput } from "./scrub-input";
 
-// Each horizontal layout's grid, and where the value and the bar sit in it. In a panel, the
-// digits end where the bar does. Upright, the bar stands alone.
-const layouts = {
-  panel: {
-    root: "grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-0.5",
-    value: "-mr-1",
-    bar: "col-span-2",
+// Upright, the bar stands alone and the layouts' grids don't apply.
+const root = cva("", {
+  variants: {
+    orientation: {
+      horizontal: "grid items-center",
+      vertical: "flex h-44 w-8 justify-center",
+    },
+    variant: {
+      panel: "grid-cols-[1fr_auto] gap-x-3 gap-y-0.5",
+      toolbar: "grid-cols-[auto_4rem_auto] gap-x-2",
+      compact: "grid-cols-[1fr_auto] gap-x-2",
+    },
   },
-  toolbar: {
-    root: "grid grid-cols-[auto_4rem_auto] items-center gap-x-2",
-    value: "col-start-3",
-    bar: "col-start-2 row-start-1",
-  },
-  compact: {
-    root: "grid grid-cols-[1fr_auto] items-center gap-x-2",
-    value: "-mr-1",
-    bar: "",
-  },
-};
+});
 
-const upright = "flex h-44 w-8 justify-center";
+// Above the bar's hit area, which reaches into its row. In a panel, the digits end where the
+// bar does.
+const digits = cva("z-10", {
+  variants: {
+    variant: { panel: "-mr-1", toolbar: "col-start-3", compact: "-mr-1" },
+  },
+});
 
 // As thick as the thumb, with a hit area reaching 10px past it on either side.
-const bars = {
-  horizontal: "h-thumb items-center before:inset-x-0 before:-inset-y-2.5",
-  vertical: "w-thumb justify-center before:-inset-x-2.5 before:inset-y-0",
-};
+const bar = cva(
+  "relative flex cursor-pointer touch-none select-none before:absolute",
+  {
+    variants: {
+      orientation: {
+        horizontal: "h-thumb items-center before:inset-x-0 before:-inset-y-2.5",
+        vertical: "w-thumb justify-center before:-inset-x-2.5 before:inset-y-0",
+      },
+      variant: {
+        panel: "col-span-2",
+        toolbar: "col-start-2 row-start-1",
+        compact: "",
+      },
+    },
+  },
+);
 
-const tracks = { horizontal: "h-1 w-full", vertical: "h-full w-1" };
+const track = cva("rounded-full surface-sunken", {
+  variants: {
+    orientation: { horizontal: "h-1 w-full", vertical: "h-full w-1" },
+  },
+});
 
 /** The thumb's center at a fraction of the range: its edge meets the bar's end at either end. */
 function thumbCenter(fraction: number) {
@@ -101,7 +119,7 @@ export function Slider({
   color?: string;
   /** Minimum width of the digits, in characters. */
   valueWidth?: number;
-  variant?: keyof typeof layouts;
+  variant?: "panel" | "toolbar" | "compact";
   orientation?: "horizontal" | "vertical";
   className?: string;
 }) {
@@ -114,7 +132,6 @@ export function Slider({
   const fraction = (x: number) =>
     Math.min(1, Math.max(0, (x - min) / (max - min)));
   const vertical = orientation === "vertical";
-  const layout = layouts[variant];
 
   return (
     <Primitive.Root
@@ -126,7 +143,7 @@ export function Slider({
       largeStep={step * 10}
       orientation={orientation}
       thumbAlignment="edge"
-      className={cn(vertical ? upright : layout.root, className)}
+      className={cn(root({ orientation, variant }), className)}
     >
       {!vertical && (
         <>
@@ -142,8 +159,7 @@ export function Slider({
             defaultValue={defaultValue}
             format={format}
             minChars={valueWidth}
-            // Above the bar's hit area, which reaches into their row.
-            className={cn("z-10", layout.value)}
+            className={digits({ variant })}
           />
         </>
       )}
@@ -155,15 +171,11 @@ export function Slider({
           onDoubleClick={() =>
             defaultValue !== undefined && onChange(defaultValue)
           }
-          className={cn(
-            "relative flex cursor-pointer touch-none select-none before:absolute",
-            bars[orientation],
-            !vertical && layout.bar,
-          )}
+          className={bar({ orientation, variant })}
         >
           <Primitive.Track
             data-slot="slider-track"
-            className={cn("rounded-full surface-sunken", tracks[orientation])}
+            className={track({ orientation })}
             style={{
               backgroundImage: barBackground(
                 vertical ? "top" : "right",
