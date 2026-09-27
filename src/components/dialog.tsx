@@ -6,12 +6,17 @@ import { cn } from "cn";
 import { Popup } from "./popup";
 
 /** A modal. An `alert` asks before what can't be undone: a click outside doesn't close it. */
-export function Dialog({
-  alert = false,
-  ...props
-}: AlertDialog.Root.Props & { alert?: boolean }) {
-  if (alert) return <AlertDialog.Root {...props} />;
-  return <Primitive.Root {...props} />;
+export function Dialog(
+  props:
+    | (Primitive.Root.Props & { alert?: false })
+    | (AlertDialog.Root.Props & { alert: true }),
+) {
+  if (props.alert) {
+    const { alert, ...rest } = props;
+    return <AlertDialog.Root {...rest} />;
+  }
+  const { alert, ...rest } = props;
+  return <Primitive.Root {...rest} />;
 }
 
 export const DialogTrigger = Primitive.Trigger;
