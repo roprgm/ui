@@ -1,8 +1,13 @@
 import { useState } from "react";
-import { CardHeader, CardSection } from "../src/components/card";
+import {
+  CardAction,
+  CardHeader,
+  CardSection,
+  CardTitle,
+} from "../src/components/card";
 import { Chip } from "../src/components/chip";
 import { IconButton } from "../src/components/icon-button";
-import { ListItem } from "../src/components/list-item";
+import { ListItem, ListItemAction } from "../src/components/list-item";
 import { Menu, MenuItem, MenuSeparator } from "../src/components/menu";
 import { Panel, PanelBody } from "../src/components/panel";
 import { Popover } from "../src/components/popover";
@@ -83,12 +88,12 @@ export function EditorDemo() {
         max={360}
         className="col-span-2 @max-2xl:w-full! @max-2xl:[&>div:first-child]:hidden"
       >
-        <CardHeader
-          title={layer}
-          actions={
+        <CardHeader>
+          <CardTitle>{layer}</CardTitle>
+          <CardAction>
             <Menu
               trigger={
-                <IconButton label="Layer actions">
+                <IconButton label="Layer actions" size="icon-sm">
                   <MoreIcon />
                 </IconButton>
               }
@@ -98,8 +103,8 @@ export function EditorDemo() {
               <MenuSeparator />
               <MenuItem className="text-danger">Delete</MenuItem>
             </Menu>
-          }
-        />
+          </CardAction>
+        </CardHeader>
         <PanelBody>
           <CardSection>
             <Slider
@@ -147,31 +152,32 @@ export function EditorDemo() {
             />
           </CardSection>
         </PanelBody>
-        <CardHeader
-          title="Layers"
-          actions={
-            <IconButton label="Add mask">
+        <CardHeader>
+          <CardTitle>Layers</CardTitle>
+          <CardAction>
+            <IconButton label="Add mask" size="icon-sm">
               <PlusIcon />
             </IconButton>
-          }
-        />
+          </CardAction>
+        </CardHeader>
         <div>
           {layers.map((name) => (
             <ListItem
               key={name}
               selected={name === layer}
               onClick={() => setLayer(name)}
-              actions={
+            >
+              <span className="size-control rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
+              <span className="flex-1">{name}</span>
+              <ListItemAction>
                 <IconButton
                   label="Hide"
+                  size="icon-sm"
                   className="opacity-0 group-hover:opacity-100"
                 >
                   <EyeIcon />
                 </IconButton>
-              }
-            >
-              <span className="size-control rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
-              <span className="flex-1">{name}</span>
+              </ListItemAction>
             </ListItem>
           ))}
         </div>

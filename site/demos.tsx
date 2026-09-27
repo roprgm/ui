@@ -4,9 +4,11 @@ import { Badge } from "../src/components/badge";
 import { Button } from "../src/components/button";
 import {
   Card,
+  CardAction,
   CardFooter,
   CardHeader,
   CardSection,
+  CardTitle,
 } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chevron } from "../src/components/chevron";
@@ -23,7 +25,7 @@ import { Field } from "../src/components/field";
 import { IconButton } from "../src/components/icon-button";
 import { Input } from "../src/components/input";
 import { Kbd } from "../src/components/kbd";
-import { ListItem } from "../src/components/list-item";
+import { ListItem, ListItemAction } from "../src/components/list-item";
 import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/components/menu";
 import { Notice } from "../src/components/notice";
 import { Panel, PanelBody } from "../src/components/panel";
@@ -621,14 +623,14 @@ export function PanelDemo() {
   const [size, setSize] = useState(35);
   return (
     <Panel className="h-80 w-64 overflow-hidden rounded-xl surface-float">
-      <CardHeader
-        title="Effects"
-        actions={
-          <IconButton label="Add effect">
+      <CardHeader>
+        <CardTitle>Effects</CardTitle>
+        <CardAction>
+          <IconButton label="Add effect" size="icon-sm">
             <PlusIcon />
           </IconButton>
-        }
-      />
+        </CardAction>
+      </CardHeader>
       <CardSection>
         <Slider
           label="Grain"
@@ -769,17 +771,18 @@ export function ListItemDemo() {
           selected={layer.id === selected}
           muted={layer.muted}
           onClick={() => setSelected(layer.id)}
-          actions={
+        >
+          <span className="size-control rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
+          <span className="flex-1">{layer.name}</span>
+          <ListItemAction>
             <IconButton
               label="Hide"
+              size="icon-sm"
               className="opacity-0 group-hover:opacity-100"
             >
               <EyeIcon />
             </IconButton>
-          }
-        >
-          <span className="size-control rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
-          <span className="flex-1">{layer.name}</span>
+          </ListItemAction>
         </ListItem>
       ))}
     </div>
@@ -852,16 +855,20 @@ export function TreeListDemo() {
         setLayers(placeLayer(withoutLayer(layers, drop.id), moved, drop));
       }}
       className="layer-elevated w-64 overflow-hidden rounded-lg surface-float"
-      actions={() => (
-        <IconButton label="Hide" className="opacity-0 group-hover:opacity-100">
-          <EyeIcon />
-        </IconButton>
-      )}
     >
       {(layer) => (
         <>
           <span className="size-control shrink-0 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <ScrollText className="flex-1">{layer.name}</ScrollText>
+          <ListItemAction>
+            <IconButton
+              label="Hide"
+              size="icon-sm"
+              className="opacity-0 group-hover:opacity-100"
+            >
+              <EyeIcon />
+            </IconButton>
+          </ListItemAction>
         </>
       )}
     </TreeList>
@@ -898,7 +905,9 @@ export function CardDemo() {
 function PresetsCard() {
   return (
     <Card className="w-72 max-w-full">
-      <CardHeader title="Presets" />
+      <CardHeader>
+        <CardTitle>Presets</CardTitle>
+      </CardHeader>
       {/* The row runs to the card's edges, so it fades there rather than inside the padding. */}
       <CardSection className="px-0">
         <div className="flex gap-2 overflow-fade-x px-3.5">
@@ -932,19 +941,17 @@ function PresetsCard() {
 function EditCard() {
   return (
     <Card className="w-72 max-w-full">
-      <CardHeader
-        title="Golden hour"
-        actions={
-          <>
-            <IconButton label="Add adjustment">
-              <PlusIcon />
-            </IconButton>
-            <IconButton label="More">
-              <MoreIcon />
-            </IconButton>
-          </>
-        }
-      />
+      <CardHeader>
+        <CardTitle>Golden hour</CardTitle>
+        <CardAction>
+          <IconButton label="Add adjustment" size="icon-sm">
+            <PlusIcon />
+          </IconButton>
+          <IconButton label="More" size="icon-sm">
+            <MoreIcon />
+          </IconButton>
+        </CardAction>
+      </CardHeader>
       <CardSection className="gap-1 text-muted">
         <span>Exposure +0.35</span>
         <span>Temperature +12</span>
@@ -974,7 +981,7 @@ export function CollapsibleDemo() {
               <span className="text-faint">{edit.when}</span>
             </CollapsibleTrigger>
             <CollapsiblePanel>
-              <ol className="flex flex-col gap-1 border-line border-t px-3.5 py-3 text-muted">
+              <ol className="flex flex-col gap-1 border-line border-t px-3.5 py-2.5 text-muted">
                 {edit.steps.map((step) => (
                   <li key={step}>{step}</li>
                 ))}

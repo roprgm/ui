@@ -28,15 +28,16 @@ export function Notice({
       className={cn("max-w-sm", tone === "alert" && "text-danger", className)}
       {...props}
     >
-      <div className="flex items-start gap-3 px-3.5 py-3 not-last:pb-0">
+      <div className="flex items-start gap-3 px-3.5 py-2.5 not-last:pb-0">
         <div className="flex flex-1 flex-col gap-0.5">{children}</div>
         {onDismiss && (
-          // Past the padding by the air around its icon, so the icon sits 12px from the end and
-          // centers on the message's first line.
+          // As a card header's actions: its box 10px from the end, and 2px out above and below, so
+          // its icon centers on the message's first line.
           <IconButton
             label="Dismiss"
+            size="icon-sm"
             onClick={onDismiss}
-            className="-my-1 -mr-2"
+            className="-my-0.5 -mr-1"
           >
             <svg
               viewBox="0 0 24 24"
