@@ -76,6 +76,7 @@ export function TreeList<T extends TreeNode<T>>({
   items,
   label,
   children,
+  actions,
   selected,
   onSelect,
   canDrag = () => true,
@@ -88,6 +89,8 @@ export function TreeList<T extends TreeNode<T>>({
   /** Names the row for the drag preview. */
   label: (item: T) => string;
   children: (item: T) => ReactNode;
+  /** Ghost icon buttons at the row's end, as a ListItem's `actions`. */
+  actions?: (item: T) => ReactNode;
   selected?: string;
   onSelect?: (id: string) => void;
   canDrag?: (item: T) => boolean;
@@ -281,6 +284,7 @@ export function TreeList<T extends TreeNode<T>>({
             data-dragging={item.id === dragging?.id}
             data-drop={drop?.target === item.id ? drop.position : undefined}
             selected={item.id === selected}
+            actions={actions?.(item)}
             style={indent}
             onFocus={() => setFocused(item.id)}
             onClick={(event) => {

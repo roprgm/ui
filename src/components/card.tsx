@@ -22,14 +22,16 @@ export function Card({ className, ...props }: ComponentProps<"div">) {
   );
 }
 
-/** A row of text, such as a title, 14px from the sides; a line of it makes a 40px row. Icon buttons
-    after the title take `inline`, so their icons line up with it. */
+/** A row of text, such as a title, 14px from the sides; a line of it makes a 40px row. `actions`
+    are ghost icon buttons at its end. */
 export function CardHeader({
   title,
+  actions,
   className,
   children,
 }: {
   title?: ReactNode;
+  actions?: ReactNode;
   className?: string;
   children?: ReactNode;
 }) {
@@ -49,6 +51,13 @@ export function CardHeader({
         </h2>
       )}
       {children}
+      {actions && (
+        // A ghost's box is air around its icon, so the actions reach past the row's padding by it:
+        // each icon sits 12px from the end and the top, and the row stays 40px.
+        <div className="-my-1 -mr-2 flex shrink-0 items-center gap-1">
+          {actions}
+        </div>
+      )}
     </div>
   );
 }

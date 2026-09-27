@@ -33,39 +33,21 @@ const button = cva(
   },
 );
 
-// Inline, a button lays out as its content, as text does: its margins take back its side padding
-// and whatever makes it taller than a line, and its box shows past them on hover.
-const inlineMargins = {
-  default: "-mx-3 -my-1",
-  sm: "-mx-2.5 -my-0.5",
-  lg: "-mx-3.5 -my-1.5",
-  icon: "-mx-1.5 -my-1",
-  "icon-sm": "-mx-1 -my-0.5",
-  "icon-lg": "-mx-2 -my-1.5",
-};
-
 /**
  * An action. `render` draws it as another element, such as a link:
- * `<Button render={<Link href="/" />}>Home</Button>`. `inline` lays a ghost out as its content, so
- * it lines up with text beside it or with a container's edge, as a card header's icon buttons do.
+ * `<Button render={<Link href="/" />}>Home</Button>`.
  */
 export function Button({
   className,
   variant,
   size,
-  inline = false,
   render,
   ...props
 }: ComponentProps<"button"> &
   VariantProps<typeof button> & {
-    inline?: boolean;
     render?: ReactElement<{ className?: string }>;
   }) {
-  const classes = cn(
-    button({ variant, size }),
-    inline && inlineMargins[size ?? "default"],
-    className,
-  );
+  const classes = cn(button({ variant, size }), className);
   if (render) {
     return cloneElement(render, {
       ...props,

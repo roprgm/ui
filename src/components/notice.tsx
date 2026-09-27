@@ -31,7 +31,13 @@ export function Notice({
       <div className="flex items-start gap-3 px-3.5 py-3 not-last:pb-0">
         <div className="flex flex-1 flex-col gap-0.5">{children}</div>
         {onDismiss && (
-          <IconButton label="Dismiss" inline onClick={onDismiss}>
+          // Past the padding by the air around its icon, so the icon sits 12px from the end and
+          // centers on the message's first line.
+          <IconButton
+            label="Dismiss"
+            onClick={onDismiss}
+            className="-my-1 -mr-2"
+          >
             <svg
               viewBox="0 0 24 24"
               fill="none"

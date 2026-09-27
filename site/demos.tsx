@@ -621,11 +621,14 @@ export function PanelDemo() {
   const [size, setSize] = useState(35);
   return (
     <Panel className="h-80 w-64 overflow-hidden rounded-xl surface-float">
-      <CardHeader title="Effects">
-        <IconButton label="Add effect" inline>
-          <PlusIcon />
-        </IconButton>
-      </CardHeader>
+      <CardHeader
+        title="Effects"
+        actions={
+          <IconButton label="Add effect">
+            <PlusIcon />
+          </IconButton>
+        }
+      />
       <CardSection>
         <Slider
           label="Grain"
@@ -766,16 +769,17 @@ export function ListItemDemo() {
           selected={layer.id === selected}
           muted={layer.muted}
           onClick={() => setSelected(layer.id)}
+          actions={
+            <IconButton
+              label="Hide"
+              className="opacity-0 group-hover:opacity-100"
+            >
+              <EyeIcon />
+            </IconButton>
+          }
         >
           <span className="size-control rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <span className="flex-1">{layer.name}</span>
-          <IconButton
-            label="Hide"
-            inline
-            className="opacity-0 group-hover:opacity-100"
-          >
-            <EyeIcon />
-          </IconButton>
         </ListItem>
       ))}
     </div>
@@ -848,18 +852,16 @@ export function TreeListDemo() {
         setLayers(placeLayer(withoutLayer(layers, drop.id), moved, drop));
       }}
       className="layer-elevated w-64 overflow-hidden rounded-lg surface-float"
+      actions={() => (
+        <IconButton label="Hide" className="opacity-0 group-hover:opacity-100">
+          <EyeIcon />
+        </IconButton>
+      )}
     >
       {(layer) => (
         <>
           <span className="size-control shrink-0 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <ScrollText className="flex-1">{layer.name}</ScrollText>
-          <IconButton
-            label="Hide"
-            inline
-            className="opacity-0 group-hover:opacity-100"
-          >
-            <EyeIcon />
-          </IconButton>
         </>
       )}
     </TreeList>
@@ -930,14 +932,19 @@ function PresetsCard() {
 function EditCard() {
   return (
     <Card className="w-72 max-w-full">
-      <CardHeader title="Golden hour">
-        <IconButton label="Add adjustment" inline>
-          <PlusIcon />
-        </IconButton>
-        <IconButton label="More" inline>
-          <MoreIcon />
-        </IconButton>
-      </CardHeader>
+      <CardHeader
+        title="Golden hour"
+        actions={
+          <>
+            <IconButton label="Add adjustment">
+              <PlusIcon />
+            </IconButton>
+            <IconButton label="More">
+              <MoreIcon />
+            </IconButton>
+          </>
+        }
+      />
       <CardSection className="gap-1 text-muted">
         <span>Exposure +0.35</span>
         <span>Temperature +12</span>
