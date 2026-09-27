@@ -266,6 +266,11 @@
     display: none;
   }
 
+  /* Its overflow and mask clip rings drawn outside a child, so draw them inside. */
+  & :focus-visible {
+    outline-offset: -2px;
+  }
+
   mask-image: linear-gradient(
     to right,
     transparent,

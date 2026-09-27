@@ -220,6 +220,9 @@
           "&::-webkit-scrollbar": {
             "display": "none"
           },
+          "& :focus-visible": {
+            "outline-offset": "-2px"
+          },
           "mask-image": "linear-gradient(to right, transparent, hsl(0 0% 0%) var(--overflow-fade-start), hsl(0 0% 0%) calc(100% - var(--overflow-fade-end)), transparent)",
           "@supports (animation-timeline: scroll())": {
             "animation": "overflow-fade-x-start linear both, overflow-fade-x-end linear both",

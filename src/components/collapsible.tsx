@@ -16,7 +16,10 @@ export function Collapsible({
   className?: string;
 }) {
   return (
-    <Primitive.Root className={cn("group/collapsible", className)} {...props} />
+    <Primitive.Root
+      className={cn("group/collapsible rounded-[inherit]", className)}
+      {...props}
+    />
   );
 }
 
@@ -31,7 +34,7 @@ export function CollapsibleTrigger({
     <Primitive.Trigger
       className={cn(
         // Square at the bottom while the panel shows under it.
-        "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring hover:bg-hover data-panel-open:rounded-b-none dim-disabled",
+        "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring -outline-offset-2 hover:bg-hover data-panel-open:rounded-b-none dim-disabled",
         className,
       )}
       {...props}
