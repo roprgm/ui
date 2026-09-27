@@ -7,7 +7,7 @@ import { sections } from "./section";
 
 /**
  * A trigger that shows and hides a panel. A chevron inside turns with
- * `group-data-open/collapsible:rotate-90`.
+ * `group-data-open/collapsible:rotate-90`. It counts as a section of the card that holds it.
  */
 export function Collapsible({
   className,
@@ -17,6 +17,7 @@ export function Collapsible({
 }) {
   return (
     <Primitive.Root
+      data-slot="section"
       className={cn("group/collapsible rounded-[inherit]", className)}
       {...props}
     />

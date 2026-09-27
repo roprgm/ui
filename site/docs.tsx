@@ -181,9 +181,9 @@ function Article({ doc }: { doc: Doc }) {
 function Preview({ doc }: { doc: Doc }) {
   if (doc.bare) return doc.demo;
   // Blocks lay out by this frame's width.
-  if (doc.block) return <Card className="@container">{doc.demo}</Card>;
+  if (doc.block) return <Card className="@container p-0">{doc.demo}</Card>;
   return (
-    <Card>
+    <Card className="p-0">
       <div className="flex min-h-40 flex-wrap items-center justify-center-safe gap-3 p-6 sm:p-10">
         {doc.demo}
       </div>

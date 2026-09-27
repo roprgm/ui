@@ -14,7 +14,8 @@ export const sections = cva(
   {
     variants: {
       lines: {
-        true: "*:data-[slot=section]:not-last:shadow-[inset_0_-1px_0_var(--color-line)]",
+        // Once it holds sections, a line runs between all its parts, such as a list that scrolls.
+        true: "has-[>[data-slot=section]]:*:not-last:shadow-[inset_0_-1px_0_var(--color-line)]",
         false: "*:data-[slot=section]:not-last:pb-0",
       },
     },
