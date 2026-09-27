@@ -121,9 +121,9 @@
   @apply bg-primary;
 }
 
-/* A line between groups; size it with `h-px` or `w-px`. */
+/* A line between groups, a level darker than a card's lines; size it with `h-px` or `w-px`. */
 @utility separator {
-  @apply bg-line;
+  @apply bg-level-1;
 }
 
 /* Grows from its trigger as it fades in. Base UI sets the attributes and the origin. */

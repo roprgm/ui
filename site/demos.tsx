@@ -1,5 +1,5 @@
 import { cn } from "cn";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import { Badge } from "../src/components/badge";
 import { Button } from "../src/components/button";
 import { Card } from "../src/components/card";
@@ -88,21 +88,26 @@ export const percent = (value: number) => `${value}%`;
 
 export function ButtonDemo() {
   return (
-    <>
-      <Button>Default</Button>
-      <Button variant="primary">Primary</Button>
-      <Button variant="primary">
-        <PlusIcon />
-        Import
-      </Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button disabled>Disabled</Button>
-      <Button variant="ghost" render={<a href="#icon-button" />}>
-        Link
-      </Button>
-      <Button size="sm">Small</Button>
-      <Button size="lg">Large</Button>
-    </>
+    <div className="grid gap-3 sm:grid-cols-[2fr_1fr]">
+      <Frame label="Variants">
+        <Button>Default</Button>
+        <Button variant="primary">Primary</Button>
+        <Button variant="primary">
+          <PlusIcon />
+          Import
+        </Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button disabled>Disabled</Button>
+        <Button variant="ghost" render={<a href="#icon-button" />}>
+          Link
+        </Button>
+      </Frame>
+      <Frame label="Sizes">
+        <Button size="sm">Small</Button>
+        <Button>Default</Button>
+        <Button size="lg">Large</Button>
+      </Frame>
+    </div>
   );
 }
 
@@ -231,23 +236,44 @@ export function ToggleGroupDemo() {
 
 export function SelectDemo() {
   return (
-    <>
-      <Select
-        aria-label="Fruit"
-        items={fruits}
-        placeholder="Pick a fruit"
-        className="w-40"
-      />
-      <Select
-        aria-label="Fruits"
-        items={fruits}
-        placeholder="Pick fruits"
-        className="w-40"
-        multiple
-      />
-    </>
+    <div className="grid gap-3 sm:grid-cols-2">
+      <Frame label="Field">
+        <Select
+          aria-label="Fruit"
+          items={fruits}
+          placeholder="Pick a fruit"
+          className="w-40"
+        />
+        <Select
+          aria-label="Fruits"
+          items={fruits}
+          placeholder="Pick fruits"
+          className="w-40"
+          multiple
+        />
+      </Frame>
+      <Frame label="Pill">
+        {/* A bar over a canvas, beside chips. */}
+        <div className="flex items-center gap-1 rounded-full p-1 surface-float">
+          <Chip>
+            <BrushIcon /> Brush
+          </Chip>
+          <Select
+            variant="pill"
+            aria-label="Mask operation"
+            items={operations}
+            defaultValue="add"
+          />
+        </div>
+      </Frame>
+    </div>
   );
 }
+
+const operations = [
+  { value: "add", label: "Add" },
+  { value: "subtract", label: "Subtract" },
+];
 
 const fonts = [
   "Geist",
@@ -318,40 +344,22 @@ export function SpinnerDemo() {
   );
 }
 
-const surfaces = [
-  "surface-card",
-  "surface-raised",
-  "surface-sunken",
-  "surface-primary",
-  "surface-float",
-] as const;
-
-export function SurfacesDemo() {
+/** One variant of a demo in a card of its own, named in its header, to set beside another. */
+function Frame({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="flex flex-col items-center gap-8">
-      <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3">
-        {surfaces.map((name) => (
-          <div key={name} className="flex flex-col items-center gap-3">
-            <div
-              className={cn(
-                "size-16 rounded-lg",
-                name,
-                name === "surface-primary" && "rounded-full",
-              )}
-            />
-            <span className="text-muted">{name}</span>
-          </div>
-        ))}
-      </div>
-      <div className="flex w-full flex-col items-center gap-3">
-        <div className="h-px w-48 separator" />
-        <span className="text-muted">separator</span>
-      </div>
-    </div>
+    <Card>
+      <Section>
+        <span className="text-muted">{label}</span>
+      </Section>
+      <Section className="min-h-32 flex-1 flex-row flex-wrap items-center justify-center gap-3 p-6">
+        {children}
+      </Section>
+    </Card>
   );
 }
 
 const levels = [
+  "bg-level-0",
   "bg-level-1",
   "bg-level-2",
   "bg-level-3",
@@ -366,20 +374,206 @@ const levels = [
   "bg-level-12",
 ] as const;
 
-export function LevelsDemo() {
+// Where each fill sits by default, to read text on it.
+const grounds = [
+  { name: "Page", className: "bg-level-2" },
+  { name: "Card", className: "bg-level-4" },
+  { name: "Card in a card", className: "bg-level-6" },
+] as const;
+
+const accents = [
+  { name: "primary", className: "bg-primary" },
+  { name: "danger", className: "bg-danger" },
+  { name: "focus", className: "bg-focus" },
+  { name: "line", className: "bg-line" },
+] as const;
+
+export function ColorsDemo() {
   return (
-    <div className="grid grid-cols-12 rounded-2xl bg-[oklch(0%_0_0)] p-2">
-      {levels.map((level, index) => (
-        <div
-          key={level}
-          className={cn(
-            "flex h-28 items-end justify-center pb-2.5 text-muted tabular-nums first:rounded-l-lg last:rounded-r-lg",
-            level,
-          )}
-        >
-          {index + 1}
+    <div className="flex flex-col gap-3">
+      <Frame label="Levels">
+        <div className="grid w-full grid-cols-13 rounded-xl bg-level-0 p-1.5">
+          {levels.map((level, index) => (
+            <div
+              key={level}
+              className={cn(
+                "flex h-24 items-end justify-center pb-2 text-muted tabular-nums first:rounded-l-md last:rounded-r-md",
+                level,
+              )}
+            >
+              {index}
+            </div>
+          ))}
+        </div>
+      </Frame>
+      <div className="grid gap-3 sm:grid-cols-[3fr_2fr]">
+        <Frame label="Text">
+          <div className="grid w-full grid-cols-3 gap-2">
+            {grounds.map((ground) => (
+              <div
+                key={ground.name}
+                className={cn(
+                  "flex flex-col gap-1 rounded-lg p-3",
+                  ground.className,
+                )}
+              >
+                <span className="text-foreground">Foreground</span>
+                <span className="text-muted">Muted</span>
+                <span className="text-disabled">Disabled</span>
+              </div>
+            ))}
+          </div>
+        </Frame>
+        <Frame label="Accents">
+          <div className="grid grid-cols-4 gap-4">
+            {accents.map((accent) => (
+              <div
+                key={accent.name}
+                className="flex flex-col items-center gap-2"
+              >
+                <div className={cn("size-10 rounded-full", accent.className)} />
+                <span className="text-muted">{accent.name}</span>
+              </div>
+            ))}
+          </div>
+        </Frame>
+      </div>
+    </div>
+  );
+}
+
+const surfaces = [
+  "surface-card",
+  "surface-raised",
+  "surface-sunken",
+  "surface-primary",
+  "surface-float",
+  "separator",
+] as const;
+
+function Swatch({ name }: { name: (typeof surfaces)[number] }) {
+  if (name === "separator") {
+    return (
+      <div className="flex size-16 items-center">
+        <div className="h-px w-full separator" />
+      </div>
+    );
+  }
+  return (
+    <div
+      className={cn(
+        "size-16 rounded-lg",
+        name,
+        name === "surface-primary" && "rounded-full",
+      )}
+    />
+  );
+}
+
+export function SurfacesDemo() {
+  return (
+    <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3">
+      {surfaces.map((name) => (
+        <div key={name} className="flex flex-col items-center gap-3">
+          <Swatch name={name} />
+          <span className="text-muted">{name}</span>
         </div>
       ))}
+    </div>
+  );
+}
+
+export function DepthDemo() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Depth name="Page" level={2} />
+      {/* 16px corners less 8px of padding leave 8px for the card inside. */}
+      <div className="flex flex-col gap-2 rounded-2xl p-2 surface-card">
+        <div className="p-3">
+          <Depth name="Card" level={4} />
+        </div>
+        <div className="rounded-lg p-5 surface-card">
+          <Depth name="Card in a card" level={6} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Depth({ name, level }: { name: string; level: number }) {
+  return (
+    <div className="flex flex-col gap-3">
+      <span className="text-muted">
+        {name} <span className="text-disabled">· level {level}</span>
+      </span>
+      <div className="flex flex-wrap items-center gap-2">
+        <Input placeholder="Name" className="w-36" />
+        <Select
+          aria-label="Fruit"
+          items={fruits}
+          placeholder="Pick a fruit"
+          className="w-36"
+        />
+        <Button>Cancel</Button>
+        <Button variant="primary">Save</Button>
+        <ToggleGroup>
+          <Toggle name={`${name}-view`} value="fit" defaultChecked>
+            Fit
+          </Toggle>
+          <Toggle name={`${name}-view`} value="fill">
+            Fill
+          </Toggle>
+        </ToggleGroup>
+        <Switch aria-label="Snap" defaultChecked />
+      </div>
+    </div>
+  );
+}
+
+export function SizesDemo() {
+  return (
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-6 gap-y-4">
+      <span className="text-muted tabular-nums">24px</span>
+      <div className="flex flex-wrap items-center gap-2">
+        <Button size="sm">Small</Button>
+        <IconButton label="More" size="icon-sm">
+          <MoreIcon />
+        </IconButton>
+      </div>
+      <span className="text-muted tabular-nums">28px</span>
+      <div className="flex flex-wrap items-center gap-2">
+        <Button>Default</Button>
+        <IconButton label="More">
+          <MoreIcon />
+        </IconButton>
+        <Input placeholder="Name" className="w-32" />
+        <Select
+          aria-label="Fruit"
+          items={fruits}
+          placeholder="Fruit"
+          className="w-32"
+        />
+      </div>
+      <span className="text-muted tabular-nums">32px</span>
+      <div className="flex flex-wrap items-center gap-2">
+        <Button size="lg">Large</Button>
+        <IconButton label="More" size="icon-lg">
+          <MoreIcon />
+        </IconButton>
+        <Input size="lg" placeholder="Name" className="w-32" />
+        <Select
+          size="lg"
+          aria-label="Fruit"
+          items={fruits}
+          placeholder="Fruit"
+          className="w-32"
+        />
+      </div>
+      <span className="text-muted tabular-nums">40px</span>
+      <div className="w-64 max-w-full overflow-hidden rounded-lg surface-float">
+        <ListItem>Sky</ListItem>
+        <ListItem>Subject</ListItem>
+      </div>
     </div>
   );
 }
@@ -398,69 +592,6 @@ export function ShimmerDemo() {
         </span>
       </div>
     </div>
-  );
-}
-
-export function LayersDemo() {
-  return (
-    <div className="grid gap-2 sm:grid-cols-[1fr_2fr]">
-      <Layer name="Page" className="py-6 pr-4" />
-      {/* 16px corners less 8px of padding leave 8px for the card inside. */}
-      <div className="grid gap-2 rounded-2xl p-2 surface-card sm:grid-cols-2">
-        <Layer name="Card" className="p-4" />
-        <Layer name="Card in a card" className="rounded-lg p-4 surface-card" />
-      </div>
-    </div>
-  );
-}
-
-function Layer({ name, className }: { name: string; className: string }) {
-  return (
-    <div className={cn("flex flex-col gap-3", className)}>
-      <span className="text-muted">{name}</span>
-      <LayerControls name={name} />
-    </div>
-  );
-}
-
-function LayerControls({ name }: { name: string }) {
-  const [exposure, setExposure] = useState(0.35);
-  return (
-    <>
-      <Input placeholder="Name" />
-      <div className="flex gap-2">
-        <Button className="flex-1">Cancel</Button>
-        <Button variant="primary" className="flex-1">
-          Save
-        </Button>
-      </div>
-      <Select aria-label="Fruit" items={fruits} placeholder="Pick a fruit" />
-      <ToggleGroup>
-        <Toggle name={`${name}-view`} value="fit" defaultChecked>
-          Fit
-        </Toggle>
-        <Toggle name={`${name}-view`} value="fill">
-          Fill
-        </Toggle>
-      </ToggleGroup>
-      <div className="flex gap-4">
-        <label className="flex items-center gap-2">
-          <Switch defaultChecked /> Snap
-        </label>
-        <label className="flex items-center gap-2">
-          <Checkbox defaultChecked /> Grid
-        </label>
-      </div>
-      <Slider
-        label="Exposure"
-        value={exposure}
-        defaultValue={0}
-        onChange={setExposure}
-        min={-5}
-        max={5}
-        step={0.05}
-      />
-    </>
   );
 }
 
@@ -742,24 +873,36 @@ const sidebar = [
 export function TabsDemo() {
   const [tool, setTool] = useState("adjust");
   return (
-    <div className="flex flex-wrap items-start justify-center gap-x-10 gap-y-6">
-      <ToolRail selected={tool} onSelect={setTool} />
-      <div className="flex w-64 flex-col gap-6">
-        <Tabs defaultValue="layers" className="flex flex-col gap-3">
-          <TabList aria-label="Sidebar">
-            {sidebar.map(({ id }) => (
-              <Tab key={id} value={id} className="capitalize">
-                {id}
-              </Tab>
+    <div className="grid gap-3 md:grid-cols-[1fr_1fr_auto]">
+      <Frame label="Default">
+        <div className="flex w-full max-w-64 flex-col gap-6">
+          <Tabs defaultValue="layers" className="flex flex-col gap-3">
+            <TabList aria-label="Sidebar">
+              {sidebar.map(({ id }) => (
+                <Tab key={id} value={id} className="capitalize">
+                  {id}
+                </Tab>
+              ))}
+            </TabList>
+            {sidebar.map(({ id, text }) => (
+              <TabPanel key={id} value={id} className="px-3 text-muted">
+                {text}
+              </TabPanel>
             ))}
-          </TabList>
-          {sidebar.map(({ id, text }) => (
-            <TabPanel key={id} value={id} className="px-3 text-muted">
-              {text}
-            </TabPanel>
-          ))}
-        </Tabs>
-        <Tabs defaultValue="hue" className="self-start">
+          </Tabs>
+          <Tabs defaultValue={panels[0]}>
+            <TabList aria-label="Panels" className="overflow-fade-x">
+              {panels.map((panel) => (
+                <Tab key={panel} value={panel}>
+                  {panel}
+                </Tab>
+              ))}
+            </TabList>
+          </Tabs>
+        </div>
+      </Frame>
+      <Frame label="Segmented">
+        <Tabs defaultValue="hue">
           <TabList aria-label="Channel" variant="segmented">
             {["hue", "saturation", "luminance"].map((id) => (
               <Tab key={id} value={id} className="capitalize">
@@ -768,16 +911,10 @@ export function TabsDemo() {
             ))}
           </TabList>
         </Tabs>
-        <Tabs defaultValue={panels[0]}>
-          <TabList aria-label="Panels" className="overflow-fade-x">
-            {panels.map((panel) => (
-              <Tab key={panel} value={panel}>
-                {panel}
-              </Tab>
-            ))}
-          </TabList>
-        </Tabs>
-      </div>
+      </Frame>
+      <Frame label="Vertical">
+        <ToolRail selected={tool} onSelect={setTool} />
+      </Frame>
     </div>
   );
 }
@@ -1090,40 +1227,44 @@ export function SliderDemo() {
   const [opacity, setOpacity] = useState(80);
   const [angle, setAngle] = useState(0);
   return (
-    <>
-      <div className="flex w-64 flex-col gap-4">
-        <Slider
-          label="Exposure"
-          value={exposure}
-          defaultValue={0}
-          onChange={setExposure}
-          min={-5}
-          max={5}
-          step={0.05}
-          format={(v) => `${v.toFixed(2)} EV`}
-        />
-        <Slider
-          label="Opacity"
-          value={opacity}
-          defaultValue={100}
-          onChange={setOpacity}
-          min={0}
-          max={100}
-          format={percent}
-        />
-        <Slider
-          label="Angle"
-          value={angle}
-          defaultValue={0}
-          onChange={setAngle}
-          min={-180}
-          max={180}
-          format={degrees}
-          variant="compact"
-        />
-      </div>
-      <HueSliders />
-    </>
+    <div className="grid gap-3 sm:grid-cols-2">
+      <Frame label="Horizontal">
+        <div className="flex w-64 max-w-full flex-col gap-4">
+          <Slider
+            label="Exposure"
+            value={exposure}
+            defaultValue={0}
+            onChange={setExposure}
+            min={-5}
+            max={5}
+            step={0.05}
+            format={(v) => `${v.toFixed(2)} EV`}
+          />
+          <Slider
+            label="Opacity"
+            value={opacity}
+            defaultValue={100}
+            onChange={setOpacity}
+            min={0}
+            max={100}
+            format={percent}
+          />
+          <Slider
+            label="Angle"
+            value={angle}
+            defaultValue={0}
+            onChange={setAngle}
+            min={-180}
+            max={180}
+            format={degrees}
+            variant="compact"
+          />
+        </div>
+      </Frame>
+      <Frame label="Vertical">
+        <HueSliders />
+      </Frame>
+    </div>
   );
 }
 

@@ -20,6 +20,8 @@ export type Doc = {
   block?: boolean;
   /** Renders on the page itself, without the preview card. */
   bare?: boolean;
+  /** Shares a row with the next doc that has it, on wide screens. */
+  half?: boolean;
   /** Shown instead of the install command, for the theme's utilities. */
   code?: string;
 };
@@ -42,8 +44,14 @@ function useHash() {
   return hash;
 }
 
-/** The usage guide, or the group the hash names by its title or one of its docs. */
-export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
+/** The overview, or the group the hash names by its title or one of its docs. */
+export function Page({
+  groups,
+  overview,
+}: {
+  groups: Group[];
+  overview: ReactNode;
+}) {
   const hash = useHash();
   const current = groups.find(
     (group) =>
@@ -65,7 +73,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
           <div className="flex flex-col gap-1 py-12 pr-4 pl-1">
             <div className="mb-4 -mt-px flex items-center gap-1">
               <a
-                href="#usage"
+                href="#overview"
                 className={cn(link, "flex items-baseline gap-2 self-center")}
               >
                 <span className="font-medium">@roprgm/ui</span>
@@ -84,14 +92,14 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
               </IconButton>
             </div>
             <a
-              href="#usage"
+              href="#overview"
               className={cn(
                 link,
                 "mb-3 hover:text-foreground",
                 current ? "text-muted" : "text-foreground",
               )}
             >
-              Usage
+              Overview
             </a>
             {groups.map((group) => (
               <div key={group.title} className="flex flex-col gap-1">
@@ -128,10 +136,10 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
       <main className="flex min-w-0 flex-1 flex-col gap-14 py-12">
         <div className="flex flex-wrap gap-x-4 gap-y-3 md:hidden">
           <a
-            href="#usage"
+            href="#overview"
             className={cn(link, current ? "text-muted" : "text-foreground")}
           >
-            Usage
+            Overview
           </a>
           {groups.map((group) => (
             <a
@@ -146,12 +154,12 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
             </a>
           ))}
         </div>
-        {!current && usage}
+        {!current && overview}
         {current && (
           <>
             <h2 className="text-2xl font-medium">{current.title}</h2>
-            {current.docs.map((doc) => (
-              <Article key={doc.name} doc={doc} />
+            {rows(current.docs).map((row) => (
+              <Row key={row[0]?.name} docs={row} />
             ))}
           </>
         )}
@@ -160,9 +168,32 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
   );
 }
 
+/** Docs in rows: each alone, but two in a row where both are `half`. */
+function rows(docs: Doc[]) {
+  const rows: Doc[][] = [];
+  for (const doc of docs) {
+    const last = rows.at(-1);
+    if (doc.half && last?.length === 1 && last[0]?.half) last.push(doc);
+    else rows.push([doc]);
+  }
+  return rows;
+}
+
+function Row({ docs }: { docs: Doc[] }) {
+  if (docs.length === 1)
+    return docs.map((doc) => <Article key={doc.name} doc={doc} />);
+  return (
+    <div className="grid gap-14 lg:grid-cols-2">
+      {docs.map((doc) => (
+        <Article key={doc.name} doc={doc} />
+      ))}
+    </div>
+  );
+}
+
 function Article({ doc }: { doc: Doc }) {
   return (
-    <article id={doc.name} className="flex scroll-mt-12 flex-col gap-4">
+    <article id={doc.name} className="flex min-w-0 scroll-mt-12 flex-col gap-4">
       <div className="flex flex-col gap-1">
         <h3 className="text-base font-medium">{doc.title}</h3>
         <p className="text-muted">{doc.description}</p>
@@ -184,7 +215,7 @@ function Preview({ doc }: { doc: Doc }) {
   if (doc.block) return <Card className="@container p-0">{doc.demo}</Card>;
   return (
     <Card className="p-0">
-      <div className="flex min-h-40 flex-wrap items-center justify-center-safe gap-3 p-6 sm:p-10">
+      <div className="flex min-h-32 flex-wrap items-center justify-center-safe gap-3 p-6 sm:p-8">
         {doc.demo}
       </div>
     </Card>

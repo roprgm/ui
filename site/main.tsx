@@ -11,15 +11,15 @@ import {
   CheckboxDemo,
   ChipDemo,
   CollapsibleDemo,
+  ColorsDemo,
   ComboboxDemo,
   ContextMenuDemo,
+  DepthDemo,
   DialogDemo,
   FieldDemo,
   IconButtonDemo,
   InputDemo,
   KbdDemo,
-  LayersDemo,
-  LevelsDemo,
   ListItemDemo,
   MenuDemo,
   NoticeDemo,
@@ -30,6 +30,7 @@ import {
   ScrubInputDemo,
   SelectDemo,
   ShimmerDemo,
+  SizesDemo,
   SliderDemo,
   SpinnerDemo,
   SurfacesDemo,
@@ -44,9 +45,48 @@ import {
 import { type Group, Page } from "./docs";
 import { EditorDemo } from "./editor";
 import { FormsDemo } from "./forms";
-import { Usage } from "./usage";
+import { Overview } from "./overview";
 
 const groups: Group[] = [
+  {
+    title: "Foundations",
+    docs: [
+      {
+        name: "colors",
+        title: "Colors",
+        description:
+          "Every fill is a level: black, then 15% up in steps of 3.7% of lightness, so they look even. The page is level 2 and a card level 4. Muted and disabled text are the foreground faded, so they read on any level.",
+        demo: <ColorsDemo />,
+        bare: true,
+        code: '<div className="bg-level-4 text-muted">…</div>',
+      },
+      {
+        name: "surfaces",
+        title: "Surfaces",
+        description:
+          "What components are built from: a fill, and an edge the theme draws. A card rises over what it sits on and a floating card does too, drawn floating; a raised control stands up, a sunken one sets in, and a primary one is on. A separator parts groups. A control you build with them follows the theme too.",
+        demo: <SurfacesDemo />,
+        code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
+      },
+      {
+        name: "depth",
+        title: "Depth",
+        description:
+          "A card rises two levels over what it sits on, a card too, and sets the fills of what sits on it: a control three levels up, a field two down. The same controls keep their contrast on the page, in a card, and in a card inside it, and a popup rises from where its trigger is.",
+        demo: <DepthDemo />,
+        bare: true,
+        code: '<div className="rounded-xl surface-card">…</div>',
+      },
+      {
+        name: "sizes",
+        title: "Sizes",
+        description:
+          "Controls stand 28px tall, with 24px and 32px sizes, and what goes together takes the same height. A list's rows are 40px.",
+        demo: <SizesDemo />,
+        code: '<Button size="sm">…</Button>',
+      },
+    ],
+  },
   {
     title: "Actions",
     docs: [
@@ -56,6 +96,7 @@ const groups: Group[] = [
         description:
           "Actions. render draws one as another element, such as a link; it renders on the server.",
         demo: <ButtonDemo />,
+        bare: true,
       },
       {
         name: "icon-button",
@@ -77,6 +118,7 @@ const groups: Group[] = [
         description:
           "A shortcut written as Mod Z: Mod shows as ⌘ on a Mac and Ctrl elsewhere. Tooltips and menu items take one as shortcut.",
         demo: <KbdDemo />,
+        half: true,
       },
       {
         name: "badge",
@@ -84,6 +126,7 @@ const groups: Group[] = [
         description:
           "A short label that isn't a control, such as a status or a count. primary marks what is new; it renders on the server.",
         demo: <BadgeDemo />,
+        half: true,
       },
     ],
   },
@@ -115,6 +158,7 @@ const groups: Group[] = [
         title: "Checkbox",
         description: "A native checkbox; its label is clickable too.",
         demo: <CheckboxDemo />,
+        half: true,
       },
       {
         name: "radio",
@@ -122,12 +166,14 @@ const groups: Group[] = [
         description:
           "A native radio: radios that share a name choose one, without JavaScript.",
         demo: <RadioDemo />,
+        half: true,
       },
       {
         name: "switch",
         title: "Switch",
         description: "A native checkbox with the switch role.",
         demo: <SwitchDemo />,
+        half: true,
       },
       {
         name: "toggle-group",
@@ -135,12 +181,14 @@ const groups: Group[] = [
         description:
           "Segmented choices from hidden radios, without JavaScript.",
         demo: <ToggleGroupDemo />,
+        half: true,
       },
       {
         name: "select",
         title: "Select",
         description: "One value, or several with multiple, from a list.",
         demo: <SelectDemo />,
+        bare: true,
       },
       {
         name: "combobox",
@@ -155,6 +203,7 @@ const groups: Group[] = [
         description:
           "A labeled value with a bar. Compact drops the bar and edits by dragging the value; a vertical orientation stands the bar upright alone.",
         demo: <SliderDemo />,
+        bare: true,
       },
       {
         name: "scrub-input",
@@ -169,37 +218,11 @@ const groups: Group[] = [
     title: "Containers",
     docs: [
       {
-        name: "levels",
-        title: "Levels",
-        description:
-          "The backgrounds, darkest first, each 3.7% lighter in OKLCH so the steps look even, over black. Every fill is one of them: the page is level-2 and a card level-4, and a control on a surface sits three levels above it, and a field two below.",
-        demo: <LevelsDemo />,
-        bare: true,
-        code: '<div className="bg-level-4">…</div>',
-      },
-      {
-        name: "layers",
-        title: "Layers",
-        description:
-          "A card rises over whatever it sits on and sets the fills of what sits on it, so controls keep their contrast on the page, in a card, and in a card inside it.",
-        demo: <LayersDemo />,
-        bare: true,
-        code: '<div className="rounded-xl surface-card">…</div>',
-      },
-      {
         name: "card",
         title: "Card",
         description:
           "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-card, without its edge, and sections() on your own element, as the Photo editor block does.",
         demo: <CardDemo />,
-      },
-      {
-        name: "surfaces",
-        title: "Surfaces",
-        description:
-          "The primitives components are built from: a fill, and an edge the theme draws. surface-card lifts a card over what it sits on, and what sits on it follows; surface-float does the same, drawn floating, for popups and dialogs, and a popup rises from where its trigger is; surface-raised stands a control up; surface-sunken sets a field in; surface-primary fills what is on. A control you build with them follows the theme too.",
-        demo: <SurfacesDemo />,
-        code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
       },
       {
         name: "collapsible",
@@ -225,6 +248,7 @@ const groups: Group[] = [
         description:
           "Tabs and the panels they show, in a row or a column, with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views.",
         demo: <TabsDemo />,
+        bare: true,
       },
       {
         name: "list-item",
@@ -306,6 +330,7 @@ const groups: Group[] = [
         title: "Spinner",
         description: "Work in progress.",
         demo: <SpinnerDemo />,
+        half: true,
       },
       {
         name: "shimmer",
@@ -313,6 +338,7 @@ const groups: Group[] = [
         description:
           "A theme utility: a bright band sweeps across text, icons, or placeholder blocks while work is pending.",
         demo: <ShimmerDemo />,
+        half: true,
         code: '<span className="shimmer">Decoding RAW…</span>',
       },
       {
@@ -351,7 +377,7 @@ const groups: Group[] = [
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <TooltipProvider>
-      <Page groups={groups} usage={<Usage />} />
+      <Page groups={groups} overview={<Overview />} />
       <Toaster />
     </TooltipProvider>
   </StrictMode>,

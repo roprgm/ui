@@ -1,7 +1,9 @@
 import { type ReactNode, useState } from "react";
 import { version } from "../package.json";
 import { Button } from "../src/components/button";
+import { Card } from "../src/components/card";
 import { Code } from "./docs";
+import { EditorDemo } from "./editor";
 import { CopyIcon } from "./icons";
 
 const prompt =
@@ -39,9 +41,10 @@ function CopyForAgents() {
   );
 }
 
-export function Usage() {
+/** What the library looks like, then how to start. */
+export function Overview() {
   return (
-    <div className="flex max-w-3xl flex-col gap-10">
+    <div className="flex flex-col gap-10">
       <header className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
           <div className="flex items-baseline gap-2">
@@ -52,27 +55,33 @@ export function Usage() {
         </div>
         <CopyForAgents />
       </header>
-      <Section title="Install the package">
-        <p className="text-muted">Then import the theme in your CSS.</p>
-        <Code>bun add @roprgm/ui</Code>
-        <Code lang="css">{`@import "tailwindcss";
+      {/* Blocks lay out by this frame's width. */}
+      <Card className="@container p-0">
+        <EditorDemo />
+      </Card>
+      <div className="flex max-w-3xl flex-col gap-10">
+        <Section title="Install the package">
+          <p className="text-muted">Then import the theme in your CSS.</p>
+          <Code>bun add @roprgm/ui</Code>
+          <Code lang="css">{`@import "tailwindcss";
 @import "@roprgm/ui/themes/default.css";`}</Code>
-        <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";`}</Code>
-      </Section>
-      <Section title="Or copy the source">
-        <p className="text-muted">
-          No package needed: shadcn adds a component's code to your app.
-        </p>
-        <Code>npx shadcn@latest add https://ui.roprgm.com/r/button.json</Code>
-      </Section>
-      <Section title="Put controls on cards">
-        <p className="text-muted">Controls adapt to the card they sit on.</p>
-        <Code lang="tsx">{`<Card>
+          <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";`}</Code>
+        </Section>
+        <Section title="Or copy the source">
+          <p className="text-muted">
+            No package needed: shadcn adds a component's code to your app.
+          </p>
+          <Code>npx shadcn@latest add https://ui.roprgm.com/r/button.json</Code>
+        </Section>
+        <Section title="Put controls on cards">
+          <p className="text-muted">Controls adapt to the card they sit on.</p>
+          <Code lang="tsx">{`<Card>
   <Section>
     <Input placeholder="Name" />
   </Section>
 </Card>`}</Code>
-      </Section>
+        </Section>
+      </div>
     </div>
   );
 }
