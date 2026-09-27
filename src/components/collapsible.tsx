@@ -5,8 +5,7 @@ import { cn } from "cn";
 import type { ComponentProps, TransitionEvent } from "react";
 
 /**
- * A section whose trigger shows and hides its panel, such as a card that opens to its details.
- * It sets `data-open` while open, so a chevron inside turns with
+ * A trigger that shows and hides a panel. A chevron inside turns with
  * `group-data-open/collapsible:rotate-90`.
  */
 export function Collapsible({
@@ -20,11 +19,7 @@ export function Collapsible({
   );
 }
 
-/**
- * The row that opens and closes the panel, padded like a list row. It is a button; to hold
- * buttons of its own, such as a copy button, render it as a div:
- * `<CollapsibleTrigger nativeButton={false} render={<div />}>`.
- */
+/** A row that toggles the panel; to hold buttons, render a div with `nativeButton={false}`. */
 export function CollapsibleTrigger({
   className,
   ...props
@@ -34,7 +29,7 @@ export function CollapsibleTrigger({
   return (
     <Primitive.Trigger
       className={cn(
-        // Its corners follow the section's, square at the bottom while the panel shows under it.
+        // Square at the bottom while the panel shows under it.
         "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring hover:bg-hover data-panel-open:rounded-b-none dim-disabled",
         className,
       )}
@@ -43,7 +38,7 @@ export function CollapsibleTrigger({
   );
 }
 
-/** Scrolls an opened section into view, as little as it can, once it has finished opening. */
+/** Scrolls a section into view once it has opened. */
 function revealSection(event: TransitionEvent<HTMLDivElement>) {
   const panel = event.currentTarget;
   if (event.target !== panel || event.propertyName !== "height") return;
@@ -51,11 +46,7 @@ function revealSection(event: TransitionEvent<HTMLDivElement>) {
   panel.parentElement?.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
 
-/**
- * What the trigger shows. It slides and fades open and closed, and stays in the page while
- * closed, so the browser's find-in-page reaches it and opens it. `className` styles a box inside
- * the part that slides, so padding and borders fold away with it.
- */
+/** What the trigger shows. `className` styles a box inside the part that slides. */
 export function CollapsiblePanel({
   className,
   children,

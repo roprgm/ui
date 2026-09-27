@@ -33,12 +33,25 @@ import { Button } from "@roprgm/ui/button";
 <Button variant="primary">Export</Button>;
 ```
 
+Components compose from their parts. An overlay's trigger renders your own element:
+
+```tsx
+<Menu>
+  <MenuTrigger render={<Button />}>Edit</MenuTrigger>
+  <MenuContent>
+    <MenuItem>Duplicate</MenuItem>
+  </MenuContent>
+</Menu>
+```
+
 Put groups of controls on a card. Controls take their fills from the surface they sit on, so they keep the same contrast everywhere:
 
 ```tsx
-<div className="surface-card rounded-xl p-3.5">
-  <Input placeholder="Name" />
-</div>
+<Card>
+  <CardSection>
+    <Input placeholder="Name" />
+  </CardSection>
+</Card>
 ```
 
 - Use `surface-card` for cards, which rise a level inside another card on their own, and `surface-panel` for a card docked in your layout. What floats is `surface-float`, elevated wherever it opens.
@@ -94,9 +107,9 @@ A surface is what a box is filled with and how it stands against what's under it
 | `surface-thumb` | the primary color | slider thumbs and switch knobs |
 | `separator` | a line | a menu's separators |
 
-### Density
+### Sizes
 
-`--size-control` (28px) sets the height of buttons, selects, and fields, and the other sizes follow from it, such as 32px large controls and 40px list rows. Each is also a utility, for controls of your own: `h-control`, `h-control-lg`, `h-row`, and the rest listed in `base.css`. Spacing is Tailwind's own.
+Controls are 28px tall (`h-7`), with 24px and 32px sizes, and list rows 40px. Heights and spacing are Tailwind's own, so a control of your own takes the same classes.
 
 ### Customize
 
@@ -106,7 +119,6 @@ Redefine a token to restyle every component that uses it:
 @theme {
   --color-primary: hsl(210 90% 60%);
   --radius-md: 8px;
-  --size-control: 32px;
 }
 ```
 

@@ -16,20 +16,15 @@ const list = cva("flex", {
   variants: {
     variant: {
       default: "gap-1",
-      // Set into a sunken strip as a ToggleGroup's toggles are: a size smaller, 4px in, with
-      // corners nested in the strip's. Only default and `icon` tabs follow it; the other sizes
-      // resolve at the root.
+      // As a ToggleGroup: tabs a size smaller, 4px in.
       segmented:
-        "gap-0.5 rounded-lg surface-sunken p-1 [--size-control:var(--size-control-sm)] *:rounded-sm",
+        "gap-0.5 rounded-lg surface-sunken p-1 *:h-6 *:min-w-6 *:rounded-sm",
     },
   },
   defaultVariants: { variant: "default" },
 });
 
-/**
- * Tabs in a row, or a column with `flex-col`; arrow keys in any direction move between them.
- * `segmented` sets them into a sunken strip, as a tool rail or a switch between views.
- */
+/** Tabs in a row, or a column with `flex-col`. `segmented` sets them into a sunken strip. */
 export function TabList({
   variant,
   className,
@@ -59,7 +54,6 @@ export function TabList({
   );
 }
 
-/** Only the selected tab is in the tab order; arrow keys reach the rest. */
 export function Tab({
   selected,
   className,

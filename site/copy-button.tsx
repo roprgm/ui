@@ -3,7 +3,7 @@ import { type ComponentProps, useState } from "react";
 import { IconButton } from "../src/components/icon-button";
 import { CopyIcon } from "./icons";
 
-/** Copies `value`. The copy icon shrinks away and a check draws itself in, then the reverse. */
+/** Copies `value`, and a check draws itself in. */
 export function CopyButton({
   value,
   className,
@@ -47,7 +47,7 @@ function DrawnCheck() {
       className="size-4"
       aria-hidden
     >
-      {/* pathLength 1 makes the dash the whole stroke; the gap of 2 keeps the round cap from showing while it's hidden. */}
+      {/* One dash the length of the stroke; its gap of 2 hides the round cap. */}
       <path
         d="m5 13 4 4L19 7"
         pathLength={1}

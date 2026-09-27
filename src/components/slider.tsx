@@ -15,22 +15,21 @@ const root = cva("grid items-center", {
   },
 });
 
-// Where the value and the bar sit in each layout's grid. In a panel the digits end with the bar,
-// and the hover chevron reaches ~8px past it.
+// In a panel, the digits end where the bar does.
 const cells = {
   panel: { value: "-mr-1", bar: "col-span-2" },
   toolbar: { value: "col-start-3", bar: "col-start-2 row-start-1" },
   compact: { value: "-mr-1", bar: "" },
 };
 
-/** Where the thumb's center sits at a fraction of the range: half a thumb in from either end, or the bar's ends. */
+/** The thumb's center at a fraction of the range. */
 function position(fraction: number) {
   if (fraction <= 0) return "0%";
   if (fraction >= 1) return "100%";
-  return `calc(var(--size-thumb) / 2 + (100% - var(--size-thumb)) * ${fraction})`;
+  return `calc(var(--spacing-thumb) / 2 + (100% - var(--spacing-thumb)) * ${fraction})`;
 }
 
-/** The bar's paint: its color stops, or a fill between the origin and the value, in fractions of the range. */
+/** The bar's color stops, or a fill from the origin to the value. */
 function barBackground(
   origin: number,
   value: number,
@@ -42,10 +41,7 @@ function barBackground(
   return `linear-gradient(to right, transparent ${start}, var(--color-muted) ${start} ${end}, transparent ${end})`;
 }
 
-/**
- * A labeled number with a bar. "panel" stacks the bar under its row, "toolbar" keeps one short
- * row for a bar over a canvas, and "compact" drops the bar and edits by dragging the value.
- */
+/** A labeled number with a bar. `toolbar` fits a bar over a canvas; `compact` drops the bar. */
 export function Slider({
   label,
   value,
@@ -65,32 +61,31 @@ export function Slider({
   label: string;
   value: number;
   onChange: (value: number) => void;
-  /** Reports a gesture on the bar or the value, so a caller can group its changes into one edit. */
+  /** Brackets a gesture, so a caller can group its changes into one edit. */
   onEditingChange?: (editing: boolean) => void;
   min: number;
   max: number;
   step?: number;
-  /** Restored by double-clicking the value or the bar. */
+  /** Restored by a double-click. */
   defaultValue?: number;
-  /** Where the bar's fill starts; the default value when there is one, otherwise the minimum. */
+  /** Where the bar's fill starts: `defaultValue`, or else `min`. */
   origin?: number;
   format?: (value: number) => string;
-  /** CSS colors painting the bar left to right, in place of the progress fill. */
+  /** Colors painting the bar, in place of the fill. */
   stops?: readonly string[];
-  /** Minimum width of the value's digits in characters; the unit follows them. */
+  /** Minimum width of the digits, in characters. */
   valueWidth?: number;
   variant?: "panel" | "toolbar" | "compact";
   className?: string;
 }) {
   const fraction = (x: number) => (x - min) / (max - min);
 
-  // Native touch dragging can lock to scrolling before the finger moves along the track.
-  // Keep the native range for keyboard/mouse input and let it clamp and snap touch values.
+  // A native range can lose a touch to scrolling, so touch sets the value itself.
   const changeFromTouch = (event: PointerEvent<HTMLInputElement>) => {
     const input = event.currentTarget;
     const bounds = input.getBoundingClientRect();
     const style = getComputedStyle(input);
-    const thumb = Number.parseFloat(style.getPropertyValue("--size-thumb"));
+    const thumb = Number.parseFloat(style.getPropertyValue("--spacing-thumb"));
     const travel = bounds.width - thumb;
     if (travel <= 0) return;
     let progress = (event.clientX - bounds.left - thumb / 2) / travel;
@@ -113,15 +108,15 @@ export function Slider({
         defaultValue={defaultValue}
         format={format}
         minChars={valueWidth}
-        // Above the bar, like the label, since the bar's taller target reaches into their row.
+        // Above the bar's hit area, which reaches into their row.
         className={cn("z-10", cells[variant].value)}
       />
       {variant !== "compact" && (
-        // The margin makes room for the thumb, so the slider's box ends where the thumb does.
+        // Room for the thumb, so the slider ends where it does.
         <div
           data-slot="slider-track"
           className={cn(
-            "relative my-[calc(var(--size-thumb)/2-2px)] h-1 rounded-full surface-sunken",
+            "relative my-[calc(var(--spacing-thumb)/2-2px)] h-1 rounded-full surface-sunken",
             cells[variant].bar,
           )}
           style={{
@@ -164,7 +159,7 @@ export function Slider({
             onPointerCancel={() => onEditingChange?.(false)}
             onFocus={() => onEditingChange?.(true)}
             onBlur={() => onEditingChange?.(false)}
-            // Keep a touch on the bar attached to the range, even when the finger drifts vertically.
+            // A taller hit area that holds on to a drifting finger.
             className="absolute inset-x-0 top-1/2 h-8 w-full -translate-y-1/2 cursor-pointer touch-none range-thumb"
           />
         </div>

@@ -2,7 +2,7 @@
 
 import { cn } from "cn";
 
-/** A native range standing upright: up increases. `stops` paint the track bottom to top. */
+/** An upright range. `stops` paint the track bottom to top. */
 export function VerticalSlider({
   label,
   value,
@@ -21,10 +21,10 @@ export function VerticalSlider({
   min: number;
   max: number;
   step?: number;
-  /** Restored by double-clicking. */
+  /** Restored by a double-click. */
   defaultValue?: number;
   stops?: readonly string[];
-  /** The thumb's color; the primary color when omitted. */
+  /** The thumb's color. */
   color?: string;
   className?: string;
 }) {

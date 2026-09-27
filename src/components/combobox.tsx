@@ -14,7 +14,7 @@ export type ComboboxItem<T extends string> = {
   disabled?: boolean;
 };
 
-/** A choice from a list, filtered as you type into its field; for long lists, such as fonts. */
+/** A choice from a list filtered as you type, for long lists such as fonts. */
 export function Combobox<T extends string>({
   items,
   placeholder,

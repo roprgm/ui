@@ -1,18 +1,13 @@
-/*
- * The default theme: surfaces drawn with light and shadow. Raised ones catch light on top and cast
- * a line below, sunken ones invert it, and what floats casts a soft shadow. While a ring shows on
- * the same element, as a thumb's keyboard focus or an invalid field's red ring, the ring takes
- * the shadow's place.
- */
+/* Surfaces drawn with light and shadow. */
 
 @import "../base.css";
 
-/* Geist when the app loads it, with next/font or @fontsource-variable/geist; the system font otherwise. */
+/* Geist, when the app loads it. */
 @theme {
   --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
 }
 
-/* Text sits a half pixel off the page; on light fills, such as a primary button, it lightens. */
+/* Text sits a half pixel off the page, lighter on light fills. */
 @theme {
   --text-shadow-default: 0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2);
   --text-shadow-subtle: 0.5px 1px 0.5px hsl(0 0% 0% / 0.08);
@@ -38,7 +33,7 @@
     0 1px 0 hsl(0 0% 94.12% / 0.05);
 }
 
-/* The outer edge is nearly opaque, so it holds over lighter surfaces, not only the page. */
+/* A nearly opaque outer edge, so it holds over light surfaces too. */
 @utility surface-float {
   box-shadow:
     0 0 2px 1px hsl(0 0% 9% / 0.8),

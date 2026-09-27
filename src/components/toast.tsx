@@ -2,17 +2,17 @@
 
 import { Toast as Primitive } from "@base-ui/react/toast";
 import { Button } from "./button";
-import { Notice } from "./notice";
+import { CardAction, CardSection } from "./card";
+import { Notice, NoticeClose } from "./notice";
 
 /**
- * Shows notices in a corner of the screen from anywhere, in React or out, once a `Toaster` is
- * mounted: `toast.add({ title: "Exported", description: "portrait.jpg" })`. Each closes after
- * five seconds unless the pointer rests on it; `actionProps` adds a button, and `priority: "high"`
- * makes it an alert. `toast.close(id)`, `toast.update(id, …)`, and `toast.promise(…)` follow it.
+ * Shows notices in a corner from anywhere, once a `Toaster` is mounted:
+ * `toast.add({ title: "Exported", description: "portrait.jpg" })`. `actionProps` adds a button,
+ * and `priority: "high"` makes it an alert.
  */
 export const toast = Primitive.createToastManager();
 
-/** Where `toast` notices appear, the newest nearest the corner. Mount it once, anywhere. */
+/** Where `toast` notices appear. Mount it once, anywhere. */
 export function Toaster() {
   return (
     <Primitive.Provider toastManager={toast}>
@@ -32,22 +32,24 @@ function Toasts() {
       key={item.id}
       toast={item}
       swipeDirection="right"
-      // Past the provider's limit, older toasts stay mounted but inert until the newer ones go.
+      // Past the provider's limit, older toasts wait hidden until newer ones go.
       className="translate-x-(--toast-swipe-movement-x) data-limited:hidden"
-      render={
-        <Notice
-          tone={item.priority === "high" ? "alert" : "status"}
-          onDismiss={() => toast.close(item.id)}
-          actions={
-            item.actionProps && (
-              <Primitive.Action render={<Button variant="primary" />} />
-            )
-          }
-        />
-      }
+      render={<Notice tone={item.priority === "high" ? "alert" : "status"} />}
     >
-      <Primitive.Title className="font-medium" />
-      <Primitive.Description />
+      <CardSection className="flex-row items-start">
+        <div className="flex flex-1 flex-col gap-0.5">
+          <Primitive.Title className="font-medium" />
+          <Primitive.Description />
+        </div>
+        <CardAction>
+          <NoticeClose onClick={() => toast.close(item.id)} />
+        </CardAction>
+      </CardSection>
+      {item.actionProps && (
+        <CardSection className="flex-row gap-1 px-2.5">
+          <Primitive.Action render={<Button variant="primary" />} />
+        </CardSection>
+      )}
     </Primitive.Root>
   ));
 }

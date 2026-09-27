@@ -67,11 +67,7 @@ function preventScroll(event: TouchEvent) {
   event.preventDefault();
 }
 
-/**
- * A tree of rows, such as layers and groups, that drag to reorder or nest. Arrow keys move
- * through it and open or close groups. The caller owns the data: `canDrop` adds its rules to the
- * tree's own (nothing drops into itself) and `onDrop` commits the move.
- */
+/** Rows that nest and drag to reorder; `canDrop` adds rules and `onDrop` commits a move. */
 export function TreeList<T extends TreeNode<T>>({
   items,
   label,
@@ -260,8 +256,7 @@ export function TreeList<T extends TreeNode<T>>({
     action();
   }
 
-  // Every row renders, so a group can animate open and closed; closed groups are inert, and
-  // `rows` holds only the open ones for keys and drops.
+  // Closed groups still render, inert, so they can animate; `rows` holds only the open ones.
   function renderItems(list: readonly T[], depth: number): ReactNode {
     return list.map((item) => {
       const branch = Boolean(item.children?.length);
@@ -317,7 +312,7 @@ export function TreeList<T extends TreeNode<T>>({
             {children(item)}
           </ListItem>
           {branch && (
-            // Rows 0fr to 1fr animates the group's height to its content, like an accordion.
+            // 0fr to 1fr animates the group's height.
             <div
               inert={!expanded}
               data-expanded={expanded}

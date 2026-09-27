@@ -2,9 +2,8 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 /**
- * Writes the `theme` item of registry.json from themes/default.css and the files it imports, so the
- * registry installs the same CSS the package ships. `@theme` variables become `cssVars.theme`;
- * everything else goes to `css`. Runs before each build.
+ * Writes registry.json's `theme` item from themes/default.css and its imports: `@theme` variables
+ * to `cssVars.theme`, the rest to `css`.
  */
 type Rules = { [key: string]: string | Rules };
 

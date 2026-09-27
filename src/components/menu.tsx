@@ -2,32 +2,35 @@
 
 import { Menu as Primitive } from "@base-ui/react/menu";
 import { cn } from "cn";
-import type { ComponentProps, ReactElement, ReactNode } from "react";
+import type { ComponentProps } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
 import { Popup, popupItem } from "./popup";
 
-/** Commands opened from `trigger`, such as an IconButton. For settings, use a Popover. */
-export function Menu({
-  trigger,
+/** Commands, such as a row's actions. For settings, use a Popover. */
+export const Menu = Primitive.Root;
+export const MenuTrigger = Primitive.Trigger;
+
+export function MenuContent({
   align = "end",
-  children,
-}: {
-  trigger: ReactElement;
-  align?: "start" | "center" | "end";
-  children: ReactNode;
-}) {
+  alignOffset,
+  ...props
+}: Primitive.Popup.Props &
+  Pick<Primitive.Positioner.Props, "align" | "alignOffset">) {
   return (
-    <Primitive.Root>
-      <Primitive.Trigger render={trigger} />
-      <Primitive.Portal>
-        <Primitive.Positioner sideOffset={4} align={align} className="z-50">
-          <Primitive.Popup render={(props) => <Popup {...props} list />}>
-            {children}
-          </Primitive.Popup>
-        </Primitive.Positioner>
-      </Primitive.Portal>
-    </Primitive.Root>
+    <Primitive.Portal>
+      <Primitive.Positioner
+        sideOffset={4}
+        align={align}
+        alignOffset={alignOffset}
+        className="z-50"
+      >
+        <Primitive.Popup
+          render={(popup) => <Popup {...popup} list />}
+          {...props}
+        />
+      </Primitive.Positioner>
+    </Primitive.Portal>
   );
 }
 
@@ -37,7 +40,7 @@ export function MenuItem({
   className,
   children,
   ...props
-}: ComponentProps<typeof Primitive.Item> & { shortcut?: string }) {
+}: Primitive.Item.Props & { shortcut?: string }) {
   return (
     <Primitive.Item className={cn(popupItem, "gap-2", className)} {...props}>
       {children}
@@ -50,33 +53,29 @@ export function MenuSeparator() {
   return <Primitive.Separator className="mx-1.5 my-0.5 h-px separator" />;
 }
 
-/** An item that opens a nested list of commands beside the menu. */
-export function Submenu({
-  label,
+export const Submenu = Primitive.SubmenuRoot;
+
+export function SubmenuTrigger({
+  className,
   children,
-}: {
-  label: ReactNode;
-  children: ReactNode;
-}) {
+  ...props
+}: Primitive.SubmenuTrigger.Props) {
   return (
-    <Primitive.SubmenuRoot>
-      <Primitive.SubmenuTrigger
-        className={cn(
-          popupItem,
-          "justify-between gap-4 data-popup-open:bg-raised",
-        )}
-      >
-        {label}
-        <Chevron direction="right" size="sm" className="text-muted" />
-      </Primitive.SubmenuTrigger>
-      <Primitive.Portal>
-        {/* Up by the list's 4px padding, so the first item lines up with its trigger. */}
-        <Primitive.Positioner sideOffset={4} alignOffset={-4} className="z-50">
-          <Primitive.Popup render={(props) => <Popup {...props} list />}>
-            {children}
-          </Primitive.Popup>
-        </Primitive.Positioner>
-      </Primitive.Portal>
-    </Primitive.SubmenuRoot>
+    <Primitive.SubmenuTrigger
+      className={cn(
+        popupItem,
+        "justify-between gap-4 data-popup-open:bg-raised",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <Chevron direction="right" size="sm" className="text-muted" />
+    </Primitive.SubmenuTrigger>
   );
+}
+
+/** Up by the list's padding, so its first item lines up with the trigger. */
+export function SubmenuContent(props: ComponentProps<typeof MenuContent>) {
+  return <MenuContent align="start" alignOffset={-4} {...props} />;
 }

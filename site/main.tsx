@@ -178,7 +178,7 @@ const groups: Group[] = [
         name: "layers",
         title: "Layers",
         description:
-          "A surface stands at a level of the palette, which also sets the fills of the fields and buttons on it: a field a level below, a button two above. So they keep the same contrast on the page, in a card, and in a card inside it, which rises a level on its own.",
+          "Each surface sets the fills of the controls on it, so they keep their contrast on the page, in a card, and in a card inside it, which rises a level on its own.",
         demo: <LayersDemo />,
         bare: true,
         code: '<div className="rounded-xl surface-card">…</div>',
@@ -187,14 +187,14 @@ const groups: Group[] = [
         name: "card",
         title: "Card",
         description:
-          "A stack of sections with a line between each: the first reads as a header and the last as a footer, with no parts of their own. CardAction holds a header's icon buttons at its end. A panel docked at an app's side is the same sections on surface-panel, a card's fill with no edge: surface-panel and cardParts on an element of its own, as in the Photo editor block.",
+          "Sections with a line between each; the first reads as a header and the last as a footer. CardAction holds a header's icon buttons. For a panel docked in a layout, put surface-panel and cardParts on your own element, as the Photo editor block does.",
         demo: <CardDemo />,
       },
       {
         name: "surfaces",
         title: "Surfaces",
         description:
-          "The primitives components are built from, each a fill and an edge the theme draws. surface-raised lifts a control off where it sits and surface-sunken sets it in; surface-thumb marks what you grab. surface-card stands a card on what's under it, a level up; surface-panel is a card docked in a layout, with no edge; surface-float lifts a popup over everything. separator draws a line between groups. A control you build with them follows the theme too.",
+          "The primitives components are built from: a fill, and an edge the theme draws. surface-raised lifts a control and surface-sunken sets it in; surface-card stands a card a level up, surface-panel docks one with no edge, and surface-float lifts a popup over everything. A control you build with them follows the theme too.",
         demo: <SurfacesDemo />,
         code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
       },
@@ -271,7 +271,7 @@ const groups: Group[] = [
         name: "dialog",
         title: "Dialog",
         description:
-          "A modal for decisions that need an answer, such as exporting. DialogClose closes it; alert asks before what can't be undone, and a click outside doesn't dismiss it.",
+          "A modal for decisions that need an answer, such as exporting. DialogClose closes it; alert asks before what can't be undone.",
         demo: (
           <>
             <DialogDemo />
@@ -282,14 +282,15 @@ const groups: Group[] = [
       {
         name: "notice",
         title: "Notice",
-        description: "A message that floats without blocking the app.",
+        description:
+          "A message that floats without blocking the app; NoticeClose dismisses it.",
         demo: <NoticeDemo />,
       },
       {
         name: "toast",
         title: "Toast",
         description:
-          "Notices in a corner, shown with toast.add from anywhere once a Toaster is mounted. They close on their own, wait while the pointer rests on them, and swipe away.",
+          "Notices in a corner, shown with toast.add from anywhere once a Toaster is mounted. They close on their own, or swipe away.",
         demo: <ToastDemo />,
       },
     ],
@@ -315,7 +316,7 @@ const groups: Group[] = [
         name: "scroll-text",
         title: "Scroll text",
         description:
-          "One line of text that fades at the end instead of an ellipsis when it doesn't fit, and scrolls sideways to show the rest, without becoming a tab stop. Use it where you would use truncate. It is the overflow-fade-x utility on a line of text: the same fade, following the scroll, works on anything that may not fit a row, such as tabs or chips.",
+          "One line of text that fades and scrolls where it doesn't fit, instead of an ellipsis. It's the overflow-fade-x utility, which works on any row that may not fit, such as tabs or chips.",
         demo: <ScrollTextDemo />,
       },
     ],

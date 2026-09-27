@@ -36,23 +36,12 @@
           "radius-md": "7px",
           "radius-lg": "9px",
           "radius-xl": "12px",
-          "size-control": "28px",
-          "size-control-lg": "calc(var(--size-control) + 4px)",
-          "size-control-sm": "calc(var(--size-control) - 4px)",
-          "size-item": "calc(var(--size-control) - 2px)",
-          "size-row": "calc(var(--size-control) + 12px)",
-          "size-thumb": "13px",
+          "spacing-thumb": "13px",
           "text-shadow-default": "0.5px 1px 0.5px hsl(0 0% 7.84% / 0.2)",
           "text-shadow-subtle": "0.5px 1px 0.5px hsl(0 0% 0% / 0.08)",
           "color-field": "var(--field)",
           "color-raised": "var(--raised)",
-          "color-raised-hover": "var(--raised-hover)",
-          "spacing-control": "var(--size-control)",
-          "spacing-control-sm": "var(--size-control-sm)",
-          "spacing-control-lg": "var(--size-control-lg)",
-          "spacing-item": "var(--size-item)",
-          "spacing-row": "var(--size-row)",
-          "spacing-thumb": "var(--size-thumb)"
+          "color-raised-hover": "var(--raised-hover)"
         }
       },
       "css": {
@@ -404,6 +393,7 @@
     {
       "name": "radio",
       "type": "registry:ui",
+      "categories": ["inputs"],
       "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
@@ -533,7 +523,7 @@
       "name": "tooltip",
       "type": "registry:ui",
       "categories": ["overlays"],
-      "dependencies": ["@base-ui/react"],
+      "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/kbd.json"
@@ -601,7 +591,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "categories": ["overlays"],
-      "dependencies": ["@base-ui/react"],
+      "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
@@ -640,6 +630,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/button.json",
+        "https://ui.roprgm.com/r/card.json",
         "https://ui.roprgm.com/r/notice.json"
       ],
       "files": [

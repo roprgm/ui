@@ -12,16 +12,40 @@ import {
   CollapsibleTrigger,
 } from "../src/components/collapsible";
 import { Combobox } from "../src/components/combobox";
-import { ContextMenu } from "../src/components/context-menu";
-import { Dialog, DialogClose } from "../src/components/dialog";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuTrigger,
+} from "../src/components/context-menu";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "../src/components/dialog";
 import { Field } from "../src/components/field";
 import { IconButton } from "../src/components/icon-button";
 import { Input } from "../src/components/input";
 import { Kbd } from "../src/components/kbd";
 import { ListItem, ListItemAction } from "../src/components/list-item";
-import { Menu, MenuItem, MenuSeparator, Submenu } from "../src/components/menu";
-import { Notice } from "../src/components/notice";
-import { Popover } from "../src/components/popover";
+import {
+  Menu,
+  MenuContent,
+  MenuItem,
+  MenuSeparator,
+  MenuTrigger,
+  Submenu,
+  SubmenuContent,
+  SubmenuTrigger,
+} from "../src/components/menu";
+import { Notice, NoticeClose } from "../src/components/notice";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../src/components/popover";
 import { Radio } from "../src/components/radio";
 import { ScrollArea } from "../src/components/scroll-area";
 import { ScrollText } from "../src/components/scroll-text";
@@ -34,7 +58,11 @@ import { Tab, TabList } from "../src/components/tabs";
 import { Textarea } from "../src/components/textarea";
 import { toast } from "../src/components/toast";
 import { Toggle, ToggleGroup } from "../src/components/toggle-group";
-import { Tooltip } from "../src/components/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "../src/components/tooltip";
 import { type TreeDrop, TreeList } from "../src/components/tree-list";
 import { VerticalSlider } from "../src/components/vertical-slider";
 import { CopyButton } from "./copy-button";
@@ -115,7 +143,7 @@ function CopyInput({ value }: { value: string }) {
         size="lg"
         className="pr-8"
       />
-      {/* 4px inside the field; concentric corners would be 2px, too sharp at this size. */}
+      {/* 4px in; concentric corners would be too sharp here. */}
       <CopyButton
         value={value}
         size="icon-sm"
@@ -270,7 +298,7 @@ export function ScrollTextDemo() {
       ].map((name) => (
         <div
           key={name}
-          className="flex h-control items-center gap-2 rounded-md surface-sunken px-2.5"
+          className="flex h-7 items-center gap-2 rounded-md surface-sunken px-2.5"
         >
           <ScrollText>{name}</ScrollText>
         </div>
@@ -290,7 +318,6 @@ export function SpinnerDemo() {
   );
 }
 
-/** Each primitive with the fill the base gives it; the theme draws its edge. */
 const surfaces = [
   "surface-raised",
   "surface-sunken",
@@ -407,13 +434,13 @@ function LayerControls({ name }: { name: string }) {
 
 export function TooltipDemo() {
   return (["top", "right", "bottom", "left"] as const).map((side) => (
-    <Tooltip
-      key={side}
-      side={side}
-      content="Saves the document"
-      shortcut="Mod S"
-    >
-      <Button className="capitalize">{side}</Button>
+    <Tooltip key={side}>
+      <TooltipTrigger render={<Button className="capitalize" />}>
+        {side}
+      </TooltipTrigger>
+      <TooltipContent side={side} shortcut="Mod S">
+        Saves the document
+      </TooltipContent>
     </Tooltip>
   ));
 }
@@ -442,84 +469,98 @@ export function BadgeDemo() {
 
 export function MenuDemo() {
   return (
-    <Menu
-      trigger={
-        <IconButton label="Layer actions">
-          <MoreIcon />
-        </IconButton>
-      }
-    >
-      <MenuItem shortcut="Mod D">Duplicate</MenuItem>
-      <MenuItem shortcut="F2">Rename</MenuItem>
-      <Submenu label="Move to">
-        <MenuItem>Top</MenuItem>
-        <MenuItem>Bottom</MenuItem>
-      </Submenu>
-      <MenuSeparator />
-      <MenuItem shortcut="⌫" className="text-danger">
-        Delete
-      </MenuItem>
+    <Menu>
+      <MenuTrigger render={<IconButton label="Layer actions" />}>
+        <MoreIcon />
+      </MenuTrigger>
+      <MenuContent>
+        <MenuItem shortcut="Mod D">Duplicate</MenuItem>
+        <MenuItem shortcut="F2">Rename</MenuItem>
+        <Submenu>
+          <SubmenuTrigger>Move to</SubmenuTrigger>
+          <SubmenuContent>
+            <MenuItem>Top</MenuItem>
+            <MenuItem>Bottom</MenuItem>
+          </SubmenuContent>
+        </Submenu>
+        <MenuSeparator />
+        <MenuItem shortcut="⌫" className="text-danger">
+          Delete
+        </MenuItem>
+      </MenuContent>
     </Menu>
   );
 }
 
 export function ContextMenuDemo() {
   return (
-    <ContextMenu
-      trigger={
-        <div className="flex h-32 w-64 items-center justify-center rounded-lg surface-sunken text-muted select-none">
-          Right-click here
-        </div>
-      }
-    >
-      <MenuItem shortcut="Mod C">Copy</MenuItem>
-      <MenuItem shortcut="Mod V">Paste</MenuItem>
-      <Submenu label="Arrange">
-        <MenuItem>Bring to front</MenuItem>
-        <MenuItem>Send to back</MenuItem>
-      </Submenu>
-      <MenuSeparator />
-      <MenuItem shortcut="⌫" className="text-danger">
-        Delete
-      </MenuItem>
+    <ContextMenu>
+      <ContextMenuTrigger className="flex h-32 w-64 items-center justify-center rounded-lg surface-sunken text-muted select-none">
+        Right-click here
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <MenuItem shortcut="Mod C">Copy</MenuItem>
+        <MenuItem shortcut="Mod V">Paste</MenuItem>
+        <Submenu>
+          <SubmenuTrigger>Arrange</SubmenuTrigger>
+          <SubmenuContent>
+            <MenuItem>Bring to front</MenuItem>
+            <MenuItem>Send to back</MenuItem>
+          </SubmenuContent>
+        </Submenu>
+        <MenuSeparator />
+        <MenuItem shortcut="⌫" className="text-danger">
+          Delete
+        </MenuItem>
+      </ContextMenuContent>
     </ContextMenu>
   );
 }
 
 export function DialogDemo() {
   return (
-    <Dialog
-      trigger={<Button>Export…</Button>}
-      title="Export image"
-      description="Saves a copy with your edits. The original stays as it is."
-      actions={
-        <>
-          <DialogClose render={<Button variant="ghost">Cancel</Button>} />
-          <DialogClose render={<Button variant="primary">Export</Button>} />
-        </>
-      }
-    >
-      <Input defaultValue="portrait-edit.jpg" aria-label="File name" />
+    <Dialog>
+      <DialogTrigger render={<Button />}>Export…</DialogTrigger>
+      <DialogContent>
+        <CardSection className="gap-1">
+          <DialogTitle>Export image</DialogTitle>
+          <DialogDescription>
+            Saves a copy with your edits. The original stays as it is.
+          </DialogDescription>
+        </CardSection>
+        <CardSection>
+          <Input defaultValue="portrait-edit.jpg" aria-label="File name" />
+        </CardSection>
+        <CardSection className="flex-row justify-end gap-1 px-2.5">
+          <DialogClose render={<Button variant="ghost" />}>Cancel</DialogClose>
+          <DialogClose render={<Button variant="primary" />}>
+            Export
+          </DialogClose>
+        </CardSection>
+      </DialogContent>
     </Dialog>
   );
 }
 
 export function AlertDialogDemo() {
   return (
-    <Dialog
-      alert
-      trigger={<Button>Delete layer…</Button>}
-      title="Delete “Sky”?"
-      description="Its mask and adjustments go with it."
-      actions={
-        <>
-          <DialogClose render={<Button variant="ghost">Cancel</Button>} />
-          <DialogClose
-            render={<Button className="text-danger">Delete</Button>}
-          />
-        </>
-      }
-    />
+    <Dialog alert>
+      <DialogTrigger render={<Button />}>Delete layer…</DialogTrigger>
+      <DialogContent>
+        <CardSection className="gap-1">
+          <DialogTitle>Delete “Sky”?</DialogTitle>
+          <DialogDescription>
+            Its mask and adjustments go with it.
+          </DialogDescription>
+        </CardSection>
+        <CardSection className="flex-row justify-end gap-1 px-2.5">
+          <DialogClose render={<Button variant="ghost" />}>Cancel</DialogClose>
+          <DialogClose render={<Button className="text-danger" />}>
+            Delete
+          </DialogClose>
+        </CardSection>
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -527,34 +568,31 @@ export function PopoverDemo() {
   const [size, setSize] = useState(40);
   const [feather, setFeather] = useState(50);
   return (
-    <Popover
-      align="center"
-      className="w-64"
-      trigger={
-        <Chip>
-          <BrushIcon /> Brush
-        </Chip>
-      }
-    >
-      <CardSection>
-        <Slider
-          label="Size"
-          value={size}
-          onChange={setSize}
-          min={1}
-          max={500}
-          format={(v) => `${v}px`}
-        />
-        <Slider
-          label="Feather"
-          value={feather}
-          defaultValue={50}
-          onChange={setFeather}
-          min={0}
-          max={100}
-          format={percent}
-        />
-      </CardSection>
+    <Popover>
+      <PopoverTrigger render={<Chip />}>
+        <BrushIcon /> Brush
+      </PopoverTrigger>
+      <PopoverContent align="center" className="w-64">
+        <CardSection>
+          <Slider
+            label="Size"
+            value={size}
+            onChange={setSize}
+            min={1}
+            max={500}
+            format={(v) => `${v}px`}
+          />
+          <Slider
+            label="Feather"
+            value={feather}
+            defaultValue={50}
+            onChange={setFeather}
+            min={0}
+            max={100}
+            format={percent}
+          />
+        </CardSection>
+      </PopoverContent>
     </Popover>
   );
 }
@@ -565,16 +603,19 @@ export function NoticeDemo() {
     return <Button onClick={() => setShown(true)}>Show notice</Button>;
   }
   return (
-    <Notice
-      onDismiss={() => setShown(false)}
-      actions={
-        <>
-          <Button variant="primary">Restore</Button>
-          <Button variant="ghost">Forget</Button>
-        </>
-      }
-    >
-      An unsaved draft from yesterday can be restored.
+    <Notice>
+      <CardSection className="flex-row items-start">
+        <p className="flex-1">
+          An unsaved draft from yesterday can be restored.
+        </p>
+        <CardAction>
+          <NoticeClose onClick={() => setShown(false)} />
+        </CardAction>
+      </CardSection>
+      <CardSection className="flex-row gap-1 px-2.5">
+        <Button variant="primary">Restore</Button>
+        <Button variant="ghost">Forget</Button>
+      </CardSection>
     </Notice>
   );
 }
@@ -621,7 +662,7 @@ const tools = [
   { id: "crop", label: "Crop", key: "C", Icon: CropIcon },
 ];
 
-/** Segmented icon tabs in a column, with their names and keys as tooltips; `onSelect` makes them live. */
+/** Icon tabs in a column, with their names and keys as tooltips. */
 export function ToolRail({
   selected,
   onSelect,
@@ -632,15 +673,22 @@ export function ToolRail({
   return (
     <TabList aria-label="Tools" variant="segmented" className="flex-col">
       {tools.map(({ id, label, key, Icon }) => (
-        <Tooltip key={id} content={label} shortcut={key} side="right">
-          <Tab
-            selected={id === selected}
-            size="icon"
-            aria-label={label}
-            onClick={() => onSelect(id)}
+        <Tooltip key={id}>
+          <TooltipTrigger
+            render={
+              <Tab
+                selected={id === selected}
+                size="icon"
+                aria-label={label}
+                onClick={() => onSelect(id)}
+              />
+            }
           >
             <Icon />
-          </Tab>
+          </TooltipTrigger>
+          <TooltipContent side="right" shortcut={key}>
+            {label}
+          </TooltipContent>
         </Tooltip>
       ))}
     </TabList>
@@ -724,7 +772,7 @@ export function ListItemDemo() {
           muted={layer.muted}
           onClick={() => setSelected(layer.id)}
         >
-          <span className="size-control rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
+          <span className="size-7 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <span className="flex-1">{layer.name}</span>
           <ListItemAction>
             <IconButton
@@ -809,7 +857,7 @@ export function TreeListDemo() {
     >
       {(layer) => (
         <>
-          <span className="size-control shrink-0 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
+          <span className="size-7 shrink-0 rounded-md bg-linear-to-br from-sky-700 to-amber-600" />
           <ScrollText className="flex-1">{layer.name}</ScrollText>
           <ListItemAction>
             <IconButton
@@ -853,7 +901,7 @@ export function CardDemo() {
   );
 }
 
-/** A card of a fixed height whose last section, a list, takes the room left and scrolls. */
+/** A fixed-height card whose list takes the room left and scrolls. */
 function EffectsCard() {
   const [grain, setGrain] = useState(20);
   const [size, setSize] = useState(35);
@@ -904,7 +952,7 @@ function PresetsCard() {
       <CardSection>
         <h2 className="font-medium">Presets</h2>
       </CardSection>
-      {/* The row runs to the card's edges, so it fades there rather than inside the padding. */}
+      {/* The row runs to the card's edges, so it fades there. */}
       <CardSection className="px-0">
         <div className="flex gap-2 overflow-fade-x px-3.5">
           {presets.map((preset) => (
@@ -1104,7 +1152,7 @@ export function VerticalSliderDemo() {
           min={-100}
           max={100}
           defaultValue={0}
-          // From a gray as light as the hue, so the track neither darkens nor lightens toward it.
+          // From a gray as light as the hue.
           stops={[`hsl(from ${hue.color} h 0% l)`, hue.color]}
           color={hue.color}
         />

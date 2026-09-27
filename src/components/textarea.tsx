@@ -1,7 +1,7 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-/** A sunken multi-line field that grows with its text. `aria-invalid` rings it red. */
+/** A multi-line field that grows with its text. `aria-invalid` rings it red. */
 export function Textarea({ className, ...props }: ComponentProps<"textarea">) {
   return (
     <textarea

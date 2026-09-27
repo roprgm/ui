@@ -12,20 +12,18 @@ import { Chevron } from "./chevron";
 
 type Drag = { x: number; dx: number; value: number; moved: boolean };
 
-// Chevrons shown on hover to hint that the value drags sideways; hidden while typing.
 const hint =
   "pointer-events-none absolute size-[9px] text-faint opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
 
-/** Whole characters, as tabular digits can differ from `ch` by a fraction of a pixel and shift a row. */
+/** Whole `ch`, since tabular digits can differ from it by a fraction of a pixel. */
 function digitsWidth(digits: string, minChars?: number) {
   if (!minChars) return undefined;
   return `${Math.max(minChars, digits.length)}ch`;
 }
 
 /**
- * A number shown as text that scrubs on horizontal drag, types on click or focus,
- * and steps with the arrow keys. `format` writes the text; whatever follows its last
- * digit reads as the unit, e.g. `(v) => `${v}px`` or `Intl.NumberFormat(…).format`.
+ * A number that drags sideways, types on click, and steps with the arrow keys. What `format`
+ * writes after the last digit reads as the unit.
  */
 export function ScrubInput({
   value,
@@ -43,17 +41,17 @@ export function ScrubInput({
 }: {
   value: number;
   onChange: (value: number) => void;
-  /** Reports a drag or typing session, so a caller can group its changes into one edit. */
+  /** Brackets a drag or typing, so a caller can group its changes into one edit. */
   onEditingChange?: (editing: boolean) => void;
   min: number;
   max: number;
   step?: number;
-  /** Restored by double-clicking the value. */
+  /** Restored by a double-click. */
   defaultValue?: number;
   format?: (value: number) => string;
-  /** Minimum width of the digits in characters, so a value whose digit count changes doesn't shift its row. */
+  /** Minimum width of the digits, in characters, so the row doesn't shift. */
   minChars?: number;
-  /** Shows chevrons beside the value on hover, hinting that it drags sideways. */
+  /** Chevrons on hover, hinting that it drags. */
   chevrons?: boolean;
   className?: string;
   "aria-label"?: string;
@@ -134,12 +132,10 @@ export function ScrubInput({
   };
 
   return (
-    // The field inside stays focusable and typeable, with the formatted text over it until then;
-    // dragging is a pointer shortcut on top of it, which the keyboard gets through the arrow keys.
+    // The input is the control; dragging is a pointer shortcut over it.
     // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
       className={cn(
-        // A line of text plus 2px above and below, so it follows the app's text size; the unit never wraps off the digits.
         "group relative inline-flex cursor-ew-resize items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
         className,
       )}
@@ -162,7 +158,7 @@ export function ScrubInput({
           >
             {number}
           </span>
-          {/* A unit set flush against the digits, like % or °, gets a hair of space. */}
+          {/* A unit flush against the digits, such as %, gets a hair of space. */}
           <span
             className={cn("text-faint", /^\S/.test(unit ?? "") && "ml-0.5")}
           >

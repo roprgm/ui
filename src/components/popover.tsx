@@ -2,42 +2,30 @@
 
 import { Popover as Primitive } from "@base-ui/react/popover";
 import { cn } from "cn";
-import type { ReactElement, ReactNode } from "react";
 import { cardParts } from "./card";
 import { Popup } from "./popup";
 
-/**
- * Settings opened beside `trigger`, such as bar controls that no longer fit. Its content is
- * `CardSection`s, stacked with a line between each, as in a card.
- * `className` sizes its box, such as a width its parts fill.
- */
-export function Popover({
-  trigger,
+/** Settings beside their trigger, such as bar controls that no longer fit. */
+export const Popover = Primitive.Root;
+export const PopoverTrigger = Primitive.Trigger;
+
+/** `CardSection`s with a line between each, as in a card. */
+export function PopoverContent({
   align = "end",
-  className,
-  children,
-}: {
-  trigger: ReactElement;
-  align?: "start" | "center" | "end";
-  className?: string;
-  children: ReactNode;
-}) {
+  ...props
+}: Primitive.Popup.Props & Pick<Primitive.Positioner.Props, "align">) {
   return (
-    <Primitive.Root>
-      <Primitive.Trigger render={trigger} />
-      <Primitive.Portal>
-        <Primitive.Positioner sideOffset={4} align={align} className="z-50">
-          <Primitive.Popup
-            // Keyboard users land inside; a click leaves focus on the trigger, so no field starts typing.
-            initialFocus={(type) => type === "keyboard"}
-            render={(props) => (
-              <Popup {...props} className={cn(cardParts, className)} />
-            )}
-          >
-            {children}
-          </Primitive.Popup>
-        </Primitive.Positioner>
-      </Primitive.Portal>
-    </Primitive.Root>
+    <Primitive.Portal>
+      <Primitive.Positioner sideOffset={4} align={align} className="z-50">
+        <Primitive.Popup
+          // A click leaves focus on the trigger, so no field starts typing.
+          initialFocus={(type) => type === "keyboard"}
+          render={(popup) => (
+            <Popup {...popup} className={cn(cardParts, popup.className)} />
+          )}
+          {...props}
+        />
+      </Primitive.Positioner>
+    </Primitive.Portal>
   );
 }

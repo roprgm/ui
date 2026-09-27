@@ -9,7 +9,6 @@ const badge = cva(
     variants: {
       variant: {
         default: "text-muted",
-        // Filled like a checked checkbox, since it marks what is on or new.
         primary:
           "bg-primary! text-on-primary text-shadow-(--text-shadow-subtle)",
       },
@@ -18,7 +17,7 @@ const badge = cva(
   },
 );
 
-/** A short label that isn't a control, such as a status or a count; `primary` marks what is new. */
+/** A short label, such as a status or a count. */
 export function Badge({
   variant,
   className,

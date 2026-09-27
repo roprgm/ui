@@ -2,20 +2,14 @@ import { cn } from "cn";
 import type { ComponentProps } from "react";
 
 /**
- * The box everything floating is drawn in: menus, selects, popovers, dialogs, and notices. It has
- * no padding of its own: a list of items takes `list`, and other content sits in `CardSection`s. Render a Base UI popup as one:
- * `<Menu.Popup render={(props) => <Popup {...props} />} />`. It floats, so it's elevated wherever
- * it opens.
+ * The floating box of menus, selects, popovers, dialogs, and notices. `list` pads a column of
+ * `popupItem` rows; other content goes in `CardSection`s.
  */
 export function Popup({
   list = false,
   className,
   ...props
-}: ComponentProps<"div"> & {
-  /** Holds a column of `popupItem` rows, as a menu does: 4px around them, so its 9px corners nest
-      around their 5px ones. A list inside it, as a select's, stacks its rows the same way. */
-  list?: boolean;
-}) {
+}: ComponentProps<"div"> & { list?: boolean }) {
   return (
     <div
       className={cn(
@@ -28,10 +22,6 @@ export function Popup({
   );
 }
 
-/**
- * A row in a popup's list, as in a menu or select: 2px shorter than a control, so a list reads
- * dense, padded so its text lands 14px from the popup's edge past the list's 4px, and a flat
- * highlight under the pointer or keys.
- */
+/** A row in a popup's list, as in a menu or select. */
 export const popupItem =
-  "flex h-item shrink-0 cursor-default items-center rounded-sm px-2.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised";
+  "flex h-6.5 shrink-0 cursor-default items-center rounded-sm px-2.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised";

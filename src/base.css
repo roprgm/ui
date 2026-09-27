@@ -1,26 +1,15 @@
-/*
- * The base every theme builds on: the tokens, the primitives components are made of, and the
- * utilities, variants, and page rules around them. A theme imports this file, sets again any
- * token it changes in its own `@theme`, and draws the primitives' edges its own way: with
- * shadows, borders, or nothing.
- */
+/* The tokens, primitives, and utilities every theme builds on. A theme imports this file, sets
+   again the tokens it changes, and draws the primitives' edges. */
 
 @source "./";
 
-/* The system font; a theme sets its own. */
 @theme {
   --font-sans: system-ui, sans-serif;
 }
 
-/*
- * Colors. Components use only these, so a theme, or your own `@theme`, restyles every component by
- * setting them again.
- */
+/* Colors. Components use only these. */
 @theme {
-  /* Levels, the backgrounds of the interface, darkest first. Every fill is one of them: a surface
-     stands at a level, a field sits one below it, and a raised control two above, three on hover.
-     A theme redefines all eight; a light one lightens up to its cards and darkens after, since
-     white can't get lighter. */
+  /* Backgrounds, darkest first. Every fill is one of them. */
   --color-level-1: hsl(0 0% 4%);
   --color-level-2: hsl(0 0% 8%);
   --color-level-3: hsl(0 0% 12.3%);
@@ -36,13 +25,12 @@
   --color-faint: hsl(0 0% 45%);
   --color-disabled: hsl(0 0% 32%);
 
-  /* What is on: primary buttons, checked controls, thumbs, drop markers. */
+  /* What is on: primary buttons, checked controls, thumbs. */
   --color-primary: hsl(0 0% 86%);
   --color-primary-hover: hsl(0 0% 98%);
   --color-on-primary: hsl(0 0% 9%);
 
-  /* Translucent, over any level: the states of ghost buttons and chips, lines, the focus ring, and
-     the shade behind a dialog. */
+  /* Translucent, over any level. */
   --color-hover: hsl(0 0% 100% / 0.08);
   --color-pressed: hsl(0 0% 100% / 0.15);
   --color-line: hsl(0 0% 0% / 0.4);
@@ -53,16 +41,13 @@
   --color-tooltip: var(--color-level-1);
 }
 
-/* The fills of controls, which the surface they sit on sets. `inline` writes the variable into
-   each utility, so a control reads the surface around it. */
+/* The fills of controls, set by the surface they sit on. */
 @theme inline {
   --color-field: var(--field);
   --color-raised: var(--raised);
   --color-raised-hover: var(--raised-hover);
 }
 
-/* Corner radii, used as `rounded-*`. Nested corners stay concentric: the outer radius less the
-   inset is the inner radius, so changing one may mean changing the ones inside it. */
 @theme {
   --radius-xs: 2.5px;
   --radius-sm: 5px;
@@ -71,55 +56,15 @@
   --radius-xl: 12px;
 }
 
-/*
- * Sizes, the only spacing kept as tokens, since they set the density. `--size-control` is Button's
- * height and the scale the other controls measure themselves against; the sizes after it follow
- * from it, and resolve once at the root, so redefining `--size-control` on an element changes
- * only what reads it directly, as a segmented group does for the controls set into it. Padding
- * and gaps are Tailwind's own scale, written as they are.
- */
+/* A range input's thumb, which the slider's math reads too. */
 @theme {
-  /* Buttons, selects, fields, chips, and the thumbnails and icon buttons in rows. */
-  --size-control: 28px;
-  /* Large buttons, selects, and fields. */
-  --size-control-lg: calc(var(--size-control) + 4px);
-  /* Small buttons, the controls set into a segmented group, and close buttons. */
-  --size-control-sm: calc(var(--size-control) - 4px);
-  /* A row in a popup's list, 2px shorter than a control so a list reads dense. */
-  --size-item: calc(var(--size-control) - 2px);
-  /* A row in a panel's list: a control and 6px above and below it. */
-  --size-row: calc(var(--size-control) + 12px);
-  /* A range input's thumb. The slider's fill and the room around its bar follow it. */
-  --size-thumb: 13px;
+  --spacing-thumb: 13px;
 }
 
-/* The sizes as utilities: `h-control`, `size-control-sm`, `h-item`, `h-row`, `size-thumb`. `inline`
-   writes the token itself into each, so a token redefined on an element reaches the ones inside. */
-@theme inline {
-  --spacing-control: var(--size-control);
-  --spacing-control-sm: var(--size-control-sm);
-  --spacing-control-lg: var(--size-control-lg);
-  --spacing-item: var(--size-item);
-  --spacing-row: var(--size-row);
-  --spacing-thumb: var(--size-thumb);
-}
+/* Surfaces: a fill, and an edge the theme draws. A container's surface also sets the fills of the
+   controls on it: a field a level below, a raised control two above, three on hover. A theme
+   changes a fill through its token, never by redeclaring `background-color` here. */
 
-/*
- * Surfaces: what a box is filled with and how it stands against what's under it, the one look
- * components use. Each fills itself from the levels above, relative to where it sits, and a theme
- * draws its edge with shadows, lines, or nothing, so a theme restyles every component, and yours,
- * by drawing these. A container's surface sets its fill, `--layer`, and the fills of the controls
- * on it, all from the levels, so every color is one of the palette's.
- *
- * A theme changes a fill by setting its color token again, never by redeclaring the property here:
- * Tailwind orders a utility's merged definitions by how many properties each has, so this file's
- * could win. A component that needs another fill says so with `!`, as the primary Button does,
- * since a plain `bg-*` sorts before these.
- */
-
-/* The page, the first of three levels: what's on it, and what's on that. Each sets its fill,
-   `--layer`, and the fills of the controls on it: a field a level below, a raised control two
-   above, three on hover. */
 @layer base {
   :root {
     --layer: var(--color-level-2);
@@ -129,7 +74,7 @@
   }
 }
 
-/* A card on the page, a level up; on a card, a panel, or in a popup, a level up again. */
+/* A card, a level up; inside a card, a panel, or a popup, a level up again. */
 @utility surface-card {
   --layer: var(--color-level-3);
   --field: var(--color-level-2);
@@ -145,8 +90,7 @@
   }
 }
 
-/* A card docked in an app's layout, with things against it rather than room around it: a card's
-   level, and no edge unless a theme draws one. */
+/* A card docked in a layout, with no edge. */
 @utility surface-panel {
   --layer: var(--color-level-3);
   --field: var(--color-level-2);
@@ -155,8 +99,7 @@
   background-color: var(--layer);
 }
 
-/* Floats over everything, a level above a card wherever it opens: popups, dialogs, notices, and
-   anything dragged. */
+/* What floats: popups, dialogs, notices, anything dragged. */
 @utility surface-float {
   --layer: var(--color-level-4);
   --field: var(--color-level-3);
@@ -165,35 +108,32 @@
   background-color: var(--layer);
 }
 
-/* Floats in a shape that isn't a box, such as a tooltip with its arrow, so a theme draws its edge
-   as a filter that follows the shape. It fills itself, as a tooltip has no layer. */
+/* A floating shape that isn't a box, such as a tooltip with its arrow. */
 @utility surface-callout {
   @apply bg-tooltip;
 }
 
-/* Stands out from where it sits: buttons, selects, and selected tabs and toggles. */
+/* Buttons, selects, selected tabs and toggles. */
 @utility surface-raised {
   @apply bg-raised;
 }
 
-/* Set into where it sits: fields, tracks, checkboxes, switches, and segmented groups. */
+/* Fields, tracks, checkboxes, switches, segmented groups. */
 @utility surface-sunken {
   @apply bg-field;
 }
 
-/* Grabbed and moved: a slider's thumb or a switch's knob. */
+/* A slider's thumb or a switch's knob. */
 @utility surface-thumb {
   @apply bg-primary;
 }
 
-/* A line between groups, such as a menu's. Size it with `h-px` or `w-px`. The lines between a
-   card's sections and along a list row are inset shadows in `--color-line`, the same color. */
+/* A line between groups; size it with `h-px` or `w-px`. */
 @utility separator {
   @apply bg-line;
 }
 
-/* How a popup opens and closes: it grows from where it was opened as it fades in, and fades out.
-   Base UI sets the attributes and `--transform-origin`. */
+/* Grows from its trigger as it fades in. Base UI sets the attributes and the origin. */
 @utility popup-motion {
   transform-origin: var(--transform-origin);
   transition-property: opacity, scale;
@@ -209,8 +149,7 @@
   }
 }
 
-/* An outline set off by a gap, so it shows on any fill. It stays transparent until
-   the element or a child has keyboard focus, then fades in slowly. */
+/* An outline with a gap, on keyboard focus. */
 @utility focus-ring {
   outline: 2px solid transparent;
   outline-offset: 1px;
@@ -222,8 +161,7 @@
   }
 }
 
-/* Fades a disabled control and stops it reacting, whether it is disabled natively, through Base
-   UI's `data-disabled`, or by a disabled input inside it, as a toggle's radio is. */
+/* Fades a control disabled natively, by Base UI, or through a disabled input inside it. */
 @utility dim-disabled {
   &:is(:disabled, [data-disabled], :has(:disabled)) {
     pointer-events: none;
@@ -231,22 +169,13 @@
   }
 }
 
-/* A range input drawn as its thumb alone, over a track the component paints: a `--size-thumb`
-   `surface-thumb`, with the focus ring in its shape. Touch draws no highlight box around it. */
+/* A range input drawn as its thumb alone, over a track the component paints. */
 @utility range-thumb {
   @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-thumb thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
 }
 
-/*
- * Overflow that scrolls and fades where more lies that way, rather than showing a scrollbar or
- * cutting the content off: `overflow-fade-y` for a column, `overflow-fade-x` for a row.
- */
-
-/* Scrolls vertically, with a shade at the top and bottom that shows while there is more to scroll
-   that way. Where the browser ties animations to scrolling, each shade follows the position: the
-   top one fades in over the first 1.5rem scrolled and the bottom one fades out over the last, and
-   neither shows when nothing overflows. Elsewhere it fades by time, from the attributes Base UI's
-   ScrollArea sets on its viewport. */
+/* Scrolls vertically, shading an edge while more lies past it. Without scroll timelines, it reads
+   the attributes Base UI's ScrollArea sets. */
 @utility overflow-fade-y {
   overflow-y: auto;
   &::before,
@@ -318,8 +247,7 @@
   }
 }
 
-/* How far in each edge of an overflow-fade-x element fades, animated as it scrolls. Registered, so
-   an animation can move them. */
+/* Registered, so an animation can move them. */
 @property --overflow-fade-start {
   syntax: "<length>";
   inherits: false;
@@ -332,15 +260,8 @@
   initial-value: 0px;
 }
 
-/* Scrolls horizontally, fading the start and end of its content where more of it lies that way,
-   following the scroll position: the end fades while there is more to the right, and the start
-   fades in over the first 1.5rem scrolled. A mask, so it fades the content itself and works on any
-   background. The fade stands in for a scrollbar, so it hides it, and a sideways swipe that
-   reaches an end stops there rather than scrolling the page or going back a page. It shrinks in a
-   flex row, so a row of chips or tabs, or a line of text with `whitespace-nowrap`, scrolls inside
-   whatever holds it. When nothing overflows, or the browser can't tie animations to scrolling,
-   nothing fades. A box that scrolls is a tab stop when nothing in it is one, so give one that holds
-   only text `tabIndex={-1}`, as the ScrollText component does. */
+/* Scrolls horizontally, fading an edge while more lies past it, with no scrollbar. Give one that
+   holds only text `tabIndex={-1}`, or it becomes a tab stop. */
 @utility overflow-fade-x {
   min-width: 0;
   overflow-x: auto;
@@ -387,10 +308,7 @@
   }
 }
 
-/* A bright band sweeping across text, icons, or placeholder blocks. The mask only dims, so the
-   element keeps its own colors; the band is the one place shown at full strength. The band is
-   sized to the element, so put it on a group of blocks rather than on each one, and one band
-   crosses them all at the same pace. */
+/* A bright band sweeping across pending work. On a group, one band crosses it all. */
 @utility shimmer {
   mask-image: linear-gradient(
     100deg,
@@ -409,7 +327,6 @@
   }
 }
 
-/* The band crosses in the first three quarters, then rests off the edge before the next pass. */
 @keyframes shimmer {
   from {
     mask-position: 100% 0;
@@ -420,7 +337,7 @@
   }
 }
 
-/* A range input's thumb. Separate rules, since one unknown pseudo-element voids a selector list. */
+/* Separate rules, since one unknown pseudo-element voids a selector list. */
 @custom-variant thumb {
   &::-webkit-slider-thumb {
     @slot;
@@ -431,7 +348,6 @@
 }
 
 @layer base {
-  /* 13px text in the foreground color on the page's layer, with dark form controls. */
   body {
     font-family: var(--font-sans);
     font-size: 13px;

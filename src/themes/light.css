@@ -1,12 +1,8 @@
-/*
- * A light theme: dark text on a light-gray page, with white cards and popups, and surfaces drawn
- * with soft shadows and hairlines. White can't get lighter, so a raised control sits a shade below
- * the layer it stands on and a field a shade below that.
- */
+/* Dark text on a light-gray page, with white cards and popups. */
 
 @import "../base.css";
 
-/* Geist when the app loads it, with next/font or @fontsource-variable/geist; the system font otherwise. */
+/* Geist, when the app loads it. */
 @theme {
   --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
 }
@@ -29,8 +25,7 @@
   --color-focus: hsl(0 0% 0% / 0.3);
   --color-danger: hsl(0 72% 46%);
 
-  /* The page is light gray, and cards and popups are white; past them, levels darken, since white
-     can't get lighter. */
+  /* White can't get lighter, so levels darken past cards and popups. */
   --color-level-1: hsl(0 0% 90%);
   --color-level-2: hsl(0 0% 95%);
   --color-level-3: hsl(0 0% 100%);

@@ -7,23 +7,22 @@ import { type ReactNode, useState } from "react";
 import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Popup, popupItem } from "./popup";
-import { Tooltip } from "./tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
 const trigger = cva(
   "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring dim-disabled",
   {
     variants: {
-      /** "field" sits in a panel or form; "pill" sits in a bar over a canvas, beside Chips. */
+      /** `pill` goes in a bar over a canvas, beside Chips. */
       variant: {
         field:
           "rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
         pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
       },
-      /** A Button's heights and label padding, 2px less on the chevron's side; `lg` goes with
-          large buttons and a large ToggleGroup. */
+      /** A Button's, 2px less on the chevron's side. */
       size: {
-        default: "h-control pr-2.5 pl-3",
-        lg: "h-control-lg pr-3 pl-3.5",
+        default: "h-7 pr-2.5 pl-3",
+        lg: "h-8 pr-3 pl-3.5",
       },
     },
     defaultVariants: { size: "default" },
@@ -89,13 +88,13 @@ export function Select<T extends string, Multiple extends boolean = false>({
       }}
       {...props}
     >
-      {tooltip ? (
-        <Tooltip content={tooltip} disabled={open}>
-          {control}
+      {tooltip && (
+        <Tooltip disabled={open}>
+          <TooltipTrigger render={control} />
+          <TooltipContent>{tooltip}</TooltipContent>
         </Tooltip>
-      ) : (
-        control
       )}
+      {!tooltip && control}
       <Primitive.Portal>
         <Primitive.Positioner
           sideOffset={4}
@@ -110,7 +109,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
             <Primitive.List className="flex flex-col gap-0.5">
               {items.map((item, index) => (
                 <Primitive.Item
-                  // Two items may share a value, such as an "Original" ratio equal to a preset.
+                  // Values can repeat.
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}

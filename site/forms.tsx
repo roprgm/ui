@@ -27,7 +27,7 @@ const sorts = [
   { value: "rating", label: "Rating" },
 ];
 
-/** Fields, buttons, and toggles side by side, to judge how their sizes and paddings sit together. */
+/** Controls side by side, to judge their sizes together. */
 export function FormsDemo() {
   const [quality, setQuality] = useState(90);
   return (
@@ -144,7 +144,7 @@ export function FormsDemo() {
         </div>
       </div>
 
-      {/* Sunken and raised controls in one row, to judge which heights read as equal. */}
+      {/* To judge which heights read as equal. */}
       <div className="flex flex-col gap-3 @2xl:col-span-2">
         <div className="flex flex-wrap items-center gap-2">
           <ToggleGroup>

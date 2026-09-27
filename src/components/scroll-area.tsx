@@ -4,10 +4,7 @@ import { ScrollArea as Primitive } from "@base-ui/react/scroll-area";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-/**
- * Scrolls vertically with a thin overlay bar; `fade` shades an edge while content continues past it.
- * The fade's 30% color hint eases it: dense at the edge, a third of its strength halfway, a long soft tail.
- */
+/** Scrolls vertically with a thin bar; `fade` shades an edge while more lies past it. */
 export function ScrollArea({
   fade,
   className,

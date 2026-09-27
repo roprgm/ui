@@ -4,8 +4,18 @@ import { CardAction, CardSection, cardParts } from "../src/components/card";
 import { Chip } from "../src/components/chip";
 import { IconButton } from "../src/components/icon-button";
 import { ListItem, ListItemAction } from "../src/components/list-item";
-import { Menu, MenuItem, MenuSeparator } from "../src/components/menu";
-import { Popover } from "../src/components/popover";
+import {
+  Menu,
+  MenuContent,
+  MenuItem,
+  MenuSeparator,
+  MenuTrigger,
+} from "../src/components/menu";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../src/components/popover";
 import { ScrollArea } from "../src/components/scroll-area";
 import { Slider } from "../src/components/slider";
 import { percent, ToolRail } from "./demos";
@@ -13,7 +23,7 @@ import { EyeIcon, MoreIcon, PlusIcon } from "./icons";
 
 const layers = ["Sky", "Subject", "Image"];
 
-/** Openlight's layout from the library alone; the sliders drive a CSS stand-in for the photo. */
+/** OpenLight's layout from the library alone. */
 export function EditorDemo() {
   const [tool, setTool] = useState("adjust");
   const [width, setWidth] = useState(280);
@@ -55,21 +65,20 @@ export function EditorDemo() {
               valueWidth={3}
               variant="toolbar"
             />
-            <Popover
-              align="center"
-              trigger={<Chip>More</Chip>}
-              className="w-56"
-            >
-              <CardSection>
-                <Slider
-                  label="Size"
-                  value={size}
-                  onChange={setSize}
-                  min={1}
-                  max={500}
-                  format={(v) => `${v}px`}
-                />
-              </CardSection>
+            <Popover>
+              <PopoverTrigger render={<Chip />}>More</PopoverTrigger>
+              <PopoverContent align="center" className="w-56">
+                <CardSection>
+                  <Slider
+                    label="Size"
+                    value={size}
+                    onChange={setSize}
+                    min={1}
+                    max={500}
+                    format={(v) => `${v}px`}
+                  />
+                </CardSection>
+              </PopoverContent>
             </Popover>
             <Chip aria-pressed={overlay} onClick={() => setOverlay(!overlay)}>
               Overlay
@@ -77,8 +86,7 @@ export function EditorDemo() {
           </div>
         )}
       </div>
-      {/* A card docked beside the canvas: its sections without a card's corners or edge. Under the
-          canvas it spans the frame and its dragged width waits for a wider one. */}
+      {/* A panel docked beside the canvas, or under it in a narrow frame. */}
       <aside
         className={cn(
           cardParts,
@@ -90,17 +98,16 @@ export function EditorDemo() {
         <CardSection className="flex-row items-center">
           <h2 className="flex-1 font-medium">{layer}</h2>
           <CardAction>
-            <Menu
-              trigger={
-                <IconButton label="Layer actions">
-                  <MoreIcon />
-                </IconButton>
-              }
-            >
-              <MenuItem>Duplicate</MenuItem>
-              <MenuItem>Rename</MenuItem>
-              <MenuSeparator />
-              <MenuItem className="text-danger">Delete</MenuItem>
+            <Menu>
+              <MenuTrigger render={<IconButton label="Layer actions" />}>
+                <MoreIcon />
+              </MenuTrigger>
+              <MenuContent>
+                <MenuItem>Duplicate</MenuItem>
+                <MenuItem>Rename</MenuItem>
+                <MenuSeparator />
+                <MenuItem className="text-danger">Delete</MenuItem>
+              </MenuContent>
             </Menu>
           </CardAction>
         </CardSection>
@@ -166,7 +173,7 @@ export function EditorDemo() {
               selected={name === layer}
               onClick={() => setLayer(name)}
             >
-              <span className="size-control rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
+              <span className="size-7 rounded-md bg-linear-to-b from-[#3b6ea5] via-[#f0a868] to-[#16261d]" />
               <span className="flex-1">{name}</span>
               <ListItemAction>
                 <IconButton
@@ -184,7 +191,7 @@ export function EditorDemo() {
   );
 }
 
-/** The panel's edge facing the canvas, which drags to resize it between 240px and 360px. */
+/** The panel's edge, which drags to resize it between 240px and 360px. */
 function ResizeEdge({
   width,
   onWidthChange,

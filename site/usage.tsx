@@ -24,7 +24,7 @@ function CopyForAgents() {
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    // Both labels share one cell, so the button keeps the longer one's width while they fade.
+    // Both labels share one cell, so the width holds while they fade.
     <Button onClick={copy} data-copied={copied} className="group shrink-0">
       <span className="grid *:[grid-area:1/1]">
         <span className="flex items-center gap-2 transition-opacity duration-200 group-data-[copied=true]:opacity-0">
@@ -39,7 +39,6 @@ function CopyForAgents() {
   );
 }
 
-/** The docs' opening page: how to add the library, and how cards work. */
 export function Usage() {
   return (
     <div className="flex max-w-3xl flex-col gap-10">
@@ -68,9 +67,11 @@ export function Usage() {
       </Section>
       <Section title="Put controls on cards">
         <p className="text-muted">Controls adapt to the card they sit on.</p>
-        <Code lang="tsx">{`<div className="rounded-xl p-3 surface-card">
-  <Input placeholder="Name" />
-</div>`}</Code>
+        <Code lang="tsx">{`<Card>
+  <CardSection>
+    <Input placeholder="Name" />
+  </CardSection>
+</Card>`}</Code>
       </Section>
     </div>
   );

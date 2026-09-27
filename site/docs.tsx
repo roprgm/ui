@@ -16,11 +16,11 @@ export type Doc = {
   title: string;
   description: string;
   demo: ReactNode;
-  /** A composition of components: it fills the preview and has no registry item yet. */
+  /** A composition that fills the preview and has no registry item. */
   block?: boolean;
   /** Renders on the page itself, without the preview card. */
   bare?: boolean;
-  /** Shown instead of the install command, for utilities that come with the theme. */
+  /** Shown instead of the install command, for the theme's utilities. */
   code?: string;
 };
 
@@ -28,7 +28,7 @@ export type Group = { title: string; docs: Doc[] };
 
 const slug = (group: Group) => group.title.toLowerCase();
 
-/** Nav links take the library's focus ring, hugging the text rather than the row. */
+/** Focus rings hug the text rather than the row. */
 const link = "self-start rounded-sm transition focus-ring";
 
 /** The location hash, which names a group or a doc. */
@@ -42,11 +42,7 @@ function useHash() {
   return hash;
 }
 
-/**
- * The docs page shows the usage guide, or one group at a time. The hash picks the group, by its
- * name or one of its docs; a doc link in another group switches to that group and scrolls to
- * the doc. Any other hash, or none, shows the guide.
- */
+/** The usage guide, or the group the hash names by its title or one of its docs. */
 export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
   const hash = useHash();
   const current = groups.find(
@@ -54,7 +50,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
       slug(group) === hash || group.docs.some((doc) => doc.name === hash),
   );
 
-  // Runs after the group renders, so a doc from another group exists to scroll to.
+  // After the group renders, so the doc exists to scroll to.
   useLayoutEffect(() => {
     const doc = document.getElementById(hash);
     if (doc?.tagName === "ARTICLE") doc.scrollIntoView();
@@ -64,8 +60,7 @@ export function Page({ groups, usage }: { groups: Group[]; usage: ReactNode }) {
   return (
     <div className="mx-auto flex max-w-6xl gap-12 px-6">
       <nav className="sticky top-0 hidden h-dvh w-48 shrink-0 md:block">
-        {/* The right padding keeps the scrollbar clear of the links; the area reaches 4px past the
-            left edge, padded back, so it doesn't clip a control's edge or focus ring there. */}
+        {/* 4px past the left edge, padded back, so it doesn't clip focus rings. */}
         <ScrollArea className="-ml-1 h-full">
           <div className="flex flex-col gap-1 py-12 pr-4 pl-1">
             <div className="mb-4 -mt-px flex items-center gap-1">
@@ -185,7 +180,7 @@ function Article({ doc }: { doc: Doc }) {
 
 function Preview({ doc }: { doc: Doc }) {
   if (doc.bare) return doc.demo;
-  // Blocks lay themselves out by the width of this frame, not the screen's.
+  // Blocks lay out by this frame's width.
   if (doc.block) return <Card className="@container">{doc.demo}</Card>;
   return (
     <Card>
@@ -198,7 +193,7 @@ function Preview({ doc }: { doc: Doc }) {
 
 const languages = { css, shell, tsx: typescript };
 
-/** Highlighted code with a copy button, one line or several; `text` wraps and isn't highlighted. */
+/** Highlighted code with a copy button; `text` wraps instead. */
 export function Code({
   lang = "shell",
   children,
@@ -207,7 +202,7 @@ export function Code({
   children: string;
 }) {
   return (
-    // Each line is 16px in a 6px padding, so the first one centers on the 28px copy button.
+    // 6px around a 16px line centers it on the 28px copy button.
     <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 surface-sunken">
       {lang === "text" && (
         <pre className="flex-1 py-1.5 font-mono text-xs whitespace-pre-wrap text-foreground">
