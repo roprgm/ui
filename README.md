@@ -63,7 +63,7 @@ A card, popover, dialog, or notice pads its content as one section. To split it,
 </Card>
 ```
 
-- Use `surface-card` for cards, which rise two levels over what they sit on, even another card, and `surface-raised` for controls, three levels up. What floats is `surface-float`, a card drawn floating; a popup rises from where its trigger is.
+- Use `surface-card` for cards, which rise two levels over what they sit on, even another card, and `surface-raised` for controls, three levels up. Dock a card in your layout with `surface-panel`, which has no edge. What floats is `surface-float`, a card drawn floating: a popup opens as a card on the page, and with `raised`, a level up, for one that opens over a card.
 - Use the theme's colors, such as `text-muted`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette.
 - Build your own controls from the `surface-*` primitives rather than shadows or borders of your own, so they follow the theme.
 - For content that may not fit, use `overflow-fade-x` or `overflow-fade-y`: it scrolls, and fades where more lies that way. For one line of text, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
@@ -107,8 +107,9 @@ A surface is what a box is filled with and how it stands against what's under it
 
 | Surface | Fill | Used by |
 | --- | --- | --- |
-| `surface-card` | two levels up from what it sits on | cards, and panels docked in your layout without its edge |
-| `surface-float` | a card's, drawn floating; a popup, from where its trigger is | popups, dialogs, notices, anything dragged |
+| `surface-card` | two levels up from what it sits on | cards |
+| `surface-panel` | a card's, with no edge | a card docked in your layout, such as a sidebar |
+| `surface-float` | a card's, drawn floating; with `raised`, a level up | popups, dialogs, notices, anything dragged |
 | `surface-raised` | three levels up from what it sits on | buttons, selects, selected tabs and toggles |
 | `surface-sunken` | two levels down from what it sits on | fields, tracks, checkboxes, switches, groups |
 | `surface-primary` | the primary color | primary buttons, checked switches, slider thumbs |

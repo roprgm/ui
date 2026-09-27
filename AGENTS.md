@@ -1,57 +1,43 @@
 # @roprgm/ui
 
-A minimal, dark, neutral component library. Every file in `src/` ships to npm and to the shadcn registry, so keep each one self-contained and copy-pasteable. The goal is for OpenLight to adopt this library; port its patterns and keep APIs close to its usage.
+A minimal, dark component library for React and Tailwind CSS v4, on Base UI. It sets the design rules for OpenLight and tripscalendar and gives primitives for what it doesn't have. Every file in `src/` ships to npm and the shadcn registry, so keep each self-contained.
 
-## Files
+## A new component
 
-- `src/components/` holds one file per component, flat among themselves, so a component's `./` imports still resolve when shadcn copies it beside its dependencies. Import only `react`, `cn`, `class-variance-authority`, and `@base-ui/react`, plus sibling files with `./`.
-- `src/base.css` holds the tokens, the primitives, and the utilities every theme shares. `src/themes/default.css` imports it and draws the primitives. The other themes in `src/themes/` are experiments: the package doesn't export them and the docs don't show them.
-- Sections (actions, inputs, containers, navigation, overlays, effects) are `categories` in `registry.json` and groups in `site/main.tsx`. Foundations, first in the site, shows the tokens and primitives rather than components, so it has no category. Internal pieces (`check`, `chevron`, `popup`, `popup-surface`) have registry items without a category.
-- A new component needs its entry in `registry.json`, a demo in `site/demos.tsx`, its entry in `site/main.tsx`, and a line in `README.md`. Its registry entry lists the theme in `registryDependencies`, even when a dependency brings it, so it installs alone with its CSS; `bun run build` fails otherwise.
-- `bun run build` writes `default.css` and `base.css` into the `theme` item of `registry.json` with `scripts/registry.ts`; don't edit that item by hand.
+1. **Height**: the Button's it goes with, `h-7` (28px), `h-6` small, `h-8` large, and its sizes named after the Button's. Icon buttons are square (`size-7`); labels at least as wide as tall (`min-w-7`).
+2. **Surfaces**: a control stands up with `surface-raised`, sets in with `surface-sunken`, or is on with `surface-primary`; content sits in a `Card`. Never draw depth with a `shadow-*` or a border.
+3. **Colors**: tokens only. Use the fills the surface under it sets (`bg-surface`, `bg-field`, `bg-raised`, `bg-raised-hover`, `bg-hover`) and text in `foreground`, `muted`, `faint`, or `disabled`. Never Tailwind's palette, and no `level-*` inside a component: it doesn't follow the surface.
+4. **Spacing**: Tailwind's scale as written (`px-3.5`), in the patterns below.
+5. **Parts, not props**: parts come as children, never as `title`, `actions`, or `trigger` props; props carry data, such as `items` and `label`. An overlay is its root, a `…Trigger` that renders your element with `render`, and a `…Content`.
+6. **Nothing forced**: never `!`. A fill that needs forcing wants a primitive or a variant.
+7. **Wiring**: an entry in `registry.json` that lists the theme in `registryDependencies`, a demo in `site/demos.tsx`, an entry in `site/main.tsx`, and a line in `README.md`.
 
-## Code
+## Files and code
 
-- Prefer CSS over JavaScript: style native elements with Tailwind variants (`checked:`, `has-checked:`, `peer-*`). Use Base UI only for behavior CSS can't provide, such as positioning, focus management, and typeahead.
-- Start a file with `"use client";` when it uses Base UI, hooks, or its own event handlers. Markup-only components stay without it and render on the server.
-- Keep each component's styles in its own Tailwind class strings; use `cva` only for variants. Named exports only.
-- Avoid ternaries. Use one only when it is trivially short and both branches fit on one line; otherwise use a named function with early returns, a lookup object, or `&&` conditions in `cn`.
-- Content composes: a component takes its parts as children, never as props such as `title`, `actions`, or `trigger`. Props carry data and strings, such as `items`, `label`, and `shortcut`. An overlay is its root, a `…Trigger` that renders your element with `render`, and a `…Content` that takes where it opens (`side`, `align`), as `<Menu>`, `<MenuTrigger render={<IconButton label="More" />}>`, and `<MenuContent>`.
-- Comment only what the code can't say, in a line or two.
+- `src/components/` has one flat file per component, so `./` imports resolve after shadcn copies them. Import only `react`, `cn`, `class-variance-authority`, `@base-ui/react`, and sibling files; anything else comes in as a prop, as `CodeBlock` takes a highlighter's `html`.
+- `src/base.css` holds tokens, primitives, and shared utilities; `src/themes/default.css` draws the edges. Other themes are unexported experiments.
+- Registry `categories` (actions, inputs, containers, navigation, overlays, effects) are the site's groups; Foundations is the site's only. `check`, `chevron`, and `popup` are internal. `bun run build` writes the `theme` item; don't edit it.
+- CSS before JavaScript: Tailwind variants (`checked:`, `has-checked:`) on native elements, and Base UI for positioning, focus, and typeahead. `"use client";` only with Base UI, hooks, or handlers.
+- Styles in each component's class strings, `cva` only for variants, named exports, ternaries only when short, comments only for what code can't say.
 
 ## Look
 
-The look is built in layers, each using only the one below: tokens, then primitives, then parts, then components.
+- **Tokens**, in `oklch()`: `level-0` to `level-12`, black then 15% up in steps of 3.7%, with the page at level 2; the fills a surface sets (`surface` its own, `field` −2, `raised` +3, `raised-hover` +4, `hover` +1), which `:root` sets for the page; opaque text; `primary`, `on-primary`; the translucent `pressed`, `focus`, `backdrop`, `line`, `separator`; `danger`; `code-*`.
+- **Containers** are plain classes under the utilities, so a `bg-*` changes their fill. `surface-card` stands two levels over what it sits on, a card too, three deep at most; `surface-panel` is a card docked in a layout, with no edge; `surface-float` is a card drawn floating. A popup opens as a card on the page; `raised` on its `…Content`, `Select`, or `Combobox` lifts it a level for one that opens over a card.
+- **Controls** are utilities, so variants apply: `surface-raised`, `surface-sunken`, `surface-primary`, `segmented` (with `surface-sunken`) for a strip of controls, and `separator`. Lines between parts are inset shadows in `--color-line`.
+- **Behaviors**: `focus-ring` and `dim-disabled` on every control, plus `popup-motion`, `overflow-fade-x`, `overflow-fade-y`, and `shimmer`.
+- Text that may not fit is a `ScrollText`, except inside something clickable; a row that may not fit scrolls in `overflow-fade-x`, a column in `overflow-fade-y`, and a text-only scroller takes `tabIndex={-1}`. Components inherit font size.
+- A theme sets tokens again and draws edges as `box-shadow` (never `border`, which takes room) or `filter`. For one component's part it targets its public `data-slot`, and never changes markup.
 
-- Tokens, in `base.css`, are colors and radii. Colors come only from them (`text-muted`, `bg-field`, `bg-level-3`, `border-line`, …), written as `oklch()`; never use Tailwind's palette, such as `neutral-*` or `white/*`, and add or reuse a token instead.
-- Primitives, in `base.css`, are surfaces: a fill, and an edge the theme draws, in one class. `surface-card` lifts a card two levels over what it sits on, a card too, up to three deep, and sets the fills of what sits on it: `bg-surface` its own, `bg-field` two levels below, `bg-raised` three above for a control and `bg-raised-hover` four, and `bg-hover` one above for a ghost; `:root` sets them for the page. `surface-float` is a card drawn floating, for popups, dialogs, and notices; a popup opens in a portal as deep as its trigger, through `popup-surface`, so it rises from where its trigger is. `surface-raised` stands a control up in `bg-raised`, `surface-sunken` sets a field in, `surface-primary` fills what is on, such as a primary button, a checked switch, or a thumb, and `separator` draws a line between groups. Never draw depth with a `shadow-*` or a border of your own; lines between a card's parts and along a list row are inset shadows in `--color-line`, as `sections()` and `ListItem` draw them.
-- For another fill on a control's surface, add it with `!`, as `bg-primary!`, since a plain `bg-*` sorts before a primitive; a variant such as `hover:` or `checked:` needs none.
-- The other utilities in `base.css` are behaviors no one component owns: `focus-ring`, `dim-disabled`, `popup-motion`, `overflow-fade-x`, `overflow-fade-y`, and `shimmer`.
-- Parts, in `card.tsx` and `popup.tsx`, are what containers hold: card sections and popup lists, under Spacing.
-- Controls take `focus-ring` and `dim-disabled`. Range inputs stay at least 32px across. For one line of text that may not fit, use `ScrollText` rather than `truncate`, except inside something you click, such as a Select's trigger, where a scroller would fight the click. Content that may not fit a row, such as tabs, chips, or a line of text with `whitespace-nowrap`, scrolls in `overflow-fade-x`, and a column in `overflow-fade-y`, rather than being cut off. Where a component puts `overflow-fade-x` on an element that holds only text, it adds `tabIndex={-1}`, since a box that scrolls is a tab stop when nothing in it is one. Components inherit font size.
+## Sizes and spacing
 
-## Themes
+- Input and Select match a Button. A segmented group holds controls a size smaller, 3px in, and reaches a pixel past each edge, so in a row it takes a Button's height.
+- Popup rows are `h-6.5`, list rows `h-10`. `--spacing-thumb` is the only size token.
+- A card, popover, collapsible panel, dialog, or notice pads its content as one `Section` (`px-3.5 py-2.5`) until it holds `Section`s, which take over (`sections()`); content outside them gets no padding. A `Collapsible` counts as a section; a list edge to edge is a section without padding; a card that only frames takes `p-0`.
+- Sections in a card, popover, or collapsible panel have a line between them, and the first and last of several read as header and footer. A dialog or notice stacks them without one; a dialog's last sits 16px below.
+- A header is `flex-row items-center` with a title and a `SectionAction`; a row of buttons is `flex-row gap-1.5 px-2.5`.
+- `SectionAction` and `ListItemAction` reach into the padding, so an icon sits 12px from the end and the top. The only corrections inside a control: a leading icon 4px closer to a button's edge, and a Slider's bar, last in its container, 4px of room under it.
+- A list pads items 4px (`p-1`), `rounded-sm` in `rounded-lg`, and a `popupItem` is `px-2.5`, so text lands 14px in. Nested corners are concentric: the outer radius less the inset.
+- A container sizes itself: a width goes on the `Card` or `…Content`, never on a section. A `Popup` never scrolls sideways; a `Card` clips.
 
-- A theme imports `base.css`, sets again any token it changes, and draws the primitives' edges by adding what `base.css` leaves out, such as a `box-shadow` or a `filter`. It changes a fill through its token, never by redeclaring `background-color`: Tailwind orders the merged definitions of a utility by how many properties each has, so the base's could win.
-- An edge takes no room: a real `border` grows a control whose height comes from its content, so draw lines as `inset 0 0 0 1px` box-shadows.
-- For a part of one component, a theme targets its `data-slot` in a rule outside any layer, which wins over the component's utilities, as `[data-slot="slider-track"]`. Add a `data-slot` only when a theme needs it, and treat its name as public. A theme never changes markup.
-
-## Sizes
-
-- Heights are Tailwind's scale, not tokens. Controls are `h-7` (28px), `h-6` small and `h-8` large; a label is at least as wide as it is tall (`min-w-7`), and an icon button square (`size-7`). A new control takes the height of the Button it goes with, and names its sizes after it.
-- Input and Select match a Button's height. ToggleGroup and a segmented `TabList` hold their controls a size smaller, 3px in, since the eye sizes them by the raised control inside; they stand 2px taller but reach a pixel past each edge (`-my-px`), so in a row they take a Button's height.
-- A popup's rows are `h-6.5`, and a list's rows `h-10`.
-- `--spacing-thumb`, a slider's thumb, is the only size token, since the slider places its fill by it.
-
-## Spacing
-
-- Padding and gaps are Tailwind's scale, written as they are (`px-3.5`, `p-1`), never a token. Each control sets its own side padding by eye, such as Button's `px-3`.
-- A card, popover, collapsible panel, dialog, or notice pads its content as one `Section`, `px-3.5 py-2.5`, until it holds `Section`s, which take the padding over: `sections()` in `section.tsx` does both, so one section reads the same as none. It's the one place a container looks at its children; once it holds sections, content outside them has no padding. A `Collapsible` counts as a section, so a card that opens to its details runs edge to edge; other content that does, such as a list, is a section with its padding removed, and a card that only frames something takes `p-0`. In a card, popover, or collapsible panel a line runs between sections, and between all the parts of one that holds any, such as a list that scrolls between a header and a footer, and the first and last of several read as a header and a footer; a collapsible panel draws one above itself too, which folds away with it; a dialog or notice stacks them without a line, each but the last without its bottom padding, and a dialog's last of several sits 16px below the one before. A header is `flex-row items-center` with a title and a `SectionAction`; a row of buttons is `flex-row gap-1.5 px-2.5`, so the buttons sit 10px from every edge.
-- Controls stay plain: a Button is its variants and nothing else, wherever it sits. An optical effect belongs to the container that wants it: `SectionAction` and `ListItemAction` hold ghost icon buttons and reach into the padding, so each icon sits 12px from the end and the top. The exceptions are a control's own shape: a leading icon sits 4px closer to a button's edge, and a Slider's bar, last in what holds it, keeps 4px under it, since neither has the room text leaves around its letters.
-- A container of items pads them with `rounded-sm` items in its `rounded-lg`: a `Popup` with `list` 4px (`p-1`), whose `popupItem` rows are `px-2.5` so their text lands 14px in, and a segmented group 3px (`p-0.75`), with its controls rounded 3px less than it.
-- A container sizes itself and its parts fill it: a width goes on the `Card` or `PopoverContent`, never on a section, which would spill out of a container left narrower by a scrollbar or the screen's edge. A `Popup` never scrolls sideways, and a `Card` clips what doesn't fit.
-- Nested corners are concentric: the outer radius less the inset is the inner radius, as a 9px list holds 5px items 4px in. Below about 5px, round the inner corner up a little, and prefer radii other components already use over exact math.
-
-## Checks
-
-- Run `bun run check` and `bun run build`.
+Run `bun run check` and `bun run build`.
