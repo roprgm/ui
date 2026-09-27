@@ -55,42 +55,29 @@
         }
       },
       "css": {
-        "@utility surface-card": {
-          "--color-surface": "var(--color-level-4)",
-          "--color-field": "var(--color-level-2)",
-          "--color-raised": "var(--color-level-7)",
-          "--color-raised-hover": "var(--color-level-8)",
-          "--color-hover": "var(--color-level-5)",
-          "background-color": "var(--color-surface)",
-          ":where(.surface-card, .surface-float, .surface-panel) &": {
+        "@layer components": {
+          ".surface-card, .surface-panel, .surface-float": {
+            "--color-surface": "var(--color-level-4)",
+            "--color-field": "var(--color-level-2)",
+            "--color-raised": "var(--color-level-7)",
+            "--color-raised-hover": "var(--color-level-8)",
+            "--color-hover": "var(--color-level-5)",
+            "background-color": "var(--color-surface)"
+          },
+          ":where(.surface-card, .surface-panel, .surface-float) :is(.surface-card, .surface-panel, .surface-float), .surface-float[data-raised]": {
             "--color-surface": "var(--color-level-6)",
             "--color-field": "var(--color-level-4)",
             "--color-raised": "var(--color-level-9)",
             "--color-raised-hover": "var(--color-level-10)",
             "--color-hover": "var(--color-level-7)"
           },
-          ":where(.surface-card, .surface-float, .surface-panel) :where(.surface-card, .surface-float, .surface-panel) &": {
+          ":where(.surface-card, .surface-panel, .surface-float) :where(.surface-card, .surface-panel, .surface-float) :is(.surface-card, .surface-panel, .surface-float)": {
             "--color-surface": "var(--color-level-8)",
             "--color-field": "var(--color-level-6)",
             "--color-raised": "var(--color-level-11)",
             "--color-raised-hover": "var(--color-level-12)",
             "--color-hover": "var(--color-level-9)"
-          },
-          "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
-        },
-        "@utility surface-panel": {
-          "@apply surface-card": {}
-        },
-        "@utility surface-float": {
-          "@apply surface-card": {},
-          "&[data-raised]": {
-            "--color-surface": "var(--color-level-6)",
-            "--color-field": "var(--color-level-4)",
-            "--color-raised": "var(--color-level-9)",
-            "--color-raised-hover": "var(--color-level-10)",
-            "--color-hover": "var(--color-level-7)"
-          },
-          "box-shadow": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)"
+          }
         },
         "@utility surface-raised": {
           "background-color": "var(--color-raised)",
@@ -279,6 +266,12 @@
           "label:has(input:is([type=\"checkbox\"], [type=\"radio\"]):enabled)": {
             "cursor": "pointer"
           }
+        },
+        "@utility surface-card": {
+          "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
+        },
+        "@utility surface-float": {
+          "box-shadow": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)"
         }
       }
     },
