@@ -13,8 +13,9 @@ const list = cva("flex data-[orientation=vertical]:flex-col", {
   variants: {
     variant: {
       default: "gap-1",
-      // As a ToggleGroup: tabs a size smaller, 4px in. Icon tabs take `icon-sm`.
-      segmented: "gap-0.5 rounded-lg surface-sunken p-1 *:h-6 *:rounded-sm",
+      // As a ToggleGroup: tabs a size smaller, 3px in, a pixel past the row. Icon tabs take `icon-sm`.
+      segmented:
+        "-my-px gap-0.5 rounded-lg surface-sunken p-0.75 *:h-6 *:rounded-sm",
     },
   },
   defaultVariants: { variant: "default" },

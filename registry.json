@@ -23,7 +23,7 @@
           "color-level-11": "oklch(52% 0 0)",
           "color-level-12": "oklch(55.7% 0 0)",
           "color-foreground": "oklch(96% 0 0)",
-          "color-muted": "oklch(96% 0 0 / 0.55)",
+          "color-muted": "oklch(96% 0 0 / 0.6)",
           "color-disabled": "oklch(96% 0 0 / 0.21)",
           "color-primary": "oklch(89% 0 0)",
           "color-primary-hover": "oklch(98.5% 0 0)",

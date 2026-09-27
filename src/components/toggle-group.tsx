@@ -2,16 +2,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-const group = cva("inline-flex gap-0.5 rounded-lg surface-sunken p-1", {
-  variants: {
-    // Toggles a size smaller than the Button beside the group, so the group stands 4px taller.
-    size: {
-      default: "*:h-6",
-      lg: "*:h-7",
+// Toggles a size smaller than the Button beside the group, 3px in, so the group stands 2px
+// taller; it reaches a pixel past each edge and takes the Button's height in a row.
+const group = cva(
+  "-my-px inline-flex gap-0.5 rounded-lg surface-sunken p-0.75",
+  {
+    variants: {
+      size: {
+        default: "*:h-6",
+        lg: "*:h-7",
+      },
     },
+    defaultVariants: { size: "default" },
   },
-  defaultVariants: { size: "default" },
-});
+);
 
 /** Segmented toggles. Toggles that share a `name` choose one. */
 export function ToggleGroup({
