@@ -57,7 +57,11 @@
     0 1px 2px hsl(0 0% 9% / 0.5);
 }
 
-/* The light under a separator's dark line, so it reads engraved. */
+/* The light beside a separator's dark line, so it reads engraved: under it, or after it upright. */
 @utility separator {
   box-shadow: 0 1px 0 hsl(0 0% 94.12% / 0.05);
+
+  &[aria-orientation="vertical"] {
+    box-shadow: 1px 0 0 hsl(0 0% 94.12% / 0.05);
+  }
 }

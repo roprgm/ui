@@ -121,7 +121,10 @@
         },
         "@utility separator": {
           "@apply bg-line": {},
-          "box-shadow": "0 1px 0 hsl(0 0% 94.12% / 0.05)"
+          "box-shadow": "0 1px 0 hsl(0 0% 94.12% / 0.05)",
+          "&[aria-orientation=\"vertical\"]": {
+            "box-shadow": "1px 0 0 hsl(0 0% 94.12% / 0.05)"
+          }
         },
         "@utility popup-motion": {
           "transform-origin": "var(--transform-origin)",
