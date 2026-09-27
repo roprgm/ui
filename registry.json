@@ -653,7 +653,10 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/card.json"
+      ]
     },
     {
       "name": "tabs",
