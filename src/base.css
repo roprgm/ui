@@ -39,6 +39,7 @@
   --color-pressed: oklch(100% 0 0 / 0.15);
   --color-focus: oklch(100% 0 0 / 0.25);
   --color-backdrop: oklch(0% 0 0 / 0.5);
+  --color-separator: oklch(0% 0 0 / 0.7);
 
   --color-line: var(--color-level-2);
   --color-danger: oklch(75% 0.14 21);
@@ -121,9 +122,9 @@
   @apply bg-primary;
 }
 
-/* A line between groups, a level darker than a card's lines; size it with `h-px` or `w-px`. */
+/* A line between groups, dark over whatever it sits on; size it with `h-px` or `w-px`. */
 @utility separator {
-  @apply bg-level-1;
+  @apply bg-separator;
 }
 
 /* Grows from its trigger as it fades in. Base UI sets the attributes and the origin. */

@@ -98,7 +98,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | `foreground`, `muted`, `disabled` | text: the foreground, and faded, so it keeps its contrast on any level |
 | `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
 | `pressed` | a translucent state for ghost buttons and chips |
-| `line`, `focus`, `backdrop` | dividers, the focus ring, and the shade behind a dialog |
+| `line`, `separator`, `focus`, `backdrop` | the lines between a card's parts, a separator's translucent dark, the focus ring, and the shade behind a dialog |
 | `danger` | errors |
 
 ### Surfaces

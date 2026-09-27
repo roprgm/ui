@@ -19,6 +19,7 @@
   --color-on-primary: oklch(98.5% 0 0);
 
   --color-line: oklch(0% 0 0 / 0.1);
+  --color-separator: oklch(0% 0 0 / 0.1);
   --color-backdrop: oklch(0% 0 0 / 0.3);
   --color-focus: oklch(0% 0 0 / 0.3);
   --color-danger: oklch(54% 0.202 27);
