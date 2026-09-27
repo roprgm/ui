@@ -82,6 +82,18 @@ function barBackground(
  * A labeled number with a bar. `toolbar` fits a bar over a canvas and `compact` drops the bar;
  * `orientation="vertical"` stands the bar upright alone.
  */
+/** The keys that move a thumb. */
+const valueKeys = new Set([
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowUp",
+  "ArrowDown",
+  "PageUp",
+  "PageDown",
+  "Home",
+  "End",
+]);
+
 export function Slider({
   label,
   value,
@@ -165,7 +177,7 @@ export function Slider({
       )}
       {(vertical || variant !== "compact") && (
         <Primitive.Control
-          onPointerDown={() => edit(true)}
+          onPointerDown={(event) => event.button === 0 && edit(true)}
           onPointerUp={() => edit(false)}
           onPointerCancel={() => edit(false)}
           onDoubleClick={() =>
@@ -188,7 +200,7 @@ export function Slider({
             <Primitive.Thumb
               aria-label={label}
               getAriaValueText={format && ((_, next) => format(next))}
-              onKeyDown={() => edit(true)}
+              onKeyDown={(event) => valueKeys.has(event.key) && edit(true)}
               onKeyUp={() => edit(false)}
               onBlur={() => edit(false)}
               className="size-thumb rounded-full surface-thumb has-focus-visible:ring-2 has-focus-visible:ring-focus"
