@@ -5,12 +5,11 @@ import {
   type FocusEvent,
   type KeyboardEvent,
   type PointerEvent,
+  useEffect,
   useRef,
   useState,
 } from "react";
 import { Chevron } from "./chevron";
-
-type Drag = { x: number; dx: number; value: number; moved: boolean };
 
 const hint =
   "pointer-events-none absolute size-[9px] text-faint opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
@@ -58,7 +57,8 @@ export function ScrubInput({
 }) {
   const [draft, setDraft] = useState<string>();
   const input = useRef<HTMLInputElement>(null);
-  const drag = useRef<Drag>(undefined);
+  const stopDrag = useRef<() => void>(undefined);
+  useEffect(() => () => stopDrag.current?.(), []);
   const decimals = `${step}`.split(".")[1]?.length ?? 0;
   const fixed = value.toFixed(decimals);
   const text = format?.(Number(fixed)) ?? fixed;
@@ -82,39 +82,56 @@ export function ScrubInput({
     input.current?.blur();
   };
 
+  // Follows the pointer on the window, so a drag holds once it leaves the value.
   const start = (event: PointerEvent<HTMLElement>) => {
-    if (document.activeElement === input.current) return;
+    if (event.button !== 0 || document.activeElement === input.current) return;
     event.preventDefault();
-    event.currentTarget.setPointerCapture(event.pointerId);
-    drag.current = { x: event.clientX, dx: 0, value, moved: false };
-  };
+    const target = event.currentTarget;
+    const mouse = event.pointerType === "mouse";
+    const pointer = event.pointerId;
+    const from = value;
+    let x = event.clientX;
+    let dx = 0;
+    let moved = false;
 
-  const move = (event: PointerEvent<HTMLElement>) => {
-    const state = drag.current;
-    if (!state) return;
-    // Under pointer lock clientX freezes, so deltas come from movementX.
-    const locked = document.pointerLockElement === event.currentTarget;
-    state.dx += locked ? event.movementX : event.clientX - state.x;
-    state.x = event.clientX;
-    if (!state.moved && Math.abs(state.dx) > 2) {
-      state.moved = true;
-      onEditingChange?.(true);
-      // Hides the cursor so the drag isn't stopped by the screen edge.
-      Promise.resolve(event.currentTarget.requestPointerLock()).catch(() => {});
+    function move(event: globalThis.PointerEvent) {
+      if (event.pointerId !== pointer) return;
+      // Under pointer lock clientX freezes, so deltas come from movementX.
+      const locked = document.pointerLockElement === target;
+      dx += locked ? event.movementX : event.clientX - x;
+      x = event.clientX;
+      if (!moved && Math.abs(dx) > 2) {
+        moved = true;
+        onEditingChange?.(true);
+        // Hides the cursor so the drag isn't stopped by the screen edge.
+        if (mouse) Promise.resolve(target.requestPointerLock()).catch(() => {});
+      }
+      // Every range sweeps end to end in about 250px.
+      if (moved) set(from + (dx * (max - min)) / 250);
     }
-    // Every range sweeps end to end in about 250px.
-    if (state.moved) set(state.value + (state.dx * (max - min)) / 250);
-  };
 
-  const end = () => {
-    const state = drag.current;
-    drag.current = undefined;
-    if (state?.moved) {
-      document.exitPointerLock();
-      onEditingChange?.(false);
-    } else if (state) {
-      input.current?.focus();
+    function end(event: globalThis.PointerEvent) {
+      if (event.pointerId !== pointer) return;
+      stop();
+      if (moved) {
+        document.exitPointerLock();
+        onEditingChange?.(false);
+      } else if (event.type === "pointerup") {
+        input.current?.focus();
+      }
     }
+
+    function stop() {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", end);
+      window.removeEventListener("pointercancel", end);
+      stopDrag.current = undefined;
+    }
+
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", end);
+    window.addEventListener("pointercancel", end);
+    stopDrag.current = stop;
   };
 
   const key = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -136,16 +153,11 @@ export function ScrubInput({
     // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
       className={cn(
-        "group relative inline-flex cursor-ew-resize items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
+        "group relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
         className,
       )}
       onDoubleClick={reset}
       onPointerDown={start}
-      onPointerMove={move}
-      onPointerUp={end}
-      onPointerCancel={() => {
-        drag.current = undefined;
-      }}
     >
       {chevrons && (
         <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />

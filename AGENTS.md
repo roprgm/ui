@@ -41,7 +41,7 @@ The look is built in layers, each using only the one below: tokens, then primiti
 - Heights are Tailwind's scale, not tokens. Controls are `h-7` (28px), `h-6` small and `h-8` large, each at least as wide as it is tall (`min-w-7`). A new control takes the height of the Button it goes with, and names its sizes after it.
 - Input and Select match a Button's height. ToggleGroup and a segmented TabList stand 4px taller, with their controls a size smaller, 4px in, since the eye sizes them by the raised control inside.
 - A popup's rows are `h-6.5`, and a list's rows `h-10`.
-- `--spacing-thumb`, a range's thumb, is the only size token, since the slider's math reads it.
+- `--spacing-thumb`, a range's thumb, is the only size token, since the slider places its thumb and fill by it.
 
 ## Spacing
 
