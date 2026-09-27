@@ -74,11 +74,17 @@
           "--raised": "var(--color-level-5)",
           "--raised-hover": "var(--color-level-6)",
           "background-color": "var(--layer)",
-          ":where(.surface-card, .surface-panel, .surface-float) &": {
+          ":where(.surface-card, .surface-panel) &": {
             "--layer": "var(--color-level-4)",
             "--field": "var(--color-level-3)",
             "--raised": "var(--color-level-6)",
             "--raised-hover": "var(--color-level-7)"
+          },
+          ":where(.surface-float, :where(.surface-card, .surface-panel) .surface-card) &": {
+            "--layer": "var(--color-level-5)",
+            "--field": "var(--color-level-4)",
+            "--raised": "var(--color-level-7)",
+            "--raised-hover": "var(--color-level-8)"
           },
           "box-shadow": "inset 0 1px 0 hsl(0 0% 94.12% / 0.07), 0 1px 1px hsl(0 0% 0% / 0.28), 0 0 1px hsl(0 0% 0% / 0.14)"
         },

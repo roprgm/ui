@@ -74,7 +74,7 @@
   }
 }
 
-/* A card, a level up; inside a card, a panel, or a popup, a level up again. */
+/* A card, a level up from what's under it: the page, a card or panel, or a popup. */
 @utility surface-card {
   --layer: var(--color-level-3);
   --field: var(--color-level-2);
@@ -82,11 +82,19 @@
   --raised-hover: var(--color-level-6);
   background-color: var(--layer);
 
-  :where(.surface-card, .surface-panel, .surface-float) & {
+  :where(.surface-card, .surface-panel) & {
     --layer: var(--color-level-4);
     --field: var(--color-level-3);
     --raised: var(--color-level-6);
     --raised-hover: var(--color-level-7);
+  }
+
+  :where(.surface-float, :where(.surface-card, .surface-panel) .surface-card)
+    & {
+    --layer: var(--color-level-5);
+    --field: var(--color-level-4);
+    --raised: var(--color-level-7);
+    --raised-hover: var(--color-level-8);
   }
 }
 
