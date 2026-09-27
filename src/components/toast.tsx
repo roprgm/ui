@@ -47,7 +47,7 @@ function Toasts() {
       </CardSection>
       {item.actionProps && (
         <CardSection className="flex-row gap-1 px-2.5">
-          <Primitive.Action render={<Button variant="primary" />} />
+          <Primitive.Action render={<Button />} />
         </CardSection>
       )}
     </Primitive.Root>

@@ -612,7 +612,7 @@ export function NoticeDemo() {
         </CardAction>
       </CardSection>
       <CardSection className="flex-row gap-1 px-2.5">
-        <Button variant="primary">Restore</Button>
+        <Button>Restore</Button>
         <Button variant="ghost">Forget</Button>
       </CardSection>
     </Notice>

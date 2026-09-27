@@ -29,23 +29,23 @@ const digits = cva("z-10", {
   },
 });
 
-// As thick as the thumb, with a hit area reaching 10px past it on either side.
-const bar = cva(
-  "relative flex cursor-pointer touch-none select-none before:absolute",
-  {
-    variants: {
-      orientation: {
-        horizontal: "h-thumb items-center before:inset-x-0 before:-inset-y-2.5",
-        vertical: "w-thumb justify-center before:-inset-x-2.5 before:inset-y-0",
-      },
-      variant: {
-        panel: "col-span-2",
-        toolbar: "col-start-2 row-start-1",
-        compact: "",
-      },
+// As thick as the thumb, padded 10px past it on either side, or 16px for a finger, with the
+// room given back by margins.
+const bar = cva("box-content flex cursor-pointer touch-none select-none", {
+  variants: {
+    orientation: {
+      horizontal:
+        "-my-2.5 h-thumb items-center py-2.5 pointer-coarse:-my-4 pointer-coarse:py-4",
+      vertical:
+        "-mx-2.5 w-thumb justify-center px-2.5 pointer-coarse:-mx-4 pointer-coarse:px-4",
+    },
+    variant: {
+      panel: "col-span-2",
+      toolbar: "col-start-2 row-start-1",
+      compact: "",
     },
   },
-);
+});
 
 const track = cva("rounded-full surface-sunken", {
   variants: {
