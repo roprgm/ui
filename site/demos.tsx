@@ -64,7 +64,6 @@ import {
   TooltipTrigger,
 } from "../src/components/tooltip";
 import { type TreeDrop, TreeList } from "../src/components/tree-list";
-import { VerticalSlider } from "../src/components/vertical-slider";
 import { CopyButton } from "./copy-button";
 import {
   AdjustIcon,
@@ -1061,37 +1060,40 @@ export function SliderDemo() {
   const [opacity, setOpacity] = useState(80);
   const [angle, setAngle] = useState(0);
   return (
-    <div className="flex w-64 flex-col gap-4">
-      <Slider
-        label="Exposure"
-        value={exposure}
-        defaultValue={0}
-        onChange={setExposure}
-        min={-5}
-        max={5}
-        step={0.05}
-        format={(v) => `${v.toFixed(2)} EV`}
-      />
-      <Slider
-        label="Opacity"
-        value={opacity}
-        defaultValue={100}
-        onChange={setOpacity}
-        min={0}
-        max={100}
-        format={percent}
-      />
-      <Slider
-        label="Angle"
-        value={angle}
-        defaultValue={0}
-        onChange={setAngle}
-        min={-180}
-        max={180}
-        format={degrees}
-        variant="compact"
-      />
-    </div>
+    <>
+      <div className="flex w-64 flex-col gap-4">
+        <Slider
+          label="Exposure"
+          value={exposure}
+          defaultValue={0}
+          onChange={setExposure}
+          min={-5}
+          max={5}
+          step={0.05}
+          format={(v) => `${v.toFixed(2)} EV`}
+        />
+        <Slider
+          label="Opacity"
+          value={opacity}
+          defaultValue={100}
+          onChange={setOpacity}
+          min={0}
+          max={100}
+          format={percent}
+        />
+        <Slider
+          label="Angle"
+          value={angle}
+          defaultValue={0}
+          onChange={setAngle}
+          min={-180}
+          max={180}
+          format={degrees}
+          variant="compact"
+        />
+      </div>
+      <HueSliders />
+    </>
   );
 }
 
@@ -1137,13 +1139,14 @@ const hues = [
   { name: "Blue", color: "#59f" },
 ];
 
-export function VerticalSliderDemo() {
+function HueSliders() {
   const [values, setValues] = useState(hues.map(() => 0));
   return (
     <div className="flex">
       {hues.map((hue, index) => (
-        <VerticalSlider
+        <Slider
           key={hue.name}
+          orientation="vertical"
           label={`${hue.name} saturation`}
           value={values[index] ?? 0}
           onChange={(value) =>

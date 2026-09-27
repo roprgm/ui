@@ -26,7 +26,7 @@ The look is built in layers, each using only the one below: tokens, then primiti
 - Tokens, in `base.css`, are colors and radii. Colors come only from them (`text-muted`, `bg-field`, `bg-level-3`, `border-line`, …), written as `hsl()`; never use Tailwind's palette, such as `neutral-*` or `white/*`, and add or reuse a token instead.
 - Primitives, in `base.css`, are surfaces: a fill, and an edge the theme draws, in one class. `surface-card` is a card, a level up from what's under it, so one inside another rises on its own; `surface-panel` is a card docked in a layout, with no edge; `surface-float` is what floats. There are three levels, the page, what's on it, and what's on that, and floating is a level up. A container's surface also sets the fills of the controls on it from the palette: a field a level below, a raised control two above, three on hover. `surface-callout` fills a tooltip's shape, and `separator` draws a line between groups. Never draw depth with a `shadow-*` or a border of your own; lines between a card's parts and along a list row are inset shadows in `--color-line`, as `cardParts` and `ListItem` draw them.
 - For another fill on a control's surface, add it with `!`, as `bg-primary!`, since a plain `bg-*` sorts before a primitive; a variant such as `hover:` or `checked:` needs none.
-- The other utilities in `base.css` are behaviors no one component owns: `focus-ring`, `dim-disabled`, `popup-motion`, `range-thumb`, `overflow-fade-x`, `overflow-fade-y`, and `shimmer`.
+- The other utilities in `base.css` are behaviors no one component owns: `focus-ring`, `dim-disabled`, `popup-motion`, `overflow-fade-x`, `overflow-fade-y`, and `shimmer`.
 - Parts, in `card.tsx` and `popup.tsx`, are what containers hold: card sections and popup lists, under Spacing.
 - Controls take `focus-ring` and `dim-disabled`. Range inputs stay at least 32px across. For one line of text that may not fit, use `ScrollText` rather than `truncate`, except inside something you click, such as a Select's trigger, where a scroller would fight the click. Content that may not fit a row, such as tabs, chips, or a line of text with `whitespace-nowrap`, scrolls in `overflow-fade-x`, and a column in `overflow-fade-y`, rather than being cut off. Where a component puts `overflow-fade-x` on an element that holds only text, it adds `tabIndex={-1}`, since a box that scrolls is a tab stop when nothing in it is one. Components inherit font size.
 
@@ -41,7 +41,7 @@ The look is built in layers, each using only the one below: tokens, then primiti
 - Heights are Tailwind's scale, not tokens. Controls are `h-7` (28px), `h-6` small and `h-8` large, each at least as wide as it is tall (`min-w-7`). A new control takes the height of the Button it goes with, and names its sizes after it.
 - Input and Select match a Button's height. ToggleGroup and a segmented TabList stand 4px taller, with their controls a size smaller, 4px in, since the eye sizes them by the raised control inside.
 - A popup's rows are `h-6.5`, and a list's rows `h-10`.
-- `--spacing-thumb`, a range's thumb, is the only size token, since the slider places its thumb and fill by it.
+- `--spacing-thumb`, a slider's thumb, is the only size token, since the slider places its fill by it.
 
 ## Spacing
 

@@ -56,7 +56,7 @@
   --radius-xl: 12px;
 }
 
-/* A range's thumb, which the slider also places its thumb and fill by. */
+/* A slider's thumb, which its fill is placed by too. */
 @theme {
   --spacing-thumb: 13px;
 }
@@ -167,11 +167,6 @@
     pointer-events: none;
     opacity: 40%;
   }
-}
-
-/* A range input drawn as its thumb alone, over a track the component paints. */
-@utility range-thumb {
-  @apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-thumb thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus;
 }
 
 /* Scrolls vertically, shading an edge while more lies past it. Without scroll timelines, it reads
@@ -334,16 +329,6 @@
   75%,
   to {
     mask-position: 0 0;
-  }
-}
-
-/* Separate rules, since one unknown pseudo-element voids a selector list. */
-@custom-variant thumb {
-  &::-webkit-slider-thumb {
-    @slot;
-  }
-  &::-moz-range-thumb {
-    @slot;
   }
 }
 

@@ -144,9 +144,6 @@
             "opacity": "40%"
           }
         },
-        "@utility range-thumb": {
-          "@apply appearance-none bg-transparent outline-none [-webkit-tap-highlight-color:transparent] thumb:size-thumb thumb:appearance-none thumb:rounded-full thumb:border-0 thumb:surface-thumb thumb:transition focus-visible:thumb:ring-2 focus-visible:thumb:ring-focus": {}
-        },
         "@utility overflow-fade-y": {
           "overflow-y": "auto",
           "&::before, &::after": {
@@ -261,14 +258,6 @@
           },
           "75%, to": {
             "mask-position": "0 0"
-          }
-        },
-        "@custom-variant thumb": {
-          "&::-webkit-slider-thumb": {
-            "@slot": {}
-          },
-          "&::-moz-range-thumb": {
-            "@slot": {}
           }
         }
       }
@@ -742,7 +731,7 @@
       "name": "slider",
       "type": "registry:ui",
       "categories": ["inputs"],
-      "dependencies": ["cn", "class-variance-authority"],
+      "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/scrub-input.json"
@@ -766,19 +755,6 @@
       "files": [
         {
           "path": "src/components/scrub-input.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "vertical-slider",
-      "type": "registry:ui",
-      "categories": ["inputs"],
-      "dependencies": ["cn"],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
-      "files": [
-        {
-          "path": "src/components/vertical-slider.tsx",
           "type": "registry:ui"
         }
       ]

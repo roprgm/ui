@@ -39,7 +39,6 @@ import {
   ToggleGroupDemo,
   TooltipDemo,
   TreeListDemo,
-  VerticalSliderDemo,
 } from "./demos";
 import { type Group, Page } from "./docs";
 import { EditorDemo } from "./editor";
@@ -153,7 +152,7 @@ const groups: Group[] = [
         name: "slider",
         title: "Slider",
         description:
-          "A labeled value with a bar; compact drops the bar and edits by dragging the value.",
+          "A labeled value with a bar. Compact drops the bar and edits by dragging the value; a vertical orientation stands the bar upright alone.",
         demo: <SliderDemo />,
       },
       {
@@ -162,12 +161,6 @@ const groups: Group[] = [
         description:
           "A number that drags sideways, types on click, and steps with the arrow keys.",
         demo: <ScrubInputDemo />,
-      },
-      {
-        name: "vertical-slider",
-        title: "Vertical slider",
-        description: "An upright range with an optional painted track.",
-        demo: <VerticalSliderDemo />,
       },
     ],
   },
