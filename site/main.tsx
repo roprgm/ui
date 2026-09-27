@@ -59,7 +59,6 @@ const groups: Group[] = [
         description:
           "Actions. render draws one as another element, such as a link; it renders on the server.",
         demo: <ButtonDemo />,
-        bare: true,
       },
       {
         name: "icon-button",

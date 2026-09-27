@@ -90,25 +90,31 @@ export const percent = (value: number) => `${value}%`;
 
 export function ButtonDemo() {
   return (
-    <div className="grid gap-3 sm:grid-cols-[2fr_1fr]">
-      <Frame label="Variants">
-        <Button>Default</Button>
-        <Button variant="primary">Primary</Button>
-        <Button variant="primary">
-          <PlusIcon />
-          Import
-        </Button>
-        <Button variant="ghost">Ghost</Button>
-        <Button disabled>Disabled</Button>
-        <Button variant="ghost" render={<a href="#icon-button" />}>
-          Link
-        </Button>
-      </Frame>
-      <Frame label="Sizes">
-        <Button size="sm">Small</Button>
-        <Button>Default</Button>
-        <Button size="lg">Large</Button>
-      </Frame>
+    <div className="grid w-full gap-6 sm:grid-cols-[2fr_1fr]">
+      <div className="flex flex-col items-center gap-3">
+        <span className="text-muted">Variants</span>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Button>Default</Button>
+          <Button variant="primary">Primary</Button>
+          <Button variant="primary">
+            <PlusIcon />
+            Import
+          </Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button disabled>Disabled</Button>
+          <Button variant="ghost" render={<a href="#icon-button" />}>
+            Link
+          </Button>
+        </div>
+      </div>
+      <div className="flex flex-col items-center gap-3">
+        <span className="text-muted">Sizes</span>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Button size="sm">Small</Button>
+          <Button>Default</Button>
+          <Button size="lg">Large</Button>
+        </div>
+      </div>
     </div>
   );
 }
