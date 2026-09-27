@@ -34,8 +34,7 @@ export function EditorDemo() {
   ].join(" ");
 
   return (
-    // An elevated surface, as an app window over the page; its canvas sinks to the lowest level.
-    <div className="grid grid-cols-[auto_minmax(0,1fr)] overflow-hidden rounded-xl bg-level-1! surface-float @2xl:flex @2xl:h-[560px]">
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] bg-level-1 @2xl:flex @2xl:h-[560px]">
       <div className="border-line border-r p-1.5 surface-panel">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>

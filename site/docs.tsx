@@ -185,8 +185,8 @@ function Article({ doc }: { doc: Doc }) {
 
 function Preview({ doc }: { doc: Doc }) {
   if (doc.bare) return doc.demo;
-  // A block draws its own surface, and lays itself out by the width it's given, not the screen's.
-  if (doc.block) return <div className="@container">{doc.demo}</div>;
+  // Blocks lay themselves out by the width of this frame, not the screen's.
+  if (doc.block) return <Card className="@container">{doc.demo}</Card>;
   return (
     <Card>
       <div className="flex min-h-40 flex-wrap items-center justify-center-safe gap-3 p-6 sm:p-10">
