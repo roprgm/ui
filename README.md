@@ -76,9 +76,9 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 
 | Section | Components |
 | --- | --- |
-| Actions | `Button`, `IconButton`, `Chip`, `Kbd`, `Badge` |
+| Actions | `Button`, `IconButton`, `CopyButton`, `Chip`, `Kbd`, `Badge` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput` |
-| Containers | `Card`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `surface-*` primitives; `Collapsible`, `ScrollArea` |
+| Containers | `Card`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `surface-*` primitives; `Collapsible`, `ScrollArea`, `CodeBlock` |
 | Navigation | `Tabs`, `ListItem`, `TreeList` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
 | Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, and `overflow-fade-y` utilities |
@@ -95,7 +95,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | --- | --- |
 | `level-0` to `level-12` | the backgrounds of the interface: black, then darkest first in even steps of lightness; every fill is one of them |
 | `surface`, `field`, `raised`, `raised-hover`, `hover` | fills relative to the surface they sit on: its own, a field two levels below, a raised control three above and four on hover, and a ghost's hover one above |
-| `foreground`, `muted`, `disabled` | text: the foreground, and faded, so it keeps its contrast on any level |
+| `foreground`, `muted`, `faint`, `disabled` | text, strongest first: `faint` for what should barely show, such as a disclaimer |
 | `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
 | `pressed` | a translucent state for ghost buttons and chips |
 | `line`, `separator`, `focus`, `backdrop` | the lines between a card's parts, a separator's translucent dark, the focus ring, and the shade behind a dialog |

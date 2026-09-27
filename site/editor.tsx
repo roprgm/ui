@@ -1,5 +1,5 @@
 import { cn } from "cn";
-import { useState } from "react";
+import { type CSSProperties, useState } from "react";
 import { Chip } from "../src/components/chip";
 import { IconButton } from "../src/components/icon-button";
 import { ListItem, ListItemAction } from "../src/components/list-item";
@@ -45,7 +45,7 @@ export function EditorDemo() {
 
   return (
     <div className="grid grid-cols-[auto_minmax(0,1fr)] bg-level-1 @2xl:flex @2xl:h-[560px]">
-      <div className="border-line border-r p-1.5 surface-card shadow-none!">
+      <div className="border-line border-r p-1.5 surface-panel">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <div className="relative grid min-h-64 min-w-0 flex-1 place-items-center p-4 @2xl:p-10">
@@ -67,7 +67,7 @@ export function EditorDemo() {
             />
             <Popover>
               <PopoverTrigger render={<Chip />}>More</PopoverTrigger>
-              <PopoverContent align="center" className="w-56">
+              <PopoverContent raised align="center" className="w-56">
                 <Section>
                   <Slider
                     label="Size"
@@ -90,9 +90,9 @@ export function EditorDemo() {
       <aside
         className={cn(
           sections(),
-          "relative col-span-2 min-h-0 shrink-0 surface-card shadow-none! @max-2xl:w-full!",
+          "relative col-span-2 min-h-0 w-(--width) shrink-0 surface-panel @max-2xl:w-full",
         )}
-        style={{ width }}
+        style={{ "--width": `${width}px` } as CSSProperties}
       >
         <ResizeEdge width={width} onWidthChange={setWidth} />
         <Section className="flex-row items-center">
@@ -102,7 +102,7 @@ export function EditorDemo() {
               <MenuTrigger render={<IconButton label="Layer actions" />}>
                 <MoreIcon />
               </MenuTrigger>
-              <MenuContent>
+              <MenuContent raised>
                 <MenuItem>Duplicate</MenuItem>
                 <MenuItem>Rename</MenuItem>
                 <MenuSeparator />

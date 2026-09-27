@@ -25,10 +25,11 @@
   --color-level-11: oklch(52% 0 0);
   --color-level-12: oklch(55.7% 0 0);
 
-  /* Text: the foreground, and faded, so it keeps its contrast on any level. */
+  /* Text, strongest first, and opaque, so an icon's crossing strokes don't show. */
   --color-foreground: oklch(96% 0 0);
-  --color-muted: oklch(96% 0 0 / 0.6);
-  --color-disabled: oklch(96% 0 0 / 0.21);
+  --color-muted: oklch(70% 0 0);
+  --color-faint: oklch(55% 0 0);
+  --color-disabled: oklch(44% 0 0);
 
   /* What is on: primary buttons, checked controls, thumbs. */
   --color-primary: oklch(89% 0 0);
@@ -39,10 +40,16 @@
   --color-pressed: oklch(100% 0 0 / 0.15);
   --color-focus: oklch(100% 0 0 / 0.25);
   --color-backdrop: oklch(0% 0 0 / 0.5);
+  --color-line: oklch(0% 0 0 / 0.5);
   --color-separator: oklch(0% 0 0 / 0.7);
 
-  --color-line: var(--color-level-2);
   --color-danger: oklch(75% 0.14 21);
+
+  /* Code, as a highlighter marks it. */
+  --color-code-keyword: oklch(77% 0.1 9);
+  --color-code-string: oklch(81% 0.08 133);
+  --color-code-type: oklch(81% 0.07 230);
+  --color-code-property: oklch(83% 0.08 76);
 }
 
 /* The page's fills, for what sits on it: its own, a field two levels below, a raised control
@@ -82,7 +89,7 @@
   --color-hover: var(--color-level-5);
   background-color: var(--color-surface);
 
-  :where(.surface-card, .surface-float) & {
+  :where(.surface-card, .surface-float, .surface-panel) & {
     --color-surface: var(--color-level-6);
     --color-field: var(--color-level-4);
     --color-raised: var(--color-level-9);
@@ -91,8 +98,8 @@
   }
 
   /* Not nested in the rule above, where both ancestors could be the same one. */
-  :where(.surface-card, .surface-float)
-    :where(.surface-card, .surface-float)
+  :where(.surface-card, .surface-float, .surface-panel)
+    :where(.surface-card, .surface-float, .surface-panel)
     & {
     --color-surface: var(--color-level-8);
     --color-field: var(--color-level-6);
@@ -102,9 +109,23 @@
   }
 }
 
-/* What floats, a card drawn floating by the theme: popups, dialogs, notices, anything dragged. */
+/* A card docked in a layout, such as a sidebar: a card's fills, with no edge. */
+@utility surface-panel {
+  @apply surface-card;
+}
+
+/* What floats, a card drawn floating by the theme: popups, dialogs, notices, anything dragged.
+   Raised, it stands as a card on a card, for a popup that opens over one. */
 @utility surface-float {
   @apply surface-card;
+
+  &[data-raised] {
+    --color-surface: var(--color-level-6);
+    --color-field: var(--color-level-4);
+    --color-raised: var(--color-level-9);
+    --color-raised-hover: var(--color-level-10);
+    --color-hover: var(--color-level-7);
+  }
 }
 
 /* A control that stands up from what it sits on: buttons, selects, selected tabs and toggles. */
@@ -120,6 +141,17 @@
 /* What is on: a primary button, a checked switch, a slider's thumb. */
 @utility surface-primary {
   @apply bg-primary;
+}
+
+/* A strip of controls a size smaller than a Button, 3px in and rounded to match, as a ToggleGroup
+   or a segmented TabList; pair it with `surface-sunken`. It stands 2px taller than a Button but
+   reaches a pixel past each edge, so in a row it takes a Button's height. */
+@utility segmented {
+  @apply -my-px gap-0.5 rounded-lg p-0.75;
+
+  & > * {
+    border-radius: calc(var(--radius-lg) - 3px);
+  }
 }
 
 /* A line between groups, dark over whatever it sits on; size it with `h-px` or `w-px`. */

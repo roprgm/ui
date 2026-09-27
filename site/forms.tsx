@@ -3,6 +3,7 @@ import { Button } from "../src/components/button";
 import { Card } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chip } from "../src/components/chip";
+import { CopyButton } from "../src/components/copy-button";
 import { Field } from "../src/components/field";
 import { IconButton } from "../src/components/icon-button";
 import { Input } from "../src/components/input";
@@ -12,7 +13,6 @@ import { Slider } from "../src/components/slider";
 import { Switch } from "../src/components/switch";
 import { Textarea } from "../src/components/textarea";
 import { Toggle, ToggleGroup } from "../src/components/toggle-group";
-import { CopyButton } from "./copy-button";
 import { percent } from "./demos";
 import { MoreIcon, UndoIcon } from "./icons";
 
@@ -64,6 +64,7 @@ export function FormsDemo() {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-muted">Color space</span>
             <Select
+              raised
               aria-label="Color space"
               items={spaces}
               defaultValue="srgb"
@@ -106,6 +107,7 @@ export function FormsDemo() {
         </div>
         <div className="flex gap-2">
           <Select
+            raised
             aria-label="Sort by"
             items={sorts}
             defaultValue="recent"
@@ -125,6 +127,7 @@ export function FormsDemo() {
             </Toggle>
           </ToggleGroup>
           <Select
+            raised
             aria-label="Zoom"
             variant="pill"
             items={[
@@ -162,6 +165,7 @@ export function FormsDemo() {
           <Button>Default</Button>
           <Button variant="primary">Apply</Button>
           <Select
+            raised
             aria-label="Spacing"
             items={sorts}
             defaultValue="recent"
@@ -185,6 +189,7 @@ export function FormsDemo() {
             Apply
           </Button>
           <Select
+            raised
             aria-label="Spacing"
             items={sorts}
             defaultValue="recent"
@@ -197,6 +202,7 @@ export function FormsDemo() {
           <Button>Default</Button>
           <Button variant="primary">Save</Button>
           <Select
+            raised
             aria-label="Folder"
             items={sorts}
             defaultValue="recent"

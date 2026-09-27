@@ -5,9 +5,9 @@ import * as css from "sugar-high/lang/css";
 import * as shell from "sugar-high/lang/shell";
 import * as typescript from "sugar-high/lang/typescript";
 import { Card } from "../src/components/card";
+import { CodeBlock } from "../src/components/code-block";
 import { IconButton } from "../src/components/icon-button";
 import { ScrollArea } from "../src/components/scroll-area";
-import { CopyButton } from "./copy-button";
 import { GitHubIcon } from "./icons";
 
 export type Doc = {
@@ -232,23 +232,11 @@ export function Code({
   lang?: keyof typeof languages | "text";
   children: string;
 }) {
+  if (lang === "text") return <CodeBlock code={children} wrap />;
   return (
-    // 6px around a 16px line centers it on the 28px copy button.
-    <div className="flex items-start gap-2 rounded-xl bg-field p-1.5 pl-3 surface-sunken">
-      {lang === "text" && (
-        <pre className="flex-1 py-1.5 font-mono text-xs whitespace-pre-wrap text-foreground">
-          {children}
-        </pre>
-      )}
-      {lang !== "text" && (
-        <pre
-          className="flex-1 overflow-fade-x py-1.5 font-mono text-xs text-foreground"
-          dangerouslySetInnerHTML={{
-            __html: render(parse(children, languages[lang])),
-          }}
-        />
-      )}
-      <CopyButton value={children} />
-    </div>
+    <CodeBlock
+      code={children}
+      html={render(parse(children, languages[lang]))}
+    />
   );
 }

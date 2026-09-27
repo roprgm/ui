@@ -3,15 +3,18 @@ import type { ComponentProps } from "react";
 
 /**
  * The floating box of menus, selects, popovers, dialogs, and notices. `list` pads a column of
- * `popupItem` rows; other content goes in `Section`s.
+ * `popupItem` rows; other content goes in `Section`s. `raised` lifts it a level more, to stand
+ * out where it opens over a card.
  */
 export function Popup({
   list = false,
+  raised = false,
   className,
   ...props
-}: ComponentProps<"div"> & { list?: boolean }) {
+}: ComponentProps<"div"> & { list?: boolean; raised?: boolean }) {
   return (
     <div
+      data-raised={raised || undefined}
       className={cn(
         "max-h-(--available-height) min-w-40 overflow-x-hidden overflow-y-auto rounded-xl text-foreground surface-float outline-none popup-motion",
         list && "flex flex-col gap-0.5 rounded-lg p-1",

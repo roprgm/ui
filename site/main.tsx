@@ -10,10 +10,12 @@ import {
   CardDemo,
   CheckboxDemo,
   ChipDemo,
+  CodeBlockDemo,
   CollapsibleDemo,
   ColorsDemo,
   ComboboxDemo,
   ContextMenuDemo,
+  CopyButtonDemo,
   DepthDemo,
   DialogDemo,
   FieldDemo,
@@ -67,11 +69,20 @@ const groups: Group[] = [
         demo: <IconButtonDemo />,
       },
       {
+        name: "copy-button",
+        title: "Copy button",
+        description:
+          "Copies a value, such as a link or a snippet, and draws a check once it has.",
+        demo: <CopyButtonDemo />,
+        half: true,
+      },
+      {
         name: "chip",
         title: "Chip",
         description:
           "Pill buttons for bars over a canvas; aria-pressed shows one on.",
         demo: <ChipDemo />,
+        half: true,
       },
       {
         name: "kbd",
@@ -197,6 +208,14 @@ const groups: Group[] = [
         title: "Scroll area",
         description: "Vertical scrolling with a thin bar and faded edges.",
         demo: <ScrollAreaDemo />,
+      },
+      {
+        name: "code-block",
+        title: "Code block",
+        description:
+          "Code with a copy button; a line that doesn't fit scrolls. Pass html from any highlighter, such as Sugar High, and the theme colors it.",
+        demo: <CodeBlockDemo />,
+        code: "<CodeBlock code={source} html={highlight(source)} />",
       },
     ],
   },
@@ -335,7 +354,7 @@ const groups: Group[] = [
         name: "colors",
         title: "Colors",
         description:
-          "Every fill is a level, 3.7% apart in lightness. Muted and disabled text fade the foreground, so they read on any level.",
+          "Every fill is a level, 3.7% apart in lightness. Text comes in four opaque steps, from foreground to disabled.",
         demo: <ColorsDemo />,
         bare: true,
         code: '<div className="bg-level-4 text-muted">…</div>',

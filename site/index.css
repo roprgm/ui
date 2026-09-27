@@ -11,16 +11,3 @@
   src: url("@fontsource-variable/geist/files/geist-latin-wght-normal.woff2")
     format("woff2-variations");
 }
-
-/* Code snippets: Sugar High colors its tokens from these. */
-:root {
-  --sh-identifier: var(--color-foreground);
-  --sh-sign: var(--color-muted);
-  --sh-comment: var(--color-muted);
-  --sh-keyword: oklch(76.7% 0.104 9);
-  --sh-string: oklch(81.2% 0.08 133);
-  --sh-class: oklch(81.1% 0.067 230);
-  --sh-entity: oklch(81.1% 0.067 230);
-  --sh-property: oklch(82.7% 0.083 76);
-  --sh-jsxliterals: var(--color-foreground);
-}

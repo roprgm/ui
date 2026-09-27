@@ -2,34 +2,42 @@
 
 import { Menu as Primitive } from "@base-ui/react/menu";
 import { cn } from "cn";
-import type { ComponentProps } from "react";
+import { type ComponentProps, createContext, useContext } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
 import { Popup, popupItem } from "./popup";
-import { usePopupContainer, withTriggerSurface } from "./popup-surface";
 
 /** Commands, such as a row's actions. For settings, use a Popover. */
-export const Menu = withTriggerSurface(Primitive.Root);
+export const Menu = Primitive.Root;
 export const MenuTrigger = Primitive.Trigger;
 
+// A submenu opens as raised as the menu it opens from.
+const Raised = createContext(false);
+
+/** `raised` lifts it a level more, for a menu that opens over a card. */
 export function MenuContent({
   align = "end",
   alignOffset,
+  raised = false,
   ...props
 }: Primitive.Popup.Props &
-  Pick<Primitive.Positioner.Props, "align" | "alignOffset">) {
+  Pick<Primitive.Positioner.Props, "align" | "alignOffset"> & {
+    raised?: boolean;
+  }) {
   return (
-    <Primitive.Portal container={usePopupContainer()}>
+    <Primitive.Portal>
       <Primitive.Positioner
         sideOffset={4}
         align={align}
         alignOffset={alignOffset}
         className="z-50"
       >
-        <Primitive.Popup
-          render={(popup) => <Popup {...popup} list />}
-          {...props}
-        />
+        <Raised value={raised}>
+          <Primitive.Popup
+            render={(popup) => <Popup {...popup} list raised={raised} />}
+            {...props}
+          />
+        </Raised>
       </Primitive.Positioner>
     </Primitive.Portal>
   );
@@ -54,9 +62,7 @@ export function MenuSeparator() {
   return <Primitive.Separator className="mx-1.5 my-0.5 h-px separator" />;
 }
 
-export const Submenu = withTriggerSurface(Primitive.SubmenuRoot, {
-  beside: true,
-});
+export const Submenu = Primitive.SubmenuRoot;
 
 export function SubmenuTrigger({
   className,
@@ -80,5 +86,8 @@ export function SubmenuTrigger({
 
 /** Up by the list's padding, so its first item lines up with the trigger. */
 export function SubmenuContent(props: ComponentProps<typeof MenuContent>) {
-  return <MenuContent align="start" alignOffset={-4} {...props} />;
+  const raised = useContext(Raised);
+  return (
+    <MenuContent align="start" alignOffset={-4} raised={raised} {...props} />
+  );
 }

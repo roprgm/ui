@@ -23,17 +23,22 @@
           "color-level-11": "oklch(52% 0 0)",
           "color-level-12": "oklch(55.7% 0 0)",
           "color-foreground": "oklch(96% 0 0)",
-          "color-muted": "oklch(96% 0 0 / 0.6)",
-          "color-disabled": "oklch(96% 0 0 / 0.21)",
+          "color-muted": "oklch(70% 0 0)",
+          "color-faint": "oklch(55% 0 0)",
+          "color-disabled": "oklch(44% 0 0)",
           "color-primary": "oklch(89% 0 0)",
           "color-primary-hover": "oklch(98.5% 0 0)",
           "color-on-primary": "oklch(18% 0 0)",
           "color-pressed": "oklch(100% 0 0 / 0.15)",
           "color-focus": "oklch(100% 0 0 / 0.25)",
           "color-backdrop": "oklch(0% 0 0 / 0.5)",
+          "color-line": "oklch(0% 0 0 / 0.5)",
           "color-separator": "oklch(0% 0 0 / 0.7)",
-          "color-line": "var(--color-level-2)",
           "color-danger": "oklch(75% 0.14 21)",
+          "color-code-keyword": "oklch(77% 0.1 9)",
+          "color-code-string": "oklch(81% 0.08 133)",
+          "color-code-type": "oklch(81% 0.07 230)",
+          "color-code-property": "oklch(83% 0.08 76)",
           "color-surface": "var(--color-level-2)",
           "color-field": "var(--color-level-0)",
           "color-raised": "var(--color-level-5)",
@@ -57,14 +62,14 @@
           "--color-raised-hover": "var(--color-level-8)",
           "--color-hover": "var(--color-level-5)",
           "background-color": "var(--color-surface)",
-          ":where(.surface-card, .surface-float) &": {
+          ":where(.surface-card, .surface-float, .surface-panel) &": {
             "--color-surface": "var(--color-level-6)",
             "--color-field": "var(--color-level-4)",
             "--color-raised": "var(--color-level-9)",
             "--color-raised-hover": "var(--color-level-10)",
             "--color-hover": "var(--color-level-7)"
           },
-          ":where(.surface-card, .surface-float) :where(.surface-card, .surface-float) &": {
+          ":where(.surface-card, .surface-float, .surface-panel) :where(.surface-card, .surface-float, .surface-panel) &": {
             "--color-surface": "var(--color-level-8)",
             "--color-field": "var(--color-level-6)",
             "--color-raised": "var(--color-level-11)",
@@ -73,8 +78,18 @@
           },
           "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
         },
+        "@utility surface-panel": {
+          "@apply surface-card": {}
+        },
         "@utility surface-float": {
           "@apply surface-card": {},
+          "&[data-raised]": {
+            "--color-surface": "var(--color-level-6)",
+            "--color-field": "var(--color-level-4)",
+            "--color-raised": "var(--color-level-9)",
+            "--color-raised-hover": "var(--color-level-10)",
+            "--color-hover": "var(--color-level-7)"
+          },
           "box-shadow": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)"
         },
         "@utility surface-raised": {
@@ -88,6 +103,12 @@
         "@utility surface-primary": {
           "@apply bg-primary": {},
           "box-shadow": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)"
+        },
+        "@utility segmented": {
+          "@apply -my-px gap-0.5 rounded-lg p-0.75": {},
+          "& > *": {
+            "border-radius": "calc(var(--radius-lg) - 3px)"
+          }
         },
         "@utility separator": {
           "@apply bg-separator": {},
@@ -286,17 +307,6 @@
       ]
     },
     {
-      "name": "popup-surface",
-      "type": "registry:ui",
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
-      "files": [
-        {
-          "path": "src/components/popup-surface.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "section",
       "type": "registry:ui",
       "dependencies": ["cn", "class-variance-authority"],
@@ -347,6 +357,22 @@
       "files": [
         {
           "path": "src/components/icon-button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "categories": ["actions"],
+      "dependencies": ["cn"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/icon-button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/copy-button.tsx",
           "type": "registry:ui"
         }
       ]
@@ -452,7 +478,6 @@
         "https://ui.roprgm.com/r/check.json",
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/popup-surface.json",
         "https://ui.roprgm.com/r/tooltip.json"
       ],
       "files": [
@@ -472,8 +497,7 @@
         "https://ui.roprgm.com/r/check.json",
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/input.json",
-        "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/popup-surface.json"
+        "https://ui.roprgm.com/r/popup.json"
       ],
       "files": [
         {
@@ -559,7 +583,6 @@
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/popup-surface.json",
         "https://ui.roprgm.com/r/kbd.json"
       ],
       "files": [
@@ -577,7 +600,6 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/popup-surface.json",
         "https://ui.roprgm.com/r/menu.json"
       ],
       "files": [
@@ -595,7 +617,6 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/popup-surface.json",
         "https://ui.roprgm.com/r/section.json"
       ],
       "files": [
@@ -761,6 +782,22 @@
         }
       ],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "categories": ["containers"],
+      "dependencies": ["cn"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/copy-button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/code-block.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "slider",

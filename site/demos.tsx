@@ -1,11 +1,13 @@
 import { cn } from "cn";
 import { type ReactNode, useState } from "react";
+import { highlight } from "sugar-high";
 import { Badge } from "../src/components/badge";
 import { Button } from "../src/components/button";
 import { Card } from "../src/components/card";
 import { Checkbox } from "../src/components/checkbox";
 import { Chevron } from "../src/components/chevron";
 import { Chip } from "../src/components/chip";
+import { CodeBlock } from "../src/components/code-block";
 import {
   Collapsible,
   CollapsiblePanel,
@@ -17,6 +19,7 @@ import {
   ContextMenuContent,
   ContextMenuTrigger,
 } from "../src/components/context-menu";
+import { CopyButton } from "../src/components/copy-button";
 import {
   Dialog,
   DialogClose,
@@ -65,7 +68,6 @@ import {
   TooltipTrigger,
 } from "../src/components/tooltip";
 import { type TreeDrop, TreeList } from "../src/components/tree-list";
-import { CopyButton } from "./copy-button";
 import {
   AdjustIcon,
   BrushIcon,
@@ -239,12 +241,14 @@ export function SelectDemo() {
     <div className="grid gap-3 sm:grid-cols-2">
       <Frame label="Field">
         <Select
+          raised
           aria-label="Fruit"
           items={fruits}
           placeholder="Pick a fruit"
           className="w-40"
         />
         <Select
+          raised
           aria-label="Fruits"
           items={fruits}
           placeholder="Pick fruits"
@@ -259,6 +263,7 @@ export function SelectDemo() {
             <BrushIcon /> Brush
           </Chip>
           <Select
+            raised
             variant="pill"
             aria-label="Mask operation"
             items={operations}
@@ -289,6 +294,7 @@ const fonts = [
 export function ComboboxDemo() {
   return (
     <Combobox
+      raised
       aria-label="Font"
       items={fonts}
       placeholder="Search fonts"
@@ -419,6 +425,7 @@ export function ColorsDemo() {
               >
                 <span className="text-foreground">Foreground</span>
                 <span className="text-muted">Muted</span>
+                <span className="text-faint">Faint</span>
                 <span className="text-disabled">Disabled</span>
               </div>
             ))}
@@ -509,6 +516,7 @@ function Depth({ name, level }: { name: string; level: number }) {
       <div className="flex flex-wrap items-center gap-2">
         <Input placeholder="Name" className="w-36" />
         <Select
+          raised={level > 2}
           aria-label="Fruit"
           items={fruits}
           placeholder="Pick a fruit"
@@ -548,6 +556,7 @@ export function SizesDemo() {
         </IconButton>
         <Input placeholder="Name" className="w-32" />
         <Select
+          raised
           aria-label="Fruit"
           items={fruits}
           placeholder="Fruit"
@@ -562,6 +571,7 @@ export function SizesDemo() {
         </IconButton>
         <Input size="lg" placeholder="Name" className="w-32" />
         <Select
+          raised
           size="lg"
           aria-label="Fruit"
           items={fruits}
@@ -574,6 +584,30 @@ export function SizesDemo() {
         <ListItem>Sky</ListItem>
         <ListItem>Subject</ListItem>
       </div>
+    </div>
+  );
+}
+
+export function CopyButtonDemo() {
+  return (
+    <span className="flex items-center gap-1">
+      <span className="text-muted">ui.roprgm.com</span>
+      <CopyButton value="https://ui.roprgm.com" />
+    </span>
+  );
+}
+
+const snippet = `import { Button } from "@roprgm/ui/button";
+
+export function SaveButton() {
+  return <Button variant="primary">Save</Button>;
+}`;
+
+export function CodeBlockDemo() {
+  return (
+    <div className="flex w-full max-w-lg flex-col gap-3">
+      <CodeBlock code={snippet} html={highlight(snippet)} />
+      <CodeBlock code="bun add @roprgm/ui" />
     </div>
   );
 }
@@ -636,7 +670,7 @@ export function MenuDemo() {
       <MenuTrigger render={<IconButton label="Layer actions" />}>
         <MoreIcon />
       </MenuTrigger>
-      <MenuContent>
+      <MenuContent raised>
         <MenuItem shortcut="Mod D">Duplicate</MenuItem>
         <MenuItem shortcut="F2">Rename</MenuItem>
         <Submenu>
@@ -661,7 +695,7 @@ export function ContextMenuDemo() {
       <ContextMenuTrigger className="flex h-32 w-64 items-center justify-center rounded-lg surface-sunken text-muted select-none">
         Right-click here
       </ContextMenuTrigger>
-      <ContextMenuContent>
+      <ContextMenuContent raised>
         <MenuItem shortcut="Mod C">Copy</MenuItem>
         <MenuItem shortcut="Mod V">Paste</MenuItem>
         <Submenu>
@@ -733,7 +767,7 @@ export function PopoverDemo() {
       <PopoverTrigger render={<Chip />}>
         <BrushIcon /> Brush
       </PopoverTrigger>
-      <PopoverContent align="center" className="w-64">
+      <PopoverContent raised align="center" className="w-64">
         <Section>
           <Slider
             label="Size"

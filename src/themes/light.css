@@ -11,8 +11,9 @@
   --color-pressed: oklch(0% 0 0 / 0.09);
 
   --color-foreground: oklch(20.4% 0 0);
-  --color-muted: oklch(20.4% 0 0 / 0.66);
-  --color-disabled: oklch(20.4% 0 0 / 0.31);
+  --color-muted: oklch(51% 0 0);
+  --color-faint: oklch(65% 0 0);
+  --color-disabled: oklch(78% 0 0);
 
   --color-primary: oklch(23.8% 0 0);
   --color-primary-hover: oklch(38% 0 0);

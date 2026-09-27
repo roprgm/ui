@@ -7,7 +7,6 @@ import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Input } from "./input";
 import { Popup, popupItem } from "./popup";
-import { useTriggerSurface } from "./popup-surface";
 
 export type ComboboxItem<T extends string> = {
   value: T;
@@ -21,9 +20,9 @@ export function Combobox<T extends string>({
   placeholder,
   empty = "No results",
   size,
+  raised = false,
   className,
   "aria-label": label,
-  onOpenChange,
   ...props
 }: Omit<
   Primitive.Root.Props<T, false, ComboboxItem<T>>,
@@ -34,6 +33,8 @@ export function Combobox<T extends string>({
   /** Shown in the list when nothing matches. */
   empty?: ReactNode;
   size?: "default" | "lg";
+  /** Lifts its list a level more, for a combobox on a card. */
+  raised?: boolean;
   className?: string;
   "aria-label"?: string;
 }) {
@@ -45,13 +46,8 @@ export function Combobox<T extends string>({
       }),
     [items],
   );
-  const surface = useTriggerSurface(onOpenChange);
   return (
-    <Primitive.Root
-      items={collection}
-      onOpenChange={surface.onOpenChange}
-      {...props}
-    >
+    <Primitive.Root items={collection} {...props}>
       <Primitive.InputGroup className={cn("relative", className)}>
         <Primitive.Input
           aria-label={label}
@@ -66,11 +62,16 @@ export function Combobox<T extends string>({
           <Chevron size="sm" />
         </Primitive.Trigger>
       </Primitive.InputGroup>
-      <Primitive.Portal container={surface.container}>
+      <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} className="z-50">
           <Primitive.Popup
             render={(props) => (
-              <Popup {...props} list className="min-w-(--anchor-width)" />
+              <Popup
+                {...props}
+                list
+                raised={raised}
+                className="min-w-(--anchor-width)"
+              />
             )}
           >
             <Primitive.Empty

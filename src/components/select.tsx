@@ -7,7 +7,6 @@ import { type ReactNode, useState } from "react";
 import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Popup, popupItem } from "./popup";
-import { useTriggerSurface } from "./popup-surface";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
 const trigger = cva(
@@ -43,6 +42,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
   tooltip,
   variant = "field",
   size,
+  raised = false,
   className,
   "aria-label": label,
   onOpenChange,
@@ -54,16 +54,12 @@ export function Select<T extends string, Multiple extends boolean = false>({
   tooltip?: string;
   variant?: "field" | "pill";
   size?: "default" | "lg";
+  /** Lifts its list a level more, for a select on a card. */
+  raised?: boolean;
   className?: string;
   "aria-label"?: string;
 }) {
   const [open, setOpen] = useState(false);
-  const surface = useTriggerSurface(
-    (next: boolean, details: Primitive.Root.ChangeEventDetails) => {
-      setOpen(next);
-      onOpenChange?.(next, details);
-    },
-  );
   const control = (
     <Primitive.Trigger
       aria-label={label}
@@ -89,7 +85,10 @@ export function Select<T extends string, Multiple extends boolean = false>({
   return (
     <Primitive.Root
       items={items}
-      onOpenChange={surface.onOpenChange}
+      onOpenChange={(next, details) => {
+        setOpen(next);
+        onOpenChange?.(next, details);
+      }}
       {...props}
     >
       {tooltip && (
@@ -99,7 +98,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
         </Tooltip>
       )}
       {!tooltip && control}
-      <Primitive.Portal container={surface.container}>
+      <Primitive.Portal>
         <Primitive.Positioner
           sideOffset={4}
           alignItemWithTrigger={false}
@@ -107,7 +106,12 @@ export function Select<T extends string, Multiple extends boolean = false>({
         >
           <Primitive.Popup
             render={(props) => (
-              <Popup {...props} list className="min-w-(--anchor-width)" />
+              <Popup
+                {...props}
+                list
+                raised={raised}
+                className="min-w-(--anchor-width)"
+              />
             )}
           >
             <Primitive.List className="flex flex-col gap-0.5">
