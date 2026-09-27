@@ -675,7 +675,7 @@ export function ToolRail({
         {tools.map(({ id, label, key, Icon }) => (
           <Tooltip key={id}>
             <TooltipTrigger
-              render={<Tab value={id} size="icon" aria-label={label} />}
+              render={<Tab value={id} size="icon-sm" aria-label={label} />}
             >
               <Icon />
             </TooltipTrigger>
