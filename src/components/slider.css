@@ -1,0 +1,90 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.slider[data-orientation="horizontal"]) {
+    @apply grid items-center;
+  }
+
+  :where(.slider[data-orientation="vertical"]) {
+    @apply flex h-44 w-8 justify-center;
+  }
+
+  :where(.slider[data-variant="panel"]) {
+    @apply grid-cols-[1fr_auto] gap-x-3 gap-y-0.5;
+  }
+
+  :where(.slider[data-variant="toolbar"]) {
+    @apply grid-cols-[auto_4rem_auto] gap-x-2;
+  }
+
+  :where(.slider[data-variant="compact"]) {
+    @apply grid-cols-[1fr_auto] gap-x-2;
+  }
+
+  /* A last track needs the room text normally leaves under its letters. */
+  :where(.slider[data-orientation="horizontal"][data-variant="panel"]) {
+    @apply last:mb-1;
+  }
+
+  /* Above the track’s padded hit area; panel digits align with the track’s end. */
+  :where(.slider-value) {
+    @apply z-10;
+  }
+
+  :where(.slider[data-variant="panel"]) :where(.slider-value) {
+    @apply -mr-1;
+  }
+
+  :where(.slider[data-variant="toolbar"]) :where(.slider-value) {
+    @apply col-start-3;
+  }
+
+  :where(.slider[data-variant="compact"]) :where(.slider-value) {
+    @apply -mr-1;
+  }
+
+  /* Extend the hit area 10px on each side, or 16px for a finger. Margins return the room. */
+  :where(.slider-control) {
+    @apply box-content flex cursor-pointer touch-none select-none;
+  }
+
+  :where(.slider[data-orientation="horizontal"]) :where(.slider-control) {
+    @apply -my-2.5 h-thumb items-center py-2.5 pointer-coarse:-my-4 pointer-coarse:py-4;
+  }
+
+  :where(.slider[data-orientation="vertical"]) :where(.slider-control) {
+    @apply -mx-2.5 w-thumb justify-center px-2.5 pointer-coarse:-mx-4 pointer-coarse:px-4;
+  }
+
+  :where(.slider[data-variant="panel"]) :where(.slider-control) {
+    @apply col-span-2;
+  }
+
+  :where(.slider[data-variant="toolbar"]) :where(.slider-control) {
+    @apply col-start-2 row-start-1;
+  }
+
+  :where(.slider-track) {
+    @apply rounded-full surface-sunken;
+  }
+
+  :where(.slider[data-orientation="horizontal"]) :where(.slider-track) {
+    @apply h-1 w-full;
+  }
+
+  :where(.slider[data-orientation="vertical"]) :where(.slider-track) {
+    @apply h-full w-1;
+  }
+
+  :where(.slider-label) {
+    @apply relative z-10 text-muted;
+  }
+
+  :where(.slider-thumb) {
+    @apply size-thumb rounded-full surface-primary;
+    &:has(:focus-visible) {
+      box-shadow: 0 0 0 2px var(--color-focus);
+    }
+  }
+}

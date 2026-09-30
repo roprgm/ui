@@ -1,0 +1,28 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.tab-list) {
+    @apply flex data-[orientation=vertical]:flex-col;
+  }
+
+  :where(.tab-list[data-variant="default"]) {
+    @apply gap-1;
+  }
+
+  :where(.tab-list[data-variant="segmented"]) {
+    @apply segmented surface-sunken;
+  }
+
+  .tab-list:where([data-variant="segmented"]) > * {
+    @apply h-6;
+  }
+
+  :where(.tab) {
+    @apply data-active:surface-raised data-active:text-foreground;
+  }
+
+  :where(.tab-panel) {
+    @apply rounded-sm focus-ring;
+  }
+}

@@ -1,0 +1,29 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.input) {
+    @apply w-full min-w-0 rounded-md surface-sunken px-2.5 text-foreground transition focus-ring placeholder:text-muted dim-disabled;
+    &[aria-invalid="true"] {
+      box-shadow: 0 0 0 1px
+        color-mix(in oklab, var(--color-danger) 60%, transparent);
+    }
+    /* The file picker’s button sits 3px inside the field. */
+    &::file-selector-button {
+      border-width: 0;
+      border-style: solid;
+      @apply mt-0.75 mr-3 -ml-1.75 cursor-pointer rounded-sm surface-raised px-2 text-foreground transition;
+    }
+    &:hover::file-selector-button {
+      @apply bg-raised-hover;
+    }
+  }
+
+  :where(.input[data-size="default"]) {
+    @apply h-7 file:h-5.5;
+  }
+
+  :where(.input[data-size="lg"]) {
+    @apply h-8 file:h-6.5;
+  }
+}

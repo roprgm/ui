@@ -1,0 +1,15 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.notice) {
+    @apply max-w-sm;
+  }
+
+  :where(.notice[data-tone="alert"]) {
+    @apply text-danger;
+  }
+
+  :where(.notice-close-icon) {
+    @apply size-4;
+  }
+}

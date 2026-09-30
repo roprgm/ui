@@ -1,89 +1,81 @@
-import { readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { basename, join } from "node:path";
+import postcss, { type Container } from "postcss";
+import type { Registry } from "shadcn/schema";
 
-/**
- * Writes registry.json's `theme` item from themes/default.css and its imports: `@theme` variables
- * to `cssVars.theme`, the rest to `css`.
- */
 type Rules = { [key: string]: string | Rules };
 
-function parse(source: string): Rules {
-  const css = source.replace(/\/\*[\s\S]*?\*\//g, "");
-  let index = 0;
-  const clean = (text: string) =>
-    text.trim().replace(/\s+/g, " ").replace(/\( /g, "(").replace(/ \)/g, ")");
-
-  function add(rules: Rules, key: string, value: string | Rules) {
-    const current = rules[key];
-    if (typeof current === "object" && typeof value === "object") {
-      Object.assign(current, value);
-    } else {
-      rules[key] = value;
+function rules(container: Container): Rules {
+  const result: Rules = {};
+  for (const node of container.nodes ?? []) {
+    if (node.type === "decl") {
+      result[node.prop] = node.value;
+    }
+    if (node.type === "rule") {
+      result[node.selector] = rules(node);
+    }
+    if (node.type === "atrule" && node.nodes) {
+      result[`@${node.name} ${node.params}`] = rules(node);
     }
   }
+  return result;
+}
 
-  function statement(rules: Rules, text: string) {
-    const line = clean(text);
-    if (!line || line.startsWith("@source")) return;
-    const colon = line.indexOf(":");
-    if (line.startsWith("@") || colon < 0) return add(rules, line, {});
-    add(rules, line.slice(0, colon).trim(), line.slice(colon + 1).trim());
+const url = (name: string) => `https://ui.roprgm.com/r/${name}.json`;
+const folder = "src/components";
+const styles = readdirSync(folder)
+  .filter((file) => file.endsWith(".css"))
+  .sort();
+const shared = styles.filter(
+  (file) => !existsSync(join(folder, file.replace(/\.css$/, ".tsx"))),
+);
+const registry: Registry = JSON.parse(readFileSync("registry.json", "utf8"));
+const sharedNames = new Set(shared.map((file) => basename(file, ".css")));
+registry.items = registry.items.filter((item) => !sharedNames.has(item.name));
+
+for (const file of shared) {
+  registry.items.push({
+    name: basename(file, ".css"),
+    type: "registry:ui",
+    files: [{ path: join(folder, file), type: "registry:ui" }],
+  });
+}
+
+for (const item of registry.items) {
+  if (item.name === "theme") {
+    delete item.cssVars;
+    item.css = {
+      ...rules(postcss.parse(readFileSync("src/themes/default.css", "utf8"))),
+      ...rules(postcss.parse(readFileSync(join(folder, "page.css"), "utf8"))),
+    };
+    item.registryDependencies = [url("tailwind")];
+    item.docs =
+      "Components include their own styles. To use the library tokens in your app’s Tailwind classes, add @reference to the installed ui/tailwind.css from your main CSS file (the relative path depends on your components.json aliases).";
+    continue;
   }
-
-  function block(): Rules {
-    const rules: Rules = {};
-    let buffer = "";
-    while (index < css.length) {
-      const char = css[index++];
-      if (char === "{") {
-        add(rules, clean(buffer), block());
-        buffer = "";
-      } else if (char === "}") {
-        break;
-      } else if (char === ";") {
-        statement(rules, buffer);
-        buffer = "";
-      } else {
-        buffer += char;
+  const ownStyle = join(folder, `${item.name}.css`);
+  item.files = (item.files ?? []).filter((file) => file.path !== ownStyle);
+  if (existsSync(ownStyle)) {
+    item.files.push({ path: ownStyle, type: "registry:ui" });
+  }
+  // CSS dependencies are generated; component dependencies remain explicit registry metadata.
+  const dependencies = new Set(
+    (item.registryDependencies ?? []).filter(
+      (dependency) =>
+        !shared.some((file) => url(basename(file, ".css")) === dependency),
+    ),
+  );
+  for (const file of item.files) {
+    const source = readFileSync(file.path, "utf8");
+    const imports = source.matchAll(
+      /(?:import\s*|@(?:import|reference)\s*)["']\.\/([\w-]+)\.css["']/g,
+    );
+    for (const [, name] of imports) {
+      if (name !== item.name) {
+        dependencies.add(url(name));
       }
     }
-    statement(rules, buffer);
-    return rules;
   }
-
-  return block();
-}
-
-/** A CSS file with its relative imports written in place. */
-function read(path: string): string {
-  return readFileSync(path, "utf8").replace(
-    /@import "(\.{1,2}\/.+?)";/g,
-    (_, file) => read(join(dirname(path), file)),
-  );
-}
-
-function item(path: string) {
-  const {
-    "@theme": theme = {},
-    "@theme inline": inline = {},
-    ...css
-  } = parse(read(path)) as Record<string, Rules>;
-  const vars = Object.fromEntries(
-    Object.entries({ ...theme, ...inline }).map(([key, value]) => [
-      key.replace(/^--/, ""),
-      value,
-    ]),
-  );
-  return { cssVars: { theme: vars }, css };
-}
-
-const theme = "https://ui.roprgm.com/r/theme.json";
-const registry = JSON.parse(readFileSync("registry.json", "utf8"));
-for (const entry of registry.items) {
-  if (entry.name === "theme")
-    Object.assign(entry, item("src/themes/default.css"));
-  // Installed alone with shadcn, an item gets the theme's CSS only if it lists the theme itself.
-  else if (!entry.registryDependencies?.includes(theme))
-    throw new Error(`registry.json: "${entry.name}" must list ${theme}`);
+  item.registryDependencies = [...dependencies];
 }
 writeFileSync("registry.json", `${JSON.stringify(registry, null, 2)}\n`);

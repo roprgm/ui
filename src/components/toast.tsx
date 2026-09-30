@@ -4,6 +4,8 @@ import { Toast as Primitive } from "@base-ui/react/toast";
 import { Button } from "./button";
 import { Notice, NoticeClose } from "./notice";
 import { Section, SectionAction } from "./section";
+import "./tokens.css";
+import "./toast.css";
 
 /**
  * Shows notices in a corner from anywhere, once a `Toaster` is mounted:
@@ -15,9 +17,9 @@ export const toast = Primitive.createToastManager();
 /** Where `toast` notices appear. Mount it once, anywhere. */
 export function Toaster() {
   return (
-    <Primitive.Provider toastManager={toast}>
+    <Primitive.Provider data-slot="toaster-provider" toastManager={toast}>
       <Primitive.Portal>
-        <Primitive.Viewport className="fixed inset-x-3.5 bottom-3.5 z-50 flex flex-col-reverse gap-2 sm:left-auto sm:w-sm">
+        <Primitive.Viewport data-slot="toaster" className="toaster">
           <Toasts />
         </Primitive.Viewport>
       </Primitive.Portal>
@@ -29,25 +31,29 @@ function Toasts() {
   const { toasts } = Primitive.useToastManager();
   return toasts.map((item) => (
     <Primitive.Root
+      data-slot="toast"
       key={item.id}
       toast={item}
       swipeDirection="right"
       // Past the provider's limit, older toasts wait hidden until newer ones go.
-      className="translate-x-(--toast-swipe-movement-x) data-limited:hidden"
+      className="toast"
       render={<Notice tone={item.priority === "high" ? "alert" : "status"} />}
     >
-      <Section className="flex-row items-start">
-        <div className="flex flex-1 flex-col gap-0.5">
-          <Primitive.Title className="font-medium" />
-          <Primitive.Description />
+      <Section data-slot="toast-header" className="toast-header">
+        <div data-slot="toast-content" className="toast-content">
+          <Primitive.Title data-slot="toast-title" className="toast-title" />
+          <Primitive.Description data-slot="toast-description" />
         </div>
         <SectionAction>
           <NoticeClose onClick={() => toast.close(item.id)} />
         </SectionAction>
       </Section>
       {item.actionProps && (
-        <Section className="flex-row gap-1.5 px-2.5">
-          <Primitive.Action render={<Button size="sm" />} />
+        <Section data-slot="toast-actions" className="toast-actions">
+          <Primitive.Action
+            data-slot="toast-action"
+            render={<Button size="sm" />}
+          />
         </Section>
       )}
     </Primitive.Root>

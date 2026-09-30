@@ -1,0 +1,89 @@
+/* Scrolls vertically, shading an edge while more lies past it. Without scroll timelines, it reads
+   the attributes Base UI's ScrollArea sets. */
+@utility overflow-fade-y {
+  overflow-y: auto;
+  &::before,
+  &::after {
+    content: "";
+    position: sticky;
+    z-index: 10;
+    display: block;
+    height: 1.5rem;
+    pointer-events: none;
+    opacity: 0;
+  }
+  &::before {
+    top: 0;
+    margin-bottom: -1.5rem;
+    background: linear-gradient(
+      to bottom,
+      oklch(0% 0 0 / 0.2),
+      30%,
+      transparent
+    );
+  }
+  &::after {
+    bottom: 0;
+    margin-top: -1.5rem;
+    background: linear-gradient(to top, oklch(0% 0 0 / 0.2), 30%, transparent);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    &::before {
+      animation: overflow-fade-in linear both;
+      animation-timeline: scroll();
+      animation-range: 0 1.5rem;
+    }
+    &::after {
+      animation: overflow-fade-out linear both;
+      animation-timeline: scroll();
+      animation-range: calc(100% - 1.5rem) 100%;
+    }
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    &::before,
+    &::after {
+      transition: opacity 150ms;
+    }
+    &[data-overflow-y-start]::before,
+    &[data-overflow-y-end]::after {
+      opacity: 1;
+    }
+  }
+}
+
+/* Scrolls horizontally, fading an edge while more lies past it, with no scrollbar. Give one that
+   holds only text `tabIndex={-1}`, or it becomes a tab stop. */
+@utility overflow-fade-x {
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Its overflow and mask clip rings drawn outside a child, so draw them inside. */
+  & :focus-visible {
+    outline-offset: -2px;
+  }
+
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    oklch(0% 0 0) var(--overflow-fade-start),
+    oklch(0% 0 0) calc(100% - var(--overflow-fade-end)),
+    transparent
+  );
+
+  @supports (animation-timeline: scroll()) {
+    animation:
+      overflow-fade-x-start linear both,
+      overflow-fade-x-end linear both;
+    animation-timeline: scroll(self inline), scroll(self inline);
+    animation-range:
+      0 1.5rem,
+      calc(100% - 1.5rem) 100%;
+  }
+}

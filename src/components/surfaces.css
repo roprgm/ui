@@ -1,0 +1,42 @@
+@layer components {
+  .surface-card,
+  .surface-panel,
+  .surface-float {
+    --color-surface: var(--color-level-4);
+    --color-field: var(--color-level-2);
+    --color-raised: var(--color-level-7);
+    --color-raised-hover: var(--color-level-8);
+    --color-hover: var(--color-level-5);
+    background-color: var(--color-surface);
+    box-shadow: var(--edge-card);
+  }
+
+  :where(.surface-card, .surface-panel, .surface-float)
+    :is(.surface-card, .surface-panel, .surface-float),
+  .surface-float[data-raised] {
+    --color-surface: var(--color-level-6);
+    --color-field: var(--color-level-4);
+    --color-raised: var(--color-level-9);
+    --color-raised-hover: var(--color-level-10);
+    --color-hover: var(--color-level-7);
+  }
+
+  :where(.surface-card, .surface-panel, .surface-float)
+    :where(.surface-card, .surface-panel, .surface-float)
+    :is(.surface-card, .surface-panel, .surface-float) {
+    --color-surface: var(--color-level-8);
+    --color-field: var(--color-level-6);
+    --color-raised: var(--color-level-11);
+    --color-raised-hover: var(--color-level-12);
+    --color-hover: var(--color-level-9);
+  }
+}
+
+@layer components {
+  .surface-panel {
+    box-shadow: none;
+  }
+  .surface-float {
+    box-shadow: var(--edge-float);
+  }
+}

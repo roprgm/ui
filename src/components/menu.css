@@ -1,0 +1,28 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.menu-positioner) {
+    @apply z-50;
+  }
+
+  :where(.menu-item) {
+    @apply gap-2;
+  }
+
+  :where(.menu-shortcut) {
+    @apply ml-auto pl-4;
+  }
+
+  :where(.menu-separator) {
+    @apply mx-1.5 my-0.5 h-px separator;
+  }
+
+  :where(.submenu-trigger) {
+    @apply justify-between gap-4 data-popup-open:bg-raised;
+  }
+
+  :where(.submenu-icon) {
+    @apply text-muted;
+  }
+}

@@ -1,5 +1,7 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
+import "./tokens.css";
+import "./switch.css";
 
 /** A native checkbox with the switch role; `::before` draws the thumb. */
 export function Switch({
@@ -8,12 +10,13 @@ export function Switch({
 }: Omit<ComponentProps<"input">, "type">) {
   return (
     <input
+      data-slot="switch"
       type="checkbox"
       // biome-ignore lint/a11y/useAriaPropsForRole: a native checkbox exposes its checked state.
       role="switch"
       className={cn(
         // Sized by its content, so a theme's border grows the track rather than squeezing the knob.
-        "box-content h-4 w-8 shrink-0 cursor-pointer appearance-none rounded-full surface-sunken p-0.5 transition focus-ring before:block before:size-4 before:rounded-full before:surface-raised before:transition checked:surface-primary checked:before:translate-x-4 checked:before:bg-on-primary dim-disabled",
+        "switch",
         className,
       )}
       {...props}

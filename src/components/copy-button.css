@@ -1,0 +1,36 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.copy-button-icons) {
+    display: grid;
+    & > * {
+      grid-area: 1 / 1;
+    }
+  }
+  :where(.copy-button-icon) {
+    @apply size-4 transition;
+    transition-duration: 150ms;
+    transition-delay: 150ms;
+  }
+  :where(.copy-button-check) {
+    @apply size-4;
+  }
+  :where(.copy-button-check-path) {
+    transition: stroke-dashoffset 150ms var(--ease-in);
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1;
+  }
+  :where(.copy-button[data-copied="true"]) {
+    & .copy-button-icon {
+      scale: 0.5;
+      opacity: 0;
+      transition-delay: 0ms;
+    }
+    & .copy-button-check-path {
+      stroke-dashoffset: 0;
+      transition-delay: 100ms;
+      transition-duration: 300ms;
+      transition-timing-function: var(--ease-out);
+    }
+  }
+}

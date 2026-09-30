@@ -1,0 +1,19 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.switch) {
+    @apply box-content h-4 w-8 shrink-0 cursor-pointer appearance-none rounded-full surface-sunken p-0.5 transition focus-ring dim-disabled;
+    &::before {
+      @apply block size-4 rounded-full surface-raised transition;
+      content: "";
+    }
+    &:checked {
+      @apply surface-primary;
+    }
+    &:checked::before {
+      @apply bg-on-primary;
+      translate: calc(var(--spacing, 0.25rem) * 4) 0;
+    }
+  }
+}

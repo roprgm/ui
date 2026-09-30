@@ -1,0 +1,31 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+@reference "./overflow.css";
+
+@layer components {
+  :where(.code-block) {
+    --sh-class: var(--color-code-type);
+    --sh-comment: var(--color-muted);
+    --sh-entity: var(--color-code-type);
+    --sh-identifier: var(--color-foreground);
+    --sh-jsxliterals: var(--color-foreground);
+    --sh-keyword: var(--color-code-keyword);
+    --sh-property: var(--color-code-property);
+    --sh-sign: var(--color-muted);
+    --sh-string: var(--color-code-string);
+
+    @apply flex items-start gap-2 rounded-xl surface-sunken p-1.5 pl-3;
+  }
+
+  :where(.code-block-content) {
+    @apply flex-1 py-1.5 font-mono text-xs text-foreground;
+  }
+
+  :where(.code-block[data-wrap]) :where(.code-block-content) {
+    @apply whitespace-pre-wrap;
+  }
+
+  :where(.code-block:not([data-wrap])) :where(.code-block-content) {
+    @apply overflow-fade-x;
+  }
+}

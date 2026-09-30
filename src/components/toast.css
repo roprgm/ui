@@ -1,0 +1,28 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.toaster) {
+    @apply fixed inset-x-3.5 bottom-3.5 z-50 flex flex-col-reverse gap-2 sm:left-auto sm:w-sm;
+  }
+
+  :where(.toast) {
+    @apply data-limited:hidden;
+    translate: var(--toast-swipe-movement-x) 0;
+  }
+
+  :where(.toast-header) {
+    @apply flex-row items-start;
+  }
+
+  :where(.toast-content) {
+    @apply flex flex-1 flex-col gap-0.5;
+  }
+
+  :where(.toast-title) {
+    @apply font-medium;
+  }
+
+  :where(.toast-actions) {
+    @apply flex-row gap-1.5 px-2.5;
+  }
+}

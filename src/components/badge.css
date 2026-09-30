@@ -1,0 +1,15 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.badge) {
+    @apply inline-flex h-5.5 min-w-5.5 shrink-0 items-center justify-center gap-1 rounded-full px-1.75 whitespace-nowrap;
+  }
+
+  :where(.badge[data-variant="default"]) {
+    @apply bg-pressed text-foreground;
+  }
+
+  :where(.badge[data-variant="primary"]) {
+    @apply bg-primary text-on-primary;
+  }
+}

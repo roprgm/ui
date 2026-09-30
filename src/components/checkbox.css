@@ -1,0 +1,26 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.checkbox) {
+    @apply inline-grid shrink-0;
+    & > * {
+      grid-area: 1 / 1;
+    }
+  }
+  :where(.checkbox-input) {
+    @apply size-4 cursor-pointer appearance-none rounded-sm surface-sunken transition focus-ring checked:bg-primary dim-disabled;
+  }
+  :where(.checkbox-indicator) {
+    @apply pointer-events-none size-4 p-0.5 text-on-primary;
+    transition: stroke-dashoffset 100ms var(--ease-in);
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1;
+  }
+  :where(.checkbox-input:checked) + :where(.checkbox-indicator) {
+    stroke-dashoffset: 0;
+    transition-delay: 50ms;
+    transition-duration: 200ms;
+    transition-timing-function: var(--ease-out);
+  }
+}

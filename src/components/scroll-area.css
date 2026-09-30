@@ -1,0 +1,31 @@
+@reference "./tailwind.css";
+@reference "./overflow.css";
+
+@layer components {
+  :where(.scroll-area) {
+    @apply relative min-h-0 overflow-hidden;
+  }
+
+  :where(.scroll-area-viewport) {
+    @apply h-full overscroll-contain outline-none;
+  }
+
+  :where(.scroll-area[data-fade]) :where(.scroll-area-viewport) {
+    @apply overflow-fade-y;
+  }
+
+  :where(.scroll-area-content) {
+    @apply min-w-0;
+  }
+
+  :where(.scroll-area-scrollbar) {
+    @apply z-10 my-1 mr-px flex w-1.5 justify-center opacity-0 transition-opacity data-hovering:opacity-100 data-scrolling:opacity-100;
+  }
+
+  :where(.scroll-area-thumb) {
+    @apply w-1 rounded-full bg-disabled;
+  }
+  :where(.scroll-area-scrollbar:hover) :where(.scroll-area-thumb) {
+    @apply bg-muted;
+  }
+}

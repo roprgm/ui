@@ -1,0 +1,12 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.textarea) {
+    @apply min-h-20 w-full min-w-0 resize-y rounded-md surface-sunken px-2.5 py-1.5 text-foreground transition field-sizing-content focus-ring placeholder:text-muted dim-disabled;
+    &[aria-invalid="true"] {
+      box-shadow: 0 0 0 1px
+        color-mix(in oklab, var(--color-danger) 60%, transparent);
+    }
+  }
+}

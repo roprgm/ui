@@ -1,0 +1,32 @@
+@reference "./tailwind.css";
+@reference "./popup-motion.css";
+
+@layer components {
+  :where(.tooltip-positioner) {
+    @apply z-50;
+  }
+
+  :where(.tooltip-content) {
+    @apply flex max-w-64 items-center gap-2 rounded-md bg-level-1 px-2 py-1 text-foreground popup-motion data-instant:transition-none;
+  }
+
+  :where(.tooltip-arrow) {
+    @apply size-3 bg-level-1;
+    &[data-side="bottom"] {
+      bottom: 100%;
+      clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+    }
+    &[data-side="left"] {
+      left: 100%;
+      clip-path: polygon(0 0, 50% 50%, 0 100%);
+    }
+    &[data-side="right"] {
+      right: 100%;
+      clip-path: polygon(100% 0, 50% 50%, 100% 100%);
+    }
+    &[data-side="top"] {
+      top: 100%;
+      clip-path: polygon(0 0, 50% 50%, 100% 0);
+    }
+  }
+}

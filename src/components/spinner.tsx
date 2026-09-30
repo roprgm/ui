@@ -1,15 +1,15 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
+import "./tokens.css";
+import "./spinner.css";
 
 export function Spinner({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
+      data-slot="spinner"
       role="status"
       aria-label="Loading"
-      className={cn(
-        "size-4 animate-spin rounded-full border-2 border-disabled border-t-foreground",
-        className,
-      )}
+      className={cn("spinner", className)}
       {...props}
     />
   );

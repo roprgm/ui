@@ -1,0 +1,35 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.combobox) {
+    @apply relative;
+  }
+
+  :where(.combobox-input) {
+    @apply pr-7;
+  }
+
+  :where(.combobox-trigger) {
+    @apply absolute inset-y-0 right-0 flex w-7 cursor-pointer items-center justify-center text-muted;
+  }
+
+  :where(.combobox-positioner) {
+    @apply z-50;
+  }
+
+  :where(.combobox-popup) {
+    @apply min-w-(--anchor-width);
+  }
+
+  :where(.combobox-empty) {
+    @apply text-muted empty:hidden;
+  }
+
+  :where(.combobox-list) {
+    @apply flex flex-col gap-0.5;
+  }
+
+  :where(.combobox-item) {
+    @apply justify-between gap-4 data-selected:bg-raised;
+  }
+}

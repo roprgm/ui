@@ -1,0 +1,29 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.chevron) {
+    @apply shrink-0 transition-[rotate,color];
+    transition-duration: 200ms;
+  }
+
+  :where(.chevron[data-direction="down"]) {
+    rotate: 90deg;
+  }
+
+  :where(.chevron[data-direction="left"]) {
+    rotate: 180deg;
+  }
+
+  :where(.chevron[data-direction="up"]) {
+    rotate: -90deg;
+  }
+
+  /* ViewBox units: thicken the smaller icon’s stroke to keep its painted weight. */
+  :where(.chevron[data-size="sm"]) {
+    @apply size-2 stroke-[2.5];
+  }
+
+  :where(.chevron[data-size="md"]) {
+    @apply size-2.5 stroke-2;
+  }
+}

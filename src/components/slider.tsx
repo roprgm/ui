@@ -1,61 +1,11 @@
 "use client";
 
 import { Slider as Primitive } from "@base-ui/react/slider";
-import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { useRef } from "react";
 import { ScrubInput } from "./scrub-input";
-
-// Upright, the bar stands alone and the layouts' grids don't apply.
-const root = cva("", {
-  variants: {
-    orientation: {
-      horizontal: "grid items-center",
-      vertical: "flex h-44 w-8 justify-center",
-    },
-    variant: {
-      panel: "grid-cols-[1fr_auto] gap-x-3 gap-y-0.5",
-      toolbar: "grid-cols-[auto_4rem_auto] gap-x-2",
-      compact: "grid-cols-[1fr_auto] gap-x-2",
-    },
-  },
-  compoundVariants: [
-    // Last in what holds it, a bar has none of the room text leaves under its letters.
-    { orientation: "horizontal", variant: "panel", className: "last:mb-1" },
-  ],
-});
-
-// Above the bar's hit area, which reaches into its row. In a panel, the digits end where the
-// bar does.
-const digits = cva("z-10", {
-  variants: {
-    variant: { panel: "-mr-1", toolbar: "col-start-3", compact: "-mr-1" },
-  },
-});
-
-// As thick as the thumb, padded 10px past it on either side, or 16px for a finger, with the
-// room given back by margins.
-const bar = cva("box-content flex cursor-pointer touch-none select-none", {
-  variants: {
-    orientation: {
-      horizontal:
-        "-my-2.5 h-thumb items-center py-2.5 pointer-coarse:-my-4 pointer-coarse:py-4",
-      vertical:
-        "-mx-2.5 w-thumb justify-center px-2.5 pointer-coarse:-mx-4 pointer-coarse:px-4",
-    },
-    variant: {
-      panel: "col-span-2",
-      toolbar: "col-start-2 row-start-1",
-      compact: "",
-    },
-  },
-});
-
-const track = cva("rounded-full surface-sunken", {
-  variants: {
-    orientation: { horizontal: "h-1 w-full", vertical: "h-full w-1" },
-  },
-});
+import "./tokens.css";
+import "./slider.css";
 
 /** The thumb's center at a fraction of the range: its edge meets the bar's end at either end. */
 function thumbCenter(fraction: number) {
@@ -151,6 +101,8 @@ export function Slider({
 
   return (
     <Primitive.Root
+      data-slot="slider"
+      data-variant={variant}
       value={value}
       onValueChange={onChange}
       min={min}
@@ -159,12 +111,15 @@ export function Slider({
       largeStep={step * 10}
       orientation={orientation}
       thumbAlignment="edge"
-      className={cn(root({ orientation, variant }), className)}
+      className={cn("slider", className)}
     >
       {!vertical && (
         <>
-          <span className="relative z-10 text-muted">{label}</span>
+          <span data-slot="slider-label" className="slider-label">
+            {label}
+          </span>
           <ScrubInput
+            data-slot="slider-value"
             aria-label={label}
             value={value}
             onChange={onChange}
@@ -175,23 +130,24 @@ export function Slider({
             defaultValue={defaultValue}
             format={format}
             minChars={valueWidth}
-            className={digits({ variant })}
+            className="slider-value"
           />
         </>
       )}
       {(vertical || variant !== "compact") && (
         <Primitive.Control
+          data-slot="slider-control"
           onPointerDown={(event) => event.button === 0 && edit(true)}
           onPointerUp={() => edit(false)}
           onPointerCancel={() => edit(false)}
           onDoubleClick={() =>
             defaultValue !== undefined && onChange(defaultValue)
           }
-          className={bar({ orientation, variant })}
+          className="slider-control"
         >
           <Primitive.Track
             data-slot="slider-track"
-            className={track({ orientation })}
+            className="slider-track"
             style={{
               backgroundImage: barBackground(
                 vertical ? "top" : "right",
@@ -202,12 +158,13 @@ export function Slider({
             }}
           >
             <Primitive.Thumb
+              data-slot="slider-thumb"
               aria-label={label}
               getAriaValueText={format && ((_, next) => format(next))}
               onKeyDown={(event) => valueKeys.has(event.key) && edit(true)}
               onKeyUp={() => edit(false)}
               onBlur={() => edit(false)}
-              className="size-thumb rounded-full surface-primary has-focus-visible:ring-2 has-focus-visible:ring-focus"
+              className="slider-thumb"
               style={{ backgroundColor: color }}
             />
           </Primitive.Track>

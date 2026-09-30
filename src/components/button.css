@@ -1,0 +1,51 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  /* The one-pixel press moves faster than the colors ease. */
+  .button {
+    @apply inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring dim-disabled;
+  }
+
+  .button:active:not([aria-haspopup]) {
+    translate: 0 1px;
+  }
+
+  :where(.button[data-variant="default"]) {
+    @apply surface-raised text-foreground hover:bg-raised-hover data-popup-open:bg-raised-hover;
+  }
+
+  :where(.button[data-variant="primary"]) {
+    @apply surface-primary text-on-primary hover:bg-primary-hover;
+    text-shadow: var(--text-shadow-subtle);
+  }
+
+  :where(.button[data-variant="ghost"]) {
+    @apply text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground;
+  }
+
+  /* Labels are at least as wide as tall; a leading icon sits 4px closer to the edge. */
+  .button:where([data-size="default"]) {
+    @apply h-7 min-w-7 has-[>svg:first-child]:pl-2;
+  }
+
+  .button:where([data-size="sm"]) {
+    @apply h-6 min-w-6 px-2.5 has-[>svg:first-child]:pl-1.5;
+  }
+
+  .button:where([data-size="lg"]) {
+    @apply h-8 min-w-8 px-3.5 has-[>svg:first-child]:pl-2.5;
+  }
+
+  .button:where([data-size="icon"]) {
+    @apply size-7 px-0;
+  }
+
+  .button:where([data-size="icon-sm"]) {
+    @apply size-6 px-0;
+  }
+
+  .button:where([data-size="icon-lg"]) {
+    @apply size-8 px-0;
+  }
+}

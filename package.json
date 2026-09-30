@@ -25,29 +25,34 @@
     "./*": {
       "types": "./dist/*.d.ts",
       "default": "./dist/*.js"
-    }
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind.css": "./src/components/tailwind.css"
   },
   "scripts": {
-    "dev": "vite",
-    "check": "biome check --write && tsc",
-    "build": "bun scripts/registry.ts && biome format --write registry.json && tsc -p tsconfig.build.json && shadcn build -o site/public/r && vite build",
-    "prepublishOnly": "bun run build"
+    "dev": "bun scripts/tailwind.ts && vite",
+    "check": "bun scripts/tailwind.ts && biome check --write && tsc",
+    "build": "bun scripts/tailwind.ts && bun scripts/styles.ts && bun scripts/registry.ts && biome format --write registry.json src/components/tailwind.css && tsc -p tsconfig.build.json && shadcn build -o site/public/r && vite build",
+    "prepublishOnly": "bun run build",
+    "verify": "bun scripts/verify.ts"
   },
   "peerDependencies": {
     "react": ">=19"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
-    "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",
     "@fontsource-variable/geist": "^5.3.0",
+    "@tailwindcss/node": "4.3.3",
     "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.2.5",
     "@vitejs/plugin-react": "^6.1.1",
+    "postcss": "8.5.28",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "shadcn": "^4.21.0",

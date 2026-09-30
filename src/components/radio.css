@@ -1,0 +1,16 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.radio) {
+    @apply grid size-4 shrink-0 cursor-pointer appearance-none place-content-center rounded-full surface-sunken transition focus-ring checked:bg-primary dim-disabled;
+    &::before {
+      @apply size-1.5 rounded-full bg-on-primary transition;
+      content: "";
+      scale: 0;
+    }
+    &:checked::before {
+      scale: 1;
+    }
+  }
+}

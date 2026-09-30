@@ -11,9 +11,8 @@ import {
   useState,
 } from "react";
 import { Chevron } from "./chevron";
-
-const hint =
-  "pointer-events-none absolute size-[9px] text-muted opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
+import "./tokens.css";
+import "./scrub-input.css";
 
 /** Whole `ch`, since tabular digits can differ from it by a fraction of a pixel. */
 function digitsWidth(digits: string, minChars?: number) {
@@ -38,6 +37,7 @@ export function ScrubInput({
   chevrons = false,
   className,
   "aria-label": label,
+  "data-slot": slot = "scrub-input",
 }: {
   value: number;
   onChange: (value: number) => void;
@@ -55,6 +55,7 @@ export function ScrubInput({
   chevrons?: boolean;
   className?: string;
   "aria-label"?: string;
+  "data-slot"?: string;
 }) {
   const [draft, setDraft] = useState<string>();
   const input = useRef<HTMLInputElement>(null);
@@ -161,36 +162,42 @@ export function ScrubInput({
     // The input is the control; dragging is a pointer shortcut over it.
     // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
-      className={cn(
-        "group relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
-        className,
-      )}
+      data-slot={slot}
+      className={cn("scrub-input", className)}
       onDoubleClick={reset}
       onPointerDown={start}
     >
       {chevrons && (
-        <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
+        <Chevron
+          data-slot="scrub-input-hint-left"
+          direction="left"
+          className="scrub-input-hint scrub-input-hint-left"
+        />
       )}
-      <span className="grid text-right *:[grid-area:1/1]">
-        <span className="text-foreground group-focus-within:invisible">
+      <span data-slot="scrub-input-content" className="scrub-input-content">
+        <span data-slot="scrub-input-value" className="scrub-input-value">
           <span
-            className="inline-block"
+            data-slot="scrub-input-digits"
+            className="scrub-input-digits"
             style={{ width: digitsWidth(number, minChars) }}
           >
             {number}
           </span>
           {/* A unit flush against the digits, such as %, gets a hair of space. */}
           <span
-            className={cn("text-muted", /^\S/.test(unit ?? "") && "ml-0.5")}
+            data-slot="scrub-input-unit"
+            data-spaced={/^\S/.test(unit ?? "") || undefined}
+            className="scrub-input-unit"
           >
             {unit}
           </span>
         </span>
         <input
+          data-slot="scrub-input-input"
           ref={input}
           aria-label={label}
           inputMode="decimal"
-          className="w-12 min-w-full cursor-[inherit] bg-transparent text-right text-transparent text-shadow-none outline-none field-sizing-content selection:bg-pressed focus:text-foreground focus:[text-shadow:inherit] supports-[field-sizing:content]:w-auto"
+          className="scrub-input-input"
           value={draft ?? fixed}
           onFocus={focus}
           onChange={(event) => setDraft(event.currentTarget.value)}
@@ -199,7 +206,11 @@ export function ScrubInput({
         />
       </span>
       {chevrons && (
-        <Chevron direction="right" className={cn(hint, "left-full -ml-0.75")} />
+        <Chevron
+          data-slot="scrub-input-hint-right"
+          direction="right"
+          className="scrub-input-hint scrub-input-hint-right"
+        />
       )}
     </span>
   );

@@ -1,0 +1,9 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.spinner) {
+    @apply size-4 animate-spin rounded-full;
+    border: 2px solid var(--color-disabled);
+    border-top-color: var(--color-foreground);
+  }
+}

@@ -1,0 +1,8 @@
+@reference "./tailwind.css";
+@reference "./overflow.css";
+
+@layer components {
+  :where(.scroll-text) {
+    @apply block overflow-fade-x whitespace-nowrap;
+  }
+}

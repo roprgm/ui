@@ -17,10 +17,17 @@ bun add @roprgm/ui
 @import "@roprgm/ui/themes/default.css";
 ```
 
-Or copy components into your app with the shadcn CLI. No package needed: each component brings the theme and the components it uses.
+Or copy components into your app with the shadcn CLI. No package needed: each component brings its stylesheet, shared styles, the theme, and the components it uses.
 
 ```bash
 npx shadcn@latest add https://ui.roprgm.com/r/button.json
+```
+
+The copied components resolve their own Tailwind references. To also use library tokens in your app's Tailwind classes, reference the installed `tailwind.css` from your CSS entry. Adjust the relative path for your app's layout:
+
+```css
+@import "tailwindcss";
+@reference "./components/ui/tailwind.css";
 ```
 
 ## Use
@@ -87,7 +94,21 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ## Theme
 
-`base.css` holds the tokens, the primitives the components are built from, and the page's rules: 13px text on a dark background. `themes/default.css` imports it, draws the primitives with light and shadow, and sets Geist when your app loads it. The comments in both files describe each token.
+Each component imports its own CSS and shared runtime styles, such as tokens or surface rules. Its stylesheet uses `@reference` for the Tailwind tokens and helpers it needs, and `@apply` or native CSS for its rules. Importing Button and Select includes their dependency graph; it does not scan or load the rest of the library.
+
+The npm package ships compiled CSS beside each JavaScript module. The shadcn registry copies the matching source CSS and its references beside the component, so your app's Tailwind compiler processes them. Neither installation needs an `@source` covering the library.
+
+Component rules use Tailwind's standard `components` layer. App utilities override them through `className`. Themes set CSS variables for colors, radii, and surface edges, and can target public `data-slot`, `data-variant`, and `data-size` attributes with normal CSS. No provider is required.
+
+`themes/default.css` registers the tokens with Tailwind, draws surface edges, and sets the page's rules: 13px text on a dark background, using Geist when your app loads it. To build your own primitives with utilities such as `surface-raised` or `overflow-fade-x`, opt into the shared helpers:
+
+```css
+@import "tailwindcss";
+@import "@roprgm/ui/base.css";
+@import "@roprgm/ui/themes/default.css";
+```
+
+`base.css` is an optional collection of foundations; it does not import component styles.
 
 ### Colors
 
@@ -121,16 +142,25 @@ Controls are 28px tall (`h-7`), with 24px and 32px sizes, and list rows 40px. He
 
 ### Customize
 
-Redefine a token to restyle every component that uses it:
+Load your CSS after the default theme. Redefine a token to restyle every component that uses it:
 
 ```css
-@theme {
+:root {
   --color-primary: oklch(67% 0.16 252);
   --radius-md: 8px;
 }
 ```
 
-A theme changes what a surface is by setting its fills again, at each depth, in its own `@utility surface-card`. A surface of your own sets the fills of what sits on it and paints its own:
+Surface edges are CSS variables too: set `--edge-raised`, `--edge-sunken`, `--edge-primary`, `--edge-card`, or `--edge-float` to a box shadow, or `none`. To change a specific component, select its public slot. These unlayered rules override the library's layered defaults, including components loaded later:
+
+```css
+[data-slot="button"][data-variant="primary"] {
+  border-radius: 999px;
+  background: var(--color-primary);
+}
+```
+
+A surface of your own sets the fills of what sits on it and paints its own:
 
 ```css
 @utility surface-sidebar {
@@ -150,6 +180,6 @@ bun install
 bun run dev
 ```
 
-`bun run check` formats, lints, and type-checks. `bun run build` compiles the package, the registry, and the docs site.
+`bun run check` formats, lints, and type-checks. `bun run build` compiles each stylesheet module, the package, the registry, and the docs site. `bun run verify` builds isolated npm and registry consumers and checks that only their style dependencies are included. CI runs these checks.
 
 Publishing a GitHub release publishes the package to npm. The release tag must match the version in `package.json`, such as `v0.6.0`.

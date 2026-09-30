@@ -1,0 +1,48 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.select-trigger) {
+    @apply inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring dim-disabled;
+  }
+
+  :where(.select-trigger[data-variant="field"]) {
+    @apply rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover;
+  }
+
+  :where(.select-trigger[data-variant="pill"]) {
+    @apply rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed;
+  }
+
+  :where(.select-trigger[data-size="default"]) {
+    @apply h-7 pr-2.5 pl-3;
+  }
+
+  :where(.select-trigger[data-size="lg"]) {
+    @apply h-8 pr-3 pl-3.5;
+  }
+
+  :where(.select-value) {
+    @apply truncate data-placeholder:text-muted;
+  }
+
+  :where(.select-icon) {
+    @apply text-muted;
+  }
+
+  :where(.select-positioner) {
+    @apply z-50;
+  }
+
+  :where(.select-popup) {
+    @apply min-w-(--anchor-width);
+  }
+
+  :where(.select-list) {
+    @apply flex flex-col gap-0.5;
+  }
+
+  :where(.select-item) {
+    @apply justify-between gap-4 data-selected:bg-raised;
+  }
+}

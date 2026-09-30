@@ -1,33 +1,14 @@
 "use client";
 
 import { Select as Primitive } from "@base-ui/react/select";
-import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { type ReactNode, useState } from "react";
 import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Popup, popupItem } from "./popup";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
-
-const trigger = cva(
-  "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring dim-disabled",
-  {
-    variants: {
-      /** `pill` goes in a bar over a canvas, beside Chips. */
-      variant: {
-        field:
-          "rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
-        pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
-      },
-      /** A Button's, 2px less on the chevron's side. */
-      size: {
-        default: "h-7 pr-2.5 pl-3",
-        lg: "h-8 pr-3 pl-3.5",
-      },
-    },
-    defaultVariants: { size: "default" },
-  },
-);
+import "./tokens.css";
+import "./select.css";
 
 export type SelectItem<T extends string> = {
   value: T;
@@ -41,7 +22,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
   placeholder,
   tooltip,
   variant = "field",
-  size,
+  size = "default",
   raised = false,
   className,
   "aria-label": label,
@@ -62,20 +43,26 @@ export function Select<T extends string, Multiple extends boolean = false>({
   const [open, setOpen] = useState(false);
   const control = (
     <Primitive.Trigger
+      data-slot="select-trigger"
+      data-variant={variant}
+      data-size={size}
       aria-label={label}
-      className={cn(trigger({ variant, size }), className)}
+      className={cn("select-trigger", className)}
     >
       <Primitive.Value
+        data-slot="select-value"
         placeholder={placeholder}
-        className="truncate data-placeholder:text-muted"
+        className="select-value"
       />
       <Primitive.Icon
+        data-slot="select-icon"
         render={(props, { open }) => (
-          <span {...props}>
+          <span data-slot="select-label" {...props}>
             <Chevron
+              data-slot="select-icon"
               direction={open ? "up" : "down"}
               size="sm"
-              className="text-muted"
+              className="select-icon"
             />
           </span>
         )}
@@ -100,34 +87,37 @@ export function Select<T extends string, Multiple extends boolean = false>({
       {!tooltip && control}
       <Primitive.Portal>
         <Primitive.Positioner
+          data-slot="select-positioner"
           sideOffset={4}
           alignItemWithTrigger={false}
-          className="z-50"
+          className="select-positioner"
         >
           <Primitive.Popup
+            data-slot="select-popup"
             render={(props) => (
               <Popup
+                data-slot="select-popup"
                 {...props}
                 list
                 raised={raised}
-                className="min-w-(--anchor-width)"
+                className="select-popup"
               />
             )}
           >
-            <Primitive.List className="flex flex-col gap-0.5">
+            <Primitive.List data-slot="select-list" className="select-list">
               {items.map((item, index) => (
                 <Primitive.Item
+                  data-slot="select-item"
                   // Values can repeat.
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
-                  className={cn(
-                    popupItem,
-                    "justify-between gap-4 data-selected:bg-raised",
-                  )}
+                  className={cn(popupItem, "select-item")}
                 >
-                  <Primitive.ItemText>{item.label}</Primitive.ItemText>
-                  <Primitive.ItemIndicator>
+                  <Primitive.ItemText data-slot="select-item-text">
+                    {item.label}
+                  </Primitive.ItemText>
+                  <Primitive.ItemIndicator data-slot="select-item-indicator">
                     <Check />
                   </Primitive.ItemIndicator>
                 </Primitive.Item>

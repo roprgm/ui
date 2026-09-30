@@ -1,3 +1,14 @@
 /* Surfaces with no edge, apart by their fills alone. */
 
-@import "../base.css";
+@import "../components/tailwind.css";
+@import "../components/page.css";
+
+:root {
+  --edge-raised: none;
+  --edge-card: none;
+  --edge-sunken: none;
+  --edge-float: none;
+  --edge-primary: none;
+  --edge-separator: none;
+  --edge-separator-vertical: none;
+}

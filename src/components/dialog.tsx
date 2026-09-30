@@ -5,6 +5,8 @@ import { Dialog as Primitive } from "@base-ui/react/dialog";
 import { cn } from "cn";
 import { Popup } from "./popup";
 import { sections } from "./section";
+import "./tokens.css";
+import "./dialog.css";
 
 /** A modal. An `alert` asks before what can't be undone: a click outside doesn't close it. */
 export function Dialog(
@@ -29,14 +31,19 @@ export const DialogClose = Primitive.Close;
 export function DialogContent(props: Primitive.Popup.Props) {
   return (
     <Primitive.Portal>
-      <Primitive.Backdrop className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0" />
+      <Primitive.Backdrop
+        data-slot="dialog-backdrop"
+        className="dialog-backdrop"
+      />
       <Primitive.Popup
+        data-slot="dialog-popup"
         render={(popup) => (
           <Popup
+            data-slot="dialog-content"
             {...popup}
             className={cn(
               sections({ lines: false }),
-              "fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 duration-150 *:data-[slot=section]:not-first:last:pt-4 data-ending-style:scale-95",
+              "dialog-content",
               popup.className,
             )}
           />
@@ -49,7 +56,11 @@ export function DialogContent(props: Primitive.Popup.Props) {
 
 export function DialogTitle({ className, ...props }: Primitive.Title.Props) {
   return (
-    <Primitive.Title className={cn("font-medium", className)} {...props} />
+    <Primitive.Title
+      data-slot="dialog-title"
+      className={cn("dialog-title", className)}
+      {...props}
+    />
   );
 }
 
@@ -58,6 +69,10 @@ export function DialogDescription({
   ...props
 }: Primitive.Description.Props) {
   return (
-    <Primitive.Description className={cn("text-muted", className)} {...props} />
+    <Primitive.Description
+      data-slot="dialog-description"
+      className={cn("dialog-description", className)}
+      {...props}
+    />
   );
 }

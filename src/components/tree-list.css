@@ -1,0 +1,62 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+@reference "./overflow.css";
+
+@layer components {
+  :where(.tree-list-item) {
+    @apply gap-1.5 pl-(--indent) outline-none select-none focus-visible:bg-hover;
+    -webkit-touch-callout: none;
+    &:focus-visible {
+      box-shadow:
+        inset 0 0 0 1px var(--color-focus),
+        inset 0 -1px 0 var(--color-line);
+    }
+    &::before {
+      @apply absolute right-2 left-(--indent) z-10 h-0.5 rounded-full bg-primary opacity-0;
+      content: "";
+    }
+  }
+  :where(.tree-list-item[data-dragging="true"]) {
+    opacity: 0.4;
+  }
+  :where(.tree-list-item[data-drop="inside"]) {
+    @apply bg-hover;
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklab, var(--color-primary) 60%, transparent),
+      inset 0 -1px 0 var(--color-line);
+  }
+  :where(.tree-list-item[data-drop="before"])::before {
+    bottom: auto;
+    top: -1px;
+    opacity: 1;
+  }
+  :where(.tree-list-item[data-drop="after"])::before {
+    top: auto;
+    bottom: -1px;
+    opacity: 1;
+  }
+  :where(.tree-list-toggle) {
+    @apply -mr-0.5 -ml-2 grid size-5 shrink-0 place-items-center rounded-xs text-muted focus-ring hover:text-foreground;
+  }
+  :where(.tree-list-spacer) {
+    @apply -mr-0.5 -ml-2 w-5 shrink-0;
+  }
+  :where(.tree-list-group) {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 200ms
+      var(--default-transition-timing-function);
+  }
+  :where(.tree-list-group[data-expanded="true"]) {
+    grid-template-rows: 1fr;
+  }
+  :where(.tree-list-group-content) {
+    @apply min-h-0 overflow-hidden;
+  }
+  :where(.tree-list[data-dragging]) {
+    cursor: grabbing;
+  }
+  :where(.tree-list-drag-preview) {
+    @apply pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 overflow-fade-x rounded-md whitespace-nowrap px-2.5 py-1 text-foreground;
+  }
+}

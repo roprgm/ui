@@ -6,6 +6,8 @@ import { type ComponentProps, createContext, useContext } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
 import { Popup, popupItem } from "./popup";
+import "./tokens.css";
+import "./menu.css";
 
 /** Commands, such as a row's actions. For settings, use a Popover. */
 export const Menu = Primitive.Root;
@@ -27,13 +29,15 @@ export function MenuContent({
   return (
     <Primitive.Portal>
       <Primitive.Positioner
+        data-slot="menu-positioner"
         sideOffset={4}
         align={align}
         alignOffset={alignOffset}
-        className="z-50"
+        className="menu-positioner"
       >
         <Raised value={raised}>
           <Primitive.Popup
+            data-slot="menu-content"
             render={(popup) => <Popup {...popup} list raised={raised} />}
             {...props}
           />
@@ -51,15 +55,28 @@ export function MenuItem({
   ...props
 }: Primitive.Item.Props & { shortcut?: string }) {
   return (
-    <Primitive.Item className={cn(popupItem, "gap-2", className)} {...props}>
+    <Primitive.Item
+      data-slot="menu-item"
+      className={cn(popupItem, "menu-item", className)}
+      {...props}
+    >
       {children}
-      {shortcut && <Kbd className="ml-auto pl-4">{shortcut}</Kbd>}
+      {shortcut && (
+        <Kbd data-slot="menu-shortcut" className="menu-shortcut">
+          {shortcut}
+        </Kbd>
+      )}
     </Primitive.Item>
   );
 }
 
 export function MenuSeparator() {
-  return <Primitive.Separator className="mx-1.5 my-0.5 h-px separator" />;
+  return (
+    <Primitive.Separator
+      data-slot="menu-separator"
+      className="menu-separator"
+    />
+  );
 }
 
 export const Submenu = Primitive.SubmenuRoot;
@@ -71,15 +88,17 @@ export function SubmenuTrigger({
 }: Primitive.SubmenuTrigger.Props) {
   return (
     <Primitive.SubmenuTrigger
-      className={cn(
-        popupItem,
-        "justify-between gap-4 data-popup-open:bg-raised",
-        className,
-      )}
+      data-slot="submenu-trigger"
+      className={cn(popupItem, "submenu-trigger", className)}
       {...props}
     >
       {children}
-      <Chevron direction="right" size="sm" className="text-muted" />
+      <Chevron
+        data-slot="submenu-icon"
+        direction="right"
+        size="sm"
+        className="submenu-icon"
+      />
     </Primitive.SubmenuTrigger>
   );
 }

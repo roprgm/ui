@@ -1,0 +1,7 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.drag-toggle[data-dragging]) {
+    @apply select-none;
+  }
+}

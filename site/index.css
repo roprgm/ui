@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../src/base.css";
 @import "../src/themes/default.css";
 
 /* `block` waits for Geist instead of painting a fallback first; index.html preloads the file,

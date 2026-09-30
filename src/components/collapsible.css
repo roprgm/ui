@@ -1,0 +1,22 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.collapsible) {
+    @apply rounded-[inherit];
+  }
+
+  :where(.collapsible-trigger) {
+    @apply flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring -outline-offset-2 hover:bg-hover data-panel-open:rounded-b-none dim-disabled;
+  }
+
+  :where(.collapsible-panel) {
+    @apply h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none;
+    transition-duration: 200ms;
+    transition-timing-function: var(--ease-out);
+  }
+
+  :where(.collapsible-content) {
+    box-shadow: inset 0 1px 0 var(--color-line);
+  }
+}

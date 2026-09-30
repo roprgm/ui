@@ -1,0 +1,19 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.field) {
+    @apply flex flex-col gap-1.5;
+  }
+
+  :where(.field-label) {
+    @apply text-muted;
+  }
+
+  :where(.field-description) {
+    @apply text-muted;
+  }
+
+  :where(.field-description[data-error]) {
+    @apply text-danger;
+  }
+}

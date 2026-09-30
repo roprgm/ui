@@ -15,5 +15,6 @@ jobs:
       - run: bunx biome ci
       - run: bunx tsc
       - run: bun run build
-      - name: registry.json matches the default theme
-        run: git diff --exit-code registry.json
+      - run: bun run verify
+      - name: Generated stylesheet references and registry are current
+        run: git diff --exit-code registry.json src/components/tailwind.css

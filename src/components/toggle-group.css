@@ -1,0 +1,26 @@
+@reference "./tailwind.css";
+@reference "./control.css";
+
+@layer components {
+  :where(.toggle-group) {
+    @apply inline-flex segmented surface-sunken;
+  }
+
+  /* Controls are one size smaller than the Button beside their group. */
+  :where(.toggle-group[data-size="default"]) {
+    @apply *:h-6;
+  }
+
+  :where(.toggle-group[data-size="lg"]) {
+    @apply *:h-7;
+  }
+
+  /* Keep the hidden radio inside the label so it cannot widen the page. */
+  :where(.toggle) {
+    @apply relative inline-flex cursor-pointer items-center px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled;
+  }
+
+  :where(.toggle-input) {
+    @apply sr-only;
+  }
+}

@@ -1,0 +1,25 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.dialog-backdrop) {
+    @apply fixed inset-0 z-50 bg-backdrop transition-opacity data-ending-style:opacity-0 data-starting-style:opacity-0;
+    transition-duration: 150ms;
+  }
+
+  :where(.dialog-content) {
+    @apply fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm *:data-[slot=section]:not-first:last:pt-4;
+    translate: -50% -50%;
+    transition-duration: 150ms;
+    &[data-ending-style] {
+      scale: 0.95;
+    }
+  }
+
+  :where(.dialog-title) {
+    @apply font-medium;
+  }
+
+  :where(.dialog-description) {
+    @apply text-muted;
+  }
+}

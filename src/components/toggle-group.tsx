@@ -1,25 +1,22 @@
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-
-// Toggles a size smaller than the Button beside the group.
-const group = cva("inline-flex segmented surface-sunken", {
-  variants: {
-    size: {
-      default: "*:h-6",
-      lg: "*:h-7",
-    },
-  },
-  defaultVariants: { size: "default" },
-});
+import "./tokens.css";
+import "./toggle-group.css";
 
 /** Segmented toggles. Toggles that share a `name` choose one. */
 export function ToggleGroup({
-  size,
+  size = "default",
   className,
   ...props
-}: ComponentProps<"fieldset"> & VariantProps<typeof group>) {
-  return <fieldset className={cn(group({ size }), className)} {...props} />;
+}: ComponentProps<"fieldset"> & { size?: "default" | "lg" | null }) {
+  return (
+    <fieldset
+      data-slot="toggle-group"
+      data-size={size ?? undefined}
+      className={cn("toggle-group", className)}
+      {...props}
+    />
+  );
 }
 
 /** A label around a hidden radio, or a checkbox with `type="checkbox"`. */
@@ -29,14 +26,13 @@ export function Toggle({
   ...props
 }: ComponentProps<"input">) {
   return (
-    <label
-      className={cn(
-        // `relative` keeps the hidden radio inside, or it can widen the page.
-        "relative inline-flex cursor-pointer items-center px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled",
-        className,
-      )}
-    >
-      <input type="radio" className="sr-only" {...props} />
+    <label data-slot="toggle" className={cn("toggle", className)}>
+      <input
+        data-slot="toggle-input"
+        type="radio"
+        className="toggle-input"
+        {...props}
+      />
       {children}
     </label>
   );

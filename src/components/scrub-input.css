@@ -1,0 +1,57 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.scrub-input-hint) {
+    transition-property: opacity;
+    @apply pointer-events-none absolute size-[9px] text-muted opacity-0;
+  }
+
+  :where(.scrub-input) {
+    touch-action: pan-y;
+    font-variant-numeric: tabular-nums;
+    @apply relative inline-flex cursor-ew-resize items-center rounded-sm px-1 py-0.5 whitespace-nowrap transition focus-within:cursor-text focus-within:bg-field;
+  }
+
+  :where(.scrub-input-hint-left) {
+    @apply right-full -mr-0.75;
+  }
+
+  :where(.scrub-input-content) {
+    @apply grid text-right *:[grid-area:1/1];
+  }
+
+  :where(.scrub-input-value) {
+    @apply text-foreground;
+  }
+
+  :where(.scrub-input-digits) {
+    @apply inline-block;
+  }
+
+  :where(.scrub-input-unit) {
+    @apply text-muted;
+  }
+
+  :where(.scrub-input-unit[data-spaced]) {
+    @apply ml-0.5;
+  }
+
+  :where(.scrub-input-input) {
+    text-shadow: none;
+    @apply w-12 min-w-full cursor-[inherit] bg-transparent text-right text-transparent outline-none field-sizing-content selection:bg-pressed focus:text-foreground supports-[field-sizing:content]:w-auto;
+  }
+
+  :where(.scrub-input-input:focus) {
+    text-shadow: inherit;
+  }
+
+  :where(.scrub-input-hint-right) {
+    @apply left-full -ml-0.75;
+  }
+  :where(.scrub-input:hover:not(:focus-within)) :where(.scrub-input-hint) {
+    opacity: 1;
+  }
+  :where(.scrub-input:focus-within) :where(.scrub-input-value) {
+    visibility: hidden;
+  }
+}

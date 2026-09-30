@@ -1,10 +1,9 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 import { CopyButton } from "./copy-button";
-
-// Sugar High's markup reads these; other highlighters color their own.
-const syntax =
-  "[--sh-class:var(--color-code-type)] [--sh-comment:var(--color-muted)] [--sh-entity:var(--color-code-type)] [--sh-identifier:var(--color-foreground)] [--sh-jsxliterals:var(--color-foreground)] [--sh-keyword:var(--color-code-keyword)] [--sh-property:var(--color-code-property)] [--sh-sign:var(--color-muted)] [--sh-string:var(--color-code-string)]";
+import "./tokens.css";
+import "./code-block.css";
+import "./overflow-keyframes.css";
 
 /**
  * Code with a button that copies it; a line that doesn't fit scrolls, or with `wrap`, wraps.
@@ -27,20 +26,15 @@ export function CodeBlock({
   return (
     // 6px around a 16px line centers it on the 28px copy button.
     <div
-      className={cn(
-        "flex items-start gap-2 rounded-xl surface-sunken p-1.5 pl-3",
-        syntax,
-        className,
-      )}
+      data-slot="code-block"
+      data-wrap={wrap || undefined}
+      className={cn("code-block", className)}
       {...props}
     >
       <pre
+        data-slot="code-block-content"
         tabIndex={-1}
-        className={cn(
-          "flex-1 py-1.5 font-mono text-xs text-foreground",
-          wrap && "whitespace-pre-wrap",
-          !wrap && "overflow-fade-x",
-        )}
+        className="code-block-content"
         {...content}
       />
       <CopyButton value={code} />

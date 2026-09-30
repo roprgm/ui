@@ -1,0 +1,7 @@
+@reference "./tailwind.css";
+
+@layer components {
+  :where(.card) {
+    @apply overflow-hidden rounded-xl;
+  }
+}
