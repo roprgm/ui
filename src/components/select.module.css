@@ -1,0 +1,50 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .trigger {
+    @apply inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring dim-disabled;
+
+    &[data-variant="field"] {
+      @apply rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover;
+    }
+    /* In a bar over a canvas, beside Chips. */
+    &[data-variant="pill"] {
+      @apply rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed;
+    }
+
+    /* A Button's, 2px less on the chevron's side. */
+    &[data-size="default"] {
+      @apply h-7 pr-2.5 pl-3;
+    }
+    &[data-size="lg"] {
+      @apply h-8 pr-3 pl-3.5;
+    }
+  }
+
+  .value {
+    @apply truncate data-placeholder:text-muted;
+  }
+
+  .chevron {
+    @apply text-muted;
+  }
+
+  .positioner {
+    @apply z-50;
+  }
+
+  .content {
+    @apply popup-list;
+    min-width: var(--anchor-width);
+  }
+
+  .list {
+    @apply flex flex-col gap-0.5;
+  }
+
+  .item {
+    @apply popup-item justify-between gap-4 data-selected:bg-raised;
+  }
+}

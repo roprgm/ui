@@ -11,9 +11,7 @@ import {
   useState,
 } from "react";
 import { Chevron } from "./chevron";
-
-const hint =
-  "pointer-events-none absolute size-[9px] text-muted opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
+import styles from "./scrub-input.module.css";
 
 /** Whole `ch`, since tabular digits can differ from it by a fraction of a pixel. */
 function digitsWidth(digits: string, minChars?: number) {
@@ -162,28 +160,24 @@ export function ScrubInput({
     // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
       data-slot="scrub-input"
-      className={cn(
-        "group relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition",
-        "focus-within:cursor-text focus-within:bg-field",
-        className,
-      )}
+      className={cn(styles.scrub, className)}
       onDoubleClick={reset}
       onPointerDown={start}
     >
       {chevrons && (
-        <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
+        <Chevron direction="left" className={cn(styles.hint, styles.before)} />
       )}
-      <span className="grid text-right *:[grid-area:1/1]">
-        <span className="text-foreground group-focus-within:invisible">
+      <span className={styles.value}>
+        <span className={styles.display}>
           <span
-            className="inline-block"
+            className={styles.number}
             style={{ width: digitsWidth(number, minChars) }}
           >
             {number}
           </span>
           {/* A unit flush against the digits, such as %, gets a hair of space. */}
           <span
-            className={cn("text-muted", /^\S/.test(unit ?? "") && "ml-0.5")}
+            className={cn(styles.unit, /^\S/.test(unit ?? "") && styles.flush)}
           >
             {unit}
           </span>
@@ -192,11 +186,7 @@ export function ScrubInput({
           ref={input}
           aria-label={label}
           inputMode="decimal"
-          className={cn(
-            "w-12 min-w-full cursor-[inherit] bg-transparent text-right outline-none field-sizing-content supports-[field-sizing:content]:w-auto",
-            // Hidden under the digits until it takes focus.
-            "text-transparent text-shadow-none selection:bg-pressed focus:text-foreground focus:[text-shadow:inherit]",
-          )}
+          className={styles.input}
           value={draft ?? fixed}
           onFocus={focus}
           onChange={(event) => setDraft(event.currentTarget.value)}
@@ -205,7 +195,7 @@ export function ScrubInput({
         />
       </span>
       {chevrons && (
-        <Chevron direction="right" className={cn(hint, "left-full -ml-0.75")} />
+        <Chevron direction="right" className={cn(styles.hint, styles.after)} />
       )}
     </span>
   );

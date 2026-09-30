@@ -1,0 +1,25 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .list {
+    @apply flex data-[orientation=vertical]:flex-col;
+
+    &[data-variant="default"] {
+      @apply gap-1;
+    }
+    /* As a ToggleGroup: tabs a size smaller. Icon tabs take `icon-sm`. */
+    &[data-variant="segmented"] {
+      @apply segmented surface-sunken *:h-6;
+    }
+  }
+
+  .tab {
+    @apply data-active:surface-raised data-active:text-foreground;
+  }
+
+  .panel {
+    @apply rounded-sm focus-ring;
+  }
+}

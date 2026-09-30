@@ -4,6 +4,7 @@ import { Toast as Primitive } from "@base-ui/react/toast";
 import { Button } from "./button";
 import { Notice, NoticeClose } from "./notice";
 import { Section, SectionAction } from "./section";
+import styles from "./toast.module.css";
 
 /**
  * Shows notices in a corner from anywhere, once a `Toaster` is mounted:
@@ -17,10 +18,7 @@ export function Toaster() {
   return (
     <Primitive.Provider toastManager={toast}>
       <Primitive.Portal>
-        <Primitive.Viewport
-          data-slot="toaster"
-          className="fixed inset-x-3.5 bottom-3.5 z-50 flex flex-col-reverse gap-2 sm:left-auto sm:w-sm"
-        >
+        <Primitive.Viewport data-slot="toaster" className={styles.viewport}>
           <Toasts />
         </Primitive.Viewport>
       </Primitive.Portal>
@@ -35,13 +33,12 @@ function Toasts() {
       key={item.id}
       toast={item}
       swipeDirection="right"
-      // Past the provider's limit, older toasts wait hidden until newer ones go.
-      className="translate-x-(--toast-swipe-movement-x) data-limited:hidden"
+      className={styles.toast}
       render={<Notice tone={item.priority === "high" ? "alert" : "status"} />}
     >
-      <Section className="flex-row items-start">
-        <div className="flex flex-1 flex-col gap-0.5">
-          <Primitive.Title className="font-medium" />
+      <Section className={styles.header}>
+        <div className={styles.text}>
+          <Primitive.Title className={styles.title} />
           <Primitive.Description />
         </div>
         <SectionAction>
@@ -49,7 +46,7 @@ function Toasts() {
         </SectionAction>
       </Section>
       {item.actionProps && (
-        <Section className="flex-row gap-1.5 px-2.5">
+        <Section className={styles.actions}>
           <Primitive.Action render={<Button size="sm" />} />
         </Section>
       )}

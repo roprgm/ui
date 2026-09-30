@@ -1,14 +1,15 @@
-/* The tokens, primitives, and utilities every theme builds on. A theme imports this file, sets
-   again the tokens it changes, and draws the primitives' edges. */
+/* The tokens and parts every theme builds on. A theme imports this file and sets again the tokens
+   it changes. Each component brings its own CSS, built from these parts, which reads the tokens:
+   so they're `static`, and an app's CSS declares them all, used by it or not. */
 
-@source "./";
-
-@theme {
+@theme static {
   --font-sans: system-ui, sans-serif;
+  /* Tailwind's easing, which components read as a variable. */
+  --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Colors. Components use only these. */
-@theme {
+@theme static {
   /* Backgrounds: black, then darkest first in even steps of lightness. Every fill is one of them.
      Level 1 is 15%, and each level after adds 3.7%. */
   --color-level-0: oklch(0% 0 0);
@@ -55,7 +56,7 @@
 /* The page's fills, for what sits on it: its own, a field two levels below, a raised control
    three above and four on hover, and a hover one above. `surface-card` sets them again for what
    sits on a card. */
-@theme {
+@theme static {
   --color-surface: var(--color-level-2);
   --color-field: var(--color-level-0);
   --color-raised: var(--color-level-5);
@@ -65,7 +66,7 @@
 
 /* The edges a theme draws around surfaces, as box shadows, and the light beside a separator's dark
    line. Here, none: surfaces stand apart by their fills alone. */
-@theme {
+@theme static {
   --edge-raised: none;
   --edge-sunken: none;
   --edge-primary: none;
@@ -74,7 +75,7 @@
   --color-separator-light: transparent;
 }
 
-@theme {
+@theme static {
   --radius-xs: 2.5px;
   --radius-sm: 5px;
   --radius-md: 7px;
@@ -83,13 +84,13 @@
 }
 
 /* A slider's thumb, which its fill is placed by too. */
-@theme {
+@theme static {
   --spacing-thumb: 13px;
 }
 
 /* Surfaces: a fill and an edge from the tokens, so a theme changes them by setting tokens again. */
 
-/* Containers, which set the fills of what sits on them, as the page does. A card stands two
+/* Containers, classes on an element, which set the fills of what sits on it, as the page does. A card stands two
    levels over what it sits on, a card too, three deep at most; a panel is a card docked in a
    layout, such as a sidebar, with no edge; and what floats is a card drawn floating: popups,
    dialogs, notices, anything dragged. Raised, a popup stands as a card on a card, for one that
@@ -126,15 +127,14 @@
     --color-raised-hover: var(--color-level-12);
     --color-hover: var(--color-level-9);
   }
-}
 
-/* The containers' edges, as utilities over any shadow of the element's own. */
-@utility surface-card {
-  box-shadow: var(--edge-card);
-}
+  .surface-card {
+    box-shadow: var(--edge-card);
+  }
 
-@utility surface-float {
-  box-shadow: var(--edge-float);
+  .surface-float {
+    box-shadow: var(--edge-float);
+  }
 }
 
 /* A control that stands up from what it sits on: buttons, selects, selected tabs and toggles. */
@@ -205,6 +205,27 @@
   }
 }
 
+/* The floating box of menus, selects, popovers, dialogs, and notices, on a `surface-float`;
+   `data-raised` on it lifts it a level, for one that opens over a card. Its content goes in
+   sections, or with `popup-list`, in a column of `popup-item` rows. */
+@utility popup {
+  @apply max-h-(--available-height) min-w-40 overflow-x-hidden overflow-y-auto rounded-xl text-foreground outline-none popup-motion;
+}
+
+@utility popup-list {
+  @apply popup;
+  @apply flex flex-col gap-0.5 rounded-lg p-1;
+}
+
+@utility popup-item {
+  @apply flex h-6.5 shrink-0 cursor-default items-center rounded-sm px-2.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised;
+}
+
+/* What you type into: sunken, with a muted placeholder, ringed red when invalid. */
+@utility field {
+  @apply w-full min-w-0 rounded-md surface-sunken px-2.5 text-foreground transition focus-ring placeholder:text-muted dim-disabled aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger/60;
+}
+
 /* Grows from its trigger as it fades in. Base UI sets the attributes and the origin. */
 @utility popup-motion {
   transform-origin: var(--transform-origin);
@@ -241,57 +262,67 @@
   }
 }
 
+/* The scrollers and the shimmer are classes to put on an element, always in the theme, rather than
+   parts to apply: their animations keep global names, which a CSS module would rename. */
+
 /* Scrolls vertically, shading an edge while more lies past it. Without scroll timelines, it reads
    the attributes Base UI's ScrollArea sets. */
-@utility overflow-fade-y {
-  overflow-y: auto;
-  &::before,
-  &::after {
-    content: "";
-    position: sticky;
-    z-index: 10;
-    display: block;
-    height: 1.5rem;
-    pointer-events: none;
-    opacity: 0;
-  }
-  &::before {
-    top: 0;
-    margin-bottom: -1.5rem;
-    background: linear-gradient(
-      to bottom,
-      oklch(0% 0 0 / 0.2),
-      30%,
-      transparent
-    );
-  }
-  &::after {
-    bottom: 0;
-    margin-top: -1.5rem;
-    background: linear-gradient(to top, oklch(0% 0 0 / 0.2), 30%, transparent);
-  }
-
-  @supports (animation-timeline: scroll()) {
-    &::before {
-      animation: overflow-fade-in linear both;
-      animation-timeline: scroll();
-      animation-range: 0 1.5rem;
-    }
-    &::after {
-      animation: overflow-fade-out linear both;
-      animation-timeline: scroll();
-      animation-range: calc(100% - 1.5rem) 100%;
-    }
-  }
-
-  @supports not (animation-timeline: scroll()) {
+@layer components {
+  .overflow-fade-y {
+    overflow-y: auto;
     &::before,
     &::after {
-      transition: opacity 150ms;
+      content: "";
+      position: sticky;
+      z-index: 10;
+      display: block;
+      height: 1.5rem;
+      pointer-events: none;
+      opacity: 0;
     }
-    &[data-overflow-y-start]::before,
-    &[data-overflow-y-end]::after {
-      opacity: 1;
+    &::before {
+      top: 0;
+      margin-bottom: -1.5rem;
+      background: linear-gradient(
+        to bottom,
+        oklch(0% 0 0 / 0.2),
+        30%,
+        transparent
+      );
+    }
+    &::after {
+      bottom: 0;
+      margin-top: -1.5rem;
+      background: linear-gradient(
+        to top,
+        oklch(0% 0 0 / 0.2),
+        30%,
+        transparent
+      );
+    }
+
+    @supports (animation-timeline: scroll()) {
+      &::before {
+        animation: overflow-fade-in linear both;
+        animation-timeline: scroll();
+        animation-range: 0 1.5rem;
+      }
+      &::after {
+        animation: overflow-fade-out linear both;
+        animation-timeline: scroll();
+        animation-range: calc(100% - 1.5rem) 100%;
+      }
+    }
+
+    @supports not (animation-timeline: scroll()) {
+      &::before,
+      &::after {
+        transition: opacity 150ms;
+      }
+      &[data-overflow-y-start]::before,
+      &[data-overflow-y-end]::after {
+        opacity: 1;
+      }
     }
   }
 }
@@ -329,36 +360,41 @@
 
 /* Scrolls horizontally, fading an edge while more lies past it, with no scrollbar. Give one that
    holds only text `tabIndex={-1}`, or it becomes a tab stop. */
-@utility overflow-fade-x {
-  min-width: 0;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+@layer components {
+  .overflow-fade-x {
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
-  /* Its overflow and mask clip rings drawn outside a child, so draw them inside. */
-  & :focus-visible {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      oklch(0% 0 0) var(--overflow-fade-start),
+      oklch(0% 0 0) calc(100% - var(--overflow-fade-end)),
+      transparent
+    );
+
+    @supports (animation-timeline: scroll()) {
+      animation:
+        overflow-fade-x-start linear both,
+        overflow-fade-x-end linear both;
+      animation-timeline: scroll(self inline), scroll(self inline);
+      animation-range:
+        0 1.5rem,
+        calc(100% - 1.5rem) 100%;
+    }
+  }
+}
+
+/* Its overflow and mask clip rings drawn outside a child, so it draws them inside, over the
+   child's own. */
+@layer utilities {
+  .overflow-fade-x :focus-visible {
     outline-offset: -2px;
-  }
-
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    oklch(0% 0 0) var(--overflow-fade-start),
-    oklch(0% 0 0) calc(100% - var(--overflow-fade-end)),
-    transparent
-  );
-
-  @supports (animation-timeline: scroll()) {
-    animation:
-      overflow-fade-x-start linear both,
-      overflow-fade-x-end linear both;
-    animation-timeline: scroll(self inline), scroll(self inline);
-    animation-range:
-      0 1.5rem,
-      calc(100% - 1.5rem) 100%;
   }
 }
 
@@ -392,21 +428,23 @@
 }
 
 /* A bright band sweeping across pending work. On a group, one band crosses it all. */
-@utility shimmer {
-  mask-image: linear-gradient(
-    100deg,
-    oklch(0% 0 0 / 0.45) 30%,
-    oklch(0% 0 0 / 0.6) 40%,
-    oklch(0% 0 0) 50%,
-    oklch(0% 0 0 / 0.6) 60%,
-    oklch(0% 0 0 / 0.45) 70%
-  );
-  mask-size: 300% 100%;
-  animation: shimmer 2.4s ease-in-out infinite;
+@layer components {
+  .shimmer {
+    mask-image: linear-gradient(
+      100deg,
+      oklch(0% 0 0 / 0.45) 30%,
+      oklch(0% 0 0 / 0.6) 40%,
+      oklch(0% 0 0) 50%,
+      oklch(0% 0 0 / 0.6) 60%,
+      oklch(0% 0 0 / 0.45) 70%
+    );
+    mask-size: 300% 100%;
+    animation: shimmer 2.4s ease-in-out infinite;
 
-  @media (prefers-reduced-motion: reduce) {
-    mask-image: none;
-    animation: none;
+    @media (prefers-reduced-motion: reduce) {
+      mask-image: none;
+      animation: none;
+    }
   }
 }
 

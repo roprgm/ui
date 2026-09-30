@@ -1,0 +1,79 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  /* Upright, the bar stands alone and the layouts' grids don't apply. */
+  .slider {
+    &[data-orientation="horizontal"] {
+      @apply grid items-center;
+    }
+    &[data-orientation="vertical"] {
+      @apply flex h-44 w-8 justify-center;
+    }
+    &[data-variant="panel"] {
+      @apply grid-cols-[1fr_auto] gap-x-3 gap-y-0.5;
+    }
+    &[data-variant="toolbar"] {
+      @apply grid-cols-[auto_4rem_auto] gap-x-2;
+    }
+    &[data-variant="compact"] {
+      @apply grid-cols-[1fr_auto] gap-x-2;
+    }
+    /* Last in what holds it, a bar has none of the room text leaves under its letters. */
+    &[data-orientation="horizontal"][data-variant="panel"] {
+      @apply last:mb-1;
+    }
+  }
+
+  .label {
+    @apply relative z-10 text-muted;
+  }
+
+  /* Above the bar's hit area, which reaches into its row. In a panel, the digits end where the
+     bar does. */
+  .digits {
+    @apply z-10;
+
+    .slider:is([data-variant="panel"], [data-variant="compact"]) & {
+      @apply -mr-1;
+    }
+    .slider[data-variant="toolbar"] & {
+      @apply col-start-3;
+    }
+  }
+
+  /* As thick as the thumb, padded 10px past it on either side, or 16px for a finger, with the
+     room given back by margins. */
+  .bar {
+    @apply box-content flex cursor-pointer touch-none select-none;
+
+    &[data-orientation="horizontal"] {
+      @apply -my-2.5 h-thumb items-center py-2.5 pointer-coarse:-my-4 pointer-coarse:py-4;
+    }
+    &[data-orientation="vertical"] {
+      @apply -mx-2.5 w-thumb justify-center px-2.5 pointer-coarse:-mx-4 pointer-coarse:px-4;
+    }
+    .slider[data-variant="panel"] & {
+      @apply col-span-2;
+    }
+    .slider[data-variant="toolbar"] & {
+      @apply col-start-2 row-start-1;
+    }
+  }
+
+  .track {
+    @apply rounded-full surface-sunken;
+
+    &[data-orientation="horizontal"] {
+      @apply h-1 w-full;
+    }
+    &[data-orientation="vertical"] {
+      @apply h-full w-1;
+    }
+  }
+
+  .thumb {
+    @apply size-thumb rounded-full surface-primary has-focus-visible:ring-2 has-focus-visible:ring-focus;
+  }
+}

@@ -1,36 +1,26 @@
 "use client";
 
 import { Tabs as Primitive } from "@base-ui/react/tabs";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 import { Button } from "./button";
+import styles from "./tabs.module.css";
 
 /** Tabs and the panels they show; `orientation="vertical"` stacks the tabs in a column. */
 export const Tabs = Primitive.Root;
-
-const list = cva("flex data-[orientation=vertical]:flex-col", {
-  variants: {
-    variant: {
-      default: "gap-1",
-      // As a ToggleGroup: tabs a size smaller. Icon tabs take `icon-sm`.
-      segmented: "segmented surface-sunken *:h-6",
-    },
-  },
-});
 
 /** The tabs; the arrow keys move between them and select. `segmented` sets them into a sunken strip. */
 export function TabList({
   variant = "default",
   className,
   ...props
-}: Primitive.List.Props & VariantProps<typeof list>) {
+}: Primitive.List.Props & { variant?: "default" | "segmented" }) {
   return (
     <Primitive.List
       activateOnFocus
       data-slot="tab-list"
       data-variant={variant}
-      className={cn(list({ variant }), className)}
+      className={cn(styles.list, className)}
       {...props}
     />
   );
@@ -46,10 +36,7 @@ export function Tab({
     <Primitive.Tab
       render={<Button variant="ghost" size={size} />}
       data-slot="tab"
-      className={cn(
-        "data-active:surface-raised data-active:text-foreground",
-        className,
-      )}
+      className={cn(styles.tab, className)}
       {...props}
     />
   );
@@ -59,7 +46,7 @@ export function TabPanel({ className, ...props }: Primitive.Panel.Props) {
   return (
     <Primitive.Panel
       data-slot="tab-panel"
-      className={cn("rounded-sm focus-ring", className)}
+      className={cn(styles.panel, className)}
       {...props}
     />
   );

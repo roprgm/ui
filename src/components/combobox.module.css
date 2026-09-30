@@ -1,0 +1,40 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .group {
+    @apply relative;
+  }
+
+  /* Room for the chevron. */
+  .input {
+    @apply pr-7;
+  }
+
+  /* Its chevron lands where a Select's does, 10px from the edge. */
+  .trigger {
+    @apply absolute inset-y-0 right-0 flex w-7 cursor-pointer items-center justify-center text-muted;
+  }
+
+  .positioner {
+    @apply z-50;
+  }
+
+  .content {
+    @apply popup-list;
+    min-width: var(--anchor-width);
+  }
+
+  .empty {
+    @apply popup-item text-muted empty:hidden;
+  }
+
+  .list {
+    @apply flex flex-col gap-0.5;
+  }
+
+  .item {
+    @apply popup-item justify-between gap-4 data-selected:bg-raised;
+  }
+}

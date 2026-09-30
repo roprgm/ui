@@ -1,0 +1,13 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .positioner {
+    @apply z-50;
+  }
+
+  .content {
+    @apply popup;
+  }
+}

@@ -14,6 +14,7 @@ import {
 } from "react";
 import { Chevron } from "./chevron";
 import { ListItem } from "./list-item";
+import styles from "./tree-list.module.css";
 
 export type TreeDrop = {
   id: string;
@@ -286,13 +287,7 @@ export function TreeList<T extends TreeNode<T>>({
               if (branch) toggle(item.id, !expanded);
             }}
             onKeyDown={(event) => onRowKeyDown(event, item.id)}
-            className={cn(
-              "gap-1.5 pl-(--indent) outline-none select-none [-webkit-touch-callout:none] focus-visible:bg-hover focus-visible:ring-1 focus-visible:ring-focus focus-visible:ring-inset",
-              "data-[dragging=true]:opacity-40",
-              "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-primary/60 data-[drop=inside]:ring-inset",
-              "before:absolute before:right-2 before:left-(--indent) before:z-10 before:h-0.5 before:rounded-full before:bg-primary before:opacity-0",
-              "data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100",
-            )}
+            className={styles.row}
           >
             {branch && (
               <button
@@ -303,12 +298,12 @@ export function TreeList<T extends TreeNode<T>>({
                   event.stopPropagation();
                   toggle(item.id, !expanded);
                 }}
-                className="-mr-0.5 -ml-2 grid size-5 shrink-0 place-items-center rounded-xs text-muted focus-ring hover:text-foreground"
+                className={styles.toggle}
               >
                 <Chevron direction={expanded ? "down" : "right"} size="sm" />
               </button>
             )}
-            {!branch && <span className="-mr-0.5 -ml-2 w-5 shrink-0" />}
+            {!branch && <span className={styles.spacer} />}
             {children(item)}
           </ListItem>
           {branch && (
@@ -316,9 +311,9 @@ export function TreeList<T extends TreeNode<T>>({
             <div
               inert={!expanded}
               data-expanded={expanded}
-              className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-200 data-[expanded=true]:grid-rows-[1fr]"
+              className={styles.group}
             >
-              <div className="min-h-0 overflow-hidden">
+              <div className={styles.children}>
                 {renderItems(item.children ?? [], depth + 1)}
               </div>
             </div>
@@ -346,7 +341,8 @@ export function TreeList<T extends TreeNode<T>>({
         event.stopPropagation();
       }}
       data-slot="tree-list"
-      className={cn(dragging && "cursor-grabbing", className)}
+      data-dragging={dragging ? true : undefined}
+      className={cn(styles.tree, className)}
       {...props}
     >
       {renderItems(items, 0)}
@@ -355,7 +351,7 @@ export function TreeList<T extends TreeNode<T>>({
           ref={ghost}
           tabIndex={-1}
           style={{ translate: `${dragging.x}px ${dragging.y}px` }}
-          className="pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 overflow-fade-x rounded-md whitespace-nowrap px-2.5 py-1 text-foreground surface-float"
+          className={cn("surface-float overflow-fade-x", styles.ghost)}
         >
           {label(active.item)}
         </div>

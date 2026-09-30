@@ -1,0 +1,18 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components.inner {
+  .input {
+    @apply field;
+    /* The file picker's button, 3px into the field. */
+    @apply file:mt-0.75 file:mr-3 file:-ml-1.75 file:cursor-pointer file:rounded-sm file:border-0 file:surface-raised file:px-2 file:text-foreground file:transition hover:file:bg-raised-hover;
+
+    &[data-size="default"] {
+      @apply h-7 file:h-5.5;
+    }
+    &[data-size="lg"] {
+      @apply h-8 file:h-6.5;
+    }
+  }
+}

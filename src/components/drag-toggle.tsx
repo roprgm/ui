@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import styles from "./drag-toggle.module.css";
 
 const toggles =
   'input[type="checkbox"], [aria-pressed], [role="checkbox"], [role="switch"]';
@@ -151,7 +152,8 @@ export function DragToggle({
         event.stopPropagation();
       }}
       data-slot="drag-toggle"
-      className={cn(dragging && "select-none", className)}
+      data-dragging={dragging || undefined}
+      className={cn(styles.toggle, className)}
       {...props}
     />
   );

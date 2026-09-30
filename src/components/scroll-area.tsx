@@ -3,6 +3,7 @@
 import { ScrollArea as Primitive } from "@base-ui/react/scroll-area";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
+import styles from "./scroll-area.module.css";
 
 /** Scrolls vertically with a thin bar; `fade` shades an edge while more lies past it. */
 export function ScrollArea({
@@ -14,19 +15,18 @@ export function ScrollArea({
   return (
     <Primitive.Root
       data-slot="scroll-area"
-      className={cn("relative min-h-0 overflow-hidden", className)}
+      className={cn(styles.area, className)}
       {...props}
     >
       <Primitive.Viewport
-        className={cn(
-          "h-full overscroll-contain outline-none",
-          fade && "overflow-fade-y",
-        )}
+        className={cn(styles.viewport, fade && "overflow-fade-y")}
       >
-        <Primitive.Content className="min-w-0">{children}</Primitive.Content>
+        <Primitive.Content className={styles.content}>
+          {children}
+        </Primitive.Content>
       </Primitive.Viewport>
-      <Primitive.Scrollbar className="group z-10 my-1 mr-px flex w-1.5 justify-center opacity-0 transition-opacity data-hovering:opacity-100 data-scrolling:opacity-100">
-        <Primitive.Thumb className="w-1 rounded-full bg-disabled group-hover:bg-muted" />
+      <Primitive.Scrollbar className={styles.scrollbar}>
+        <Primitive.Thumb className={styles.thumb} />
       </Primitive.Scrollbar>
     </Primitive.Root>
   );

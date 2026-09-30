@@ -1,0 +1,44 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components.inner {
+  .button {
+    @apply inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap focus-ring dim-disabled active:not-aria-[haspopup]:translate-y-px;
+    /* The 1px press moves faster than the colors ease. */
+    transition:
+      all 200ms var(--default-transition-timing-function),
+      translate 100ms var(--default-transition-timing-function);
+
+    &[data-variant="default"] {
+      @apply surface-raised text-foreground hover:bg-raised-hover data-popup-open:bg-raised-hover;
+    }
+    &[data-variant="primary"] {
+      @apply surface-primary text-on-primary text-shadow-(--text-shadow-subtle) hover:bg-primary-hover;
+    }
+    &[data-variant="ghost"] {
+      @apply text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground;
+    }
+
+    /* Labels are at least as wide as tall, and icons square. A leading icon sits 4px closer to
+       the edge, since its box has air around the stroke. */
+    &[data-size="default"] {
+      @apply h-7 min-w-7 has-[>svg:first-child]:pl-2;
+    }
+    &[data-size="sm"] {
+      @apply h-6 min-w-6 px-2.5 has-[>svg:first-child]:pl-1.5;
+    }
+    &[data-size="lg"] {
+      @apply h-8 min-w-8 px-3.5 has-[>svg:first-child]:pl-2.5;
+    }
+    &[data-size="icon"] {
+      @apply size-7 px-0;
+    }
+    &[data-size="icon-sm"] {
+      @apply size-6 px-0;
+    }
+    &[data-size="icon-lg"] {
+      @apply size-8 px-0;
+    }
+  }
+}

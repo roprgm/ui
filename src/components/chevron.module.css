@@ -1,0 +1,27 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components.inner {
+  .chevron {
+    @apply shrink-0 transition-[rotate,color] duration-200;
+
+    &[data-direction="down"] {
+      @apply rotate-90;
+    }
+    &[data-direction="left"] {
+      @apply rotate-180;
+    }
+    &[data-direction="up"] {
+      @apply -rotate-90;
+    }
+
+    /* The stroke is in viewBox units, so the smaller icon draws it thicker to match. */
+    &[data-size="sm"] {
+      @apply size-2 stroke-[2.5];
+    }
+    &[data-size="md"] {
+      @apply size-2.5 stroke-2;
+    }
+  }
+}

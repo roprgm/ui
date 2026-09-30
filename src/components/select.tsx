@@ -1,32 +1,12 @@
 "use client";
 
 import { Select as Primitive } from "@base-ui/react/select";
-import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import { type ReactNode, useState } from "react";
 import { Check } from "./check";
 import { Chevron } from "./chevron";
-import { popupItem, popupList } from "./popup";
+import styles from "./select.module.css";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
-
-const trigger = cva(
-  "inline-flex min-w-0 cursor-pointer items-center justify-between gap-2 text-foreground transition focus-ring dim-disabled",
-  {
-    variants: {
-      /** `pill` goes in a bar over a canvas, beside Chips. */
-      variant: {
-        field:
-          "rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
-        pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
-      },
-      /** A Button's, 2px less on the chevron's side. */
-      size: {
-        default: "h-7 pr-2.5 pl-3",
-        lg: "h-8 pr-3 pl-3.5",
-      },
-    },
-  },
-);
 
 export type SelectItem<T extends string> = {
   value: T;
@@ -65,19 +45,16 @@ export function Select<T extends string, Multiple extends boolean = false>({
       data-slot="select"
       data-variant={variant}
       data-size={size}
-      className={cn(trigger({ variant, size }), className)}
+      className={cn(styles.trigger, className)}
     >
-      <Primitive.Value
-        placeholder={placeholder}
-        className="truncate data-placeholder:text-muted"
-      />
+      <Primitive.Value placeholder={placeholder} className={styles.value} />
       <Primitive.Icon
         render={(props, { open }) => (
           <span {...props}>
             <Chevron
               direction={open ? "up" : "down"}
               size="sm"
-              className="text-muted"
+              className={styles.chevron}
             />
           </span>
         )}
@@ -104,14 +81,14 @@ export function Select<T extends string, Multiple extends boolean = false>({
         <Primitive.Positioner
           sideOffset={4}
           alignItemWithTrigger={false}
-          className="z-50"
+          className={styles.positioner}
         >
           <Primitive.Popup
             data-slot="select-content"
             data-raised={raised || undefined}
-            className={cn(popupList, "min-w-(--anchor-width)")}
+            className={cn("surface-float", styles.content)}
           >
-            <Primitive.List className="flex flex-col gap-0.5">
+            <Primitive.List className={styles.list}>
               {items.map((item, index) => (
                 <Primitive.Item
                   // Values can repeat.
@@ -119,10 +96,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
                   value={item.value}
                   disabled={item.disabled}
                   data-slot="select-item"
-                  className={cn(
-                    popupItem,
-                    "justify-between gap-4 data-selected:bg-raised",
-                  )}
+                  className={styles.item}
                 >
                   <Primitive.ItemText>{item.label}</Primitive.ItemText>
                   <Primitive.ItemIndicator>

@@ -1,0 +1,33 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .positioner {
+    @apply z-50;
+  }
+
+  .content {
+    @apply popup-list;
+  }
+
+  .item {
+    @apply popup-item gap-2;
+  }
+
+  .shortcut {
+    @apply ml-auto pl-4;
+  }
+
+  .separator {
+    @apply mx-1.5 my-0.5 h-px separator;
+  }
+
+  .submenuTrigger {
+    @apply popup-item justify-between gap-4 data-popup-open:bg-raised;
+  }
+
+  .submenuChevron {
+    @apply text-muted;
+  }
+}

@@ -1,5 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
+import styles from "./chip.module.css";
 
 /** A pill button for bars over a canvas; `aria-pressed` shows it on. */
 export function Chip({ className, ...props }: ComponentProps<"button">) {
@@ -7,12 +8,7 @@ export function Chip({ className, ...props }: ComponentProps<"button">) {
     <button
       type="button"
       data-slot="chip"
-      className={cn(
-        "inline-flex h-7 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 whitespace-nowrap text-muted transition focus-ring dim-disabled",
-        "hover:bg-hover hover:text-foreground",
-        "aria-pressed:bg-pressed aria-pressed:text-foreground data-popup-open:bg-pressed data-popup-open:text-foreground",
-        className,
-      )}
+      className={cn(styles.chip, className)}
       {...props}
     />
   );

@@ -1,0 +1,24 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .backdrop {
+    @apply fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0;
+  }
+
+  .content {
+    @apply popup;
+    @apply fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 duration-150 data-ending-style:scale-95;
+    /* The last of several sections sits 16px below the rest. */
+    @apply *:data-[slot=section]:not-first:last:pt-4;
+  }
+
+  .title {
+    @apply font-medium;
+  }
+
+  .description {
+    @apply text-muted;
+  }
+}

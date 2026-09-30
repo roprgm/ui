@@ -3,7 +3,7 @@
 import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog as Primitive } from "@base-ui/react/dialog";
 import { cn } from "cn";
-import { popup } from "./popup";
+import styles from "./dialog.module.css";
 
 /** A modal. An `alert` asks before what can't be undone: a click outside doesn't close it. */
 export function Dialog(
@@ -30,15 +30,13 @@ export function DialogContent({ className, ...props }: Primitive.Popup.Props) {
     <Primitive.Portal>
       <Primitive.Backdrop
         data-slot="dialog-backdrop"
-        className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0"
+        className={styles.backdrop}
       />
       <Primitive.Popup
         data-slot="dialog-content"
         className={cn(
-          popup,
-          "sections-stacked fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 duration-150 data-ending-style:scale-95",
-          // The last of several sections sits 16px below the rest.
-          "*:data-[slot=section]:not-first:last:pt-4",
+          "surface-float sections-stacked",
+          styles.content,
           className,
         )}
         {...props}
@@ -51,7 +49,7 @@ export function DialogTitle({ className, ...props }: Primitive.Title.Props) {
   return (
     <Primitive.Title
       data-slot="dialog-title"
-      className={cn("font-medium", className)}
+      className={cn(styles.title, className)}
       {...props}
     />
   );
@@ -64,7 +62,7 @@ export function DialogDescription({
   return (
     <Primitive.Description
       data-slot="dialog-description"
-      className={cn("text-muted", className)}
+      className={cn(styles.description, className)}
       {...props}
     />
   );

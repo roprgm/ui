@@ -1,5 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
+import styles from "./section.module.css";
 
 /**
  * A part of a card, popover, dialog, or notice, which pads its content as one section until it
@@ -10,7 +11,7 @@ export function Section({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="section"
-      className={cn("flex flex-col gap-3 px-3.5 py-2.5", className)}
+      className={cn(styles.section, className)}
       {...props}
     />
   );
@@ -21,7 +22,7 @@ export function SectionAction({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="section-action"
-      className={cn("-my-1 -mr-2 flex shrink-0 items-center gap-1", className)}
+      className={cn(styles.action, className)}
       {...props}
     />
   );

@@ -1,0 +1,27 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  /* Toggles a size smaller than the Button beside the group. */
+  .group {
+    @apply inline-flex segmented surface-sunken;
+
+    &[data-size="default"] {
+      @apply *:h-6;
+    }
+    &[data-size="lg"] {
+      @apply *:h-7;
+    }
+  }
+
+  /* `relative` keeps the hidden radio inside, or it can widen the page. */
+  .toggle {
+    @apply relative inline-flex cursor-pointer items-center px-3 text-muted transition focus-ring dim-disabled;
+    @apply hover:text-foreground has-checked:surface-raised has-checked:text-foreground;
+  }
+
+  .input {
+    @apply sr-only;
+  }
+}

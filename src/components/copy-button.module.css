@@ -1,0 +1,30 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .icons {
+    @apply grid *:[grid-area:1/1];
+  }
+
+  .copy {
+    @apply size-4 transition delay-150 duration-150;
+  }
+
+  .check {
+    @apply size-4;
+  }
+
+  .mark {
+    @apply draw transition-[stroke-dashoffset] duration-150 ease-in;
+  }
+
+  .button[data-copied="true"] {
+    & .copy {
+      @apply scale-50 opacity-0 delay-0;
+    }
+    & .mark {
+      @apply drawn delay-100 duration-300 ease-out;
+    }
+  }
+}

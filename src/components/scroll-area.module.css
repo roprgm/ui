@@ -1,0 +1,31 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .area {
+    @apply relative min-h-0 overflow-hidden;
+  }
+
+  .viewport {
+    @apply h-full overscroll-contain outline-none;
+  }
+
+  .content {
+    @apply min-w-0;
+  }
+
+  .scrollbar {
+    @apply z-10 my-1 mr-px flex w-1.5 justify-center opacity-0 transition-opacity data-hovering:opacity-100 data-scrolling:opacity-100;
+  }
+
+  .thumb {
+    @apply w-1 rounded-full bg-disabled;
+  }
+
+  @media (hover: hover) {
+    .scrollbar:hover .thumb {
+      @apply bg-muted;
+    }
+  }
+}

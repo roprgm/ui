@@ -1,0 +1,45 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .tree[data-dragging] {
+    @apply cursor-grabbing;
+  }
+
+  /* Indented by depth; a line before or after it, or a ring around it, shows where a drop lands. */
+  .row {
+    @apply gap-1.5 pl-(--indent) outline-none select-none [-webkit-touch-callout:none];
+    @apply focus-visible:ring-1 focus-visible:ring-focus focus-visible:ring-inset data-[dragging=true]:opacity-40;
+    @apply data-[drop=inside]:ring-1 data-[drop=inside]:ring-primary/60 data-[drop=inside]:ring-inset;
+    @apply before:absolute before:right-2 before:left-(--indent) before:z-10 before:h-0.5 before:rounded-full before:bg-primary before:opacity-0;
+    @apply data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100;
+
+    /* A selected row keeps its fill. */
+    &:not([data-selected="true"]) {
+      @apply focus-visible:bg-hover data-[drop=inside]:bg-hover;
+    }
+  }
+
+  /* Reaches 8px into the row's padding, where a leaf keeps an empty one. */
+  .toggle {
+    @apply -mr-0.5 -ml-2 grid size-5 shrink-0 place-items-center rounded-xs text-muted focus-ring hover:text-foreground;
+  }
+
+  .spacer {
+    @apply -mr-0.5 -ml-2 w-5 shrink-0;
+  }
+
+  /* 0fr to 1fr animates the group's height. */
+  .group {
+    @apply grid grid-rows-[0fr] transition-[grid-template-rows] duration-200 data-[expanded=true]:grid-rows-[1fr];
+  }
+
+  .children {
+    @apply min-h-0 overflow-hidden;
+  }
+
+  .ghost {
+    @apply pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 rounded-md whitespace-nowrap px-2.5 py-1 text-foreground;
+  }
+}

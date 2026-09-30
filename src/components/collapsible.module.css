@@ -1,0 +1,26 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .collapsible {
+    @apply rounded-[inherit];
+  }
+
+  .trigger {
+    @apply flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left;
+    @apply transition focus-ring -outline-offset-2 hover:bg-hover dim-disabled;
+    /* Square at the bottom while the panel shows under it. */
+    @apply data-panel-open:rounded-b-none;
+  }
+
+  .panel {
+    @apply h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out motion-reduce:transition-none;
+    @apply data-starting-style:h-0 data-starting-style:opacity-0 data-ending-style:h-0 data-ending-style:opacity-0;
+  }
+
+  /* Under a line that folds away with it. */
+  .content {
+    @apply shadow-[inset_0_1px_0_var(--color-line)];
+  }
+}

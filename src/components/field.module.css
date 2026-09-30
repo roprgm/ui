@@ -1,0 +1,21 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .label {
+    @apply text-muted;
+  }
+
+  .note {
+    @apply text-muted;
+
+    &[data-error] {
+      @apply text-danger;
+    }
+  }
+}

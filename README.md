@@ -6,7 +6,7 @@ Docs and live examples: [ui.roprgm.com](https://ui.roprgm.com)
 
 ## Install
 
-Add the package, then import the theme after Tailwind in your CSS:
+Add the package, then import the theme after Tailwind in your CSS. Each component brings its own CSS, so importing one styles it, and your app ships the CSS of only what it imports:
 
 ```bash
 bun add @roprgm/ui
@@ -73,29 +73,36 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 
 The components are built from a few parts, which build yours too, so they follow the theme. Use the theme's colors, such as `text-muted`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette, and the parts rather than shadows or borders of your own.
 
-Classes from the theme:
+Classes to put on an element, always in the theme:
 
 | Part | Use |
 | --- | --- |
 | `surface-card`, `surface-panel`, `surface-float` | containers, which set the fills of what sits on them: a card rises two levels over what it sits on, even another card; a panel is a card docked in your layout, with no edge; what floats is a card drawn floating, a level up with `data-raised` for one that opens over a card |
-| `surface-raised`, `surface-sunken`, `surface-primary` | controls: raised three levels up, sunken two down, or on; with any variant, such as `checked:surface-primary` |
 | `sections`, `sections-stacked` | a box padded as one section until it holds `Section`s, with a line between them, or stacked without one as in a dialog |
-| `segmented`, `separator` | a strip of controls a size smaller, with `surface-sunken`, and a line between groups |
-| `focus-ring`, `dim-disabled` | a control's focus ring and its disabled look |
-| `popup-motion`, `shimmer`, `draw` and `drawn` | a popup growing from its trigger, a band across pending work, and a stroke that draws itself in |
 | `overflow-fade-x`, `overflow-fade-y` | content that may not fit: it scrolls, and fades where more lies that way |
+| `shimmer` | a band across pending work |
 
 For one line of text, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
 
-Recipes, class strings to compose with `cn`, which lets a later class win:
+Utilities, to use with any variant, such as `checked:surface-primary`, or to `@apply` in a CSS module:
 
-| Recipe | Use |
+| Part | Use |
 | --- | --- |
-| `popup`, `popupList`, `popupItem` from `popup` | the floating box of an overlay, one that pads a column of rows, and a row |
-| `field` from `input` | what you type into: sunken, with a muted placeholder, ringed red when invalid |
+| `surface-raised`, `surface-sunken`, `surface-primary` | controls: raised three levels up, sunken two down, or on |
+| `segmented`, `separator` | a strip of controls a size smaller, with `surface-sunken`, and a line between groups |
+| `focus-ring`, `dim-disabled` | a control's focus ring and its disabled look |
+| `field` | what you type into: sunken, with a muted placeholder, ringed red when invalid |
+| `popup`, `popup-list`, `popup-item` | the box of an overlay on a `surface-float`, one that pads a column of rows, and a row |
+| `popup-motion`, `draw` and `drawn` | a popup growing from its trigger, and a stroke that draws itself in |
 
-```tsx
-<Primitive.Popup data-raised className={cn(popupList, "min-w-(--anchor-width)")}>
+A component of your own can take its styles from a CSS module, as the library's do, referencing your CSS for the theme:
+
+```css
+@reference "../app.css";
+
+.trigger {
+  @apply inline-flex h-7 items-center rounded-md px-3 surface-raised focus-ring hover:bg-raised-hover;
+}
 ```
 
 ## Components
@@ -151,10 +158,10 @@ Controls are 28px tall (`h-7`), with 24px and 32px sizes, and list rows 40px. He
 
 ### Customize
 
-Set a token again to restyle every component that uses it, edges too:
+Set a token again to restyle every component that uses it, edges too. Set it in `@theme static`, since a plain `@theme` writes a token only when your own classes use it, and components bring their CSS apart from yours:
 
 ```css
-@theme {
+@theme static {
   --color-primary: oklch(67% 0.16 252);
   --radius-md: 8px;
   --edge-raised: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
@@ -181,6 +188,6 @@ bun install
 bun run dev
 ```
 
-`bun run check` formats, lints, and type-checks. `bun run build` compiles the package, the registry, and the docs site.
+`bun run check` formats, lints, and type-checks. `bun run build` compiles the package, each component's CSS module with Tailwind into plain CSS beside its JavaScript, the registry, and the docs site.
 
 Publishing a GitHub release publishes the package to npm. The release tag must match the version in `package.json`, such as `v0.6.0`.

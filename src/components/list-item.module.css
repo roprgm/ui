@@ -1,0 +1,15 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components.inner {
+  .item {
+    @apply relative flex h-10 items-center gap-2 px-3.5 text-foreground shadow-[inset_0_-1px_0_var(--color-line)];
+    @apply data-[muted=true]:text-muted data-[selected=false]:hover:bg-hover data-[selected=true]:bg-raised;
+  }
+
+  /* Reaches into the row's padding, so each icon sits 12px from its end. */
+  .action {
+    @apply -mr-2 flex shrink-0 items-center gap-1;
+  }
+}

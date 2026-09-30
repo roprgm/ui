@@ -1,0 +1,59 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  /* The input is the control; dragging is a pointer shortcut over it. */
+  .scrub {
+    @apply relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field;
+  }
+
+  /* The digits and the input share one cell; the input shows while it has focus. */
+  .value {
+    @apply grid text-right *:[grid-area:1/1];
+  }
+
+  .display {
+    @apply text-foreground;
+
+    .scrub:focus-within & {
+      @apply invisible;
+    }
+  }
+
+  .number {
+    @apply inline-block;
+  }
+
+  .unit {
+    @apply text-muted;
+  }
+
+  /* A unit flush against the digits, such as %, gets a hair of space. */
+  .flush {
+    @apply ml-0.5;
+  }
+
+  .input {
+    @apply w-12 min-w-full cursor-[inherit] bg-transparent text-right outline-none field-sizing-content supports-[field-sizing:content]:w-auto;
+    /* Hidden under the digits until it takes focus. */
+    @apply text-transparent text-shadow-none selection:bg-pressed focus:text-foreground focus:[text-shadow:inherit];
+  }
+
+  /* Chevrons on hover, hinting that it drags. */
+  .hint {
+    @apply pointer-events-none absolute size-[9px] text-muted opacity-0 transition-opacity;
+
+    .scrub:hover:not(:focus-within) & {
+      @apply opacity-100;
+    }
+  }
+
+  .before {
+    @apply right-full -mr-0.75;
+  }
+
+  .after {
+    @apply left-full -ml-0.75;
+  }
+}

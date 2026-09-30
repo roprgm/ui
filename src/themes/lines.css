@@ -2,12 +2,12 @@
 
 @import "../base.css";
 
-@theme {
+@theme static {
   --color-line: oklch(100% 0 0 / 0.1);
   --color-separator: oklch(100% 0 0 / 0.1);
 }
 
-@theme {
+@theme static {
   --edge-raised: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
   --edge-card: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
   --edge-sunken: inset 0 0 0 1px oklch(100% 0 0 / 0.1);

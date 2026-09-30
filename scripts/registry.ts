@@ -1,10 +1,8 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { Features, transform } from "lightningcss";
 
-/**
- * Writes registry.json's `theme` item from themes/default.css and its imports: `@theme` variables
- * to `cssVars.theme`, the rest to `css`.
- */
+/** Writes registry.json's `theme` item from themes/default.css and its imports. */
 type Rules = { [key: string]: string | Rules };
 
 function parse(source: string): Rules {
@@ -62,19 +60,32 @@ function read(path: string): string {
   );
 }
 
+/** The same CSS without nesting, which shadcn's CSS writer mangles. */
+function flatten(css: string): string {
+  const code = Buffer.from(css);
+  return transform({
+    filename: "theme.css",
+    code,
+    include: Features.Nesting,
+  }).code.toString();
+}
+
+/**
+ * The theme item. Its tokens go to `css` as variables on `:root`, which the components' CSS reads,
+ * and to `cssVars.theme`, which shadcn writes as `@theme inline`, each naming its own variable, for
+ * Tailwind utilities such as `bg-raised`.
+ */
 function item(path: string) {
-  const {
-    "@theme": theme = {},
-    "@theme inline": inline = {},
-    ...css
-  } = parse(read(path)) as Record<string, Rules>;
-  const vars = Object.fromEntries(
-    Object.entries({ ...theme, ...inline }).map(([key, value]) => [
-      key.replace(/^--/, ""),
-      value,
-    ]),
+  const { "@theme static": tokens = {}, ...css } = parse(
+    flatten(read(path)),
+  ) as Record<string, Rules>;
+  const theme = Object.fromEntries(
+    Object.keys(tokens).map((key) => [key.slice(2), `var(${key})`]),
   );
-  return { cssVars: { theme: vars }, css };
+  return {
+    cssVars: { theme },
+    css: { "@layer theme": { ":root": tokens }, ...css },
+  };
 }
 
 const theme = "https://ui.roprgm.com/r/theme.json";

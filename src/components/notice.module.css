@@ -1,0 +1,17 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .notice {
+    @apply popup max-w-sm;
+
+    &[data-tone="alert"] {
+      @apply text-danger;
+    }
+  }
+
+  .icon {
+    @apply size-4;
+  }
+}

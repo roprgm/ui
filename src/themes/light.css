@@ -3,11 +3,11 @@
 @import "../base.css";
 
 /* Geist, when the app loads it. */
-@theme {
+@theme static {
   --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
 }
 
-@theme {
+@theme static {
   --color-pressed: oklch(0% 0 0 / 0.09);
 
   --color-foreground: oklch(20.4% 0 0);
@@ -44,7 +44,7 @@
   }
 }
 
-@theme {
+@theme static {
   --edge-raised: 0 0 0 1px oklch(0% 0 0 / 0.08), 0 1px 2px oklch(0% 0 0 / 0.06);
   --edge-card: 0 0 0 1px oklch(0% 0 0 / 0.08), 0 1px 2px oklch(0% 0 0 / 0.06);
   --edge-sunken:

@@ -3,17 +3,17 @@
 @import "../base.css";
 
 /* Geist, when the app loads it. */
-@theme {
+@theme static {
   --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;
 }
 
 /* Text sits a half pixel off the page, lighter on light fills. */
-@theme {
+@theme static {
   --text-shadow-default: 0.5px 1px 0.5px oklch(19.1% 0 0 / 0.2);
   --text-shadow-subtle: 0.5px 1px 0.5px oklch(0% 0 0 / 0.08);
 }
 
-@theme {
+@theme static {
   --edge-raised:
     inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28),
     0 0 1px oklch(0% 0 0 / 0.14);

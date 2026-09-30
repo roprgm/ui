@@ -1,0 +1,9 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .kbd {
+    @apply font-sans text-muted;
+  }
+}

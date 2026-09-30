@@ -2,7 +2,7 @@
 
 import { ContextMenu as Primitive } from "@base-ui/react/context-menu";
 import { cn } from "cn";
-import { popupList } from "./popup";
+import styles from "./context-menu.module.css";
 
 /** A menu at the pointer, opened by a right-click or long press. Its items are a Menu's. */
 export const ContextMenu = Primitive.Root;
@@ -16,11 +16,11 @@ export function ContextMenuContent({
 }: Primitive.Popup.Props & { raised?: boolean }) {
   return (
     <Primitive.Portal>
-      <Primitive.Positioner className="z-50">
+      <Primitive.Positioner className={styles.positioner}>
         <Primitive.Popup
           data-slot="context-menu-content"
           data-raised={raised || undefined}
-          className={cn(popupList, className)}
+          className={cn("surface-float", styles.content, className)}
           {...props}
         />
       </Primitive.Positioner>

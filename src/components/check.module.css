@@ -1,0 +1,9 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .check {
+    @apply size-3.5 shrink-0;
+  }
+}

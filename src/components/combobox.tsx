@@ -5,8 +5,8 @@ import { cn } from "cn";
 import { type ReactNode, useMemo } from "react";
 import { Check } from "./check";
 import { Chevron } from "./chevron";
+import styles from "./combobox.module.css";
 import { Input } from "./input";
-import { popupItem, popupList } from "./popup";
 
 export type ComboboxItem<T extends string> = {
   value: T;
@@ -50,44 +50,34 @@ export function Combobox<T extends string>({
     <Primitive.Root items={collection} {...props}>
       <Primitive.InputGroup
         data-slot="combobox"
-        className={cn("relative", className)}
+        className={cn(styles.group, className)}
       >
         <Primitive.Input
           aria-label={label}
           placeholder={placeholder}
-          render={<Input size={size} className="pr-7" />}
+          render={<Input size={size} className={styles.input} />}
         />
         {/* Its chevron lands where a Select's does, 10px from the edge. */}
-        <Primitive.Trigger
-          aria-label="Show options"
-          className="absolute inset-y-0 right-0 flex w-7 cursor-pointer items-center justify-center text-muted"
-        >
+        <Primitive.Trigger aria-label="Show options" className={styles.trigger}>
           <Chevron size="sm" />
         </Primitive.Trigger>
       </Primitive.InputGroup>
       <Primitive.Portal>
-        <Primitive.Positioner sideOffset={4} className="z-50">
+        <Primitive.Positioner sideOffset={4} className={styles.positioner}>
           <Primitive.Popup
             data-slot="combobox-content"
             data-raised={raised || undefined}
-            className={cn(popupList, "min-w-(--anchor-width)")}
+            className={cn("surface-float", styles.content)}
           >
-            <Primitive.Empty
-              className={cn(popupItem, "text-muted empty:hidden")}
-            >
-              {empty}
-            </Primitive.Empty>
-            <Primitive.List className="flex flex-col gap-0.5">
+            <Primitive.Empty className={styles.empty}>{empty}</Primitive.Empty>
+            <Primitive.List className={styles.list}>
               {(item: ComboboxItem<T>) => (
                 <Primitive.Item
                   key={item.value}
                   value={item.value}
                   disabled={item.disabled}
                   data-slot="combobox-item"
-                  className={cn(
-                    popupItem,
-                    "justify-between gap-4 data-selected:bg-raised",
-                  )}
+                  className={styles.item}
                 >
                   {item.label}
                   <Primitive.ItemIndicator>

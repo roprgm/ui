@@ -3,6 +3,7 @@
 import { Tooltip as Primitive } from "@base-ui/react/tooltip";
 import { cn } from "cn";
 import { Kbd } from "./kbd";
+import styles from "./tooltip.module.css";
 
 /** Shares hover timing, so moving between triggers shows their tips without waiting again. */
 export const TooltipProvider = Primitive.Provider;
@@ -22,27 +23,20 @@ export function TooltipContent({
   Pick<Primitive.Positioner.Props, "side"> & { shortcut?: string }) {
   return (
     <Primitive.Portal>
-      <Primitive.Positioner side={side} sideOffset={8} className="z-50">
+      <Primitive.Positioner
+        side={side}
+        sideOffset={8}
+        className={styles.positioner}
+      >
         <Primitive.Popup
           data-slot="tooltip-content"
-          className={cn(
-            "flex max-w-64 items-center gap-2 rounded-md bg-level-1 px-2 py-1 text-foreground popup-motion data-instant:transition-none",
-            className,
-          )}
+          className={cn(styles.content, className)}
           {...props}
         >
           {children}
           {shortcut && <Kbd>{shortcut}</Kbd>}
           {/* A square keeps Base UI's centering right; the clip draws its outer half. */}
-          <Primitive.Arrow
-            className={cn(
-              "size-3 bg-level-1",
-              "data-[side=top]:top-full data-[side=top]:[clip-path:polygon(0_0,50%_50%,100%_0)]",
-              "data-[side=bottom]:bottom-full data-[side=bottom]:[clip-path:polygon(0_100%,50%_50%,100%_100%)]",
-              "data-[side=left]:left-full data-[side=left]:[clip-path:polygon(0_0,50%_50%,0_100%)]",
-              "data-[side=right]:right-full data-[side=right]:[clip-path:polygon(100%_0,50%_50%,100%_100%)]",
-            )}
-          />
+          <Primitive.Arrow className={styles.arrow} />
         </Primitive.Popup>
       </Primitive.Positioner>
     </Primitive.Portal>

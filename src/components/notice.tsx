@@ -1,7 +1,7 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 import { IconButton } from "./icon-button";
-import { popup } from "./popup";
+import styles from "./notice.module.css";
 
 /**
  * A message that floats without blocking the app, padded as its content needs; its `Section`s
@@ -18,11 +18,7 @@ export function Notice({
       role={tone}
       data-slot="notice"
       data-tone={tone}
-      className={cn(
-        popup,
-        "sections-stacked max-w-sm data-[tone=alert]:text-danger",
-        className,
-      )}
+      className={cn("surface-float sections-stacked", styles.notice, className)}
       {...props}
     />
   );
@@ -40,7 +36,7 @@ export function NoticeClose(
         stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
-        className="size-4"
+        className={styles.icon}
         aria-hidden
       >
         <path d="M18 6 6 18M6 6l12 12" />

@@ -8,19 +8,21 @@ A minimal, dark component library for React and Tailwind CSS v4, on Base UI. It 
 2. **Surfaces**: a control stands up with `surface-raised`, sets in with `surface-sunken`, or is on with `surface-primary`; content sits in a `Card`. Never draw depth with a `shadow-*` or a border.
 3. **Colors**: tokens only. Use the fills the surface under it sets (`bg-surface`, `bg-field`, `bg-raised`, `bg-raised-hover`, `bg-hover`) and text in `foreground`, `muted`, `faint`, or `disabled`. Never Tailwind's palette, and no `level-*` inside a component: it doesn't follow the surface.
 4. **Spacing**: Tailwind's scale as written (`px-3.5`), in the patterns below.
-5. **Build from what exists**: compose other components (a control is a `Button`, as a `Tab` is), the theme's parts, and the recipes (`popup`, `popupList`, `popupItem`, `field`) before writing classes of your own. When a second component repeats a pattern, it becomes a part: a CSS part in `src/base.css` when it needs selectors beyond its element or a token, as `sections` and the surfaces do, and otherwise a recipe exported from the file that owns it.
+5. **Build from what exists**: compose other components (a control is a `Button`, as a `Tab` is) and the theme's parts (`popup-list`, `popup-item`, `field`, the surfaces) before writing styles of your own. When a second component repeats a pattern, it becomes a part in `src/base.css`: a `@utility` that modules `@apply`, or a class on the element when it holds children's rules or keyframes, as `sections` and `shimmer` do.
 6. **Parts, not props**: parts come as children, never as `title`, `actions`, or `trigger` props; props carry data, such as `items` and `label`. An overlay is its root, a `…Trigger` that renders your element with `render`, and a `…Content`.
 7. **Nothing forced**: never `!`. A fill that needs forcing wants a primitive or a variant.
 8. **Wiring**: an entry in `registry.json` that lists the theme in `registryDependencies`, a demo in `site/demos.tsx`, an entry in `site/main.tsx`, and a line in `README.md`.
 
 ## Files and code
 
-- `src/components/` has one flat file per component, so `./` imports resolve after shadcn copies them. Import only `react`, `cn`, `class-variance-authority`, `@base-ui/react`, and sibling files; anything else comes in as a prop, as `CodeBlock` takes a highlighter's `html`.
-- `src/base.css` holds the tokens and the parts; `src/themes/default.css` sets the edge tokens. A theme sets tokens only, never a part. Other themes are unexported experiments.
-- Registry `categories` (actions, inputs, containers, navigation, overlays, effects) are the site's groups; Foundations is the site's only. `check`, `chevron`, and `popup` are internal. `bun run build` writes the `theme` item; don't edit it.
+- `src/components/` has one flat pair per component, `button.tsx` and `button.module.css`, so `./` imports resolve after shadcn copies them. Import only `react`, `cn`, `@base-ui/react`, sibling files, and the component's module; anything else comes in as a prop, as `CodeBlock` takes a highlighter's `html`.
+- `src/base.css` holds the tokens, in `@theme static` so apps always have them, and the parts; `src/themes/default.css` sets the edge tokens. A theme sets tokens only, never a part. Other themes are unexported experiments.
+- Registry `categories` (actions, inputs, containers, navigation, overlays, effects) are the site's groups; Foundations is the site's only. `check` and `chevron` are internal. `bun run build` writes the `theme` item; don't edit it.
 - CSS before JavaScript: Tailwind variants (`checked:`, `has-checked:`) on native elements, and Base UI for positioning, focus, and typeahead. `"use client";` only with Base UI, hooks, or handlers.
-- Styles in each component's class strings, split in `cn` by what they style when long, one line each; `cva` only for variants, named exports, ternaries only when short, comments only for what code can't say.
-- Every element a component renders gets a `data-slot` named after it, and its variants a `data-variant` or `data-size`, so a theme or an app can select them.
+- Styles in the component's module, one class per element with `@apply`, split by what they style when long. A module opens with `@layer theme, base, components, utilities;`, since whichever CSS loads first sets the order, then `@reference "tailwindcss";` and `@reference "../base.css";`. Its rules go in `@layer components`, or `@layer components.inner` for a component others restyle, as Button, Input, and ListItem are, so the one that renders it wins.
+- In the TSX, `cn(styles.x, className)`; Tailwind classes only for the theme's container, section, and fade classes, and for `group` markers. Named exports, ternaries only when short, comments only for what code can't say.
+- Every element a component renders gets a `data-slot` named after it, and its variants a `data-variant` or `data-size`, which its module selects (`&[data-variant="ghost"]`), as a theme or an app can.
+- `bun run build` compiles each module with Tailwind into plain CSS in `dist`, so apps need no setup and ship only what they import.
 
 ## Look
 

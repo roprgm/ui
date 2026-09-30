@@ -2,6 +2,7 @@
 
 import { cn } from "cn";
 import { cloneElement, type ReactElement, type ReactNode, useId } from "react";
+import styles from "./field.module.css";
 
 type Control = ReactElement<{
   id?: string;
@@ -26,8 +27,8 @@ export function Field({
   const id = useId();
   const note = error ?? description;
   return (
-    <div data-slot="field" className={cn("flex flex-col gap-1.5", className)}>
-      <label htmlFor={id} className="text-muted">
+    <div data-slot="field" className={cn(styles.field, className)}>
+      <label htmlFor={id} className={styles.label}>
         {label}
       </label>
       {cloneElement(children, {
@@ -38,7 +39,8 @@ export function Field({
       {note && (
         <p
           id={`${id}-note`}
-          className={cn("text-muted", error && "text-danger")}
+          data-error={error ? true : undefined}
+          className={styles.note}
         >
           {note}
         </p>

@@ -1,0 +1,21 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .checkbox {
+    @apply inline-grid shrink-0 *:[grid-area:1/1];
+  }
+
+  .input {
+    @apply size-4 cursor-pointer appearance-none rounded-sm surface-sunken transition focus-ring checked:bg-primary dim-disabled;
+  }
+
+  .mark {
+    @apply pointer-events-none size-4 p-0.5 text-on-primary draw transition-[stroke-dashoffset] duration-100 ease-in;
+  }
+
+  .input:checked + .mark {
+    @apply drawn delay-50 duration-200 ease-out;
+  }
+}

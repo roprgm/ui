@@ -1,0 +1,22 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .positioner {
+    @apply z-50;
+  }
+
+  .content {
+    @apply flex max-w-64 items-center gap-2 rounded-md bg-level-1 px-2 py-1 text-foreground popup-motion data-instant:transition-none;
+  }
+
+  /* A square keeps Base UI's centering right; the clip draws its outer half. */
+  .arrow {
+    @apply size-3 bg-level-1;
+    @apply data-[side=top]:top-full data-[side=top]:[clip-path:polygon(0_0,50%_50%,100%_0)];
+    @apply data-[side=bottom]:bottom-full data-[side=bottom]:[clip-path:polygon(0_100%,50%_50%,100%_100%)];
+    @apply data-[side=left]:left-full data-[side=left]:[clip-path:polygon(0_0,50%_50%,0_100%)];
+    @apply data-[side=right]:right-full data-[side=right]:[clip-path:polygon(100%_0,50%_50%,100%_100%)];
+  }
+}

@@ -8,59 +8,115 @@
       "type": "registry:theme",
       "cssVars": {
         "theme": {
-          "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
-          "color-level-0": "oklch(0% 0 0)",
-          "color-level-1": "oklch(15% 0 0)",
-          "color-level-2": "oklch(18.7% 0 0)",
-          "color-level-3": "oklch(22.4% 0 0)",
-          "color-level-4": "oklch(26.1% 0 0)",
-          "color-level-5": "oklch(29.8% 0 0)",
-          "color-level-6": "oklch(33.5% 0 0)",
-          "color-level-7": "oklch(37.2% 0 0)",
-          "color-level-8": "oklch(40.9% 0 0)",
-          "color-level-9": "oklch(44.6% 0 0)",
-          "color-level-10": "oklch(48.3% 0 0)",
-          "color-level-11": "oklch(52% 0 0)",
-          "color-level-12": "oklch(55.7% 0 0)",
-          "color-foreground": "oklch(96% 0 0)",
-          "color-muted": "oklch(70% 0 0)",
-          "color-faint": "oklch(55% 0 0)",
-          "color-disabled": "oklch(44% 0 0)",
-          "color-primary": "oklch(89% 0 0)",
-          "color-primary-hover": "oklch(98.5% 0 0)",
-          "color-on-primary": "oklch(18% 0 0)",
-          "color-pressed": "oklch(100% 0 0 / 0.15)",
-          "color-focus": "oklch(100% 0 0 / 0.25)",
-          "color-backdrop": "oklch(0% 0 0 / 0.5)",
-          "color-line": "oklch(0% 0 0 / 0.5)",
-          "color-separator": "oklch(0% 0 0 / 0.7)",
-          "color-danger": "oklch(75% 0.14 21)",
-          "color-code-keyword": "oklch(77% 0.1 9)",
-          "color-code-string": "oklch(81% 0.08 133)",
-          "color-code-type": "oklch(81% 0.07 230)",
-          "color-code-property": "oklch(83% 0.08 76)",
-          "color-surface": "var(--color-level-2)",
-          "color-field": "var(--color-level-0)",
-          "color-raised": "var(--color-level-5)",
-          "color-raised-hover": "var(--color-level-6)",
-          "color-hover": "var(--color-level-3)",
-          "edge-raised": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)",
-          "edge-sunken": "inset 0 1px 1px oklch(0% 0 0 / 0.3), 0 1px 0 oklch(95% 0 0 / 0.08)",
-          "edge-primary": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)",
-          "edge-card": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)",
-          "edge-float": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)",
-          "color-separator-light": "oklch(95.5% 0 0 / 0.05)",
-          "radius-xs": "2.5px",
-          "radius-sm": "5px",
-          "radius-md": "7px",
-          "radius-lg": "9px",
-          "radius-xl": "12px",
-          "spacing-thumb": "13px",
-          "text-shadow-default": "0.5px 1px 0.5px oklch(19.1% 0 0 / 0.2)",
-          "text-shadow-subtle": "0.5px 1px 0.5px oklch(0% 0 0 / 0.08)"
+          "font-sans": "var(--font-sans)",
+          "default-transition-timing-function": "var(--default-transition-timing-function)",
+          "color-level-0": "var(--color-level-0)",
+          "color-level-1": "var(--color-level-1)",
+          "color-level-2": "var(--color-level-2)",
+          "color-level-3": "var(--color-level-3)",
+          "color-level-4": "var(--color-level-4)",
+          "color-level-5": "var(--color-level-5)",
+          "color-level-6": "var(--color-level-6)",
+          "color-level-7": "var(--color-level-7)",
+          "color-level-8": "var(--color-level-8)",
+          "color-level-9": "var(--color-level-9)",
+          "color-level-10": "var(--color-level-10)",
+          "color-level-11": "var(--color-level-11)",
+          "color-level-12": "var(--color-level-12)",
+          "color-foreground": "var(--color-foreground)",
+          "color-muted": "var(--color-muted)",
+          "color-faint": "var(--color-faint)",
+          "color-disabled": "var(--color-disabled)",
+          "color-primary": "var(--color-primary)",
+          "color-primary-hover": "var(--color-primary-hover)",
+          "color-on-primary": "var(--color-on-primary)",
+          "color-pressed": "var(--color-pressed)",
+          "color-focus": "var(--color-focus)",
+          "color-backdrop": "var(--color-backdrop)",
+          "color-line": "var(--color-line)",
+          "color-separator": "var(--color-separator)",
+          "color-danger": "var(--color-danger)",
+          "color-code-keyword": "var(--color-code-keyword)",
+          "color-code-string": "var(--color-code-string)",
+          "color-code-type": "var(--color-code-type)",
+          "color-code-property": "var(--color-code-property)",
+          "color-surface": "var(--color-surface)",
+          "color-field": "var(--color-field)",
+          "color-raised": "var(--color-raised)",
+          "color-raised-hover": "var(--color-raised-hover)",
+          "color-hover": "var(--color-hover)",
+          "edge-raised": "var(--edge-raised)",
+          "edge-sunken": "var(--edge-sunken)",
+          "edge-primary": "var(--edge-primary)",
+          "edge-card": "var(--edge-card)",
+          "edge-float": "var(--edge-float)",
+          "color-separator-light": "var(--color-separator-light)",
+          "radius-xs": "var(--radius-xs)",
+          "radius-sm": "var(--radius-sm)",
+          "radius-md": "var(--radius-md)",
+          "radius-lg": "var(--radius-lg)",
+          "radius-xl": "var(--radius-xl)",
+          "spacing-thumb": "var(--spacing-thumb)",
+          "text-shadow-default": "var(--text-shadow-default)",
+          "text-shadow-subtle": "var(--text-shadow-subtle)"
         }
       },
       "css": {
+        "@layer theme": {
+          ":root": {
+            "--font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
+            "--default-transition-timing-function": "cubic-bezier(.4, 0, .2, 1)",
+            "--color-level-0": "oklch(0% 0 0)",
+            "--color-level-1": "oklch(15% 0 0)",
+            "--color-level-2": "oklch(18.7% 0 0)",
+            "--color-level-3": "oklch(22.4% 0 0)",
+            "--color-level-4": "oklch(26.1% 0 0)",
+            "--color-level-5": "oklch(29.8% 0 0)",
+            "--color-level-6": "oklch(33.5% 0 0)",
+            "--color-level-7": "oklch(37.2% 0 0)",
+            "--color-level-8": "oklch(40.9% 0 0)",
+            "--color-level-9": "oklch(44.6% 0 0)",
+            "--color-level-10": "oklch(48.3% 0 0)",
+            "--color-level-11": "oklch(52% 0 0)",
+            "--color-level-12": "oklch(55.7% 0 0)",
+            "--color-foreground": "oklch(96% 0 0)",
+            "--color-muted": "oklch(70% 0 0)",
+            "--color-faint": "oklch(55% 0 0)",
+            "--color-disabled": "oklch(44% 0 0)",
+            "--color-primary": "oklch(89% 0 0)",
+            "--color-primary-hover": "oklch(98.5% 0 0)",
+            "--color-on-primary": "oklch(18% 0 0)",
+            "--color-pressed": "oklch(100% 0 0 / .15)",
+            "--color-focus": "oklch(100% 0 0 / .25)",
+            "--color-backdrop": "oklch(0% 0 0 / .5)",
+            "--color-line": "oklch(0% 0 0 / .5)",
+            "--color-separator": "oklch(0% 0 0 / .7)",
+            "--color-danger": "oklch(75% .14 21)",
+            "--color-code-keyword": "oklch(77% .1 9)",
+            "--color-code-string": "oklch(81% .08 133)",
+            "--color-code-type": "oklch(81% .07 230)",
+            "--color-code-property": "oklch(83% .08 76)",
+            "--color-surface": "var(--color-level-2)",
+            "--color-field": "var(--color-level-0)",
+            "--color-raised": "var(--color-level-5)",
+            "--color-raised-hover": "var(--color-level-6)",
+            "--color-hover": "var(--color-level-3)",
+            "--edge-raised": "inset 0 1px 0 oklch(95% 0 0 / .08), 0 1px 1px oklch(0% 0 0 / .28), 0 0 1px oklch(0% 0 0 / .14)",
+            "--edge-sunken": "inset 0 1px 1px oklch(0% 0 0 / .3), 0 1px 0 oklch(95% 0 0 / .08)",
+            "--edge-primary": "0 0 2px 1px oklch(10% 0 0 / .3), inset 0 1px 0 oklch(95% 0 0 / .2), 0 1px 2px oklch(10% 0 0 / .5)",
+            "--edge-card": "inset 0 1px 0 oklch(95% 0 0 / .08), 0 1px 1px oklch(0% 0 0 / .28), 0 0 1px oklch(0% 0 0 / .14)",
+            "--edge-float": "0 0 0px 1px oklch(10% 0 0 / .25), inset 0 1px 0 oklch(100% 0 0 / .08), 0 2px 6px oklch(0% 0 0 / .3), 0 4px 16px 0 oklch(10% 0 0 / .1)",
+            "--color-separator-light": "oklch(95.5% 0 0 / .05)",
+            "--radius-xs": "2.5px",
+            "--radius-sm": "5px",
+            "--radius-md": "7px",
+            "--radius-lg": "9px",
+            "--radius-xl": "12px",
+            "--spacing-thumb": "13px",
+            "--text-shadow-default": ".5px 1px .5px oklch(19.1% 0 0 / .2)",
+            "--text-shadow-subtle": ".5px 1px .5px oklch(0% 0 0 / .08)"
+          }
+        },
         "@layer components": {
           ".surface-card, .surface-panel, .surface-float": {
             "--color-surface": "var(--color-level-4)",
@@ -84,18 +140,83 @@
             "--color-raised-hover": "var(--color-level-12)",
             "--color-hover": "var(--color-level-9)"
           },
+          ".surface-card": {
+            "box-shadow": "var(--edge-card)"
+          },
+          ".surface-float": {
+            "box-shadow": "var(--edge-float)"
+          },
           ".sections, .sections-stacked": {
             "@apply flex flex-col gap-3 px-3.5 py-2.5": {}
           },
           ".sections:has(> [data-slot=\"section\"]), .sections-stacked:has(> [data-slot=\"section\"])": {
             "@apply gap-0 p-0": {}
+          },
+          ".overflow-fade-y": {
+            "overflow-y": "auto"
+          },
+          ".overflow-fade-y:before, .overflow-fade-y:after": {
+            "content": "\"\"",
+            "z-index": "10",
+            "pointer-events": "none",
+            "opacity": "0",
+            "height": "1.5rem",
+            "display": "block",
+            "position": "sticky"
+          },
+          ".overflow-fade-y:before": {
+            "background": "linear-gradient(oklch(0% 0 0 / .2), 30%, #0000)",
+            "margin-bottom": "-1.5rem",
+            "top": "0"
+          },
+          ".overflow-fade-y:after": {
+            "background": "linear-gradient(to top, oklch(0% 0 0 / .2), 30%, #0000)",
+            "margin-top": "-1.5rem",
+            "bottom": "0"
+          },
+          "@supports (animation-timeline: scroll())": {
+            ".overflow-fade-y:before": {
+              "animation": "linear both overflow-fade-in scroll()",
+              "animation-range": "0 1.5rem"
+            },
+            ".overflow-fade-y:after": {
+              "animation": "linear both overflow-fade-out scroll()",
+              "animation-range": "calc(100% - 1.5rem) 100%"
+            },
+            ".overflow-fade-x": {
+              "animation": "linear both overflow-fade-x-start scroll(self inline), linear both overflow-fade-x-end scroll(self inline)",
+              "animation-range": "0 1.5rem, calc(100% - 1.5rem) 100%"
+            }
+          },
+          "@supports not (animation-timeline: scroll())": {
+            ".overflow-fade-y:before, .overflow-fade-y:after": {
+              "transition": "opacity .15s"
+            },
+            ".overflow-fade-y[data-overflow-y-start]:before, .overflow-fade-y[data-overflow-y-end]:after": {
+              "opacity": "1"
+            }
+          },
+          ".overflow-fade-x": {
+            "overscroll-behavior-x": "contain",
+            "scrollbar-width": "none",
+            "min-width": "0",
+            "overflow-x": "auto",
+            "mask-image": "linear-gradient(to right, transparent, oklch(0% 0 0) var(--overflow-fade-start), oklch(0% 0 0) calc(100% - var(--overflow-fade-end)), transparent)"
+          },
+          ".overflow-fade-x::-webkit-scrollbar": {
+            "display": "none"
+          },
+          ".shimmer": {
+            "animation": "2.4s ease-in-out infinite shimmer",
+            "mask-image": "linear-gradient(100deg, oklch(0% 0 0 / .45) 30%, oklch(0% 0 0 / .6) 40%, oklch(0% 0 0) 50%, oklch(0% 0 0 / .6) 60%, oklch(0% 0 0 / .45) 70%)",
+            "mask-size": "300% 100%"
+          },
+          "@media (prefers-reduced-motion: reduce)": {
+            ".shimmer": {
+              "animation": "none",
+              "mask-image": "none"
+            }
           }
-        },
-        "@utility surface-card": {
-          "box-shadow": "var(--edge-card)"
-        },
-        "@utility surface-float": {
-          "box-shadow": "var(--edge-float)"
         },
         "@utility surface-raised": {
           "background-color": "var(--color-raised)",
@@ -128,16 +249,32 @@
           },
           ".sections-stacked > [data-slot=\"section\"]:not(:last-child)": {
             "@apply pb-0": {}
+          },
+          ".overflow-fade-x :focus-visible": {
+            "outline-offset": "-2px"
           }
+        },
+        "@utility popup": {
+          "@apply max-h-(--available-height) min-w-40 overflow-x-hidden overflow-y-auto rounded-xl text-foreground outline-none popup-motion": {}
+        },
+        "@utility popup-list": {
+          "@apply popup": {},
+          "@apply flex flex-col gap-0.5 rounded-lg p-1": {}
+        },
+        "@utility popup-item": {
+          "@apply flex h-6.5 shrink-0 cursor-default items-center rounded-sm px-2.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised": {}
+        },
+        "@utility field": {
+          "@apply w-full min-w-0 rounded-md surface-sunken px-2.5 text-foreground transition focus-ring placeholder:text-muted dim-disabled aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger/60": {}
         },
         "@utility popup-motion": {
           "transform-origin": "var(--transform-origin)",
           "transition-property": "opacity, scale",
           "transition-timing-function": "var(--default-transition-timing-function)",
-          "transition-duration": "100ms",
+          "transition-duration": ".1s",
           "&[data-starting-style]": {
             "opacity": "0",
-            "scale": "0.95"
+            "scale": ".95"
           },
           "&[data-ending-style]": {
             "opacity": "0"
@@ -148,55 +285,13 @@
           "outline-offset": "1px",
           "&:focus-visible, &:has(:focus-visible)": {
             "outline-color": "var(--color-focus)",
-            "transition-duration": "300ms"
+            "transition-duration": ".3s"
           }
         },
         "@utility dim-disabled": {
           "&:is(:disabled, [data-disabled], :has(:disabled))": {
             "pointer-events": "none",
             "opacity": "40%"
-          }
-        },
-        "@utility overflow-fade-y": {
-          "overflow-y": "auto",
-          "&::before, &::after": {
-            "content": "\"\"",
-            "position": "sticky",
-            "z-index": "10",
-            "display": "block",
-            "height": "1.5rem",
-            "pointer-events": "none",
-            "opacity": "0"
-          },
-          "&::before": {
-            "top": "0",
-            "margin-bottom": "-1.5rem",
-            "background": "linear-gradient(to bottom, oklch(0% 0 0 / 0.2), 30%, transparent)"
-          },
-          "&::after": {
-            "bottom": "0",
-            "margin-top": "-1.5rem",
-            "background": "linear-gradient(to top, oklch(0% 0 0 / 0.2), 30%, transparent)"
-          },
-          "@supports (animation-timeline: scroll())": {
-            "&::before": {
-              "animation": "overflow-fade-in linear both",
-              "animation-timeline": "scroll()",
-              "animation-range": "0 1.5rem"
-            },
-            "&::after": {
-              "animation": "overflow-fade-out linear both",
-              "animation-timeline": "scroll()",
-              "animation-range": "calc(100% - 1.5rem) 100%"
-            }
-          },
-          "@supports not (animation-timeline: scroll())": {
-            "&::before, &::after": {
-              "transition": "opacity 150ms"
-            },
-            "&[data-overflow-y-start]::before, &[data-overflow-y-end]::after": {
-              "opacity": "1"
-            }
           }
         },
         "@keyframes overflow-fade-in": {
@@ -218,30 +313,12 @@
         "@property --overflow-fade-start": {
           "syntax": "\"<length>\"",
           "inherits": "false",
-          "initial-value": "0px"
+          "initial-value": "0"
         },
         "@property --overflow-fade-end": {
           "syntax": "\"<length>\"",
           "inherits": "false",
-          "initial-value": "0px"
-        },
-        "@utility overflow-fade-x": {
-          "min-width": "0",
-          "overflow-x": "auto",
-          "overscroll-behavior-x": "contain",
-          "scrollbar-width": "none",
-          "&::-webkit-scrollbar": {
-            "display": "none"
-          },
-          "& :focus-visible": {
-            "outline-offset": "-2px"
-          },
-          "mask-image": "linear-gradient(to right, transparent, oklch(0% 0 0) var(--overflow-fade-start), oklch(0% 0 0) calc(100% - var(--overflow-fade-end)), transparent)",
-          "@supports (animation-timeline: scroll())": {
-            "animation": "overflow-fade-x-start linear both, overflow-fade-x-end linear both",
-            "animation-timeline": "scroll(self inline), scroll(self inline)",
-            "animation-range": "0 1.5rem, calc(100% - 1.5rem) 100%"
-          }
+          "initial-value": "0"
         },
         "@keyframes overflow-fade-x-start": {
           "from": {
@@ -266,15 +343,6 @@
         "@utility drawn": {
           "stroke-dashoffset": "0"
         },
-        "@utility shimmer": {
-          "mask-image": "linear-gradient(100deg, oklch(0% 0 0 / 0.45) 30%, oklch(0% 0 0 / 0.6) 40%, oklch(0% 0 0) 50%, oklch(0% 0 0 / 0.6) 60%, oklch(0% 0 0 / 0.45) 70%)",
-          "mask-size": "300% 100%",
-          "animation": "shimmer 2.4s ease-in-out infinite",
-          "@media (prefers-reduced-motion: reduce)": {
-            "mask-image": "none",
-            "animation": "none"
-          }
-        },
         "@keyframes shimmer": {
           "from": {
             "mask-position": "100% 0"
@@ -286,12 +354,12 @@
         "@layer base": {
           "body": {
             "font-family": "var(--font-sans)",
-            "font-size": "13px",
-            "line-height": "20px",
             "color": "var(--color-foreground)",
             "background": "var(--color-surface)",
             "color-scheme": "dark",
-            "text-shadow": "var(--text-shadow-default)"
+            "text-shadow": "var(--text-shadow-default)",
+            "font-size": "13px",
+            "line-height": "20px"
           },
           "button, input, textarea": {
             "text-shadow": "inherit"
@@ -305,26 +373,18 @@
     {
       "name": "chevron",
       "type": "registry:ui",
-      "dependencies": ["cn", "class-variance-authority"],
+      "dependencies": ["cn"],
       "files": [
         {
           "path": "src/components/chevron.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/chevron.module.css",
+          "type": "registry:ui"
         }
       ],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
-    },
-    {
-      "name": "popup",
-      "type": "registry:ui",
-      "dependencies": ["cn"],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
-      "files": [
-        {
-          "path": "src/components/popup.ts",
-          "type": "registry:ui"
-        }
-      ]
     },
     {
       "name": "section",
@@ -334,6 +394,10 @@
       "files": [
         {
           "path": "src/components/section.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/section.module.css",
           "type": "registry:ui"
         }
       ],
@@ -349,6 +413,10 @@
         {
           "path": "src/components/check.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/check.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -356,11 +424,15 @@
       "name": "button",
       "type": "registry:ui",
       "categories": ["actions"],
-      "dependencies": ["cn", "class-variance-authority"],
+      "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
           "path": "src/components/button.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/button.module.css",
           "type": "registry:ui"
         }
       ]
@@ -394,6 +466,10 @@
         {
           "path": "src/components/copy-button.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/copy-button.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -401,11 +477,15 @@
       "name": "input",
       "type": "registry:ui",
       "categories": ["inputs"],
-      "dependencies": ["cn", "class-variance-authority"],
+      "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
           "path": "src/components/input.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/input.module.css",
           "type": "registry:ui"
         }
       ]
@@ -415,13 +495,14 @@
       "type": "registry:ui",
       "categories": ["inputs"],
       "dependencies": ["cn"],
-      "registryDependencies": [
-        "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/input.json"
-      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
           "path": "src/components/textarea.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/textarea.module.css",
           "type": "registry:ui"
         }
       ]
@@ -434,6 +515,10 @@
       "files": [
         {
           "path": "src/components/field.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/field.module.css",
           "type": "registry:ui"
         }
       ],
@@ -449,6 +534,10 @@
         {
           "path": "src/components/checkbox.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/checkbox.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -461,6 +550,10 @@
       "files": [
         {
           "path": "src/components/drag-toggle.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/drag-toggle.module.css",
           "type": "registry:ui"
         }
       ]
@@ -475,6 +568,10 @@
         {
           "path": "src/components/radio.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/radio.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -488,6 +585,10 @@
         {
           "path": "src/components/switch.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/switch.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -495,11 +596,15 @@
       "name": "toggle-group",
       "type": "registry:ui",
       "categories": ["inputs"],
-      "dependencies": ["cn", "class-variance-authority"],
+      "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
           "path": "src/components/toggle-group.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/toggle-group.module.css",
           "type": "registry:ui"
         }
       ]
@@ -508,17 +613,20 @@
       "name": "select",
       "type": "registry:ui",
       "categories": ["inputs"],
-      "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
+      "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/check.json",
         "https://ui.roprgm.com/r/chevron.json",
-        "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/tooltip.json"
       ],
       "files": [
         {
           "path": "src/components/select.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/select.module.css",
           "type": "registry:ui"
         }
       ]
@@ -532,12 +640,15 @@
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/check.json",
         "https://ui.roprgm.com/r/chevron.json",
-        "https://ui.roprgm.com/r/input.json",
-        "https://ui.roprgm.com/r/popup.json"
+        "https://ui.roprgm.com/r/input.json"
       ],
       "files": [
         {
           "path": "src/components/combobox.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/combobox.module.css",
           "type": "registry:ui"
         }
       ]
@@ -552,6 +663,10 @@
         {
           "path": "src/components/chip.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/chip.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -565,6 +680,10 @@
         {
           "path": "src/components/kbd.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/kbd.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -572,11 +691,15 @@
       "name": "badge",
       "type": "registry:ui",
       "categories": ["actions"],
-      "dependencies": ["cn", "class-variance-authority"],
+      "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
           "path": "src/components/badge.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/badge.module.css",
           "type": "registry:ui"
         }
       ]
@@ -589,6 +712,10 @@
       "files": [
         {
           "path": "src/components/spinner.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/spinner.module.css",
           "type": "registry:ui"
         }
       ],
@@ -607,6 +734,10 @@
         {
           "path": "src/components/tooltip.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/tooltip.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -618,12 +749,15 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/chevron.json",
-        "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/kbd.json"
       ],
       "files": [
         {
           "path": "src/components/menu.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/menu.module.css",
           "type": "registry:ui"
         }
       ]
@@ -632,15 +766,18 @@
       "name": "context-menu",
       "type": "registry:ui",
       "categories": ["overlays"],
-      "dependencies": ["@base-ui/react", "cn"],
+      "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/menu.json"
       ],
       "files": [
         {
           "path": "src/components/context-menu.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/context-menu.module.css",
           "type": "registry:ui"
         }
       ]
@@ -650,13 +787,14 @@
       "type": "registry:ui",
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
-      "registryDependencies": [
-        "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/popup.json"
-      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
           "path": "src/components/popover.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/popover.module.css",
           "type": "registry:ui"
         }
       ]
@@ -666,13 +804,14 @@
       "type": "registry:ui",
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
-      "registryDependencies": [
-        "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/popup.json"
-      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
           "path": "src/components/dialog.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/dialog.module.css",
           "type": "registry:ui"
         }
       ]
@@ -684,12 +823,15 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/icon-button.json",
-        "https://ui.roprgm.com/r/popup.json"
+        "https://ui.roprgm.com/r/icon-button.json"
       ],
       "files": [
         {
           "path": "src/components/notice.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/notice.module.css",
           "type": "registry:ui"
         }
       ]
@@ -709,6 +851,10 @@
         {
           "path": "src/components/toast.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/toast.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -720,6 +866,10 @@
       "files": [
         {
           "path": "src/components/card.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/card.module.css",
           "type": "registry:ui"
         }
       ],
@@ -734,6 +884,10 @@
         {
           "path": "src/components/collapsible.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/collapsible.module.css",
+          "type": "registry:ui"
         }
       ],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
@@ -742,7 +896,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "categories": ["navigation"],
-      "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
+      "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/button.json"
@@ -750,6 +904,10 @@
       "files": [
         {
           "path": "src/components/tabs.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/tabs.module.css",
           "type": "registry:ui"
         }
       ]
@@ -763,6 +921,10 @@
         {
           "path": "src/components/list-item.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/list-item.module.css",
+          "type": "registry:ui"
         }
       ],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
@@ -774,12 +936,16 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/list-item.json",
-        "https://ui.roprgm.com/r/chevron.json"
+        "https://ui.roprgm.com/r/chevron.json",
+        "https://ui.roprgm.com/r/list-item.json"
       ],
       "files": [
         {
           "path": "src/components/tree-list.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/tree-list.module.css",
           "type": "registry:ui"
         }
       ]
@@ -793,6 +959,10 @@
         {
           "path": "src/components/scroll-text.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/scroll-text.module.css",
+          "type": "registry:ui"
         }
       ],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
@@ -805,6 +975,10 @@
       "files": [
         {
           "path": "src/components/scroll-area.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/scroll-area.module.css",
           "type": "registry:ui"
         }
       ],
@@ -823,6 +997,10 @@
         {
           "path": "src/components/code-block.tsx",
           "type": "registry:ui"
+        },
+        {
+          "path": "dist/code-block.module.css",
+          "type": "registry:ui"
         }
       ]
     },
@@ -830,7 +1008,7 @@
       "name": "slider",
       "type": "registry:ui",
       "categories": ["inputs"],
-      "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
+      "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/scrub-input.json"
@@ -838,6 +1016,10 @@
       "files": [
         {
           "path": "src/components/slider.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/slider.module.css",
           "type": "registry:ui"
         }
       ]
@@ -854,6 +1036,10 @@
       "files": [
         {
           "path": "src/components/scrub-input.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "dist/scrub-input.module.css",
           "type": "registry:ui"
         }
       ]

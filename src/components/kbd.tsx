@@ -1,5 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
+import styles from "./kbd.module.css";
 
 const mac =
   typeof navigator !== "undefined" &&
@@ -16,7 +17,7 @@ export function Kbd({
     <kbd
       data-slot="kbd"
       suppressHydrationWarning
-      className={cn("font-sans text-muted", className)}
+      className={cn(styles.kbd, className)}
       {...props}
     >
       {children.replace(/Mod ?/, mac ? "⌘" : "Ctrl ")}

@@ -1,0 +1,30 @@
+@layer theme, base, components, utilities;
+@reference "tailwindcss";
+@reference "../base.css";
+
+@layer components {
+  .viewport {
+    @apply fixed inset-x-3.5 bottom-3.5 z-50 flex flex-col-reverse gap-2 sm:left-auto sm:w-sm;
+  }
+
+  /* Past the provider's limit, older toasts wait hidden until newer ones go. */
+  .toast {
+    @apply translate-x-(--toast-swipe-movement-x) data-limited:hidden;
+  }
+
+  .header {
+    @apply flex-row items-start;
+  }
+
+  .text {
+    @apply flex flex-1 flex-col gap-0.5;
+  }
+
+  .title {
+    @apply font-medium;
+  }
+
+  .actions {
+    @apply flex-row gap-1.5 px-2.5;
+  }
+}
