@@ -1,0 +1,31 @@
+@layer components.inner {
+  /* The stroke is in viewBox units, so the smaller icon draws it thicker to match. */
+  .chevron {
+    display: block;
+    flex-shrink: 0;
+    transition-property: rotate, color;
+    transition-duration: 200ms;
+    transition-timing-function: var(--ease-in-out);
+
+    &[data-direction="down"] {
+      rotate: 90deg;
+    }
+    &[data-direction="left"] {
+      rotate: 180deg;
+    }
+    &[data-direction="up"] {
+      rotate: -90deg;
+    }
+
+    &[data-size="sm"] {
+      width: 8px;
+      height: 8px;
+      stroke-width: 2.5;
+    }
+    &[data-size="md"] {
+      width: 10px;
+      height: 10px;
+      stroke-width: 2;
+    }
+  }
+}

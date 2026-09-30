@@ -1,0 +1,23 @@
+/* What every control shares: a focus ring and a disabled look. */
+
+@layer base {
+  /* An outline with a gap, on keyboard focus. */
+  .focus-ring {
+    outline: 2px solid transparent;
+    outline-offset: 1px;
+  }
+
+  /* Fades a control disabled natively, by Base UI, or through a disabled input inside it. */
+  .dim-disabled:is(:disabled, [data-disabled], :has(:disabled)) {
+    pointer-events: none;
+    opacity: 40%;
+  }
+}
+
+/* The ring fades in slower than a control's own transition, so it sits with the components. */
+@layer components {
+  .focus-ring:is(:focus-visible, :has(:focus-visible)) {
+    outline-color: var(--color-focus);
+    transition-duration: 300ms;
+  }
+}

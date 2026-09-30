@@ -1,23 +1,30 @@
 # @roprgm/ui
 
-A minimal, dark UI library for React and Tailwind CSS v4.
+A minimal, dark UI library for React, styled with CSS modules. It works with Tailwind CSS v4 or without it.
 
 Docs and live examples: [ui.roprgm.com](https://ui.roprgm.com)
 
 ## Install
 
-Add the package, then import the theme after Tailwind in your CSS:
+Add the package, then import the theme in your CSS:
 
 ```bash
 bun add @roprgm/ui
 ```
 
 ```css
-@import "tailwindcss";
 @import "@roprgm/ui/themes/default.css";
 ```
 
-Or copy components into your app with the shadcn CLI. No package needed: each component brings the theme and the components it uses.
+With Tailwind, import the theme after it, and `tailwind.css` for utilities from the theme's tokens, such as `bg-raised` and `text-muted`:
+
+```css
+@import "tailwindcss";
+@import "@roprgm/ui/themes/default.css";
+@import "@roprgm/ui/tailwind.css";
+```
+
+Or copy components into your app with the shadcn CLI. No package needed: each component brings its CSS module, the theme, and the components it uses.
 
 ```bash
 npx shadcn@latest add https://ui.roprgm.com/r/button.json
@@ -52,7 +59,7 @@ Put groups of controls on a card. Controls take their fills from the surface the
 </Card>
 ```
 
-A card, popover, dialog, or notice pads its content as one section. To split it, put its parts in `Section`s: one reads the same as none, and several stack with a line between each, or, in a dialog or notice, without one. A `Collapsible` counts as a section. For content that runs edge to edge, such as a frame around an app, remove the padding with `p-0`:
+A card, popover, dialog, or notice pads its content as one section. To split it, put its parts in `Section`s: one reads the same as none, and several stack with a line between each, or, in a dialog or notice, without one. A `Collapsible` counts as a section. For content that runs edge to edge, such as a frame around an app, remove the padding:
 
 ```tsx
 <Card>
@@ -63,14 +70,31 @@ A card, popover, dialog, or notice pads its content as one section. To split it,
 </Card>
 ```
 
-- Use `surface-card` for cards, which rise two levels over what they sit on, even another card, and `surface-raised` for controls, three levels up. Dock a card in your layout with `surface-panel`, which has no edge. What floats is `surface-float`, a card drawn floating: a popup opens as a card on the page, and with `raised`, a level up, for one that opens over a card.
-- Use the theme's colors, such as `text-muted`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette.
-- Build your own controls from the `surface-*` primitives rather than shadows or borders of your own, so they follow the theme.
-- For content that may not fit, use `overflow-fade-x` or `overflow-fade-y`: it scrolls, and fades where more lies that way. For one line of text, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
+A `className` restyles a component: your utilities and your own CSS override its styles, since the library's sit in cascade layers under them. Each component's elements carry a `data-slot`, and its variants a `data-variant` or `data-size`, to select them from your CSS.
 
 Components without JavaScript, such as `Button` and `Input`, render on the server.
 
 Mount one `<Toaster />` near the root, then show a toast from anywhere, even outside React: `toast.add({ title: "Exported" })`.
+
+## Parts
+
+The theme brings the classes the components are built from, for controls of your own. They follow the theme like the components do.
+
+| Part | Use |
+| --- | --- |
+| `surface-card`, `surface-panel`, `surface-float` | containers, which set the fills of what sits on them: a card rises two levels over what it sits on, even another card; a panel is a card docked in your layout, with no edge; what floats is a card drawn floating, a level up with `data-raised` |
+| `surface-raised`, `surface-sunken`, `surface-primary` | controls: raised three levels up, sunken two down, or on |
+| `segmented` | a strip of controls a size smaller, with `surface-sunken` |
+| `separator` | a line between groups; size it 1px |
+| `sections`, `sections-stacked` | a box padded as one section until it holds `Section`s, with a line between them or stacked without one |
+| `focus-ring`, `dim-disabled` | a control's focus ring and its disabled look |
+| `popup-motion` | a popup that grows from its trigger |
+| `overflow-fade-x`, `overflow-fade-y` | content that may not fit: it scrolls, and fades where more lies that way |
+| `shimmer` | a bright band across pending work |
+
+For one line of text, use `ScrollText` rather than an ellipsis: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep the ellipsis.
+
+In a CSS module, compose a part: `composes: surface-raised focus-ring from global;`.
 
 ## Components
 
@@ -78,62 +102,73 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 | --- | --- |
 | Actions | `Button`, `IconButton`, `CopyButton`, `Chip`, `Kbd`, `Badge` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `DragToggle`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput` |
-| Containers | `Card`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `surface-*` primitives; `Collapsible`, `ScrollArea`, `CodeBlock` |
+| Containers | `Card`, with `Section` and `SectionAction` from `section`; `Collapsible`, `ScrollArea`, `CodeBlock` |
 | Navigation | `Tabs`, `ListItem`, `TreeList` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
-| Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, and `overflow-fade-y` utilities |
+| Effects | `Spinner`, `ScrollText` |
 
 Each one has a live demo and its install command on the [docs site](https://ui.roprgm.com).
 
 ## Theme
 
-`base.css` holds the tokens, the primitives the components are built from, and the page's rules: 13px text on a dark background. `themes/default.css` imports it, draws the primitives with light and shadow, and sets Geist when your app loads it. The comments in both files describe each token.
+`base.css` holds the tokens, the parts, and the page's rules: 13px text on a dark background. `themes/default.css` imports it, draws the surfaces' edges with light and shadow, and sets Geist when your app loads it. The comments in both files describe each token.
 
 ### Colors
 
 | Token | Use |
 | --- | --- |
-| `level-0` to `level-12` | the backgrounds of the interface: black, then darkest first in even steps of lightness; every fill is one of them |
-| `surface`, `field`, `raised`, `raised-hover`, `hover` | fills relative to the surface they sit on: its own, a field two levels below, a raised control three above and four on hover, and a ghost's hover one above |
-| `foreground`, `muted`, `faint`, `disabled` | text, strongest first: `faint` for what should barely show, such as a disclaimer |
-| `primary`, `primary-hover`, `on-primary` | primary buttons, checked controls, and slider thumbs |
-| `pressed` | a translucent state for ghost buttons and chips |
-| `line`, `separator`, `focus`, `backdrop` | the lines between a card's parts, a separator's translucent dark, the focus ring, and the shade behind a dialog |
-| `danger` | errors |
+| `--color-level-0` to `--color-level-12` | the backgrounds of the interface: black, then darkest first in even steps of lightness; every fill is one of them |
+| `--color-surface`, `-field`, `-raised`, `-raised-hover`, `-hover` | fills relative to the surface they sit on: its own, a field two levels below, a raised control three above and four on hover, and a ghost's hover one above |
+| `--color-foreground`, `-muted`, `-faint`, `-disabled` | text, strongest first: `faint` for what should barely show, such as a disclaimer |
+| `--color-primary`, `-primary-hover`, `-on-primary` | primary buttons, checked controls, and slider thumbs |
+| `--color-pressed` | a translucent state for ghost buttons and chips |
+| `--color-line`, `-separator`, `-focus`, `-backdrop` | the lines between a card's parts, a separator's translucent dark, the focus ring, and the shade behind a dialog |
+| `--color-danger` | errors |
 
-### Surfaces
+### Edges
 
-A surface is what a box is filled with and how it stands against what's under it; the theme draws its edge. A raised surface fills itself two levels over where it sits and sets the fills of what sits on it, so everything keeps its contrast at any depth and every color is one of the palette's:
-
-| Surface | Fill | Used by |
-| --- | --- | --- |
-| `surface-card` | two levels up from what it sits on | cards |
-| `surface-panel` | a card's, with no edge | a card docked in your layout, such as a sidebar |
-| `surface-float` | a card's, drawn floating; with `raised`, a level up | popups, dialogs, notices, anything dragged |
-| `surface-raised` | three levels up from what it sits on | buttons, selects, selected tabs and toggles |
-| `surface-sunken` | two levels down from what it sits on | fields, tracks, checkboxes, switches, groups |
-| `surface-primary` | the primary color | primary buttons, checked switches, slider thumbs |
-| `separator` | a line | a menu's separators |
+A surface's edge is a box shadow the theme draws: `--edge-raised`, `--edge-sunken`, `--edge-primary`, `--edge-card`, and `--edge-float`, with `--color-separator-light` beside a separator's line. `base.css` draws none, so surfaces stand apart by their fills alone.
 
 ### Sizes
 
-Controls are 28px tall (`h-7`), with 24px and 32px sizes, and list rows 40px. Heights and spacing are Tailwind's own, so a control of your own takes the same classes.
+Controls are 28px tall, with 24px and 32px sizes, and list rows 40px. Radii are `--radius-xs` to `--radius-xl`.
 
 ### Customize
 
-Redefine a token to restyle every component that uses it:
+Set a token again to restyle every component that uses it. Outside a layer, your CSS overrides the theme's:
 
 ```css
-@theme {
+:root {
   --color-primary: oklch(67% 0.16 252);
   --radius-md: 8px;
 }
 ```
 
-A theme changes what a surface is by setting its fills again, at each depth, in its own `@utility surface-card`. A surface of your own sets the fills of what sits on it and paints its own:
+Set tokens on a part of the page to restyle only what's in it, or on a component's `data-slot` to restyle only it:
 
 ```css
-@utility surface-sidebar {
+[data-slot="button"] {
+  --radius-md: 14px;
+}
+```
+
+A theme of your own imports `base.css` and sets the tokens it changes, edges included, in the `theme` layer, so an app's CSS still overrides it:
+
+```css
+@import "@roprgm/ui/base.css";
+
+@layer theme {
+  :root {
+    --edge-raised: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
+    --edge-card: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
+  }
+}
+```
+
+A container of your own sets the fills of what sits on it and paints its own:
+
+```css
+.sidebar {
   --color-surface: var(--color-level-1);
   --color-field: var(--color-level-0);
   --color-raised: var(--color-level-4);

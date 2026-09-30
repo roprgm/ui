@@ -977,7 +977,7 @@ export function ListItemDemo() {
           <ListItemAction>
             <IconButton
               label="Hide"
-              className="opacity-0 group-hover:opacity-100"
+              className="opacity-0 in-[[data-slot=list-item]:hover]:opacity-100"
             >
               <EyeIcon />
             </IconButton>
@@ -1113,7 +1113,7 @@ export function TreeListDemo() {
           <ListItemAction>
             <IconButton
               label="Hide"
-              className="opacity-0 group-hover:opacity-100"
+              className="opacity-0 in-[[data-slot=list-item]:hover]:opacity-100"
             >
               <EyeIcon />
             </IconButton>
@@ -1268,10 +1268,7 @@ export function CollapsibleDemo() {
         <Card key={edit.title} className="rounded-lg">
           <Collapsible>
             <CollapsibleTrigger>
-              <Chevron
-                direction="right"
-                className="text-muted group-data-open/collapsible:rotate-90"
-              />
+              <Chevron direction="right" className="text-muted" />
               <span className="flex-1">{edit.title}</span>
               <span className="text-muted">{edit.when}</span>
             </CollapsibleTrigger>

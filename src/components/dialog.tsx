@@ -3,8 +3,7 @@
 import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Dialog as Primitive } from "@base-ui/react/dialog";
 import { cn } from "cn";
-import { Popup } from "./popup";
-import { sections } from "./section";
+import styles from "./dialog.module.css";
 
 /** A modal. An `alert` asks before what can't be undone: a click outside doesn't close it. */
 export function Dialog(
@@ -26,21 +25,13 @@ export const DialogTrigger = Primitive.Trigger;
 export const DialogClose = Primitive.Close;
 
 /** Padded as its content needs; its `Section`s stack without a line, and the last of several sits apart. */
-export function DialogContent(props: Primitive.Popup.Props) {
+export function DialogContent({ className, ...props }: Primitive.Popup.Props) {
   return (
     <Primitive.Portal>
-      <Primitive.Backdrop className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0" />
+      <Primitive.Backdrop className={styles.backdrop} />
       <Primitive.Popup
-        render={(popup) => (
-          <Popup
-            {...popup}
-            className={cn(
-              sections({ lines: false }),
-              "fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-sm -translate-1/2 duration-150 *:data-[slot=section]:not-first:last:pt-4 data-ending-style:scale-95",
-              popup.className,
-            )}
-          />
-        )}
+        data-slot="dialog-content"
+        className={cn(styles.content, className)}
         {...props}
       />
     </Primitive.Portal>
@@ -49,7 +40,11 @@ export function DialogContent(props: Primitive.Popup.Props) {
 
 export function DialogTitle({ className, ...props }: Primitive.Title.Props) {
   return (
-    <Primitive.Title className={cn("font-medium", className)} {...props} />
+    <Primitive.Title
+      data-slot="dialog-title"
+      className={cn(styles.title, className)}
+      {...props}
+    />
   );
 }
 
@@ -58,6 +53,10 @@ export function DialogDescription({
   ...props
 }: Primitive.Description.Props) {
   return (
-    <Primitive.Description className={cn("text-muted", className)} {...props} />
+    <Primitive.Description
+      data-slot="dialog-description"
+      className={cn(styles.description, className)}
+      {...props}
+    />
   );
 }

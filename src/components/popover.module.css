@@ -1,0 +1,13 @@
+.content {
+  composes: popup from "./popup.module.css";
+}
+
+.content {
+  composes: sections from global;
+}
+
+@layer components {
+  .positioner {
+    z-index: 50;
+  }
+}

@@ -1,0 +1,32 @@
+/* A card, popover, collapsible panel, dialog, or notice pads its content as one section until it
+   holds sections, marked `data-slot="section"`, which take over its padding. */
+
+@layer base {
+  .sections,
+  .sections-stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 14px;
+
+    &:has(> [data-slot="section"]) {
+      gap: 0;
+      padding: 0;
+    }
+  }
+}
+
+/* Rules that reach into children sit with the components, over the children's own. */
+@layer components {
+  /* In a card or popover, a line runs between all its parts once it holds sections, such as a
+     list that scrolls; the first reads as a header and the last as a footer. In a dialog or
+     notice, `sections-stacked` stacks them without one. */
+  .sections:has(> [data-slot="section"]) > :not(:last-child) {
+    box-shadow: inset 0 -1px 0 var(--color-line);
+  }
+
+  /* In a dialog or notice, they share the padding between them. */
+  .sections-stacked > [data-slot="section"]:not(:last-child) {
+    padding-bottom: 0;
+  }
+}

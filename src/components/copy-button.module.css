@@ -1,0 +1,41 @@
+@layer components {
+  .icons {
+    display: grid;
+
+    & > * {
+      grid-area: 1 / 1;
+    }
+  }
+
+  .icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+
+  .copy {
+    transition-property: scale, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: var(--ease-in-out);
+    transition-delay: 150ms;
+  }
+
+  /* One dash the length of the stroke; its gap of 2 hides the round cap. */
+  .check {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 150ms var(--ease-in);
+  }
+
+  .button[data-copied] {
+    & .copy {
+      scale: 0.5;
+      opacity: 0;
+      transition-delay: 0s;
+    }
+    & .check {
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 300ms var(--ease-out) 100ms;
+    }
+  }
+}

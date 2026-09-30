@@ -1,0 +1,125 @@
+.track {
+  composes: surface-sunken from global;
+}
+
+.thumb {
+  composes: surface-primary from global;
+}
+
+@layer components {
+  /* Upright, the bar stands alone and the layouts' grids don't apply. */
+  .slider {
+    &[data-orientation="horizontal"] {
+      display: grid;
+      align-items: center;
+    }
+    &[data-orientation="vertical"] {
+      display: flex;
+      justify-content: center;
+      width: 32px;
+      height: 176px;
+    }
+
+    &[data-variant="panel"] {
+      grid-template-columns: 1fr auto;
+      gap: 2px 12px;
+    }
+    &[data-variant="toolbar"] {
+      grid-template-columns: auto 64px auto;
+      column-gap: 8px;
+    }
+    &[data-variant="compact"] {
+      grid-template-columns: 1fr auto;
+      column-gap: 8px;
+    }
+
+    /* Last in what holds it, a bar has none of the room text leaves under its letters. */
+    &[data-orientation="horizontal"][data-variant="panel"]:last-child {
+      margin-bottom: 4px;
+    }
+  }
+
+  .label {
+    position: relative;
+    z-index: 10;
+    color: var(--color-muted);
+  }
+
+  /* Above the bar's hit area, which reaches into its row. In a panel, the digits end where the
+     bar does. */
+  .digits {
+    z-index: 10;
+
+    .slider:is([data-variant="panel"], [data-variant="compact"]) & {
+      margin-right: -4px;
+    }
+    .slider[data-variant="toolbar"] & {
+      grid-column-start: 3;
+    }
+  }
+
+  /* As thick as the thumb, padded 10px past it on either side, or 16px for a finger, with the
+     room given back by margins. */
+  .bar {
+    box-sizing: content-box;
+    display: flex;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+
+    &[data-orientation="horizontal"] {
+      align-items: center;
+      height: var(--spacing-thumb);
+      margin-block: -10px;
+      padding-block: 10px;
+
+      @media (pointer: coarse) {
+        margin-block: -16px;
+        padding-block: 16px;
+      }
+    }
+    &[data-orientation="vertical"] {
+      justify-content: center;
+      width: var(--spacing-thumb);
+      margin-inline: -10px;
+      padding-inline: 10px;
+
+      @media (pointer: coarse) {
+        margin-inline: -16px;
+        padding-inline: 16px;
+      }
+    }
+
+    .slider[data-variant="panel"] & {
+      grid-column: span 2 / span 2;
+    }
+    .slider[data-variant="toolbar"] & {
+      grid-column-start: 2;
+      grid-row-start: 1;
+    }
+  }
+
+  .track {
+    border-radius: 999px;
+
+    &[data-orientation="horizontal"] {
+      width: 100%;
+      height: 4px;
+    }
+    &[data-orientation="vertical"] {
+      width: 4px;
+      height: 100%;
+    }
+  }
+
+  /* A ring in place of its edge while the keyboard is on it. */
+  .thumb {
+    width: var(--spacing-thumb);
+    height: var(--spacing-thumb);
+    border-radius: 999px;
+
+    &:has(:focus-visible) {
+      box-shadow: 0 0 0 2px var(--color-focus);
+    }
+  }
+}

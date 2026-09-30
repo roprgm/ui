@@ -52,19 +52,21 @@ export function Overview() {
           </div>
           <p className="text-muted">
             The design library behind my apps: minimal, dark React components on
-            Tailwind CSS v4 and Base UI. Use it as a package, or copy its source
-            into your app.
+            Base UI, styled with CSS modules, with or without Tailwind CSS v4.
+            Use it as a package, or copy its source into your app.
           </p>
         </div>
         <CopyForAgents />
       </header>
       <Way title="Install the package">
         <p className="text-muted">
-          Add it, then import its theme after Tailwind in your CSS.
+          Add it, then import its theme in your CSS. With Tailwind, import the
+          theme after it, and its utilities for the theme's tokens.
         </p>
         <Code>bun add @roprgm/ui</Code>
         <Code lang="css">{`@import "tailwindcss";
-@import "@roprgm/ui/themes/default.css";`}</Code>
+@import "@roprgm/ui/themes/default.css";
+@import "@roprgm/ui/tailwind.css";`}</Code>
         <p className="text-muted">Each component imports from its own path.</p>
         <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";
 

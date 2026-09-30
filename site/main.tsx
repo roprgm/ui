@@ -200,7 +200,7 @@ const groups: Group[] = [
         name: "card",
         title: "Card",
         description:
-          "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-card, without its edge, and sections() on your own element, as the Photo editor block does.",
+          "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-panel and sections on your own element, as the Photo editor block does.",
         demo: <CardDemo />,
       },
       {
@@ -323,7 +323,7 @@ const groups: Group[] = [
         name: "shimmer",
         title: "Shimmer",
         description:
-          "A theme utility: a bright band sweeps across text, icons, or placeholder blocks while work is pending.",
+          "A part of the theme: a bright band sweeps across text, icons, or placeholder blocks while work is pending.",
         demo: <ShimmerDemo />,
         half: true,
         code: '<span className="shimmer">Decoding RAW…</span>',
@@ -332,7 +332,7 @@ const groups: Group[] = [
         name: "scroll-text",
         title: "Scroll text",
         description:
-          "One line of text that fades and scrolls where it doesn't fit, instead of an ellipsis. It's the overflow-fade-x utility, which works on any row that may not fit, such as tabs or chips.",
+          "One line of text that fades and scrolls where it doesn't fit, instead of an ellipsis. It's the overflow-fade-x part, which works on any row that may not fit, such as tabs or chips.",
         demo: <ScrollTextDemo />,
       },
     ],

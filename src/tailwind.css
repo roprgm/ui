@@ -1,0 +1,65 @@
+/* Tailwind utilities for the theme's tokens, such as `bg-raised`, `text-muted`, and
+   `rounded-md`. Import it after Tailwind and a theme. `reference` reads the theme's variables
+   rather than declaring them again. */
+
+@theme reference {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --color-level-0: var(--color-level-0);
+  --color-level-1: var(--color-level-1);
+  --color-level-2: var(--color-level-2);
+  --color-level-3: var(--color-level-3);
+  --color-level-4: var(--color-level-4);
+  --color-level-5: var(--color-level-5);
+  --color-level-6: var(--color-level-6);
+  --color-level-7: var(--color-level-7);
+  --color-level-8: var(--color-level-8);
+  --color-level-9: var(--color-level-9);
+  --color-level-10: var(--color-level-10);
+  --color-level-11: var(--color-level-11);
+  --color-level-12: var(--color-level-12);
+
+  --color-surface: var(--color-surface);
+  --color-field: var(--color-field);
+  --color-raised: var(--color-raised);
+  --color-raised-hover: var(--color-raised-hover);
+  --color-hover: var(--color-hover);
+
+  --color-foreground: var(--color-foreground);
+  --color-muted: var(--color-muted);
+  --color-faint: var(--color-faint);
+  --color-disabled: var(--color-disabled);
+
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-on-primary: var(--color-on-primary);
+
+  --color-pressed: var(--color-pressed);
+  --color-focus: var(--color-focus);
+  --color-backdrop: var(--color-backdrop);
+  --color-line: var(--color-line);
+  --color-separator: var(--color-separator);
+
+  --color-danger: var(--color-danger);
+
+  --color-code-keyword: var(--color-code-keyword);
+  --color-code-string: var(--color-code-string);
+  --color-code-type: var(--color-code-type);
+  --color-code-property: var(--color-code-property);
+
+  --text-shadow-default: var(--text-shadow-default);
+  --text-shadow-subtle: var(--text-shadow-subtle);
+
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --spacing-thumb: var(--spacing-thumb);
+
+  --ease-in: var(--ease-in);
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+}

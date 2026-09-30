@@ -1,0 +1,7 @@
+@layer components {
+  .kbd {
+    font: inherit;
+    font-family: var(--font-sans);
+    color: var(--color-muted);
+  }
+}

@@ -3,11 +3,11 @@
 import { Collapsible as Primitive } from "@base-ui/react/collapsible";
 import { cn } from "cn";
 import type { ComponentProps, TransitionEvent } from "react";
-import { sections } from "./section";
+import styles from "./collapsible.module.css";
 
 /**
- * A trigger that shows and hides a panel. A chevron inside turns with
- * `group-data-open/collapsible:rotate-90`. It counts as a section of the card that holds it.
+ * A trigger that shows and hides a panel. A right-pointing Chevron inside turns down while it
+ * shows. It counts as a section of the card that holds it.
  */
 export function Collapsible({
   className,
@@ -18,7 +18,7 @@ export function Collapsible({
   return (
     <Primitive.Root
       data-slot="section"
-      className={cn("group/collapsible rounded-[inherit]", className)}
+      className={cn(styles.collapsible, className)}
       {...props}
     />
   );
@@ -33,11 +33,8 @@ export function CollapsibleTrigger({
 }) {
   return (
     <Primitive.Trigger
-      className={cn(
-        // Square at the bottom while the panel shows under it.
-        "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring -outline-offset-2 hover:bg-hover data-panel-open:rounded-b-none dim-disabled",
-        className,
-      )}
+      data-slot="collapsible-trigger"
+      className={cn(styles.trigger, className)}
       {...props}
     />
   );
@@ -70,18 +67,11 @@ export function CollapsiblePanel({
         revealSection(event);
         onTransitionEnd?.(event);
       }}
-      className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none"
+      data-slot="collapsible-panel"
+      className={styles.panel}
       {...props}
     >
-      <div
-        className={cn(
-          sections(),
-          "shadow-[inset_0_1px_0_var(--color-line)]",
-          className,
-        )}
-      >
-        {children}
-      </div>
+      <div className={cn(styles.content, className)}>{children}</div>
     </Primitive.Panel>
   );
 }

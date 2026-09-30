@@ -1,0 +1,43 @@
+.switch {
+  composes: surface-sunken focus-ring dim-disabled from global;
+}
+
+@layer components {
+  /* Sized by its content, so a theme's border grows the track rather than squeezing the knob. */
+  .switch {
+    box-sizing: content-box;
+    flex-shrink: 0;
+    width: 32px;
+    height: 16px;
+    padding: 2px;
+    appearance: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition-property: background-color, box-shadow, outline-color, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: var(--ease-in-out);
+
+    /* The thumb. */
+    &::before {
+      content: "";
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background-color: var(--color-raised);
+      box-shadow: var(--edge-raised);
+      transition-property: translate, background-color;
+      transition-duration: 150ms;
+      transition-timing-function: var(--ease-in-out);
+    }
+
+    &:checked {
+      background-color: var(--color-primary);
+      box-shadow: var(--edge-primary);
+    }
+    &:checked::before {
+      translate: 16px;
+      background-color: var(--color-on-primary);
+    }
+  }
+}

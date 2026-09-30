@@ -1,0 +1,47 @@
+.fade {
+  composes: overflow-fade-y from global;
+}
+
+@layer components {
+  .area {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .viewport {
+    height: 100%;
+    overscroll-behavior: contain;
+    outline: none;
+  }
+
+  .content {
+    min-width: 0;
+  }
+
+  .scrollbar {
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    width: 6px;
+    margin: 4px 1px 4px 0;
+    opacity: 0;
+    transition: opacity 150ms var(--ease-in-out);
+
+    &:is([data-hovering], [data-scrolling]) {
+      opacity: 1;
+    }
+  }
+
+  .thumb {
+    width: 4px;
+    border-radius: 999px;
+    background-color: var(--color-disabled);
+
+    @media (hover: hover) {
+      .scrollbar:hover & {
+        background-color: var(--color-muted);
+      }
+    }
+  }
+}

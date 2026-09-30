@@ -1,0 +1,35 @@
+.segmented {
+  composes: segmented surface-sunken from global;
+}
+
+.panel {
+  composes: focus-ring from global;
+}
+
+@layer components {
+  .list {
+    display: flex;
+
+    &[data-orientation="vertical"] {
+      flex-direction: column;
+    }
+    &[data-variant="default"] {
+      gap: 4px;
+    }
+  }
+
+  /* As a ToggleGroup: tabs a size smaller. Icon tabs take `icon-sm`. */
+  .segmented > * {
+    height: 24px;
+  }
+
+  .tab[data-active] {
+    background-color: var(--color-raised);
+    box-shadow: var(--edge-raised);
+    color: var(--color-foreground);
+  }
+
+  .panel {
+    border-radius: var(--radius-sm);
+  }
+}

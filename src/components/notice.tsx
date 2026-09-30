@@ -1,18 +1,12 @@
-import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 import { IconButton } from "./icon-button";
-import { Popup } from "./popup";
-import { sections } from "./section";
-
-const notice = cva("max-w-sm", {
-  variants: { tone: { status: "", alert: "text-danger" } },
-});
+import styles from "./notice.module.css";
 
 /**
  * A message that floats without blocking the app, padded as its content needs; its `Section`s
- * stack without a line. An
- * `alert` is red and interrupts assistive technology; a `status` waits its turn.
+ * stack without a line. An `alert` is red and interrupts assistive technology; a `status` waits
+ * its turn.
  */
 export function Notice({
   tone = "status",
@@ -20,9 +14,11 @@ export function Notice({
   ...props
 }: ComponentProps<"div"> & { tone?: "status" | "alert" }) {
   return (
-    <Popup
+    <div
       role={tone}
-      className={cn(sections({ lines: false }), notice({ tone }), className)}
+      data-slot="notice"
+      data-tone={tone}
+      className={cn(styles.notice, className)}
       {...props}
     />
   );
@@ -40,7 +36,7 @@ export function NoticeClose(
         stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
-        className="size-4"
+        className={styles.icon}
         aria-hidden
       >
         <path d="M18 6 6 18M6 6l12 12" />

@@ -1,0 +1,22 @@
+@layer components {
+  /* Flat, as a Chip is, and at least as wide as it is tall, so a one-digit count is round. */
+  .badge {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 22px;
+    min-width: 22px;
+    padding-inline: 7px;
+    border-radius: 999px;
+    white-space: nowrap;
+    background-color: var(--color-pressed);
+    color: var(--color-foreground);
+
+    &[data-variant="primary"] {
+      background-color: var(--color-primary);
+      color: var(--color-on-primary);
+    }
+  }
+}

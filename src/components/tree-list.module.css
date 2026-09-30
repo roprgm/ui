@@ -1,0 +1,117 @@
+.ghost {
+  composes: surface-float overflow-fade-x from global;
+}
+
+.toggle {
+  composes: focus-ring from global;
+}
+
+@layer components {
+  .tree[data-dragging] {
+    cursor: grabbing;
+  }
+
+  /* Indented by depth; a line before or after it, or a ring around it, shows where a drop lands. */
+  .row {
+    gap: 6px;
+    padding-left: var(--indent);
+    outline: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+
+    &:focus-visible {
+      box-shadow:
+        inset 0 0 0 1px var(--color-focus),
+        inset 0 -1px 0 var(--color-line);
+    }
+    &:focus-visible:not([data-selected]) {
+      background-color: var(--color-hover);
+    }
+
+    &[data-dragging] {
+      opacity: 0.4;
+    }
+
+    &[data-drop="inside"] {
+      box-shadow:
+        inset 0 0 0 1px
+        color-mix(in oklab, var(--color-primary) 60%, transparent),
+        inset 0 -1px 0 var(--color-line);
+    }
+    &[data-drop="inside"]:not([data-selected]) {
+      background-color: var(--color-hover);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      right: 8px;
+      left: var(--indent);
+      z-index: 10;
+      height: 2px;
+      border-radius: 999px;
+      background-color: var(--color-primary);
+      opacity: 0;
+    }
+    &[data-drop="before"]::before {
+      top: -1px;
+      opacity: 1;
+    }
+    &[data-drop="after"]::before {
+      bottom: -1px;
+      opacity: 1;
+    }
+  }
+
+  /* Reaches 8px into the row's padding, where a leaf keeps an empty one. */
+  .toggle,
+  .spacer {
+    flex-shrink: 0;
+    width: 20px;
+    margin: 0 -2px 0 -8px;
+  }
+
+  .toggle {
+    display: grid;
+    place-items: center;
+    height: 20px;
+    border-radius: var(--radius-xs);
+    color: var(--color-muted);
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-foreground);
+      }
+    }
+  }
+
+  /* 0fr to 1fr animates the group's height. */
+  .group {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 200ms var(--ease-in-out);
+
+    &[data-expanded] {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  .children {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .ghost {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    max-width: 256px;
+    margin: 12px 0 0 12px;
+    padding: 4px 10px;
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+    color: var(--color-foreground);
+    pointer-events: none;
+  }
+}

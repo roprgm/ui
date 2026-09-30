@@ -1,0 +1,50 @@
+.content {
+  composes: popup from "./popup.module.css";
+}
+
+.content {
+  composes: sections-stacked from global;
+}
+
+@layer components {
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: var(--color-backdrop);
+    transition: opacity 150ms var(--ease-in-out);
+
+    &:is([data-starting-style], [data-ending-style]) {
+      opacity: 0;
+    }
+  }
+
+  .content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 50;
+    width: calc(100% - 32px);
+    max-width: 384px;
+    max-height: calc(100dvh - 32px);
+    translate: -50% -50%;
+    transition-duration: 150ms;
+
+    /* The last of several sections sits 16px below the rest. */
+    & > [data-slot="section"]:not(:first-child):last-child {
+      padding-top: 16px;
+    }
+
+    &[data-ending-style] {
+      scale: 0.95;
+    }
+  }
+
+  .title {
+    font-weight: 500;
+  }
+
+  .description {
+    color: var(--color-muted);
+  }
+}

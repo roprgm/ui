@@ -1,0 +1,43 @@
+.block {
+  composes: surface-sunken from global;
+}
+
+.scroll {
+  composes: overflow-fade-x from global;
+}
+
+@layer components {
+  /* 6px around a 16px line centers it on the 28px copy button. */
+  .block {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 6px 6px 12px;
+    border-radius: var(--radius-xl);
+
+    /* Sugar High's markup reads these; other highlighters color their own. */
+    --sh-class: var(--color-code-type);
+    --sh-comment: var(--color-muted);
+    --sh-entity: var(--color-code-type);
+    --sh-identifier: var(--color-foreground);
+    --sh-jsxliterals: var(--color-foreground);
+    --sh-keyword: var(--color-code-keyword);
+    --sh-property: var(--color-code-property);
+    --sh-sign: var(--color-muted);
+    --sh-string: var(--color-code-string);
+  }
+
+  .code {
+    flex: 1;
+    margin: 0;
+    padding-block: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--color-foreground);
+  }
+
+  .wrap {
+    white-space: pre-wrap;
+  }
+}

@@ -1,0 +1,47 @@
+.input {
+  composes: surface-sunken focus-ring dim-disabled from global;
+}
+
+@layer components {
+  .checkbox {
+    display: inline-grid;
+    flex-shrink: 0;
+
+    & > * {
+      grid-area: 1 / 1;
+    }
+  }
+
+  .input {
+    width: 16px;
+    height: 16px;
+    appearance: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition-property: background-color, outline-color, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: var(--ease-in-out);
+
+    &:checked {
+      background-color: var(--color-primary);
+    }
+  }
+
+  /* One dash the length of the stroke; its gap of 2 hides the round cap while erased. */
+  .mark {
+    display: block;
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    color: var(--color-on-primary);
+    pointer-events: none;
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 100ms var(--ease-in);
+  }
+
+  .input:checked + .mark {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 200ms var(--ease-out) 50ms;
+  }
+}

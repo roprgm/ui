@@ -1,0 +1,23 @@
+.notice {
+  composes: popup from "./popup.module.css";
+}
+
+.notice {
+  composes: sections-stacked from global;
+}
+
+@layer components {
+  .notice {
+    max-width: 384px;
+
+    &[data-tone="alert"] {
+      color: var(--color-danger);
+    }
+  }
+
+  .icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+}

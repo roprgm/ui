@@ -1,0 +1,36 @@
+.radio {
+  composes: surface-sunken focus-ring dim-disabled from global;
+}
+
+@layer components {
+  .radio {
+    display: grid;
+    flex-shrink: 0;
+    place-content: center;
+    width: 16px;
+    height: 16px;
+    appearance: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition-property: background-color, outline-color, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: var(--ease-in-out);
+
+    &::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background-color: var(--color-on-primary);
+      scale: 0;
+      transition: scale 150ms var(--ease-in-out);
+    }
+
+    &:checked {
+      background-color: var(--color-primary);
+    }
+    &:checked::before {
+      scale: 1;
+    }
+  }
+}

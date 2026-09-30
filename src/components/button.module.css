@@ -1,0 +1,117 @@
+.button {
+  composes: focus-ring dim-disabled from global;
+}
+
+@layer components.inner {
+  .button {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+    cursor: pointer;
+    /* The 1px press moves faster than the colors ease. */
+    transition:
+      all 200ms var(--ease-in-out),
+      translate 100ms var(--ease-in-out);
+
+    &:active:not([aria-haspopup]) {
+      translate: 0 1px;
+    }
+  }
+
+  .button[data-variant="default"] {
+    background-color: var(--color-raised);
+    box-shadow: var(--edge-raised);
+    color: var(--color-foreground);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-raised-hover);
+      }
+    }
+    &[data-popup-open] {
+      background-color: var(--color-raised-hover);
+    }
+  }
+
+  .button[data-variant="primary"] {
+    background-color: var(--color-primary);
+    box-shadow: var(--edge-primary);
+    color: var(--color-on-primary);
+    text-shadow: var(--text-shadow-subtle);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-primary-hover);
+      }
+    }
+  }
+
+  .button[data-variant="ghost"] {
+    color: var(--color-muted);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-hover);
+        color: var(--color-foreground);
+      }
+    }
+    &:active {
+      background-color: var(--color-pressed);
+    }
+    &[data-popup-open] {
+      background-color: var(--color-hover);
+      color: var(--color-foreground);
+    }
+  }
+
+  /* Labels are at least as wide as tall, and icons square. A leading icon sits 4px closer to the
+     edge, since its box has air around the stroke. */
+  .button[data-size="default"] {
+    height: 28px;
+    min-width: 28px;
+    padding-inline: 12px;
+
+    &:has(> svg:first-child) {
+      padding-left: 8px;
+    }
+  }
+
+  .button[data-size="sm"] {
+    height: 24px;
+    min-width: 24px;
+    padding-inline: 10px;
+
+    &:has(> svg:first-child) {
+      padding-left: 6px;
+    }
+  }
+
+  .button[data-size="lg"] {
+    height: 32px;
+    min-width: 32px;
+    padding-inline: 14px;
+
+    &:has(> svg:first-child) {
+      padding-left: 10px;
+    }
+  }
+
+  .button[data-size="icon"] {
+    width: 28px;
+    height: 28px;
+  }
+
+  .button[data-size="icon-sm"] {
+    width: 24px;
+    height: 24px;
+  }
+
+  .button[data-size="icon-lg"] {
+    width: 32px;
+    height: 32px;
+  }
+}

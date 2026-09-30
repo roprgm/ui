@@ -1,0 +1,63 @@
+.content {
+  composes: list from "./popup.module.css";
+}
+
+.item,
+.empty {
+  composes: item from "./popup.module.css";
+}
+
+@layer components {
+  .group {
+    position: relative;
+  }
+
+  /* Room for the chevron. */
+  .input {
+    padding-right: 28px;
+  }
+
+  /* Its chevron lands where a Select's does, 10px from the edge. */
+  .trigger {
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+
+  .positioner {
+    z-index: 50;
+  }
+
+  .content {
+    min-width: var(--anchor-width);
+  }
+
+  .empty {
+    color: var(--color-muted);
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .item {
+    justify-content: space-between;
+    gap: 16px;
+
+    &[data-selected] {
+      background-color: var(--color-raised);
+    }
+  }
+}

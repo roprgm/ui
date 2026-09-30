@@ -1,0 +1,33 @@
+@layer components.inner {
+  .item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding-inline: 14px;
+    box-shadow: inset 0 -1px 0 var(--color-line);
+    color: var(--color-foreground);
+
+    &[data-muted] {
+      color: var(--color-muted);
+    }
+    &[data-selected] {
+      background-color: var(--color-raised);
+    }
+    @media (hover: hover) {
+      &:not([data-selected]):hover {
+        background-color: var(--color-hover);
+      }
+    }
+  }
+
+  /* Reaches into the row's padding, so each icon sits 12px from its end. */
+  .action {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 4px;
+    margin-right: -8px;
+  }
+}

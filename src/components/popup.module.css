@@ -1,0 +1,50 @@
+/* The floating box of menus, selects, popovers, dialogs, and notices, for them to compose. `list`
+   pads a column of `item` rows; other content goes in sections. */
+
+.popup {
+  composes: surface-float popup-motion from global;
+}
+
+.list {
+  composes: popup;
+}
+
+@layer components.inner {
+  .popup {
+    min-width: 160px;
+    max-height: var(--available-height);
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: var(--radius-xl);
+    color: var(--color-foreground);
+    outline: none;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px;
+    border-radius: var(--radius-lg);
+  }
+
+  /* A row in a popup's list, as in a menu or select. */
+  .item {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    height: 26px;
+    padding-inline: 10px;
+    border-radius: var(--radius-sm);
+    outline: none;
+    cursor: default;
+    user-select: none;
+
+    &[data-highlighted] {
+      background-color: var(--color-raised);
+    }
+    &[data-disabled] {
+      color: var(--color-disabled);
+    }
+  }
+}

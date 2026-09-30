@@ -1,0 +1,99 @@
+@layer components {
+  /* The input is the control; dragging is a pointer shortcut over it. */
+  .scrub {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 4px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    cursor: ew-resize;
+    touch-action: pan-y;
+    transition: background-color 150ms var(--ease-in-out);
+
+    &:focus-within {
+      background-color: var(--color-field);
+      cursor: text;
+    }
+  }
+
+  /* The digits and the input share one cell; the input shows while it has focus. */
+  .value {
+    display: grid;
+    text-align: right;
+
+    & > * {
+      grid-area: 1 / 1;
+    }
+  }
+
+  .display {
+    color: var(--color-foreground);
+
+    .scrub:focus-within & {
+      visibility: hidden;
+    }
+  }
+
+  .number {
+    display: inline-block;
+  }
+
+  .unit {
+    color: var(--color-muted);
+  }
+
+  /* A unit flush against the digits, such as %, gets a hair of space. */
+  .flush {
+    margin-left: 2px;
+  }
+
+  .input {
+    width: 48px;
+    min-width: 100%;
+    background-color: transparent;
+    color: transparent;
+    text-align: right;
+    text-shadow: none;
+    outline: none;
+    field-sizing: content;
+    cursor: inherit;
+
+    &::selection {
+      background-color: var(--color-pressed);
+    }
+    &:focus {
+      color: var(--color-foreground);
+      text-shadow: inherit;
+    }
+    @supports (field-sizing: content) {
+      width: auto;
+    }
+  }
+
+  /* Chevrons on hover, hinting that it drags. */
+  .hint {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    color: var(--color-muted);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms var(--ease-in-out);
+
+    .scrub:hover:not(:focus-within) & {
+      opacity: 1;
+    }
+  }
+
+  .before {
+    right: 100%;
+    margin-right: -3px;
+  }
+
+  .after {
+    left: 100%;
+    margin-left: -3px;
+  }
+}

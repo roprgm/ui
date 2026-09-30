@@ -1,0 +1,45 @@
+.content {
+  composes: list from "./popup.module.css";
+}
+
+.item,
+.submenuTrigger {
+  composes: item from "./popup.module.css";
+}
+
+.separator {
+  composes: separator from global;
+}
+
+@layer components {
+  .positioner {
+    z-index: 50;
+  }
+
+  .item {
+    gap: 8px;
+  }
+
+  .shortcut {
+    margin-left: auto;
+    padding-left: 16px;
+  }
+
+  .separator {
+    height: 1px;
+    margin: 2px 6px;
+  }
+
+  .submenuTrigger {
+    justify-content: space-between;
+    gap: 16px;
+
+    &[data-popup-open] {
+      background-color: var(--color-raised);
+    }
+  }
+
+  .submenuChevron {
+    color: var(--color-muted);
+  }
+}

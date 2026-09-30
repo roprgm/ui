@@ -1,0 +1,65 @@
+.trigger {
+  composes: focus-ring dim-disabled from global;
+}
+
+.content {
+  composes: sections from global;
+}
+
+@layer components {
+  .collapsible {
+    border-radius: inherit;
+  }
+
+  .trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: inherit;
+    outline-offset: -2px;
+    text-align: left;
+    cursor: pointer;
+    transition-property: background-color, outline-color, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: var(--ease-in-out);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-hover);
+      }
+    }
+    /* Square at the bottom while the panel shows under it. */
+    &[data-panel-open] {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    /* A right-pointing chevron turns down while the panel shows. */
+    &[data-panel-open] [data-slot="chevron"][data-direction="right"] {
+      rotate: 90deg;
+    }
+  }
+
+  .panel {
+    height: var(--collapsible-panel-height);
+    overflow: hidden;
+    transition-property: height, opacity;
+    transition-duration: 200ms;
+    transition-timing-function: var(--ease-out);
+
+    &:is([data-starting-style], [data-ending-style]) {
+      height: 0;
+      opacity: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      transition-property: none;
+    }
+  }
+
+  /* Under a line that folds away with it. */
+  .content {
+    box-shadow: inset 0 1px 0 var(--color-line);
+  }
+}

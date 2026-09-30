@@ -22,7 +22,7 @@ export type Doc = {
   bare?: boolean;
   /** Shares a row with the next doc that has it, on wide screens. */
   half?: boolean;
-  /** Shown instead of the install command, for the theme's utilities. */
+  /** Shown instead of the install command, for the theme's parts. */
   code?: string;
 };
 

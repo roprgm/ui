@@ -1,0 +1,20 @@
+@layer components {
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .label {
+    color: var(--color-muted);
+  }
+
+  .note {
+    margin: 0;
+    color: var(--color-muted);
+
+    &[data-error] {
+      color: var(--color-danger);
+    }
+  }
+}

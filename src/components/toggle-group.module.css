@@ -1,0 +1,60 @@
+.group {
+  composes: segmented surface-sunken from global;
+}
+
+.toggle {
+  composes: focus-ring dim-disabled from global;
+}
+
+@layer components {
+  .group {
+    display: inline-flex;
+    margin-inline: 0;
+    border: 0;
+
+    /* Toggles a size smaller than the Button beside the group. */
+    &[data-size="default"] > * {
+      height: 24px;
+    }
+    &[data-size="lg"] > * {
+      height: 28px;
+    }
+  }
+
+  /* Relative, so the hidden radio stays inside rather than widening the page. */
+  .toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding-inline: 12px;
+    color: var(--color-muted);
+    cursor: pointer;
+    transition-property:
+      background-color, box-shadow, color, outline-color, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: var(--ease-in-out);
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-foreground);
+      }
+    }
+    &:has(:checked) {
+      background-color: var(--color-raised);
+      box-shadow: var(--edge-raised);
+      color: var(--color-foreground);
+    }
+  }
+
+  .input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}

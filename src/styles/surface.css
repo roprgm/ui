@@ -1,0 +1,92 @@
+/* Surfaces: a fill from the tokens, and an edge the theme draws. */
+
+@layer base {
+  /* Containers set the fills of what sits on them, as the page does. A card stands two levels over
+     what it sits on, a card too, three deep at most; a panel is a card docked in a layout, such as
+     a sidebar, with no edge; and what floats is a card drawn floating: popups, dialogs, notices,
+     anything dragged. Raised, a popup stands as a card on a card, for one that opens over one. */
+  .surface-card,
+  .surface-panel,
+  .surface-float {
+    --color-surface: var(--color-level-4);
+    --color-field: var(--color-level-2);
+    --color-raised: var(--color-level-7);
+    --color-raised-hover: var(--color-level-8);
+    --color-hover: var(--color-level-5);
+    background-color: var(--color-surface);
+  }
+
+  :where(.surface-card, .surface-panel, .surface-float)
+    :is(.surface-card, .surface-panel, .surface-float),
+  .surface-float[data-raised] {
+    --color-surface: var(--color-level-6);
+    --color-field: var(--color-level-4);
+    --color-raised: var(--color-level-9);
+    --color-raised-hover: var(--color-level-10);
+    --color-hover: var(--color-level-7);
+  }
+
+  :where(.surface-card, .surface-panel, .surface-float)
+    :where(.surface-card, .surface-panel, .surface-float)
+    :is(.surface-card, .surface-panel, .surface-float) {
+    --color-surface: var(--color-level-8);
+    --color-field: var(--color-level-6);
+    --color-raised: var(--color-level-11);
+    --color-raised-hover: var(--color-level-12);
+    --color-hover: var(--color-level-9);
+  }
+
+  .surface-card {
+    box-shadow: var(--edge-card);
+  }
+
+  .surface-float {
+    box-shadow: var(--edge-float);
+  }
+
+  /* A control that stands up from what it sits on: buttons, selects, selected tabs and toggles. */
+  .surface-raised {
+    background-color: var(--color-raised);
+    box-shadow: var(--edge-raised);
+  }
+
+  /* Sets a control into what it sits on: fields, tracks, checkboxes, switches, segmented groups. */
+  .surface-sunken {
+    background-color: var(--color-field);
+    box-shadow: var(--edge-sunken);
+  }
+
+  /* What is on: a primary button, a checked switch, a slider's thumb. */
+  .surface-primary {
+    background-color: var(--color-primary);
+    box-shadow: var(--edge-primary);
+  }
+
+  /* A strip of controls a size smaller than a Button, 3px in and rounded to match, as a
+     ToggleGroup or a segmented TabList; pair it with `surface-sunken`. It stands 2px taller than a
+     Button but reaches a pixel past each edge, so in a row it takes a Button's height. */
+  .segmented {
+    margin-block: -1px;
+    gap: 2px;
+    padding: 3px;
+    border-radius: var(--radius-lg);
+  }
+
+  /* A line between groups, dark over whatever it sits on, with the theme's light beside it so it
+     reads engraved: under it, or after it upright. Size it with a height or width of 1px. */
+  .separator {
+    background-color: var(--color-separator);
+    box-shadow: 0 1px 0 var(--color-separator-light);
+
+    &[aria-orientation="vertical"] {
+      box-shadow: 1px 0 0 var(--color-separator-light);
+    }
+  }
+}
+
+/* Rules that reach into children sit with the components, over the children's own. */
+@layer components {
+  .segmented > * {
+    border-radius: calc(var(--radius-lg) - 3px);
+  }
+}

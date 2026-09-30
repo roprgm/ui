@@ -1,0 +1,19 @@
+@layer components.inner {
+  /* The padding a card gives its content as one section. */
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 14px;
+  }
+
+  /* Reaches into the header's padding, so each icon sits 12px from its end and top. */
+  .action {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 4px;
+    margin-block: -4px;
+    margin-right: -8px;
+  }
+}

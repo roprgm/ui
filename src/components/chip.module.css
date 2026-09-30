@@ -1,0 +1,32 @@
+.chip {
+  composes: focus-ring dim-disabled from global;
+}
+
+@layer components {
+  .chip {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding-inline: 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+    color: var(--color-muted);
+    cursor: pointer;
+    transition-property: background-color, color, outline-color, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: var(--ease-in-out);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-hover);
+        color: var(--color-foreground);
+      }
+    }
+    &:is([aria-pressed="true"], [data-popup-open]) {
+      background-color: var(--color-pressed);
+      color: var(--color-foreground);
+    }
+  }
+}

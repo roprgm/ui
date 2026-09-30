@@ -1,0 +1,48 @@
+.content {
+  composes: popup-motion from global;
+}
+
+@layer components {
+  .positioner {
+    z-index: 50;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 256px;
+    padding: 4px 8px;
+    border-radius: var(--radius-md);
+    background-color: var(--color-level-1);
+    color: var(--color-foreground);
+
+    &[data-instant] {
+      transition-property: none;
+    }
+  }
+
+  /* A square keeps Base UI's centering right; the clip draws its outer half. */
+  .arrow {
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-level-1);
+
+    &[data-side="top"] {
+      top: 100%;
+      clip-path: polygon(0 0, 50% 50%, 100% 0);
+    }
+    &[data-side="bottom"] {
+      bottom: 100%;
+      clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+    }
+    &[data-side="left"] {
+      left: 100%;
+      clip-path: polygon(0 0, 50% 50%, 0 100%);
+    }
+    &[data-side="right"] {
+      right: 100%;
+      clip-path: polygon(100% 0, 50% 50%, 100% 100%);
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.card {
+  composes: sections surface-card from global;
+}
+
+@layer components {
+  .card {
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+  }
+}

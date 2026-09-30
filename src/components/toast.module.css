@@ -1,0 +1,47 @@
+@layer components {
+  .viewport {
+    position: fixed;
+    inset-inline: 14px;
+    bottom: 14px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 8px;
+
+    @media (width >= 640px) {
+      left: auto;
+      width: 384px;
+    }
+  }
+
+  /* Past the provider's limit, older toasts wait hidden until newer ones go. */
+  .toast {
+    translate: var(--toast-swipe-movement-x);
+
+    &[data-limited] {
+      display: none;
+    }
+  }
+
+  .header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .title {
+    font-weight: 500;
+  }
+
+  .actions {
+    flex-direction: row;
+    gap: 6px;
+    padding-inline: 10px;
+  }
+}

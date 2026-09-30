@@ -1,0 +1,9 @@
+.content {
+  composes: list from "./popup.module.css";
+}
+
+@layer components {
+  .positioner {
+    z-index: 50;
+  }
+}

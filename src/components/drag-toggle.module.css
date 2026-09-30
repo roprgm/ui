@@ -1,0 +1,5 @@
+@layer components {
+  .toggle[data-dragging] {
+    user-select: none;
+  }
+}

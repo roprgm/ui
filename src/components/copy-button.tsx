@@ -2,6 +2,7 @@
 
 import { cn } from "cn";
 import { type ComponentProps, useState } from "react";
+import styles from "./copy-button.module.css";
 import { IconButton } from "./icon-button";
 
 /** Copies `value`, and a check draws itself in. */
@@ -22,11 +23,11 @@ export function CopyButton({
     <IconButton
       label={copied ? "Copied" : "Copy"}
       onClick={copy}
-      data-copied={copied}
-      className={cn("group", className)}
+      data-copied={copied || undefined}
+      className={cn(styles.button, className)}
       {...props}
     >
-      <span className="grid *:[grid-area:1/1]">
+      <span className={styles.icons}>
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -34,7 +35,7 @@ export function CopyButton({
           strokeWidth={1.75}
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="size-4 transition delay-150 duration-150 group-data-[copied=true]:scale-50 group-data-[copied=true]:opacity-0 group-data-[copied=true]:delay-0"
+          className={cn(styles.icon, styles.copy)}
           aria-hidden
         >
           <rect x="8" y="8" width="12" height="12" rx="2" />
@@ -47,15 +48,10 @@ export function CopyButton({
           strokeWidth={1.75}
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="size-4"
+          className={styles.icon}
           aria-hidden
         >
-          {/* One dash the length of the stroke; its gap of 2 hides the round cap. */}
-          <path
-            d="m5 13 4 4L19 7"
-            pathLength={1}
-            className="transition-[stroke-dashoffset] duration-150 ease-in [stroke-dasharray:1_2] [stroke-dashoffset:1] group-data-[copied=true]:delay-100 group-data-[copied=true]:duration-300 group-data-[copied=true]:ease-out group-data-[copied=true]:[stroke-dashoffset:0]"
-          />
+          <path d="m5 13 4 4L19 7" pathLength={1} className={styles.check} />
         </svg>
       </span>
     </IconButton>

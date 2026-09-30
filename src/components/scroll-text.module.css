@@ -1,0 +1,10 @@
+.text {
+  composes: overflow-fade-x from global;
+}
+
+@layer components {
+  .text {
+    display: block;
+    white-space: nowrap;
+  }
+}
