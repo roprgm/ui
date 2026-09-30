@@ -67,6 +67,13 @@ export const EyeIcon = () => (
   </Icon>
 );
 
+export const EyeOffIcon = () => (
+  <Icon>
+    <path d="M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-2.2 3.1M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6" />
+    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20" />
+  </Icon>
+);
+
 export const CopyIcon = () => (
   <Icon>
     <rect x="8" y="8" width="12" height="12" rx="2" />

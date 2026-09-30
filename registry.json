@@ -423,6 +423,19 @@
       ]
     },
     {
+      "name": "drag-toggle",
+      "type": "registry:ui",
+      "categories": ["inputs"],
+      "dependencies": ["cn"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/drag-toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "radio",
       "type": "registry:ui",
       "categories": ["inputs"],
