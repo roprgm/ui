@@ -18,6 +18,7 @@ import {
   CopyButtonDemo,
   DepthDemo,
   DialogDemo,
+  DragToggleDemo,
   FieldDemo,
   IconButtonDemo,
   InputDemo,
@@ -130,6 +131,13 @@ const groups: Group[] = [
         description: "A native checkbox; its label is clickable too.",
         demo: <CheckboxDemo />,
         half: true,
+      },
+      {
+        name: "drag-toggle",
+        title: "Drag toggle",
+        description:
+          "Drag across checkboxes or pressed buttons, such as layers' eyes, to set them all as the first one flips. Dragging back restores the rest; only toggles that share a name join in.",
+        demo: <DragToggleDemo />,
       },
       {
         name: "radio",

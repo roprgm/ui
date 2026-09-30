@@ -28,6 +28,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../src/components/dialog";
+import { DragToggle } from "../src/components/drag-toggle";
 import { Field } from "../src/components/field";
 import { IconButton } from "../src/components/icon-button";
 import { Input } from "../src/components/input";
@@ -73,6 +74,7 @@ import {
   BrushIcon,
   CropIcon,
   EyeIcon,
+  EyeOffIcon,
   HealIcon,
   MoreIcon,
   PlusIcon,
@@ -982,6 +984,57 @@ export function ListItemDemo() {
           </ListItemAction>
         </ListItem>
       ))}
+    </div>
+  );
+}
+
+function toggled(set: Set<string>, id: string, on: boolean) {
+  const next = new Set(set);
+  if (on) next.add(id);
+  else next.delete(id);
+  return next;
+}
+
+export function DragToggleDemo() {
+  const photos = ["Harbor", "Lighthouse", "Dunes", "Pier", "Tide pools"];
+  const [picked, setPicked] = useState(new Set(["Dunes"]));
+  const layers = ["Sky", "Subject", "Vignette", "Grain", "Image"];
+  const [hidden, setHidden] = useState(new Set(["Grain"]));
+  return (
+    <div className="flex flex-wrap justify-center gap-4">
+      <DragToggle className="w-56 overflow-hidden rounded-lg surface-float">
+        {photos.map((photo) => (
+          <ListItem key={photo}>
+            <label className="flex flex-1 items-center gap-2.5 self-stretch">
+              <Checkbox
+                checked={picked.has(photo)}
+                onChange={(event) =>
+                  setPicked((set) => toggled(set, photo, event.target.checked))
+                }
+              />
+              {photo}
+            </label>
+          </ListItem>
+        ))}
+      </DragToggle>
+      <DragToggle className="w-56 overflow-hidden rounded-lg surface-float">
+        {layers.map((layer) => (
+          <ListItem key={layer} muted={hidden.has(layer)}>
+            <span className="flex-1">{layer}</span>
+            <ListItemAction>
+              <IconButton
+                label="Visible"
+                aria-pressed={!hidden.has(layer)}
+                onClick={() =>
+                  setHidden((set) => toggled(set, layer, !set.has(layer)))
+                }
+              >
+                {hidden.has(layer) ? <EyeOffIcon /> : <EyeIcon />}
+              </IconButton>
+            </ListItemAction>
+          </ListItem>
+        ))}
+      </DragToggle>
     </div>
   );
 }
