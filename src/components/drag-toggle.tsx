@@ -44,10 +44,16 @@ function preventScroll(event: TouchEvent) {
 /**
  * Toggles checkboxes and pressed buttons by dragging across them. The one pressed flips, and so
  * does every one between it and the pointer; toggles the drag leaves go back. A drag can start on
- * a toggle's label. Only those that share
- * its `name` join in, and each flips with a click, so its own handlers run.
+ * a toggle's label. Only those that share its `name` join in, and each flips with a click, so its
+ * own handlers run; `onDraggingChange` can group those clicks, such as into one undo.
  */
-export function DragToggle({ className, ...props }: ComponentProps<"div">) {
+export function DragToggle({
+  onDraggingChange,
+  className,
+  ...props
+}: ComponentProps<"div"> & {
+  onDraggingChange?: (dragging: boolean) => void;
+}) {
   const root = useRef<HTMLDivElement>(null);
   const gesture = useRef<Gesture | null>(null);
   const suppressClick = useRef(false);
@@ -60,8 +66,11 @@ export function DragToggle({ className, ...props }: ComponentProps<"div">) {
 
   function stop() {
     window.removeEventListener("touchmove", preventScroll);
+    if (gesture.current?.dragging) {
+      setDragging(false);
+      onDraggingChange?.(false);
+    }
     gesture.current = null;
-    setDragging(false);
   }
 
   function onPointerDown(event: PointerEvent<HTMLDivElement>) {
@@ -110,6 +119,7 @@ export function DragToggle({ className, ...props }: ComponentProps<"div">) {
       root.current?.setPointerCapture(event.pointerId);
       getSelection()?.removeAllRanges();
       setDragging(true);
+      onDraggingChange?.(true);
     }
     const from = Math.min(current.start, end);
     const to = Math.max(current.start, end);
