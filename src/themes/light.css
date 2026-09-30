@@ -2,7 +2,7 @@
 
 @import "../base.css";
 
-@layer theme.defaults {
+@layer theme {
   :root {
     color-scheme: light;
 

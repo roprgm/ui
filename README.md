@@ -135,7 +135,7 @@ Controls are 28px tall, with 24px and 32px sizes, and list rows 40px. Radii are 
 
 ### Customize
 
-Set a token again to restyle every component that uses it. The theme's tokens sit under yours, so any of these override them: CSS outside a layer, the `theme` layer, or, with Tailwind, `@theme`:
+Set a token again to restyle every component that uses it, in CSS outside a layer, which overrides the theme's. With Tailwind, set it there rather than in `@theme`, which sits under the theme:
 
 ```css
 :root {

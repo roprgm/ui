@@ -2,9 +2,9 @@
    again the tokens it changes.
 
    Everything sits in Tailwind's layers, so it slots into an app that uses Tailwind and orders the
-   same without it: tokens in `theme.defaults`, under an app's own tokens, the page and parts in
-   `base`, components in `components`, and an app's utilities over all of them. CSS outside a
-   layer overrides it all. Components that others restyle, such as a Button a Tab renders, sit in
+   same without it: tokens in `theme`, after Tailwind's own, the page and parts in `base`,
+   components in `components`, and an app's utilities over all of them. CSS outside a layer
+   overrides it all. Components that others restyle, such as a Button a Tab renders, sit in
    `components.inner`, under the rest. Each stylesheet, modules too, opens with the order, since
    whichever loads first sets it. */
 
@@ -16,7 +16,7 @@
 @import "./styles/overflow.css";
 @import "./styles/motion.css";
 
-@layer theme.defaults {
+@layer theme {
   :root {
     color-scheme: dark;
 

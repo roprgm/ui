@@ -34,7 +34,7 @@ A minimal, dark component library for React on Base UI, styled with CSS modules,
 - **Controls**: `surface-raised`, `surface-sunken`, `surface-primary`, `segmented` (with `surface-sunken`) for a strip of controls, and `separator`. Lines between parts are inset shadows in `--color-line`.
 - **Behaviors**: `focus-ring` and `dim-disabled` on every control, plus `popup-motion`, `overflow-fade-x`, `overflow-fade-y`, and `shimmer`. A part's rules that reach into children or outrank a control's own sit in `components`.
 - Text that may not fit is a `ScrollText`, except inside something clickable; a row that may not fit scrolls in `overflow-fade-x`, a column in `overflow-fade-y`, and a text-only scroller takes `tabIndex={-1}`. Components inherit font size.
-- A theme sets tokens again in `theme.defaults`, under an app's own, and draws edges as `--edge-*` box shadows (never a border, which takes room). For one component's part it sets tokens on its public `data-slot`, and never changes markup.
+- A theme sets tokens again in the `theme` layer and draws edges as `--edge-*` box shadows (never a border, which takes room). For one component's part it sets tokens on its public `data-slot`, and never changes markup.
 
 ## Sizes and spacing
 
