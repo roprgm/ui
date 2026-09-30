@@ -2,7 +2,7 @@
 
 @import "../base.css";
 
-@layer theme {
+@layer theme.defaults {
   :root {
     /* Geist, when the app loads it. */
     --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;

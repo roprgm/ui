@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 /* The floating box of menus, selects, popovers, dialogs, and notices, for them to compose. `list`
    pads a column of `item` rows; other content goes in sections. */
 

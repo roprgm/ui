@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .text {
   composes: overflow-fade-x from global;
 }

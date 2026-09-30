@@ -2,7 +2,7 @@
 
 @import "../base.css";
 
-@layer theme {
+@layer theme.defaults {
   :root {
     --color-line: oklch(100% 0 0 / 0.1);
     --color-separator: oklch(100% 0 0 / 0.1);

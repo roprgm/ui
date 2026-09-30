@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .card {
   composes: sections surface-card from global;
 }

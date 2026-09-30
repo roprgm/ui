@@ -1,6 +1,8 @@
 /* A card, popover, collapsible panel, dialog, or notice pads its content as one section until it
    holds sections, marked `data-slot="section"`, which take over its padding. */
 
+@layer theme, base, components;
+
 @layer base {
   .sections,
   .sections-stacked {

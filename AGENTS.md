@@ -23,7 +23,7 @@ A minimal, dark component library for React on Base UI, styled with CSS modules,
 ## CSS modules
 
 - A class per element, named for what it is (`.button`, `.item`, `.thumb`). A variant or boolean prop is a `data-*` attribute (`data-variant`, `data-size`, `data-raised`), set only when true for a boolean; every element a component renders for you to target has a `data-slot` named after it.
-- Rules sit in `@layer components`, nested with `&`. A component that others render and restyle, such as a Button a Tab renders, sits in `components.inner`, which rules in `components` override, so the one that renders it wins without a fight over specificity or order.
+- Each stylesheet opens with `@layer theme, base, components;`, since whichever loads first sets the order, and a module can load before the app's CSS. Rules sit in `@layer components`, nested with `&`. A component that others render and restyle, such as a Button a Tab renders, sits in `components.inner`, which rules in `components` override, so the one that renders it wins without a fight over specificity or order.
 - A module composes the parts it's built from in a rule of its own before the layer, since Lightning CSS allows `composes` only there, one `composes` per source: `composes: focus-ring dim-disabled from global;`. A part a prop decides comes from a local class that composes it, picked in the TSX; never a global class name in the TSX.
 - Hover sits in `@media (hover: hover)`. A transition lists what changes, with `outline-color` beside `focus-ring` and `opacity` beside `dim-disabled`.
 
@@ -34,7 +34,7 @@ A minimal, dark component library for React on Base UI, styled with CSS modules,
 - **Controls**: `surface-raised`, `surface-sunken`, `surface-primary`, `segmented` (with `surface-sunken`) for a strip of controls, and `separator`. Lines between parts are inset shadows in `--color-line`.
 - **Behaviors**: `focus-ring` and `dim-disabled` on every control, plus `popup-motion`, `overflow-fade-x`, `overflow-fade-y`, and `shimmer`. A part's rules that reach into children or outrank a control's own sit in `components`.
 - Text that may not fit is a `ScrollText`, except inside something clickable; a row that may not fit scrolls in `overflow-fade-x`, a column in `overflow-fade-y`, and a text-only scroller takes `tabIndex={-1}`. Components inherit font size.
-- A theme sets tokens again in the `theme` layer and draws edges as `--edge-*` box shadows (never a border, which takes room). For one component's part it sets tokens on its public `data-slot`, and never changes markup.
+- A theme sets tokens again in `theme.defaults`, under an app's own, and draws edges as `--edge-*` box shadows (never a border, which takes room). For one component's part it sets tokens on its public `data-slot`, and never changes markup.
 
 ## Sizes and spacing
 

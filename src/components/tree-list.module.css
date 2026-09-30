@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .ghost {
   composes: surface-float overflow-fade-x from global;
 }

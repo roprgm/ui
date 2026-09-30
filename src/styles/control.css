@@ -1,5 +1,7 @@
 /* What every control shares: a focus ring and a disabled look. */
 
+@layer theme, base, components;
+
 @layer base {
   /* An outline with a gap, on keyboard focus. */
   .focus-ring {

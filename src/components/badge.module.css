@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 @layer components {
   /* Flat, as a Chip is, and at least as wide as it is tall, so a one-digit count is round. */
   .badge {

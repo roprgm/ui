@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .notice {
   composes: popup from "./popup.module.css";
 }

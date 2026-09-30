@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .fade {
   composes: overflow-fade-y from global;
 }

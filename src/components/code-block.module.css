@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .block {
   composes: surface-sunken from global;
 }

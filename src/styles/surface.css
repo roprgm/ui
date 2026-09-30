@@ -1,5 +1,7 @@
 /* Surfaces: a fill from the tokens, and an edge the theme draws. */
 
+@layer theme, base, components;
+
 @layer base {
   /* Containers set the fills of what sits on them, as the page does. A card stands two levels over
      what it sits on, a card too, three deep at most; a panel is a card docked in a layout, such as

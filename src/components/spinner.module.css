@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 @layer components {
   .spinner {
     width: 16px;

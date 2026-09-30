@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .content {
   composes: popup-motion from global;
 }

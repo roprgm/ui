@@ -1,5 +1,7 @@
 /* Motion for what opens and what waits. */
 
+@layer theme, base, components;
+
 @layer base {
   /* Grows from its trigger as it fades in. Base UI sets the attributes and the origin. */
   .popup-motion {

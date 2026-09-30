@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 @layer components.inner {
   /* The padding a card gives its content as one section. */
   .section {

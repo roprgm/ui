@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .switch {
   composes: surface-sunken focus-ring dim-disabled from global;
 }

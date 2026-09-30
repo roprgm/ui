@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .group {
   composes: segmented surface-sunken from global;
 }

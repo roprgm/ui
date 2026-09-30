@@ -1,5 +1,7 @@
 /* Scrollers that fade an edge while more lies past it. */
 
+@layer theme, base, components;
+
 @layer base {
   /* Scrolls vertically, shading an edge while more lies past it. Without scroll timelines, it
      reads the attributes Base UI's ScrollArea sets. */

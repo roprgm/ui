@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 @layer components.inner {
   /* The stroke is in viewBox units, so the smaller icon draws it thicker to match. */
   .chevron {

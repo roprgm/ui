@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .track {
   composes: surface-sunken from global;
 }

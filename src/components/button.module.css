@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 .button {
   composes: focus-ring dim-disabled from global;
 }

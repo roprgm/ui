@@ -1,3 +1,5 @@
+@layer theme, base, components;
+
 @layer components {
   /* The input is the control; dragging is a pointer shortcut over it. */
   .scrub {
