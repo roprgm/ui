@@ -200,7 +200,7 @@ const groups: Group[] = [
         name: "card",
         title: "Card",
         description:
-          "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-card, without its edge, and sections() on your own element, as the Photo editor block does.",
+          "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-panel and sections on your own element, as the Photo editor block does.",
         demo: <CardDemo />,
       },
       {

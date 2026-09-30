@@ -44,6 +44,12 @@
           "color-raised": "var(--color-level-5)",
           "color-raised-hover": "var(--color-level-6)",
           "color-hover": "var(--color-level-3)",
+          "edge-raised": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)",
+          "edge-sunken": "inset 0 1px 1px oklch(0% 0 0 / 0.3), 0 1px 0 oklch(95% 0 0 / 0.08)",
+          "edge-primary": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)",
+          "edge-card": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)",
+          "edge-float": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)",
+          "color-separator-light": "oklch(95.5% 0 0 / 0.05)",
           "radius-xs": "2.5px",
           "radius-sm": "5px",
           "radius-md": "7px",
@@ -77,19 +83,31 @@
             "--color-raised": "var(--color-level-11)",
             "--color-raised-hover": "var(--color-level-12)",
             "--color-hover": "var(--color-level-9)"
+          },
+          ".sections, .sections-stacked": {
+            "@apply flex flex-col gap-3 px-3.5 py-2.5": {}
+          },
+          ".sections:has(> [data-slot=\"section\"]), .sections-stacked:has(> [data-slot=\"section\"])": {
+            "@apply gap-0 p-0": {}
           }
+        },
+        "@utility surface-card": {
+          "box-shadow": "var(--edge-card)"
+        },
+        "@utility surface-float": {
+          "box-shadow": "var(--edge-float)"
         },
         "@utility surface-raised": {
           "background-color": "var(--color-raised)",
-          "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
+          "box-shadow": "var(--edge-raised)"
         },
         "@utility surface-sunken": {
           "background-color": "var(--color-field)",
-          "box-shadow": "inset 0 1px 1px oklch(0% 0 0 / 0.3), 0 1px 0 oklch(95% 0 0 / 0.08)"
+          "box-shadow": "var(--edge-sunken)"
         },
         "@utility surface-primary": {
-          "@apply bg-primary": {},
-          "box-shadow": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)"
+          "background-color": "var(--color-primary)",
+          "box-shadow": "var(--edge-primary)"
         },
         "@utility segmented": {
           "@apply -my-px gap-0.5 rounded-lg p-0.75": {},
@@ -99,9 +117,17 @@
         },
         "@utility separator": {
           "@apply bg-separator": {},
-          "box-shadow": "0 1px 0 oklch(95.5% 0 0 / 0.05)",
+          "box-shadow": "0 1px 0 var(--color-separator-light)",
           "&[aria-orientation=\"vertical\"]": {
-            "box-shadow": "1px 0 0 oklch(95.5% 0 0 / 0.05)"
+            "box-shadow": "1px 0 0 var(--color-separator-light)"
+          }
+        },
+        "@layer utilities": {
+          ".sections:has(> [data-slot=\"section\"]) > :not(:last-child)": {
+            "@apply shadow-[inset_0_-1px_0_var(--color-line)]": {}
+          },
+          ".sections-stacked > [data-slot=\"section\"]:not(:last-child)": {
+            "@apply pb-0": {}
           }
         },
         "@utility popup-motion": {
@@ -233,6 +259,13 @@
             "--overflow-fade-end": "0px"
           }
         },
+        "@utility draw": {
+          "stroke-dasharray": "1 2",
+          "stroke-dashoffset": "1"
+        },
+        "@utility drawn": {
+          "stroke-dashoffset": "0"
+        },
         "@utility shimmer": {
           "mask-image": "linear-gradient(100deg, oklch(0% 0 0 / 0.45) 30%, oklch(0% 0 0 / 0.6) 40%, oklch(0% 0 0) 50%, oklch(0% 0 0 / 0.6) 60%, oklch(0% 0 0 / 0.45) 70%)",
           "mask-size": "300% 100%",
@@ -266,12 +299,6 @@
           "label:has(input:is([type=\"checkbox\"], [type=\"radio\"]):enabled)": {
             "cursor": "pointer"
           }
-        },
-        "@utility surface-card": {
-          "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
-        },
-        "@utility surface-float": {
-          "box-shadow": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)"
         }
       }
     },
@@ -294,7 +321,7 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
-          "path": "src/components/popup.tsx",
+          "path": "src/components/popup.ts",
           "type": "registry:ui"
         }
       ]
@@ -302,7 +329,7 @@
     {
       "name": "section",
       "type": "registry:ui",
-      "dependencies": ["cn", "class-variance-authority"],
+      "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
@@ -388,7 +415,10 @@
       "type": "registry:ui",
       "categories": ["inputs"],
       "dependencies": ["cn"],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/input.json"
+      ],
       "files": [
         {
           "path": "src/components/textarea.tsx",
@@ -602,7 +632,7 @@
       "name": "context-menu",
       "type": "registry:ui",
       "categories": ["overlays"],
-      "dependencies": ["@base-ui/react"],
+      "dependencies": ["@base-ui/react", "cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
@@ -622,8 +652,7 @@
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/section.json"
+        "https://ui.roprgm.com/r/popup.json"
       ],
       "files": [
         {
@@ -639,8 +668,7 @@
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/section.json"
+        "https://ui.roprgm.com/r/popup.json"
       ],
       "files": [
         {
@@ -653,12 +681,11 @@
       "name": "notice",
       "type": "registry:ui",
       "categories": ["overlays"],
-      "dependencies": ["cn", "class-variance-authority"],
+      "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/icon-button.json",
-        "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/section.json"
+        "https://ui.roprgm.com/r/popup.json"
       ],
       "files": [
         {
@@ -696,10 +723,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": [
-        "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/section.json"
-      ]
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
       "name": "collapsible",
@@ -712,10 +736,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": [
-        "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/section.json"
-      ]
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
       "name": "tabs",

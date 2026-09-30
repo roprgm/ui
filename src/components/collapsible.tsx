@@ -3,7 +3,6 @@
 import { Collapsible as Primitive } from "@base-ui/react/collapsible";
 import { cn } from "cn";
 import type { ComponentProps, TransitionEvent } from "react";
-import { sections } from "./section";
 
 /**
  * A trigger that shows and hides a panel. A chevron inside turns with
@@ -33,9 +32,12 @@ export function CollapsibleTrigger({
 }) {
   return (
     <Primitive.Trigger
+      data-slot="collapsible-trigger"
       className={cn(
+        "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left",
+        "transition focus-ring -outline-offset-2 hover:bg-hover dim-disabled",
         // Square at the bottom while the panel shows under it.
-        "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring -outline-offset-2 hover:bg-hover data-panel-open:rounded-b-none dim-disabled",
+        "data-panel-open:rounded-b-none",
         className,
       )}
       {...props}
@@ -70,13 +72,16 @@ export function CollapsiblePanel({
         revealSection(event);
         onTransitionEnd?.(event);
       }}
-      className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none"
+      data-slot="collapsible-panel"
+      className={cn(
+        "h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out motion-reduce:transition-none",
+        "data-starting-style:h-0 data-starting-style:opacity-0 data-ending-style:h-0 data-ending-style:opacity-0",
+      )}
       {...props}
     >
       <div
         className={cn(
-          sections(),
-          "shadow-[inset_0_1px_0_var(--color-line)]",
+          "sections shadow-[inset_0_1px_0_var(--color-line)]",
           className,
         )}
       >

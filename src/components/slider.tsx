@@ -159,6 +159,8 @@ export function Slider({
       largeStep={step * 10}
       orientation={orientation}
       thumbAlignment="edge"
+      data-slot="slider"
+      data-variant={variant}
       className={cn(root({ orientation, variant }), className)}
     >
       {!vertical && (
@@ -207,6 +209,7 @@ export function Slider({
               onKeyDown={(event) => valueKeys.has(event.key) && edit(true)}
               onKeyUp={() => edit(false)}
               onBlur={() => edit(false)}
+              data-slot="slider-thumb"
               className="size-thumb rounded-full surface-primary has-focus-visible:ring-2 has-focus-visible:ring-focus"
               style={{ backgroundColor: color }}
             />

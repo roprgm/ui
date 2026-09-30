@@ -26,7 +26,7 @@ export function Field({
   const id = useId();
   const note = error ?? description;
   return (
-    <div className={cn("flex flex-col gap-1.5", className)}>
+    <div data-slot="field" className={cn("flex flex-col gap-1.5", className)}>
       <label htmlFor={id} className="text-muted">
         {label}
       </label>

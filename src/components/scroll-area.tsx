@@ -13,6 +13,7 @@ export function ScrollArea({
 }: ComponentProps<"div"> & { fade?: boolean }) {
   return (
     <Primitive.Root
+      data-slot="scroll-area"
       className={cn("relative min-h-0 overflow-hidden", className)}
       {...props}
     >

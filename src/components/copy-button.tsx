@@ -50,11 +50,10 @@ export function CopyButton({
           className="size-4"
           aria-hidden
         >
-          {/* One dash the length of the stroke; its gap of 2 hides the round cap. */}
           <path
             d="m5 13 4 4L19 7"
             pathLength={1}
-            className="transition-[stroke-dashoffset] duration-150 ease-in [stroke-dasharray:1_2] [stroke-dashoffset:1] group-data-[copied=true]:delay-100 group-data-[copied=true]:duration-300 group-data-[copied=true]:ease-out group-data-[copied=true]:[stroke-dashoffset:0]"
+            className="draw transition-[stroke-dashoffset] duration-150 ease-in group-data-[copied=true]:drawn group-data-[copied=true]:delay-100 group-data-[copied=true]:duration-300 group-data-[copied=true]:ease-out"
           />
         </svg>
       </span>

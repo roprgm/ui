@@ -345,6 +345,7 @@ export function TreeList<T extends TreeNode<T>>({
         suppressClick.current = false;
         event.stopPropagation();
       }}
+      data-slot="tree-list"
       className={cn(dragging && "cursor-grabbing", className)}
       {...props}
     >

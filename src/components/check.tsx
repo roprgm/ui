@@ -4,6 +4,7 @@ import { cn } from "cn";
 export function Check({ className }: { className?: string }) {
   return (
     <svg
+      data-slot="check"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

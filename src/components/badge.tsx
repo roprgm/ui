@@ -12,15 +12,21 @@ const badge = cva(
         primary: "bg-primary text-on-primary",
       },
     },
-    defaultVariants: { variant: "default" },
   },
 );
 
 /** A short label, such as a status or a count. */
 export function Badge({
-  variant,
+  variant = "default",
   className,
   ...props
 }: ComponentProps<"span"> & VariantProps<typeof badge>) {
-  return <span className={cn(badge({ variant }), className)} {...props} />;
+  return (
+    <span
+      data-slot="badge"
+      data-variant={variant}
+      className={cn(badge({ variant }), className)}
+      {...props}
+    />
+  );
 }

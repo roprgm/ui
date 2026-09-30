@@ -2,8 +2,7 @@
 
 import { Popover as Primitive } from "@base-ui/react/popover";
 import { cn } from "cn";
-import { Popup } from "./popup";
-import { sections } from "./section";
+import { popup } from "./popup";
 
 /** Settings beside their trigger, such as bar controls that no longer fit. */
 export const Popover = Primitive.Root;
@@ -16,6 +15,7 @@ export const PopoverTrigger = Primitive.Trigger;
 export function PopoverContent({
   align = "end",
   raised = false,
+  className,
   ...props
 }: Primitive.Popup.Props &
   Pick<Primitive.Positioner.Props, "align"> & { raised?: boolean }) {
@@ -25,13 +25,9 @@ export function PopoverContent({
         <Primitive.Popup
           // A click leaves focus on the trigger, so no field starts typing.
           initialFocus={(type) => type === "keyboard"}
-          render={(popup) => (
-            <Popup
-              {...popup}
-              raised={raised}
-              className={cn(sections(), popup.className)}
-            />
-          )}
+          data-slot="popover-content"
+          data-raised={raised || undefined}
+          className={cn(popup, "sections", className)}
           {...props}
         />
       </Primitive.Positioner>

@@ -5,7 +5,7 @@ import { cn } from "cn";
 import { type ComponentProps, createContext, useContext } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
-import { Popup, popupItem } from "./popup";
+import { popupItem, popupList } from "./popup";
 
 /** Commands, such as a row's actions. For settings, use a Popover. */
 export const Menu = Primitive.Root;
@@ -19,6 +19,7 @@ export function MenuContent({
   align = "end",
   alignOffset,
   raised = false,
+  className,
   ...props
 }: Primitive.Popup.Props &
   Pick<Primitive.Positioner.Props, "align" | "alignOffset"> & {
@@ -34,7 +35,9 @@ export function MenuContent({
       >
         <Raised value={raised}>
           <Primitive.Popup
-            render={(popup) => <Popup {...popup} list raised={raised} />}
+            data-slot="menu-content"
+            data-raised={raised || undefined}
+            className={cn(popupList, className)}
             {...props}
           />
         </Raised>
@@ -51,7 +54,11 @@ export function MenuItem({
   ...props
 }: Primitive.Item.Props & { shortcut?: string }) {
   return (
-    <Primitive.Item className={cn(popupItem, "gap-2", className)} {...props}>
+    <Primitive.Item
+      data-slot="menu-item"
+      className={cn(popupItem, "gap-2", className)}
+      {...props}
+    >
       {children}
       {shortcut && <Kbd className="ml-auto pl-4">{shortcut}</Kbd>}
     </Primitive.Item>
@@ -59,7 +66,12 @@ export function MenuItem({
 }
 
 export function MenuSeparator() {
-  return <Primitive.Separator className="mx-1.5 my-0.5 h-px separator" />;
+  return (
+    <Primitive.Separator
+      data-slot="menu-separator"
+      className="mx-1.5 my-0.5 h-px separator"
+    />
+  );
 }
 
 export const Submenu = Primitive.SubmenuRoot;
@@ -71,6 +83,7 @@ export function SubmenuTrigger({
 }: Primitive.SubmenuTrigger.Props) {
   return (
     <Primitive.SubmenuTrigger
+      data-slot="submenu-trigger"
       className={cn(
         popupItem,
         "justify-between gap-4 data-popup-open:bg-raised",

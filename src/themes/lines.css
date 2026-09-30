@@ -7,27 +7,15 @@
   --color-separator: oklch(100% 0 0 / 0.1);
 }
 
-@utility surface-raised {
-  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
-}
-
-@utility surface-card {
-  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
-}
-
-@utility surface-sunken {
-  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.1);
-}
-
-@utility surface-float {
-  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.16);
-}
-
-@utility surface-primary {
-  box-shadow: inset 0 0 0 1px oklch(0% 0 0 / 0.5);
+@theme {
+  --edge-raised: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
+  --edge-card: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
+  --edge-sunken: inset 0 0 0 1px oklch(100% 0 0 / 0.1);
+  --edge-float: inset 0 0 0 1px oklch(100% 0 0 / 0.16);
+  --edge-primary: inset 0 0 0 1px oklch(0% 0 0 / 0.5);
 }
 
 /* A line around a thin groove reads heavy. */
 [data-slot="slider-track"] {
-  box-shadow: none;
+  --edge-sunken: none;
 }

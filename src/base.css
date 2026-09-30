@@ -63,6 +63,17 @@
   --color-hover: var(--color-level-3);
 }
 
+/* The edges a theme draws around surfaces, as box shadows, and the light beside a separator's dark
+   line. Here, none: surfaces stand apart by their fills alone. */
+@theme {
+  --edge-raised: none;
+  --edge-sunken: none;
+  --edge-primary: none;
+  --edge-card: none;
+  --edge-float: none;
+  --color-separator-light: transparent;
+}
+
 @theme {
   --radius-xs: 2.5px;
   --radius-sm: 5px;
@@ -76,8 +87,7 @@
   --spacing-thumb: 13px;
 }
 
-/* Surfaces: a fill, and an edge the theme draws. A theme changes a fill through its tokens, never
-   by redeclaring `background-color` here. */
+/* Surfaces: a fill and an edge from the tokens, so a theme changes them by setting tokens again. */
 
 /* Containers, which set the fills of what sits on them, as the page does. A card stands two
    levels over what it sits on, a card too, three deep at most; a panel is a card docked in a
@@ -118,19 +128,31 @@
   }
 }
 
+/* The containers' edges, as utilities over any shadow of the element's own. */
+@utility surface-card {
+  box-shadow: var(--edge-card);
+}
+
+@utility surface-float {
+  box-shadow: var(--edge-float);
+}
+
 /* A control that stands up from what it sits on: buttons, selects, selected tabs and toggles. */
 @utility surface-raised {
   background-color: var(--color-raised);
+  box-shadow: var(--edge-raised);
 }
 
 /* Sets a control into what it sits on: fields, tracks, checkboxes, switches, segmented groups. */
 @utility surface-sunken {
   background-color: var(--color-field);
+  box-shadow: var(--edge-sunken);
 }
 
 /* What is on: a primary button, a checked switch, a slider's thumb. */
 @utility surface-primary {
-  @apply bg-primary;
+  background-color: var(--color-primary);
+  box-shadow: var(--edge-primary);
 }
 
 /* A strip of controls a size smaller than a Button, 3px in and rounded to match, as a ToggleGroup
@@ -144,9 +166,43 @@
   }
 }
 
-/* A line between groups, dark over whatever it sits on; size it with `h-px` or `w-px`. */
+/* A line between groups, dark over whatever it sits on, with the theme's light beside it so it
+   reads engraved: under it, or after it upright. Size it with `h-px` or `w-px`. */
 @utility separator {
   @apply bg-separator;
+  box-shadow: 0 1px 0 var(--color-separator-light);
+
+  &[aria-orientation="vertical"] {
+    box-shadow: 1px 0 0 var(--color-separator-light);
+  }
+}
+
+/* A card, popover, collapsible panel, dialog, or notice pads its content as one section until it
+   holds sections, marked `data-slot="section"`, which take over its padding. Plain classes, like
+   the containers, so a utility changes their padding. */
+@layer components {
+  .sections,
+  .sections-stacked {
+    @apply flex flex-col gap-3 px-3.5 py-2.5;
+  }
+
+  .sections:has(> [data-slot="section"]),
+  .sections-stacked:has(> [data-slot="section"]) {
+    @apply gap-0 p-0;
+  }
+}
+
+/* What reaches into the sections sits with the utilities, over the sections' own. In a card or
+   popover, a line runs between all its parts once it holds sections, such as a list that scrolls;
+   in a dialog or notice, `sections-stacked` stacks them without one, sharing the padding. */
+@layer utilities {
+  .sections:has(> [data-slot="section"]) > :not(:last-child) {
+    @apply shadow-[inset_0_-1px_0_var(--color-line)];
+  }
+
+  .sections-stacked > [data-slot="section"]:not(:last-child) {
+    @apply pb-0;
+  }
 }
 
 /* Grows from its trigger as it fades in. Base UI sets the attributes and the origin. */
@@ -322,6 +378,17 @@
   to {
     --overflow-fade-end: 0px;
   }
+}
+
+/* A stroke that draws itself in: give its path `pathLength={1}`, and `drawn` once on, such as
+   `peer-checked:drawn`. One dash the length of the stroke; its gap of 2 hides the round cap. */
+@utility draw {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1;
+}
+
+@utility drawn {
+  stroke-dashoffset: 0;
 }
 
 /* A bright band sweeping across pending work. On a group, one band crosses it all. */

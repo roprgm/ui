@@ -3,8 +3,11 @@ import { cn } from "cn";
 import { type ComponentProps, cloneElement, type ReactElement } from "react";
 
 const button = cva(
-  // The 1px press moves faster than the colors ease.
-  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap [transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] focus-ring active:not-aria-[haspopup]:translate-y-px dim-disabled",
+  [
+    "inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md px-3 whitespace-nowrap focus-ring dim-disabled",
+    // The 1px press moves faster than the colors ease.
+    "[transition:all_200ms_var(--default-transition-timing-function),translate_100ms_var(--default-transition-timing-function)] active:not-aria-[haspopup]:translate-y-px",
+  ],
   {
     variants: {
       variant: {
@@ -26,27 +29,32 @@ const button = cva(
         "icon-lg": "size-8 px-0",
       },
     },
-    defaultVariants: { variant: "default", size: "default" },
   },
 );
 
 /** An action. `render` draws it as another element: `<Button render={<a href="/" />}>`. */
 export function Button({
-  className,
-  variant,
-  size,
+  variant = "default",
+  size = "default",
   render,
+  className,
   ...props
 }: ComponentProps<"button"> &
   VariantProps<typeof button> & {
     render?: ReactElement<{ className?: string }>;
   }) {
+  const attributes = {
+    "data-slot": "button",
+    "data-variant": variant,
+    "data-size": size,
+    ...props,
+  };
   const classes = cn(button({ variant, size }), className);
   if (render) {
     return cloneElement(render, {
-      ...props,
+      ...attributes,
       className: cn(classes, render.props.className),
     });
   }
-  return <button type="button" className={classes} {...props} />;
+  return <button type="button" className={classes} {...attributes} />;
 }

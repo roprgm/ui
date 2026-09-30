@@ -63,14 +63,40 @@ A card, popover, dialog, or notice pads its content as one section. To split it,
 </Card>
 ```
 
-- Use `surface-card` for cards, which rise two levels over what they sit on, even another card, and `surface-raised` for controls, three levels up. Dock a card in your layout with `surface-panel`, which has no edge. What floats is `surface-float`, a card drawn floating: a popup opens as a card on the page, and with `raised`, a level up, for one that opens over a card.
-- Use the theme's colors, such as `text-muted`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette.
-- Build your own controls from the `surface-*` primitives rather than shadows or borders of your own, so they follow the theme.
-- For content that may not fit, use `overflow-fade-x` or `overflow-fade-y`: it scrolls, and fades where more lies that way. For one line of text, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
+Every element a component renders carries a `data-slot`, and a component's variants a `data-variant` or `data-size`, to select it from CSS, a theme, or a Tailwind variant such as `in-data-[slot=card]:`.
 
 Components without JavaScript, such as `Button` and `Input`, render on the server.
 
 Mount one `<Toaster />` near the root, then show a toast from anywhere, even outside React: `toast.add({ title: "Exported" })`.
+
+## Parts
+
+The components are built from a few parts, which build yours too, so they follow the theme. Use the theme's colors, such as `text-muted`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette, and the parts rather than shadows or borders of your own.
+
+Classes from the theme:
+
+| Part | Use |
+| --- | --- |
+| `surface-card`, `surface-panel`, `surface-float` | containers, which set the fills of what sits on them: a card rises two levels over what it sits on, even another card; a panel is a card docked in your layout, with no edge; what floats is a card drawn floating, a level up with `data-raised` for one that opens over a card |
+| `surface-raised`, `surface-sunken`, `surface-primary` | controls: raised three levels up, sunken two down, or on; with any variant, such as `checked:surface-primary` |
+| `sections`, `sections-stacked` | a box padded as one section until it holds `Section`s, with a line between them, or stacked without one as in a dialog |
+| `segmented`, `separator` | a strip of controls a size smaller, with `surface-sunken`, and a line between groups |
+| `focus-ring`, `dim-disabled` | a control's focus ring and its disabled look |
+| `popup-motion`, `shimmer`, `draw` and `drawn` | a popup growing from its trigger, a band across pending work, and a stroke that draws itself in |
+| `overflow-fade-x`, `overflow-fade-y` | content that may not fit: it scrolls, and fades where more lies that way |
+
+For one line of text, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
+
+Recipes, class strings to compose with `cn`, which lets a later class win:
+
+| Recipe | Use |
+| --- | --- |
+| `popup`, `popupList`, `popupItem` from `popup` | the floating box of an overlay, one that pads a column of rows, and a row |
+| `field` from `input` | what you type into: sunken, with a muted placeholder, ringed red when invalid |
+
+```tsx
+<Primitive.Popup data-raised className={cn(popupList, "min-w-(--anchor-width)")}>
+```
 
 ## Components
 
@@ -78,16 +104,16 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 | --- | --- |
 | Actions | `Button`, `IconButton`, `CopyButton`, `Chip`, `Kbd`, `Badge` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `DragToggle`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput` |
-| Containers | `Card`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `surface-*` primitives; `Collapsible`, `ScrollArea`, `CodeBlock` |
+| Containers | `Card`, with `Section` and `SectionAction` from `section`; `Collapsible`, `ScrollArea`, `CodeBlock` |
 | Navigation | `Tabs`, `ListItem`, `TreeList` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
-| Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, and `overflow-fade-y` utilities |
+| Effects | `Spinner`, `ScrollText` |
 
 Each one has a live demo and its install command on the [docs site](https://ui.roprgm.com).
 
 ## Theme
 
-`base.css` holds the tokens, the primitives the components are built from, and the page's rules: 13px text on a dark background. `themes/default.css` imports it, draws the primitives with light and shadow, and sets Geist when your app loads it. The comments in both files describe each token.
+`base.css` holds the tokens, the parts, and the page's rules: 13px text on a dark background. `themes/default.css` imports it, sets the edges that draw surfaces with light and shadow, and sets Geist when your app loads it. The comments in both files describe each token.
 
 ### Colors
 
@@ -115,22 +141,27 @@ A surface is what a box is filled with and how it stands against what's under it
 | `surface-primary` | the primary color | primary buttons, checked switches, slider thumbs |
 | `separator` | a line | a menu's separators |
 
+### Edges
+
+A surface's edge is a box shadow from a token: `--edge-raised`, `--edge-sunken`, `--edge-primary`, `--edge-card`, and `--edge-float`, with `--color-separator-light` beside a separator's line. `base.css` draws none, so surfaces stand apart by their fills alone; `themes/default.css` sets them.
+
 ### Sizes
 
 Controls are 28px tall (`h-7`), with 24px and 32px sizes, and list rows 40px. Heights and spacing are Tailwind's own, so a control of your own takes the same classes.
 
 ### Customize
 
-Redefine a token to restyle every component that uses it:
+Set a token again to restyle every component that uses it, edges too:
 
 ```css
 @theme {
   --color-primary: oklch(67% 0.16 252);
   --radius-md: 8px;
+  --edge-raised: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
 }
 ```
 
-A theme changes what a surface is by setting its fills again, at each depth, in its own `@utility surface-card`. A surface of your own sets the fills of what sits on it and paints its own:
+A theme is only tokens: it imports `base.css` and sets again the ones it changes. For one component's part, set tokens on its `data-slot`, as `themes/lines.css` flattens a slider's track with `[data-slot="slider-track"] { --edge-sunken: none; }`. A surface of your own sets the fills of what sits on it and paints its own:
 
 ```css
 @utility surface-sidebar {

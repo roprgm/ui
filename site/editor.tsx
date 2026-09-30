@@ -1,4 +1,3 @@
-import { cn } from "cn";
 import { type CSSProperties, useState } from "react";
 import { Chip } from "../src/components/chip";
 import { IconButton } from "../src/components/icon-button";
@@ -16,7 +15,7 @@ import {
   PopoverTrigger,
 } from "../src/components/popover";
 import { ScrollArea } from "../src/components/scroll-area";
-import { Section, SectionAction, sections } from "../src/components/section";
+import { Section, SectionAction } from "../src/components/section";
 import { Slider } from "../src/components/slider";
 import { percent, ToolRail } from "./demos";
 import { EyeIcon, MoreIcon, PlusIcon } from "./icons";
@@ -88,10 +87,7 @@ export function EditorDemo() {
       </div>
       {/* A panel docked beside the canvas, or under it in a narrow frame. */}
       <aside
-        className={cn(
-          sections(),
-          "relative col-span-2 min-h-0 w-(--width) shrink-0 surface-panel @max-2xl:w-full",
-        )}
+        className="sections relative col-span-2 min-h-0 w-(--width) shrink-0 surface-panel @max-2xl:w-full"
         style={{ "--width": `${width}px` } as CSSProperties}
       >
         <ResizeEdge width={width} onWidthChange={setWidth} />

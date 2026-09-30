@@ -150,6 +150,7 @@ export function DragToggle({
         event.preventDefault();
         event.stopPropagation();
       }}
+      data-slot="drag-toggle"
       className={cn(dragging && "select-none", className)}
       {...props}
     />

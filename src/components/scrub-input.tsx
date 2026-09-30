@@ -161,8 +161,10 @@ export function ScrubInput({
     // The input is the control; dragging is a pointer shortcut over it.
     // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
+      data-slot="scrub-input"
       className={cn(
-        "group relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
+        "group relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition",
+        "focus-within:cursor-text focus-within:bg-field",
         className,
       )}
       onDoubleClick={reset}
@@ -190,7 +192,11 @@ export function ScrubInput({
           ref={input}
           aria-label={label}
           inputMode="decimal"
-          className="w-12 min-w-full cursor-[inherit] bg-transparent text-right text-transparent text-shadow-none outline-none field-sizing-content selection:bg-pressed focus:text-foreground focus:[text-shadow:inherit] supports-[field-sizing:content]:w-auto"
+          className={cn(
+            "w-12 min-w-full cursor-[inherit] bg-transparent text-right outline-none field-sizing-content supports-[field-sizing:content]:w-auto",
+            // Hidden under the digits until it takes focus.
+            "text-transparent text-shadow-none selection:bg-pressed focus:text-foreground focus:[text-shadow:inherit]",
+          )}
           value={draft ?? fixed}
           onFocus={focus}
           onChange={(event) => setDraft(event.currentTarget.value)}

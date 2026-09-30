@@ -6,7 +6,7 @@ import { type ReactNode, useMemo } from "react";
 import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Input } from "./input";
-import { Popup, popupItem } from "./popup";
+import { popupItem, popupList } from "./popup";
 
 export type ComboboxItem<T extends string> = {
   value: T;
@@ -48,7 +48,10 @@ export function Combobox<T extends string>({
   );
   return (
     <Primitive.Root items={collection} {...props}>
-      <Primitive.InputGroup className={cn("relative", className)}>
+      <Primitive.InputGroup
+        data-slot="combobox"
+        className={cn("relative", className)}
+      >
         <Primitive.Input
           aria-label={label}
           placeholder={placeholder}
@@ -65,14 +68,9 @@ export function Combobox<T extends string>({
       <Primitive.Portal>
         <Primitive.Positioner sideOffset={4} className="z-50">
           <Primitive.Popup
-            render={(props) => (
-              <Popup
-                {...props}
-                list
-                raised={raised}
-                className="min-w-(--anchor-width)"
-              />
-            )}
+            data-slot="combobox-content"
+            data-raised={raised || undefined}
+            className={cn(popupList, "min-w-(--anchor-width)")}
           >
             <Primitive.Empty
               className={cn(popupItem, "text-muted empty:hidden")}
@@ -85,6 +83,7 @@ export function Combobox<T extends string>({
                   key={item.value}
                   value={item.value}
                   disabled={item.disabled}
+                  data-slot="combobox-item"
                   className={cn(
                     popupItem,
                     "justify-between gap-4 data-selected:bg-raised",

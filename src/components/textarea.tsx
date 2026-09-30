@@ -1,12 +1,15 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
+import { field } from "./input";
 
 /** A multi-line field that grows with its text. `aria-invalid` rings it red. */
 export function Textarea({ className, ...props }: ComponentProps<"textarea">) {
   return (
     <textarea
+      data-slot="textarea"
       className={cn(
-        "min-h-20 w-full min-w-0 resize-y rounded-md surface-sunken px-2.5 py-1.5 text-foreground transition field-sizing-content focus-ring placeholder:text-muted dim-disabled aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger/60",
+        field,
+        "min-h-20 resize-y py-1.5 field-sizing-content",
         className,
       )}
       {...props}

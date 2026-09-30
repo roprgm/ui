@@ -6,7 +6,7 @@ import { cn } from "cn";
 import { type ReactNode, useState } from "react";
 import { Check } from "./check";
 import { Chevron } from "./chevron";
-import { Popup, popupItem } from "./popup";
+import { popupItem, popupList } from "./popup";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
 const trigger = cva(
@@ -25,7 +25,6 @@ const trigger = cva(
         lg: "h-8 pr-3 pl-3.5",
       },
     },
-    defaultVariants: { size: "default" },
   },
 );
 
@@ -41,7 +40,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
   placeholder,
   tooltip,
   variant = "field",
-  size,
+  size = "default",
   raised = false,
   className,
   "aria-label": label,
@@ -63,6 +62,9 @@ export function Select<T extends string, Multiple extends boolean = false>({
   const control = (
     <Primitive.Trigger
       aria-label={label}
+      data-slot="select"
+      data-variant={variant}
+      data-size={size}
       className={cn(trigger({ variant, size }), className)}
     >
       <Primitive.Value
@@ -105,14 +107,9 @@ export function Select<T extends string, Multiple extends boolean = false>({
           className="z-50"
         >
           <Primitive.Popup
-            render={(props) => (
-              <Popup
-                {...props}
-                list
-                raised={raised}
-                className="min-w-(--anchor-width)"
-              />
-            )}
+            data-slot="select-content"
+            data-raised={raised || undefined}
+            className={cn(popupList, "min-w-(--anchor-width)")}
           >
             <Primitive.List className="flex flex-col gap-0.5">
               {items.map((item, index) => (
@@ -121,6 +118,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
+                  data-slot="select-item"
                   className={cn(
                     popupItem,
                     "justify-between gap-4 data-selected:bg-raised",

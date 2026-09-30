@@ -17,18 +17,19 @@ const list = cva("flex data-[orientation=vertical]:flex-col", {
       segmented: "segmented surface-sunken *:h-6",
     },
   },
-  defaultVariants: { variant: "default" },
 });
 
 /** The tabs; the arrow keys move between them and select. `segmented` sets them into a sunken strip. */
 export function TabList({
-  variant,
+  variant = "default",
   className,
   ...props
 }: Primitive.List.Props & VariantProps<typeof list>) {
   return (
     <Primitive.List
       activateOnFocus
+      data-slot="tab-list"
+      data-variant={variant}
       className={cn(list({ variant }), className)}
       {...props}
     />
@@ -44,6 +45,7 @@ export function Tab({
   return (
     <Primitive.Tab
       render={<Button variant="ghost" size={size} />}
+      data-slot="tab"
       className={cn(
         "data-active:surface-raised data-active:text-foreground",
         className,
@@ -56,6 +58,7 @@ export function Tab({
 export function TabPanel({ className, ...props }: Primitive.Panel.Props) {
   return (
     <Primitive.Panel
+      data-slot="tab-panel"
       className={cn("rounded-sm focus-ring", className)}
       {...props}
     />

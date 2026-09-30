@@ -6,6 +6,7 @@ export function ScrollText({ className, ...props }: ComponentProps<"span">) {
   return (
     <span
       tabIndex={-1}
+      data-slot="scroll-text"
       className={cn("block overflow-fade-x whitespace-nowrap", className)}
       {...props}
     />

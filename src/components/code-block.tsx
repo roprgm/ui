@@ -27,6 +27,7 @@ export function CodeBlock({
   return (
     // 6px around a 16px line centers it on the 28px copy button.
     <div
+      data-slot="code-block"
       className={cn(
         "flex items-start gap-2 rounded-xl surface-sunken p-1.5 pl-3",
         syntax,

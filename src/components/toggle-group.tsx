@@ -10,16 +10,22 @@ const group = cva("inline-flex segmented surface-sunken", {
       lg: "*:h-7",
     },
   },
-  defaultVariants: { size: "default" },
 });
 
 /** Segmented toggles. Toggles that share a `name` choose one. */
 export function ToggleGroup({
-  size,
+  size = "default",
   className,
   ...props
 }: ComponentProps<"fieldset"> & VariantProps<typeof group>) {
-  return <fieldset className={cn(group({ size }), className)} {...props} />;
+  return (
+    <fieldset
+      data-slot="toggle-group"
+      data-size={size}
+      className={cn(group({ size }), className)}
+      {...props}
+    />
+  );
 }
 
 /** A label around a hidden radio, or a checkbox with `type="checkbox"`. */
@@ -30,9 +36,11 @@ export function Toggle({
 }: ComponentProps<"input">) {
   return (
     <label
+      data-slot="toggle"
       className={cn(
         // `relative` keeps the hidden radio inside, or it can widen the page.
-        "relative inline-flex cursor-pointer items-center px-3 text-muted transition focus-ring hover:text-foreground has-checked:surface-raised has-checked:text-foreground dim-disabled",
+        "relative inline-flex cursor-pointer items-center px-3 text-muted transition focus-ring dim-disabled",
+        "hover:text-foreground has-checked:surface-raised has-checked:text-foreground",
         className,
       )}
     >
