@@ -4,7 +4,7 @@ import { Collapsible as Primitive } from "@base-ui/react/collapsible";
 import { cn } from "cn";
 import type { ComponentProps, TransitionEvent } from "react";
 import { sections } from "./section";
-import "./tokens.css";
+import "./core.css";
 import "./collapsible.css";
 
 /**

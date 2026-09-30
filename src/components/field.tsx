@@ -2,7 +2,7 @@
 
 import { cn } from "cn";
 import { cloneElement, type ReactElement, type ReactNode, useId } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./field.css";
 
 type Control = ReactElement<{

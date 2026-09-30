@@ -1,7 +1,7 @@
 /* Surfaces with no edge, apart by their fills alone. */
 
-@import "../components/tailwind.css";
 @import "../components/page.css";
+@reference "../components/core.css";
 
 :root {
   --edge-raised: none;

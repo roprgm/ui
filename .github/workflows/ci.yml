@@ -16,5 +16,5 @@ jobs:
       - run: bunx tsc
       - run: bun run build
       - run: bun run verify
-      - name: Generated stylesheet references and registry are current
-        run: git diff --exit-code registry.json src/components/tailwind.css
+      - name: Generated registry is current
+        run: git diff --exit-code registry.json

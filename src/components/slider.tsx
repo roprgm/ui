@@ -4,7 +4,7 @@ import { Slider as Primitive } from "@base-ui/react/slider";
 import { cn } from "cn";
 import { useRef } from "react";
 import { ScrubInput } from "./scrub-input";
-import "./tokens.css";
+import "./core.css";
 import "./slider.css";
 
 /** The thumb's center at a fraction of the range: its edge meets the bar's end at either end. */

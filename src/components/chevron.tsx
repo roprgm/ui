@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./chevron.css";
 
 /** One right-pointing stroke turned to `direction`, so changing it animates the turn. */

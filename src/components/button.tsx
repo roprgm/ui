@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import { type ComponentProps, cloneElement, type ReactElement } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./button.css";
 
 /** An action. `render` draws it as another element: `<Button render={<a href="/" />}>`. */

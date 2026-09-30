@@ -3,7 +3,7 @@ import type { ComponentProps } from "react";
 import { IconButton } from "./icon-button";
 import { Popup } from "./popup";
 import { sections } from "./section";
-import "./tokens.css";
+import "./core.css";
 import "./notice.css";
 
 /**

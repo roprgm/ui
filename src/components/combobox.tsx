@@ -7,7 +7,7 @@ import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Input } from "./input";
 import { Popup, popupItem } from "./popup";
-import "./tokens.css";
+import "./core.css";
 import "./combobox.css";
 
 export type ComboboxItem<T extends string> = {

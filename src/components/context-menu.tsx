@@ -2,7 +2,7 @@
 
 import { ContextMenu as Primitive } from "@base-ui/react/context-menu";
 import { Popup } from "./popup";
-import "./tokens.css";
+import "./core.css";
 import "./context-menu.css";
 
 /** A menu at the pointer, opened by a right-click or long press. Its items are a Menu's. */

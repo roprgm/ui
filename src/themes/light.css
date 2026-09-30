@@ -1,7 +1,7 @@
 /* Dark text on a light-gray page, with white cards and popups. */
 
-@import "../components/tailwind.css";
 @import "../components/page.css";
+@reference "../components/core.css";
 
 :root {
   --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;

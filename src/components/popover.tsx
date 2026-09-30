@@ -4,7 +4,7 @@ import { Popover as Primitive } from "@base-ui/react/popover";
 import { cn } from "cn";
 import { Popup } from "./popup";
 import { sections } from "./section";
-import "./tokens.css";
+import "./core.css";
 import "./popover.css";
 
 /** Settings beside their trigger, such as bar controls that no longer fit. */

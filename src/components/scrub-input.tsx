@@ -11,7 +11,7 @@ import {
   useState,
 } from "react";
 import { Chevron } from "./chevron";
-import "./tokens.css";
+import "./core.css";
 import "./scrub-input.css";
 
 /** Whole `ch`, since tabular digits can differ from it by a fraction of a pixel. */

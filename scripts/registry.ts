@@ -31,7 +31,19 @@ const shared = styles.filter(
 );
 const registry: Registry = JSON.parse(readFileSync("registry.json", "utf8"));
 const sharedNames = new Set(shared.map((file) => basename(file, ".css")));
+for (const item of registry.items) {
+  if (
+    item.files?.length &&
+    item.files.every(
+      (file) =>
+        file.path.startsWith(`${folder}/`) && file.path.endsWith(".css"),
+    )
+  ) {
+    sharedNames.add(item.name);
+  }
+}
 registry.items = registry.items.filter((item) => !sharedNames.has(item.name));
+const sharedDependencies = new Set([...sharedNames].map(url));
 
 for (const file of shared) {
   registry.items.push({
@@ -48,9 +60,9 @@ for (const item of registry.items) {
       ...rules(postcss.parse(readFileSync("src/themes/default.css", "utf8"))),
       ...rules(postcss.parse(readFileSync(join(folder, "page.css"), "utf8"))),
     };
-    item.registryDependencies = [url("tailwind")];
+    item.registryDependencies = [url("core")];
     item.docs =
-      "Components include their own styles. To use the library tokens in your app’s Tailwind classes, add @reference to the installed ui/tailwind.css from your main CSS file (the relative path depends on your components.json aliases).";
+      "Components include their own styles. To use the library tokens and helpers in your app’s Tailwind classes, add @reference to the installed ui/core.css from your main CSS file (the relative path depends on your components.json aliases).";
     continue;
   }
   const ownStyle = join(folder, `${item.name}.css`);
@@ -61,8 +73,7 @@ for (const item of registry.items) {
   // CSS dependencies are generated; component dependencies remain explicit registry metadata.
   const dependencies = new Set(
     (item.registryDependencies ?? []).filter(
-      (dependency) =>
-        !shared.some((file) => url(basename(file, ".css")) === dependency),
+      (dependency) => !sharedDependencies.has(dependency),
     ),
   );
   for (const file of item.files) {

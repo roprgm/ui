@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./switch.css";
 
 /** A native checkbox with the switch role; `::before` draws the thumb. */

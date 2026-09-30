@@ -3,9 +3,9 @@
 import { ScrollArea as Primitive } from "@base-ui/react/scroll-area";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./scroll-area.css";
-import "./overflow-keyframes.css";
+import "./overflow.css";
 
 /** Scrolls vertically with a thin bar; `fade` shades an edge while more lies past it. */
 export function ScrollArea({

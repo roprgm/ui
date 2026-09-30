@@ -1,0 +1,182 @@
+@layer properties, theme, base, components, utilities;
+
+@layer theme {
+  @theme static {
+    --font-sans: system-ui, sans-serif;
+
+    /* Native transitions also work when the app generates no animation utilities. */
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+    /* Colors. Components use only these. */
+
+    /* Backgrounds: black, then darkest first in even steps of lightness. Every fill is one of them.
+     Level 1 is 15%, and each level after adds 3.7%. */
+    --color-level-0: oklch(0% 0 0);
+    --color-level-1: oklch(15% 0 0);
+    --color-level-2: oklch(18.7% 0 0);
+    --color-level-3: oklch(22.4% 0 0);
+    --color-level-4: oklch(26.1% 0 0);
+    --color-level-5: oklch(29.8% 0 0);
+    --color-level-6: oklch(33.5% 0 0);
+    --color-level-7: oklch(37.2% 0 0);
+    --color-level-8: oklch(40.9% 0 0);
+    --color-level-9: oklch(44.6% 0 0);
+    --color-level-10: oklch(48.3% 0 0);
+    --color-level-11: oklch(52% 0 0);
+    --color-level-12: oklch(55.7% 0 0);
+
+    /* Text, strongest first, and opaque, so an icon's crossing strokes don't show. */
+    --color-foreground: oklch(96% 0 0);
+    --color-muted: oklch(70% 0 0);
+    --color-faint: oklch(55% 0 0);
+    --color-disabled: oklch(44% 0 0);
+
+    /* What is on: primary buttons, checked controls, thumbs. */
+    --color-primary: oklch(89% 0 0);
+    --color-primary-hover: oklch(98.5% 0 0);
+    --color-on-primary: oklch(18% 0 0);
+
+    /* Translucent, over any level. */
+    --color-pressed: oklch(100% 0 0 / 0.15);
+    --color-focus: oklch(100% 0 0 / 0.25);
+    --color-backdrop: oklch(0% 0 0 / 0.5);
+    --color-line: oklch(0% 0 0 / 0.5);
+    --color-separator: oklch(0% 0 0 / 0.7);
+
+    --color-danger: oklch(75% 0.14 21);
+
+    /* Code, as a highlighter marks it. */
+    --color-code-keyword: oklch(77% 0.1 9);
+    --color-code-string: oklch(81% 0.08 133);
+    --color-code-type: oklch(81% 0.07 230);
+    --color-code-property: oklch(83% 0.08 76);
+
+    /* Page fills: its own, a field two levels below, a raised control three above
+       and four on hover, and a hover one above. Cards set them again for their contents. */
+
+    --color-surface: var(--color-level-2);
+    --color-field: var(--color-level-0);
+    --color-raised: var(--color-level-5);
+    --color-raised-hover: var(--color-level-6);
+    --color-hover: var(--color-level-3);
+
+    --radius-xs: 2.5px;
+    --radius-sm: 5px;
+    --radius-md: 7px;
+    --radius-lg: 9px;
+    --radius-xl: 12px;
+
+    /* Slider thumb size also determines its fill placement. */
+    --spacing-thumb: 13px;
+  }
+}
+
+/* Register our theme before referencing Tailwind’s defaults. */
+@reference "tailwindcss";
+
+@utility surface-raised {
+  background-color: var(--color-raised);
+  box-shadow: var(--edge-raised);
+}
+
+@utility surface-sunken {
+  background-color: var(--color-field);
+  box-shadow: var(--edge-sunken);
+}
+
+@utility surface-primary {
+  @apply bg-primary;
+  box-shadow: var(--edge-primary);
+}
+
+@utility segmented {
+  @apply -my-px gap-0.5 rounded-lg p-0.75;
+
+  & > * {
+    border-radius: calc(var(--radius-lg) - 3px);
+  }
+}
+
+@utility separator {
+  @apply bg-separator;
+  box-shadow: var(--edge-separator);
+  &[aria-orientation="vertical"] {
+    box-shadow: var(--edge-separator-vertical);
+  }
+}
+
+@utility focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+
+  &:focus-visible,
+  &:has(:focus-visible) {
+    outline-color: var(--color-focus);
+    transition-duration: 300ms;
+  }
+}
+
+@utility dim-disabled {
+  &:is(:disabled, [data-disabled], :has(:disabled)) {
+    pointer-events: none;
+    opacity: 40%;
+  }
+}
+
+@utility popup-motion {
+  transform-origin: var(--transform-origin);
+  transition-property: opacity, scale;
+  transition-timing-function: var(--default-transition-timing-function);
+  transition-duration: 100ms;
+
+  &[data-starting-style] {
+    opacity: 0;
+    scale: 0.95;
+  }
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+
+@layer components {
+  .surface-card,
+  .surface-panel,
+  .surface-float {
+    --color-surface: var(--color-level-4);
+    --color-field: var(--color-level-2);
+    --color-raised: var(--color-level-7);
+    --color-raised-hover: var(--color-level-8);
+    --color-hover: var(--color-level-5);
+    background-color: var(--color-surface);
+    box-shadow: var(--edge-card);
+  }
+
+  :where(.surface-card, .surface-panel, .surface-float)
+    :is(.surface-card, .surface-panel, .surface-float),
+  .surface-float[data-raised] {
+    --color-surface: var(--color-level-6);
+    --color-field: var(--color-level-4);
+    --color-raised: var(--color-level-9);
+    --color-raised-hover: var(--color-level-10);
+    --color-hover: var(--color-level-7);
+  }
+
+  :where(.surface-card, .surface-panel, .surface-float)
+    :where(.surface-card, .surface-panel, .surface-float)
+    :is(.surface-card, .surface-panel, .surface-float) {
+    --color-surface: var(--color-level-8);
+    --color-field: var(--color-level-6);
+    --color-raised: var(--color-level-11);
+    --color-raised-hover: var(--color-level-12);
+    --color-hover: var(--color-level-9);
+  }
+  .surface-panel {
+    box-shadow: none;
+  }
+  .surface-float {
+    box-shadow: var(--edge-float);
+  }
+}

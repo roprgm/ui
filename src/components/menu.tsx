@@ -6,7 +6,7 @@ import { type ComponentProps, createContext, useContext } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
 import { Popup, popupItem } from "./popup";
-import "./tokens.css";
+import "./core.css";
 import "./menu.css";
 
 /** Commands, such as a row's actions. For settings, use a Popover. */

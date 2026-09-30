@@ -37,8 +37,8 @@
           }
         }
       },
-      "registryDependencies": ["https://ui.roprgm.com/r/tailwind.json"],
-      "docs": "Components include their own styles. To use the library tokens in your app’s Tailwind classes, add @reference to the installed ui/tailwind.css from your main CSS file (the relative path depends on your components.json aliases)."
+      "registryDependencies": ["https://ui.roprgm.com/r/core.json"],
+      "docs": "Components include their own styles. To use the library tokens and helpers in your app’s Tailwind classes, add @reference to the installed ui/core.css from your main CSS file (the relative path depends on your components.json aliases)."
     },
     {
       "name": "chevron",
@@ -56,8 +56,7 @@
       ],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ]
     },
     {
@@ -66,10 +65,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/surfaces.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/popup-motion.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -88,8 +84,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -110,8 +105,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -131,9 +125,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -170,8 +162,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/icon-button.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -191,9 +182,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -213,9 +202,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -245,8 +232,7 @@
       ],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ]
     },
     {
@@ -256,9 +242,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -278,8 +262,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -299,9 +282,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -321,9 +302,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -343,9 +322,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -369,9 +346,7 @@
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/tooltip.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -395,8 +370,7 @@
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/input.json",
         "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -416,9 +390,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -438,8 +410,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -459,8 +430,7 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -490,8 +460,7 @@
       ],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ]
     },
     {
@@ -502,9 +471,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/kbd.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/popup-motion.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -527,9 +494,7 @@
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/kbd.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -551,8 +516,7 @@
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/menu.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -574,8 +538,7 @@
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/section.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -597,8 +560,7 @@
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/section.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -621,8 +583,7 @@
         "https://ui.roprgm.com/r/icon-button.json",
         "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/section.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -645,8 +606,7 @@
         "https://ui.roprgm.com/r/button.json",
         "https://ui.roprgm.com/r/notice.json",
         "https://ui.roprgm.com/r/section.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -677,9 +637,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/section.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/surfaces.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ]
     },
     {
@@ -700,9 +658,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/section.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ]
     },
     {
@@ -713,9 +669,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/button.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -745,8 +699,7 @@
       ],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ]
     },
     {
@@ -758,11 +711,7 @@
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/list-item.json",
         "https://ui.roprgm.com/r/chevron.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/surfaces.json",
-        "https://ui.roprgm.com/r/overflow-keyframes.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json",
+        "https://ui.roprgm.com/r/core.json",
         "https://ui.roprgm.com/r/overflow.json"
       ],
       "files": [
@@ -793,9 +742,7 @@
       ],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/overflow-keyframes.json",
-        "https://ui.roprgm.com/r/tailwind.json",
+        "https://ui.roprgm.com/r/core.json",
         "https://ui.roprgm.com/r/overflow.json"
       ]
     },
@@ -816,9 +763,7 @@
       ],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/overflow-keyframes.json",
-        "https://ui.roprgm.com/r/tailwind.json",
+        "https://ui.roprgm.com/r/core.json",
         "https://ui.roprgm.com/r/overflow.json"
       ]
     },
@@ -830,10 +775,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/copy-button.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/overflow-keyframes.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json",
+        "https://ui.roprgm.com/r/core.json",
         "https://ui.roprgm.com/r/overflow.json"
       ],
       "files": [
@@ -855,9 +797,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/scrub-input.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json",
-        "https://ui.roprgm.com/r/control.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -878,8 +818,7 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/chevron.json",
-        "https://ui.roprgm.com/r/tokens.json",
-        "https://ui.roprgm.com/r/tailwind.json"
+        "https://ui.roprgm.com/r/core.json"
       ],
       "files": [
         {
@@ -893,22 +832,11 @@
       ]
     },
     {
-      "name": "control",
+      "name": "core",
       "type": "registry:ui",
       "files": [
         {
-          "path": "src/components/control.css",
-          "type": "registry:ui"
-        }
-      ],
-      "registryDependencies": ["https://ui.roprgm.com/r/tailwind.json"]
-    },
-    {
-      "name": "overflow-keyframes",
-      "type": "registry:ui",
-      "files": [
-        {
-          "path": "src/components/overflow-keyframes.css",
+          "path": "src/components/core.css",
           "type": "registry:ui"
         }
       ],
@@ -923,7 +851,7 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": []
+      "registryDependencies": ["https://ui.roprgm.com/r/core.json"]
     },
     {
       "name": "page",
@@ -937,55 +865,11 @@
       "registryDependencies": []
     },
     {
-      "name": "popup-motion",
-      "type": "registry:ui",
-      "files": [
-        {
-          "path": "src/components/popup-motion.css",
-          "type": "registry:ui"
-        }
-      ],
-      "registryDependencies": []
-    },
-    {
       "name": "shimmer",
       "type": "registry:ui",
       "files": [
         {
           "path": "src/components/shimmer.css",
-          "type": "registry:ui"
-        }
-      ],
-      "registryDependencies": []
-    },
-    {
-      "name": "surfaces",
-      "type": "registry:ui",
-      "files": [
-        {
-          "path": "src/components/surfaces.css",
-          "type": "registry:ui"
-        }
-      ],
-      "registryDependencies": []
-    },
-    {
-      "name": "tailwind",
-      "type": "registry:ui",
-      "files": [
-        {
-          "path": "src/components/tailwind.css",
-          "type": "registry:ui"
-        }
-      ],
-      "registryDependencies": []
-    },
-    {
-      "name": "tokens",
-      "type": "registry:ui",
-      "files": [
-        {
-          "path": "src/components/tokens.css",
           "type": "registry:ui"
         }
       ],

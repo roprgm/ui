@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./radio.css";
 
 /** A native radio; radios that share a `name` choose one. `::before` draws the dot. */

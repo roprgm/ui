@@ -1,5 +1,4 @@
-@reference "./tailwind.css";
-@reference "./control.css";
+@reference "./core.css";
 
 @layer components {
   /* The one-pixel press moves faster than the colors ease. */

@@ -3,7 +3,7 @@
 import { Tooltip as Primitive } from "@base-ui/react/tooltip";
 import { cn } from "cn";
 import { Kbd } from "./kbd";
-import "./tokens.css";
+import "./core.css";
 import "./tooltip.css";
 
 /** Shares hover timing, so moving between triggers shows their tips without waiting again. */

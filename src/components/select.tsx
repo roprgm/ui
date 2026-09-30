@@ -7,7 +7,7 @@ import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Popup, popupItem } from "./popup";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
-import "./tokens.css";
+import "./core.css";
 import "./select.css";
 
 export type SelectItem<T extends string> = {

@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./check.css";
 
 /** A check mark, as on the chosen rows of a select or combobox. */

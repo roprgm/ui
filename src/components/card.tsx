@@ -1,9 +1,8 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 import { sections } from "./section";
-import "./tokens.css";
+import "./core.css";
 import "./card.css";
-import "./surfaces.css";
 
 /** A box padded as its content needs; its `Section`s stack with a line between each. */
 export function Card({ className, ...props }: ComponentProps<"div">) {

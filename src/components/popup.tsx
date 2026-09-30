@@ -1,8 +1,7 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./popup.css";
-import "./surfaces.css";
 
 /**
  * The floating box of menus, selects, popovers, dialogs, and notices. `list` pads a column of

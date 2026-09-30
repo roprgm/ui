@@ -1,7 +1,7 @@
 /* Surfaces drawn with light and shadow. */
 
-@import "../components/tailwind.css";
 @import "../components/page.css";
+@reference "../components/core.css";
 
 :root {
   --font-sans: "Geist Variable", "Geist", system-ui, sans-serif;

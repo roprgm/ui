@@ -1,5 +1,4 @@
-@reference "./tailwind.css";
-@reference "./popup-motion.css";
+@reference "./core.css";
 
 @layer components {
   :where(.popup) {

@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./list-item.css";
 
 /** A row in a panel's list, such as a layer. */

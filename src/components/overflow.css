@@ -1,3 +1,5 @@
+@reference "./core.css";
+
 /* Scrolls vertically, shading an edge while more lies past it. Without scroll timelines, it reads
    the attributes Base UI's ScrollArea sets. */
 @utility overflow-fade-y {
@@ -85,5 +87,53 @@
     animation-range:
       0 1.5rem,
       calc(100% - 1.5rem) 100%;
+  }
+}
+
+@keyframes overflow-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overflow-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@property --overflow-fade-start {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --overflow-fade-end {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes overflow-fade-x-start {
+  from {
+    --overflow-fade-start: 0px;
+  }
+  to {
+    --overflow-fade-start: 1.5rem;
+  }
+}
+
+@keyframes overflow-fade-x-end {
+  from {
+    --overflow-fade-end: 1.5rem;
+  }
+  to {
+    --overflow-fade-end: 0px;
   }
 }

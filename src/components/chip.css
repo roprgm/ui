@@ -1,5 +1,4 @@
-@reference "./tailwind.css";
-@reference "./control.css";
+@reference "./core.css";
 
 @layer components {
   :where(.chip) {

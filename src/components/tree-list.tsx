@@ -14,10 +14,9 @@ import {
 } from "react";
 import { Chevron } from "./chevron";
 import { ListItem } from "./list-item";
-import "./tokens.css";
+import "./core.css";
 import "./tree-list.css";
-import "./surfaces.css";
-import "./overflow-keyframes.css";
+import "./overflow.css";
 
 export type TreeDrop = {
   id: string;

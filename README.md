@@ -23,11 +23,11 @@ Or copy components into your app with the shadcn CLI. No package needed: each co
 npx shadcn@latest add https://ui.roprgm.com/r/button.json
 ```
 
-The copied components resolve their own Tailwind references. To also use library tokens in your app's Tailwind classes, reference the installed `tailwind.css` from your CSS entry. Adjust the relative path for your app's layout:
+The copied components resolve their own Tailwind references. To also use library tokens and core helpers in your app's Tailwind classes, reference the installed `core.css` from your CSS entry. Adjust the relative path for your app's layout:
 
 ```css
 @import "tailwindcss";
-@reference "./components/ui/tailwind.css";
+@reference "./components/ui/core.css";
 ```
 
 ## Use
@@ -94,7 +94,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 
 ## Theme
 
-Each component imports its own CSS and shared runtime styles, such as tokens or surface rules. Its stylesheet uses `@reference` for the Tailwind tokens and helpers it needs, and `@apply` or native CSS for its rules. Importing Button and Select includes their dependency graph; it does not scan or load the rest of the library.
+Each component imports `core.css` and its own stylesheet. `core.css` defines the tokens, surfaces, and shared control and popup helpers; overflow utilities and their animations live together in `overflow.css`, imported only by components that scroll. Component stylesheets use `@reference` for these definitions and `@apply` or native CSS for their rules. Importing Button and Select includes their dependency graph; it does not scan or load the rest of the library.
 
 The npm package ships compiled CSS beside each JavaScript module. The shadcn registry copies the matching source CSS and its references beside the component, so your app's Tailwind compiler processes them. Neither installation needs an `@source` covering the library.
 

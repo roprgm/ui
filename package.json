@@ -26,13 +26,12 @@
       "types": "./dist/*.d.ts",
       "default": "./dist/*.js"
     },
-    "./tokens.css": "./dist/tokens.css",
-    "./tailwind.css": "./src/components/tailwind.css"
+    "./core.css": "./src/components/core.css"
   },
   "scripts": {
-    "dev": "bun scripts/tailwind.ts && vite",
-    "check": "bun scripts/tailwind.ts && biome check --write && tsc",
-    "build": "bun scripts/tailwind.ts && bun scripts/styles.ts && bun scripts/registry.ts && biome format --write registry.json src/components/tailwind.css && tsc -p tsconfig.build.json && shadcn build -o site/public/r && vite build",
+    "dev": "vite",
+    "check": "biome check --write && tsc",
+    "build": "bun scripts/styles.ts && bun scripts/registry.ts && biome format --write registry.json && tsc -p tsconfig.build.json && shadcn build -o site/public/r && vite build",
     "prepublishOnly": "bun run build",
     "verify": "bun scripts/verify.ts"
   },

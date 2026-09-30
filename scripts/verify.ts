@@ -115,7 +115,7 @@ async function consumer(names: string[], source = false) {
       `${names.map((name) => `import * as ${name.replaceAll("-", "_")} from "${source ? "./" : "@roprgm/ui/"}${name}";`).join("\n")}\nimport "./app.css";\nwindow.components = [${names.map((name) => name.replaceAll("-", "_")).join(",")}];`,
     );
     const theme = source
-      ? `@reference "./tailwind.css";\n${stylesheet(items.get("theme")?.css ?? {})}`
+      ? `@reference "./core.css";\n${stylesheet(items.get("theme")?.css ?? {})}`
       : '@import "@roprgm/ui/themes/default.css";';
     writeFileSync(
       join(directory, "app.css"),
@@ -152,10 +152,15 @@ async function consumer(names: string[], source = false) {
       !css.includes(".slider"),
       "An unused Slider must not contribute styles",
     );
-    assert(
-      !css.includes(".scroll-area"),
-      "An unused ScrollArea must not contribute styles",
+    const scrolling = names.includes("scroll-text");
+    assert(!css.includes(".scroll-area"));
+    assert.equal(css.includes(".scroll-text"), scrolling);
+    assert.equal(
+      [...css.matchAll(/@keyframes overflow-fade-x-start\b/g)].length,
+      scrolling ? 1 : 0,
+      "Scroll animations must only load once, with their consumers",
     );
+    assert.equal(css.includes("@property --overflow-fade-start"), scrolling);
     assert.equal(
       [...css.matchAll(/--color-level-0\s*:/g)].length,
       1,
@@ -173,7 +178,11 @@ async function consumer(names: string[], source = false) {
 for (const item of items.values()) {
   dependencies(item.name);
 }
-for (const names of [["button"], ["button", "select"]]) {
+for (const names of [
+  ["button"],
+  ["button", "select"],
+  ["button", "scroll-text"],
+]) {
   await consumer(names);
   await consumer(names, true);
 }

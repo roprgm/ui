@@ -4,7 +4,7 @@ import { Toast as Primitive } from "@base-ui/react/toast";
 import { Button } from "./button";
 import { Notice, NoticeClose } from "./notice";
 import { Section, SectionAction } from "./section";
-import "./tokens.css";
+import "./core.css";
 import "./toast.css";
 
 /**

@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./checkbox.css";
 
 /** A native checkbox; `:checked` draws the mark in. */

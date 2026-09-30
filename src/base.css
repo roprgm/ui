@@ -1,11 +1,6 @@
-/* Optional utilities and page styles for applications building their own primitives. */
+/* Optional foundations for applications building their own primitives. */
 
-@import "./components/tokens.css";
-@import "./components/tailwind.css";
-@import "./components/control.css";
-@import "./components/surfaces.css";
-@import "./components/popup-motion.css";
+@import "./components/core.css";
 @import "./components/overflow.css";
-@import "./components/overflow-keyframes.css";
 @import "./components/shimmer.css";
 @import "./components/page.css";

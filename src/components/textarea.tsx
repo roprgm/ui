@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./textarea.css";
 
 /** A multi-line field that grows with its text. `aria-invalid` rings it red. */

@@ -1,9 +1,9 @@
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 import { CopyButton } from "./copy-button";
-import "./tokens.css";
+import "./core.css";
 import "./code-block.css";
-import "./overflow-keyframes.css";
+import "./overflow.css";
 
 /**
  * Code with a button that copies it; a line that doesn't fit scrolls, or with `wrap`, wraps.

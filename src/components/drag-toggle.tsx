@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
-import "./tokens.css";
+import "./core.css";
 import "./drag-toggle.css";
 
 const toggles =

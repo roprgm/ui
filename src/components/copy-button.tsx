@@ -3,7 +3,7 @@
 import { cn } from "cn";
 import { type ComponentProps, useState } from "react";
 import { IconButton } from "./icon-button";
-import "./tokens.css";
+import "./core.css";
 import "./copy-button.css";
 
 /** Copies `value`, and a check draws itself in. */

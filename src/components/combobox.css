@@ -1,4 +1,4 @@
-@reference "./tailwind.css";
+@reference "./core.css";
 
 @layer components {
   :where(.combobox) {

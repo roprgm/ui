@@ -5,7 +5,7 @@ import { Dialog as Primitive } from "@base-ui/react/dialog";
 import { cn } from "cn";
 import { Popup } from "./popup";
 import { sections } from "./section";
-import "./tokens.css";
+import "./core.css";
 import "./dialog.css";
 
 /** A modal. An `alert` asks before what can't be undone: a click outside doesn't close it. */

@@ -4,7 +4,7 @@ import { Tabs as Primitive } from "@base-ui/react/tabs";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 import { Button } from "./button";
-import "./tokens.css";
+import "./core.css";
 import "./tabs.css";
 
 /** Tabs and the panels they show; `orientation="vertical"` stacks the tabs in a column. */
