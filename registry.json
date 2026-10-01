@@ -37,6 +37,7 @@
           "color-border-subtle": "oklch(0% 0 0 / 0.5)",
           "color-accent": "oklch(89% 0 0)",
           "color-on-accent": "oklch(18% 0 0)",
+          "color-accent-text": "var(--color-accent)",
           "color-primary": "var(--color-accent)",
           "color-primary-hover": "oklch(98.5% 0 0)",
           "color-on-primary": "var(--color-on-accent)",
@@ -56,7 +57,11 @@
           "radius-md": "7px",
           "radius-lg": "9px",
           "radius-xl": "12px",
-          "spacing-thumb": "13px"
+          "spacing-control-sm": "24px",
+          "spacing-control": "28px",
+          "spacing-control-lg": "32px",
+          "spacing-thumb": "13px",
+          "font-weight-selected": "400"
         }
       },
       "css": {
@@ -289,6 +294,7 @@
         },
         "@layer base": {
           "[data-accent]": {
+            "--color-accent-text": "var(--color-accent)",
             "--color-primary": "var(--color-accent)",
             "--color-on-primary": "var(--color-on-accent)"
           },

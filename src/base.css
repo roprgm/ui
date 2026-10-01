@@ -56,6 +56,8 @@
   /* What is on: checked controls, thumbs. `data-accent` picks another. */
   --color-accent: oklch(89% 0 0);
   --color-on-accent: oklch(18% 0 0);
+  /* The accent as text, such as a link, for a theme whose accent fill reads too dark as text. */
+  --color-accent-text: var(--color-accent);
 
   /* The main action, a primary button. It takes the accent until a theme sets it apart. */
   --color-primary: var(--color-accent);
@@ -89,9 +91,20 @@
   --radius-xl: 12px;
 }
 
-/* A slider's thumb, which its fill is placed by too. */
+/* The heights of controls, a Button's and what goes with it: `h-control`, `size-control-sm`.
+   Only controls take them, so a theme can scale them without moving anything else. A slider's
+   thumb, which its fill is placed by too. */
 @theme {
+  --spacing-control-sm: 24px;
+  --spacing-control: 28px;
+  --spacing-control-lg: 32px;
   --spacing-thumb: 13px;
+}
+
+/* The weight of a selected tab. Its label keeps this weight's width either way, so a theme can
+   bolden it without moving its neighbors. */
+@theme {
+  --font-weight-selected: 400;
 }
 
 /* Surfaces: what a box is. Each paints its color, and the theme adds the rest, such as an edge.
@@ -210,6 +223,7 @@
    the main action takes it too. */
 @layer base {
   [data-accent] {
+    --color-accent-text: var(--color-accent);
     --color-primary: var(--color-accent);
     --color-on-primary: var(--color-on-accent);
   }

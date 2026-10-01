@@ -17,12 +17,12 @@ const button = cva(
       // Labels are at least as wide as tall, and icons square. A leading icon sits 4px closer to
       // the edge, since its box has air around the stroke.
       size: {
-        default: "h-7 min-w-7 has-[>svg:first-child]:pl-2",
-        sm: "h-6 min-w-6 px-2.5 has-[>svg:first-child]:pl-1.5",
-        lg: "h-8 min-w-8 px-3.5 has-[>svg:first-child]:pl-2.5",
-        icon: "size-7 px-0",
-        "icon-sm": "size-6 px-0",
-        "icon-lg": "size-8 px-0",
+        default: "h-control min-w-control has-[>svg:first-child]:pl-2",
+        sm: "h-control-sm min-w-control-sm px-2.5 has-[>svg:first-child]:pl-1.5",
+        lg: "h-control-lg min-w-control-lg px-3.5 has-[>svg:first-child]:pl-2.5",
+        icon: "size-control px-0",
+        "icon-sm": "size-control-sm px-0",
+        "icon-lg": "size-control-lg px-0",
       },
     },
   },

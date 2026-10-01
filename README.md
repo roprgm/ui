@@ -100,6 +100,7 @@ Each one has a live demo and its install command on the [docs site](https://ui.r
 | `foreground`, `secondary`, `muted`, `disabled` | text, strongest first: text and icons, supporting text, hints, and what is disabled |
 | `border`, `border-subtle` | separators, and dividers inside a surface |
 | `accent`, `on-accent` | what is on: checked controls and slider thumbs |
+| `accent-text` | the accent as text, such as a link: the accent until a theme sets it apart |
 | `primary`, `primary-hover`, `on-primary` | the main action, a primary button: the accent until a theme sets it apart |
 | `success`, `warning`, `danger` | states, each with a label beside it |
 | `pressed`, `focus`, `backdrop` | a pressed ghost, the focus ring, and the shade behind a dialog |
@@ -133,7 +134,7 @@ In the default theme, a field sits two levels below what it's on, and a card, a 
 
 ### Sizes
 
-Controls are 28px tall (`h-7`), with 24px and 32px sizes, and list rows 40px. Heights and spacing are Tailwind's own, so a control of your own takes the same classes.
+Controls are 28px tall (`h-control`), with 24px (`h-control-sm`) and 32px (`h-control-lg`) sizes, and list rows 40px. A theme can scale the three control heights through `--spacing-control`, `--spacing-control-sm`, and `--spacing-control-lg`; nothing but controls takes them. Spacing is Tailwind's own, so a control of your own takes the same classes.
 
 ### Customize
 

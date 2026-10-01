@@ -101,7 +101,7 @@ const groups: Group[] = [
         name: "badge",
         title: "Badge",
         description:
-          "A short label that isn't a control, such as a status or a count. accent marks what is new; it renders on the server.",
+          "A short label that isn't a control, such as a status or a count. accent marks what is new, and outline draws a line in the text's color, so text-success makes a green one. sm is a count beside a label, a step smaller than its text. It renders on the server.",
         demo: <BadgeDemo />,
         half: true,
       },
@@ -245,7 +245,7 @@ const groups: Group[] = [
         name: "tabs",
         title: "Tabs",
         description:
-          "Tabs and the panels they show, in a row or a column, with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views.",
+          "Tabs and the panels they show, in a row or a column, with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views, and underline lines them over a rule, as a page's navigation. A tab is as wide selected or not, so a theme can bolden the selected one.",
         demo: <TabsDemo />,
         bare: true,
       },
@@ -401,7 +401,7 @@ const groups: Group[] = [
         name: "sizes",
         title: "Sizes",
         description:
-          "Controls are 28px tall, with 24px and 32px sizes, and list rows 40px. Corners take Tailwind's scale, set for controls (md), lists (lg), and cards and popups (xl).",
+          "Controls are 28px tall, with 24px and 32px sizes, from the control tokens a theme can scale; list rows are 40px. Corners take Tailwind's scale, set for controls (md), lists (lg), and cards and popups (xl).",
         demo: <SizesDemo />,
         code: '<Button size="sm">…</Button>',
       },

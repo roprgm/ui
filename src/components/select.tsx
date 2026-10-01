@@ -15,14 +15,14 @@ const trigger = cva(
     variants: {
       /** `pill` goes in a bar over a canvas, beside Chips. */
       variant: {
-        field:
+        default:
           "rounded-md surface-control hover:bg-control-hover data-popup-open:bg-control-hover",
         pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
       },
       /** A Button's, 2px less on the chevron's side. */
       size: {
-        default: "h-7 pr-2.5 pl-3",
-        lg: "h-8 pr-3 pl-3.5",
+        default: "h-control pr-2.5 pl-3",
+        lg: "h-control-lg pr-3 pl-3.5",
       },
     },
   },
@@ -39,7 +39,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
   items,
   placeholder,
   tooltip,
-  variant = "field",
+  variant = "default",
   size = "default",
   raised = false,
   className,
@@ -51,7 +51,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
   placeholder?: string;
   /** Shown on hover while the list is closed. */
   tooltip?: string;
-  variant?: "field" | "pill";
+  variant?: "default" | "pill";
   size?: "default" | "lg";
   /** Lifts its list a level more, for a select on a card. */
   raised?: boolean;

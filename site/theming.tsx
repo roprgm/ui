@@ -102,6 +102,11 @@ const tokens: Group[] = [
         swatch: "bg-on-accent",
         use: "Text and icons on the accent.",
       },
+      {
+        name: "accent-text",
+        swatch: "bg-accent-text",
+        use: "The accent as text, such as a link. It is the accent until a theme sets it apart.",
+      },
     ],
   },
   {
@@ -173,6 +178,23 @@ const tokens: Group[] = [
         name: "level-0 to level-12",
         swatch: "bg-level-6",
         use: "The palette every fill is picked from, by a theme or a region. Components never use it.",
+      },
+    ],
+  },
+  {
+    title: "Not colors: with h-, size-, or font-",
+    entries: [
+      {
+        name: "control-sm, control, control-lg",
+        use: "The heights of controls: 24px, 28px, and 32px. Only controls take them, so a theme scales them alone.",
+      },
+      {
+        name: "thumb",
+        use: "A slider's thumb, which its fill is placed by too.",
+      },
+      {
+        name: "font-weight-selected",
+        use: "The weight of a selected tab. A tab is as wide either way.",
       },
     ],
   },

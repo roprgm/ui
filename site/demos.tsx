@@ -242,7 +242,7 @@ export function ToggleGroupDemo() {
 export function SelectDemo() {
   return (
     <div className="grid gap-3 sm:grid-cols-2">
-      <Frame label="Field">
+      <Frame label="Default">
         <Select
           raised
           aria-label="Fruit"
@@ -651,8 +651,15 @@ export function BadgeDemo() {
     <>
       <Badge>Draft</Badge>
       <Badge variant="accent">New</Badge>
+      <Badge variant="outline">Public</Badge>
+      <Badge variant="outline" className="text-success">
+        Verified
+      </Badge>
       <span className="flex items-center gap-2">
         Comments <Badge>3</Badge>
+      </span>
+      <span className="flex items-center gap-2">
+        Issues <Badge size="sm">860</Badge>
       </span>
     </>
   );
@@ -929,7 +936,16 @@ export function TabsDemo() {
           </Tabs>
         </div>
       </Frame>
-      <Frame label="Segmented">
+      <Frame label="Segmented and underline">
+        <Tabs defaultValue="layers">
+          <TabList aria-label="Sidebar" variant="underline">
+            {sidebar.map(({ id }) => (
+              <Tab key={id} value={id} className="capitalize">
+                {id}
+              </Tab>
+            ))}
+          </TabList>
+        </Tabs>
         <Tabs defaultValue="hue">
           <TabList aria-label="Channel" variant="segmented">
             {["hue", "saturation", "luminance"].map((id) => (
