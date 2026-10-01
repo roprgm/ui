@@ -1,9 +1,11 @@
 import { cn } from "cn";
+import type { ComponentProps } from "react";
 
-/** A check mark, as on the chosen rows of a select or combobox. */
-export function Check({ className }: { className?: string }) {
+/** A check mark, as on the chosen rows of a select or combobox. With `draw`, it strokes itself in once `drawn`. */
+export function Check({ className, ...props }: ComponentProps<"svg">) {
   return (
     <svg
+      data-slot="check"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -12,8 +14,9 @@ export function Check({ className }: { className?: string }) {
       strokeLinejoin="round"
       className={cn("size-3.5 shrink-0", className)}
       aria-hidden
+      {...props}
     >
-      <path d="m5 13 4 4L19 7" />
+      <path d="m5 13 4 4L19 7" pathLength={1} />
     </svg>
   );
 }

@@ -21,6 +21,7 @@ export function Notice({
 }: ComponentProps<"div"> & { tone?: "status" | "alert" }) {
   return (
     <Popup
+      data-slot="notice"
       role={tone}
       className={cn(sections({ lines: false }), notice({ tone }), className)}
       {...props}
@@ -33,8 +34,9 @@ export function NoticeClose(
   props: Omit<ComponentProps<typeof IconButton>, "label">,
 ) {
   return (
-    <IconButton label="Dismiss" {...props}>
+    <IconButton data-slot="notice-close" label="Dismiss" {...props}>
       <svg
+        data-slot="notice-close-icon"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

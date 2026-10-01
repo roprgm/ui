@@ -33,6 +33,7 @@ export function CollapsibleTrigger({
 }) {
   return (
     <Primitive.Trigger
+      data-slot="collapsible-trigger"
       className={cn(
         // Square at the bottom while the panel shows under it.
         "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring -outline-offset-2 hover:bg-hover data-panel-open:rounded-b-none dim-disabled",
@@ -65,6 +66,7 @@ export function CollapsiblePanel({
 }) {
   return (
     <Primitive.Panel
+      data-slot="collapsible-panel"
       hiddenUntilFound
       onTransitionEnd={(event) => {
         revealSection(event);
@@ -74,9 +76,10 @@ export function CollapsiblePanel({
       {...props}
     >
       <div
+        data-slot="collapsible-panel-content"
         className={cn(
           sections(),
-          "shadow-[inset_0_1px_0_var(--color-line)]",
+          "shadow-[inset_0_1px_0_var(--color-border-subtle)]",
           className,
         )}
       >

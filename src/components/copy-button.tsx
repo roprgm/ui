@@ -2,6 +2,7 @@
 
 import { cn } from "cn";
 import { type ComponentProps, useState } from "react";
+import { Check } from "./check";
 import { IconButton } from "./icon-button";
 
 /** Copies `value`, and a check draws itself in. */
@@ -20,14 +21,16 @@ export function CopyButton({
   };
   return (
     <IconButton
+      data-slot="copy-button"
       label={copied ? "Copied" : "Copy"}
       onClick={copy}
       data-copied={copied}
       className={cn("group", className)}
       {...props}
     >
-      <span className="grid *:[grid-area:1/1]">
+      <span data-slot="copy-button-icons" className="grid *:[grid-area:1/1]">
         <svg
+          data-slot="copy-button-copy"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -40,23 +43,10 @@ export function CopyButton({
           <rect x="8" y="8" width="12" height="12" rx="2" />
           <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
         </svg>
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={1.75}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="size-4"
-          aria-hidden
-        >
-          {/* One dash the length of the stroke; its gap of 2 hides the round cap. */}
-          <path
-            d="m5 13 4 4L19 7"
-            pathLength={1}
-            className="transition-[stroke-dashoffset] duration-150 ease-in [stroke-dasharray:1_2] [stroke-dashoffset:1] group-data-[copied=true]:delay-100 group-data-[copied=true]:duration-300 group-data-[copied=true]:ease-out group-data-[copied=true]:[stroke-dashoffset:0]"
-          />
-        </svg>
+        <Check
+          data-slot="copy-button-check"
+          className="size-4 stroke-[1.75] draw transition-[stroke-dashoffset] duration-150 ease-in group-data-[copied=true]:drawn group-data-[copied=true]:delay-100 group-data-[copied=true]:duration-300 group-data-[copied=true]:ease-out"
+        />
       </span>
     </IconButton>
   );

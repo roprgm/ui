@@ -20,9 +20,15 @@ export function PopoverContent({
 }: Primitive.Popup.Props &
   Pick<Primitive.Positioner.Props, "align"> & { raised?: boolean }) {
   return (
-    <Primitive.Portal>
-      <Primitive.Positioner sideOffset={4} align={align} className="z-50">
+    <Primitive.Portal data-slot="popover-portal">
+      <Primitive.Positioner
+        data-slot="popover-positioner"
+        sideOffset={4}
+        align={align}
+        className="z-50"
+      >
         <Primitive.Popup
+          data-slot="popover-content"
           // A click leaves focus on the trigger, so no field starts typing.
           initialFocus={(type) => type === "keyboard"}
           render={(popup) => (

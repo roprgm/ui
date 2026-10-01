@@ -28,9 +28,13 @@ export const DialogClose = Primitive.Close;
 /** Padded as its content needs; its `Section`s stack without a line, and the last of several sits apart. */
 export function DialogContent(props: Primitive.Popup.Props) {
   return (
-    <Primitive.Portal>
-      <Primitive.Backdrop className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0" />
+    <Primitive.Portal data-slot="dialog-portal">
+      <Primitive.Backdrop
+        data-slot="dialog-backdrop"
+        className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0"
+      />
       <Primitive.Popup
+        data-slot="dialog-content"
         render={(popup) => (
           <Popup
             {...popup}
@@ -49,7 +53,11 @@ export function DialogContent(props: Primitive.Popup.Props) {
 
 export function DialogTitle({ className, ...props }: Primitive.Title.Props) {
   return (
-    <Primitive.Title className={cn("font-medium", className)} {...props} />
+    <Primitive.Title
+      data-slot="dialog-title"
+      className={cn("font-medium", className)}
+      {...props}
+    />
   );
 }
 
@@ -58,6 +66,10 @@ export function DialogDescription({
   ...props
 }: Primitive.Description.Props) {
   return (
-    <Primitive.Description className={cn("text-muted", className)} {...props} />
+    <Primitive.Description
+      data-slot="dialog-description"
+      className={cn("text-secondary", className)}
+      {...props}
+    />
   );
 }

@@ -96,7 +96,7 @@ export function Page({
               className={cn(
                 link,
                 "mb-3 hover:text-foreground",
-                current ? "text-muted" : "text-foreground",
+                current ? "text-secondary" : "text-foreground",
               )}
             >
               Overview
@@ -108,7 +108,7 @@ export function Page({
                   className={cn(
                     link,
                     "hover:text-foreground",
-                    group === current ? "text-foreground" : "text-muted",
+                    group === current ? "text-foreground" : "text-secondary",
                   )}
                 >
                   {group.title}
@@ -121,7 +121,9 @@ export function Page({
                       className={cn(
                         link,
                         "hover:text-foreground",
-                        doc.name === hash ? "text-foreground" : "text-muted",
+                        doc.name === hash
+                          ? "text-foreground"
+                          : "text-secondary",
                       )}
                     >
                       {doc.title}
@@ -137,7 +139,7 @@ export function Page({
         <div className="flex flex-wrap gap-x-4 gap-y-3 md:hidden">
           <a
             href="#overview"
-            className={cn(link, current ? "text-muted" : "text-foreground")}
+            className={cn(link, current ? "text-secondary" : "text-foreground")}
           >
             Overview
           </a>
@@ -147,7 +149,7 @@ export function Page({
               href={`#${slug(group)}`}
               className={cn(
                 link,
-                group === current ? "text-foreground" : "text-muted",
+                group === current ? "text-foreground" : "text-secondary",
               )}
             >
               {group.title}
@@ -196,7 +198,7 @@ function Article({ doc }: { doc: Doc }) {
     <article id={doc.name} className="flex min-w-0 scroll-mt-12 flex-col gap-4">
       <div className="flex flex-col gap-1">
         <h3 className="text-base font-medium">{doc.title}</h3>
-        <p className="text-muted">{doc.description}</p>
+        <p className="text-secondary">{doc.description}</p>
       </div>
       <Preview doc={doc} />
       {!doc.block && (

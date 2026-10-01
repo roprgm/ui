@@ -13,7 +13,7 @@ import {
 import { Chevron } from "./chevron";
 
 const hint =
-  "pointer-events-none absolute size-[9px] text-muted opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
+  "pointer-events-none absolute size-[9px] text-secondary opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
 
 /** Whole `ch`, since tabular digits can differ from it by a fraction of a pixel. */
 function digitsWidth(digits: string, minChars?: number) {
@@ -161,6 +161,7 @@ export function ScrubInput({
     // The input is the control; dragging is a pointer shortcut over it.
     // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
+      data-slot="scrub-input"
       className={cn(
         "group relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
         className,
@@ -171,9 +172,16 @@ export function ScrubInput({
       {chevrons && (
         <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
       )}
-      <span className="grid text-right *:[grid-area:1/1]">
-        <span className="text-foreground group-focus-within:invisible">
+      <span
+        data-slot="scrub-input-value"
+        className="grid text-right *:[grid-area:1/1]"
+      >
+        <span
+          data-slot="scrub-input-text"
+          className="text-foreground group-focus-within:invisible"
+        >
           <span
+            data-slot="scrub-input-number"
             className="inline-block"
             style={{ width: digitsWidth(number, minChars) }}
           >
@@ -181,12 +189,14 @@ export function ScrubInput({
           </span>
           {/* A unit flush against the digits, such as %, gets a hair of space. */}
           <span
-            className={cn("text-muted", /^\S/.test(unit ?? "") && "ml-0.5")}
+            data-slot="scrub-input-unit"
+            className={cn("text-secondary", /^\S/.test(unit ?? "") && "ml-0.5")}
           >
             {unit}
           </span>
         </span>
         <input
+          data-slot="scrub-input-control"
           ref={input}
           aria-label={label}
           inputMode="decimal"

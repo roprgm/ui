@@ -45,7 +45,7 @@ export function EditorDemo() {
 
   return (
     <div className="grid grid-cols-[auto_minmax(0,1fr)] bg-level-1 @2xl:flex @2xl:h-[560px]">
-      <div className="border-line border-r p-1.5 surface-panel">
+      <div className="p-1.5 shadow-[inset_-1px_0_0_var(--color-border-subtle)] surface-panel">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <div className="relative grid min-h-64 min-w-0 flex-1 place-items-center p-4 @2xl:p-10">
@@ -201,7 +201,7 @@ function ResizeEdge({
 }) {
   return (
     <div
-      className="absolute inset-y-0 -left-1 z-20 w-2 cursor-col-resize touch-none after:absolute after:inset-y-0 after:left-1 after:w-px after:transition-colors hover:after:bg-raised @max-2xl:hidden"
+      className="absolute inset-y-0 -left-1 z-20 w-2 cursor-col-resize touch-none after:absolute after:inset-y-0 after:left-1 after:w-px after:transition-colors hover:after:bg-selected @max-2xl:hidden"
       onPointerDown={(event) =>
         event.currentTarget.setPointerCapture(event.pointerId)
       }

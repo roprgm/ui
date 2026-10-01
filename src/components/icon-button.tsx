@@ -19,7 +19,13 @@ export function IconButton({
     <Tooltip>
       <TooltipTrigger
         render={
-          <Button variant="ghost" size="icon" aria-label={label} {...props} />
+          <Button
+            data-slot="icon-button"
+            variant="ghost"
+            size="icon"
+            aria-label={label}
+            {...props}
+          />
         }
       />
       <TooltipContent side={side} shortcut={shortcut}>

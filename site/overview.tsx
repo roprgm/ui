@@ -48,9 +48,9 @@ export function Overview() {
         <div className="flex flex-col gap-2">
           <div className="flex items-baseline gap-2">
             <h1 className="text-2xl font-medium">@roprgm/ui</h1>
-            <span className="text-muted">v{version}</span>
+            <span className="text-secondary">v{version}</span>
           </div>
-          <p className="text-muted">
+          <p className="text-secondary">
             The design library behind my apps: minimal, dark React components on
             Tailwind CSS v4 and Base UI. Use it as a package, or copy its source
             into your app.
@@ -59,13 +59,15 @@ export function Overview() {
         <CopyForAgents />
       </header>
       <Way title="Install the package">
-        <p className="text-muted">
+        <p className="text-secondary">
           Add it, then import its theme after Tailwind in your CSS.
         </p>
         <Code>bun add @roprgm/ui</Code>
         <Code lang="css">{`@import "tailwindcss";
 @import "@roprgm/ui/themes/default.css";`}</Code>
-        <p className="text-muted">Each component imports from its own path.</p>
+        <p className="text-secondary">
+          Each component imports from its own path.
+        </p>
         <Code lang="tsx">{`import { Button } from "@roprgm/ui/button";
 
 export function SaveButton() {
@@ -73,7 +75,7 @@ export function SaveButton() {
 }`}</Code>
       </Way>
       <Way title="Or copy the source">
-        <p className="text-muted">
+        <p className="text-secondary">
           In an app set up for shadcn, its CLI copies a component into
           components/ui, with the components it uses, and adds the theme to your
           CSS. The code is yours to change.
@@ -85,11 +87,11 @@ export function SaveButton() {
   return <Button variant="primary">Save</Button>;
 }`}</Code>
       </Way>
-      <p className="text-muted">
+      <p className="text-secondary">
         Then browse the{" "}
         <a
           href="#button"
-          className="rounded-sm text-foreground underline decoration-muted underline-offset-4 transition focus-ring hover:decoration-foreground"
+          className="rounded-sm text-foreground underline decoration-secondary underline-offset-4 transition focus-ring hover:decoration-foreground"
         >
           components
         </a>

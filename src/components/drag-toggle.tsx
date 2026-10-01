@@ -139,6 +139,7 @@ export function DragToggle({
 
   return (
     <div
+      data-slot="drag-toggle"
       ref={root}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}

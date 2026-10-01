@@ -4,6 +4,7 @@ import type { ComponentProps } from "react";
 export function Spinner({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
+      data-slot="spinner"
       role="status"
       aria-label="Loading"
       className={cn(

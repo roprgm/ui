@@ -16,7 +16,7 @@ const trigger = cva(
       /** `pill` goes in a bar over a canvas, beside Chips. */
       variant: {
         field:
-          "rounded-md surface-raised hover:bg-raised-hover data-popup-open:bg-raised-hover",
+          "rounded-md surface-control hover:bg-control-hover data-popup-open:bg-control-hover",
         pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
       },
       /** A Button's, 2px less on the chevron's side. */
@@ -25,7 +25,6 @@ const trigger = cva(
         lg: "h-8 pr-3 pl-3.5",
       },
     },
-    defaultVariants: { size: "default" },
   },
 );
 
@@ -41,7 +40,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
   placeholder,
   tooltip,
   variant = "field",
-  size,
+  size = "default",
   raised = false,
   className,
   "aria-label": label,
@@ -62,20 +61,25 @@ export function Select<T extends string, Multiple extends boolean = false>({
   const [open, setOpen] = useState(false);
   const control = (
     <Primitive.Trigger
+      data-slot="select"
+      data-variant={variant}
+      data-size={size}
       aria-label={label}
       className={cn(trigger({ variant, size }), className)}
     >
       <Primitive.Value
+        data-slot="select-value"
         placeholder={placeholder}
-        className="truncate data-placeholder:text-muted"
+        className="truncate data-placeholder:text-secondary"
       />
       <Primitive.Icon
+        data-slot="select-icon"
         render={(props, { open }) => (
           <span {...props}>
             <Chevron
               direction={open ? "up" : "down"}
               size="sm"
-              className="text-muted"
+              className="text-secondary"
             />
           </span>
         )}
@@ -98,13 +102,15 @@ export function Select<T extends string, Multiple extends boolean = false>({
         </Tooltip>
       )}
       {!tooltip && control}
-      <Primitive.Portal>
+      <Primitive.Portal data-slot="select-portal">
         <Primitive.Positioner
+          data-slot="select-positioner"
           sideOffset={4}
           alignItemWithTrigger={false}
           className="z-50"
         >
           <Primitive.Popup
+            data-slot="select-content"
             render={(props) => (
               <Popup
                 {...props}
@@ -114,20 +120,26 @@ export function Select<T extends string, Multiple extends boolean = false>({
               />
             )}
           >
-            <Primitive.List className="flex flex-col gap-0.5">
+            <Primitive.List
+              data-slot="select-list"
+              className="flex flex-col gap-0.5"
+            >
               {items.map((item, index) => (
                 <Primitive.Item
+                  data-slot="select-item"
                   // Values can repeat.
                   key={`${item.value}-${index}`}
                   value={item.value}
                   disabled={item.disabled}
                   className={cn(
                     popupItem,
-                    "justify-between gap-4 data-selected:bg-raised",
+                    "justify-between gap-4 data-selected:bg-selected",
                   )}
                 >
-                  <Primitive.ItemText>{item.label}</Primitive.ItemText>
-                  <Primitive.ItemIndicator>
+                  <Primitive.ItemText data-slot="select-item-text">
+                    {item.label}
+                  </Primitive.ItemText>
+                  <Primitive.ItemIndicator data-slot="select-item-indicator">
                     <Check />
                   </Primitive.ItemIndicator>
                 </Primitive.Item>
