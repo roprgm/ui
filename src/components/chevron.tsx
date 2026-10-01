@@ -12,17 +12,18 @@ const chevron = cva("shrink-0 transition-[rotate,color] duration-200", {
     // The stroke is in viewBox units, so the smaller icon draws it thicker to match.
     size: { sm: "size-2 stroke-[2.5]", md: "size-2.5 stroke-2" },
   },
-  defaultVariants: { direction: "down", size: "md" },
 });
 
 /** One right-pointing stroke turned to `direction`, so changing it animates the turn. */
 export function Chevron({
-  direction,
-  size,
+  direction = "down",
+  size = "md",
   className,
 }: VariantProps<typeof chevron> & { className?: string }) {
   return (
     <svg
+      data-slot="chevron"
+      data-size={size}
       viewBox="5 5 14 14"
       fill="none"
       stroke="currentColor"

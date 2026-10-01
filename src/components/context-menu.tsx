@@ -13,9 +13,13 @@ export function ContextMenuContent({
   ...props
 }: Primitive.Popup.Props & { raised?: boolean }) {
   return (
-    <Primitive.Portal>
-      <Primitive.Positioner className="z-50">
+    <Primitive.Portal data-slot="context-menu-portal">
+      <Primitive.Positioner
+        data-slot="context-menu-positioner"
+        className="z-50"
+      >
         <Primitive.Popup
+          data-slot="context-menu-content"
           render={(popup) => <Popup {...popup} list raised={raised} />}
           {...props}
         />

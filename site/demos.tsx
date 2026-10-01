@@ -56,6 +56,7 @@ import { ScrollText } from "../src/components/scroll-text";
 import { ScrubInput } from "../src/components/scrub-input";
 import { Section, SectionAction } from "../src/components/section";
 import { Select } from "../src/components/select";
+import { Separator } from "../src/components/separator";
 import { Slider } from "../src/components/slider";
 import { Spinner } from "../src/components/spinner";
 import { Switch } from "../src/components/switch";
@@ -241,7 +242,7 @@ export function ToggleGroupDemo() {
 export function SelectDemo() {
   return (
     <div className="grid gap-3 sm:grid-cols-2">
-      <Frame label="Field">
+      <Frame label="Default">
         <Select
           raised
           aria-label="Fruit"
@@ -332,7 +333,7 @@ export function ScrollTextDemo() {
       ].map((name) => (
         <div
           key={name}
-          className="flex h-7 items-center gap-2 rounded-md surface-sunken px-2.5"
+          className="flex h-7 items-center gap-2 rounded-md surface-field px-2.5"
         >
           <ScrollText>{name}</ScrollText>
         </div>
@@ -345,7 +346,7 @@ export function SpinnerDemo() {
   return (
     <>
       <Spinner />
-      <span className="flex items-center gap-2 text-muted">
+      <span className="flex items-center gap-2 text-secondary">
         <Spinner className="size-3 border" /> Decoding RAW…
       </span>
     </>
@@ -357,7 +358,7 @@ function Frame({ label, children }: { label: string; children: ReactNode }) {
   return (
     <Card>
       <Section>
-        <span className="text-muted">{label}</span>
+        <span className="text-secondary">{label}</span>
       </Section>
       <Section className="min-h-32 flex-1 flex-row flex-wrap items-center justify-center gap-3 p-6">
         {children}
@@ -384,16 +385,33 @@ const levels = [
 
 // Where each fill sits by default, to read text on it.
 const grounds = [
-  { name: "Page", className: "bg-level-2" },
-  { name: "Card", className: "bg-level-4" },
-  { name: "Card in a card", className: "bg-level-6" },
+  { name: "Background", className: "bg-background" },
+  { name: "Surface", className: "bg-surface" },
+  { name: "Raised popup", className: "bg-level-6" },
 ] as const;
 
-const accents = [
-  { name: "primary", className: "bg-primary" },
+const states = [
+  { name: "success", className: "bg-success" },
+  { name: "warning", className: "bg-warning" },
   { name: "danger", className: "bg-danger" },
+];
+
+const translucent = [
+  { name: "border", className: "bg-border" },
+  { name: "border-subtle", className: "bg-border-subtle" },
+  { name: "pressed", className: "bg-pressed" },
   { name: "focus", className: "bg-focus" },
-  { name: "line", className: "bg-line" },
+];
+
+const accents = [
+  "neutral",
+  "violet",
+  "blue",
+  "green",
+  "amber",
+  "orange",
+  "coral",
+  "rose",
 ] as const;
 
 export function ColorsDemo() {
@@ -405,7 +423,7 @@ export function ColorsDemo() {
             <div
               key={level}
               className={cn(
-                "flex h-24 items-end justify-center pb-2 text-muted tabular-nums first:rounded-l-md last:rounded-r-md",
+                "flex h-24 items-end justify-center pb-2 text-secondary tabular-nums first:rounded-l-md last:rounded-r-md",
                 level,
               )}
             >
@@ -426,8 +444,8 @@ export function ColorsDemo() {
                 )}
               >
                 <span className="text-foreground">Foreground</span>
+                <span className="text-secondary">Secondary</span>
                 <span className="text-muted">Muted</span>
-                <span className="text-faint">Faint</span>
                 <span className="text-disabled">Disabled</span>
               </div>
             ))}
@@ -436,13 +454,25 @@ export function ColorsDemo() {
         <Frame label="Accents">
           <div className="grid grid-cols-4 gap-4">
             {accents.map((accent) => (
-              <div
-                key={accent.name}
-                className="flex flex-col items-center gap-2"
-              >
-                <div className={cn("size-10 rounded-full", accent.className)} />
-                <span className="text-muted">{accent.name}</span>
+              <div key={accent} data-accent={accent}>
+                <ColorSwatch name={accent} className="bg-accent" />
               </div>
+            ))}
+          </div>
+        </Frame>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Frame label="States">
+          <div className="grid grid-cols-3 gap-4">
+            {states.map((state) => (
+              <ColorSwatch key={state.name} {...state} />
+            ))}
+          </div>
+        </Frame>
+        <Frame label="Lines and states of a control">
+          <div className="grid grid-cols-4 gap-4">
+            {translucent.map((color) => (
+              <ColorSwatch key={color.name} {...color} />
             ))}
           </div>
         </Frame>
@@ -451,43 +481,11 @@ export function ColorsDemo() {
   );
 }
 
-const surfaces = [
-  "surface-card",
-  "surface-raised",
-  "surface-sunken",
-  "surface-primary",
-  "surface-float",
-  "separator",
-] as const;
-
-function Swatch({ name }: { name: (typeof surfaces)[number] }) {
-  if (name === "separator") {
-    return (
-      <div className="flex size-16 items-center">
-        <div className="h-px w-full separator" />
-      </div>
-    );
-  }
+function ColorSwatch({ name, className }: { name: string; className: string }) {
   return (
-    <div
-      className={cn(
-        "size-16 rounded-lg",
-        name,
-        name === "surface-primary" && "rounded-full",
-      )}
-    />
-  );
-}
-
-export function SurfacesDemo() {
-  return (
-    <div className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3">
-      {surfaces.map((name) => (
-        <div key={name} className="flex flex-col items-center gap-3">
-          <Swatch name={name} />
-          <span className="text-muted">{name}</span>
-        </div>
-      ))}
+    <div className="flex flex-col items-center gap-2">
+      <div className={cn("size-10 rounded-full", className)} />
+      <span className="text-secondary">{name}</span>
     </div>
   );
 }
@@ -496,14 +494,8 @@ export function DepthDemo() {
   return (
     <div className="flex flex-col gap-4">
       <Depth name="Page" level={2} />
-      {/* 16px corners less 8px of padding leave 8px for the card inside. */}
-      <div className="flex flex-col gap-2 rounded-2xl p-2 surface-card">
-        <div className="p-3">
-          <Depth name="Card" level={4} />
-        </div>
-        <div className="rounded-lg p-5 surface-card">
-          <Depth name="Card in a card" level={6} />
-        </div>
+      <div className="rounded-2xl p-5 surface-card">
+        <Depth name="Card" level={4} />
       </div>
     </div>
   );
@@ -512,7 +504,7 @@ export function DepthDemo() {
 function Depth({ name, level }: { name: string; level: number }) {
   return (
     <div className="flex flex-col gap-3">
-      <span className="text-muted">
+      <span className="text-secondary">
         {name} <span className="text-disabled">· level {level}</span>
       </span>
       <div className="flex flex-wrap items-center gap-2">
@@ -543,14 +535,14 @@ function Depth({ name, level }: { name: string; level: number }) {
 export function SizesDemo() {
   return (
     <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-6 gap-y-4">
-      <span className="text-muted tabular-nums">24px</span>
+      <span className="text-secondary tabular-nums">24px</span>
       <div className="flex flex-wrap items-center gap-2">
         <Button size="sm">Small</Button>
         <IconButton label="More" size="icon-sm">
           <MoreIcon />
         </IconButton>
       </div>
-      <span className="text-muted tabular-nums">28px</span>
+      <span className="text-secondary tabular-nums">28px</span>
       <div className="flex flex-wrap items-center gap-2">
         <Button>Default</Button>
         <IconButton label="More">
@@ -565,7 +557,7 @@ export function SizesDemo() {
           className="w-32"
         />
       </div>
-      <span className="text-muted tabular-nums">32px</span>
+      <span className="text-secondary tabular-nums">32px</span>
       <div className="flex flex-wrap items-center gap-2">
         <Button size="lg">Large</Button>
         <IconButton label="More" size="icon-lg">
@@ -581,7 +573,7 @@ export function SizesDemo() {
           className="w-32"
         />
       </div>
-      <span className="text-muted tabular-nums">40px</span>
+      <span className="text-secondary tabular-nums">40px</span>
       <div className="w-64 max-w-full overflow-hidden rounded-lg surface-float">
         <ListItem>Sky</ListItem>
         <ListItem>Subject</ListItem>
@@ -593,7 +585,7 @@ export function SizesDemo() {
 export function CopyButtonDemo() {
   return (
     <span className="flex items-center gap-1">
-      <span className="text-muted">ui.roprgm.com</span>
+      <span className="text-secondary">ui.roprgm.com</span>
       <CopyButton value="https://ui.roprgm.com" />
     </span>
   );
@@ -621,10 +613,10 @@ export function ShimmerDemo() {
         <BrushIcon /> Finding a source for the patch…
       </span>
       <div className="shimmer flex items-center gap-3">
-        <span className="size-10 rounded-md bg-raised" />
+        <span className="size-10 rounded-md bg-selected" />
         <span className="flex flex-1 flex-col gap-2">
-          <span className="h-2.5 w-3/4 rounded-full bg-raised" />
-          <span className="h-2.5 w-1/2 rounded-full bg-raised" />
+          <span className="h-2.5 w-3/4 rounded-full bg-selected" />
+          <span className="h-2.5 w-1/2 rounded-full bg-selected" />
         </span>
       </div>
     </div>
@@ -658,9 +650,16 @@ export function BadgeDemo() {
   return (
     <>
       <Badge>Draft</Badge>
-      <Badge variant="primary">New</Badge>
+      <Badge variant="accent">New</Badge>
+      <Badge variant="outline">Public</Badge>
+      <Badge variant="outline" className="text-success">
+        Verified
+      </Badge>
       <span className="flex items-center gap-2">
         Comments <Badge>3</Badge>
+      </span>
+      <span className="flex items-center gap-2">
+        Issues <Badge size="sm">860</Badge>
       </span>
     </>
   );
@@ -694,7 +693,7 @@ export function MenuDemo() {
 export function ContextMenuDemo() {
   return (
     <ContextMenu>
-      <ContextMenuTrigger className="flex h-32 w-64 items-center justify-center rounded-lg surface-sunken text-muted select-none">
+      <ContextMenuTrigger className="flex h-32 w-64 items-center justify-center rounded-lg surface-field text-secondary select-none">
         Right-click here
       </ContextMenuTrigger>
       <ContextMenuContent raised>
@@ -921,7 +920,7 @@ export function TabsDemo() {
               ))}
             </TabList>
             {sidebar.map(({ id, text }) => (
-              <TabPanel key={id} value={id} className="px-3 text-muted">
+              <TabPanel key={id} value={id} className="px-3 text-secondary">
                 {text}
               </TabPanel>
             ))}
@@ -937,7 +936,16 @@ export function TabsDemo() {
           </Tabs>
         </div>
       </Frame>
-      <Frame label="Segmented">
+      <Frame label="Segmented and underline">
+        <Tabs defaultValue="layers">
+          <TabList aria-label="Sidebar" variant="underline">
+            {sidebar.map(({ id }) => (
+              <Tab key={id} value={id} className="capitalize">
+                {id}
+              </Tab>
+            ))}
+          </TabList>
+        </Tabs>
         <Tabs defaultValue="hue">
           <TabList aria-label="Channel" variant="segmented">
             {["hue", "saturation", "luminance"].map((id) => (
@@ -1142,6 +1150,22 @@ const presets = [
   { name: "Fjord", tint: "from-cyan-300 to-slate-700" },
 ];
 
+export function SeparatorDemo() {
+  return (
+    <div className="flex w-64 flex-col gap-3">
+      <span>Exposure</span>
+      <Separator />
+      <div className="flex h-5 items-center gap-3 text-secondary">
+        <span>Crop</span>
+        <Separator orientation="vertical" />
+        <span>Rotate</span>
+        <Separator orientation="vertical" />
+        <span>Flip</span>
+      </div>
+    </div>
+  );
+}
+
 export function CardDemo() {
   return (
     <>
@@ -1210,7 +1234,7 @@ function PresetsCard() {
             <button
               key={preset.name}
               type="button"
-              className="flex w-16 shrink-0 cursor-pointer flex-col gap-1.5 rounded-md text-muted focus-ring hover:text-foreground"
+              className="flex w-16 shrink-0 cursor-pointer flex-col gap-1.5 rounded-md text-secondary focus-ring hover:text-foreground"
             >
               <span
                 className={cn(
@@ -1223,7 +1247,7 @@ function PresetsCard() {
           ))}
         </div>
       </Section>
-      <Section className="text-muted">
+      <Section className="text-secondary">
         <ScrollText>
           Canon EOS R5 · RF 24–70mm F2.8 · ƒ/2.8 · 1/250 s · ISO 100 · 8192 ×
           5464
@@ -1247,11 +1271,11 @@ function EditCard() {
           </IconButton>
         </SectionAction>
       </Section>
-      <Section className="gap-1 text-muted">
+      <Section className="gap-1 text-secondary">
         <span>Exposure +0.35</span>
         <span>Temperature +12</span>
         <span>Shadows +20</span>
-        <span className="text-muted">Edited 2 min ago</span>
+        <span className="text-secondary">Edited 2 min ago</span>
       </Section>
       <Section className="flex-row justify-end gap-1.5 px-2.5">
         <Button variant="ghost">Revert</Button>
@@ -1270,14 +1294,14 @@ export function CollapsibleDemo() {
             <CollapsibleTrigger>
               <Chevron
                 direction="right"
-                className="text-muted group-data-open/collapsible:rotate-90"
+                className="text-secondary group-data-open/collapsible:rotate-90"
               />
               <span className="flex-1">{edit.title}</span>
-              <span className="text-muted">{edit.when}</span>
+              <span className="text-secondary">{edit.when}</span>
             </CollapsibleTrigger>
             <CollapsiblePanel>
               <Section>
-                <ol className="flex flex-col gap-1 text-muted">
+                <ol className="flex flex-col gap-1 text-secondary">
                   {edit.steps.map((step) => (
                     <li key={step}>{step}</li>
                   ))}
@@ -1294,7 +1318,7 @@ export function CollapsibleDemo() {
 export function ScrollAreaDemo() {
   return (
     <ScrollArea fade className="h-48 w-64 rounded-lg bg-field/60">
-      <ol className="flex flex-col gap-2 p-3 text-muted">
+      <ol className="flex flex-col gap-2 p-3 text-secondary">
         {Array.from({ length: 24 }, (_, index) => (
           <li key={index}>Step {index + 1}: Exposure +0.1</li>
         ))}
@@ -1360,7 +1384,7 @@ export function ScrubInputDemo() {
   const [angle, setAngle] = useState(0);
   return (
     <>
-      <span className="flex items-center gap-2 text-muted">
+      <span className="flex items-center gap-2 text-secondary">
         Size
         <ScrubInput
           aria-label="Size"
@@ -1372,7 +1396,7 @@ export function ScrubInputDemo() {
           format={(v) => `${v}px`}
         />
       </span>
-      <span className="flex items-center gap-2 text-muted">
+      <span className="flex items-center gap-2 text-secondary">
         Angle
         <ScrubInput
           aria-label="Angle"

@@ -15,7 +15,7 @@ export const sections = cva(
     variants: {
       lines: {
         // Once it holds sections, a line runs between all its parts, such as a list that scrolls.
-        true: "has-[>[data-slot=section]]:*:not-last:shadow-[inset_0_-1px_0_var(--color-line)]",
+        true: "has-[>[data-slot=section]]:*:not-last:shadow-[inset_0_-1px_0_var(--color-border-subtle)]",
         false: "*:data-[slot=section]:not-last:pb-0",
       },
     },
@@ -34,6 +34,7 @@ export function Section({ className, ...props }: ComponentProps<"div">) {
 export function SectionAction({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
+      data-slot="section-action"
       className={cn("-my-1 -mr-2 flex shrink-0 items-center gap-1", className)}
       {...props}
     />

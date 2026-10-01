@@ -13,19 +13,29 @@ export function ScrollArea({
 }: ComponentProps<"div"> & { fade?: boolean }) {
   return (
     <Primitive.Root
+      data-slot="scroll-area"
       className={cn("relative min-h-0 overflow-hidden", className)}
       {...props}
     >
       <Primitive.Viewport
+        data-slot="scroll-area-viewport"
         className={cn(
           "h-full overscroll-contain outline-none",
           fade && "overflow-fade-y",
         )}
       >
-        <Primitive.Content className="min-w-0">{children}</Primitive.Content>
+        <Primitive.Content data-slot="scroll-area-content" className="min-w-0">
+          {children}
+        </Primitive.Content>
       </Primitive.Viewport>
-      <Primitive.Scrollbar className="group z-10 my-1 mr-px flex w-1.5 justify-center opacity-0 transition-opacity data-hovering:opacity-100 data-scrolling:opacity-100">
-        <Primitive.Thumb className="w-1 rounded-full bg-disabled group-hover:bg-muted" />
+      <Primitive.Scrollbar
+        data-slot="scroll-area-scrollbar"
+        className="group z-10 my-1 mr-px flex w-1.5 justify-center opacity-0 transition-opacity data-hovering:opacity-100 data-scrolling:opacity-100"
+      >
+        <Primitive.Thumb
+          data-slot="scroll-area-thumb"
+          className="w-1 rounded-full bg-disabled group-hover:bg-secondary"
+        />
       </Primitive.Scrollbar>
     </Primitive.Root>
   );

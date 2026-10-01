@@ -1,4 +1,3 @@
-import "./index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Toaster } from "../src/components/toast";
@@ -32,11 +31,11 @@ import {
   ScrollTextDemo,
   ScrubInputDemo,
   SelectDemo,
+  SeparatorDemo,
   ShimmerDemo,
   SizesDemo,
   SliderDemo,
   SpinnerDemo,
-  SurfacesDemo,
   SwitchDemo,
   TabsDemo,
   TextareaDemo,
@@ -49,6 +48,12 @@ import { type Group, Page } from "./docs";
 import { EditorDemo } from "./editor";
 import { FormsDemo } from "./forms";
 import { Overview } from "./overview";
+import {
+  SurfacesTable,
+  ThemeExample,
+  TokensTable,
+  UtilitiesTable,
+} from "./theming";
 
 const groups: Group[] = [
   {
@@ -96,7 +101,7 @@ const groups: Group[] = [
         name: "badge",
         title: "Badge",
         description:
-          "A short label that isn't a control, such as a status or a count. primary marks what is new; it renders on the server.",
+          "A short label that isn't a control, such as a status or a count. accent marks what is new, and outline draws a line in the text's color, so text-success makes a green one. sm is a count beside a label, a step smaller than its text. It renders on the server.",
         demo: <BadgeDemo />,
         half: true,
       },
@@ -200,8 +205,15 @@ const groups: Group[] = [
         name: "card",
         title: "Card",
         description:
-          "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-card, without its edge, and sections() on your own element, as the Photo editor block does.",
+          "Padded as one section until it holds Sections, which stack with a line between each; the first reads as a header and the last as a footer. SectionAction holds a header's icon buttons. For a panel docked in a layout, put surface-panel and sections() on your own element, as the Photo editor block does.",
         demo: <CardDemo />,
+      },
+      {
+        name: "separator",
+        title: "Separator",
+        description:
+          'A line between groups: across, or upright with orientation="vertical". A menu\'s separators are these.',
+        demo: <SeparatorDemo />,
       },
       {
         name: "collapsible",
@@ -233,7 +245,7 @@ const groups: Group[] = [
         name: "tabs",
         title: "Tabs",
         description:
-          "Tabs and the panels they show, in a row or a column, with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views.",
+          "Tabs and the panels they show, in a row or a column, with arrow-key navigation. The segmented variant sets them into a sunken strip, as a tool rail or a switch between views, and underline lines them over a rule, as a page's navigation. A tab is as wide selected or not, so a theme can bolden the selected one.",
         demo: <TabsDemo />,
         bare: true,
       },
@@ -338,41 +350,69 @@ const groups: Group[] = [
     ],
   },
   {
-    title: "Foundations",
+    title: "Theming",
     docs: [
+      {
+        name: "colors",
+        title: "Colors",
+        description:
+          "Every fill is a level, 3.7% apart in lightness. Text comes in four opaque steps, from foreground to disabled; data-accent picks the accent, for what is on; and success, warning, and danger mark states, each with a label.",
+        demo: <ColorsDemo />,
+        bare: true,
+        code: '<div className="bg-level-4 text-secondary">…</div>',
+      },
+      {
+        name: "tokens",
+        title: "Color tokens",
+        description:
+          "Components use only these, never the palette. Use each with bg-, text-, or outline-. A theme sets them again, and a region sets the roles of what sits on it. The swatches show the current values.",
+        demo: <TokensTable />,
+        bare: true,
+        code: '<p className="text-secondary">…</p>',
+      },
       {
         name: "surfaces",
         title: "Surfaces",
         description:
-          "What every component is built from: a fill, and an edge the theme draws. Build your own controls from them and they follow the theme.",
-        demo: <SurfacesDemo />,
-        code: '<button className="surface-raised hover:bg-raised-hover rounded-md px-3">…</button>',
+          "A surface is a class: it paints the color of its name, and the theme adds the rest, such as an edge. Build your own from them and they follow the theme.",
+        demo: <SurfacesTable />,
+        bare: true,
+        code: '<button className="surface-control hover:bg-control-hover rounded-md px-3">…</button>',
       },
       {
         name: "depth",
         title: "Depth",
         description:
-          "A card rises two levels over what it sits on, and what sits on it follows, so controls keep their contrast at any depth.",
+          "A card sets the fills of what sits on it, so its controls keep their contrast. A popup that opens over a card takes raised, and stands a level more.",
         demo: <DepthDemo />,
         bare: true,
         code: '<div className="rounded-xl surface-card">…</div>',
       },
       {
-        name: "colors",
-        title: "Colors",
+        name: "utilities",
+        title: "Utilities",
         description:
-          "Every fill is a level, 3.7% apart in lightness. Text comes in four opaque steps, from foreground to disabled.",
-        demo: <ColorsDemo />,
+          "What every control shares, and patterns too fiddly to write twice. Use them on your own controls too.",
+        demo: <UtilitiesTable />,
         bare: true,
-        code: '<div className="bg-level-4 text-muted">…</div>',
+        code: '<button className="surface-control rounded-md px-3 focus-ring dim-disabled">…</button>',
       },
       {
         name: "sizes",
         title: "Sizes",
         description:
-          "Controls are 28px tall, with 24px and 32px sizes. List rows are 40px.",
+          "Controls are 28px tall, with 24px and 32px sizes, from the control tokens a theme can scale; list rows are 40px. Corners take Tailwind's scale, set for controls (md), lists (lg), and cards and popups (xl).",
         demo: <SizesDemo />,
         code: '<Button size="sm">…</Button>',
+      },
+      {
+        name: "writing-a-theme",
+        title: "Writing a theme",
+        description:
+          "A theme imports base.css and sets again only what it changes: tokens in @theme; for each region, the roles of what sits on it and its edge; what a control's surface adds; and a single component through its data-slot. Themes share no helpers.",
+        demo: <ThemeExample />,
+        bare: true,
+        block: true,
       },
     ],
   },

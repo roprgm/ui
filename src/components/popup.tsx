@@ -14,6 +14,7 @@ export function Popup({
 }: ComponentProps<"div"> & { list?: boolean; raised?: boolean }) {
   return (
     <div
+      data-slot="popup"
       data-raised={raised || undefined}
       className={cn(
         "max-h-(--available-height) min-w-40 overflow-x-hidden overflow-y-auto rounded-xl text-foreground surface-float outline-none popup-motion",
@@ -27,4 +28,4 @@ export function Popup({
 
 /** A row in a popup's list, as in a menu or select. */
 export const popupItem =
-  "flex h-6.5 shrink-0 cursor-default items-center rounded-sm px-2.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-raised";
+  "flex h-6.5 shrink-0 cursor-default items-center rounded-sm px-2.5 outline-none select-none data-disabled:text-disabled data-highlighted:bg-selected";

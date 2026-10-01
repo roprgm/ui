@@ -26,8 +26,8 @@ export function Field({
   const id = useId();
   const note = error ?? description;
   return (
-    <div className={cn("flex flex-col gap-1.5", className)}>
-      <label htmlFor={id} className="text-muted">
+    <div data-slot="field" className={cn("flex flex-col gap-1.5", className)}>
+      <label data-slot="field-label" htmlFor={id} className="text-secondary">
         {label}
       </label>
       {cloneElement(children, {
@@ -37,8 +37,9 @@ export function Field({
       })}
       {note && (
         <p
+          data-slot={error ? "field-error" : "field-description"}
           id={`${id}-note`}
-          className={cn("text-muted", error && "text-danger")}
+          className={cn("text-secondary", error && "text-danger")}
         >
           {note}
         </p>

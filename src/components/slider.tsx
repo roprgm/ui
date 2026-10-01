@@ -39,9 +39,9 @@ const bar = cva("box-content flex cursor-pointer touch-none select-none", {
   variants: {
     orientation: {
       horizontal:
-        "-my-2.5 h-thumb items-center py-2.5 pointer-coarse:-my-4 pointer-coarse:py-4",
+        "-my-2.5 h-(--spacing-thumb) items-center py-2.5 pointer-coarse:-my-4 pointer-coarse:py-4",
       vertical:
-        "-mx-2.5 w-thumb justify-center px-2.5 pointer-coarse:-mx-4 pointer-coarse:px-4",
+        "-mx-2.5 w-(--spacing-thumb) justify-center px-2.5 pointer-coarse:-mx-4 pointer-coarse:px-4",
     },
     variant: {
       panel: "col-span-2",
@@ -51,7 +51,7 @@ const bar = cva("box-content flex cursor-pointer touch-none select-none", {
   },
 });
 
-const track = cva("rounded-full surface-sunken", {
+const track = cva("rounded-full surface-field", {
   variants: {
     orientation: { horizontal: "h-1 w-full", vertical: "h-full w-1" },
   },
@@ -79,7 +79,7 @@ function barBackground(
   if (stops) return `linear-gradient(to ${side}, ${stops.join()})`;
   const start = fillEdge(Math.min(origin, value));
   const end = fillEdge(Math.max(origin, value));
-  return `linear-gradient(to ${side}, transparent ${start}, var(--color-muted) ${start} ${end}, transparent ${end})`;
+  return `linear-gradient(to ${side}, transparent ${start}, var(--color-secondary) ${start} ${end}, transparent ${end})`;
 }
 
 /**
@@ -151,6 +151,8 @@ export function Slider({
 
   return (
     <Primitive.Root
+      data-slot="slider"
+      data-variant={variant}
       value={value}
       onValueChange={onChange}
       min={min}
@@ -163,7 +165,12 @@ export function Slider({
     >
       {!vertical && (
         <>
-          <span className="relative z-10 text-muted">{label}</span>
+          <span
+            data-slot="slider-label"
+            className="relative z-10 text-secondary"
+          >
+            {label}
+          </span>
           <ScrubInput
             aria-label={label}
             value={value}
@@ -181,6 +188,7 @@ export function Slider({
       )}
       {(vertical || variant !== "compact") && (
         <Primitive.Control
+          data-slot="slider-control"
           onPointerDown={(event) => event.button === 0 && edit(true)}
           onPointerUp={() => edit(false)}
           onPointerCancel={() => edit(false)}
@@ -202,12 +210,13 @@ export function Slider({
             }}
           >
             <Primitive.Thumb
+              data-slot="slider-thumb"
               aria-label={label}
               getAriaValueText={format && ((_, next) => format(next))}
               onKeyDown={(event) => valueKeys.has(event.key) && edit(true)}
               onKeyUp={() => edit(false)}
               onBlur={() => edit(false)}
-              className="size-thumb rounded-full surface-primary has-focus-visible:ring-2 has-focus-visible:ring-focus"
+              className="size-(--spacing-thumb) rounded-full surface-accent has-focus-visible:ring-2 has-focus-visible:ring-focus"
               style={{ backgroundColor: color }}
             />
           </Primitive.Track>

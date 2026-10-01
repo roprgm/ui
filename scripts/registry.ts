@@ -13,10 +13,12 @@ function parse(source: string): Rules {
   const clean = (text: string) =>
     text.trim().replace(/\s+/g, " ").replace(/\( /g, "(").replace(/ \)/g, ")");
 
+  // A block written again, such as a theme's rule for a selector the base styles, merges into it.
   function add(rules: Rules, key: string, value: string | Rules) {
     const current = rules[key];
     if (typeof current === "object" && typeof value === "object") {
-      Object.assign(current, value);
+      for (const [name, inner] of Object.entries(value))
+        add(current, name, inner);
     } else {
       rules[key] = value;
     }

@@ -1,7 +1,12 @@
-/* The tokens, primitives, and utilities every theme builds on. A theme imports this file, sets
-   again the tokens it changes, and draws the primitives' edges. */
+/* The tokens every theme sets again, and the surfaces and utilities components are built from, as
+   plain as they can be. A theme imports this file, sets again the tokens it changes, and adds to
+   the surfaces with selectors and utilities of the same name, as themes/default.css does. */
 
-@source "./";
+@import "./utils/overflow-fade.css";
+@import "./utils/shimmer.css";
+
+/* The app's Tailwind skips node_modules, so this registers the components to generate classes for. */
+@source "./components";
 
 @theme {
   --font-sans: system-ui, sans-serif;
@@ -9,7 +14,7 @@
 
 /* Colors. Components use only these. */
 @theme {
-  /* Backgrounds: black, then darkest first in even steps of lightness. Every fill is one of them.
+  /* The palette: black, then darkest first in even steps of lightness. Every fill is one of them.
      Level 1 is 15%, and each level after adds 3.7%. */
   --color-level-0: oklch(0% 0 0);
   --color-level-1: oklch(15% 0 0);
@@ -25,42 +30,57 @@
   --color-level-11: oklch(52% 0 0);
   --color-level-12: oklch(55.7% 0 0);
 
-  /* Text, strongest first, and opaque, so an icon's crossing strokes don't show. */
+  /* The colors of where you are. The page sets them, and each region sets them again for what sits
+     on it: its own fill; the fill a card gets there; what you press; where you set a value; a quiet
+     fill, such as a ghost's hover or a well; and a highlighted or selected row. Until a theme sets
+     them apart, controls, fields, and selected rows take a card's fill. */
+  --color-background: var(--color-level-2);
+  --color-surface: var(--color-level-4);
+  --color-control: var(--color-surface);
+  --color-control-hover: var(--color-level-5);
+  --color-field: var(--color-control);
+  --color-hover: var(--color-level-3);
+  --color-selected: var(--color-control);
+
+  /* Text, strongest first, and opaque, so an icon's crossing strokes don't show: text and icons,
+     supporting text, hints, and what is disabled. */
   --color-foreground: oklch(96% 0 0);
-  --color-muted: oklch(70% 0 0);
-  --color-faint: oklch(55% 0 0);
+  --color-secondary: oklch(70% 0 0);
+  --color-muted: oklch(55% 0 0);
   --color-disabled: oklch(44% 0 0);
 
-  /* What is on: primary buttons, checked controls, thumbs. */
-  --color-primary: oklch(89% 0 0);
-  --color-primary-hover: oklch(98.5% 0 0);
-  --color-on-primary: oklch(18% 0 0);
+  /* Lines, translucent over any fill: separators, and dividers inside a surface. */
+  --color-border: oklch(0% 0 0 / 0.7);
+  --color-border-subtle: oklch(0% 0 0 / 0.5);
 
-  /* Translucent, over any level. */
+  /* What is on: checked controls, thumbs. `data-accent` picks another. */
+  --color-accent: oklch(89% 0 0);
+  --color-on-accent: oklch(18% 0 0);
+  /* The accent as text, such as a link, for a theme whose accent fill reads too dark as text. */
+  --color-accent-text: var(--color-accent);
+
+  /* The main action, a primary button. It takes the accent until a theme sets it apart. */
+  --color-primary: var(--color-accent);
+  --color-primary-hover: oklch(98.5% 0 0);
+  --color-on-primary: var(--color-on-accent);
+
+  /* States, each with a label beside it. */
+  --color-success: oklch(78% 0.15 150);
+  --color-warning: oklch(84% 0.15 85);
+  --color-danger: oklch(75% 0.14 21);
+
+  /* Translucent, over any fill: a pressed ghost, the focus ring, and the shade behind a dialog. */
   --color-pressed: oklch(100% 0 0 / 0.15);
   --color-focus: oklch(100% 0 0 / 0.25);
   --color-backdrop: oklch(0% 0 0 / 0.5);
-  --color-line: oklch(0% 0 0 / 0.5);
-  --color-separator: oklch(0% 0 0 / 0.7);
 
-  --color-danger: oklch(75% 0.14 21);
+  --color-tooltip: var(--color-level-1);
 
   /* Code, as a highlighter marks it. */
   --color-code-keyword: oklch(77% 0.1 9);
   --color-code-string: oklch(81% 0.08 133);
   --color-code-type: oklch(81% 0.07 230);
   --color-code-property: oklch(83% 0.08 76);
-}
-
-/* The page's fills, for what sits on it: its own, a field two levels below, a raised control
-   three above and four on hover, and a hover one above. `surface-card` sets them again for what
-   sits on a card. */
-@theme {
-  --color-surface: var(--color-level-2);
-  --color-field: var(--color-level-0);
-  --color-raised: var(--color-level-5);
-  --color-raised-hover: var(--color-level-6);
-  --color-hover: var(--color-level-3);
 }
 
 @theme {
@@ -71,70 +91,78 @@
   --radius-xl: 12px;
 }
 
-/* A slider's thumb, which its fill is placed by too. */
+/* The heights of controls, a Button's and what goes with it: `h-control`, `size-control-sm`.
+   Only controls take them, so a theme can scale them without moving anything else. A slider's
+   thumb, which its fill is placed by too. */
 @theme {
+  --spacing-control-sm: 24px;
+  --spacing-control: 28px;
+  --spacing-control-lg: 32px;
   --spacing-thumb: 13px;
 }
 
-/* Surfaces: a fill, and an edge the theme draws. A theme changes a fill through its tokens, never
-   by redeclaring `background-color` here. */
+/* The weight of a selected tab. Its label keeps this weight's width either way, so a theme can
+   bolden it without moving its neighbors. */
+@theme {
+  --font-weight-selected: 400;
+}
 
-/* Containers, which set the fills of what sits on them, as the page does. A card stands two
-   levels over what it sits on, a card too, three deep at most; a panel is a card docked in a
-   layout, such as a sidebar, with no edge; and what floats is a card drawn floating: popups,
-   dialogs, notices, anything dragged. Raised, a popup stands as a card on a card, for one that
-   opens over a card. Plain classes under the utilities, so a utility such as `bg-*` changes
-   one's fill. */
+/* Surfaces: what a box is. Each paints its color, and the theme adds the rest, such as an edge.
+
+   Regions hold content and paint their background and text; the theme sets the colors of what sits on each.
+   A card, and what floats, take the surface of where they sit; a panel, docked in a layout, keeps
+   the background until the theme gives it one. With `data-raised`, a popup opens over a card. Plain
+   classes under the utilities, so a utility such as `bg-*` changes one's fill. */
 @layer components {
   .surface-card,
   .surface-panel,
   .surface-float {
-    --color-surface: var(--color-level-4);
-    --color-field: var(--color-level-2);
-    --color-raised: var(--color-level-7);
-    --color-raised-hover: var(--color-level-8);
-    --color-hover: var(--color-level-5);
-    background-color: var(--color-surface);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 
-  :where(.surface-card, .surface-panel, .surface-float)
-    :is(.surface-card, .surface-panel, .surface-float),
-  .surface-float[data-raised] {
-    --color-surface: var(--color-level-6);
-    --color-field: var(--color-level-4);
-    --color-raised: var(--color-level-9);
-    --color-raised-hover: var(--color-level-10);
-    --color-hover: var(--color-level-7);
+  .surface-card,
+  .surface-float {
+    --color-background: var(--color-surface);
   }
 
-  :where(.surface-card, .surface-panel, .surface-float)
-    :where(.surface-card, .surface-panel, .surface-float)
-    :is(.surface-card, .surface-panel, .surface-float) {
-    --color-surface: var(--color-level-8);
-    --color-field: var(--color-level-6);
-    --color-raised: var(--color-level-11);
-    --color-raised-hover: var(--color-level-12);
-    --color-hover: var(--color-level-9);
+  /* A frame over what a card holds, where a theme draws its edge: it takes no room, so a border
+     works, and a row with a fill can't cover it. */
+  .surface-card {
+    position: relative;
+  }
+
+  .surface-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
   }
 }
 
-/* A control that stands up from what it sits on: buttons, selects, selected tabs and toggles. */
-@utility surface-raised {
-  background-color: var(--color-raised);
+/* A control you press: buttons, selects, selected tabs and toggles. */
+@utility surface-control {
+  background-color: var(--color-control);
 }
 
-/* Sets a control into what it sits on: fields, tracks, checkboxes, switches, segmented groups. */
-@utility surface-sunken {
+/* A field you set: inputs, tracks, checkboxes, switches, segmented groups. */
+@utility surface-field {
   background-color: var(--color-field);
 }
 
-/* What is on: a primary button, a checked switch, a slider's thumb. */
+/* What is on: a checked switch, a slider's thumb. */
+@utility surface-accent {
+  background-color: var(--color-accent);
+}
+
+/* The main action: a primary button. */
 @utility surface-primary {
-  @apply bg-primary;
+  background-color: var(--color-primary);
 }
 
 /* A strip of controls a size smaller than a Button, 3px in and rounded to match, as a ToggleGroup
-   or a segmented TabList; pair it with `surface-sunken`. It stands 2px taller than a Button but
+   or a segmented TabList; pair it with `surface-field`. It stands 2px taller than a Button but
    reaches a pixel past each edge, so in a row it takes a Button's height. */
 @utility segmented {
   @apply -my-px gap-0.5 rounded-lg p-0.75;
@@ -144,9 +172,15 @@
   }
 }
 
-/* A line between groups, dark over whatever it sits on; size it with `h-px` or `w-px`. */
-@utility separator {
-  @apply bg-separator;
+/* A stroke that draws itself in once `drawn`, on a path with `pathLength={1}`: one dash its length,
+   with a gap of 2 that hides the round cap while erased. */
+@utility draw {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1;
+}
+
+@utility drawn {
+  stroke-dashoffset: 0;
 }
 
 /* Grows from its trigger as it fades in. Base UI sets the attributes and the origin. */
@@ -185,171 +219,55 @@
   }
 }
 
-/* Scrolls vertically, shading an edge while more lies past it. Without scroll timelines, it reads
-   the attributes Base UI's ScrollArea sets. */
-@utility overflow-fade-y {
-  overflow-y: auto;
-  &::before,
-  &::after {
-    content: "";
-    position: sticky;
-    z-index: 10;
-    display: block;
-    height: 1.5rem;
-    pointer-events: none;
-    opacity: 0;
-  }
-  &::before {
-    top: 0;
-    margin-bottom: -1.5rem;
-    background: linear-gradient(
-      to bottom,
-      oklch(0% 0 0 / 0.2),
-      30%,
-      transparent
-    );
-  }
-  &::after {
-    bottom: 0;
-    margin-top: -1.5rem;
-    background: linear-gradient(to top, oklch(0% 0 0 / 0.2), 30%, transparent);
+/* Accents, for `data-accent` on the page or any part of it. Each works on a dark or a light page, and
+   the main action takes it too. */
+@layer base {
+  [data-accent] {
+    --color-accent-text: var(--color-accent);
+    --color-primary: var(--color-accent);
+    --color-on-primary: var(--color-on-accent);
   }
 
-  @supports (animation-timeline: scroll()) {
-    &::before {
-      animation: overflow-fade-in linear both;
-      animation-timeline: scroll();
-      animation-range: 0 1.5rem;
-    }
-    &::after {
-      animation: overflow-fade-out linear both;
-      animation-timeline: scroll();
-      animation-range: calc(100% - 1.5rem) 100%;
-    }
+  [data-accent="violet"] {
+    --color-accent: oklch(62% 0.2 293);
+    --color-on-accent: oklch(98.5% 0 0);
+    --color-primary-hover: oklch(68% 0.19 293);
   }
 
-  @supports not (animation-timeline: scroll()) {
-    &::before,
-    &::after {
-      transition: opacity 150ms;
-    }
-    &[data-overflow-y-start]::before,
-    &[data-overflow-y-end]::after {
-      opacity: 1;
-    }
-  }
-}
-
-@keyframes overflow-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes overflow-fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-/* Registered, so an animation can move them. */
-@property --overflow-fade-start {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-@property --overflow-fade-end {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-/* Scrolls horizontally, fading an edge while more lies past it, with no scrollbar. Give one that
-   holds only text `tabIndex={-1}`, or it becomes a tab stop. */
-@utility overflow-fade-x {
-  min-width: 0;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
+  [data-accent="blue"] {
+    --color-accent: oklch(62% 0.19 255);
+    --color-on-accent: oklch(98.5% 0 0);
+    --color-primary-hover: oklch(68% 0.17 255);
   }
 
-  /* Its overflow and mask clip rings drawn outside a child, so draw them inside. */
-  & :focus-visible {
-    outline-offset: -2px;
+  [data-accent="green"] {
+    --color-accent: oklch(72% 0.17 150);
+    --color-on-accent: oklch(20% 0.04 150);
+    --color-primary-hover: oklch(78% 0.16 150);
   }
 
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    oklch(0% 0 0) var(--overflow-fade-start),
-    oklch(0% 0 0) calc(100% - var(--overflow-fade-end)),
-    transparent
-  );
+  [data-accent="amber"] {
+    --color-accent: oklch(81% 0.16 80);
+    --color-on-accent: oklch(22% 0.04 80);
+    --color-primary-hover: oklch(86% 0.14 80);
+  }
 
-  @supports (animation-timeline: scroll()) {
-    animation:
-      overflow-fade-x-start linear both,
-      overflow-fade-x-end linear both;
-    animation-timeline: scroll(self inline), scroll(self inline);
-    animation-range:
-      0 1.5rem,
-      calc(100% - 1.5rem) 100%;
+  [data-accent="orange"] {
+    --color-accent: oklch(73% 0.17 55);
+    --color-on-accent: oklch(20% 0.04 55);
+    --color-primary-hover: oklch(79% 0.15 55);
   }
-}
 
-@keyframes overflow-fade-x-start {
-  from {
-    --overflow-fade-start: 0px;
+  [data-accent="coral"] {
+    --color-accent: oklch(71% 0.15 30);
+    --color-on-accent: oklch(20% 0.04 30);
+    --color-primary-hover: oklch(77% 0.13 30);
   }
-  to {
-    --overflow-fade-start: 1.5rem;
-  }
-}
 
-@keyframes overflow-fade-x-end {
-  from {
-    --overflow-fade-end: 1.5rem;
-  }
-  to {
-    --overflow-fade-end: 0px;
-  }
-}
-
-/* A bright band sweeping across pending work. On a group, one band crosses it all. */
-@utility shimmer {
-  mask-image: linear-gradient(
-    100deg,
-    oklch(0% 0 0 / 0.45) 30%,
-    oklch(0% 0 0 / 0.6) 40%,
-    oklch(0% 0 0) 50%,
-    oklch(0% 0 0 / 0.6) 60%,
-    oklch(0% 0 0 / 0.45) 70%
-  );
-  mask-size: 300% 100%;
-  animation: shimmer 2.4s ease-in-out infinite;
-
-  @media (prefers-reduced-motion: reduce) {
-    mask-image: none;
-    animation: none;
-  }
-}
-
-@keyframes shimmer {
-  from {
-    mask-position: 100% 0;
-  }
-  75%,
-  to {
-    mask-position: 0 0;
+  [data-accent="rose"] {
+    --color-accent: oklch(63% 0.21 10);
+    --color-on-accent: oklch(98.5% 0 0);
+    --color-primary-hover: oklch(69% 0.19 10);
   }
 }
 
@@ -359,11 +277,11 @@
     font-size: 13px;
     line-height: 20px;
     color: var(--color-foreground);
-    background: var(--color-surface);
+    background: var(--color-background);
     color-scheme: dark;
-    text-shadow: var(--text-shadow-default);
   }
 
+  /* Form controls take a theme's text shadow, as other text does. */
   button,
   input,
   textarea {

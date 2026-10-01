@@ -9,44 +9,51 @@ const button = cva(
     variants: {
       variant: {
         default:
-          "surface-raised text-foreground hover:bg-raised-hover data-popup-open:bg-raised-hover",
-        primary:
-          "surface-primary text-on-primary text-shadow-(--text-shadow-subtle) hover:bg-primary-hover",
+          "surface-control text-foreground hover:bg-control-hover data-popup-open:bg-control-hover",
+        primary: "surface-primary text-on-primary hover:bg-primary-hover",
         ghost:
-          "text-muted hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
+          "text-secondary hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },
       // Labels are at least as wide as tall, and icons square. A leading icon sits 4px closer to
       // the edge, since its box has air around the stroke.
       size: {
-        default: "h-7 min-w-7 has-[>svg:first-child]:pl-2",
-        sm: "h-6 min-w-6 px-2.5 has-[>svg:first-child]:pl-1.5",
-        lg: "h-8 min-w-8 px-3.5 has-[>svg:first-child]:pl-2.5",
-        icon: "size-7 px-0",
-        "icon-sm": "size-6 px-0",
-        "icon-lg": "size-8 px-0",
+        default:
+          "h-(--spacing-control) min-w-(--spacing-control) has-[>svg:first-child]:pl-2",
+        sm: "h-(--spacing-control-sm) min-w-(--spacing-control-sm) px-2.5 has-[>svg:first-child]:pl-1.5",
+        lg: "h-(--spacing-control-lg) min-w-(--spacing-control-lg) px-3.5 has-[>svg:first-child]:pl-2.5",
+        icon: "size-(--spacing-control) px-0",
+        "icon-sm": "size-(--spacing-control-sm) px-0",
+        "icon-lg": "size-(--spacing-control-lg) px-0",
       },
     },
-    defaultVariants: { variant: "default", size: "default" },
   },
 );
 
 /** An action. `render` draws it as another element: `<Button render={<a href="/" />}>`. */
 export function Button({
   className,
-  variant,
-  size,
+  variant = "default",
+  size = "default",
   render,
   ...props
 }: ComponentProps<"button"> &
   VariantProps<typeof button> & {
-    render?: ReactElement<{ className?: string }>;
+    render?: ReactElement<{ className?: string; "data-slot"?: string }>;
   }) {
   const classes = cn(button({ variant, size }), className);
+  const attributes = {
+    "data-slot": render?.props["data-slot"] ?? "button",
+    "data-variant": variant,
+    "data-size": size,
+  };
   if (render) {
     return cloneElement(render, {
+      ...attributes,
       ...props,
       className: cn(classes, render.props.className),
     });
   }
-  return <button type="button" className={classes} {...props} />;
+  return (
+    <button type="button" {...attributes} className={classes} {...props} />
+  );
 }

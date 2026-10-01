@@ -16,8 +16,11 @@ export const toast = Primitive.createToastManager();
 export function Toaster() {
   return (
     <Primitive.Provider toastManager={toast}>
-      <Primitive.Portal>
-        <Primitive.Viewport className="fixed inset-x-3.5 bottom-3.5 z-50 flex flex-col-reverse gap-2 sm:left-auto sm:w-sm">
+      <Primitive.Portal data-slot="toaster-portal">
+        <Primitive.Viewport
+          data-slot="toaster"
+          className="fixed inset-x-3.5 bottom-3.5 z-50 flex flex-col-reverse gap-2 sm:left-auto sm:w-sm"
+        >
           <Toasts />
         </Primitive.Viewport>
       </Primitive.Portal>
@@ -29,6 +32,7 @@ function Toasts() {
   const { toasts } = Primitive.useToastManager();
   return toasts.map((item) => (
     <Primitive.Root
+      data-slot="toast"
       key={item.id}
       toast={item}
       swipeDirection="right"
@@ -37,9 +41,9 @@ function Toasts() {
       render={<Notice tone={item.priority === "high" ? "alert" : "status"} />}
     >
       <Section className="flex-row items-start">
-        <div className="flex flex-1 flex-col gap-0.5">
-          <Primitive.Title className="font-medium" />
-          <Primitive.Description />
+        <div data-slot="toast-text" className="flex flex-1 flex-col gap-0.5">
+          <Primitive.Title data-slot="toast-title" className="font-medium" />
+          <Primitive.Description data-slot="toast-description" />
         </div>
         <SectionAction>
           <NoticeClose onClick={() => toast.close(item.id)} />
@@ -47,7 +51,10 @@ function Toasts() {
       </Section>
       {item.actionProps && (
         <Section className="flex-row gap-1.5 px-2.5">
-          <Primitive.Action render={<Button size="sm" />} />
+          <Primitive.Action
+            data-slot="toast-action"
+            render={<Button size="sm" />}
+          />
         </Section>
       )}
     </Primitive.Root>

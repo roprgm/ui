@@ -22,115 +22,49 @@
           "color-level-10": "oklch(48.3% 0 0)",
           "color-level-11": "oklch(52% 0 0)",
           "color-level-12": "oklch(55.7% 0 0)",
+          "color-background": "var(--color-level-2)",
+          "color-surface": "var(--color-level-4)",
+          "color-control": "var(--color-level-5)",
+          "color-control-hover": "var(--color-level-6)",
+          "color-field": "var(--color-level-0)",
+          "color-hover": "var(--color-level-3)",
+          "color-selected": "var(--color-control)",
           "color-foreground": "oklch(96% 0 0)",
-          "color-muted": "oklch(70% 0 0)",
-          "color-faint": "oklch(55% 0 0)",
+          "color-secondary": "oklch(70% 0 0)",
+          "color-muted": "oklch(55% 0 0)",
           "color-disabled": "oklch(44% 0 0)",
-          "color-primary": "oklch(89% 0 0)",
+          "color-border": "oklch(0% 0 0 / 0.7)",
+          "color-border-subtle": "oklch(0% 0 0 / 0.5)",
+          "color-accent": "oklch(89% 0 0)",
+          "color-on-accent": "oklch(18% 0 0)",
+          "color-accent-text": "var(--color-accent)",
+          "color-primary": "var(--color-accent)",
           "color-primary-hover": "oklch(98.5% 0 0)",
-          "color-on-primary": "oklch(18% 0 0)",
+          "color-on-primary": "var(--color-on-accent)",
+          "color-success": "oklch(78% 0.15 150)",
+          "color-warning": "oklch(84% 0.15 85)",
+          "color-danger": "oklch(75% 0.14 21)",
           "color-pressed": "oklch(100% 0 0 / 0.15)",
           "color-focus": "oklch(100% 0 0 / 0.25)",
           "color-backdrop": "oklch(0% 0 0 / 0.5)",
-          "color-line": "oklch(0% 0 0 / 0.5)",
-          "color-separator": "oklch(0% 0 0 / 0.7)",
-          "color-danger": "oklch(75% 0.14 21)",
+          "color-tooltip": "var(--color-level-1)",
           "color-code-keyword": "oklch(77% 0.1 9)",
           "color-code-string": "oklch(81% 0.08 133)",
           "color-code-type": "oklch(81% 0.07 230)",
           "color-code-property": "oklch(83% 0.08 76)",
-          "color-surface": "var(--color-level-2)",
-          "color-field": "var(--color-level-0)",
-          "color-raised": "var(--color-level-5)",
-          "color-raised-hover": "var(--color-level-6)",
-          "color-hover": "var(--color-level-3)",
           "radius-xs": "2.5px",
           "radius-sm": "5px",
           "radius-md": "7px",
           "radius-lg": "9px",
           "radius-xl": "12px",
+          "spacing-control-sm": "24px",
+          "spacing-control": "28px",
+          "spacing-control-lg": "32px",
           "spacing-thumb": "13px",
-          "text-shadow-default": "0.5px 1px 0.5px oklch(19.1% 0 0 / 0.2)",
-          "text-shadow-subtle": "0.5px 1px 0.5px oklch(0% 0 0 / 0.08)"
+          "font-weight-selected": "400"
         }
       },
       "css": {
-        "@layer components": {
-          ".surface-card, .surface-panel, .surface-float": {
-            "--color-surface": "var(--color-level-4)",
-            "--color-field": "var(--color-level-2)",
-            "--color-raised": "var(--color-level-7)",
-            "--color-raised-hover": "var(--color-level-8)",
-            "--color-hover": "var(--color-level-5)",
-            "background-color": "var(--color-surface)"
-          },
-          ":where(.surface-card, .surface-panel, .surface-float) :is(.surface-card, .surface-panel, .surface-float), .surface-float[data-raised]": {
-            "--color-surface": "var(--color-level-6)",
-            "--color-field": "var(--color-level-4)",
-            "--color-raised": "var(--color-level-9)",
-            "--color-raised-hover": "var(--color-level-10)",
-            "--color-hover": "var(--color-level-7)"
-          },
-          ":where(.surface-card, .surface-panel, .surface-float) :where(.surface-card, .surface-panel, .surface-float) :is(.surface-card, .surface-panel, .surface-float)": {
-            "--color-surface": "var(--color-level-8)",
-            "--color-field": "var(--color-level-6)",
-            "--color-raised": "var(--color-level-11)",
-            "--color-raised-hover": "var(--color-level-12)",
-            "--color-hover": "var(--color-level-9)"
-          }
-        },
-        "@utility surface-raised": {
-          "background-color": "var(--color-raised)",
-          "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
-        },
-        "@utility surface-sunken": {
-          "background-color": "var(--color-field)",
-          "box-shadow": "inset 0 1px 1px oklch(0% 0 0 / 0.3), 0 1px 0 oklch(95% 0 0 / 0.08)"
-        },
-        "@utility surface-primary": {
-          "@apply bg-primary": {},
-          "box-shadow": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)"
-        },
-        "@utility segmented": {
-          "@apply -my-px gap-0.5 rounded-lg p-0.75": {},
-          "& > *": {
-            "border-radius": "calc(var(--radius-lg) - 3px)"
-          }
-        },
-        "@utility separator": {
-          "@apply bg-separator": {},
-          "box-shadow": "0 1px 0 oklch(95.5% 0 0 / 0.05)",
-          "&[aria-orientation=\"vertical\"]": {
-            "box-shadow": "1px 0 0 oklch(95.5% 0 0 / 0.05)"
-          }
-        },
-        "@utility popup-motion": {
-          "transform-origin": "var(--transform-origin)",
-          "transition-property": "opacity, scale",
-          "transition-timing-function": "var(--default-transition-timing-function)",
-          "transition-duration": "100ms",
-          "&[data-starting-style]": {
-            "opacity": "0",
-            "scale": "0.95"
-          },
-          "&[data-ending-style]": {
-            "opacity": "0"
-          }
-        },
-        "@utility focus-ring": {
-          "outline": "2px solid transparent",
-          "outline-offset": "1px",
-          "&:focus-visible, &:has(:focus-visible)": {
-            "outline-color": "var(--color-focus)",
-            "transition-duration": "300ms"
-          }
-        },
-        "@utility dim-disabled": {
-          "&:is(:disabled, [data-disabled], :has(:disabled))": {
-            "pointer-events": "none",
-            "opacity": "40%"
-          }
-        },
         "@utility overflow-fade-y": {
           "overflow-y": "auto",
           "&::before, &::after": {
@@ -250,15 +184,158 @@
             "mask-position": "0 0"
           }
         },
+        "@layer components": {
+          ".surface-card, .surface-panel, .surface-float": {
+            "background-color": "var(--color-background)",
+            "color": "var(--color-foreground)",
+            "--color-control": "var(--color-level-7)",
+            "--color-control-hover": "var(--color-level-8)",
+            "--color-field": "var(--color-level-2)",
+            "--color-hover": "var(--color-level-5)",
+            "--color-selected": "var(--color-level-7)"
+          },
+          ".surface-card, .surface-float": {
+            "--color-background": "var(--color-surface)"
+          },
+          ".surface-card": {
+            "position": "relative",
+            "box-shadow": "0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
+          },
+          ".surface-card::after": {
+            "content": "\"\"",
+            "position": "absolute",
+            "inset": "0",
+            "border-radius": "inherit",
+            "pointer-events": "none",
+            "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08)"
+          },
+          ".surface-panel": {
+            "--color-background": "var(--color-surface)"
+          },
+          ".surface-float[data-raised]": {
+            "--color-background": "var(--color-level-6)",
+            "--color-control": "var(--color-level-9)",
+            "--color-control-hover": "var(--color-level-10)",
+            "--color-field": "var(--color-level-4)",
+            "--color-hover": "var(--color-level-7)",
+            "--color-selected": "var(--color-level-9)"
+          },
+          "[data-slot=\"separator\"]": {
+            "box-shadow": "0 1px 0 oklch(95.5% 0 0 / 0.05)"
+          },
+          "[data-slot=\"separator\"][data-orientation=\"vertical\"]": {
+            "box-shadow": "1px 0 0 oklch(95.5% 0 0 / 0.05)"
+          },
+          ".surface-float": {
+            "box-shadow": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)"
+          }
+        },
+        "@utility surface-control": {
+          "background-color": "var(--color-control)",
+          "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
+        },
+        "@utility surface-field": {
+          "background-color": "var(--color-field)",
+          "box-shadow": "inset 0 1px 1px oklch(0% 0 0 / 0.3), 0 1px 0 oklch(95% 0 0 / 0.08)"
+        },
+        "@utility surface-accent": {
+          "background-color": "var(--color-accent)",
+          "box-shadow": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)"
+        },
+        "@utility surface-primary": {
+          "background-color": "var(--color-primary)",
+          "box-shadow": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)",
+          "text-shadow": "0.5px 1px 0.5px oklch(0% 0 0 / 0.08)"
+        },
+        "@utility segmented": {
+          "@apply -my-px gap-0.5 rounded-lg p-0.75": {},
+          "& > *": {
+            "border-radius": "calc(var(--radius-lg) - 3px)"
+          }
+        },
+        "@utility draw": {
+          "stroke-dasharray": "1 2",
+          "stroke-dashoffset": "1"
+        },
+        "@utility drawn": {
+          "stroke-dashoffset": "0"
+        },
+        "@utility popup-motion": {
+          "transform-origin": "var(--transform-origin)",
+          "transition-property": "opacity, scale",
+          "transition-timing-function": "var(--default-transition-timing-function)",
+          "transition-duration": "100ms",
+          "&[data-starting-style]": {
+            "opacity": "0",
+            "scale": "0.95"
+          },
+          "&[data-ending-style]": {
+            "opacity": "0"
+          }
+        },
+        "@utility focus-ring": {
+          "outline": "2px solid transparent",
+          "outline-offset": "1px",
+          "&:focus-visible, &:has(:focus-visible)": {
+            "outline-color": "var(--color-focus)",
+            "transition-duration": "300ms"
+          }
+        },
+        "@utility dim-disabled": {
+          "&:is(:disabled, [data-disabled], :has(:disabled))": {
+            "pointer-events": "none",
+            "opacity": "40%"
+          }
+        },
         "@layer base": {
+          "[data-accent]": {
+            "--color-accent-text": "var(--color-accent)",
+            "--color-primary": "var(--color-accent)",
+            "--color-on-primary": "var(--color-on-accent)"
+          },
+          "[data-accent=\"violet\"]": {
+            "--color-accent": "oklch(62% 0.2 293)",
+            "--color-on-accent": "oklch(98.5% 0 0)",
+            "--color-primary-hover": "oklch(68% 0.19 293)"
+          },
+          "[data-accent=\"blue\"]": {
+            "--color-accent": "oklch(62% 0.19 255)",
+            "--color-on-accent": "oklch(98.5% 0 0)",
+            "--color-primary-hover": "oklch(68% 0.17 255)"
+          },
+          "[data-accent=\"green\"]": {
+            "--color-accent": "oklch(72% 0.17 150)",
+            "--color-on-accent": "oklch(20% 0.04 150)",
+            "--color-primary-hover": "oklch(78% 0.16 150)"
+          },
+          "[data-accent=\"amber\"]": {
+            "--color-accent": "oklch(81% 0.16 80)",
+            "--color-on-accent": "oklch(22% 0.04 80)",
+            "--color-primary-hover": "oklch(86% 0.14 80)"
+          },
+          "[data-accent=\"orange\"]": {
+            "--color-accent": "oklch(73% 0.17 55)",
+            "--color-on-accent": "oklch(20% 0.04 55)",
+            "--color-primary-hover": "oklch(79% 0.15 55)"
+          },
+          "[data-accent=\"coral\"]": {
+            "--color-accent": "oklch(71% 0.15 30)",
+            "--color-on-accent": "oklch(20% 0.04 30)",
+            "--color-primary-hover": "oklch(77% 0.13 30)"
+          },
+          "[data-accent=\"rose\"]": {
+            "--color-accent": "oklch(63% 0.21 10)",
+            "--color-on-accent": "oklch(98.5% 0 0)",
+            "--color-primary-hover": "oklch(69% 0.19 10)"
+          },
           "body": {
             "font-family": "var(--font-sans)",
             "font-size": "13px",
             "line-height": "20px",
             "color": "var(--color-foreground)",
-            "background": "var(--color-surface)",
+            "background": "var(--color-background)",
             "color-scheme": "dark",
-            "text-shadow": "var(--text-shadow-default)"
+            "text-shadow": "0.5px 1px 0.5px oklch(19.1% 0 0 / 0.2)"
           },
           "button, input, textarea": {
             "text-shadow": "inherit"
@@ -266,12 +343,6 @@
           "label:has(input:is([type=\"checkbox\"], [type=\"radio\"]):enabled)": {
             "cursor": "pointer"
           }
-        },
-        "@utility surface-card": {
-          "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
-        },
-        "@utility surface-float": {
-          "box-shadow": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)"
         }
       }
     },
@@ -361,7 +432,8 @@
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/icon-button.json"
+        "https://ui.roprgm.com/r/icon-button.json",
+        "https://ui.roprgm.com/r/check.json"
       ],
       "files": [
         {
@@ -414,7 +486,10 @@
       "type": "registry:ui",
       "categories": ["inputs"],
       "dependencies": ["cn"],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/check.json"
+      ],
       "files": [
         {
           "path": "src/components/checkbox.tsx",
@@ -589,7 +664,8 @@
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/popup.json",
-        "https://ui.roprgm.com/r/kbd.json"
+        "https://ui.roprgm.com/r/kbd.json",
+        "https://ui.roprgm.com/r/separator.json"
       ],
       "files": [
         {
@@ -699,6 +775,19 @@
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/section.json"
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "categories": ["containers"],
+      "dependencies": ["cn", "@base-ui/react"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/separator.tsx",
+          "type": "registry:ui"
+        }
       ]
     },
     {

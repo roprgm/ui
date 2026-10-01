@@ -3,24 +3,58 @@
 @import "../base.css";
 
 @theme {
-  --color-line: oklch(100% 0 0 / 0.1);
-  --color-separator: oklch(100% 0 0 / 0.1);
+  --color-border-subtle: oklch(100% 0 0 / 0.1);
+  --color-border: oklch(100% 0 0 / 0.1);
 }
 
-@utility surface-raised {
+/* On the page, a control stands three levels over it and a field two below. */
+@theme {
+  --color-control: var(--color-level-5);
+  --color-control-hover: var(--color-level-6);
+  --color-field: var(--color-level-0);
+}
+
+@layer components {
+  /* A card, a panel, and what floats lift what sits on them two levels, as the page does. */
+  .surface-card,
+  .surface-panel,
+  .surface-float {
+    --color-hover: var(--color-level-5);
+    --color-selected: var(--color-level-7);
+    --color-control: var(--color-level-7);
+    --color-control-hover: var(--color-level-8);
+    --color-field: var(--color-level-2);
+  }
+
+  /* A popup that opens over a card stands as a card on a card. */
+  .surface-float[data-raised] {
+    --color-background: var(--color-level-6);
+    --color-hover: var(--color-level-7);
+    --color-selected: var(--color-level-9);
+    --color-control: var(--color-level-9);
+    --color-control-hover: var(--color-level-10);
+    --color-field: var(--color-level-4);
+  }
+
+  .surface-card::after {
+    border: 1px solid oklch(100% 0 0 / 0.08);
+  }
+
+  .surface-float {
+    box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.16);
+  }
+}
+
+@utility surface-control {
   box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
 }
 
-@utility surface-card {
-  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
-}
-
-@utility surface-sunken {
+@utility surface-field {
   box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.1);
 }
 
-@utility surface-float {
-  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.16);
+@utility surface-accent {
+  box-shadow: inset 0 0 0 1px oklch(0% 0 0 / 0.5);
 }
 
 @utility surface-primary {

@@ -48,7 +48,7 @@ export function FormsDemo() {
             </Field>
           </div>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-muted">Format</span>
+            <span className="text-secondary">Format</span>
             <ToggleGroup>
               <Toggle name="format" value="jpeg" defaultChecked>
                 JPEG
@@ -62,7 +62,7 @@ export function FormsDemo() {
             </ToggleGroup>
           </div>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="text-muted">Color space</span>
+            <span className="text-secondary">Color space</span>
             <Select
               raised
               aria-label="Color space"

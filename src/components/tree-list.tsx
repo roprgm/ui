@@ -289,13 +289,14 @@ export function TreeList<T extends TreeNode<T>>({
             className={cn(
               "gap-1.5 pl-(--indent) outline-none select-none [-webkit-touch-callout:none] focus-visible:bg-hover focus-visible:ring-1 focus-visible:ring-focus focus-visible:ring-inset",
               "data-[dragging=true]:opacity-40",
-              "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-primary/60 data-[drop=inside]:ring-inset",
-              "before:absolute before:right-2 before:left-(--indent) before:z-10 before:h-0.5 before:rounded-full before:bg-primary before:opacity-0",
+              "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-accent/60 data-[drop=inside]:ring-inset",
+              "before:absolute before:right-2 before:left-(--indent) before:z-10 before:h-0.5 before:rounded-full before:bg-accent before:opacity-0",
               "data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100",
             )}
           >
             {branch && (
               <button
+                data-slot="tree-list-toggle"
                 type="button"
                 tabIndex={-1}
                 aria-label={`${expanded ? "Collapse" : "Expand"} ${label(item)}`}
@@ -303,22 +304,31 @@ export function TreeList<T extends TreeNode<T>>({
                   event.stopPropagation();
                   toggle(item.id, !expanded);
                 }}
-                className="-mr-0.5 -ml-2 grid size-5 shrink-0 place-items-center rounded-xs text-muted focus-ring hover:text-foreground"
+                className="-mr-0.5 -ml-2 grid size-5 shrink-0 place-items-center rounded-xs text-secondary focus-ring hover:text-foreground"
               >
                 <Chevron direction={expanded ? "down" : "right"} size="sm" />
               </button>
             )}
-            {!branch && <span className="-mr-0.5 -ml-2 w-5 shrink-0" />}
+            {!branch && (
+              <span
+                data-slot="tree-list-spacer"
+                className="-mr-0.5 -ml-2 w-5 shrink-0"
+              />
+            )}
             {children(item)}
           </ListItem>
           {branch && (
             // 0fr to 1fr animates the group's height.
             <div
+              data-slot="tree-list-group"
               inert={!expanded}
               data-expanded={expanded}
               className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-200 data-[expanded=true]:grid-rows-[1fr]"
             >
-              <div className="min-h-0 overflow-hidden">
+              <div
+                data-slot="tree-list-group-items"
+                className="min-h-0 overflow-hidden"
+              >
                 {renderItems(item.children ?? [], depth + 1)}
               </div>
             </div>
@@ -331,6 +341,7 @@ export function TreeList<T extends TreeNode<T>>({
   const active = rows.find((row) => row.item.id === dragging?.id);
   return (
     <div
+      data-slot="tree-list"
       ref={root}
       role="tree"
       onPointerDown={onPointerDown}
@@ -351,6 +362,7 @@ export function TreeList<T extends TreeNode<T>>({
       {renderItems(items, 0)}
       {dragging && active && (
         <div
+          data-slot="tree-list-drag-preview"
           ref={ghost}
           tabIndex={-1}
           style={{ translate: `${dragging.x}px ${dragging.y}px` }}

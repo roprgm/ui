@@ -6,6 +6,7 @@ import { type ComponentProps, createContext, useContext } from "react";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
 import { Popup, popupItem } from "./popup";
+import { Separator } from "./separator";
 
 /** Commands, such as a row's actions. For settings, use a Popover. */
 export const Menu = Primitive.Root;
@@ -25,8 +26,9 @@ export function MenuContent({
     raised?: boolean;
   }) {
   return (
-    <Primitive.Portal>
+    <Primitive.Portal data-slot="menu-portal">
       <Primitive.Positioner
+        data-slot="menu-positioner"
         sideOffset={4}
         align={align}
         alignOffset={alignOffset}
@@ -34,6 +36,7 @@ export function MenuContent({
       >
         <Raised value={raised}>
           <Primitive.Popup
+            data-slot="menu-content"
             render={(popup) => <Popup {...popup} list raised={raised} />}
             {...props}
           />
@@ -51,7 +54,11 @@ export function MenuItem({
   ...props
 }: Primitive.Item.Props & { shortcut?: string }) {
   return (
-    <Primitive.Item className={cn(popupItem, "gap-2", className)} {...props}>
+    <Primitive.Item
+      data-slot="menu-item"
+      className={cn(popupItem, "gap-2", className)}
+      {...props}
+    >
       {children}
       {shortcut && <Kbd className="ml-auto pl-4">{shortcut}</Kbd>}
     </Primitive.Item>
@@ -59,7 +66,7 @@ export function MenuItem({
 }
 
 export function MenuSeparator() {
-  return <Primitive.Separator className="mx-1.5 my-0.5 h-px separator" />;
+  return <Separator className="mx-1.5 my-0.5" />;
 }
 
 export const Submenu = Primitive.SubmenuRoot;
@@ -71,15 +78,16 @@ export function SubmenuTrigger({
 }: Primitive.SubmenuTrigger.Props) {
   return (
     <Primitive.SubmenuTrigger
+      data-slot="submenu-trigger"
       className={cn(
         popupItem,
-        "justify-between gap-4 data-popup-open:bg-raised",
+        "justify-between gap-4 data-popup-open:bg-selected",
         className,
       )}
       {...props}
     >
       {children}
-      <Chevron direction="right" size="sm" className="text-muted" />
+      <Chevron direction="right" size="sm" className="text-secondary" />
     </Primitive.SubmenuTrigger>
   );
 }
@@ -88,6 +96,12 @@ export function SubmenuTrigger({
 export function SubmenuContent(props: ComponentProps<typeof MenuContent>) {
   const raised = useContext(Raised);
   return (
-    <MenuContent align="start" alignOffset={-4} raised={raised} {...props} />
+    <MenuContent
+      data-slot="submenu-content"
+      align="start"
+      alignOffset={-4}
+      raised={raised}
+      {...props}
+    />
   );
 }

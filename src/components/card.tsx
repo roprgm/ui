@@ -6,6 +6,7 @@ import { sections } from "./section";
 export function Card({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
+      data-slot="card"
       className={cn(
         sections(),
         "overflow-hidden rounded-xl surface-card",
