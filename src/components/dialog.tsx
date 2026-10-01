@@ -20,10 +20,28 @@ export function Dialog(
   return <Primitive.Root {...rest} />;
 }
 
-export const DialogTrigger = Primitive.Trigger;
+// An element it renders, such as a Button, keeps its own slot.
+export function DialogTrigger(props: Primitive.Trigger.Props) {
+  return (
+    <Primitive.Trigger
+      {...(props.render ? {} : { "data-slot": "dialog-trigger" })}
+      {...props}
+    />
+  );
+}
 
-/** Closes its dialog: `<DialogClose render={<Button />}>Cancel</DialogClose>`. */
-export const DialogClose = Primitive.Close;
+/**
+ * Closes its dialog: `<DialogClose render={<Button />}>Cancel</DialogClose>`. A Button it renders
+ * keeps its own slot.
+ */
+export function DialogClose(props: Primitive.Close.Props) {
+  return (
+    <Primitive.Close
+      {...(props.render ? {} : { "data-slot": "dialog-close" })}
+      {...props}
+    />
+  );
+}
 
 /** Padded as its content needs; its `Section`s stack without a line, and the last of several sits apart. */
 export function DialogContent(props: Primitive.Popup.Props) {

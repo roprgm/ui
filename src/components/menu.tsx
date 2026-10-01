@@ -10,7 +10,16 @@ import { Separator } from "./separator";
 
 /** Commands, such as a row's actions. For settings, use a Popover. */
 export const Menu = Primitive.Root;
-export const MenuTrigger = Primitive.Trigger;
+
+// An element it renders, such as a Button, keeps its own slot.
+export function MenuTrigger(props: Primitive.Trigger.Props) {
+  return (
+    <Primitive.Trigger
+      {...(props.render ? {} : { "data-slot": "menu-trigger" })}
+      {...props}
+    />
+  );
+}
 
 // A submenu opens as raised as the menu it opens from.
 const Raised = createContext(false);

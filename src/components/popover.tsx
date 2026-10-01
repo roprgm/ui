@@ -7,7 +7,16 @@ import { sections } from "./section";
 
 /** Settings beside their trigger, such as bar controls that no longer fit. */
 export const Popover = Primitive.Root;
-export const PopoverTrigger = Primitive.Trigger;
+
+// An element it renders, such as a Button, keeps its own slot.
+export function PopoverTrigger(props: Primitive.Trigger.Props) {
+  return (
+    <Primitive.Trigger
+      {...(props.render ? {} : { "data-slot": "popover-trigger" })}
+      {...props}
+    />
+  );
+}
 
 /**
  * Padded as its content needs; its `Section`s stack with a line between each, as in a card.

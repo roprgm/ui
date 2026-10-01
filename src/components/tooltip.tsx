@@ -9,7 +9,16 @@ export const TooltipProvider = Primitive.Provider;
 
 /** A short hint on hover or focus. It names nothing; the trigger keeps its own label. */
 export const Tooltip = Primitive.Root;
-export const TooltipTrigger = Primitive.Trigger;
+
+// An element it renders, such as a Button, keeps its own slot.
+export function TooltipTrigger(props: Primitive.Trigger.Props) {
+  return (
+    <Primitive.Trigger
+      {...(props.render ? {} : { "data-slot": "tooltip-trigger" })}
+      {...props}
+    />
+  );
+}
 
 /** `shortcut`, written as `Mod Z`, shows after the text. */
 export function TooltipContent({
