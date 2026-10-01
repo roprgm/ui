@@ -6,8 +6,8 @@ import type { ComponentProps } from "react";
 const group = cva("inline-flex segmented surface-field", {
   variants: {
     size: {
-      default: "*:h-control-sm",
-      lg: "*:h-control",
+      default: "*:h-(--spacing-control-sm)",
+      lg: "*:h-(--spacing-control)",
     },
   },
 });

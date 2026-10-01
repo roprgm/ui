@@ -21,8 +21,8 @@ const trigger = cva(
       },
       /** A Button's, 2px less on the chevron's side. */
       size: {
-        default: "h-control pr-2.5 pl-3",
-        lg: "h-control-lg pr-3 pl-3.5",
+        default: "h-(--spacing-control) pr-2.5 pl-3",
+        lg: "h-(--spacing-control-lg) pr-3 pl-3.5",
       },
     },
   },

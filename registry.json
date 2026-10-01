@@ -187,15 +187,15 @@
         "@layer components": {
           ".surface-card, .surface-panel, .surface-float": {
             "background-color": "var(--color-background)",
-            "color": "var(--color-foreground)"
-          },
-          ".surface-card, .surface-float": {
-            "--color-background": "var(--color-surface)",
+            "color": "var(--color-foreground)",
             "--color-control": "var(--color-level-7)",
             "--color-control-hover": "var(--color-level-8)",
             "--color-field": "var(--color-level-2)",
             "--color-hover": "var(--color-level-5)",
             "--color-selected": "var(--color-level-7)"
+          },
+          ".surface-card, .surface-float": {
+            "--color-background": "var(--color-surface)"
           },
           ".surface-card": {
             "position": "relative",
@@ -210,12 +210,7 @@
             "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08)"
           },
           ".surface-panel": {
-            "--color-background": "var(--color-level-3)",
-            "--color-control": "var(--color-level-6)",
-            "--color-control-hover": "var(--color-level-7)",
-            "--color-field": "var(--color-level-1)",
-            "--color-hover": "var(--color-level-4)",
-            "--color-selected": "var(--color-level-6)"
+            "--color-background": "var(--color-surface)"
           },
           ".surface-float[data-raised]": {
             "--color-background": "var(--color-level-6)",

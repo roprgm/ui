@@ -56,13 +56,13 @@ export function Combobox<T extends string>({
           data-slot="combobox-input"
           aria-label={label}
           placeholder={placeholder}
-          render={<Input size={size} className="pr-control" />}
+          render={<Input size={size} className="pr-(--spacing-control)" />}
         />
         {/* Its chevron lands where a Select's does, 10px from the edge. */}
         <Primitive.Trigger
           data-slot="combobox-trigger"
           aria-label="Show options"
-          className="absolute inset-y-0 right-0 flex w-control cursor-pointer items-center justify-center text-secondary"
+          className="absolute inset-y-0 right-0 flex w-(--spacing-control) cursor-pointer items-center justify-center text-secondary"
         >
           <Chevron size="sm" />
         </Primitive.Trigger>

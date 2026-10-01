@@ -11,8 +11,9 @@ const field = cva(
   {
     variants: {
       size: {
-        default: "h-control file:h-[calc(var(--spacing-control)-6px)]",
-        lg: "h-control-lg file:h-[calc(var(--spacing-control-lg)-6px)]",
+        default:
+          "h-(--spacing-control) file:h-[calc(var(--spacing-control)-6px)]",
+        lg: "h-(--spacing-control-lg) file:h-[calc(var(--spacing-control-lg)-6px)]",
       },
     },
   },

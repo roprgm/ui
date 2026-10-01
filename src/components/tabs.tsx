@@ -3,7 +3,12 @@
 import { Tabs as Primitive } from "@base-ui/react/tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
-import { type ComponentProps, createContext, useContext } from "react";
+import {
+  Children,
+  type ComponentProps,
+  createContext,
+  useContext,
+} from "react";
 import { Button } from "./button";
 
 /** Tabs and the panels they show; `orientation="vertical"` stacks the tabs in a column. */
@@ -16,7 +21,7 @@ const list = cva("flex data-[orientation=vertical]:flex-col", {
     variant: {
       default: "gap-1",
       // As a ToggleGroup: tabs a size smaller. Icon tabs take `icon-sm`.
-      segmented: "segmented surface-field *:h-control-sm",
+      segmented: "segmented surface-field *:h-(--spacing-control-sm)",
       // Over a line, which the selected tab marks.
       underline:
         "gap-1 pb-1.5 shadow-[inset_0_-1px_0_var(--color-border-subtle)]",
@@ -62,8 +67,9 @@ const tab = cva("data-active:font-selected data-active:text-foreground", {
 });
 
 /**
- * A tab, drawn as a ghost Button of any size. Its label also renders hidden in the selected
- * weight, so a tab is as wide either way and selecting one doesn't move the rest.
+ * A tab, drawn as a ghost Button of any size. Its text also renders hidden in the selected
+ * weight, so a tab is as wide either way and selecting one doesn't move the rest; elements, such
+ * as an icon, render once.
  */
 export function Tab({
   size,
@@ -79,19 +85,20 @@ export function Tab({
       className={cn(tab({ variant }), className)}
       {...props}
     >
-      {/* An icon tab has no text to bolden. */}
-      {size?.startsWith("icon") ? (
-        children
-      ) : (
-        <span
-          data-slot="tab-label"
-          className="grid *:col-start-1 *:row-start-1 *:flex *:items-center *:justify-center *:gap-1.5 has-[>*>svg:first-child]:-ml-1"
-        >
-          <span>{children}</span>
-          <span aria-hidden className="invisible font-selected">
-            {children}
+      {Children.map(children, (child) =>
+        typeof child === "string" || typeof child === "number" ? (
+          <span
+            data-slot="tab-label"
+            className="grid *:col-start-1 *:row-start-1"
+          >
+            <span>{child}</span>
+            <span aria-hidden className="invisible font-selected">
+              {child}
+            </span>
           </span>
-        </span>
+        ) : (
+          child
+        ),
       )}
     </Primitive.Tab>
   );

@@ -14,8 +14,8 @@
   }
 }
 
-/* Colors. On the page, a control stands three levels up and a field two down; a card and what
-   floats lift what sits on them two levels, and a panel one. */
+/* Colors. On the page, a control stands three levels up and a field two down; a card, a panel,
+   and what floats lift what sits on them two levels. */
 @theme {
   --color-control: var(--color-level-5);
   --color-control-hover: var(--color-level-6);
@@ -24,6 +24,7 @@
 
 @layer components {
   .surface-card,
+  .surface-panel,
   .surface-float {
     --color-control: var(--color-level-7);
     --color-control-hover: var(--color-level-8);
@@ -32,13 +33,9 @@
     --color-selected: var(--color-level-7);
   }
 
+  /* A panel is a card docked in a layout, with no edge. */
   .surface-panel {
-    --color-background: var(--color-level-3);
-    --color-control: var(--color-level-6);
-    --color-control-hover: var(--color-level-7);
-    --color-field: var(--color-level-1);
-    --color-hover: var(--color-level-4);
-    --color-selected: var(--color-level-6);
+    --color-background: var(--color-surface);
   }
 
   /* A popup that opens over a card stands as a card on a card. */

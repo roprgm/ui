@@ -39,9 +39,9 @@ const bar = cva("box-content flex cursor-pointer touch-none select-none", {
   variants: {
     orientation: {
       horizontal:
-        "-my-2.5 h-thumb items-center py-2.5 pointer-coarse:-my-4 pointer-coarse:py-4",
+        "-my-2.5 h-(--spacing-thumb) items-center py-2.5 pointer-coarse:-my-4 pointer-coarse:py-4",
       vertical:
-        "-mx-2.5 w-thumb justify-center px-2.5 pointer-coarse:-mx-4 pointer-coarse:px-4",
+        "-mx-2.5 w-(--spacing-thumb) justify-center px-2.5 pointer-coarse:-mx-4 pointer-coarse:px-4",
     },
     variant: {
       panel: "col-span-2",
@@ -216,7 +216,7 @@ export function Slider({
               onKeyDown={(event) => valueKeys.has(event.key) && edit(true)}
               onKeyUp={() => edit(false)}
               onBlur={() => edit(false)}
-              className="size-thumb rounded-full surface-accent has-focus-visible:ring-2 has-focus-visible:ring-focus"
+              className="size-(--spacing-thumb) rounded-full surface-accent has-focus-visible:ring-2 has-focus-visible:ring-focus"
               style={{ backgroundColor: color }}
             />
           </Primitive.Track>

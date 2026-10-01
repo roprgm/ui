@@ -158,7 +158,7 @@ Every part a component renders carries a `data-slot`, and its variants a `data-v
 }
 ```
 
-A theme of your own imports `base.css`, sets tokens again, and adds to a control's surface with a utility of the same name, or to a region with a rule on its class. A card's edge goes on its `::after`, a frame over its content, so a row with a fill can't cover it. `themes/duotone.css` is one:
+A theme of your own imports `base.css`, sets tokens again, and adds to a control's surface with a utility of the same name, or to a region with a rule on its class. A card's edge goes on its `::after`, a frame over its content, so a row with a fill can't cover it. For example:
 
 ```css
 @import "@roprgm/ui/base.css";

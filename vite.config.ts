@@ -5,9 +5,4 @@ import { defineConfig } from "vite";
 export default defineConfig({
   root: "site",
   plugins: [react(), tailwindcss()],
-  build: {
-    rolldownOptions: {
-      input: ["site/index.html", "site/duotone.html"],
-    },
-  },
 });
