@@ -3,10 +3,10 @@ import type { ComponentProps } from "react";
 import { CopyButton } from "./copy-button";
 import { ScrollArea } from "./scroll-area";
 
-// Sugar High's markup reads these; other highlighters color their own. A theme sets them again
-// on the code block's slot.
+// Sugar High's markup reads these; other highlighters color their own. A theme sets `--code-type`,
+// `--code-keyword`, `--code-property`, or `--code-string` on the code block's slot.
 const syntax =
-  "[--sh-class:oklch(81%_0.07_230)] [--sh-comment:var(--color-secondary)] [--sh-entity:oklch(81%_0.07_230)] [--sh-identifier:var(--color-foreground)] [--sh-jsxliterals:var(--color-foreground)] [--sh-keyword:oklch(77%_0.1_9)] [--sh-property:oklch(83%_0.08_76)] [--sh-sign:var(--color-secondary)] [--sh-string:oklch(81%_0.08_133)]";
+  "[--sh-class:var(--code-type,oklch(81%_0.07_230))] [--sh-comment:var(--color-secondary)] [--sh-entity:var(--code-type,oklch(81%_0.07_230))] [--sh-identifier:var(--color-foreground)] [--sh-jsxliterals:var(--color-foreground)] [--sh-keyword:var(--code-keyword,oklch(77%_0.1_9))] [--sh-property:var(--code-property,oklch(83%_0.08_76))] [--sh-sign:var(--color-secondary)] [--sh-string:var(--code-string,oklch(81%_0.08_133))]";
 
 /**
  * Code with a button that copies it; a line that doesn't fit scrolls, or with `wrap`, wraps, and
