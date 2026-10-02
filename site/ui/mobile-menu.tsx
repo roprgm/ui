@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@roprgm/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@roprgm/ui/popover";
 import { ScrollArea } from "@roprgm/ui/scroll-area";

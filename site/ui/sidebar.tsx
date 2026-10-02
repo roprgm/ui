@@ -1,6 +1,6 @@
 import { IconButton } from "@roprgm/ui/icon-button";
 import { ScrollArea } from "@roprgm/ui/scroll-area";
-import Link from "next/link";
+import { Link } from "react-router";
 import { type Section, sections } from "@/tree";
 import { version } from "../../package.json";
 import { GitHubIcon } from "./icons";
@@ -37,7 +37,7 @@ function Brand() {
   return (
     <div className="flex items-center gap-1">
       <Link
-        href="/"
+        to="/"
         className="flex items-baseline gap-2 rounded-sm px-1 font-medium transition focus-ring"
       >
         @roprgm/ui

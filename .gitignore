@@ -1,8 +1,7 @@
 node_modules
 dist
-site/.next
+site/.server
 site/out
-site/next-env.d.ts
 site/public/r
 .claude
 .DS_Store

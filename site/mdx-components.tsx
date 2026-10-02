@@ -1,6 +1,6 @@
 import type { MDXComponents } from "mdx/types";
-import Link from "next/link";
 import { isValidElement, type ReactNode } from "react";
+import { Link } from "react-router";
 import { Code, isLanguage } from "@/ui/code";
 import { Example } from "@/ui/example";
 import { Install } from "@/ui/install";
@@ -14,7 +14,7 @@ function Pre({ children }: { children?: ReactNode }) {
   return <Code lang={language}>{(children.props.children ?? "").trim()}</Code>;
 }
 
-const components: MDXComponents = {
+export const components: MDXComponents = {
   h2: (props) => (
     <h2
       className="mt-6 scroll-mt-20 text-lg font-medium tracking-tight first:mt-0"
@@ -27,7 +27,7 @@ const components: MDXComponents = {
   p: (props) => <p className="max-w-[70ch] text-secondary" {...props} />,
   a: ({ href = "", ...props }) => (
     <Link
-      href={href}
+      to={href}
       className="rounded-sm text-foreground underline decoration-muted underline-offset-4 transition focus-ring hover:decoration-foreground"
       {...props}
     />
@@ -48,7 +48,3 @@ const components: MDXComponents = {
   Example,
   Install,
 };
-
-export function useMDXComponents(): MDXComponents {
-  return components;
-}
