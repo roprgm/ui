@@ -51,7 +51,7 @@
 
   /* Lines, translucent over any fill: separators, and dividers inside a material. */
   --color-border: oklch(0% 0 0 / 0.7);
-  --color-border-subtle: oklch(0% 0 0 / 0.5);
+  --color-border-subtle: oklch(0% 0 0 / 0.6);
 
   /* What is on: checked controls, thumbs. `data-accent` picks another. */
   --color-accent: oklch(89% 0 0);
