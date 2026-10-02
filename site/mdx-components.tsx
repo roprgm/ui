@@ -17,7 +17,7 @@ function Pre({ children }: { children?: ReactNode }) {
 const components: MDXComponents = {
   h2: (props) => (
     <h2
-      className="mt-6 scroll-mt-20 text-lg font-medium tracking-tight"
+      className="mt-6 scroll-mt-20 text-lg font-medium tracking-tight first:mt-0"
       {...props}
     />
   ),
