@@ -170,7 +170,7 @@
           ".surface-panel": {
             "--color-background": "var(--color-surface)"
           },
-          ".surface-float[data-raised]": {
+          ":where(.surface-card) :is(.surface-card, .surface-panel, .surface-float), .surface-float[data-raised]": {
             "--color-background": "var(--color-level-6)",
             "--color-control": "var(--color-level-9)",
             "--color-control-hover": "var(--color-level-10)",
