@@ -75,12 +75,7 @@ const fundamentals = group("fundamentals", [
   [
     "colors",
     "Colors",
-    "Grays in even steps of lightness, four steps of text, an accent, and states.",
-  ],
-  [
-    "tokens",
-    "Color tokens",
-    "The colors components use, which each region sets again for what sits on it.",
+    "The palette, and every color token as each container sets it.",
   ],
   [
     "materials",

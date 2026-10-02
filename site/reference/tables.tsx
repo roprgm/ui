@@ -26,149 +26,20 @@ export function Reference({ entries }: { entries: Entry[] }) {
   );
 }
 
-export const tokens = {
-  where: [
-    {
-      name: "--color-background",
-      swatch: "bg-background",
-      use: "The fill of where you are: the page, or the card, panel, or popup you're in.",
-    },
-    {
-      name: "--color-hover",
-      swatch: "bg-hover",
-      use: "A quiet fill on it: a ghost's hover, a well.",
-    },
-  ],
-  text: [
-    {
-      name: "--color-foreground",
-      swatch: "bg-foreground",
-      use: "Primary text and icons.",
-    },
-    {
-      name: "--color-secondary",
-      swatch: "bg-secondary",
-      use: "Supporting text, descriptions, and placeholders.",
-    },
-    {
-      name: "--color-muted",
-      swatch: "bg-muted",
-      use: "Hints and metadata that should barely show, such as a disclaimer.",
-    },
-    {
-      name: "--color-disabled",
-      swatch: "bg-disabled",
-      use: "Rows and labels that can't be used.",
-    },
-  ],
-  lines: [
-    {
-      name: "--color-border",
-      swatch: "bg-border",
-      use: "Separators between groups.",
-    },
-    {
-      name: "--color-border-subtle",
-      swatch: "bg-border-subtle",
-      use: "Dividers inside a material, such as between a card's sections.",
-    },
-  ],
-  accent: [
-    {
-      name: "--color-accent",
-      swatch: "bg-accent",
-      use: "What is on: a checked control, a slider's thumb, a badge that stands out.",
-    },
-    {
-      name: "--color-on-accent",
-      swatch: "bg-on-accent",
-      use: "Text and icons on the accent.",
-    },
-    {
-      name: "--color-accent-text",
-      swatch: "bg-accent-text",
-      use: "The accent as text, such as a link. It is the accent until a theme sets it apart.",
-    },
-    {
-      name: "--color-primary",
-      swatch: "bg-primary",
-      use: "The main action: a primary button. It is the accent until a theme sets it apart.",
-    },
-    {
-      name: "--color-primary-hover",
-      swatch: "bg-primary-hover",
-      use: "A primary button under the pointer.",
-    },
-    {
-      name: "--color-on-primary",
-      swatch: "bg-on-primary",
-      use: "Text and icons on the primary.",
-    },
-  ],
-  states: [
-    {
-      name: "--color-success",
-      swatch: "bg-success",
-      use: "Completed and healthy states, with a label.",
-    },
-    {
-      name: "--color-warning",
-      swatch: "bg-warning",
-      use: "Needs attention soon, with a label.",
-    },
-    {
-      name: "--color-danger",
-      swatch: "bg-danger",
-      use: "Destructive actions and errors, with a label.",
-    },
-    {
-      name: "--color-pressed",
-      swatch: "bg-pressed",
-      use: "A ghost button or chip held down, or on. Translucent, over any fill.",
-    },
-    {
-      name: "--color-focus",
-      swatch: "bg-focus",
-      use: "The focus ring. Translucent, over any fill.",
-    },
-    {
-      name: "--color-backdrop",
-      swatch: "bg-backdrop",
-      use: "The shade behind a dialog. Translucent, over any fill.",
-    },
-  ],
-  rest: [
-    {
-      name: "--color-tooltip",
-      swatch: "bg-tooltip",
-      use: "A tooltip's fill.",
-    },
-    {
-      name: "--color-code-*",
-      swatch: "bg-code-keyword",
-      use: "Code, as a highlighter marks it: keyword, string, type, and property.",
-    },
-    {
-      name: "--color-level-0 … 12",
-      swatch: "bg-level-6",
-      use: "The palette every fill is picked from, by a theme or a container. Components never use it.",
-    },
-  ],
-  sizes: [
-    {
-      name: "--spacing-control",
-      use: "The height of controls, 28px, with --spacing-control-sm at 24px and --spacing-control-lg at 32px. Only controls take them, so a theme scales them alone.",
-    },
-    {
-      name: "--spacing-thumb",
-      use: "A slider's thumb, which its fill is placed by too.",
-    },
-    {
-      name: "--font-weight-selected",
-      use: "The weight of a selected tab. A tab is as wide either way.",
-    },
-  ],
-} satisfies Record<string, Entry[]>;
+export const sizes: Entry[] = [
+  {
+    name: "--spacing-control",
+    use: "The height of controls, 28px, with --spacing-control-sm at 24px and --spacing-control-lg at 32px. Only controls take them, so a theme scales them alone.",
+  },
+  {
+    name: "--spacing-thumb",
+    use: "A slider's thumb, which its fill is placed by too.",
+  },
+  {
+    name: "--font-weight-selected",
+    use: "The weight of a selected tab. A tab is as wide either way.",
+  },
+];
 
 export const materials = {
   containers: [

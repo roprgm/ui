@@ -21,14 +21,14 @@ export function Swatches({ swatches }: { swatches: Swatch[] }) {
     setTimeout(() => setCopied(undefined), 1200);
   };
   return (
-    <div className="flex h-32 gap-1.5">
+    <div className="grid grid-cols-4 gap-1.5 sm:grid-cols-8">
       {swatches.map((swatch) => (
         <button
           key={swatch.name}
           type="button"
           onClick={() => copy(swatch)}
           className={cn(
-            "group flex min-w-0 flex-1 cursor-pointer flex-col justify-end rounded-xl px-3 pb-2.5 text-left focus-ring",
+            "group flex h-16 min-w-0 cursor-pointer flex-col justify-end rounded-lg px-2.5 pb-2 text-left focus-ring",
             swatch.className,
           )}
           {...swatch.attributes}

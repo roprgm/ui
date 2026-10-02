@@ -1,22 +1,38 @@
-import { Accents, Levels, States, TextColors, Translucent } from "@/reference/colors";
+import {
+  Accents,
+  AccentTokens,
+  Grounds,
+  Levels,
+  OtherTokens,
+  StateTokens,
+  TranslucentTokens,
+} from "@/reference/colors";
 
-Components never name these colors; they use the [color tokens](/fundamentals/tokens), which a theme picks from here.
+Components use only the tokens on this page, with `bg-`, `text-`, or `outline-` and without their `--color-` prefix. A theme picks them from the palette, and sets them again.
 
-## Levels
+```tsx
+<p className="text-secondary">Three edits since the import.</p>
+```
 
-Every fill is a level: black, then from 15% lightness up in even steps of 3.7%. Only themes and containers pick levels.
+## Palette
+
+Every fill is a level: black, then from 15% lightness up in even steps of 3.7%. Only themes and containers pick levels; components never do.
 
 <Levels />
 
-## Text
+## Where you are
 
-Four opaque steps, strongest first, on each fill they sit on by default.
+The page sets these, and each container sets them again for what sits on it, so the same token reads in a page, a card, and a popup raised over a card. Text takes four opaque steps, so an icon's crossing strokes don't show. The materials' own fills are on [Materials](/fundamentals/materials).
 
-<TextColors />
+<Grounds />
 
-## Accent
+## Accent and primary
 
-What is on, such as a checked switch. `data-accent` on any element picks another accent for what it holds.
+The primary takes the accent until a theme sets it apart.
+
+<AccentTokens />
+
+`data-accent` on any element picks another accent for what it holds. Click one to copy it.
 
 <Accents />
 
@@ -26,12 +42,16 @@ What is on, such as a checked switch. `data-accent` on any element picks another
 
 ## States
 
-Success, warning, and danger, each with a label beside it, never alone.
+Each with a label beside it, never alone.
 
-<States />
+<StateTokens />
 
 ## Translucent
 
-Lines, and the fills of a pressed control and the focus ring, which read over any fill.
+They read over any fill, as the palette under each shows.
 
-<Translucent />
+<TranslucentTokens />
+
+## The rest
+
+<OtherTokens />

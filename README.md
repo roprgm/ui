@@ -117,7 +117,7 @@ Set `data-accent` on the page, or on any part of it, to pick the accent: `violet
 
 ### Materials
 
-A material is what a box is made of: its fill and its edge. A component is made of one, as a `Button` is of `material-control`, and the theme draws it. Each paints itself from its own variables, `--color-*` for its fill and `--shadow-*` for its edge, so any element that sets them again changes every material inside it. The docs site lists every [token](https://ui.roprgm.com/fundamentals/tokens), [material](https://ui.roprgm.com/fundamentals/materials), and [utility](https://ui.roprgm.com/fundamentals/utilities), with what each is for.
+A material is what a box is made of: its fill and its edge. A component is made of one, as a `Button` is of `material-control`, and the theme draws it. Each paints itself from its own variables, `--color-*` for its fill and `--shadow-*` for its edge, so any element that sets them again changes every material inside it. The docs site lists every [color](https://ui.roprgm.com/fundamentals/colors), [material](https://ui.roprgm.com/fundamentals/materials), and [utility](https://ui.roprgm.com/fundamentals/utilities), with what each is for.
 
 | Material | Variables | Used by |
 | --- | --- | --- |
