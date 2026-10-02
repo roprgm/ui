@@ -23,7 +23,7 @@ export type Section = {
 type Entry = [slug: string, title: string, description: string];
 
 /** The page the site opens on. */
-const home = "introduction";
+const home = "installation";
 
 function group(section: string, entries: Entry[], title?: string): Group {
   return {
@@ -62,11 +62,6 @@ const components = categories.map(([category, title]) =>
 );
 
 const fundamentals = group("fundamentals", [
-  [
-    "introduction",
-    "Introduction",
-    "A minimal, dark component library for React and Tailwind CSS v4, on Base UI.",
-  ],
   [
     "installation",
     "Installation",

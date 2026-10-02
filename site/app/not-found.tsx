@@ -10,7 +10,7 @@ export default function NotFound() {
           href="/"
           className="text-foreground underline decoration-muted underline-offset-4"
         >
-          introduction
+          installation
         </Link>
         .
       </p>
