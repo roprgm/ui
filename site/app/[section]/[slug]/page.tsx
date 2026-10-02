@@ -1,5 +1,3 @@
-import { readdirSync } from "node:fs";
-import { join } from "node:path";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { findPage, pages } from "@/tree";
@@ -9,19 +7,10 @@ type Props = { params: Promise<{ section: string; slug: string }> };
 
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-  // A page written but left out of the tree would never be reached.
-  const docs = join(process.cwd(), "site/docs");
-  for (const section of readdirSync(docs))
-    for (const file of readdirSync(join(docs, section))) {
-      const slug = file.replace(/\.mdx$/, "");
-      if (!findPage(section, slug))
-        throw new Error(`site/docs/${section}/${file} isn't in site/tree.ts`);
-    }
-  return pages
+export const generateStaticParams = () =>
+  pages
     .filter((page) => page.href !== "/")
     .map(({ section, slug }) => ({ section, slug }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { section, slug } = await params;

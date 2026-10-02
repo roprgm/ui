@@ -1,10 +1,9 @@
 import { Tab, TabList, TabPanel, Tabs } from "@roprgm/ui/tabs";
 import { Code } from "./code";
-import { exportsOf } from "./source";
 
 /** How to add a component: from the package, or as source through shadcn. */
 export async function Install({ name }: { name: string }) {
-  const exports = await exportsOf(name);
+  const exports = Object.keys(await import(`@roprgm/ui/${name}`)).join(", ");
   return (
     <Tabs defaultValue="package" className="flex flex-col gap-3">
       <TabList variant="underline">
