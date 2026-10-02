@@ -33,11 +33,6 @@
     0 0 1px oklch(0% 0 0 / 0.14);
   --shadow-field:
     inset 0 1px 1px oklch(0% 0 0 / 0.3), 0 1px 0 oklch(95% 0 0 / 0.08);
-
-  /* Temporary, to compare: a dark halo stands it off any track or material, lit on top. */
-  --shadow-prominent:
-    0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2),
-    0 1px 2px oklch(10% 0 0 / 0.5);
 }
 
 @layer components {

@@ -116,7 +116,6 @@
   --shadow-float: none;
   --shadow-control: none;
   --shadow-field: none;
-  --shadow-prominent: none;
 }
 
 /* Materials: what a box is made of. Each paints its fill and edge from its own variables, so a
@@ -173,12 +172,6 @@
 @utility material-field {
   background-color: var(--color-field);
   box-shadow: var(--shadow-field);
-}
-
-/* Temporary, to compare with the five: what is on, lit as production draws it. */
-@utility material-prominent {
-  background-color: var(--color-accent);
-  box-shadow: var(--shadow-prominent);
 }
 
 /* A strip of controls a size smaller than a Button, 3px in and rounded to match, as a ToggleGroup

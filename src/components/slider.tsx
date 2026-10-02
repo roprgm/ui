@@ -209,6 +209,7 @@ export function Slider({
               ),
             }}
           >
+            {/* A dark halo stands it off any colors the bar takes, and its top is lit. */}
             <Primitive.Thumb
               data-slot="slider-thumb"
               aria-label={label}
@@ -216,7 +217,7 @@ export function Slider({
               onKeyDown={(event) => valueKeys.has(event.key) && edit(true)}
               onKeyUp={() => edit(false)}
               onBlur={() => edit(false)}
-              className="size-(--spacing-thumb) rounded-full material-control bg-accent has-focus-visible:ring-2 has-focus-visible:ring-focus"
+              className="size-(--spacing-thumb) rounded-full bg-accent shadow-[0_0_2px_1px_oklch(10%_0_0/0.3),inset_0_1px_0_oklch(95%_0_0/0.2),0_1px_2px_oklch(10%_0_0/0.5)] has-focus-visible:ring-2 has-focus-visible:ring-focus"
               style={{ backgroundColor: color }}
             />
           </Primitive.Track>

@@ -25,7 +25,7 @@ export function ExampleFrame({
       defaultValue="preview"
       render={
         block ? (
-          <div className="flex flex-col overflow-hidden rounded-xl ring-1 ring-border-subtle" />
+          <div className="flex flex-col overflow-hidden rounded-xl" />
         ) : (
           <Card className="p-0" />
         )

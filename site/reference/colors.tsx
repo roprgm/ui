@@ -49,10 +49,7 @@ export function TextColors() {
       {grounds.map((ground) => (
         <div
           key={ground.name}
-          className={cn(
-            "flex flex-col gap-1 rounded-xl p-4 shadow-[inset_0_0_0_1px_var(--color-border-subtle)]",
-            ground.className,
-          )}
+          className={cn("flex flex-col gap-1 rounded-xl p-4", ground.className)}
         >
           <span className="mb-2 text-muted">{ground.name}</span>
           <span className="text-foreground">Foreground</span>

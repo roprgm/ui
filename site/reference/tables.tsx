@@ -2,22 +2,19 @@ import { cn } from "cn";
 
 type Entry = { name: string; swatch?: string; use: string };
 
-/** Names and what each is for, as rows of text with a line between each. */
+/** Names and what each is for, as rows of text. */
 export function Reference({ entries }: { entries: Entry[] }) {
   return (
-    <dl className="flex flex-col shadow-[inset_0_1px_0_var(--color-border-subtle)]">
+    <dl className="flex flex-col">
       {entries.map((entry) => (
         <div
           key={entry.name}
-          className="grid gap-x-6 gap-y-1 py-2.5 shadow-[inset_0_-1px_0_var(--color-border-subtle)] sm:grid-cols-[16rem_minmax(0,1fr)]"
+          className="grid gap-x-6 gap-y-1 py-2.5 sm:grid-cols-[16rem_minmax(0,1fr)]"
         >
           <dt className="flex min-w-0 items-center gap-2.5">
             {entry.swatch && (
               <span
-                className={cn(
-                  "size-3.5 shrink-0 rounded-sm shadow-[inset_0_0_0_1px_var(--color-border-subtle)]",
-                  entry.swatch,
-                )}
+                className={cn("size-3.5 shrink-0 rounded-sm", entry.swatch)}
               />
             )}
             <code className="truncate font-mono text-xs">{entry.name}</code>
