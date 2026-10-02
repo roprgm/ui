@@ -27,15 +27,26 @@ export const inside: Swatch[] = [
   },
 ];
 
+/** A fill, faintly ringed so one that matches the page still shows. */
+const fill = (name: string, use: string): Swatch => ({
+  name: `--color-${name}`,
+  use,
+  className: "ring-1 ring-foreground/10 ring-inset",
+  style: { backgroundColor: `var(--color-${name})` },
+});
+
 /** An edge, drawn on a card's fill. */
 const edge = (name: string, use: string): Swatch => ({
   name: `--${name}`,
   use,
-  className: "bg-card",
+  className: "bg-level-4",
   style: { boxShadow: `var(--${name})` },
 });
 
-export const edges = [
+export const variables = [
+  fill("control", "A control's fill, and a selected row's."),
+  fill("control-hover", "A hovered control."),
+  fill("field", "A field's fill."),
   edge("shadow-card", "A card's outer edge."),
   edge("inset-shadow-card", "A card's inner edge."),
   edge("shadow-float", "What floats."),

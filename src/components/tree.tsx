@@ -105,18 +105,16 @@ const spacer = cva("shrink-0", {
   },
 });
 
-const groupItems = cva(
-  "h-(--collapsible-panel-height) overflow-hidden transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0 motion-reduce:transition-none",
-  {
-    variants: {
-      variant: {
-        // A line along the children, where they sit in from their group.
-        default: "ml-4 pl-1.5 shadow-[inset_1px_0_0_var(--color-control)]",
-        list: "",
-      },
+const groupItems = cva("", {
+  variants: {
+    variant: {
+      // A line along the children, where they sit in from their group, and half a row under the
+      // last, so the next group stands apart.
+      default: "mb-3 ml-4 pl-1.5 shadow-[inset_1px_0_0_var(--color-control)]",
+      list: "",
     },
   },
-);
+});
 
 /**
  * Rows that nest, whose groups open and close; with `onDrop`, they drag to reorder, and
@@ -391,12 +389,17 @@ export function Tree<T extends TreeNode<T>>({
               onOpenChange={(open) => toggle(item.id, open)}
             >
               <Collapsible.Panel
-                data-slot="tree-group-items"
+                data-slot="tree-group-panel"
                 role="group"
                 hiddenUntilFound
-                className={groupItems({ variant })}
+                className="h-(--collapsible-panel-height) overflow-hidden transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0 motion-reduce:transition-none"
               >
-                {renderItems(item.children ?? [], depth + 1)}
+                <div
+                  data-slot="tree-group-items"
+                  className={groupItems({ variant })}
+                >
+                  {renderItems(item.children ?? [], depth + 1)}
+                </div>
               </Collapsible.Panel>
             </Collapsible.Root>
           )}

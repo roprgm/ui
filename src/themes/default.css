@@ -14,11 +14,10 @@
   }
 }
 
-/* On the page, a control stands three levels up and a field two down, and a panel takes a card's
-   fill. Controls are lit on top, fields from below, and what floats has a nearly opaque outer
-   edge, so it holds over light materials too. */
+/* On the page, a control stands three levels up and a field two down. Controls are lit on top,
+   fields from below, and what floats has a nearly opaque outer edge, so it holds over light
+   materials too. */
 @theme {
-  --color-panel: var(--color-level-4);
   --color-control: var(--color-level-5);
   --color-control-hover: var(--color-level-6);
   --color-field: var(--color-level-0);
@@ -36,6 +35,11 @@
 }
 
 @layer components {
+  /* A panel takes a card's fill. */
+  .material-panel {
+    --color-background: var(--color-level-4);
+  }
+
   /* What sits on a container stands two levels over it. */
   .material-card,
   .material-panel,

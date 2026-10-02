@@ -81,7 +81,7 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 | Containers | `Card`, `Separator`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `material-*` primitives; `Collapsible`, `ScrollArea`, `CodeBlock` |
 | Navigation | `Tabs`, `ListItem`, `Tree` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
-| Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, and `overflow-fade-y` utilities |
+| Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, `overflow-fade-y`, and `backdrop` utilities |
 
 Each one has a page with live examples, their code, and its install command on the [docs site](https://ui.roprgm.com/components).
 
@@ -95,14 +95,14 @@ Each one has a page with live examples, their code, and its install command on t
 | --- | --- |
 | `level-0` to `level-12` | the palette: black, then darkest first in even steps of lightness; every fill is one of them |
 | `background`, `hover` | the fill of where you are, and a quiet fill on it, such as a ghost's hover or a well |
-| `card`, `panel`, `float`, `control`, `control-hover`, `field` | the materials' fills: see [Materials](#materials) |
+| `control`, `control-hover`, `field` | the fills of what you press and where you type: see [Materials](#materials) |
 | `foreground`, `secondary`, `muted`, `disabled` | text, strongest first: text and icons, supporting text, hints, and what is disabled |
 | `border`, `border-subtle` | separators, and dividers inside a material |
 | `accent`, `on-accent` | what is on: checked controls and slider thumbs |
 | `accent-text` | the accent as text, such as a link: the accent until a theme sets it apart |
 | `primary`, `primary-hover`, `on-primary` | the main action, a primary button: the accent until a theme sets it apart |
 | `success`, `warning`, `danger` | states, each with a label beside it |
-| `pressed`, `focus`, `backdrop` | a pressed ghost, the focus ring, and the shade behind a dialog |
+| `pressed`, `focus` | a pressed ghost, and the focus ring |
 | `tooltip` | a tooltip's fill |
 
 The page sets where you are and the materials' fills, and each container sets them again for what's inside it. Materials take a card's fill until a theme sets them apart.
@@ -121,13 +121,13 @@ A material is what a box is made of: its fill and its edge. A component is made 
 
 | Material | Variables | Used by |
 | --- | --- | --- |
-| `material-card` | `--color-card`, `--shadow-card`, `--inset-shadow-card` | cards |
-| `material-panel` | `--color-panel` | a container docked in your layout, such as a sidebar |
-| `material-float` | `--color-float`, `--shadow-float` | popups, dialogs, notices, anything dragged; a level up with `raised` |
+| `material-card` | `--shadow-card`, `--inset-shadow-card` | cards |
+| `material-panel` | | a container docked in your layout, such as a sidebar |
+| `material-float` | `--shadow-float` | popups, dialogs, notices, anything dragged; a level up with `raised` |
 | `material-control` | `--color-control`, `--color-control-hover`, `--shadow-control` | buttons, selects, selected tabs and toggles, slider thumbs |
 | `material-field` | `--color-field`, `--shadow-field` | inputs, textareas, tracks, checkboxes, switches, code |
 
-The first three are containers: each is the background of what sits on it, and sets the materials inside it again. In the default theme, a field sits two levels below what it's on, and a container lifts what sits on it two levels.
+The first three are containers: each sets its own fill, a level, as the background of what sits on it, and sets the materials inside it again. In the default theme, a field sits two levels below what it's on, and a container lifts what sits on it two levels.
 
 ### Sizes
 

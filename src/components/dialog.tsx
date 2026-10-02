@@ -49,7 +49,7 @@ export function DialogContent(props: Primitive.Popup.Props) {
     <Primitive.Portal data-slot="dialog-portal">
       <Primitive.Backdrop
         data-slot="dialog-backdrop"
-        className="fixed inset-0 z-50 bg-backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0"
+        className="fixed inset-0 z-50 backdrop transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0"
       />
       <Primitive.Popup
         data-slot="dialog-content"

@@ -8,23 +8,14 @@ const color = (name: string, use: string): Swatch => ({
   style: { backgroundColor: `var(--color-${name})` },
 });
 
-export const text = [
+export const base = [
+  color("background", "Where you are."),
   color("foreground", "Text and icons."),
   color("secondary", "Supporting text."),
   color("muted", "Hints and placeholders."),
   color("disabled", "Disabled text."),
-];
-
-export const fills = [
-  color("background", "The page."),
   color("hover", "Hovers and wells."),
-  color("card", "Cards."),
-  color("panel", "Docked panels."),
-  color("float", "Popups and dialogs."),
   color("tooltip", "Tooltips."),
-  color("control", "Buttons and selected rows."),
-  color("control-hover", "Hovered controls."),
-  color("field", "Inputs and tracks."),
 ];
 
 export const accent = [
@@ -61,7 +52,6 @@ export const states = [
 export const overlays = [
   color("pressed", "Pressed ghosts."),
   color("focus", "Focus rings."),
-  color("backdrop", "Behind dialogs."),
 ];
 
 export const lines = [

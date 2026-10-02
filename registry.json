@@ -23,9 +23,6 @@
           "color-level-12": "oklch(55.7% 0 0)",
           "color-background": "var(--color-level-2)",
           "color-hover": "var(--color-level-3)",
-          "color-card": "var(--color-level-4)",
-          "color-panel": "var(--color-level-4)",
-          "color-float": "var(--color-level-4)",
           "color-control": "var(--color-level-5)",
           "color-control-hover": "var(--color-level-6)",
           "color-field": "var(--color-level-0)",
@@ -46,7 +43,6 @@
           "color-danger": "oklch(75% 0.14 21)",
           "color-pressed": "oklch(100% 0 0 / 0.15)",
           "color-focus": "oklch(100% 0 0 / 0.25)",
-          "color-backdrop": "oklch(0% 0 0 / 0.5)",
           "color-tooltip": "var(--color-level-1)",
           "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
           "radius-xs": "2.5px",
@@ -146,15 +142,12 @@
         },
         "@layer components": {
           ".material-card": {
-            "--color-background": "var(--color-card)",
+            "--color-background": "var(--color-level-4)",
             "position": "relative",
             "box-shadow": "var(--shadow-card)"
           },
-          ".material-panel": {
-            "--color-background": "var(--color-panel)"
-          },
           ".material-float": {
-            "--color-background": "var(--color-float)",
+            "--color-background": "var(--color-level-4)",
             "box-shadow": "var(--shadow-float)"
           },
           ".material-card, .material-panel, .material-float": {
@@ -172,6 +165,9 @@
             "border-radius": "inherit",
             "box-shadow": "var(--inset-shadow-card)",
             "pointer-events": "none"
+          },
+          ".material-panel": {
+            "--color-background": "var(--color-level-4)"
           },
           ":where(.material-card) :is(.material-card, .material-panel, .material-float), .material-float[data-raised]": {
             "--color-background": "var(--color-level-6)",
@@ -213,6 +209,9 @@
         },
         "@utility drawn": {
           "stroke-dashoffset": "0"
+        },
+        "@utility backdrop": {
+          "background-color": "oklch(0% 0 0 / 0.5)"
         },
         "@utility popup-motion": {
           "transform-origin": "var(--transform-origin)",

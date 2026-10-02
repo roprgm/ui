@@ -21,7 +21,6 @@
 
   --color-border-subtle: oklch(0% 0 0 / 0.1);
   --color-border: oklch(0% 0 0 / 0.1);
-  --color-backdrop: oklch(0% 0 0 / 0.3);
   --color-focus: oklch(0% 0 0 / 0.3);
   --color-success: oklch(52% 0.14 150);
   --color-warning: oklch(64% 0.15 70);
@@ -86,4 +85,8 @@
   box-shadow:
     0 0 0 1px oklch(100% 0 0 / 0.9),
     0 1px 3px oklch(0% 0 0 / 0.3);
+}
+
+@utility backdrop {
+  background-color: oklch(0% 0 0 / 0.3);
 }

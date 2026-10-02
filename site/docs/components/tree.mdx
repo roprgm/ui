@@ -32,8 +32,10 @@ Each part's `data-slot`, which a theme styles, is beside it.
     <button /> // tree-toggle, or tree-spacer on a row without children beside one with them
   </ListItem>
   <Collapsible.Root> // tree-group, around a row's children
-    <Collapsible.Panel> // tree-group-items
-      <ListItem /> // list-item
+    <Collapsible.Panel> // tree-group-panel, which opens and closes
+      <div> // tree-group-items, along a line and with room under the last
+        <ListItem /> // list-item
+      </div>
     </Collapsible.Panel>
   </Collapsible.Root>
   <div /> // tree-drag-preview, while dragging

@@ -15,7 +15,6 @@ A theme imports `base.css` and sets again only what it changes. Themes share no 
 
 /* Materials and colors, on the page. */
 @theme {
-  --color-panel: var(--color-level-3);
   --color-control: var(--color-level-5);
   --color-field: var(--color-level-0);
   --color-accent: oklch(67% 0.16 252);
@@ -33,8 +32,9 @@ A theme imports `base.css` and sets again only what it changes. Themes share no 
     --color-field: var(--color-level-2);
   }
 
-  /* Materials inside a panel. */
+  /* A panel's fill, and the materials inside it. */
   .material-panel {
+    --color-background: var(--color-level-3);
     --color-control: var(--color-level-6);
   }
 

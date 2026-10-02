@@ -35,11 +35,9 @@
   --color-background: var(--color-level-2);
   --color-hover: var(--color-level-3);
 
-  /* The materials' fills, as they sit on the page. A container sets them again for the materials
-     inside it. Until a theme sets them apart, they take a card's fill, and a panel the page's. */
-  --color-card: var(--color-level-4);
-  --color-panel: var(--color-level-2);
-  --color-float: var(--color-level-4);
+  /* The fills of the materials inside a container, as they sit on the page: what you press and
+     where you type. A container sets them again. Until a theme sets them apart, they take a
+     card's fill. */
   --color-control: var(--color-level-4);
   --color-control-hover: var(--color-level-5);
   --color-field: var(--color-level-4);
@@ -71,10 +69,9 @@
   --color-warning: oklch(84% 0.15 85);
   --color-danger: oklch(75% 0.14 21);
 
-  /* Translucent, over any fill: a pressed ghost, the focus ring, and the shade behind a dialog. */
+  /* Translucent, over any fill: a pressed ghost, and the focus ring. */
   --color-pressed: oklch(100% 0 0 / 0.15);
   --color-focus: oklch(100% 0 0 / 0.25);
-  --color-backdrop: oklch(0% 0 0 / 0.5);
 
   --color-tooltip: var(--color-level-1);
 }
@@ -115,20 +112,16 @@
 /* Materials: what a box is made of. Each paints its fill and edge from its own variables, so a
    container, or any class, can set them again to change how the materials inside it look.
 
-   Containers hold content: a card, a panel docked in a layout, and what floats. Each fills itself
-   with its material and makes it the background of what sits on it. Plain classes under the
-   utilities, so a utility such as `bg-*` changes one's fill. */
+   Containers hold content: a card, a panel docked in a layout, and what floats. Each sets its
+   fill as the background of what sits on it; a panel keeps the page's until a theme gives it one.
+   Plain classes under the utilities, so a utility such as `bg-*` changes one's fill. */
 @layer components {
   .material-card {
-    --color-background: var(--color-card);
-  }
-
-  .material-panel {
-    --color-background: var(--color-panel);
+    --color-background: var(--color-level-4);
   }
 
   .material-float {
-    --color-background: var(--color-float);
+    --color-background: var(--color-level-4);
     box-shadow: var(--shadow-float);
   }
 
@@ -188,6 +181,11 @@
 
 @utility drawn {
   stroke-dashoffset: 0;
+}
+
+/* The shade behind a dialog. A theme can draw it otherwise, such as with a blur. */
+@utility backdrop {
+  background-color: oklch(0% 0 0 / 0.5);
 }
 
 /* Grows from its trigger as it fades in. Base UI sets the attributes and the origin. */

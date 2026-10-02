@@ -67,4 +67,8 @@ export const utilities: Entry[] = [
     use: "A column that may not fit, the same way.",
   },
   { name: "shimmer", use: "Text, icons, or blocks while work is pending." },
+  {
+    name: "backdrop",
+    use: "The shade behind a dialog, which a theme can draw otherwise, such as with a blur.",
+  },
 ];
