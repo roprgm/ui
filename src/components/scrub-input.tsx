@@ -13,7 +13,7 @@ import {
 import { Chevron } from "./chevron";
 
 const hint =
-  "pointer-events-none absolute size-[9px] text-secondary opacity-0 transition-opacity group-[:hover:not(:focus-within)]:opacity-100";
+  "pointer-events-none absolute size-[9px] text-secondary opacity-0 transition-opacity group-[:hover:not(:focus-within)]/scrub-input:opacity-100";
 
 /** Whole `ch`, since tabular digits can differ from it by a fraction of a pixel. */
 function digitsWidth(digits: string, minChars?: number) {
@@ -96,25 +96,31 @@ export function ScrubInput({
     const target = event.currentTarget;
     const mouse = event.pointerType === "mouse";
     const pointer = event.pointerId;
-    const from = value;
     let x = event.clientX;
     let dx = 0;
     let moved = false;
+    // Held within range, so a drag that turns back after passing either end moves the value at once.
+    let reached = value;
 
     function move(event: globalThis.PointerEvent) {
       if (event.pointerId !== pointer) return;
       // Under pointer lock clientX freezes, so deltas come from movementX.
       const locked = document.pointerLockElement === target;
-      dx += locked ? event.movementX : event.clientX - x;
+      const delta = locked ? event.movementX : event.clientX - x;
       x = event.clientX;
+      dx += delta;
+      // Every range sweeps end to end in about 250px.
+      reached = Math.min(
+        max,
+        Math.max(min, reached + (delta * (max - min)) / 250),
+      );
       if (!moved && Math.abs(dx) > 2) {
         moved = true;
         latest.current.onEditingChange?.(true);
         // Hides the cursor so the drag isn't stopped by the screen edge.
         if (mouse) Promise.resolve(target.requestPointerLock()).catch(() => {});
       }
-      // Every range sweeps end to end in about 250px.
-      if (moved) latest.current.set(from + (dx * (max - min)) / 250);
+      if (moved) latest.current.set(reached);
     }
 
     function end(event: globalThis.PointerEvent) {
@@ -163,7 +169,7 @@ export function ScrubInput({
     <span
       data-slot="scrub-input"
       className={cn(
-        "group relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
+        "group/scrub-input relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
         className,
       )}
       onDoubleClick={reset}
@@ -178,7 +184,7 @@ export function ScrubInput({
       >
         <span
           data-slot="scrub-input-text"
-          className="text-foreground group-focus-within:invisible"
+          className="text-foreground group-focus-within/scrub-input:invisible"
         >
           <span
             data-slot="scrub-input-number"
