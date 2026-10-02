@@ -28,7 +28,7 @@ export default function CollapsibleSections() {
           </Section>
           <Section className="flex-row justify-end gap-1.5 px-2.5">
             <Button variant="ghost">Revert</Button>
-            <Button variant="primary">Apply</Button>
+            <Button>Apply</Button>
           </Section>
         </CollapsiblePanel>
       </Collapsible>

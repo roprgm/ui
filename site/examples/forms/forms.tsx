@@ -90,8 +90,8 @@ export default function Forms() {
           </label>
         </Section>
         <Section className="flex-row justify-end gap-1.5 px-2.5">
-          <Button>Cancel</Button>
-          <Button variant="primary">Export</Button>
+          <Button variant="ghost">Cancel</Button>
+          <Button>Export</Button>
         </Section>
       </Card>
 
@@ -147,7 +147,7 @@ export default function Forms() {
         <Textarea placeholder="Notes for this edit" />
         <div className="flex justify-end gap-2">
           <Button variant="ghost">Discard</Button>
-          <Button variant="primary">Save</Button>
+          <Button>Save</Button>
         </div>
       </div>
 
