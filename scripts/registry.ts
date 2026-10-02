@@ -2,8 +2,8 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 /**
- * Writes registry.json's `theme` item from themes/default.css and its imports: `@theme` variables
- * to `cssVars.theme`, the rest to `css`.
+ * Writes registry.json's `theme` item from themes/default.css and its imports: `@theme` variables,
+ * static or not, to `cssVars.theme`, the rest to `css`.
  */
 type Rules = { [key: string]: string | Rules };
 
@@ -67,11 +67,12 @@ function read(path: string): string {
 function item(path: string) {
   const {
     "@theme": theme = {},
+    "@theme static": always = {},
     "@theme inline": inline = {},
     ...css
   } = parse(read(path)) as Record<string, Rules>;
   const vars = Object.fromEntries(
-    Object.entries({ ...theme, ...inline }).map(([key, value]) => [
+    Object.entries({ ...always, ...theme, ...inline }).map(([key, value]) => [
       key.replace(/^--/, ""),
       value,
     ]),

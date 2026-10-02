@@ -8,7 +8,6 @@
       "type": "registry:theme",
       "cssVars": {
         "theme": {
-          "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
           "color-level-0": "oklch(0% 0 0)",
           "color-level-1": "oklch(15% 0 0)",
           "color-level-2": "oklch(18.7% 0 0)",
@@ -53,6 +52,7 @@
           "color-code-string": "oklch(81% 0.08 133)",
           "color-code-type": "oklch(81% 0.07 230)",
           "color-code-property": "oklch(83% 0.08 76)",
+          "font-sans": "\"Geist Variable\", \"Geist\", system-ui, sans-serif",
           "radius-xs": "2.5px",
           "radius-sm": "5px",
           "radius-md": "7px",

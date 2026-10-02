@@ -1,39 +1,48 @@
 import {
-  Accents,
-  AccentTokens,
-  Levels,
-  OtherTokens,
-  StateTokens,
-  TranslucentTokens,
-  WhereTokens,
+  accent,
+  accents,
+  code,
+  fills,
+  lines,
+  overlays,
+  palette,
+  states,
+  text,
 } from "@/reference/colors";
+import { SwatchList } from "@/reference/swatch-list";
 
 ## Palette
 
-<Levels />
+<SwatchList items={palette} />
 
-## Where you are
+## Text
 
-Each container sets these again. The materials' fills are on [Materials](/fundamentals/materials).
+<SwatchList items={text} />
 
-<WhereTokens />
+## Fills
 
-## Accent and primary
+<SwatchList items={fills} />
 
-<AccentTokens />
+## Accent
 
-`data-accent` picks another. Click to copy.
+<SwatchList items={accent} />
 
-<Accents />
+## Accents
+
+<SwatchList items={accents} />
 
 ## States
 
-<StateTokens />
+<SwatchList items={states} />
 
-## Translucent
+## Overlays
 
-<TranslucentTokens />
+<SwatchList items={overlays} />
 
-## The rest
+## Lines
 
-<OtherTokens />
+<SwatchList items={lines} />
+
+## Code
+
+<SwatchList items={code} />

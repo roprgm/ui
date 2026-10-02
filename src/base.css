@@ -12,8 +12,8 @@
   --font-sans: system-ui, sans-serif;
 }
 
-/* Colors. Components use only these. */
-@theme {
+/* Colors. Components use only these. Emitted even when unused, so an app can name any. */
+@theme static {
   /* The palette: black, then darkest first in even steps of lightness. Every fill is one of them.
      Level 1 is 15%, and each level after adds 3.7%. */
   --color-level-0: oklch(0% 0 0);
