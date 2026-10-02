@@ -10,7 +10,7 @@ A minimal, dark component library for React and Tailwind CSS v4, on Base UI. It 
 4. **Spacing**: Tailwind's scale as written (`px-3.5`), in the patterns below.
 5. **Parts, not props**: parts come as children, never as `title`, `actions`, or `trigger` props; props carry data, such as `items` and `label`. An overlay is its root, a `…Trigger` that renders your element with `render`, and a `…Content`.
 6. **Nothing forced**: never `!`. A fill that needs forcing wants a primitive or a variant.
-7. **Wiring**: an entry in `registry.json` with its `title`, `description`, and category, that lists the theme in `registryDependencies`; its examples in `site/examples/<name>/`, one file each; its page in `site/docs/components/<name>.mdx`, shaped as `button.mdx` is; and a line in `README.md`.
+7. **Wiring**: an entry in `registry.json` with its `title`, `description`, and category, that lists the theme in `registryDependencies`; its examples in `site/examples/<name>/`, one file each; its page in `site/docs/components/<name>.mdx`, shaped as `button.mdx` is: Installation, then Examples, the first `Default`, the component as it is, then Anatomy, with nothing above Installation; and a line in `README.md`.
 
 ## Files and code
 
