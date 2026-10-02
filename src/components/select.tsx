@@ -16,7 +16,7 @@ const trigger = cva(
       /** `pill` goes in a bar over a canvas, beside Chips. */
       variant: {
         default:
-          "rounded-md surface-control hover:bg-control-hover data-popup-open:bg-control-hover",
+          "rounded-md material-control hover:bg-control-hover data-popup-open:bg-control-hover",
         pill: "rounded-full bg-hover hover:bg-pressed data-popup-open:bg-pressed",
       },
       /** A Button's, 2px less on the chevron's side. */
@@ -133,7 +133,7 @@ export function Select<T extends string, Multiple extends boolean = false>({
                   disabled={item.disabled}
                   className={cn(
                     popupItem,
-                    "justify-between gap-4 data-selected:bg-selected",
+                    "justify-between gap-4 data-selected:bg-control",
                   )}
                 >
                   <Primitive.ItemText data-slot="select-item-text">

@@ -9,7 +9,7 @@ export function Card({ className, ...props }: ComponentProps<"div">) {
       data-slot="card"
       className={cn(
         sections(),
-        "overflow-hidden rounded-xl surface-card",
+        "overflow-hidden rounded-xl material-card",
         className,
       )}
       {...props}

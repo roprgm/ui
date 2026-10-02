@@ -14,7 +14,7 @@ export function Switch({
       role="switch"
       className={cn(
         // Sized by its content, so a theme's border grows the track rather than squeezing the knob.
-        "box-content h-4 w-8 shrink-0 cursor-pointer appearance-none rounded-full surface-field p-0.5 transition focus-ring before:block before:size-4 before:rounded-full before:surface-control before:transition checked:surface-accent checked:before:translate-x-4 checked:before:bg-on-accent dim-disabled",
+        "box-content h-4 w-8 shrink-0 cursor-pointer appearance-none rounded-full material-field p-0.5 transition focus-ring before:block before:size-4 before:rounded-full before:material-control before:transition checked:bg-accent checked:before:translate-x-4 checked:before:bg-on-accent dim-disabled",
         className,
       )}
       {...props}

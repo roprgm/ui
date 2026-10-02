@@ -71,7 +71,7 @@ export default function TreeLayers() {
         const moved = find(layers, drop.id);
         if (moved) setLayers(place(remove(layers, drop.id), moved, drop));
       }}
-      className="w-64 overflow-hidden rounded-lg surface-float"
+      className="w-64 overflow-hidden rounded-lg material-float"
     >
       {(layer) => (
         <>

@@ -1,6 +1,6 @@
-/* The tokens every theme sets again, and the surfaces and utilities components are built from, as
-   plain as they can be. A theme imports this file, sets again the tokens it changes, and adds to
-   the surfaces with selectors and utilities of the same name, as themes/default.css does. */
+/* The tokens every theme sets again, and the materials and utilities components are built from, as
+   plain as they can be. A theme imports this file and sets again the tokens it changes, such as
+   the materials' fills and edges, as themes/default.css does. */
 
 @import "./utils/overflow-fade.css";
 @import "./utils/shimmer.css";
@@ -12,8 +12,8 @@
   --font-sans: system-ui, sans-serif;
 }
 
-/* Colors. Components use only these. */
-@theme {
+/* Colors. Components use only these. Emitted even when unused, so an app can name any. */
+@theme static {
   /* The palette: black, then darkest first in even steps of lightness. Every fill is one of them.
      Level 1 is 15%, and each level after adds 3.7%. */
   --color-level-0: oklch(0% 0 0);
@@ -30,17 +30,17 @@
   --color-level-11: oklch(52% 0 0);
   --color-level-12: oklch(55.7% 0 0);
 
-  /* The colors of where you are. The page sets them, and each region sets them again for what sits
-     on it: its own fill; the fill a card gets there; what you press; where you set a value; a quiet
-     fill, such as a ghost's hover or a well; and a highlighted or selected row. Until a theme sets
-     them apart, controls, fields, and selected rows take a card's fill. */
+  /* Where you are: the fill of the page, or of the container you're in, and a quiet fill on it,
+     such as a ghost's hover. A container sets both again. */
   --color-background: var(--color-level-2);
-  --color-surface: var(--color-level-4);
-  --color-control: var(--color-surface);
-  --color-control-hover: var(--color-level-5);
-  --color-field: var(--color-control);
   --color-hover: var(--color-level-3);
-  --color-selected: var(--color-control);
+
+  /* The fills of the materials inside a container, as they sit on the page: what you press and
+     where you type. A container sets them again. Until a theme sets them apart, they take a
+     card's fill. */
+  --color-control: var(--color-level-4);
+  --color-control-hover: var(--color-level-5);
+  --color-field: var(--color-level-4);
 
   /* Text, strongest first, and opaque, so an icon's crossing strokes don't show: text and icons,
      supporting text, hints, and what is disabled. */
@@ -49,11 +49,11 @@
   --color-muted: oklch(55% 0 0);
   --color-disabled: oklch(44% 0 0);
 
-  /* Lines, translucent over any fill: separators, and dividers inside a surface. */
+  /* Lines, translucent over any fill: separators, and dividers inside a material. */
   --color-border: oklch(0% 0 0 / 0.7);
-  --color-border-subtle: oklch(0% 0 0 / 0.5);
+  --color-border-subtle: oklch(0% 0 0 / 0.6);
 
-  /* What is on: checked controls, thumbs. `data-accent` picks another. */
+  /* What is on: checked controls, thumbs. */
   --color-accent: oklch(89% 0 0);
   --color-on-accent: oklch(18% 0 0);
   /* The accent as text, such as a link, for a theme whose accent fill reads too dark as text. */
@@ -69,18 +69,11 @@
   --color-warning: oklch(84% 0.15 85);
   --color-danger: oklch(75% 0.14 21);
 
-  /* Translucent, over any fill: a pressed ghost, the focus ring, and the shade behind a dialog. */
+  /* Translucent, over any fill: a pressed ghost, and the focus ring. */
   --color-pressed: oklch(100% 0 0 / 0.15);
   --color-focus: oklch(100% 0 0 / 0.25);
-  --color-backdrop: oklch(0% 0 0 / 0.5);
 
   --color-tooltip: var(--color-level-1);
-
-  /* Code, as a highlighter marks it. */
-  --color-code-keyword: oklch(77% 0.1 9);
-  --color-code-string: oklch(81% 0.08 133);
-  --color-code-type: oklch(81% 0.07 230);
-  --color-code-property: oklch(83% 0.08 76);
 }
 
 @theme {
@@ -107,62 +100,69 @@
   --font-weight-selected: 400;
 }
 
-/* Surfaces: what a box is. Each paints its color, and the theme adds the rest, such as an edge.
+/* The materials' edges, flat until a theme draws them. */
+@theme {
+  --shadow-card: none;
+  --inset-shadow-card: none;
+  --shadow-float: none;
+  --shadow-control: none;
+  --shadow-field: none;
+}
 
-   Regions hold content and paint their background and text; the theme sets the colors of what sits on each.
-   A card, and what floats, take the surface of where they sit; a panel, docked in a layout, keeps
-   the background until the theme gives it one. With `data-raised`, a popup opens over a card. Plain
-   classes under the utilities, so a utility such as `bg-*` changes one's fill. */
+/* Materials: what a box is made of. Each paints its fill and edge from its own variables, so a
+   container, or any class, can set them again to change how the materials inside it look.
+
+   Containers hold content: a card, a panel docked in a layout, and what floats. Each sets its
+   fill as the background of what sits on it; a panel keeps the page's until a theme gives it one.
+   Plain classes under the utilities, so a utility such as `bg-*` changes one's fill. */
 @layer components {
-  .surface-card,
-  .surface-panel,
-  .surface-float {
+  .material-card {
+    --color-background: var(--color-level-4);
+  }
+
+  .material-float {
+    --color-background: var(--color-level-4);
+    box-shadow: var(--shadow-float);
+  }
+
+  .material-card,
+  .material-panel,
+  .material-float {
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
 
-  .surface-card,
-  .surface-float {
-    --color-background: var(--color-surface);
-  }
-
-  /* A frame over what a card holds, where a theme draws its edge: it takes no room, so a border
-     works, and a row with a fill can't cover it. */
-  .surface-card {
+  /* A frame over what a card holds, where its inner edge is drawn: it takes no room, and a row
+     with a fill can't cover it. */
+  .material-card {
     position: relative;
+    box-shadow: var(--shadow-card);
   }
 
-  .surface-card::after {
+  .material-card::after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
+    box-shadow: var(--inset-shadow-card);
     pointer-events: none;
   }
 }
 
-/* A control you press: buttons, selects, selected tabs and toggles. */
-@utility surface-control {
+/* What you press: buttons, selects, selected tabs and toggles. */
+@utility material-control {
   background-color: var(--color-control);
+  box-shadow: var(--shadow-control);
 }
 
-/* A field you set: inputs, tracks, checkboxes, switches, segmented groups. */
-@utility surface-field {
+/* Where you set or hold something: inputs, tracks, checkboxes, code. */
+@utility material-field {
   background-color: var(--color-field);
-}
-
-/* What is on: a checked switch, a slider's thumb. */
-@utility surface-accent {
-  background-color: var(--color-accent);
-}
-
-/* The main action: a primary button. */
-@utility surface-primary {
-  background-color: var(--color-primary);
+  box-shadow: var(--shadow-field);
 }
 
 /* A strip of controls a size smaller than a Button, 3px in and rounded to match, as a ToggleGroup
-   or a segmented TabList; pair it with `surface-field`. It stands 2px taller than a Button but
+   or a segmented TabList; pair it with `material-field`. It stands 2px taller than a Button but
    reaches a pixel past each edge, so in a row it takes a Button's height. */
 @utility segmented {
   @apply -my-px gap-0.5 rounded-lg p-0.75;
@@ -181,6 +181,11 @@
 
 @utility drawn {
   stroke-dashoffset: 0;
+}
+
+/* The shade behind a dialog. A theme can draw it otherwise, such as with a blur. */
+@utility backdrop {
+  background-color: oklch(0% 0 0 / 0.5);
 }
 
 /* Grows from its trigger as it fades in. Base UI sets the attributes and the origin. */
@@ -216,58 +221,6 @@
   &:is(:disabled, [data-disabled], :has(:disabled)) {
     pointer-events: none;
     opacity: 40%;
-  }
-}
-
-/* Accents, for `data-accent` on the page or any part of it. Each works on a dark or a light page, and
-   the main action takes it too. */
-@layer base {
-  [data-accent] {
-    --color-accent-text: var(--color-accent);
-    --color-primary: var(--color-accent);
-    --color-on-primary: var(--color-on-accent);
-  }
-
-  [data-accent="violet"] {
-    --color-accent: oklch(62% 0.2 293);
-    --color-on-accent: oklch(98.5% 0 0);
-    --color-primary-hover: oklch(68% 0.19 293);
-  }
-
-  [data-accent="blue"] {
-    --color-accent: oklch(62% 0.19 255);
-    --color-on-accent: oklch(98.5% 0 0);
-    --color-primary-hover: oklch(68% 0.17 255);
-  }
-
-  [data-accent="green"] {
-    --color-accent: oklch(72% 0.17 150);
-    --color-on-accent: oklch(20% 0.04 150);
-    --color-primary-hover: oklch(78% 0.16 150);
-  }
-
-  [data-accent="amber"] {
-    --color-accent: oklch(81% 0.16 80);
-    --color-on-accent: oklch(22% 0.04 80);
-    --color-primary-hover: oklch(86% 0.14 80);
-  }
-
-  [data-accent="orange"] {
-    --color-accent: oklch(73% 0.17 55);
-    --color-on-accent: oklch(20% 0.04 55);
-    --color-primary-hover: oklch(79% 0.15 55);
-  }
-
-  [data-accent="coral"] {
-    --color-accent: oklch(71% 0.15 30);
-    --color-on-accent: oklch(20% 0.04 30);
-    --color-primary-hover: oklch(77% 0.13 30);
-  }
-
-  [data-accent="rose"] {
-    --color-accent: oklch(63% 0.21 10);
-    --color-on-accent: oklch(98.5% 0 0);
-    --color-primary-hover: oklch(69% 0.19 10);
   }
 }
 

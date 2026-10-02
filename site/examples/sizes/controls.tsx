@@ -52,7 +52,7 @@ export default function SizesControls() {
         />
       </div>
       <span className="text-secondary tabular-nums">40px</span>
-      <div className="w-64 max-w-full overflow-hidden rounded-lg surface-float">
+      <div className="w-64 max-w-full overflow-hidden rounded-lg material-float">
         <ListItem>Sky</ListItem>
         <ListItem>Subject</ListItem>
       </div>

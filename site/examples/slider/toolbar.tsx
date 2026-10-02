@@ -8,7 +8,7 @@ export default function SliderToolbar() {
   const [size, setSize] = useState(60);
   const [overlay, setOverlay] = useState(true);
   return (
-    <div className="flex items-center gap-1 rounded-full p-1.25 pl-3.5 surface-float">
+    <div className="flex items-center gap-1 rounded-full p-1.25 pl-3.5 material-float">
       <Slider
         label="Size"
         value={size}

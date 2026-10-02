@@ -20,13 +20,13 @@ export default async function SectionPage({ params }: Props) {
   const section = findSection((await params).section);
   if (!section) notFound();
   return (
-    <div className="flex justify-center px-5 pt-6 pb-16 md:px-12 md:pt-10">
+    <div className="flex justify-center px-5 pt-7 pb-16 md:px-12 md:pt-11">
       <div className="flex w-full max-w-3xl flex-col gap-10">
         <header className="flex flex-col gap-3">
           <h1 className="text-3xl font-semibold tracking-tight">
             {section.title}
           </h1>
-          <p className="text-base text-secondary">{section.description}</p>
+          <p className="text-secondary">{section.description}</p>
         </header>
         {section.groups.map((group) => (
           <section

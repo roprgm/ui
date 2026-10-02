@@ -1,4 +1,4 @@
-/* Surfaces with no edge, apart by their fills alone. */
+/* Materials with no edge, apart by their fills alone. */
 
 @import "../base.css";
 
@@ -11,21 +11,20 @@
 
 @layer components {
   /* A card, a panel, and what floats lift what sits on them two levels, as the page does. */
-  .surface-card,
-  .surface-panel,
-  .surface-float {
+  .material-card,
+  .material-panel,
+  .material-float {
     --color-hover: var(--color-level-5);
-    --color-selected: var(--color-level-7);
     --color-control: var(--color-level-7);
     --color-control-hover: var(--color-level-8);
     --color-field: var(--color-level-2);
   }
 
-  /* A popup that opens over a card stands as a card on a card. */
-  .surface-float[data-raised] {
+  /* A container on a card, and a popup that opens over one, stand as a card on a card. */
+  :where(.material-card) :is(.material-card, .material-panel, .material-float),
+  .material-float[data-raised] {
     --color-background: var(--color-level-6);
     --color-hover: var(--color-level-7);
-    --color-selected: var(--color-level-9);
     --color-control: var(--color-level-9);
     --color-control-hover: var(--color-level-10);
     --color-field: var(--color-level-4);

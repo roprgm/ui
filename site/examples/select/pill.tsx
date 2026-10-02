@@ -9,7 +9,7 @@ const operations = [
 
 export default function SelectPill() {
   return (
-    <div className="flex items-center gap-1 rounded-full p-1 surface-float">
+    <div className="flex items-center gap-1 rounded-full p-1 material-float">
       <Chip>
         <BrushIcon /> Brush
       </Chip>

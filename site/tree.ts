@@ -23,7 +23,7 @@ export type Section = {
 type Entry = [slug: string, title: string, description: string];
 
 /** The page the site opens on. */
-const home = "introduction";
+const home = "installation";
 
 function group(section: string, entries: Entry[], title?: string): Group {
   return {
@@ -63,11 +63,6 @@ const components = categories.map(([category, title]) =>
 
 const fundamentals = group("fundamentals", [
   [
-    "introduction",
-    "Introduction",
-    "A minimal, dark component library for React and Tailwind CSS v4, on Base UI.",
-  ],
-  [
     "installation",
     "Installation",
     "Add it as a package, or copy each component's source into your app.",
@@ -75,14 +70,13 @@ const fundamentals = group("fundamentals", [
   [
     "colors",
     "Colors",
-    "Grays in even steps of lightness, four steps of text, an accent, and states.",
+    "The palette, and every color token as each container sets it.",
   ],
   [
-    "tokens",
-    "Color tokens",
-    "The colors components use, which each region sets again for what sits on it.",
+    "materials",
+    "Materials",
+    "What a box is made of, which any container can set again for what's inside it.",
   ],
-  ["surfaces", "Surfaces", "Classes for what a box is, which the theme draws."],
   [
     "depth",
     "Depth",

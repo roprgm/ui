@@ -21,7 +21,6 @@
 
   --color-border-subtle: oklch(0% 0 0 / 0.1);
   --color-border: oklch(0% 0 0 / 0.1);
-  --color-backdrop: oklch(0% 0 0 / 0.3);
   --color-focus: oklch(0% 0 0 / 0.3);
   --color-success: oklch(52% 0.14 150);
   --color-warning: oklch(64% 0.15 70);
@@ -42,6 +41,15 @@
   --color-control: var(--color-level-5);
   --color-control-hover: var(--color-level-6);
   --color-field: var(--color-level-0);
+
+  --shadow-card: 0 0 0 1px oklch(0% 0 0 / 0.08), 0 1px 2px oklch(0% 0 0 / 0.06);
+  --shadow-float:
+    0 0 0 1px oklch(0% 0 0 / 0.08), 0 4px 12px oklch(0% 0 0 / 0.08),
+    0 12px 32px -8px oklch(0% 0 0 / 0.14);
+  --shadow-control:
+    0 0 0 1px oklch(0% 0 0 / 0.08), 0 1px 2px oklch(0% 0 0 / 0.06);
+  --shadow-field:
+    inset 0 1px 2px oklch(0% 0 0 / 0.08), inset 0 0 0 1px oklch(0% 0 0 / 0.05);
 }
 
 @layer base {
@@ -52,61 +60,33 @@
 
 @layer components {
   /* A card, a panel, and what floats lift what sits on them two levels, as the page does. */
-  .surface-card,
-  .surface-panel,
-  .surface-float {
+  .material-card,
+  .material-panel,
+  .material-float {
     --color-hover: var(--color-level-5);
-    --color-selected: var(--color-level-7);
     --color-control: var(--color-level-7);
     --color-control-hover: var(--color-level-8);
     --color-field: var(--color-level-2);
   }
 
-  /* A popup that opens over a card stands as a card on a card. */
-  .surface-float[data-raised] {
+  /* A container on a card, and a popup that opens over one, stand as a card on a card. */
+  :where(.material-card) :is(.material-card, .material-panel, .material-float),
+  .material-float[data-raised] {
     --color-background: var(--color-level-6);
     --color-hover: var(--color-level-7);
-    --color-selected: var(--color-level-9);
     --color-control: var(--color-level-9);
     --color-control-hover: var(--color-level-10);
     --color-field: var(--color-level-4);
   }
-
-  .surface-card {
-    box-shadow:
-      0 0 0 1px oklch(0% 0 0 / 0.08),
-      0 1px 2px oklch(0% 0 0 / 0.06);
-  }
-
-  .surface-float {
-    box-shadow:
-      0 0 0 1px oklch(0% 0 0 / 0.08),
-      0 4px 12px oklch(0% 0 0 / 0.08),
-      0 12px 32px -8px oklch(0% 0 0 / 0.14);
-  }
-}
-
-@utility surface-control {
-  box-shadow:
-    0 0 0 1px oklch(0% 0 0 / 0.08),
-    0 1px 2px oklch(0% 0 0 / 0.06);
-}
-
-@utility surface-field {
-  box-shadow:
-    inset 0 1px 2px oklch(0% 0 0 / 0.08),
-    inset 0 0 0 1px oklch(0% 0 0 / 0.05);
 }
 
 /* A light ring stands the dark thumb off a dark track, and a soft shadow lifts it. */
-@utility surface-accent {
+[data-slot="slider-thumb"] {
   box-shadow:
     0 0 0 1px oklch(100% 0 0 / 0.9),
     0 1px 3px oklch(0% 0 0 / 0.3);
 }
 
-@utility surface-primary {
-  box-shadow:
-    0 0 0 1px oklch(100% 0 0 / 0.9),
-    0 1px 3px oklch(0% 0 0 / 0.3);
+@utility backdrop {
+  background-color: oklch(0% 0 0 / 0.3);
 }

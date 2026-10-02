@@ -2,22 +2,19 @@ import { cn } from "cn";
 
 type Entry = { name: string; swatch?: string; use: string };
 
-/** Names and what each is for, as rows of text with a line between each. */
+/** Names and what each is for, as rows of text. */
 export function Reference({ entries }: { entries: Entry[] }) {
   return (
-    <dl className="flex flex-col shadow-[inset_0_1px_0_var(--color-border-subtle)]">
+    <dl className="flex flex-col">
       {entries.map((entry) => (
         <div
           key={entry.name}
-          className="grid gap-x-6 gap-y-1 py-2.5 shadow-[inset_0_-1px_0_var(--color-border-subtle)] sm:grid-cols-[16rem_minmax(0,1fr)]"
+          className="grid gap-x-6 gap-y-1 py-2.5 sm:grid-cols-[16rem_minmax(0,1fr)]"
         >
           <dt className="flex min-w-0 items-center gap-2.5">
             {entry.swatch && (
               <span
-                className={cn(
-                  "size-3.5 shrink-0 rounded-sm shadow-[inset_0_0_0_1px_var(--color-border-subtle)]",
-                  entry.swatch,
-                )}
+                className={cn("size-3.5 shrink-0 rounded-sm", entry.swatch)}
               />
             )}
             <code className="truncate font-mono text-xs">{entry.name}</code>
@@ -29,216 +26,20 @@ export function Reference({ entries }: { entries: Entry[] }) {
   );
 }
 
-export const tokens = {
-  where: [
-    {
-      name: "--color-background",
-      swatch: "bg-background",
-      use: "The fill of the region you're in: the page, a card, a panel, a popup.",
-    },
-    {
-      name: "--color-surface",
-      swatch: "bg-surface",
-      use: "The fill a card or popup gets where it sits.",
-    },
-    {
-      name: "--color-control",
-      swatch: "bg-control",
-      use: "What you press: buttons, selects, selected tabs and toggles.",
-    },
-    {
-      name: "--color-control-hover",
-      swatch: "bg-control-hover",
-      use: "A control under the pointer, or with its popup open.",
-    },
-    {
-      name: "--color-field",
-      swatch: "bg-field",
-      use: "Where you set a value: inputs, tracks, checkboxes, switches.",
-    },
-    {
-      name: "--color-hover",
-      swatch: "bg-hover",
-      use: "Quiet fills: a ghost's hover, a well.",
-    },
-    {
-      name: "--color-selected",
-      swatch: "bg-selected",
-      use: "A highlighted or selected row.",
-    },
-  ],
-  text: [
-    {
-      name: "--color-foreground",
-      swatch: "bg-foreground",
-      use: "Primary text and icons.",
-    },
-    {
-      name: "--color-secondary",
-      swatch: "bg-secondary",
-      use: "Supporting text, descriptions, and placeholders.",
-    },
-    {
-      name: "--color-muted",
-      swatch: "bg-muted",
-      use: "Hints and metadata that should barely show, such as a disclaimer.",
-    },
-    {
-      name: "--color-disabled",
-      swatch: "bg-disabled",
-      use: "Rows and labels that can't be used.",
-    },
-  ],
-  lines: [
-    {
-      name: "--color-border",
-      swatch: "bg-border",
-      use: "Separators between groups.",
-    },
-    {
-      name: "--color-border-subtle",
-      swatch: "bg-border-subtle",
-      use: "Dividers inside a surface, such as between a card's sections.",
-    },
-  ],
-  accent: [
-    {
-      name: "--color-accent",
-      swatch: "bg-accent",
-      use: "What is on: a checked control, a slider's thumb, a badge that stands out.",
-    },
-    {
-      name: "--color-on-accent",
-      swatch: "bg-on-accent",
-      use: "Text and icons on the accent.",
-    },
-    {
-      name: "--color-accent-text",
-      swatch: "bg-accent-text",
-      use: "The accent as text, such as a link. It is the accent until a theme sets it apart.",
-    },
-    {
-      name: "--color-primary",
-      swatch: "bg-primary",
-      use: "The main action: a primary button. It is the accent until a theme sets it apart.",
-    },
-    {
-      name: "--color-primary-hover",
-      swatch: "bg-primary-hover",
-      use: "A primary button under the pointer.",
-    },
-    {
-      name: "--color-on-primary",
-      swatch: "bg-on-primary",
-      use: "Text and icons on the primary.",
-    },
-  ],
-  states: [
-    {
-      name: "--color-success",
-      swatch: "bg-success",
-      use: "Completed and healthy states, with a label.",
-    },
-    {
-      name: "--color-warning",
-      swatch: "bg-warning",
-      use: "Needs attention soon, with a label.",
-    },
-    {
-      name: "--color-danger",
-      swatch: "bg-danger",
-      use: "Destructive actions and errors, with a label.",
-    },
-    {
-      name: "--color-pressed",
-      swatch: "bg-pressed",
-      use: "A ghost button or chip held down, or on. Translucent, over any fill.",
-    },
-    {
-      name: "--color-focus",
-      swatch: "bg-focus",
-      use: "The focus ring. Translucent, over any fill.",
-    },
-    {
-      name: "--color-backdrop",
-      swatch: "bg-backdrop",
-      use: "The shade behind a dialog. Translucent, over any fill.",
-    },
-  ],
-  rest: [
-    {
-      name: "--color-tooltip",
-      swatch: "bg-tooltip",
-      use: "A tooltip's fill.",
-    },
-    {
-      name: "--color-code-*",
-      swatch: "bg-code-keyword",
-      use: "Code, as a highlighter marks it: keyword, string, type, and property.",
-    },
-    {
-      name: "--color-level-0 … 12",
-      swatch: "bg-level-6",
-      use: "The palette every fill is picked from, by a theme or a region. Components never use it.",
-    },
-  ],
-  sizes: [
-    {
-      name: "--spacing-control",
-      use: "The height of controls, 28px, with --spacing-control-sm at 24px and --spacing-control-lg at 32px. Only controls take them, so a theme scales them alone.",
-    },
-    {
-      name: "--spacing-thumb",
-      use: "A slider's thumb, which its fill is placed by too.",
-    },
-    {
-      name: "--font-weight-selected",
-      use: "The weight of a selected tab. A tab is as wide either way.",
-    },
-  ],
-} satisfies Record<string, Entry[]>;
-
-export const surfaces = {
-  regions: [
-    {
-      name: "surface-card",
-      swatch: "surface-card",
-      use: "A card: content that stands on the page. Its background is the surface where it sits, and its ::after a frame over its content, for its edge.",
-    },
-    {
-      name: "surface-panel",
-      swatch: "surface-panel",
-      use: "A panel docked in a layout, such as a sidebar or a toolbar, with a background of its own.",
-    },
-    {
-      name: "surface-float",
-      swatch: "surface-float",
-      use: "What floats: popups, dialogs, notices, anything dragged. With data-raised, one that opens over a card.",
-    },
-  ],
-  controls: [
-    {
-      name: "surface-control",
-      swatch: "surface-control",
-      use: "What you press: buttons, selects, selected tabs and toggles. Paints control.",
-    },
-    {
-      name: "surface-field",
-      swatch: "surface-field",
-      use: "Where you set a value: inputs, tracks, checkboxes, switches, segmented groups. Paints field.",
-    },
-    {
-      name: "surface-accent",
-      swatch: "surface-accent",
-      use: "What is on: a checked switch, a slider's thumb. Paints accent.",
-    },
-    {
-      name: "surface-primary",
-      swatch: "surface-primary",
-      use: "The main action: a primary button. Paints primary.",
-    },
-  ],
-} satisfies Record<string, Entry[]>;
+export const sizes: Entry[] = [
+  {
+    name: "--spacing-control",
+    use: "The height of controls, 28px, with --spacing-control-sm at 24px and --spacing-control-lg at 32px. Only controls take them, so a theme scales them alone.",
+  },
+  {
+    name: "--spacing-thumb",
+    use: "A slider's thumb, which its fill is placed by too.",
+  },
+  {
+    name: "--font-weight-selected",
+    use: "The weight of a selected tab. A tab is as wide either way.",
+  },
+];
 
 export const utilities: Entry[] = [
   {
@@ -255,7 +56,7 @@ export const utilities: Entry[] = [
   },
   {
     name: "segmented",
-    use: "A strip of controls a size smaller than a Button; pair it with surface-field.",
+    use: "A strip of controls a size smaller than a Button; pair it with material-field.",
   },
   {
     name: "overflow-fade-x",
@@ -266,4 +67,8 @@ export const utilities: Entry[] = [
     use: "A column that may not fit, the same way.",
   },
   { name: "shimmer", use: "Text, icons, or blocks while work is pending." },
+  {
+    name: "backdrop",
+    use: "The shade behind a dialog, which a theme can draw otherwise, such as with a blur.",
+  },
 ];

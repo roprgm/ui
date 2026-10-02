@@ -27,7 +27,7 @@ export default function DragToggleUndo() {
           if (on) save();
           dragging.current = on;
         }}
-        className="overflow-hidden rounded-lg surface-float"
+        className="overflow-hidden rounded-lg material-float"
       >
         {photos.map((photo) => (
           <ListItem key={photo}>

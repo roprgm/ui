@@ -8,7 +8,7 @@ import { Section, SectionAction } from "./section";
 /**
  * Shows notices in a corner from anywhere, once a `Toaster` is mounted:
  * `toast.add({ title: "Exported", description: "portrait.jpg" })`. `actionProps` adds a button,
- * and `priority: "high"` makes it an alert.
+ * `type: "success"` or `"warning"` colors it, and `priority: "high"` makes it an alert.
  */
 export const toast = Primitive.createToastManager();
 
@@ -37,7 +37,7 @@ function Toasts() {
       toast={item}
       swipeDirection="right"
       // Past the provider's limit, older toasts wait hidden until newer ones go.
-      className="translate-x-(--toast-swipe-movement-x) data-limited:hidden"
+      className="translate-x-(--toast-swipe-movement-x) data-limited:hidden data-[type=success]:text-success data-[type=warning]:text-warning"
       render={<Notice tone={item.priority === "high" ? "alert" : "status"} />}
     >
       <Section className="flex-row items-start">

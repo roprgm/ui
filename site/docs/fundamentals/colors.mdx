@@ -1,37 +1,33 @@
-import { Accents, Levels, States, TextColors, Translucent } from "@/reference/colors";
+import {
+  accent,
+  base,
+  lines,
+  overlays,
+  states,
+} from "@/reference/colors";
+import { Levels } from "@/reference/levels";
+import { SwatchList } from "@/reference/swatch-list";
 
-Components never name these colors; they use the [color tokens](/fundamentals/tokens), which a theme picks from here.
-
-## Levels
-
-Every fill is a level: black, then from 15% lightness up in even steps of 3.7%. Only themes and regions pick levels.
+## Palette
 
 <Levels />
 
-## Text
+## Base
 
-Four opaque steps, strongest first, on each fill they sit on by default.
-
-<TextColors />
+<SwatchList items={base} />
 
 ## Accent
 
-What is on, such as a checked switch. `data-accent` on any element picks another accent for what it holds.
-
-<Accents />
-
-```tsx
-<div data-accent="blue">…</div>
-```
+<SwatchList items={accent} />
 
 ## States
 
-Success, warning, and danger, each with a label beside it, never alone.
+<SwatchList items={states} />
 
-<States />
+## Overlays
 
-## Translucent
+<SwatchList items={overlays} />
 
-Lines, and the fills of a pressed control and the focus ring, which read over any fill.
+## Lines
 
-<Translucent />
+<SwatchList items={lines} />

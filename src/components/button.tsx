@@ -10,9 +10,10 @@ const button = cva(
     variants: {
       variant: {
         default:
-          "surface-control text-foreground hover:bg-control-hover data-popup-open:bg-control-hover",
-        primary: "surface-primary text-on-primary hover:bg-primary-hover",
-        // A control's fill without its surface, as a selected row is drawn.
+          "material-control text-foreground hover:bg-control-hover data-popup-open:bg-control-hover",
+        primary:
+          "material-control bg-primary text-on-primary hover:bg-primary-hover",
+        // A control's fill without its edge, as a selected row is drawn.
         flat: "bg-control text-foreground hover:bg-control-hover data-popup-open:bg-control-hover",
         ghost:
           "text-secondary hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",

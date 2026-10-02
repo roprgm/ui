@@ -25,7 +25,7 @@ export function ExampleFrame({
       defaultValue="preview"
       render={
         block ? (
-          <div className="flex flex-col overflow-hidden rounded-xl ring-1 ring-border-subtle" />
+          <div className="flex flex-col overflow-hidden rounded-xl" />
         ) : (
           <Card className="p-0" />
         )
@@ -35,7 +35,7 @@ export function ExampleFrame({
         className={cn(
           "flex-row items-center py-2 pr-1.5",
           block &&
-            "surface-panel shadow-[inset_0_-1px_0_var(--color-border-subtle)]",
+            "material-panel shadow-[inset_0_-1px_0_var(--color-border-subtle)]",
         )}
       >
         <span className="flex-1 text-muted">{file}</span>

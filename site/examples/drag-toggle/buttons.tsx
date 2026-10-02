@@ -17,7 +17,7 @@ export default function DragToggleButtons() {
         : [...all, layer],
     );
   return (
-    <DragToggle className="w-56 overflow-hidden rounded-lg surface-float">
+    <DragToggle className="w-56 overflow-hidden rounded-lg material-float">
       {layers.map((layer) => {
         const visible = !hidden.includes(layer);
         return (

@@ -90,7 +90,7 @@ export function SubmenuTrigger({
       data-slot="submenu-trigger"
       className={cn(
         popupItem,
-        "justify-between gap-4 data-popup-open:bg-selected",
+        "justify-between gap-4 data-popup-open:bg-control",
         className,
       )}
       {...props}

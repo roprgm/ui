@@ -1,4 +1,4 @@
-/* Surfaces drawn with light and shadow, on levels of gray. */
+/* Materials drawn with light and shadow, on levels of gray. */
 
 @import "../base.css";
 
@@ -14,50 +14,55 @@
   }
 }
 
-/* Colors. On the page, a control stands three levels up and a field two down; a card, a panel,
-   and what floats lift what sits on them two levels. */
+/* On the page, a control stands three levels up and a field two down. Controls are lit on top,
+   fields from below, and what floats has a nearly opaque outer edge, so it holds over light
+   materials too. */
 @theme {
   --color-control: var(--color-level-5);
   --color-control-hover: var(--color-level-6);
   --color-field: var(--color-level-0);
+
+  --shadow-card: 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14);
+  --inset-shadow-card: inset 0 1px 0 oklch(95% 0 0 / 0.08);
+  --shadow-float:
+    0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08),
+    0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1);
+  --shadow-control:
+    inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28),
+    0 0 1px oklch(0% 0 0 / 0.14);
+  --shadow-field:
+    inset 0 1px 1px oklch(0% 0 0 / 0.3), 0 1px 0 oklch(95% 0 0 / 0.08);
 }
 
 @layer components {
-  .surface-card,
-  .surface-panel,
-  .surface-float {
+  /* A panel takes a card's fill. */
+  .material-panel {
+    --color-background: var(--color-level-4);
+  }
+
+  /* What sits on a container stands two levels over it. */
+  .material-card,
+  .material-panel,
+  .material-float {
     --color-control: var(--color-level-7);
     --color-control-hover: var(--color-level-8);
     --color-field: var(--color-level-2);
     --color-hover: var(--color-level-5);
-    --color-selected: var(--color-level-7);
   }
 
-  /* A panel is a card docked in a layout, with no edge. */
-  .surface-panel {
-    --color-background: var(--color-surface);
-  }
-
-  /* A region on a card, and a popup that opens over one, stand as a card on a card. */
-  :where(.surface-card) :is(.surface-card, .surface-panel, .surface-float),
-  .surface-float[data-raised] {
+  /* A container on a card, and a popup that opens over one, stand as a card on a card. */
+  :where(.material-card) :is(.material-card, .material-panel, .material-float),
+  .material-float[data-raised] {
     --color-background: var(--color-level-6);
     --color-control: var(--color-level-9);
     --color-control-hover: var(--color-level-10);
     --color-field: var(--color-level-4);
     --color-hover: var(--color-level-7);
-    --color-selected: var(--color-level-9);
   }
 
-  /* Effects. */
-  .surface-card {
-    box-shadow:
-      0 1px 1px oklch(0% 0 0 / 0.28),
-      0 0 1px oklch(0% 0 0 / 0.14);
-  }
-
-  .surface-card::after {
-    box-shadow: inset 0 1px 0 oklch(95% 0 0 / 0.08);
+  /* A primary button's text, with a lighter shadow under it on its light fill. */
+  [data-slot="button"][data-variant="primary"] {
+    text-shadow: 0.5px 1px 0.5px oklch(0% 0 0 / 0.08);
   }
 
   /* The light beside a separator's dark line, so it reads engraved: under it, or after it upright. */
@@ -73,43 +78,4 @@
   [data-slot="tab-list"][data-variant="underline"]::before {
     box-shadow: 0 1px 0 oklch(95.5% 0 0 / 0.05);
   }
-
-  /* A nearly opaque outer edge, so it holds over light surfaces too. */
-  .surface-float {
-    box-shadow:
-      0 0 0px 1px oklch(10% 0 0 / 0.25),
-      inset 0 1px 0 oklch(100% 0 0 / 0.08),
-      0 2px 6px oklch(0% 0 0 / 0.3),
-      0 4px 16px 0 oklch(10% 0 0 / 0.1);
-  }
-}
-
-@utility surface-control {
-  box-shadow:
-    inset 0 1px 0 oklch(95% 0 0 / 0.08),
-    0 1px 1px oklch(0% 0 0 / 0.28),
-    0 0 1px oklch(0% 0 0 / 0.14);
-}
-
-@utility surface-field {
-  box-shadow:
-    inset 0 1px 1px oklch(0% 0 0 / 0.3),
-    0 1px 0 oklch(95% 0 0 / 0.08);
-}
-
-/* A dark halo stands it off any track or surface, lit on top like a control. */
-@utility surface-accent {
-  box-shadow:
-    0 0 2px 1px oklch(10% 0 0 / 0.3),
-    inset 0 1px 0 oklch(95% 0 0 / 0.2),
-    0 1px 2px oklch(10% 0 0 / 0.5);
-}
-
-/* Lit as the accent, with a lighter shadow under its text. */
-@utility surface-primary {
-  box-shadow:
-    0 0 2px 1px oklch(10% 0 0 / 0.3),
-    inset 0 1px 0 oklch(95% 0 0 / 0.2),
-    0 1px 2px oklch(10% 0 0 / 0.5);
-  text-shadow: 0.5px 1px 0.5px oklch(0% 0 0 / 0.08);
 }

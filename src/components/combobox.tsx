@@ -102,7 +102,7 @@ export function Combobox<T extends string>({
                   disabled={item.disabled}
                   className={cn(
                     popupItem,
-                    "justify-between gap-4 data-selected:bg-selected",
+                    "justify-between gap-4 data-selected:bg-control",
                   )}
                 >
                   {item.label}

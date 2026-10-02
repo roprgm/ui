@@ -24,7 +24,7 @@ export async function Doc({ page }: { page: Page }) {
   // A block is a whole layout, so it takes the width an outline would.
   const wide = page.section === "blocks";
   return (
-    <div className="flex justify-center gap-16 px-5 pt-6 pb-16 md:px-12 md:pt-10">
+    <div className="flex justify-center gap-16 px-5 pt-7 pb-16 md:px-12 md:pt-11">
       <article
         className={cn(
           "flex w-full min-w-0 flex-col gap-10",
@@ -39,9 +39,7 @@ export async function Doc({ page }: { page: Page }) {
             </h1>
             <PageActions previous={pages[index - 1]} next={pages[index + 1]} />
           </div>
-          <p className="max-w-[60ch] text-base text-secondary">
-            {page.description}
-          </p>
+          <p className="max-w-[60ch] text-secondary">{page.description}</p>
         </header>
         <div className="flex flex-col gap-4">
           <Content />

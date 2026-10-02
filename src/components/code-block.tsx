@@ -3,9 +3,10 @@ import type { ComponentProps } from "react";
 import { CopyButton } from "./copy-button";
 import { ScrollArea } from "./scroll-area";
 
-// Sugar High's markup reads these; other highlighters color their own.
+// Sugar High's markup reads these; other highlighters color their own. A theme sets `--code-type`,
+// `--code-keyword`, `--code-property`, or `--code-string` on the code block's slot.
 const syntax =
-  "[--sh-class:var(--color-code-type)] [--sh-comment:var(--color-secondary)] [--sh-entity:var(--color-code-type)] [--sh-identifier:var(--color-foreground)] [--sh-jsxliterals:var(--color-foreground)] [--sh-keyword:var(--color-code-keyword)] [--sh-property:var(--color-code-property)] [--sh-sign:var(--color-secondary)] [--sh-string:var(--color-code-string)]";
+  "[--sh-class:var(--code-type,oklch(81%_0.07_230))] [--sh-comment:var(--color-secondary)] [--sh-entity:var(--code-type,oklch(81%_0.07_230))] [--sh-identifier:var(--color-foreground)] [--sh-jsxliterals:var(--color-foreground)] [--sh-keyword:var(--code-keyword,oklch(77%_0.1_9))] [--sh-property:var(--code-property,oklch(83%_0.08_76))] [--sh-sign:var(--color-secondary)] [--sh-string:var(--code-string,oklch(81%_0.08_133))]";
 
 /**
  * Code with a button that copies it; a line that doesn't fit scrolls, or with `wrap`, wraps, and
@@ -29,7 +30,12 @@ export function CodeBlock({
   return (
     <div
       data-slot="code-block"
-      className={cn("relative rounded-xl surface-field", syntax, className)}
+      className={cn(
+        // The focus ring, around the whole block while its code has focus, as focus-ring draws it.
+        "relative rounded-xl material-field outline-2 outline-offset-1 outline-transparent has-[[data-slot=code-block-code]:focus-visible]:outline-focus",
+        syntax,
+        className,
+      )}
       {...props}
     >
       <ScrollArea fade className="max-h-[inherit] rounded-[inherit]">
@@ -38,7 +44,7 @@ export function CodeBlock({
           data-slot="code-block-code"
           tabIndex={-1}
           className={cn(
-            "mr-10.5 py-3 pl-3 font-mono text-xs text-foreground",
+            "mr-10.5 py-3 pl-3 font-mono text-xs text-foreground outline-none",
             wrap && "whitespace-pre-wrap",
             !wrap && "overflow-fade-x",
           )}
