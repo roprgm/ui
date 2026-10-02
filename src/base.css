@@ -53,7 +53,7 @@
   --color-border: oklch(0% 0 0 / 0.7);
   --color-border-subtle: oklch(0% 0 0 / 0.6);
 
-  /* What is on: checked controls, thumbs. `data-accent` picks another. */
+  /* What is on: checked controls, thumbs. */
   --color-accent: oklch(89% 0 0);
   --color-on-accent: oklch(18% 0 0);
   /* The accent as text, such as a link, for a theme whose accent fill reads too dark as text. */
@@ -221,58 +221,6 @@
   &:is(:disabled, [data-disabled], :has(:disabled)) {
     pointer-events: none;
     opacity: 40%;
-  }
-}
-
-/* Accents, for `data-accent` on the page or any part of it. Each works on a dark or a light page, and
-   the main action takes it too. */
-@layer base {
-  [data-accent] {
-    --color-accent-text: var(--color-accent);
-    --color-primary: var(--color-accent);
-    --color-on-primary: var(--color-on-accent);
-  }
-
-  [data-accent="violet"] {
-    --color-accent: oklch(62% 0.2 293);
-    --color-on-accent: oklch(98.5% 0 0);
-    --color-primary-hover: oklch(68% 0.19 293);
-  }
-
-  [data-accent="blue"] {
-    --color-accent: oklch(62% 0.19 255);
-    --color-on-accent: oklch(98.5% 0 0);
-    --color-primary-hover: oklch(68% 0.17 255);
-  }
-
-  [data-accent="green"] {
-    --color-accent: oklch(72% 0.17 150);
-    --color-on-accent: oklch(20% 0.04 150);
-    --color-primary-hover: oklch(78% 0.16 150);
-  }
-
-  [data-accent="amber"] {
-    --color-accent: oklch(81% 0.16 80);
-    --color-on-accent: oklch(22% 0.04 80);
-    --color-primary-hover: oklch(86% 0.14 80);
-  }
-
-  [data-accent="orange"] {
-    --color-accent: oklch(73% 0.17 55);
-    --color-on-accent: oklch(20% 0.04 55);
-    --color-primary-hover: oklch(79% 0.15 55);
-  }
-
-  [data-accent="coral"] {
-    --color-accent: oklch(71% 0.15 30);
-    --color-on-accent: oklch(20% 0.04 30);
-    --color-primary-hover: oklch(77% 0.13 30);
-  }
-
-  [data-accent="rose"] {
-    --color-accent: oklch(63% 0.21 10);
-    --color-on-accent: oklch(98.5% 0 0);
-    --color-primary-hover: oklch(69% 0.19 10);
   }
 }
 

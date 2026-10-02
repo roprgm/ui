@@ -28,23 +28,6 @@ export const accent = [
   color("on-primary", "Text on the primary."),
 ];
 
-export const accents: Swatch[] = [
-  "neutral",
-  "violet",
-  "blue",
-  "green",
-  "amber",
-  "orange",
-  "coral",
-  "rose",
-].map((name) => ({
-  name: `data-accent="${name}"`,
-  use: name === "neutral" ? "The default, near white." : undefined,
-  className: "bg-accent",
-  attributes: { "data-accent": name },
-  showsFill: true,
-}));
-
 export const states = [
   color("success", "Done."),
   color("warning", "Needs attention."),

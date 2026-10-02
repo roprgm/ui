@@ -107,14 +107,6 @@ Each one has a page with live examples, their code, and its install command on t
 
 The page sets where you are and the materials' fills, and each container sets them again for what's inside it. Materials take a card's fill until a theme sets them apart.
 
-### Accents
-
-Set `data-accent` on the page, or on any part of it, to pick the accent: `violet`, `blue`, `green`, `amber`, `orange`, `coral`, or `rose`. Primary buttons take it too. Without it, the accent is the theme's own, near white in the default theme.
-
-```html
-<html data-accent="blue">
-```
-
 ### Materials
 
 A material is what a box is made of: its fill and its edge. A component is made of one, as a `Button` is of `material-control`, and the theme draws it. Each paints itself from its own variables, `--color-*` for its fill and `--shadow-*` for its edge, so any element that sets them again changes every material inside it. The docs site lists every [color](https://ui.roprgm.com/fundamentals/colors), [material](https://ui.roprgm.com/fundamentals/materials), and [utility](https://ui.roprgm.com/fundamentals/utilities), with what each is for.

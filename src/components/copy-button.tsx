@@ -6,8 +6,8 @@ import { Button } from "./button";
 import { IconButton } from "./icon-button";
 
 /**
- * Copies `value`, and a check draws itself in. With children it's a Button they label, such as
- * "Copy page", which reads Copied for a moment; without, a ghost icon button whose tooltip does.
+ * Copies `value`, and a check draws itself in. With children it's a Button they label, which reads
+ * Copied for a moment; without, a ghost icon button whose tooltip does.
  */
 export function CopyButton({
   value,
