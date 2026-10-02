@@ -1,0 +1,40 @@
+<Example name="code-block/demo" />
+
+`html` is the code's markup from a highlighter, such as Sugar High's `highlight(code)`. The theme colors Sugar High's markup; other highlighters color their own. A line that doesn't fit scrolls.
+
+## Installation
+
+<Install name="code-block" />
+
+## Examples
+
+### Plain text
+
+Without `html`, the code shows uncolored, as suits a shell command.
+
+<Example name="code-block/plain" />
+
+### Wrapping
+
+`wrap` wraps a line that doesn't fit instead of scrolling it.
+
+<Example name="code-block/wrap" />
+
+### Long code
+
+A max height, such as `max-h-48`, scrolls the code down inside the block, fading it at the edge while more lies past it. The copy button stays put.
+
+<Example name="code-block/scroll" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<CodeBlock> // code-block
+  <div> // code-block-viewport, which scrolls down
+    <pre /> // code-block-code
+  </div>
+  <CopyButton /> // copy-button
+</CodeBlock>
+```

@@ -1,0 +1,44 @@
+<Example name="combobox/demo" />
+
+Its field is an [Input](/components/input), and its chevron sits where a Select's does, so the two line up in a form. On a card, as in these examples, `raised` lifts the list a level more.
+
+## Installation
+
+<Install name="combobox" />
+
+## Examples
+
+### Empty message
+
+`empty` is what the list says when nothing matches, "No results" by default.
+
+<Example name="combobox/empty" />
+
+### Sizes
+
+The default matches a Button, and `lg` a large one.
+
+<Example name="combobox/sizes" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it. Combobox renders them all from its props.
+
+```tsx
+<Combobox> // combobox
+  <Input /> // combobox-input, with data-size
+  <Trigger /> // combobox-trigger
+</Combobox>
+<Portal> // combobox-portal
+  <Positioner> // combobox-positioner
+    <Popup> // combobox-content, with data-raised
+      <Empty /> // combobox-empty
+      <List> // combobox-list
+        <Item> // combobox-item
+          <ItemIndicator /> // combobox-item-indicator
+        </Item>
+      </List>
+    </Popup>
+  </Positioner>
+</Portal>
+```

@@ -1,0 +1,41 @@
+<Example name="context-menu/demo" />
+
+Its items are a [Menu](/components/menu)'s: `MenuItem`, `MenuSeparator`, and `Submenu` come from `menu`. These open over a card, so they take `raised`, which lifts them a level more.
+
+## Installation
+
+<Install name="context-menu" />
+
+## Examples
+
+### Submenus
+
+A `Submenu` opens beside its `SubmenuTrigger`, as in a Menu.
+
+<Example name="context-menu/submenu" />
+
+### On rows
+
+`render` makes another element the trigger, such as each row of a list, so each row opens its own menu.
+
+<Example name="context-menu/rows" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger /> // context-menu-trigger, or the slot of the element it renders
+  <ContextMenuContent> // context-menu-content
+    <MenuItem /> // menu-item
+    <MenuSeparator /> // separator
+    <Submenu>
+      <SubmenuTrigger /> // submenu-trigger
+      <SubmenuContent> // submenu-content
+        <MenuItem /> // menu-item
+      </SubmenuContent>
+    </Submenu>
+  </ContextMenuContent>
+</ContextMenu>
+```

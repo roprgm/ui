@@ -1,0 +1,41 @@
+<Example name="input/demo" />
+
+An Input is as tall as a Button of the same size, so the two sit in a row. Wrap it in a [Field](/components/field) to give it a label.
+
+## Installation
+
+<Install name="input" />
+
+## Examples
+
+### Sizes
+
+`default` and `lg`, as tall as a Button of each size.
+
+<Example name="input/sizes" />
+
+### Invalid
+
+`aria-invalid` rings it red. A Field with an `error` sets it for you.
+
+<Example name="input/invalid" />
+
+### File
+
+`type="file"` styles the picker's button as a control, 3px inside the field.
+
+<Example name="input/file" />
+
+### With a copy button
+
+A read-only link at `lg` holds a CopyButton at `icon-sm`, 4px from each edge.
+
+<Example name="input/copy" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Input /> // input, with data-size
+```

@@ -1,0 +1,39 @@
+<Example name="toggle-group/demo" />
+
+Each `Toggle` is a label around a hidden radio, so toggles that share a `name` choose one and a form reads the choice. The group holds them a size smaller than a Button, so in a row it takes the Button's height.
+
+## Installation
+
+<Install name="toggle-group" />
+
+## Examples
+
+### Sizes
+
+The default group is as tall as a Button, and `lg` as a large one.
+
+<Example name="toggle-group/sizes" />
+
+### Checkboxes
+
+With `type="checkbox"`, each toggle turns on and off on its own.
+
+<Example name="toggle-group/checkboxes" />
+
+### Disabled
+
+A toggle with `disabled` dims and can't be chosen; on the group, `disabled` turns them all off.
+
+<Example name="toggle-group/disabled" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<ToggleGroup> // toggle-group, with data-size
+  <Toggle> // toggle
+    <input /> // toggle-input
+  </Toggle>
+</ToggleGroup>
+```

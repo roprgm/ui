@@ -1,0 +1,41 @@
+<Example name="tree/demo" />
+
+`items` holds the rows and their `children`, and the function you pass as children draws each one. Each row is a [List item](/components/list-item), and `label` names it for its toggle and for the drag preview.
+
+The arrow keys move between rows and open and close groups, and Enter or Space selects. Groups open and close as a [Collapsible](/components/collapsible) does, and find-in-page opens the one that holds a match.
+
+## Installation
+
+<Install name="tree" />
+
+## Examples
+
+### In a panel
+
+`variant="list"` draws rows as a panel's list, such as layers, with a line between each and each level set in. With `onDrop`, rows drag: a drop reaches it as the dragged `id`, the `target` row, and a `position` of `before`, `after`, or `inside`, and you move the item in your data. `canDrag` and `canDrop` add rules: here, the image stays last and only groups take layers. A touch drags after a short hold, so a swipe still scrolls.
+
+<Example name="tree/list" />
+
+### Navigation
+
+`render` draws a row as a link, such as Next.js's `Link`, so the arrow keys move between links and Enter follows one. This site's sidebar is one.
+
+<Example name="tree/nav" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Tree> // tree, with data-variant
+  <ListItem> // list-item, a row, or the element render draws, with data-dragging and data-drop
+    <button /> // tree-toggle, or tree-spacer on a row without children beside one with them
+  </ListItem>
+  <Collapsible.Root> // tree-group, around a row's children
+    <Collapsible.Panel> // tree-group-items
+      <ListItem /> // list-item
+    </Collapsible.Panel>
+  </Collapsible.Root>
+  <div /> // tree-drag-preview, while dragging
+</Tree>
+```

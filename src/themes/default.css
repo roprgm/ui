@@ -68,6 +68,11 @@
     box-shadow: 1px 0 0 oklch(95.5% 0 0 / 0.05);
   }
 
+  /* The line under underline tabs, engraved as a separator is. */
+  [data-slot="tab-list"][data-variant="underline"]::before {
+    box-shadow: 0 1px 0 oklch(95.5% 0 0 / 0.05);
+  }
+
   /* A nearly opaque outer edge, so it holds over light surfaces too. */
   .surface-float {
     box-shadow:

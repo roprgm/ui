@@ -1,0 +1,43 @@
+<Example name="scrub-input/demo" />
+
+Every range sweeps end to end in about 250px of drag, and the cursor hides so the screen's edge doesn't stop it. A double-click restores `defaultValue`. `onEditingChange` brackets a drag or typing, so a caller can group its changes into one undo step.
+
+## Installation
+
+<Install name="scrub-input" />
+
+## Examples
+
+### Chevrons
+
+`chevrons` shows arrows on hover, hinting that the value drags.
+
+<Example name="scrub-input/chevrons" />
+
+### Units
+
+What `format` writes after the last digit reads as the unit. `step` sets how many decimals the value keeps.
+
+<Example name="scrub-input/units" />
+
+### Fixed width
+
+`minChars` keeps room for that many digits, so what sits beside the value holds still as it changes.
+
+<Example name="scrub-input/width" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it. ScrubInput renders them all from its props.
+
+```tsx
+<ScrubInput> // scrub-input
+  <span> // scrub-input-value
+    <span> // scrub-input-text
+      <span /> // scrub-input-number
+      <span /> // scrub-input-unit
+    </span>
+    <input /> // scrub-input-control
+  </span>
+</ScrubInput>
+```

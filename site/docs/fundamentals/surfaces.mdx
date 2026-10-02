@@ -1,0 +1,21 @@
+import { Reference, surfaces } from "@/reference/tables";
+
+A surface is a class for what a box is. It paints the color of its name, and the theme adds the rest, such as an edge or a highlight. Never draw depth with a shadow or a border: pick the surface.
+
+## Regions
+
+They hold content, paint their background, and set the colors of what sits on them.
+
+<Reference entries={surfaces.regions} />
+
+## Controls
+
+Utilities, so variants such as `hover:` apply.
+
+<Reference entries={surfaces.controls} />
+
+## Your own control
+
+Build a control from a surface and the shared utilities, and it follows the theme as the library's do.
+
+<Example name="surfaces/custom-control" />

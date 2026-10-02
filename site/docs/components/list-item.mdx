@@ -1,0 +1,25 @@
+<Example name="list-item/demo" />
+
+`ListItemAction` holds ghost icon buttons at the row's end, reaching into its padding so each icon sits 12px in. `render` draws a row as another element, such as a link: `<ListItem render={<a href="/layers/sky" />}>`. The rows of a [Tree](/components/tree) are these.
+
+## Installation
+
+<Install name="list-item" />
+
+## Examples
+
+### Muted
+
+`muted` dims a row's text, such as a hidden layer's.
+
+<Example name="list-item/muted" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<ListItem> // list-item, with data-selected and data-muted
+  <ListItemAction /> // list-item-action
+</ListItem>
+```

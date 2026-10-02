@@ -1,0 +1,39 @@
+<Example name="button/demo" />
+
+## Installation
+
+<Install name="button" />
+
+## Examples
+
+### Variants
+
+`default` for most actions, `primary` for the main one, `flat` for actions that sit quietly in a header, and `ghost` for actions in a bar.
+
+<Example name="button/variants" />
+
+### Sizes
+
+`sm` and `lg` sit beside an Input or a Select of the same size. A theme can scale all three.
+
+<Example name="button/sizes" />
+
+### With an icon
+
+A leading icon sits 4px closer to the edge, since its box has air around the stroke.
+
+<Example name="button/icon" />
+
+### As a link
+
+`render` draws the button as another element, such as a link, with its props merged in.
+
+<Example name="button/link" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Button /> // button, with data-variant and data-size
+```

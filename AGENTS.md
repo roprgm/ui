@@ -10,14 +10,14 @@ A minimal, dark component library for React and Tailwind CSS v4, on Base UI. It 
 4. **Spacing**: Tailwind's scale as written (`px-3.5`), in the patterns below.
 5. **Parts, not props**: parts come as children, never as `title`, `actions`, or `trigger` props; props carry data, such as `items` and `label`. An overlay is its root, a `…Trigger` that renders your element with `render`, and a `…Content`.
 6. **Nothing forced**: never `!`. A fill that needs forcing wants a primitive or a variant.
-7. **Wiring**: an entry in `registry.json` that lists the theme in `registryDependencies`, a demo in `site/demos.tsx`, an entry in `site/main.tsx`, and a line in `README.md`.
+7. **Wiring**: an entry in `registry.json` with its `title`, `description`, and category, that lists the theme in `registryDependencies`; its examples in `site/examples/<name>/`, one file each; its page in `site/docs/components/<name>.mdx`, shaped as `button.mdx` is; and a line in `README.md`.
 
 ## Files and code
 
 - `src/components/` has one flat file per component, so `./` imports resolve after shadcn copies them. Import only `react`, `cn`, `class-variance-authority`, `@base-ui/react`, and sibling files; anything else comes in as a prop, as `CodeBlock` takes a highlighter's `html`.
 - `src/base.css` holds the tokens with their defaults, the surfaces as plain as they can be, and the shared utilities, the complex ones in `src/utils/`. A theme imports it and sets again only what it changes; themes share no helpers. `src/themes/default.css` ships; other themes are unexported experiments.
 - Every element a component renders carries a `data-slot` (`menu-content`, `select-item`), set before `{...props}` so a composing component's wins, and its variants a `data-variant` and `data-size`.
-- Registry `categories` (actions, inputs, containers, navigation, overlays, effects) are the site's groups; Theming is the site's only, and the reference for every token, surface, and utility: keep it current. `check`, `chevron`, and `popup` are internal. `bun run build` writes the `theme` item; don't edit it.
+- The site is a static Next.js export in `site/`: `site/tree.ts` orders its pages, and takes each component's title, description, and group from the registry, whose `categories` (actions, inputs, containers, navigation, overlays, effects) are the groups under Components. Fundamentals is the site's only, and the reference for every token, surface, and utility: keep it current. Links are `next/link`, so every page is prefetched and opens without a request. `check`, `chevron`, and `popup` are internal. `bun run build` writes the `theme` item; don't edit it.
 - CSS before JavaScript: Tailwind variants (`checked:`, `has-checked:`) on native elements, and Base UI for positioning, focus, and typeahead. `"use client";` only with Base UI, hooks, or handlers.
 - Styles in each component's class strings, `cva` only for variants, named exports, ternaries only when short, comments only for what code can't say.
 

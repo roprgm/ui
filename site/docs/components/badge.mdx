@@ -1,0 +1,37 @@
+<Example name="badge/demo" />
+
+It renders on the server.
+
+## Installation
+
+<Install name="badge" />
+
+## Examples
+
+### Variants
+
+`default` is a soft fill, `accent` marks what is new, and `outline` draws a line instead.
+
+<Example name="badge/variants" />
+
+### States
+
+`outline` draws its line in the text's color, so `text-success` makes a green one.
+
+<Example name="badge/states" />
+
+### Sizes
+
+`default` keeps a one-digit count round, `sm` is a count beside a label, a step smaller than its text, and `xs` a count in a short row, such as a tree's. Text centers by its capitals, so a count sits in the middle.
+
+<Example name="badge/sizes" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Badge> // badge, with data-variant and data-size
+  <span /> // badge-label, each run of text
+</Badge>
+```

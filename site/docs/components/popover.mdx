@@ -1,0 +1,34 @@
+<Example name="popover/demo" />
+
+A popover holds settings that stay open while they change, such as bar controls that no longer fit. For commands, use a [Menu](/components/menu). These open over a card, so they take `raised`, which lifts them a level more.
+
+## Installation
+
+<Install name="popover" />
+
+## Examples
+
+### Sections
+
+Content alone is padded as one `Section`. Once it holds several, they stack with a line between each, and the first reads as a header.
+
+<Example name="popover/sections" />
+
+### Alignment
+
+`align` lines it up with the trigger's `start`, `center`, or `end`, the default.
+
+<Example name="popover/align" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Popover>
+  <PopoverTrigger /> // popover-trigger, or the slot of the element it renders
+  <PopoverContent> // popover-content
+    <Section /> // section
+  </PopoverContent>
+</Popover>
+```

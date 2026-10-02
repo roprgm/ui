@@ -1,0 +1,43 @@
+<Example name="slider/demo" />
+
+Its value is a [Scrub input](/components/scrub-input): drag it sideways, click to type, or step it with the arrow keys. A double-click restores `defaultValue`, where the fill starts unless `origin` moves it.
+
+## Installation
+
+<Install name="slider" />
+
+## Examples
+
+### Compact
+
+`variant="compact"` drops the bar, and the value still drags.
+
+<Example name="slider/compact" />
+
+### Toolbar
+
+`variant="toolbar"` puts a short bar between the label and the value, for a bar over a canvas. `valueWidth` keeps room for three digits, so the bar holds still.
+
+<Example name="slider/toolbar" />
+
+### Vertical
+
+`orientation="vertical"` stands the bar upright alone, without the label or the value. `stops` paint the bar and `color` fills the thumb.
+
+<Example name="slider/vertical" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it. Slider renders them all from its props.
+
+```tsx
+<Slider> // slider, with data-variant
+  <span /> // slider-label
+  <ScrubInput /> // scrub-input
+  <Control> // slider-control
+    <Track> // slider-track
+      <Thumb /> // slider-thumb
+    </Track>
+  </Control>
+</Slider>
+```

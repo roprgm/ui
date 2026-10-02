@@ -23,9 +23,10 @@ const list = cva("flex data-[orientation=vertical]:flex-col", {
       default: "gap-1",
       // As a ToggleGroup: tabs a size smaller. Icon tabs take `icon-sm`.
       segmented: "segmented surface-field *:h-(--spacing-control-sm)",
-      // Over a line, which the selected tab marks.
+      // Over a line, which the selected tab marks; drawn first, so the mark lies over it, and on
+      // its own, so a theme can engrave it as a separator.
       underline:
-        "gap-1 pb-1.5 shadow-[inset_0_-1px_0_var(--color-border-subtle)]",
+        "relative gap-1 pb-1.5 before:absolute before:inset-x-0 before:bottom-0 before:h-px before:bg-border-subtle",
     },
   },
 });
@@ -124,11 +125,13 @@ function labeled(children: ReactNode) {
   return parts;
 }
 
+/** What a tab shows. Out of the tab order, so Tab moves from the tabs straight to what it holds. */
 export function TabPanel({ className, ...props }: Primitive.Panel.Props) {
   return (
     <Primitive.Panel
       data-slot="tab-panel"
-      className={cn("rounded-sm focus-ring", className)}
+      tabIndex={-1}
+      className={cn("outline-none", className)}
       {...props}
     />
   );

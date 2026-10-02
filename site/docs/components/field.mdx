@@ -1,0 +1,33 @@
+<Example name="field/demo" />
+
+Field gives its one child an `id` for the label and points its `aria-describedby` at the note under it.
+
+## Installation
+
+<Install name="field" />
+
+## Examples
+
+### Error
+
+`error` takes the description's place in red and sets `aria-invalid` on the control.
+
+<Example name="field/error" />
+
+### With a textarea
+
+It takes any control that accepts an `id`, such as a Textarea.
+
+<Example name="field/textarea" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Field> // field
+  {label} // field-label
+  <Input /> // input
+  {description} // field-description, or field-error
+</Field>
+```
