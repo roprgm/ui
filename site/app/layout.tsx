@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import type { ReactNode } from "react";
 import { HashRedirect } from "@/ui/hash-redirect";
-import { PrefetchAll } from "@/ui/prefetch-all";
 import { MobileBar, Sidebar } from "@/ui/sidebar";
 import "./globals.css";
 
@@ -37,7 +36,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </div>
           <Toaster />
         </TooltipProvider>
-        <PrefetchAll />
         <HashRedirect />
       </body>
     </html>
