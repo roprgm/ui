@@ -1,0 +1,49 @@
+import { materials, Reference } from "@/reference/tables";
+
+A material is what a box is made of: its fill and its edge. A component is made of one, as a `Button` is of `material-control`, and the theme draws it. Never draw depth with a shadow or a border: pick the material.
+
+Each material paints itself from its own variables, `--color-*` for its fill and `--shadow-*` for its edge. Set them again on any element, and every material inside it follows, without touching a component.
+
+## Containers
+
+They hold content, and are the background of what sits on them. In the default theme, the materials inside a container stand two levels over it, and a container on a card stands as a card on a card.
+
+<Reference entries={materials.containers} />
+
+## Inside
+
+Utilities, so variants such as `hover:` apply. Another fill, such as `bg-primary` or `bg-accent`, keeps the material's edge, as a primary `Button` does.
+
+<Reference entries={materials.inside} />
+
+## Variables
+
+The page sets them, and each container sets them again for what's inside it.
+
+<Reference entries={materials.variables} />
+
+## A scope of your own
+
+Any element that sets the variables again is a scope. A toolbar of glass lays its controls flat:
+
+<Example name="materials/scope" />
+
+```css
+.toolbar-glass {
+  background-color: oklch(20% 0 0 / 0.45);
+  backdrop-filter: blur(12px);
+  --color-control: oklch(100% 0 0 / 0.14);
+  --color-control-hover: oklch(100% 0 0 / 0.22);
+  --color-field: oklch(0% 0 0 / 0.18);
+  --shadow-control: none;
+  --shadow-field: none;
+}
+```
+
+A container can't set its own material again for what's inside it, since it would change itself too: a card on a card takes a selector of its own, `:where(.material-card) .material-card`. A popup renders at the end of the page, outside every scope, so give its content `raised` over a card, or your scope's class.
+
+## Your own control
+
+Build a control from a material and the shared utilities, and it follows the theme and every scope as the library's do.
+
+<Example name="materials/custom-control" />

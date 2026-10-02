@@ -34,37 +34,12 @@ export const tokens = {
     {
       name: "--color-background",
       swatch: "bg-background",
-      use: "The fill of the region you're in: the page, a card, a panel, a popup.",
-    },
-    {
-      name: "--color-surface",
-      swatch: "bg-surface",
-      use: "The fill a card or popup gets where it sits.",
-    },
-    {
-      name: "--color-control",
-      swatch: "bg-control",
-      use: "What you press: buttons, selects, selected tabs and toggles.",
-    },
-    {
-      name: "--color-control-hover",
-      swatch: "bg-control-hover",
-      use: "A control under the pointer, or with its popup open.",
-    },
-    {
-      name: "--color-field",
-      swatch: "bg-field",
-      use: "Where you set a value: inputs, tracks, checkboxes, switches.",
+      use: "The fill of where you are: the page, or the card, panel, or popup you're in.",
     },
     {
       name: "--color-hover",
       swatch: "bg-hover",
-      use: "Quiet fills: a ghost's hover, a well.",
-    },
-    {
-      name: "--color-selected",
-      swatch: "bg-selected",
-      use: "A highlighted or selected row.",
+      use: "A quiet fill on it: a ghost's hover, a well.",
     },
   ],
   text: [
@@ -98,7 +73,7 @@ export const tokens = {
     {
       name: "--color-border-subtle",
       swatch: "bg-border-subtle",
-      use: "Dividers inside a surface, such as between a card's sections.",
+      use: "Dividers inside a material, such as between a card's sections.",
     },
   ],
   accent: [
@@ -179,7 +154,7 @@ export const tokens = {
     {
       name: "--color-level-0 … 12",
       swatch: "bg-level-6",
-      use: "The palette every fill is picked from, by a theme or a region. Components never use it.",
+      use: "The palette every fill is picked from, by a theme or a container. Components never use it.",
     },
   ],
   sizes: [
@@ -198,44 +173,86 @@ export const tokens = {
   ],
 } satisfies Record<string, Entry[]>;
 
-export const surfaces = {
-  regions: [
+export const materials = {
+  containers: [
     {
-      name: "surface-card",
-      swatch: "surface-card",
-      use: "A card: content that stands on the page. Its background is the surface where it sits, and its ::after a frame over its content, for its edge.",
+      name: "material-card",
+      swatch: "material-card",
+      use: "Content that stands on the page. Its ::after is a frame over what it holds, where its inner edge is drawn.",
     },
     {
-      name: "surface-panel",
-      swatch: "surface-panel",
-      use: "A panel docked in a layout, such as a sidebar or a toolbar, with a background of its own.",
+      name: "material-panel",
+      swatch: "material-panel",
+      use: "A container docked in a layout, such as a sidebar or a toolbar, with no edge.",
     },
     {
-      name: "surface-float",
-      swatch: "surface-float",
+      name: "material-float",
+      swatch: "material-float",
       use: "What floats: popups, dialogs, notices, anything dragged. With data-raised, one that opens over a card.",
     },
   ],
-  controls: [
+  inside: [
     {
-      name: "surface-control",
-      swatch: "surface-control",
-      use: "What you press: buttons, selects, selected tabs and toggles. Paints control.",
+      name: "material-control",
+      swatch: "material-control",
+      use: "What you press: buttons, selects, selected tabs and toggles, a slider's thumb.",
     },
     {
-      name: "surface-field",
-      swatch: "surface-field",
-      use: "Where you set a value: inputs, tracks, checkboxes, switches, segmented groups. Paints field.",
+      name: "material-field",
+      swatch: "material-field",
+      use: "Where you set or hold something: inputs, textareas, tracks, checkboxes, switches, code.",
+    },
+  ],
+  variables: [
+    {
+      name: "--color-card",
+      swatch: "bg-card",
+      use: "A card's fill.",
     },
     {
-      name: "surface-accent",
-      swatch: "surface-accent",
-      use: "What is on: a checked switch, a slider's thumb. Paints accent.",
+      name: "--color-panel",
+      swatch: "bg-panel",
+      use: "A panel's fill.",
     },
     {
-      name: "surface-primary",
-      swatch: "surface-primary",
-      use: "The main action: a primary button. Paints primary.",
+      name: "--color-float",
+      swatch: "bg-float",
+      use: "The fill of what floats.",
+    },
+    {
+      name: "--color-control",
+      swatch: "bg-control",
+      use: "A control's fill, and a selected row's.",
+    },
+    {
+      name: "--color-control-hover",
+      swatch: "bg-control-hover",
+      use: "A control under the pointer, or with its popup open.",
+    },
+    {
+      name: "--color-field",
+      swatch: "bg-field",
+      use: "A field's fill.",
+    },
+    {
+      name: "--shadow-card",
+      use: "A card's outer edge.",
+    },
+    {
+      name: "--inset-shadow-card",
+      use: "A card's inner edge, drawn on the frame over what it holds.",
+    },
+    {
+      name: "--shadow-float",
+      use: "The edge of what floats.",
+    },
+    {
+      name: "--shadow-control",
+      use: "A control's edge.",
+    },
+    {
+      name: "--shadow-field",
+      use: "A field's edge.",
     },
   ],
 } satisfies Record<string, Entry[]>;
@@ -255,7 +272,7 @@ export const utilities: Entry[] = [
   },
   {
     name: "segmented",
-    use: "A strip of controls a size smaller than a Button; pair it with surface-field.",
+    use: "A strip of controls a size smaller than a Button; pair it with material-field.",
   },
   {
     name: "overflow-fade-x",

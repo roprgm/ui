@@ -12,7 +12,7 @@ export default function ScrollTextDemo() {
       {masks.map((mask) => (
         <div
           key={mask}
-          className="flex h-control items-center rounded-md surface-field px-2.5"
+          className="flex h-control items-center rounded-md material-field px-2.5"
         >
           <ScrollText>{mask}</ScrollText>
         </div>

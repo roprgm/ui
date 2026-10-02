@@ -3,7 +3,7 @@ import { cn } from "cn";
 import type { ComponentProps } from "react";
 
 // Toggles a size smaller than the Button beside the group.
-const group = cva("inline-flex segmented surface-field", {
+const group = cva("inline-flex segmented material-field", {
   variants: {
     size: {
       default: "*:h-(--spacing-control-sm)",
@@ -39,7 +39,7 @@ export function Toggle({
       data-slot="toggle"
       className={cn(
         // `relative` keeps the hidden radio inside, or it can widen the page.
-        "relative inline-flex cursor-pointer items-center px-3 text-secondary transition focus-ring hover:text-foreground has-checked:surface-control has-checked:text-foreground dim-disabled",
+        "relative inline-flex cursor-pointer items-center px-3 text-secondary transition focus-ring hover:text-foreground has-checked:material-control has-checked:text-foreground dim-disabled",
         className,
       )}
     >

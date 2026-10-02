@@ -15,7 +15,7 @@ export function Checkbox({
       <input
         data-slot="checkbox"
         type="checkbox"
-        className="peer size-4 cursor-pointer appearance-none rounded-sm surface-field transition focus-ring checked:bg-accent dim-disabled"
+        className="peer size-4 cursor-pointer appearance-none rounded-sm material-field transition focus-ring checked:bg-accent dim-disabled"
         {...props}
       />
       <Check

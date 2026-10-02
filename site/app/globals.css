@@ -5,3 +5,20 @@
 @theme {
   --font-sans: var(--font-geist), system-ui, sans-serif;
 }
+
+/* Temporary, for the materials lab: production's prominent material, and the alternatives. */
+.lab-prominent :is([data-slot="slider-thumb"], [data-slot="switch"]:checked) {
+  @apply material-prominent;
+}
+
+.lab-prominent [data-slot="button"][data-variant="primary"] {
+  box-shadow: var(--shadow-prominent);
+}
+
+.lab-float [data-slot="slider-thumb"] {
+  box-shadow: var(--shadow-float);
+}
+
+.lab-control [data-slot="switch"]:checked {
+  box-shadow: var(--shadow-control);
+}

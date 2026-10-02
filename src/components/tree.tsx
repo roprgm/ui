@@ -434,7 +434,7 @@ export function Tree<T extends TreeNode<T>>({
           ref={ghost}
           tabIndex={-1}
           style={{ translate: `${dragging.x}px ${dragging.y}px` }}
-          className="pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 overflow-fade-x rounded-md whitespace-nowrap px-2.5 py-1 text-foreground surface-float"
+          className="pointer-events-none fixed top-0 left-0 z-50 mt-3 ml-3 max-w-64 overflow-fade-x rounded-md whitespace-nowrap px-2.5 py-1 text-foreground material-float"
         >
           {label(active.item)}
         </div>

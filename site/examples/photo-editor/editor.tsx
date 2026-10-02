@@ -45,16 +45,16 @@ export default function PhotoEditor() {
 
   return (
     <div className="grid grid-cols-[auto_minmax(0,1fr)] bg-level-1 @2xl:flex @2xl:h-[560px]">
-      <div className="p-1.5 shadow-[inset_-1px_0_0_var(--color-border-subtle)] surface-panel">
+      <div className="p-1.5 shadow-[inset_-1px_0_0_var(--color-border-subtle)] material-panel">
         <ToolRail selected={tool} onSelect={setTool} />
       </div>
       <div className="relative grid min-h-64 min-w-0 flex-1 place-items-center p-4 @2xl:p-10">
         <div
-          className="aspect-[3/2] w-full max-w-lg rounded-sm bg-[linear-gradient(to_bottom,#3b6ea5_0%,#f0a868_45%,#f7d59c_52%,#2e4a3a_56%,#16261d_100%)] surface-float"
+          className="aspect-[3/2] w-full max-w-lg rounded-sm bg-[linear-gradient(to_bottom,#3b6ea5_0%,#f0a868_45%,#f7d59c_52%,#2e4a3a_56%,#16261d_100%)] material-float"
           style={{ filter }}
         />
         {tool === "brush" && (
-          <div className="absolute top-3 right-2 left-2 flex flex-wrap items-center justify-center gap-1 @2xl:right-auto @2xl:left-auto rounded-full p-1.25 pl-3.5 surface-float">
+          <div className="absolute top-3 right-2 left-2 flex flex-wrap items-center justify-center gap-1 @2xl:right-auto @2xl:left-auto rounded-full p-1.25 pl-3.5 material-float">
             <Slider
               label="Size"
               value={size}
@@ -90,7 +90,7 @@ export default function PhotoEditor() {
       <aside
         className={cn(
           sections(),
-          "relative col-span-2 min-h-0 w-(--width) shrink-0 surface-panel @max-2xl:w-full",
+          "relative col-span-2 min-h-0 w-(--width) shrink-0 material-panel @max-2xl:w-full",
         )}
         style={{ "--width": `${width}px` } as CSSProperties}
       >
@@ -201,7 +201,7 @@ function ResizeEdge({
 }) {
   return (
     <div
-      className="absolute inset-y-0 -left-1 z-20 w-2 cursor-col-resize touch-none after:absolute after:inset-y-0 after:left-1 after:w-px after:transition-colors hover:after:bg-selected @max-2xl:hidden"
+      className="absolute inset-y-0 -left-1 z-20 w-2 cursor-col-resize touch-none after:absolute after:inset-y-0 after:left-1 after:w-px after:transition-colors hover:after:bg-control @max-2xl:hidden"
       onPointerDown={(event) =>
         event.currentTarget.setPointerCapture(event.pointerId)
       }

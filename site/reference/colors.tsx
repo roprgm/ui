@@ -39,7 +39,7 @@ export function Levels() {
 // Where each fill sits by default, to read text on it.
 const grounds = [
   { name: "Background", className: "bg-background" },
-  { name: "Surface", className: "bg-surface" },
+  { name: "Card", className: "bg-card" },
   { name: "Raised popup", className: "bg-level-6" },
 ] as const;
 

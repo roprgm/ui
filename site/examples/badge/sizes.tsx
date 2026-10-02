@@ -9,7 +9,7 @@ export default function BadgeSizes() {
       <span className="flex items-center gap-2">
         Photos <Badge size="sm">860</Badge>
       </span>
-      <span className="flex h-6.5 items-center gap-2 rounded-md bg-selected px-2">
+      <span className="flex h-6.5 items-center gap-2 rounded-md bg-control px-2">
         Albums <Badge size="xs">12</Badge>
       </span>
     </>

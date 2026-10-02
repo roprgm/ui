@@ -46,7 +46,7 @@ export function Depth() {
   return (
     <div className="flex flex-col gap-6">
       <Controls name="Page" level={2} />
-      <div className="rounded-xl p-5 surface-card">
+      <div className="rounded-xl p-5 material-card">
         <Controls name="Card" level={4} />
       </div>
     </div>

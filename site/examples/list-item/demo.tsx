@@ -10,7 +10,7 @@ const layers = ["Sky", "Subject", "Vignette", "Image"];
 export default function ListItemDemo() {
   const [selected, setSelected] = useState("Sky");
   return (
-    <div className="w-64 overflow-hidden rounded-lg surface-float">
+    <div className="w-64 overflow-hidden rounded-lg material-float">
       {layers.map((layer) => (
         <ListItem
           key={layer}

@@ -1,4 +1,4 @@
-/* Surfaces outlined with a 1px line instead of shaded. */
+/* Materials outlined with a 1px line instead of shaded. */
 
 @import "../base.css";
 
@@ -12,56 +12,38 @@
   --color-control: var(--color-level-5);
   --color-control-hover: var(--color-level-6);
   --color-field: var(--color-level-0);
+
+  --inset-shadow-card: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
+  --shadow-card: none;
+  --shadow-float: inset 0 0 0 1px oklch(100% 0 0 / 0.16);
+  --shadow-control: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
+  --shadow-field: inset 0 0 0 1px oklch(100% 0 0 / 0.1);
+  --shadow-prominent: inset 0 0 0 1px oklch(0% 0 0 / 0.5);
 }
 
 @layer components {
   /* A card, a panel, and what floats lift what sits on them two levels, as the page does. */
-  .surface-card,
-  .surface-panel,
-  .surface-float {
+  .material-card,
+  .material-panel,
+  .material-float {
     --color-hover: var(--color-level-5);
-    --color-selected: var(--color-level-7);
     --color-control: var(--color-level-7);
     --color-control-hover: var(--color-level-8);
     --color-field: var(--color-level-2);
   }
 
-  /* A popup that opens over a card stands as a card on a card. */
-  .surface-float[data-raised] {
+  /* A container on a card, and a popup that opens over one, stand as a card on a card. */
+  :where(.material-card) :is(.material-card, .material-panel, .material-float),
+  .material-float[data-raised] {
     --color-background: var(--color-level-6);
     --color-hover: var(--color-level-7);
-    --color-selected: var(--color-level-9);
     --color-control: var(--color-level-9);
     --color-control-hover: var(--color-level-10);
     --color-field: var(--color-level-4);
   }
-
-  .surface-card::after {
-    border: 1px solid oklch(100% 0 0 / 0.08);
-  }
-
-  .surface-float {
-    box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.16);
-  }
-}
-
-@utility surface-control {
-  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.08);
-}
-
-@utility surface-field {
-  box-shadow: inset 0 0 0 1px oklch(100% 0 0 / 0.1);
-}
-
-@utility surface-accent {
-  box-shadow: inset 0 0 0 1px oklch(0% 0 0 / 0.5);
-}
-
-@utility surface-primary {
-  box-shadow: inset 0 0 0 1px oklch(0% 0 0 / 0.5);
 }
 
 /* A line around a thin groove reads heavy. */
 [data-slot="slider-track"] {
-  box-shadow: none;
+  --shadow-field: none;
 }

@@ -14,8 +14,8 @@ The design library behind my apps: minimal, dark React components on Tailwind CS
 ## Principles
 
 - **Parts, not props.** A component's parts come as children, and an overlay's trigger renders your own element.
-- **Colors follow the region.** A control takes its fill from the surface it sits on, so it keeps its contrast on the page, on a card, or in a popover.
-- **Surfaces, not shadows.** A box says what it is, such as `surface-control` or `surface-card`, and the theme draws it.
+- **Materials, not shadows.** A component is made of a material, such as `material-control` or `material-card`, and the theme draws it.
+- **Containers set their materials.** A card, a panel, or a popover sets how the materials inside it look, so a control keeps its contrast anywhere, and any class of yours can do the same.
 - **CSS before JavaScript.** Native elements and Tailwind variants first; Base UI for positioning, focus, and typeahead.
 
 ## Start

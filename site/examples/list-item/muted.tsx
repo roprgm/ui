@@ -16,7 +16,7 @@ export default function ListItemMuted() {
         : [...hidden, layer],
     );
   return (
-    <div className="w-64 overflow-hidden rounded-lg surface-float">
+    <div className="w-64 overflow-hidden rounded-lg material-float">
       {layers.map((layer) => (
         <ListItem key={layer} muted={hidden.includes(layer)}>
           <span className="flex-1">{layer}</span>

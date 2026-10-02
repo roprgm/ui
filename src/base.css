@@ -1,6 +1,6 @@
-/* The tokens every theme sets again, and the surfaces and utilities components are built from, as
-   plain as they can be. A theme imports this file, sets again the tokens it changes, and adds to
-   the surfaces with selectors and utilities of the same name, as themes/default.css does. */
+/* The tokens every theme sets again, and the materials and utilities components are built from, as
+   plain as they can be. A theme imports this file and sets again the tokens it changes, such as
+   the materials' fills and edges, as themes/default.css does. */
 
 @import "./utils/overflow-fade.css";
 @import "./utils/shimmer.css";
@@ -30,17 +30,19 @@
   --color-level-11: oklch(52% 0 0);
   --color-level-12: oklch(55.7% 0 0);
 
-  /* The colors of where you are. The page sets them, and each region sets them again for what sits
-     on it: its own fill; the fill a card gets there; what you press; where you set a value; a quiet
-     fill, such as a ghost's hover or a well; and a highlighted or selected row. Until a theme sets
-     them apart, controls, fields, and selected rows take a card's fill. */
+  /* Where you are: the fill of the page, or of the container you're in, and a quiet fill on it,
+     such as a ghost's hover. A container sets both again. */
   --color-background: var(--color-level-2);
-  --color-surface: var(--color-level-4);
-  --color-control: var(--color-surface);
-  --color-control-hover: var(--color-level-5);
-  --color-field: var(--color-control);
   --color-hover: var(--color-level-3);
-  --color-selected: var(--color-control);
+
+  /* The materials' fills, as they sit on the page. A container sets them again for the materials
+     inside it. Until a theme sets them apart, they take a card's fill, and a panel the page's. */
+  --color-card: var(--color-level-4);
+  --color-panel: var(--color-level-2);
+  --color-float: var(--color-level-4);
+  --color-control: var(--color-level-4);
+  --color-control-hover: var(--color-level-5);
+  --color-field: var(--color-level-4);
 
   /* Text, strongest first, and opaque, so an icon's crossing strokes don't show: text and icons,
      supporting text, hints, and what is disabled. */
@@ -49,7 +51,7 @@
   --color-muted: oklch(55% 0 0);
   --color-disabled: oklch(44% 0 0);
 
-  /* Lines, translucent over any fill: separators, and dividers inside a surface. */
+  /* Lines, translucent over any fill: separators, and dividers inside a material. */
   --color-border: oklch(0% 0 0 / 0.7);
   --color-border-subtle: oklch(0% 0 0 / 0.5);
 
@@ -107,62 +109,80 @@
   --font-weight-selected: 400;
 }
 
-/* Surfaces: what a box is. Each paints its color, and the theme adds the rest, such as an edge.
+/* The materials' edges, flat until a theme draws them. */
+@theme {
+  --shadow-card: none;
+  --inset-shadow-card: none;
+  --shadow-float: none;
+  --shadow-control: none;
+  --shadow-field: none;
+  --shadow-prominent: none;
+}
 
-   Regions hold content and paint their background and text; the theme sets the colors of what sits on each.
-   A card, and what floats, take the surface of where they sit; a panel, docked in a layout, keeps
-   the background until the theme gives it one. With `data-raised`, a popup opens over a card. Plain
-   classes under the utilities, so a utility such as `bg-*` changes one's fill. */
+/* Materials: what a box is made of. Each paints its fill and edge from its own variables, so a
+   container, or any class, can set them again to change how the materials inside it look.
+
+   Containers hold content: a card, a panel docked in a layout, and what floats. Each fills itself
+   with its material and makes it the background of what sits on it. Plain classes under the
+   utilities, so a utility such as `bg-*` changes one's fill. */
 @layer components {
-  .surface-card,
-  .surface-panel,
-  .surface-float {
+  .material-card {
+    --color-background: var(--color-card);
+  }
+
+  .material-panel {
+    --color-background: var(--color-panel);
+  }
+
+  .material-float {
+    --color-background: var(--color-float);
+    box-shadow: var(--shadow-float);
+  }
+
+  .material-card,
+  .material-panel,
+  .material-float {
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
 
-  .surface-card,
-  .surface-float {
-    --color-background: var(--color-surface);
-  }
-
-  /* A frame over what a card holds, where a theme draws its edge: it takes no room, so a border
-     works, and a row with a fill can't cover it. */
-  .surface-card {
+  /* A frame over what a card holds, where its inner edge is drawn: it takes no room, and a row
+     with a fill can't cover it. */
+  .material-card {
     position: relative;
+    box-shadow: var(--shadow-card);
   }
 
-  .surface-card::after {
+  .material-card::after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
+    box-shadow: var(--inset-shadow-card);
     pointer-events: none;
   }
 }
 
-/* A control you press: buttons, selects, selected tabs and toggles. */
-@utility surface-control {
+/* What you press: buttons, selects, selected tabs and toggles. */
+@utility material-control {
   background-color: var(--color-control);
+  box-shadow: var(--shadow-control);
 }
 
-/* A field you set: inputs, tracks, checkboxes, switches, segmented groups. */
-@utility surface-field {
+/* Where you set or hold something: inputs, tracks, checkboxes, code. */
+@utility material-field {
   background-color: var(--color-field);
+  box-shadow: var(--shadow-field);
 }
 
-/* What is on: a checked switch, a slider's thumb. */
-@utility surface-accent {
+/* Temporary, to compare with the five: what is on, lit as production draws it. */
+@utility material-prominent {
   background-color: var(--color-accent);
-}
-
-/* The main action: a primary button. */
-@utility surface-primary {
-  background-color: var(--color-primary);
+  box-shadow: var(--shadow-prominent);
 }
 
 /* A strip of controls a size smaller than a Button, 3px in and rounded to match, as a ToggleGroup
-   or a segmented TabList; pair it with `surface-field`. It stands 2px taller than a Button but
+   or a segmented TabList; pair it with `material-field`. It stands 2px taller than a Button but
    reaches a pixel past each edge, so in a row it takes a Button's height. */
 @utility segmented {
   @apply -my-px gap-0.5 rounded-lg p-0.75;

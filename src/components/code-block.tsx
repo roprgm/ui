@@ -29,7 +29,7 @@ export function CodeBlock({
   return (
     <div
       data-slot="code-block"
-      className={cn("relative rounded-xl surface-field", syntax, className)}
+      className={cn("relative rounded-xl material-field", syntax, className)}
       {...props}
     >
       <ScrollArea fade className="max-h-[inherit] rounded-[inherit]">

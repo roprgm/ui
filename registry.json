@@ -23,12 +23,13 @@
           "color-level-11": "oklch(52% 0 0)",
           "color-level-12": "oklch(55.7% 0 0)",
           "color-background": "var(--color-level-2)",
-          "color-surface": "var(--color-level-4)",
+          "color-hover": "var(--color-level-3)",
+          "color-card": "var(--color-level-4)",
+          "color-panel": "var(--color-level-4)",
+          "color-float": "var(--color-level-4)",
           "color-control": "var(--color-level-5)",
           "color-control-hover": "var(--color-level-6)",
           "color-field": "var(--color-level-0)",
-          "color-hover": "var(--color-level-3)",
-          "color-selected": "var(--color-control)",
           "color-foreground": "oklch(96% 0 0)",
           "color-secondary": "oklch(70% 0 0)",
           "color-muted": "oklch(55% 0 0)",
@@ -61,7 +62,13 @@
           "spacing-control": "28px",
           "spacing-control-lg": "32px",
           "spacing-thumb": "13px",
-          "font-weight-selected": "400"
+          "font-weight-selected": "400",
+          "shadow-card": "0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)",
+          "inset-shadow-card": "inset 0 1px 0 oklch(95% 0 0 / 0.08)",
+          "shadow-float": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)",
+          "shadow-control": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)",
+          "shadow-field": "inset 0 1px 1px oklch(0% 0 0 / 0.3), 0 1px 0 oklch(95% 0 0 / 0.08)",
+          "shadow-prominent": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)"
         }
       },
       "css": {
@@ -143,40 +150,43 @@
           }
         },
         "@layer components": {
-          ".surface-card, .surface-panel, .surface-float": {
+          ".material-card": {
+            "--color-background": "var(--color-card)",
+            "position": "relative",
+            "box-shadow": "var(--shadow-card)"
+          },
+          ".material-panel": {
+            "--color-background": "var(--color-panel)"
+          },
+          ".material-float": {
+            "--color-background": "var(--color-float)",
+            "box-shadow": "var(--shadow-float)"
+          },
+          ".material-card, .material-panel, .material-float": {
             "background-color": "var(--color-background)",
             "color": "var(--color-foreground)",
             "--color-control": "var(--color-level-7)",
             "--color-control-hover": "var(--color-level-8)",
             "--color-field": "var(--color-level-2)",
-            "--color-hover": "var(--color-level-5)",
-            "--color-selected": "var(--color-level-7)"
+            "--color-hover": "var(--color-level-5)"
           },
-          ".surface-card, .surface-float": {
-            "--color-background": "var(--color-surface)"
-          },
-          ".surface-card": {
-            "position": "relative",
-            "box-shadow": "0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
-          },
-          ".surface-card::after": {
+          ".material-card::after": {
             "content": "\"\"",
             "position": "absolute",
             "inset": "0",
             "border-radius": "inherit",
-            "pointer-events": "none",
-            "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08)"
+            "box-shadow": "var(--inset-shadow-card)",
+            "pointer-events": "none"
           },
-          ".surface-panel": {
-            "--color-background": "var(--color-surface)"
-          },
-          ":where(.surface-card) :is(.surface-card, .surface-panel, .surface-float), .surface-float[data-raised]": {
+          ":where(.material-card) :is(.material-card, .material-panel, .material-float), .material-float[data-raised]": {
             "--color-background": "var(--color-level-6)",
             "--color-control": "var(--color-level-9)",
             "--color-control-hover": "var(--color-level-10)",
             "--color-field": "var(--color-level-4)",
-            "--color-hover": "var(--color-level-7)",
-            "--color-selected": "var(--color-level-9)"
+            "--color-hover": "var(--color-level-7)"
+          },
+          "[data-slot=\"button\"][data-variant=\"primary\"]": {
+            "text-shadow": "0.5px 1px 0.5px oklch(0% 0 0 / 0.08)"
           },
           "[data-slot=\"separator\"]": {
             "box-shadow": "0 1px 0 oklch(95.5% 0 0 / 0.05)"
@@ -186,27 +196,19 @@
           },
           "[data-slot=\"tab-list\"][data-variant=\"underline\"]::before": {
             "box-shadow": "0 1px 0 oklch(95.5% 0 0 / 0.05)"
-          },
-          ".surface-float": {
-            "box-shadow": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)"
           }
         },
-        "@utility surface-control": {
+        "@utility material-control": {
           "background-color": "var(--color-control)",
-          "box-shadow": "inset 0 1px 0 oklch(95% 0 0 / 0.08), 0 1px 1px oklch(0% 0 0 / 0.28), 0 0 1px oklch(0% 0 0 / 0.14)"
+          "box-shadow": "var(--shadow-control)"
         },
-        "@utility surface-field": {
+        "@utility material-field": {
           "background-color": "var(--color-field)",
-          "box-shadow": "inset 0 1px 1px oklch(0% 0 0 / 0.3), 0 1px 0 oklch(95% 0 0 / 0.08)"
+          "box-shadow": "var(--shadow-field)"
         },
-        "@utility surface-accent": {
+        "@utility material-prominent": {
           "background-color": "var(--color-accent)",
-          "box-shadow": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)"
-        },
-        "@utility surface-primary": {
-          "background-color": "var(--color-primary)",
-          "box-shadow": "0 0 2px 1px oklch(10% 0 0 / 0.3), inset 0 1px 0 oklch(95% 0 0 / 0.2), 0 1px 2px oklch(10% 0 0 / 0.5)",
-          "text-shadow": "0.5px 1px 0.5px oklch(0% 0 0 / 0.08)"
+          "box-shadow": "var(--shadow-prominent)"
         },
         "@utility segmented": {
           "@apply -my-px gap-0.5 rounded-lg p-0.75": {},

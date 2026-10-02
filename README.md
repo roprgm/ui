@@ -44,7 +44,7 @@ Components compose from their parts. An overlay's trigger renders your own eleme
 </Menu>
 ```
 
-Put groups of controls on a card. Controls take their fills from the surface they sit on, so they keep the same contrast everywhere:
+Put groups of controls on a card. A card sets how the materials inside it look, so controls keep the same contrast everywhere:
 
 ```tsx
 <Card>
@@ -63,9 +63,9 @@ A card, popover, dialog, or notice pads its content as one section. To split it,
 </Card>
 ```
 
-- Use `surface-card` for cards, `surface-control` for what you press, and `surface-field` for what you set. Dock a region in your layout with `surface-panel`. What floats is `surface-float`: a popup opens as a card on the page, and with `raised` a level up, for one that opens over a card.
+- Use `material-card` for cards, `material-control` for what you press, and `material-field` for what you set. Dock a container in your layout with `material-panel`. What floats is `material-float`: a popup opens as a card on the page, and with `raised` a level up, for one that opens over a card.
 - Use the theme's colors, such as `text-secondary`, `bg-field`, or `bg-level-3`, instead of Tailwind's palette.
-- Build your own controls from the `surface-*` primitives rather than shadows or borders of your own, so they follow the theme.
+- Build your own controls from the `material-*` primitives rather than shadows or borders of your own, so they follow the theme and every scope.
 - For content that may not fit, use `overflow-fade-x` or `overflow-fade-y`: it scrolls, and fades where more lies that way. For one line of text, use `ScrollText` rather than `truncate`: it fades at the end and scrolls to show the rest, without becoming a tab stop. Inside something you click, such as a button, keep `truncate`.
 
 Components without JavaScript, such as `Button` and `Input`, render on the server.
@@ -78,7 +78,7 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 | --- | --- |
 | Actions | `Button`, `IconButton`, `CopyButton`, `Chip`, `Kbd`, `Badge` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `DragToggle`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput` |
-| Containers | `Card`, `Separator`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `surface-*` primitives; `Collapsible`, `ScrollArea`, `CodeBlock` |
+| Containers | `Card`, `Separator`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `material-*` primitives; `Collapsible`, `ScrollArea`, `CodeBlock` |
 | Navigation | `Tabs`, `ListItem`, `Tree` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
 | Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, and `overflow-fade-y` utilities |
@@ -87,18 +87,17 @@ Each one has a page with live examples, their code, and its install command on t
 
 ## Theme
 
-`base.css` holds the tokens with their defaults, the surfaces as plain as they can be, the utilities, and the page's rules: 13px text on a dark background. A theme imports it and sets again what it changes: `themes/default.css` draws the surfaces with light and shadow, lifts what sits on a card, and sets Geist when your app loads it. The comments in these files describe each token.
+`base.css` holds the tokens with their defaults, the materials as plain as they can be, the utilities, and the page's rules: 13px text on a dark background. A theme imports it and sets again what it changes: `themes/default.css` draws the materials with light and shadow, lifts what sits on a card, and sets Geist when your app loads it. The comments in these files describe each token.
 
 ### Colors
 
 | Token | Use |
 | --- | --- |
 | `level-0` to `level-12` | the palette: black, then darkest first in even steps of lightness; every fill is one of them |
-| `background`, `surface` | the fill of the region you're in, and the fill a card gets there |
-| `control`, `control-hover`, `field` | a control you press and its hover, and a field you set |
-| `hover`, `selected` | a quiet fill, such as a ghost's hover or a well, and a highlighted or selected row |
+| `background`, `hover` | the fill of where you are, and a quiet fill on it, such as a ghost's hover or a well |
+| `card`, `panel`, `float`, `control`, `control-hover`, `field` | the materials' fills: see [Materials](#materials) |
 | `foreground`, `secondary`, `muted`, `disabled` | text, strongest first: text and icons, supporting text, hints, and what is disabled |
-| `border`, `border-subtle` | separators, and dividers inside a surface |
+| `border`, `border-subtle` | separators, and dividers inside a material |
 | `accent`, `on-accent` | what is on: checked controls and slider thumbs |
 | `accent-text` | the accent as text, such as a link: the accent until a theme sets it apart |
 | `primary`, `primary-hover`, `on-primary` | the main action, a primary button: the accent until a theme sets it apart |
@@ -106,7 +105,7 @@ Each one has a page with live examples, their code, and its install command on t
 | `pressed`, `focus`, `backdrop` | a pressed ghost, the focus ring, and the shade behind a dialog |
 | `tooltip` | a tooltip's fill |
 
-The first three rows are the colors of where you are: the page sets them, and each region sets them again for what sits on it, its own background too. Controls, fields, and selected rows take a card's fill until a theme sets them apart, as cards, inputs, and buttons share one.
+The page sets where you are and the materials' fills, and each container sets them again for what's inside it. Materials take a card's fill until a theme sets them apart.
 
 ### Accents
 
@@ -116,21 +115,19 @@ Set `data-accent` on the page, or on any part of it, to pick the accent: `violet
 <html data-accent="blue">
 ```
 
-### Surfaces
+### Materials
 
-A surface is a class that says what a box is: `base.css` paints the color of its name, and the theme draws the rest. The docs site lists every [token](https://ui.roprgm.com/fundamentals/tokens), [surface](https://ui.roprgm.com/fundamentals/surfaces), and [utility](https://ui.roprgm.com/fundamentals/utilities), with what each is for. Controls fill themselves from the roles of the region under them, so a region decides how the controls on it look:
+A material is what a box is made of: its fill and its edge. A component is made of one, as a `Button` is of `material-control`, and the theme draws it. Each paints itself from its own variables, `--color-*` for its fill and `--shadow-*` for its edge, so any element that sets them again changes every material inside it. The docs site lists every [token](https://ui.roprgm.com/fundamentals/tokens), [material](https://ui.roprgm.com/fundamentals/materials), and [utility](https://ui.roprgm.com/fundamentals/utilities), with what each is for.
 
-| Surface | Fill | Used by |
+| Material | Variables | Used by |
 | --- | --- | --- |
-| `surface-card` | its `background`: the `surface` where it sits | cards |
-| `surface-panel` | its `background`, which the theme sets | a region docked in your layout, such as a sidebar |
-| `surface-float` | its `background`: the `surface` where it sits, a level up with `raised` | popups, dialogs, notices, anything dragged |
-| `surface-control` | `control` | buttons, selects, selected tabs and toggles |
-| `surface-field` | `field` | inputs, tracks, checkboxes, switches, segmented groups |
-| `surface-accent` | `accent` | checked switches, slider thumbs |
-| `surface-primary` | `primary` | primary buttons |
+| `material-card` | `--color-card`, `--shadow-card`, `--inset-shadow-card` | cards |
+| `material-panel` | `--color-panel` | a container docked in your layout, such as a sidebar |
+| `material-float` | `--color-float`, `--shadow-float` | popups, dialogs, notices, anything dragged; a level up with `raised` |
+| `material-control` | `--color-control`, `--color-control-hover`, `--shadow-control` | buttons, selects, selected tabs and toggles, slider thumbs |
+| `material-field` | `--color-field`, `--shadow-field` | inputs, textareas, tracks, checkboxes, switches, code |
 
-In the default theme, a field sits two levels below what it's on, and a card, a panel, or what floats lifts what sits on it two levels.
+The first three are containers: each is the background of what sits on it, and sets the materials inside it again. In the default theme, a field sits two levels below what it's on, and a container lifts what sits on it two levels.
 
 ### Sizes
 
@@ -148,7 +145,7 @@ Redefine a token to restyle every component that uses it. A primary button takes
 }
 ```
 
-Every part a component renders carries a `data-slot`, and its variants a `data-variant` and `data-size`. Set tokens or roles on a slot to restyle one component, and every other stays as it is:
+Every part a component renders carries a `data-slot`, and its variants a `data-variant` and `data-size`. Set tokens or materials on a slot to restyle one component, and every other stays as it is:
 
 ```css
 [data-slot="button"][data-variant="default"] {
@@ -158,35 +155,33 @@ Every part a component renders carries a `data-slot`, and its variants a `data-v
 }
 ```
 
-A theme of your own imports `base.css`, sets tokens again, and adds to a control's surface with a utility of the same name, or to a region with a rule on its class. A card's edge goes on its `::after`, a frame over its content, so a row with a fill can't cover it. For example:
+A theme of your own imports `base.css` and sets the materials' variables again: on the page in `@theme`, and inside each container on its class. For example:
 
 ```css
 @import "@roprgm/ui/base.css";
 
-@utility surface-control {
-  box-shadow: inset 0 -1px 0 oklch(0% 0 0 / 0.3);
+@theme {
+  --shadow-control: inset 0 -1px 0 oklch(0% 0 0 / 0.3);
 }
 
 /* On a card, controls turn green. */
 @layer components {
-  .surface-card {
+  .material-card {
     --color-control: oklch(60% 0.17 150);
     --color-control-hover: oklch(66% 0.17 150);
   }
 }
 ```
 
-A region of your own sets the colors of where you are, its background too, and paints it:
+Any class of yours is a scope too. A toolbar of glass lays its controls flat:
 
 ```css
-@utility surface-sidebar {
-  --color-background: var(--color-level-1);
-  --color-control: var(--color-level-4);
-  --color-control-hover: var(--color-level-5);
-  --color-field: var(--color-level-0);
-  --color-hover: var(--color-level-2);
-  --color-selected: var(--color-level-4);
-  background-color: var(--color-background);
+.toolbar-glass {
+  background-color: oklch(20% 0 0 / 0.45);
+  backdrop-filter: blur(12px);
+  --color-control: oklch(100% 0 0 / 0.14);
+  --color-control-hover: oklch(100% 0 0 / 0.22);
+  --shadow-control: none;
 }
 ```
 

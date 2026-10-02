@@ -17,7 +17,7 @@ const list = cva("flex data-[orientation=vertical]:flex-col", {
     variant: {
       default: "gap-1",
       // As a ToggleGroup: tabs a size smaller. Icon tabs take `icon-sm`.
-      segmented: "segmented surface-field *:h-(--spacing-control-sm)",
+      segmented: "segmented material-field *:h-(--spacing-control-sm)",
       // Over a line, which the selected tab marks; drawn first, so the mark lies over it, and on
       // its own, so a theme can engrave it as a separator.
       underline:
@@ -55,8 +55,8 @@ export function TabList({
 const tab = cva("data-active:font-selected data-active:text-foreground", {
   variants: {
     variant: {
-      default: "data-active:surface-control",
-      segmented: "data-active:surface-control",
+      default: "data-active:material-control",
+      segmented: "data-active:material-control",
       underline:
         "relative after:absolute after:inset-x-0 after:-bottom-1.5 after:h-0.5 after:rounded-full data-active:after:bg-accent",
     },

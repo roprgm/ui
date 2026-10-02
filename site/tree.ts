@@ -82,7 +82,16 @@ const fundamentals = group("fundamentals", [
     "Color tokens",
     "The colors components use, which each region sets again for what sits on it.",
   ],
-  ["surfaces", "Surfaces", "Classes for what a box is, which the theme draws."],
+  [
+    "materials",
+    "Materials",
+    "What a box is made of, which any container can set again for what's inside it.",
+  ],
+  [
+    "materials-lab",
+    "Materials lab",
+    "Temporary: production's prominent material beside the five, to decide.",
+  ],
   [
     "depth",
     "Depth",

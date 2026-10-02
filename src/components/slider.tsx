@@ -51,7 +51,7 @@ const bar = cva("box-content flex cursor-pointer touch-none select-none", {
   },
 });
 
-const track = cva("rounded-full surface-field", {
+const track = cva("rounded-full material-field", {
   variants: {
     orientation: { horizontal: "h-1 w-full", vertical: "h-full w-1" },
   },
@@ -216,7 +216,7 @@ export function Slider({
               onKeyDown={(event) => valueKeys.has(event.key) && edit(true)}
               onKeyUp={() => edit(false)}
               onBlur={() => edit(false)}
-              className="size-(--spacing-thumb) rounded-full surface-accent has-focus-visible:ring-2 has-focus-visible:ring-focus"
+              className="size-(--spacing-thumb) rounded-full material-control bg-accent has-focus-visible:ring-2 has-focus-visible:ring-focus"
               style={{ backgroundColor: color }}
             />
           </Primitive.Track>
