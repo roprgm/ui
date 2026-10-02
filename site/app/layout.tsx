@@ -1,16 +1,14 @@
 import { Toaster } from "@roprgm/ui/toast";
 import { TooltipProvider } from "@roprgm/ui/tooltip";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Geist } from "next/font/google";
 import type { ReactNode } from "react";
-import { HashRedirect } from "@/ui/hash-redirect";
 import { MobileBar, Sidebar } from "@/ui/sidebar";
 import "./globals.css";
 
-const geist = localFont({
-  src: "../../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2",
+const geist = Geist({
+  subsets: ["latin"],
   variable: "--font-geist",
-  weight: "100 900",
   display: "block",
 });
 
@@ -36,7 +34,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </div>
           <Toaster />
         </TooltipProvider>
-        <HashRedirect />
       </body>
     </html>
   );

@@ -1,21 +1,25 @@
+import type { Toc as Entries } from "@stefanprobst/rehype-extract-toc";
 import { cn } from "cn";
 import type { ComponentType } from "react";
 import { type Page, pages } from "@/tree";
 import { Breadcrumb } from "./breadcrumb";
-import { toMarkdown } from "./markdown";
-import { outline } from "./outline";
 import { PageActions } from "./page-actions";
-import { readSource } from "./source";
-import { Toc } from "./toc";
+import { type Heading, Toc } from "./toc";
+
+/** The `##` headings, each followed by its `###`s. */
+const headings = (entries: Entries): Heading[] =>
+  entries
+    .flatMap((entry) => [entry, ...(entry.children ?? [])])
+    .flatMap(({ id, value, depth }) => (id ? [{ id, value, depth }] : []));
 
 /** A page of the tree: its header, its MDX content, and the pages around it. */
 export async function Doc({ page }: { page: Page }) {
-  const file = `${page.section}/${page.slug}.mdx`;
-  const [{ default: Content }, mdx]: [{ default: ComponentType }, string] =
-    await Promise.all([
-      import(`@/docs/${file}`),
-      readSource(`site/docs/${file}`),
-    ]);
+  const {
+    default: Content,
+    tableOfContents,
+  }: { default: ComponentType; tableOfContents: Entries } = await import(
+    `@/docs/${page.section}/${page.slug}.mdx`
+  );
   const index = pages.indexOf(page);
   // A block is a whole layout, so it takes the width an outline would.
   const wide = page.section === "blocks";
@@ -33,11 +37,7 @@ export async function Doc({ page }: { page: Page }) {
             <h1 className="text-3xl font-semibold tracking-tight">
               {page.title}
             </h1>
-            <PageActions
-              markdown={await toMarkdown(page, mdx)}
-              previous={pages[index - 1]}
-              next={pages[index + 1]}
-            />
+            <PageActions previous={pages[index - 1]} next={pages[index + 1]} />
           </div>
           <p className="max-w-[60ch] text-base text-secondary">
             {page.description}
@@ -47,7 +47,7 @@ export async function Doc({ page }: { page: Page }) {
           <Content />
         </div>
       </article>
-      {!wide && <Toc headings={outline(mdx)} />}
+      {!wide && <Toc headings={headings(tableOfContents)} />}
     </div>
   );
 }

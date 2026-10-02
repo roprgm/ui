@@ -1,41 +1,27 @@
 import type { MDXComponents } from "mdx/types";
 import { isValidElement, type ReactNode } from "react";
-import { Code, type Language } from "@/ui/code";
+import { Code, isLanguage } from "@/ui/code";
 import { Example } from "@/ui/example";
 import { Install } from "@/ui/install";
-import { slugify } from "@/ui/outline";
-
-const text = (node: ReactNode): string =>
-  typeof node === "string"
-    ? node
-    : Array.isArray(node)
-      ? node.map(text).join("")
-      : "";
 
 /** A fenced block's code and language, from the `pre > code` MDX renders. */
 function Pre({ children }: { children?: ReactNode }) {
   if (!isValidElement<{ children?: string; className?: string }>(children))
     return null;
-  const lang = children.props.className?.replace("language-", "") as Language;
-  return <Code lang={lang}>{(children.props.children ?? "").trim()}</Code>;
+  const lang = children.props.className?.replace("language-", "") ?? "";
+  const language = isLanguage(lang) ? lang : undefined;
+  return <Code lang={language}>{(children.props.children ?? "").trim()}</Code>;
 }
 
 const components: MDXComponents = {
-  h2: ({ children }) => (
+  h2: (props) => (
     <h2
-      id={slugify(text(children))}
       className="mt-6 scroll-mt-20 text-lg font-medium tracking-tight"
-    >
-      {children}
-    </h2>
+      {...props}
+    />
   ),
-  h3: ({ children }) => (
-    <h3
-      id={slugify(text(children))}
-      className="mt-2 scroll-mt-20 text-sm font-medium"
-    >
-      {children}
-    </h3>
+  h3: (props) => (
+    <h3 className="mt-2 scroll-mt-20 text-sm font-medium" {...props} />
   ),
   p: (props) => <p className="max-w-[70ch] text-secondary" {...props} />,
   a: (props) => (

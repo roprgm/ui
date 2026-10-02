@@ -1,8 +1,10 @@
 "use client";
 
+import type { TocEntry } from "@stefanprobst/rehype-extract-toc";
 import { cn } from "cn";
 import { useEffect, useState } from "react";
-import type { Heading } from "./outline";
+
+export type Heading = Required<Pick<TocEntry, "id" | "value" | "depth">>;
 
 /** The heading whose section is on screen: the last one scrolled past the top third. */
 function useCurrent(headings: Heading[]) {
@@ -44,7 +46,7 @@ export function Toc({ headings }: { headings: Heading[] }) {
               heading.depth === 3 && "pl-3",
             )}
           >
-            {heading.title}
+            {heading.value}
           </a>
         ))}
       </nav>

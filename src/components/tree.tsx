@@ -289,16 +289,18 @@ export function Tree<T extends TreeNode<T>>({
       ?.focus();
   }
 
-  function select(element: HTMLElement, id: string) {
-    if (element.tagName === "A") element.click();
-    else onSelect?.(id);
-  }
-
-  function onRowKeyDown(event: KeyboardEvent<HTMLElement>, id: string) {
+  function onRowKeyDown(
+    event: KeyboardEvent<HTMLElement>,
+    id: string,
+    rendered: boolean,
+  ) {
     if (event.target !== event.currentTarget) return;
     const index = rows.findIndex((row) => row.item.id === id);
     const row = rows[index];
     const branch = Boolean(row.item.children?.length);
+    // A row drawn as another element, such as a link, acts as a click on it would.
+    const select = () =>
+      rendered ? event.currentTarget.click() : onSelect?.(row.item.id);
     const keys: Record<string, () => void> = {
       ArrowDown: () => focusRow(rows[index + 1]),
       ArrowUp: () => focusRow(rows[index - 1]),
@@ -312,9 +314,8 @@ export function Tree<T extends TreeNode<T>>({
         if (row.expanded) toggle(row.item.id, false);
         else focusRow(rows.find((parent) => parent.item.id === row.parent));
       },
-      // A row drawn as a link follows it, as a click would.
-      Enter: () => select(event.currentTarget, row.item.id),
-      " ": () => select(event.currentTarget, row.item.id),
+      Enter: select,
+      " ": select,
     };
     const action = keys[event.key];
     if (!action) return;
@@ -331,13 +332,14 @@ export function Tree<T extends TreeNode<T>>({
     return list.map((item) => {
       const branch = Boolean(item.children?.length);
       const expanded = branch && !collapsed.has(item.id);
+      const element = render?.(item);
       const indent = {
         "--indent": `calc(14px + ${depth}rem)`,
       } as CSSProperties;
       return (
         <Fragment key={item.id}>
           <ListItem
-            render={render?.(item)}
+            render={element}
             role="treeitem"
             aria-level={depth + 1}
             aria-selected={item.id === selected}
@@ -359,7 +361,9 @@ export function Tree<T extends TreeNode<T>>({
               onSelect?.(item.id);
               if (branch) toggle(item.id, !expanded);
             }}
-            onKeyDown={(event) => onRowKeyDown(event, item.id)}
+            onKeyDown={(event) =>
+              onRowKeyDown(event, item.id, element !== undefined)
+            }
             className={cn(
               row({ variant }),
               "data-[dragging=true]:opacity-40",

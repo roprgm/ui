@@ -5,8 +5,7 @@ import { IconButton } from "@roprgm/ui/icon-button";
 import { Popover, PopoverContent, PopoverTrigger } from "@roprgm/ui/popover";
 import { ScrollArea } from "@roprgm/ui/scroll-area";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { version } from "../../package.json";
 import { GitHubIcon, MenuIcon } from "./icons";
 import { Nav } from "./nav";
@@ -57,9 +56,6 @@ export function Sidebar() {
 /** A bar over the page on narrow screens, whose menu opens the tree. */
 export function MobileBar() {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-  // A link in the tree opens its page; the menu closes once it has.
-  useEffect(() => setOpen(false), [pathname]);
   return (
     <div className="sticky top-0 z-40 flex items-center gap-2 bg-background px-4 py-3 md:hidden">
       <Popover open={open} onOpenChange={setOpen}>
@@ -73,7 +69,7 @@ export function MobileBar() {
         <PopoverContent align="start" className="w-64 p-0">
           <ScrollArea fade className="max-h-[70dvh]">
             <div className="p-2">
-              <Nav />
+              <Nav onNavigate={() => setOpen(false)} />
             </div>
           </ScrollArea>
         </PopoverContent>

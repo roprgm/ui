@@ -49,7 +49,7 @@ const trees = sections.map((section) => ({
 }));
 
 /** The site's tree: each section, its groups, and their pages. */
-export function Nav() {
+export function Nav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   return (
     <nav className="flex flex-col">
@@ -78,6 +78,7 @@ export function Nav() {
                   <Link
                     href={node.href}
                     aria-current={node.href === pathname ? "page" : undefined}
+                    onNavigate={onNavigate}
                   />
                 ) : undefined
               }

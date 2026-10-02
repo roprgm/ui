@@ -8,10 +8,14 @@ const config: NextConfig = {
   turbopack: { root: `${import.meta.dirname}/..` },
   agentRules: false,
   devIndicators: false,
-  experimental: {
-    // Prefetched pages stay fresh for a day, so navigation never waits on the network.
-    staleTimes: { static: 86400 },
-  },
 };
 
-export default createMDX()(config);
+export default createMDX({
+  options: {
+    rehypePlugins: [
+      "rehype-slug",
+      "@stefanprobst/rehype-extract-toc",
+      "@stefanprobst/rehype-extract-toc/mdx",
+    ],
+  },
+})(config);

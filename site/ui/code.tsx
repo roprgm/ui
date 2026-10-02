@@ -9,6 +9,8 @@ const languages = { css, shell, tsx: typescript };
 
 export type Language = keyof typeof languages;
 
+export const isLanguage = (lang: string): lang is Language => lang in languages;
+
 export const highlight = (code: string, lang: Language = "tsx") =>
   render(parse(code, languages[lang]));
 
