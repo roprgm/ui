@@ -60,7 +60,9 @@ function Chip({
 function Name({ name, use }: { name: string; use: string }) {
   return (
     <div className="flex min-w-0 flex-col gap-0.5">
-      <code className="truncate font-mono text-xs text-foreground">{name}</code>
+      <code className="truncate font-mono text-xs text-foreground">
+        --color-{name}
+      </code>
       <span className="text-secondary">{use}</span>
     </div>
   );
@@ -82,76 +84,42 @@ function Tokens({ tokens }: { tokens: Token[] }) {
   );
 }
 
-const where = [
-  {
-    name: "background",
-    use: "Where you are.",
-    fill: "bg-background",
-  },
-  {
-    name: "hover",
-    use: "A ghost's hover.",
-    fill: "bg-hover",
-  },
-  {
-    name: "control",
-    use: "What you press.",
-    fill: "bg-control",
-  },
-  {
-    name: "control-hover",
-    use: "Under the pointer.",
-    fill: "bg-control-hover",
-  },
-  { name: "field", use: "Where you type.", fill: "bg-field" },
-  { name: "foreground", use: "Text and icons.", text: "text-foreground" },
-  { name: "secondary", use: "Supporting text.", text: "text-secondary" },
-  { name: "muted", use: "Hints.", text: "text-muted" },
-  { name: "disabled", use: "What is disabled.", text: "text-disabled" },
-];
-
-const grounds = [
-  { name: "Page", className: undefined, raised: false },
-  { name: "Card", className: "material-card", raised: false },
-  { name: "Raised", className: "material-float", raised: true },
-];
-
-/** Each color of where you are, read in a real page, card, and raised popup, so each shows as its container sets it. */
-export function Grounds() {
+export function WhereTokens() {
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_repeat(3,4rem)] grid-rows-[repeat(10,auto)] gap-x-1.5 sm:grid-cols-[minmax(0,1fr)_repeat(3,6rem)]">
-      <div className="row-span-full grid grid-rows-subgrid">
-        <span />
-        {where.map((color) => (
-          <div key={color.name} className="flex min-h-12 items-center py-1.5">
-            <Name name={color.name} use={color.use} />
-          </div>
-        ))}
-      </div>
-      {grounds.map((ground) => (
-        <div
-          key={ground.name}
-          data-raised={ground.raised || undefined}
-          className={cn(
-            "row-span-full grid grid-rows-subgrid justify-items-center rounded-xl pb-1.5",
-            ground.className,
-          )}
-        >
-          <span className="pt-2.5 pb-1 text-xs text-muted">{ground.name}</span>
-          {where.map((color) => (
-            <div key={color.name} className="grid place-items-center">
-              {color.fill ? (
-                <Chip className={color.fill} />
-              ) : (
-                <span className={cn("text-base font-medium", color.text)}>
-                  Aa
-                </span>
-              )}
-            </div>
-          ))}
-        </div>
-      ))}
-    </div>
+    <Tokens
+      tokens={[
+        {
+          name: "background",
+          use: "Where you are.",
+          chip: <Chip className="bg-background" />,
+        },
+        {
+          name: "hover",
+          use: "A ghost's hover.",
+          chip: <Chip className="bg-hover" />,
+        },
+        {
+          name: "foreground",
+          use: "Text and icons.",
+          chip: <Chip className="text-foreground">Aa</Chip>,
+        },
+        {
+          name: "secondary",
+          use: "Supporting text.",
+          chip: <Chip className="text-secondary">Aa</Chip>,
+        },
+        {
+          name: "muted",
+          use: "Hints.",
+          chip: <Chip className="text-muted">Aa</Chip>,
+        },
+        {
+          name: "disabled",
+          use: "What is disabled.",
+          chip: <Chip className="text-disabled">Aa</Chip>,
+        },
+      ]}
+    />
   );
 }
 

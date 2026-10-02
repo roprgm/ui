@@ -1,32 +1,28 @@
 import {
   Accents,
   AccentTokens,
-  Grounds,
   Levels,
   OtherTokens,
   StateTokens,
   TranslucentTokens,
+  WhereTokens,
 } from "@/reference/colors";
 
-Components use only these tokens, as `bg-`, `text-`, or `outline-`.
-
 ## Palette
-
-Black, then 15% lightness up in steps of 3.7%. Only themes pick levels.
 
 <Levels />
 
 ## Where you are
 
-Each container sets them again for what sits on it. The materials' fills are on [Materials](/fundamentals/materials).
+Each container sets these again. The materials' fills are on [Materials](/fundamentals/materials).
 
-<Grounds />
+<WhereTokens />
 
 ## Accent and primary
 
 <AccentTokens />
 
-`data-accent` on any element picks another. Click one to copy it.
+`data-accent` picks another. Click to copy.
 
 <Accents />
 
