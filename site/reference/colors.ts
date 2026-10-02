@@ -67,6 +67,7 @@ export const accents: Swatch[] = [
   "rose",
 ].map((name) => ({
   name: `data-accent="${name}"`,
+  use: name === "neutral" ? "The default, near white." : undefined,
   className: "bg-accent",
   attributes: { "data-accent": name },
 }));

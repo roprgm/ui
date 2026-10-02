@@ -40,7 +40,7 @@ const components: MDXComponents = {
   ),
   code: (props) => (
     <code
-      className="rounded-sm bg-hover px-1 py-px font-mono text-[0.9em] text-foreground"
+      className="rounded-sm bg-level-4 px-1 py-px font-mono text-[0.9em] text-foreground"
       {...props}
     />
   ),
