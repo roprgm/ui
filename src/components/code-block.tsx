@@ -30,7 +30,12 @@ export function CodeBlock({
   return (
     <div
       data-slot="code-block"
-      className={cn("relative rounded-xl material-field", syntax, className)}
+      className={cn(
+        // The focus ring, around the whole block while its code has focus, as focus-ring draws it.
+        "relative rounded-xl material-field outline-2 outline-offset-1 outline-transparent has-[[data-slot=code-block-code]:focus-visible]:outline-focus",
+        syntax,
+        className,
+      )}
       {...props}
     >
       <ScrollArea fade className="max-h-[inherit] rounded-[inherit]">
@@ -39,7 +44,7 @@ export function CodeBlock({
           data-slot="code-block-code"
           tabIndex={-1}
           className={cn(
-            "mr-10.5 py-3 pl-3 font-mono text-xs text-foreground",
+            "mr-10.5 py-3 pl-3 font-mono text-xs text-foreground outline-none",
             wrap && "whitespace-pre-wrap",
             !wrap && "overflow-fade-x",
           )}
