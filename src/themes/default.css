@@ -38,7 +38,8 @@
     --color-background: var(--color-surface);
   }
 
-  /* A popup that opens over a card stands as a card on a card. */
+  /* A region on a card, and a popup that opens over one, stand as a card on a card. */
+  :where(.surface-card) :is(.surface-card, .surface-panel, .surface-float),
   .surface-float[data-raised] {
     --color-background: var(--color-level-6);
     --color-control: var(--color-level-9);
