@@ -3,9 +3,10 @@ import type { ComponentProps } from "react";
 import { CopyButton } from "./copy-button";
 import { ScrollArea } from "./scroll-area";
 
-// Sugar High's markup reads these; other highlighters color their own.
+// Sugar High's markup reads these; other highlighters color their own. A theme sets them again
+// on the code block's slot.
 const syntax =
-  "[--sh-class:var(--color-code-type)] [--sh-comment:var(--color-secondary)] [--sh-entity:var(--color-code-type)] [--sh-identifier:var(--color-foreground)] [--sh-jsxliterals:var(--color-foreground)] [--sh-keyword:var(--color-code-keyword)] [--sh-property:var(--color-code-property)] [--sh-sign:var(--color-secondary)] [--sh-string:var(--color-code-string)]";
+  "[--sh-class:oklch(81%_0.07_230)] [--sh-comment:var(--color-secondary)] [--sh-entity:oklch(81%_0.07_230)] [--sh-identifier:var(--color-foreground)] [--sh-jsxliterals:var(--color-foreground)] [--sh-keyword:oklch(77%_0.1_9)] [--sh-property:oklch(83%_0.08_76)] [--sh-sign:var(--color-secondary)] [--sh-string:oklch(81%_0.08_133)]";
 
 /**
  * Code with a button that copies it; a line that doesn't fit scrolls, or with `wrap`, wraps, and

@@ -8,26 +8,6 @@ const color = (name: string, use: string): Swatch => ({
   style: { backgroundColor: `var(--color-${name})` },
 });
 
-const lightness = [
-  "0%",
-  "15%",
-  "18.7%",
-  "22.4%",
-  "26.1%",
-  "29.8%",
-  "33.5%",
-  "37.2%",
-  "40.9%",
-  "44.6%",
-  "48.3%",
-  "52%",
-  "55.7%",
-];
-
-export const palette = lightness.map((l, level) =>
-  color(`level-${level}`, `Lightness ${l}.`),
-);
-
 export const text = [
   color("foreground", "Text and icons."),
   color("secondary", "Supporting text."),
@@ -87,11 +67,4 @@ export const overlays = [
 export const lines = [
   color("border", "Separators."),
   color("border-subtle", "Dividers in a card."),
-];
-
-export const code = [
-  color("code-keyword", "Keywords."),
-  color("code-string", "Strings."),
-  color("code-type", "Types."),
-  color("code-property", "Properties."),
 ];
