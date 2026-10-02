@@ -8,47 +8,33 @@ import {
   TranslucentTokens,
 } from "@/reference/colors";
 
-Components use only the tokens on this page, with `bg-`, `text-`, or `outline-` and without their `--color-` prefix. A theme picks them from the palette, and sets them again.
-
-```tsx
-<p className="text-secondary">Three edits since the import.</p>
-```
+Components use only these tokens, as `bg-`, `text-`, or `outline-`.
 
 ## Palette
 
-Every fill is a level: black, then from 15% lightness up in even steps of 3.7%. Only themes and containers pick levels; components never do.
+Black, then 15% lightness up in steps of 3.7%. Only themes pick levels.
 
 <Levels />
 
 ## Where you are
 
-The page sets these, and each container sets them again for what sits on it, so the same token reads in a page, a card, and a popup raised over a card. Text takes four opaque steps, so an icon's crossing strokes don't show. The materials' own fills are on [Materials](/fundamentals/materials).
+Each container sets them again for what sits on it. The materials' fills are on [Materials](/fundamentals/materials).
 
 <Grounds />
 
 ## Accent and primary
 
-The primary takes the accent until a theme sets it apart.
-
 <AccentTokens />
 
-`data-accent` on any element picks another accent for what it holds. Click one to copy it.
+`data-accent` on any element picks another. Click one to copy it.
 
 <Accents />
 
-```tsx
-<div data-accent="blue">…</div>
-```
-
 ## States
-
-Each with a label beside it, never alone.
 
 <StateTokens />
 
 ## Translucent
-
-They read over any fill, as the palette under each shows.
 
 <TranslucentTokens />
 

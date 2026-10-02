@@ -85,25 +85,25 @@ function Tokens({ tokens }: { tokens: Token[] }) {
 const where = [
   {
     name: "background",
-    use: "The fill of where you are.",
+    use: "Where you are.",
     fill: "bg-background",
   },
   {
     name: "hover",
-    use: "A quiet fill on it: a ghost's hover.",
+    use: "A ghost's hover.",
     fill: "bg-hover",
   },
   {
     name: "control",
-    use: "What you press, and a selected row.",
+    use: "What you press.",
     fill: "bg-control",
   },
   {
     name: "control-hover",
-    use: "A control under the pointer.",
+    use: "Under the pointer.",
     fill: "bg-control-hover",
   },
-  { name: "field", use: "Where you set a value.", fill: "bg-field" },
+  { name: "field", use: "Where you type.", fill: "bg-field" },
   { name: "foreground", use: "Text and icons.", text: "text-foreground" },
   { name: "secondary", use: "Supporting text.", text: "text-secondary" },
   { name: "muted", use: "Hints.", text: "text-muted" },
@@ -161,32 +161,32 @@ export function AccentTokens() {
       tokens={[
         {
           name: "accent",
-          use: "What is on: a checked box, a selected tab's mark.",
+          use: "What is on.",
           chip: <Chip className="bg-accent" />,
         },
         {
           name: "on-accent",
-          use: "Text and icons on the accent.",
+          use: "Text on the accent.",
           chip: <Chip className="bg-accent text-on-accent">Aa</Chip>,
         },
         {
           name: "accent-text",
-          use: "The accent as text, such as a link.",
+          use: "The accent as text.",
           chip: <Chip className="text-accent-text">Aa</Chip>,
         },
         {
           name: "primary",
-          use: "The main action: a primary button.",
+          use: "The main action.",
           chip: <Chip className="bg-primary" />,
         },
         {
           name: "primary-hover",
-          use: "A primary button under the pointer.",
+          use: "Under the pointer.",
           chip: <Chip className="bg-primary-hover" />,
         },
         {
           name: "on-primary",
-          use: "Text and icons on the primary.",
+          use: "Text on the primary.",
           chip: <Chip className="bg-primary text-on-primary">Aa</Chip>,
         },
       ]}
@@ -224,17 +224,17 @@ export function StateTokens() {
       tokens={[
         {
           name: "success",
-          use: "Completed and healthy, with a label.",
+          use: "Done, with a label.",
           chip: <Chip className="bg-success" />,
         },
         {
           name: "warning",
-          use: "Needs attention soon, with a label.",
+          use: "Needs attention, with a label.",
           chip: <Chip className="bg-warning" />,
         },
         {
           name: "danger",
-          use: "Destructive actions and errors, with a label.",
+          use: "Errors, with a label.",
           chip: <Chip className="bg-danger" />,
         },
       ]}
@@ -262,12 +262,12 @@ export function TranslucentTokens() {
         },
         {
           name: "border-subtle",
-          use: "Dividers inside a material, such as a card's sections.",
+          use: "Dividers inside a material.",
           chip: <Over className="bg-border-subtle" />,
         },
         {
           name: "pressed",
-          use: "A ghost button or chip held down, or on.",
+          use: "Held down, or on.",
           chip: <Over className="bg-pressed" />,
         },
         {
@@ -277,7 +277,7 @@ export function TranslucentTokens() {
         },
         {
           name: "backdrop",
-          use: "The shade behind a dialog.",
+          use: "Behind a dialog.",
           chip: <Over className="bg-backdrop" />,
         },
       ]}
@@ -296,7 +296,7 @@ export function OtherTokens() {
         },
         {
           name: "code-*",
-          use: "Code, as a highlighter marks it: keyword, string, type, and property.",
+          use: "Keyword, string, type, property.",
           chip: (
             <Chip className="w-16 grid-cols-4">
               <span className="h-full w-full bg-code-keyword" />
