@@ -6,6 +6,7 @@ const color = (name: string, use: string): Swatch => ({
   use,
   className: "ring-1 ring-foreground/10 ring-inset",
   style: { backgroundColor: `var(--color-${name})` },
+  showsFill: true,
 });
 
 export const base = [
@@ -41,6 +42,7 @@ export const accents: Swatch[] = [
   use: name === "neutral" ? "The default, near white." : undefined,
   className: "bg-accent",
   attributes: { "data-accent": name },
+  showsFill: true,
 }));
 
 export const states = [

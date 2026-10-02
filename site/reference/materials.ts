@@ -1,16 +1,23 @@
 import type { Swatch } from "./swatch-list";
 
 export const containers: Swatch[] = [
-  { name: "material-card", use: "Cards.", className: "material-card" },
+  {
+    name: "material-card",
+    use: "Cards.",
+    className: "material-card",
+    showsFill: true,
+  },
   {
     name: "material-panel",
     use: "Docked panels.",
     className: "material-panel",
+    showsFill: true,
   },
   {
     name: "material-float",
     use: "Popups and dialogs.",
     className: "material-float",
+    showsFill: true,
   },
 ];
 
@@ -19,11 +26,13 @@ export const inside: Swatch[] = [
     name: "material-control",
     use: "What you press.",
     className: "material-control",
+    showsFill: true,
   },
   {
     name: "material-field",
     use: "Where you type.",
     className: "material-field",
+    showsFill: true,
   },
 ];
 
@@ -33,6 +42,7 @@ const fill = (name: string, use: string): Swatch => ({
   use,
   className: "ring-1 ring-foreground/10 ring-inset",
   style: { backgroundColor: `var(--color-${name})` },
+  showsFill: true,
 });
 
 /** An edge, drawn on a card's fill. */
