@@ -78,9 +78,9 @@ const row = cva(
         // As a popup's rows: no lines, a pixel apart so two filled rows don't merge. A group's
         // name reads above what it holds.
         default:
-          "mb-px h-6.5 rounded-md px-2 text-secondary shadow-none hover:bg-hover hover:text-foreground aria-expanded:text-foreground aria-[expanded=false]:text-foreground data-[selected=true]:text-foreground",
+          "mb-px h-6.5 rounded-md px-2 text-secondary shadow-none before:left-2 hover:bg-hover hover:text-foreground aria-expanded:text-foreground aria-[expanded=false]:text-foreground data-[selected=true]:text-foreground",
         // As a panel's list, such as layers: a line between rows, each level set in.
-        list: "pl-(--indent)",
+        list: "pl-(--indent) before:left-(--indent)",
       },
     },
   },
@@ -368,7 +368,7 @@ export function Tree<T extends TreeNode<T>>({
               row({ variant }),
               "data-[dragging=true]:opacity-40",
               "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-accent/60 data-[drop=inside]:ring-inset",
-              "before:absolute before:right-2 before:left-(--indent) before:z-10 before:h-0.5 before:rounded-full before:bg-accent before:opacity-0",
+              "before:absolute before:right-2 before:z-10 before:h-0.5 before:rounded-full before:bg-accent before:opacity-0",
               "data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100",
             )}
           >

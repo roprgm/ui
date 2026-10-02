@@ -3,7 +3,7 @@
 import { cn } from "cn";
 import { useState } from "react";
 
-export type Swatch = {
+type Swatch = {
   name: string;
   /** What to write to use it, revealed on hover and copied on click. */
   code: string;

@@ -11,28 +11,24 @@ import { Tree } from "@roprgm/ui/tree";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { type Section, sections } from "@/tree";
 import { BlocksIcon, BookIcon, ComponentsIcon } from "./icons";
 
-type Node = { id: string; title: string; href?: string; children?: Node[] };
+export type NavNode = {
+  id: string;
+  title: string;
+  href?: string;
+  children?: NavNode[];
+};
 
-/** A section's pages, under a row for each of its groups. */
-const nodes = (section: Section): Node[] =>
-  section.groups.flatMap((group): Node[] => {
-    const pages = group.pages.map((page) => ({
-      id: page.href,
-      title: page.title,
-      href: page.href,
-    }));
-    if (!group.title) return pages;
-    return [
-      {
-        id: `${section.slug}/${group.title}`,
-        title: group.title,
-        children: pages,
-      },
-    ];
-  });
+/** A section of the tree, with only what the menu shows. */
+export type NavSection = {
+  slug: string;
+  title: string;
+  count: number;
+  /** Pages straight under the section, with no groups, hang from a line as a group's do. */
+  flat: boolean;
+  items: NavNode[];
+};
 
 const icons: Record<string, ReactNode> = {
   fundamentals: <BookIcon />,
@@ -40,26 +36,24 @@ const icons: Record<string, ReactNode> = {
   blocks: <BlocksIcon />,
 };
 
-const trees = sections.map((section) => ({
-  section,
-  items: nodes(section),
-  count: section.groups.reduce((sum, group) => sum + group.pages.length, 0),
-  // Pages straight under a section hang from a line, as a group's do.
-  flat: section.groups.every((group) => !group.title),
-}));
-
 /** The site's tree: each section, its groups, and their pages. */
-export function Nav({ onNavigate }: { onNavigate?: () => void }) {
+export function Nav({
+  sections,
+  onNavigate,
+}: {
+  sections: NavSection[];
+  onNavigate?: () => void;
+}) {
   const pathname = usePathname();
   return (
     <nav className="flex flex-col">
-      {trees.map(({ section, items, count, flat }) => (
+      {sections.map((section) => (
         <Collapsible key={section.slug} defaultOpen>
           <CollapsibleTrigger className="mb-px h-6.5 gap-1.5 rounded-md px-2 py-0 font-medium text-foreground data-panel-open:rounded-md">
             <span className="text-secondary">{icons[section.slug]}</span>
             {section.title}
             <span className="ml-auto font-normal text-muted tabular-nums">
-              {count}
+              {section.count}
             </span>
             <Chevron
               direction="right"
@@ -70,7 +64,7 @@ export function Nav({ onNavigate }: { onNavigate?: () => void }) {
           <CollapsiblePanel className="gap-0 p-0 pb-4 shadow-none">
             <Tree
               aria-label={section.title}
-              items={items}
+              items={section.items}
               label={(node) => node.title}
               selected={pathname}
               render={(node) =>
@@ -83,7 +77,7 @@ export function Nav({ onNavigate }: { onNavigate?: () => void }) {
                 ) : undefined
               }
               className={
-                flat
+                section.flat
                   ? "ml-4 pl-1.5 shadow-[inset_1px_0_0_var(--color-control)]"
                   : undefined
               }

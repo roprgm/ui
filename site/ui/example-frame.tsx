@@ -1,5 +1,3 @@
-"use client";
-
 import { Card } from "@roprgm/ui/card";
 import { Section } from "@roprgm/ui/section";
 import { Tab, TabList, TabPanel, Tabs } from "@roprgm/ui/tabs";

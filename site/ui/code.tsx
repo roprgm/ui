@@ -7,11 +7,11 @@ import * as typescript from "sugar-high/lang/typescript";
 
 const languages = { css, shell, tsx: typescript };
 
-export type Language = keyof typeof languages;
+type Language = keyof typeof languages;
 
 export const isLanguage = (lang: string): lang is Language => lang in languages;
 
-export const highlight = (code: string, lang: Language = "tsx") =>
+const highlight = (code: string, lang: Language = "tsx") =>
   render(parse(code, languages[lang]));
 
 /** Code highlighted as the page builds, with a copy button. */

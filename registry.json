@@ -362,6 +362,17 @@
       ]
     },
     {
+      "name": "text-runs",
+      "type": "registry:ui",
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/text-runs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
@@ -615,7 +626,10 @@
       "description": "A short label that isn't a control, such as a status or a count.",
       "categories": ["actions"],
       "dependencies": ["cn", "class-variance-authority"],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/text-runs.json"
+      ],
       "files": [
         {
           "path": "src/components/badge.tsx",
@@ -834,7 +848,8 @@
       "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/button.json"
+        "https://ui.roprgm.com/r/button.json",
+        "https://ui.roprgm.com/r/text-runs.json"
       ],
       "files": [
         {

@@ -11,7 +11,7 @@ export type Page = {
   group?: string;
 };
 
-export type Group = { title?: string; pages: Page[] };
+type Group = { title?: string; pages: Page[] };
 
 export type Section = {
   slug: string;

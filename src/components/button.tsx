@@ -1,3 +1,4 @@
+import { mergeProps } from "@base-ui/react/merge-props";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import { type ComponentProps, cloneElement, type ReactElement } from "react";
@@ -50,8 +51,7 @@ export function Button({
   };
   if (render) {
     return cloneElement(render, {
-      ...attributes,
-      ...props,
+      ...mergeProps(render.props, { ...attributes, ...props }),
       className: cn(classes, render.props.className),
     });
   }

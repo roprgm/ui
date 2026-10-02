@@ -3,14 +3,9 @@
 import { Tabs as Primitive } from "@base-ui/react/tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
-import {
-  Children,
-  type ComponentProps,
-  createContext,
-  type ReactNode,
-  useContext,
-} from "react";
+import { type ComponentProps, createContext, useContext } from "react";
 import { Button } from "./button";
+import { textRuns } from "./text-runs";
 
 /** Tabs and the panels they show; `orientation="vertical"` stacks the tabs in a column. */
 export function Tabs(props: Primitive.Root.Props) {
@@ -87,20 +82,9 @@ export function Tab({
       className={cn(tab({ variant }), className)}
       {...props}
     >
-      {labeled(children)}
-    </Primitive.Tab>
-  );
-}
-
-/** Each run of text as one label, so `Photos {count}` stays together. */
-function labeled(children: ReactNode) {
-  const parts: ReactNode[] = [];
-  let text = "";
-  const flush = () => {
-    if (text) {
-      parts.push(
+      {/* Each run of text as one label, so `Photos {count}` stays together. */}
+      {textRuns(children, (text) => (
         <span
-          key={parts.length}
           data-slot="tab-label"
           className="grid *:col-start-1 *:row-start-1"
         >
@@ -108,21 +92,10 @@ function labeled(children: ReactNode) {
           <span aria-hidden className="invisible font-selected">
             {text}
           </span>
-        </span>,
-      );
-    }
-    text = "";
-  };
-  for (const child of Children.toArray(children)) {
-    if (typeof child === "string" || typeof child === "number") {
-      text += child;
-    } else {
-      flush();
-      parts.push(child);
-    }
-  }
-  flush();
-  return parts;
+        </span>
+      ))}
+    </Primitive.Tab>
+  );
 }
 
 /** What a tab shows. Out of the tab order, so Tab moves from the tabs straight to what it holds. */

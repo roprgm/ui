@@ -1,4 +1,5 @@
 import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
 import { isValidElement, type ReactNode } from "react";
 import { Code, isLanguage } from "@/ui/code";
 import { Example } from "@/ui/example";
@@ -24,8 +25,9 @@ const components: MDXComponents = {
     <h3 className="mt-2 scroll-mt-20 text-sm font-medium" {...props} />
   ),
   p: (props) => <p className="max-w-[70ch] text-secondary" {...props} />,
-  a: (props) => (
-    <a
+  a: ({ href = "", ...props }) => (
+    <Link
+      href={href}
       className="rounded-sm text-foreground underline decoration-muted underline-offset-4 transition focus-ring hover:decoration-foreground"
       {...props}
     />

@@ -1,5 +1,3 @@
-"use client";
-
 import { IconButton } from "@roprgm/ui/icon-button";
 import Link from "next/link";
 import type { ReactNode } from "react";

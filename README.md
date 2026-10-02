@@ -118,7 +118,7 @@ Set `data-accent` on the page, or on any part of it, to pick the accent: `violet
 
 ### Surfaces
 
-A surface is a class that says what a box is: `base.css` paints the color of its name, and the theme draws the rest. The [docs site](https://ui.roprgm.com/fundamentals/tokens) lists every token, surface, and utility, with what each is for. Controls fill themselves from the roles of the region under them, so a region decides how the controls on it look:
+A surface is a class that says what a box is: `base.css` paints the color of its name, and the theme draws the rest. The docs site lists every [token](https://ui.roprgm.com/fundamentals/tokens), [surface](https://ui.roprgm.com/fundamentals/surfaces), and [utility](https://ui.roprgm.com/fundamentals/utilities), with what each is for. Controls fill themselves from the roles of the region under them, so a region decides how the controls on it look:
 
 | Surface | Fill | Used by |
 | --- | --- | --- |

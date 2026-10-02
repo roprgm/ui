@@ -1,3 +1,4 @@
+import { mergeProps } from "@base-ui/react/merge-props";
 import { cn } from "cn";
 import { type ComponentProps, cloneElement, type ReactElement } from "react";
 
@@ -27,8 +28,7 @@ export function ListItem({
   );
   if (render) {
     return cloneElement(render, {
-      ...attributes,
-      ...props,
+      ...mergeProps(render.props, { ...attributes, ...props }),
       className: cn(classes, render.props.className),
     });
   }
