@@ -1,0 +1,34 @@
+<Example name="dialog/demo" />
+
+Use one when the app can't go on without an answer, such as where to export. Its `Section`s stack without a line, and the last of several, its buttons, sits 16px below the rest. `DialogClose` closes it, drawn as the Button it renders.
+
+## Installation
+
+<Install name="dialog" />
+
+## Examples
+
+### Alert
+
+`alert` asks before what can't be undone: a click outside doesn't close it.
+
+<Example name="dialog/alert" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Dialog>
+  <DialogTrigger /> // dialog-trigger, or the slot of the element it renders
+  <DialogContent> // dialog-content, over a dialog-backdrop
+    <Section> // section
+      <DialogTitle /> // dialog-title
+      <DialogDescription /> // dialog-description
+    </Section>
+    <Section> // section
+      <DialogClose /> // dialog-close, or the slot of the element it renders
+    </Section>
+  </DialogContent>
+</Dialog>
+```

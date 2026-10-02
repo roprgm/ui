@@ -79,11 +79,11 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 | Actions | `Button`, `IconButton`, `CopyButton`, `Chip`, `Kbd`, `Badge` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `DragToggle`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput` |
 | Containers | `Card`, `Separator`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `surface-*` primitives; `Collapsible`, `ScrollArea`, `CodeBlock` |
-| Navigation | `Tabs`, `ListItem`, `TreeList` |
+| Navigation | `Tabs`, `ListItem`, `Tree` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
 | Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, and `overflow-fade-y` utilities |
 
-Each one has a live demo and its install command on the [docs site](https://ui.roprgm.com).
+Each one has a page with live examples, their code, and its install command on the [docs site](https://ui.roprgm.com/components).
 
 ## Theme
 
@@ -118,7 +118,7 @@ Set `data-accent` on the page, or on any part of it, to pick the accent: `violet
 
 ### Surfaces
 
-A surface is a class that says what a box is: `base.css` paints the color of its name, and the theme draws the rest. The [docs site](https://ui.roprgm.com/#theming) lists every token, surface, and utility, with what each is for. Controls fill themselves from the roles of the region under them, so a region decides how the controls on it look:
+A surface is a class that says what a box is: `base.css` paints the color of its name, and the theme draws the rest. The docs site lists every [token](https://ui.roprgm.com/fundamentals/tokens), [surface](https://ui.roprgm.com/fundamentals/surfaces), and [utility](https://ui.roprgm.com/fundamentals/utilities), with what each is for. Controls fill themselves from the roles of the region under them, so a region decides how the controls on it look:
 
 | Surface | Fill | Used by |
 | --- | --- | --- |

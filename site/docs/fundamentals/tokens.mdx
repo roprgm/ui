@@ -1,0 +1,45 @@
+import { Reference, tokens } from "@/reference/tables";
+
+Components use only these, never the palette. Use each with `bg-`, `text-`, or `outline-`, without its `--color-` prefix. A theme sets them again, and the swatches show their values on the page.
+
+```tsx
+<p className="text-secondary">Three edits since the import.</p>
+```
+
+## Where you are
+
+The page sets them, and each region, such as a card, sets them again for what sits on it.
+
+<Reference entries={tokens.where} />
+
+## Text
+
+Four opaque steps, strongest first, so an icon's crossing strokes don't show.
+
+<Reference entries={tokens.text} />
+
+## Lines
+
+Translucent, so they read over any fill.
+
+<Reference entries={tokens.lines} />
+
+## Accent and primary
+
+`data-accent` picks another accent for what an element holds.
+
+<Reference entries={tokens.accent} />
+
+## States
+
+<Reference entries={tokens.states} />
+
+## The rest
+
+<Reference entries={tokens.rest} />
+
+## Sizes
+
+Not colors: use them with `h-`, `size-`, or `font-`.
+
+<Reference entries={tokens.sizes} />

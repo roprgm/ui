@@ -4,7 +4,10 @@ import { ScrollArea as Primitive } from "@base-ui/react/scroll-area";
 import { cn } from "cn";
 import type { ComponentProps } from "react";
 
-/** Scrolls vertically with a thin bar; `fade` shades an edge while more lies past it. */
+/**
+ * Scrolls vertically with a thin bar; `fade` fades the content at an edge while more lies past it.
+ * Give it a height, or a max height to grow until it scrolls.
+ */
 export function ScrollArea({
   fade,
   className,
@@ -20,11 +23,16 @@ export function ScrollArea({
       <Primitive.Viewport
         data-slot="scroll-area-viewport"
         className={cn(
-          "h-full overscroll-contain outline-none",
+          "h-full max-h-[inherit] overscroll-contain outline-none",
           fade && "overflow-fade-y",
         )}
       >
-        <Primitive.Content data-slot="scroll-area-content" className="min-w-0">
+        {/* Base UI fits it to its widest child; here it keeps the viewport's width, so a wide child,
+            such as code, scrolls sideways on its own. */}
+        <Primitive.Content
+          data-slot="scroll-area-content"
+          style={{ minWidth: 0 }}
+        >
           {children}
         </Primitive.Content>
       </Primitive.Viewport>

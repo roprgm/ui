@@ -1,0 +1,26 @@
+<Example name="checkbox/demo" />
+
+Wrap it and its text in a `label`. `className` goes on the span around it, and every other prop on the input, such as `checked`, `onChange`, and `name`.
+
+## Installation
+
+<Install name="checkbox" />
+
+## Examples
+
+### Disabled
+
+`disabled` dims it, checked or not.
+
+<Example name="checkbox/disabled" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<span> // checkbox-root
+  <input type="checkbox" /> // checkbox
+  <svg /> // checkbox-mark
+</span>
+```

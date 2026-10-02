@@ -1,0 +1,30 @@
+<Example name="scroll-area/demo" />
+
+`fade` fades the content at an edge while more lies past it, and the bar shows while you hover or scroll.
+
+## Installation
+
+<Install name="scroll-area" />
+
+## Examples
+
+### In a card
+
+With `flex-1` in a card of a fixed height, a list takes the room the header leaves and scrolls.
+
+<Example name="scroll-area/card" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<ScrollArea> // scroll-area
+  <div> // scroll-area-viewport
+    <div /> // scroll-area-content, around the children
+  </div>
+  <div> // scroll-area-scrollbar
+    <div /> // scroll-area-thumb
+  </div>
+</ScrollArea>
+```

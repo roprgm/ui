@@ -3,5 +3,6 @@
   "framework": null,
   "installCommand": "bun install",
   "buildCommand": "bun run build",
-  "outputDirectory": "site/dist"
+  "outputDirectory": "site/out",
+  "cleanUrls": true
 }

@@ -67,60 +67,18 @@
       "css": {
         "@utility overflow-fade-y": {
           "overflow-y": "auto",
-          "&::before, &::after": {
-            "content": "\"\"",
-            "position": "sticky",
-            "z-index": "10",
-            "display": "block",
-            "height": "1.5rem",
-            "pointer-events": "none",
-            "opacity": "0"
+          "& :focus-visible": {
+            "outline-offset": "-2px"
           },
-          "&::before": {
-            "top": "0",
-            "margin-bottom": "-1.5rem",
-            "background": "linear-gradient(to bottom, oklch(0% 0 0 / 0.2), 30%, transparent)"
-          },
-          "&::after": {
-            "bottom": "0",
-            "margin-top": "-1.5rem",
-            "background": "linear-gradient(to top, oklch(0% 0 0 / 0.2), 30%, transparent)"
-          },
+          "mask-image": "linear-gradient(to bottom, transparent, oklch(0% 0 0) var(--overflow-fade-start), oklch(0% 0 0) calc(100% - var(--overflow-fade-end)), transparent)",
           "@supports (animation-timeline: scroll())": {
-            "&::before": {
-              "animation": "overflow-fade-in linear both",
-              "animation-timeline": "scroll()",
-              "animation-range": "0 1.5rem"
-            },
-            "&::after": {
-              "animation": "overflow-fade-out linear both",
-              "animation-timeline": "scroll()",
-              "animation-range": "calc(100% - 1.5rem) 100%"
-            }
+            "animation": "overflow-fade-start linear both, overflow-fade-end linear both",
+            "animation-timeline": "scroll(self block), scroll(self block)",
+            "animation-range": "0 1.5rem, calc(100% - 1.5rem) 100%"
           },
           "@supports not (animation-timeline: scroll())": {
-            "&::before, &::after": {
-              "transition": "opacity 150ms"
-            },
-            "&[data-overflow-y-start]::before, &[data-overflow-y-end]::after": {
-              "opacity": "1"
-            }
-          }
-        },
-        "@keyframes overflow-fade-in": {
-          "from": {
-            "opacity": "0"
-          },
-          "to": {
-            "opacity": "1"
-          }
-        },
-        "@keyframes overflow-fade-out": {
-          "from": {
-            "opacity": "1"
-          },
-          "to": {
-            "opacity": "0"
+            "--overflow-fade-start": "min(1.5rem, var(--scroll-area-overflow-y-start, 0px))",
+            "--overflow-fade-end": "min(1.5rem, var(--scroll-area-overflow-y-end, 0px))"
           }
         },
         "@property --overflow-fade-start": {
@@ -146,12 +104,12 @@
           },
           "mask-image": "linear-gradient(to right, transparent, oklch(0% 0 0) var(--overflow-fade-start), oklch(0% 0 0) calc(100% - var(--overflow-fade-end)), transparent)",
           "@supports (animation-timeline: scroll())": {
-            "animation": "overflow-fade-x-start linear both, overflow-fade-x-end linear both",
+            "animation": "overflow-fade-start linear both, overflow-fade-end linear both",
             "animation-timeline": "scroll(self inline), scroll(self inline)",
             "animation-range": "0 1.5rem, calc(100% - 1.5rem) 100%"
           }
         },
-        "@keyframes overflow-fade-x-start": {
+        "@keyframes overflow-fade-start": {
           "from": {
             "--overflow-fade-start": "0px"
           },
@@ -159,7 +117,7 @@
             "--overflow-fade-start": "1.5rem"
           }
         },
-        "@keyframes overflow-fade-x-end": {
+        "@keyframes overflow-fade-end": {
           "from": {
             "--overflow-fade-end": "1.5rem"
           },
@@ -225,6 +183,9 @@
           },
           "[data-slot=\"separator\"][data-orientation=\"vertical\"]": {
             "box-shadow": "1px 0 0 oklch(95.5% 0 0 / 0.05)"
+          },
+          "[data-slot=\"tab-list\"][data-variant=\"underline\"]::before": {
+            "box-shadow": "0 1px 0 oklch(95.5% 0 0 / 0.05)"
           },
           ".surface-float": {
             "box-shadow": "0 0 0px 1px oklch(10% 0 0 / 0.25), inset 0 1px 0 oklch(100% 0 0 / 0.08), 0 2px 6px oklch(0% 0 0 / 0.3), 0 4px 16px 0 oklch(10% 0 0 / 0.1)"
@@ -397,8 +358,21 @@
       ]
     },
     {
+      "name": "text-runs",
+      "type": "registry:ui",
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/text-runs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
+      "title": "Button",
+      "description": "An action, in four variants and three sizes; render draws one as another element, such as a link.",
       "categories": ["actions"],
       "dependencies": ["cn", "class-variance-authority"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -412,6 +386,8 @@
     {
       "name": "icon-button",
       "type": "registry:ui",
+      "title": "Icon button",
+      "description": "A ghost button with an icon, whose label is its accessible name and tooltip.",
       "categories": ["actions"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
@@ -428,12 +404,14 @@
     {
       "name": "copy-button",
       "type": "registry:ui",
+      "title": "Copy button",
+      "description": "Copies a value, such as a link or a snippet, and draws a check once it has; with a label, it is a Button.",
       "categories": ["actions"],
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/icon-button.json",
-        "https://ui.roprgm.com/r/check.json"
+        "https://ui.roprgm.com/r/button.json",
+        "https://ui.roprgm.com/r/icon-button.json"
       ],
       "files": [
         {
@@ -445,6 +423,8 @@
     {
       "name": "input",
       "type": "registry:ui",
+      "title": "Input",
+      "description": "A sunken text field; aria-invalid rings it red.",
       "categories": ["inputs"],
       "dependencies": ["cn", "class-variance-authority"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -458,6 +438,8 @@
     {
       "name": "textarea",
       "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A multi-line field that grows with its text.",
       "categories": ["inputs"],
       "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -471,6 +453,8 @@
     {
       "name": "field",
       "type": "registry:ui",
+      "title": "Field",
+      "description": "A label, one control, and a description or error, connected for assistive technology.",
       "categories": ["inputs"],
       "dependencies": ["cn"],
       "files": [
@@ -484,6 +468,8 @@
     {
       "name": "checkbox",
       "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "A native checkbox; its label is clickable too.",
       "categories": ["inputs"],
       "dependencies": ["cn"],
       "registryDependencies": [
@@ -500,6 +486,8 @@
     {
       "name": "drag-toggle",
       "type": "registry:ui",
+      "title": "Drag toggle",
+      "description": "Drag across checkboxes or pressed buttons to set them all as the first one flips.",
       "categories": ["inputs"],
       "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -513,6 +501,8 @@
     {
       "name": "radio",
       "type": "registry:ui",
+      "title": "Radio",
+      "description": "A native radio: radios that share a name choose one, without JavaScript.",
       "categories": ["inputs"],
       "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -526,6 +516,8 @@
     {
       "name": "switch",
       "type": "registry:ui",
+      "title": "Switch",
+      "description": "A native checkbox with the switch role.",
       "categories": ["inputs"],
       "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -539,6 +531,8 @@
     {
       "name": "toggle-group",
       "type": "registry:ui",
+      "title": "Toggle group",
+      "description": "Segmented choices from hidden radios, without JavaScript.",
       "categories": ["inputs"],
       "dependencies": ["cn", "class-variance-authority"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -552,6 +546,8 @@
     {
       "name": "select",
       "type": "registry:ui",
+      "title": "Select",
+      "description": "One value, or several with multiple, from a list.",
       "categories": ["inputs"],
       "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
       "registryDependencies": [
@@ -571,6 +567,8 @@
     {
       "name": "combobox",
       "type": "registry:ui",
+      "title": "Combobox",
+      "description": "A choice from a list, filtered as you type, for lists too long to scan.",
       "categories": ["inputs"],
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
@@ -590,6 +588,8 @@
     {
       "name": "chip",
       "type": "registry:ui",
+      "title": "Chip",
+      "description": "Pill buttons for bars over a canvas; aria-pressed shows one on.",
       "categories": ["actions"],
       "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -603,6 +603,8 @@
     {
       "name": "kbd",
       "type": "registry:ui",
+      "title": "Kbd",
+      "description": "A shortcut written as Mod Z, which shows as ⌘ on a Mac and Ctrl elsewhere.",
       "categories": ["actions"],
       "dependencies": ["cn"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -616,9 +618,14 @@
     {
       "name": "badge",
       "type": "registry:ui",
+      "title": "Badge",
+      "description": "A short label that isn't a control, such as a status or a count.",
       "categories": ["actions"],
       "dependencies": ["cn", "class-variance-authority"],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/text-runs.json"
+      ],
       "files": [
         {
           "path": "src/components/badge.tsx",
@@ -629,6 +636,8 @@
     {
       "name": "spinner",
       "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Work in progress.",
       "categories": ["effects"],
       "dependencies": ["cn"],
       "files": [
@@ -642,6 +651,8 @@
     {
       "name": "tooltip",
       "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A hint on hover or focus, with an optional shortcut.",
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
@@ -658,6 +669,8 @@
     {
       "name": "menu",
       "type": "registry:ui",
+      "title": "Menu",
+      "description": "Commands, with separators and submenus.",
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
@@ -677,6 +690,8 @@
     {
       "name": "context-menu",
       "type": "registry:ui",
+      "title": "Context menu",
+      "description": "A menu's commands at the pointer, on a right-click or a long press.",
       "categories": ["overlays"],
       "dependencies": ["@base-ui/react"],
       "registryDependencies": [
@@ -694,6 +709,8 @@
     {
       "name": "popover",
       "type": "registry:ui",
+      "title": "Popover",
+      "description": "Settings that open beside their trigger.",
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
@@ -711,6 +728,8 @@
     {
       "name": "dialog",
       "type": "registry:ui",
+      "title": "Dialog",
+      "description": "A modal for decisions that need an answer.",
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
@@ -728,6 +747,8 @@
     {
       "name": "notice",
       "type": "registry:ui",
+      "title": "Notice",
+      "description": "A message that floats without blocking the app.",
       "categories": ["overlays"],
       "dependencies": ["cn", "class-variance-authority"],
       "registryDependencies": [
@@ -746,6 +767,8 @@
     {
       "name": "toast",
       "type": "registry:ui",
+      "title": "Toast",
+      "description": "Notices in a corner, shown with toast.add from anywhere.",
       "categories": ["overlays"],
       "dependencies": ["@base-ui/react"],
       "registryDependencies": [
@@ -764,6 +787,8 @@
     {
       "name": "card",
       "type": "registry:ui",
+      "title": "Card",
+      "description": "Content on a raised surface, padded as one section until it holds Sections.",
       "categories": ["containers"],
       "dependencies": ["cn"],
       "files": [
@@ -780,6 +805,8 @@
     {
       "name": "separator",
       "type": "registry:ui",
+      "title": "Separator",
+      "description": "A line between groups, across or upright.",
       "categories": ["containers"],
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
@@ -793,6 +820,8 @@
     {
       "name": "collapsible",
       "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "A section whose trigger shows and hides its panel.",
       "categories": ["containers"],
       "dependencies": ["cn", "@base-ui/react"],
       "files": [
@@ -809,11 +838,14 @@
     {
       "name": "tabs",
       "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Tabs and the panels they show, in a row or a column, with arrow-key navigation.",
       "categories": ["navigation"],
       "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/button.json"
+        "https://ui.roprgm.com/r/button.json",
+        "https://ui.roprgm.com/r/text-runs.json"
       ],
       "files": [
         {
@@ -825,6 +857,8 @@
     {
       "name": "list-item",
       "type": "registry:ui",
+      "title": "List item",
+      "description": "Selectable rows for collections, such as layers.",
       "categories": ["navigation"],
       "dependencies": ["cn"],
       "files": [
@@ -836,10 +870,12 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
-      "name": "tree-list",
+      "name": "tree",
       "type": "registry:ui",
+      "title": "Tree",
+      "description": "Rows that nest into groups that open and close, and drag to reorder, as a site's navigation or a panel's list.",
       "categories": ["navigation"],
-      "dependencies": ["cn"],
+      "dependencies": ["cn", "class-variance-authority", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
         "https://ui.roprgm.com/r/list-item.json",
@@ -847,7 +883,7 @@
       ],
       "files": [
         {
-          "path": "src/components/tree-list.tsx",
+          "path": "src/components/tree.tsx",
           "type": "registry:ui"
         }
       ]
@@ -855,6 +891,8 @@
     {
       "name": "scroll-text",
       "type": "registry:ui",
+      "title": "Scroll text",
+      "description": "One line of text that fades and scrolls where it doesn't fit, instead of an ellipsis.",
       "categories": ["effects"],
       "dependencies": ["cn"],
       "files": [
@@ -868,6 +906,8 @@
     {
       "name": "scroll-area",
       "type": "registry:ui",
+      "title": "Scroll area",
+      "description": "Vertical scrolling with a thin bar and faded edges.",
       "categories": ["containers"],
       "dependencies": ["cn", "@base-ui/react"],
       "files": [
@@ -881,11 +921,14 @@
     {
       "name": "code-block",
       "type": "registry:ui",
+      "title": "Code block",
+      "description": "Code with a copy button, colored by any highlighter.",
       "categories": ["containers"],
       "dependencies": ["cn"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/copy-button.json"
+        "https://ui.roprgm.com/r/copy-button.json",
+        "https://ui.roprgm.com/r/scroll-area.json"
       ],
       "files": [
         {
@@ -897,6 +940,8 @@
     {
       "name": "slider",
       "type": "registry:ui",
+      "title": "Slider",
+      "description": "A labeled value with a bar, or a compact value that edits by dragging.",
       "categories": ["inputs"],
       "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
       "registryDependencies": [
@@ -913,6 +958,8 @@
     {
       "name": "scrub-input",
       "type": "registry:ui",
+      "title": "Scrub input",
+      "description": "A number that drags sideways, types on click, and steps with the arrow keys.",
       "categories": ["inputs"],
       "dependencies": ["cn"],
       "registryDependencies": [

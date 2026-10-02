@@ -1,0 +1,29 @@
+<Example name="drag-toggle/demo" />
+
+Wrap a list in it, and its toggles need no wiring: each flips with a click, so its own handlers run. Dragging back restores the toggles the drag leaves, a drag can start on a label, and only toggles that share the first one's `name` join in.
+
+## Installation
+
+<Install name="drag-toggle" />
+
+## Examples
+
+### Pressed buttons
+
+Buttons with `aria-pressed`, such as layers' eyes, toggle the same way.
+
+<Example name="drag-toggle/buttons" />
+
+### One undo per drag
+
+`onDraggingChange` brackets a drag, so all its clicks can go into one undo step.
+
+<Example name="drag-toggle/undo" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<DragToggle /> // drag-toggle
+```

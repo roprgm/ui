@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "../../src/themes/default.css";
+
+/* Geist, as next/font loads it. */
+@theme {
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+}
+
+/* Demos sit in cards, so on this site a region on a card stands a card higher, and so does what
+   sits on it. */
+@layer components {
+  :where(.surface-card) :is(.surface-card, .surface-panel, .surface-float) {
+    --color-background: var(--color-level-6);
+    --color-control: var(--color-level-9);
+    --color-control-hover: var(--color-level-10);
+    --color-field: var(--color-level-4);
+    --color-hover: var(--color-level-7);
+    --color-selected: var(--color-level-9);
+  }
+}

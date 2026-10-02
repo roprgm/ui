@@ -1,0 +1,23 @@
+import { CopyButton } from "@roprgm/ui/copy-button";
+
+<Example name="photo-editor/editor" block />
+
+The design library behind my apps: minimal, dark React components on Tailwind CSS v4 and Base UI. The editor above is built from it alone. Use it as a package, or copy its source into your app.
+
+<CopyButton
+  value="Use @roprgm/ui for this app's UI. Its README explains setup and usage: https://github.com/roprgm/ui#readme"
+  className="self-start"
+>
+  Copy for agents
+</CopyButton>
+
+## Principles
+
+- **Parts, not props.** A component's parts come as children, and an overlay's trigger renders your own element.
+- **Colors follow the region.** A control takes its fill from the surface it sits on, so it keeps its contrast on the page, on a card, or in a popover.
+- **Surfaces, not shadows.** A box says what it is, such as `surface-control` or `surface-card`, and the theme draws it.
+- **CSS before JavaScript.** Native elements and Tailwind variants first; Base UI for positioning, focus, and typeahead.
+
+## Start
+
+Add it to your app in [Installation](/fundamentals/installation), then browse the [components](/components).

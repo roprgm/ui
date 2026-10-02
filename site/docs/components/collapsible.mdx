@@ -1,0 +1,30 @@
+<Example name="collapsible/demo" />
+
+It counts as a section of the `Card` that holds it, so a card opens to its details. A chevron in the trigger turns with `group-data-open/collapsible:rotate-90`. The panel slides open, and find-in-page opens it.
+
+For a trigger that holds buttons, render a `div` with `nativeButton={false}`.
+
+## Installation
+
+<Install name="collapsible" />
+
+## Examples
+
+### Sections in the panel
+
+Like a card, the panel hands its padding to the `Section`s it holds; `defaultOpen` shows this one open.
+
+<Example name="collapsible/sections" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Collapsible> // section
+  <CollapsibleTrigger /> // collapsible-trigger
+  <CollapsiblePanel> // collapsible-panel, which slides
+    <div /> // collapsible-panel-content, around the children; it takes className
+  </CollapsiblePanel>
+</Collapsible>
+```

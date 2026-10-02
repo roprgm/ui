@@ -1,0 +1,30 @@
+## Package
+
+Add it, then import its theme after Tailwind in your CSS.
+
+```shell
+bun add @roprgm/ui
+```
+
+```css
+@import "tailwindcss";
+@import "@roprgm/ui/themes/default.css";
+```
+
+Each component imports from its own path.
+
+```tsx
+import { Button } from "@roprgm/ui/button";
+
+export function SaveButton() {
+  return <Button variant="primary">Save</Button>;
+}
+```
+
+## Source
+
+In an app set up for shadcn, its CLI copies a component into `components/ui`, with the components it uses, and adds the theme to your CSS. The code is yours to change.
+
+```shell
+npx shadcn@latest add https://ui.roprgm.com/r/button.json
+```

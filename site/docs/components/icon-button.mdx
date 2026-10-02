@@ -1,0 +1,42 @@
+<Example name="icon-button/demo" />
+
+## Installation
+
+<Install name="icon-button" />
+
+## Examples
+
+### Sizes
+
+`icon-sm` and `icon-lg` match a Button's `sm` and `lg` heights.
+
+<Example name="icon-button/sizes" />
+
+### Shortcut
+
+`shortcut`, written as `Mod Z`, shows in the tooltip after the label.
+
+<Example name="icon-button/shortcut" />
+
+### Tooltip side
+
+`side` opens the tooltip on another side, such as `right` in a rail along the left edge.
+
+<Example name="icon-button/side" />
+
+### As a menu trigger
+
+A `MenuTrigger` renders it with `render`, so the menu opens from it.
+
+<Example name="icon-button/menu" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<IconButton /> // icon-button, with data-variant and data-size
+<TooltipContent> // tooltip-content, with the label
+  <Kbd /> // kbd, the shortcut
+</TooltipContent>
+```

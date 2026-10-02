@@ -1,0 +1,44 @@
+<Example name="toast/demo" />
+
+Mount one `Toaster`, such as in the root layout, and `toast.add` shows a [Notice](/components/notice) in its corner from any file. Toasts close on their own, or swipe away.
+
+## Installation
+
+<Install name="toast" />
+
+## Examples
+
+### With an action
+
+`actionProps` adds a button under the message, such as an undo.
+
+<Example name="toast/action" />
+
+### Alert
+
+`priority: "high"` makes it an alert: red, and read out at once.
+
+<Example name="toast/alert" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Toaster> // toaster
+  <Notice> // toast, one per toast.add
+    <Section> // section
+      <div> // toast-text
+        <h2 /> // toast-title
+        <p /> // toast-description
+      </div>
+      <SectionAction> // section-action
+        <NoticeClose /> // notice-close
+      </SectionAction>
+    </Section>
+    <Section> // section
+      <Button /> // toast-action
+    </Section>
+  </Notice>
+</Toaster>
+```

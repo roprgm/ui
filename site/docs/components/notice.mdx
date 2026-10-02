@@ -1,0 +1,29 @@
+<Example name="notice/demo" />
+
+Place it where it can float, such as over a canvas; for notices from anywhere, use a [Toast](/components/toast). Text alone is padded as one `Section`; once it holds several, they stack without a line. `NoticeClose`, in a `SectionAction`, dismisses it.
+
+## Installation
+
+<Install name="notice" />
+
+## Examples
+
+### Alert
+
+`tone="alert"` makes it red and interrupts assistive technology, for what went wrong. A `status`, the default, waits its turn.
+
+<Example name="notice/alert" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Notice> // notice
+  <Section> // section
+    <SectionAction> // section-action
+      <NoticeClose /> // notice-close
+    </SectionAction>
+  </Section>
+</Notice>
+```

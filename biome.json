@@ -1,7 +1,14 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["**", "!dist", "!site/dist", "!site/public/r"]
+    "includes": [
+      "**",
+      "!dist",
+      "!site/.next",
+      "!site/out",
+      "!site/next-env.d.ts",
+      "!site/public/r"
+    ]
   },
   "formatter": {
     "indentStyle": "space"

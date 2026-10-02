@@ -1,0 +1,35 @@
+<Example name="card/demo" />
+
+Its `Section`s stack with a line between each; the first reads as a header and the last as a footer. `SectionAction` holds a header's icon buttons, reaching into its padding so each icon sits 12px in. A footer of buttons takes `p-1.5`, so its buttons sit 6px in, as the header's do, and it's as tall as the header.
+
+For a panel docked in a layout, put `surface-panel` and `sections()` on your own element.
+
+## Installation
+
+<Install name="card" />
+
+## Examples
+
+### Without sections
+
+Content outside a `Section` takes the card's padding, as one section would.
+
+<Example name="card/padding" />
+
+### Edge to edge
+
+A `Section` with `px-0` lets a row that scrolls run to the card's edges and fade there.
+
+<Example name="card/edge-to-edge" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Card> // card
+  <Section> // section
+    <SectionAction /> // section-action
+  </Section>
+</Card>
+```

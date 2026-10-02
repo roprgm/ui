@@ -1,0 +1,50 @@
+<Example name="select/demo" />
+
+For a list too long to scan, a [Combobox](/components/combobox) filters it as you type. On a card, as in these examples, `raised` lifts the list a level more.
+
+## Installation
+
+<Install name="select" />
+
+## Examples
+
+### Multiple
+
+`multiple` keeps the list open and lists the chosen labels. An item with `disabled` can't be picked.
+
+<Example name="select/multiple" />
+
+### Sizes
+
+The default matches a Button, and `lg` a large one.
+
+<Example name="select/sizes" />
+
+### Pill
+
+`variant="pill"` goes in a bar over a canvas, beside Chips. `tooltip` names it on hover while the list is closed.
+
+<Example name="select/pill" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it. Select renders them all from its props.
+
+```tsx
+<Select> // select, the trigger, with data-variant and data-size
+  <Value /> // select-value
+  <Icon /> // select-icon
+</Select>
+<Portal> // select-portal
+  <Positioner> // select-positioner
+    <Popup> // select-content, with data-raised
+      <List> // select-list
+        <Item> // select-item
+          <ItemText /> // select-item-text
+          <ItemIndicator /> // select-item-indicator
+        </Item>
+      </List>
+    </Popup>
+  </Positioner>
+</Portal>
+```

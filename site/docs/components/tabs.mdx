@@ -1,0 +1,48 @@
+<Example name="tabs/demo" />
+
+A tab is a ghost `Button` of any `size`. It is as wide selected or not, so a theme can bolden the selected one without moving the rest.
+
+## Installation
+
+<Install name="tabs" />
+
+## Examples
+
+### Segmented
+
+`segmented` sets the tabs into a sunken strip, a size smaller, as a switch between views.
+
+<Example name="tabs/segmented" />
+
+### Underline
+
+`underline` lines them over a rule, which the selected tab marks, as a page's navigation.
+
+<Example name="tabs/underline" />
+
+### Vertical
+
+`orientation="vertical"` stacks them in a column, here a tool rail of `icon-sm` tabs named by their tooltips.
+
+<Example name="tabs/vertical" />
+
+### Many tabs
+
+With `overflow-fade-x`, a row of tabs that doesn't fit scrolls and fades at its edges.
+
+<Example name="tabs/overflow" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Tabs> // tabs
+  <TabList> // tab-list, with data-variant
+    <Tab> // tab, a ghost Button with data-size
+      <span /> // tab-label, around each run of text
+    </Tab>
+  </TabList>
+  <TabPanel /> // tab-panel
+</Tabs>
+```

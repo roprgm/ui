@@ -1,3 +1,4 @@
+import { mergeProps } from "@base-ui/react/merge-props";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import { type ComponentProps, cloneElement, type ReactElement } from "react";
@@ -11,6 +12,8 @@ const button = cva(
         default:
           "surface-control text-foreground hover:bg-control-hover data-popup-open:bg-control-hover",
         primary: "surface-primary text-on-primary hover:bg-primary-hover",
+        // A control's fill without its surface, as a selected row is drawn.
+        flat: "bg-control text-foreground hover:bg-control-hover data-popup-open:bg-control-hover",
         ghost:
           "text-secondary hover:bg-hover hover:text-foreground active:bg-pressed data-popup-open:bg-hover data-popup-open:text-foreground",
       },
@@ -48,8 +51,7 @@ export function Button({
   };
   if (render) {
     return cloneElement(render, {
-      ...attributes,
-      ...props,
+      ...mergeProps(render.props, { ...attributes, ...props }),
       className: cn(classes, render.props.className),
     });
   }

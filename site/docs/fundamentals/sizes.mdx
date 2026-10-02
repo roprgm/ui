@@ -1,0 +1,15 @@
+Controls are 28px tall, with 24px and 32px sizes, from tokens a theme can scale. List rows are 40px.
+
+<Example name="sizes/controls" />
+
+## Tokens
+
+`--spacing-control-sm`, `--spacing-control`, and `--spacing-control-lg` are the three heights; only controls take them, so a theme scales them alone. A component reads them as `h-(--spacing-control)`, so a `className` such as `h-8` replaces the height.
+
+```tsx
+<Button size="sm">Crop</Button>
+```
+
+## Corners
+
+Corners take Tailwind's scale: `rounded-md` for controls, `rounded-lg` for lists, and `rounded-xl` for cards and popups. Nested corners are concentric: the outer radius less the inset.

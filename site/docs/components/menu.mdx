@@ -1,0 +1,47 @@
+<Example name="menu/demo" />
+
+A menu runs commands, such as a row's actions. For settings that stay open while they change, use a [Popover](/components/popover). These menus open over a card, so they take `raised`, which lifts them a level more.
+
+## Installation
+
+<Install name="menu" />
+
+## Examples
+
+### Shortcuts
+
+`shortcut`, written as `Mod Z`, shows a command's keys at the end of its item.
+
+<Example name="menu/shortcuts" />
+
+### Submenus
+
+A `Submenu` opens beside its `SubmenuTrigger`, with its first item level with the trigger.
+
+<Example name="menu/submenu" />
+
+### Disabled items
+
+`disabled` dims an item that can't run yet; the keyboard still reaches it.
+
+<Example name="menu/disabled" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Menu>
+  <MenuTrigger /> // menu-trigger, or the slot of the element it renders
+  <MenuContent> // menu-content
+    <MenuItem shortcut="Mod D" /> // menu-item, with a kbd
+    <MenuSeparator /> // separator
+    <Submenu>
+      <SubmenuTrigger /> // submenu-trigger, with a chevron
+      <SubmenuContent> // submenu-content
+        <MenuItem /> // menu-item
+      </SubmenuContent>
+    </Submenu>
+  </MenuContent>
+</Menu>
+```
