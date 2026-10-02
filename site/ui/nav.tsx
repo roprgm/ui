@@ -1,12 +1,8 @@
 "use client";
 
+import { Collapsible } from "@base-ui/react/collapsible";
 import { Badge } from "@roprgm/ui/badge";
 import { Chevron } from "@roprgm/ui/chevron";
-import {
-  Collapsible,
-  CollapsiblePanel,
-  CollapsibleTrigger,
-} from "@roprgm/ui/collapsible";
 import { Tree } from "@roprgm/ui/tree";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -48,8 +44,12 @@ export function Nav({
   return (
     <nav className="flex flex-col">
       {sections.map((section) => (
-        <Collapsible key={section.slug} defaultOpen>
-          <CollapsibleTrigger className="mb-px h-6.5 gap-1.5 rounded-md px-2 py-0 font-medium text-foreground data-panel-open:rounded-md">
+        <Collapsible.Root
+          key={section.slug}
+          defaultOpen
+          className="group/section"
+        >
+          <Collapsible.Trigger className="mb-px flex h-6.5 w-full cursor-pointer items-center gap-1.5 rounded-md px-2 text-left font-medium text-foreground transition focus-ring -outline-offset-2 hover:bg-hover">
             <span className="text-secondary">{icons[section.slug]}</span>
             {section.title}
             <span className="ml-auto font-normal text-muted tabular-nums">
@@ -57,42 +57,47 @@ export function Nav({
             </span>
             <Chevron
               direction="right"
-              className="text-muted group-data-open/collapsible:rotate-90"
+              className="text-muted group-data-open/section:rotate-90"
             />
-          </CollapsibleTrigger>
-          {/* The space under a section folds away with it, so closed ones sit together. */}
-          <CollapsiblePanel className="gap-0 p-0 pb-4 shadow-none">
-            <Tree
-              aria-label={section.title}
-              items={section.items}
-              label={(node) => node.title}
-              selected={pathname}
-              render={(node) =>
-                node.href ? (
-                  <Link
-                    href={node.href}
-                    aria-current={node.href === pathname ? "page" : undefined}
-                    onNavigate={onNavigate}
-                  />
-                ) : undefined
-              }
-              className={
-                section.flat
-                  ? "ml-4 pl-1.5 shadow-[inset_1px_0_0_var(--color-control)]"
-                  : undefined
-              }
-            >
-              {(node) => (
-                <>
-                  {node.title}
-                  {node.children && (
-                    <Badge size="xs">{node.children.length}</Badge>
-                  )}
-                </>
-              )}
-            </Tree>
-          </CollapsiblePanel>
-        </Collapsible>
+          </Collapsible.Trigger>
+          <Collapsible.Panel
+            hiddenUntilFound
+            className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none"
+          >
+            {/* The space under a section folds away with it, so closed ones sit together. */}
+            <div className="pb-4">
+              <Tree
+                aria-label={section.title}
+                items={section.items}
+                label={(node) => node.title}
+                selected={pathname}
+                render={(node) =>
+                  node.href ? (
+                    <Link
+                      href={node.href}
+                      aria-current={node.href === pathname ? "page" : undefined}
+                      onNavigate={onNavigate}
+                    />
+                  ) : undefined
+                }
+                className={
+                  section.flat
+                    ? "ml-4 pl-1.5 shadow-[inset_1px_0_0_var(--color-control)]"
+                    : undefined
+                }
+              >
+                {(node) => (
+                  <>
+                    {node.title}
+                    {node.children && (
+                      <Badge size="xs">{node.children.length}</Badge>
+                    )}
+                  </>
+                )}
+              </Tree>
+            </div>
+          </Collapsible.Panel>
+        </Collapsible.Root>
       ))}
     </nav>
   );

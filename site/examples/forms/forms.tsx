@@ -89,7 +89,7 @@ export default function Forms() {
             <Switch /> Open when done
           </label>
         </Section>
-        <Section className="flex-row justify-end gap-1.5 px-2.5">
+        <Section className="flex-row justify-end gap-1.5 p-1.5">
           <Button variant="ghost">Cancel</Button>
           <Button>Export</Button>
         </Section>

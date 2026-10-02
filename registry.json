@@ -77,12 +77,8 @@
             "animation-range": "0 1.5rem, calc(100% - 1.5rem) 100%"
           },
           "@supports not (animation-timeline: scroll())": {
-            "&[data-overflow-y-start]": {
-              "--overflow-fade-start": "1.5rem"
-            },
-            "&[data-overflow-y-end]": {
-              "--overflow-fade-end": "1.5rem"
-            }
+            "--overflow-fade-start": "min(1.5rem, var(--scroll-area-overflow-y-start, 0px))",
+            "--overflow-fade-end": "min(1.5rem, var(--scroll-area-overflow-y-end, 0px))"
           }
         },
         "@property --overflow-fade-start": {

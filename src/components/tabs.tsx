@@ -98,13 +98,11 @@ export function Tab({
   );
 }
 
-/** What a tab shows. Out of the tab order, so Tab moves from the tabs straight to what it holds. */
 export function TabPanel({ className, ...props }: Primitive.Panel.Props) {
   return (
     <Primitive.Panel
       data-slot="tab-panel"
-      tabIndex={-1}
-      className={cn("outline-none", className)}
+      className={cn("rounded-sm focus-ring", className)}
       {...props}
     />
   );
