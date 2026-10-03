@@ -935,6 +935,26 @@
       ]
     },
     {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Buttons that move through the pages of a table or list.",
+      "categories": ["navigation"],
+      "dependencies": ["cn"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/button.json",
+        "https://ui.roprgm.com/r/chevron.json",
+        "https://ui.roprgm.com/r/icon-button.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
