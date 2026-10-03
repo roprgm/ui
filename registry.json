@@ -731,11 +731,12 @@
       "name": "menu",
       "type": "registry:ui",
       "title": "Menu",
-      "description": "Commands, with separators and submenus.",
+      "description": "Commands, with checkbox and radio items, groups, separators, and submenus.",
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/check.json",
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/kbd.json",

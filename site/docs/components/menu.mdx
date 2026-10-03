@@ -22,6 +22,24 @@ A `Submenu` opens beside its `SubmenuTrigger`, with its first item level with th
 
 <Example name="menu/submenu" />
 
+### Checkbox items
+
+A `MenuCheckboxItem` turns a setting on and off and keeps the menu open. Its check holds a column at the start whether it shows or not, so the items' text lines up.
+
+<Example name="menu/checkbox-items" />
+
+### Radio items
+
+A `MenuRadioGroup` chooses one of its `MenuRadioItem`s, checked the same way.
+
+<Example name="menu/radio-items" />
+
+### Groups
+
+A `MenuGroupLabel` names the items of a `MenuGroup`, or of a `MenuRadioGroup`, and the keyboard skips it.
+
+<Example name="menu/groups" />
+
 ### Disabled items
 
 `disabled` dims an item that can't run yet; the keyboard still reaches it.
@@ -37,6 +55,15 @@ Each part's `data-slot`, which a theme styles, is beside it.
   <MenuTrigger /> // menu-trigger, or the slot of the element it renders
   <MenuContent> // menu-content
     <MenuItem shortcut="Mod D" /> // menu-item, with a kbd
+    <MenuCheckboxItem shortcut="Mod G" /> // menu-checkbox-item, with a menu-checkbox-item-indicator and a kbd
+    <MenuRadioGroup> // menu-radio-group
+      <MenuGroupLabel /> // menu-group-label
+      <MenuRadioItem /> // menu-radio-item, with a menu-radio-item-indicator
+    </MenuRadioGroup>
+    <MenuGroup> // menu-group
+      <MenuGroupLabel /> // menu-group-label
+      <MenuItem /> // menu-item
+    </MenuGroup>
     <MenuSeparator /> // separator
     <Submenu>
       <SubmenuTrigger /> // submenu-trigger, with a chevron
