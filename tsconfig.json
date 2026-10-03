@@ -10,11 +10,13 @@
     "noEmit": true,
     "skipLibCheck": true,
     "isolatedModules": true,
+    "rewriteRelativeImportExtensions": true,
+    "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["./site/*"],
       "@roprgm/ui/*": ["./src/components/*"]
     }
   },
   "include": ["src", "site"],
-  "exclude": ["site/.next", "site/out"]
+  "exclude": ["site/out"]
 }

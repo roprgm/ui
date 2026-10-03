@@ -1,6 +1,7 @@
 import type { Toc as Entries } from "@stefanprobst/rehype-extract-toc";
 import { cn } from "cn";
-import type { ComponentType } from "react";
+import type { MDXContent } from "mdx/types";
+import { components } from "@/mdx-components";
 import { type Page, pages } from "@/tree";
 import { Breadcrumb } from "./breadcrumb";
 import { PageActions } from "./page-actions";
@@ -12,14 +13,15 @@ const headings = (entries: Entries): Heading[] =>
     .flatMap((entry) => [entry, ...(entry.children ?? [])])
     .flatMap(({ id, value, depth }) => (id ? [{ id, value, depth }] : []));
 
+const docs = import.meta.glob<{
+  default: MDXContent;
+  tableOfContents: Entries;
+}>("../docs/**/*.mdx", { eager: true });
+
 /** A page of the tree: its header, its MDX content, and the pages around it. */
-export async function Doc({ page }: { page: Page }) {
-  const {
-    default: Content,
-    tableOfContents,
-  }: { default: ComponentType; tableOfContents: Entries } = await import(
-    `@/docs/${page.section}/${page.slug}.mdx`
-  );
+export function Doc({ page }: { page: Page }) {
+  const { default: Content, tableOfContents } =
+    docs[`../docs/${page.section}/${page.slug}.mdx`];
   const index = pages.indexOf(page);
   // A block is a whole layout, so it takes the width an outline would.
   const wide = page.section === "blocks";
@@ -42,7 +44,7 @@ export async function Doc({ page }: { page: Page }) {
           <p className="max-w-[60ch] text-secondary">{page.description}</p>
         </header>
         <div className="flex flex-col gap-4">
-          <Content />
+          <Content components={components} />
         </div>
       </article>
       {!wide && <Toc headings={headings(tableOfContents)} />}

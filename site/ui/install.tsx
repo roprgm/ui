@@ -1,9 +1,16 @@
 import { Tab, TabList, TabPanel, Tabs } from "@roprgm/ui/tabs";
 import { Code } from "./code";
 
+const modules = import.meta.glob<Record<string, unknown>>(
+  "../../src/components/*.tsx",
+  { eager: true },
+);
+
 /** How to add a component: from the package, or as source through shadcn. */
-export async function Install({ name }: { name: string }) {
-  const exports = Object.keys(await import(`@roprgm/ui/${name}`)).join(", ");
+export function Install({ name }: { name: string }) {
+  const exports = Object.keys(modules[`../../src/components/${name}.tsx`]).join(
+    ", ",
+  );
   return (
     <Tabs defaultValue="package" className="flex flex-col gap-3">
       <TabList variant="underline">

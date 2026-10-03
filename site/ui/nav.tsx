@@ -1,12 +1,9 @@
-"use client";
-
 import { Collapsible } from "@base-ui/react/collapsible";
 import { Badge } from "@roprgm/ui/badge";
 import { Chevron } from "@roprgm/ui/chevron";
 import { Tree } from "@roprgm/ui/tree";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { Link, useLocation } from "react-router";
 import { BlocksIcon, BookIcon, ComponentsIcon } from "./icons";
 
 export type NavNode = {
@@ -40,7 +37,7 @@ export function Nav({
   sections: NavSection[];
   onNavigate?: () => void;
 }) {
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   return (
     <nav className="flex flex-col">
       {sections.map((section) => (
@@ -74,9 +71,9 @@ export function Nav({
                 render={(node) =>
                   node.href ? (
                     <Link
-                      href={node.href}
+                      to={node.href}
                       aria-current={node.href === pathname ? "page" : undefined}
-                      onNavigate={onNavigate}
+                      onClick={onNavigate}
                     />
                   ) : undefined
                 }

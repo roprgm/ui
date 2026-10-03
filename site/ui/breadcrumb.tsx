@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Fragment } from "react";
+import { Link } from "react-router";
 import { findSection, type Page } from "@/tree";
 
 /** Where a page sits: its section, its group, and itself. */
@@ -8,7 +8,7 @@ export function Breadcrumb({ page }: { page: Page }) {
   const trail = [
     section && (
       <Link
-        href={`/${section.slug}`}
+        to={`/${section.slug}`}
         className="rounded-sm transition focus-ring hover:text-foreground"
       >
         {section.title}

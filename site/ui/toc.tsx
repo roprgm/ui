@@ -1,5 +1,3 @@
-"use client";
-
 import type { TocEntry } from "@stefanprobst/rehype-extract-toc";
 import { cn } from "cn";
 import { useEffect, useState } from "react";

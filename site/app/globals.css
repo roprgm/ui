@@ -1,7 +1,0 @@
-@import "tailwindcss";
-@import "../../src/themes/default.css";
-
-/* Geist, as next/font loads it. */
-@theme {
-  --font-sans: var(--font-geist), system-ui, sans-serif;
-}

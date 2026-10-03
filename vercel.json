@@ -4,5 +4,17 @@
   "installCommand": "bun install",
   "buildCommand": "bun run build",
   "outputDirectory": "site/out",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 }

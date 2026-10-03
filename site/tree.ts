@@ -141,8 +141,5 @@ export const pages = sections.flatMap((section) =>
   section.groups.flatMap((group) => group.pages),
 );
 
-export const findPage = (section: string, slug: string) =>
-  pages.find((page) => page.section === section && page.slug === slug);
-
 export const findSection = (slug: string) =>
   sections.find((section) => section.slug === slug);

@@ -1,6 +1,6 @@
 import { IconButton } from "@roprgm/ui/icon-button";
-import Link from "next/link";
 import type { ReactNode } from "react";
+import { Link } from "react-router";
 import type { Page } from "@/tree";
 import { ArrowLeftIcon, ArrowRightIcon } from "./icons";
 
@@ -23,7 +23,7 @@ function Step({
     <IconButton
       label={`${label}: ${page.title}`}
       variant="default"
-      render={<Link href={page.href} />}
+      render={<Link to={page.href} />}
     >
       {children}
     </IconButton>

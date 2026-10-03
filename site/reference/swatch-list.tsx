@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "cn";
 import { type CSSProperties, useState } from "react";
 
