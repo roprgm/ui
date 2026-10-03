@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "cn";
-import { type ReactNode, useId } from "react";
+import { type ComponentProps, type ReactNode, useId } from "react";
 
 /** A legend over a group of controls, such as checkboxes or radios, and a description or error. */
 export function Fieldset({
@@ -10,12 +10,11 @@ export function Fieldset({
   error,
   className,
   children,
-}: {
+  ...props
+}: ComponentProps<"fieldset"> & {
   legend: ReactNode;
   description?: ReactNode;
   error?: ReactNode;
-  className?: string;
-  children: ReactNode;
 }) {
   const id = useId();
   const note = error ?? description;
@@ -24,6 +23,7 @@ export function Fieldset({
       data-slot="fieldset"
       aria-describedby={note ? `${id}-note` : undefined}
       className={cn("flex min-w-0 flex-col gap-1.5", className)}
+      {...props}
     >
       {/* Floated, it lays out as the other children do. */}
       <legend data-slot="fieldset-legend" className="float-left text-secondary">

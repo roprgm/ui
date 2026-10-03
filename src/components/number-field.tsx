@@ -1,11 +1,18 @@
 "use client";
 
 import { NumberField as Primitive } from "@base-ui/react/number-field";
+import { cn } from "cn";
 import { Chevron } from "./chevron";
 import { Input, InputGroup, InputGroupAddon } from "./input";
 
 const stepper =
-  "flex w-full flex-1 items-center justify-center enabled:cursor-pointer enabled:hover:text-foreground disabled:text-disabled";
+  "flex w-full flex-1 cursor-pointer items-center justify-center hover:text-foreground dim-disabled";
+
+// Clear of the stepper, which is as wide as the field is tall.
+const padding = {
+  default: "pr-(--spacing-control)",
+  lg: "pr-(--spacing-control-lg)",
+};
 
 /**
  * A number to type, or to step with the arrow keys and the chevrons at its end. `format` writes it
@@ -26,7 +33,9 @@ export function NumberField({
         aria-label={label}
         aria-invalid={invalid}
         aria-describedby={describedBy}
-        render={<Input size={size} className="pr-7 tabular-nums" />}
+        render={
+          <Input size={size} className={cn(padding[size], "tabular-nums")} />
+        }
       />
       <InputGroupAddon align="end" className="flex-col py-1">
         <Primitive.Increment
