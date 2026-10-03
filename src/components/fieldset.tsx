@@ -10,6 +10,7 @@ export function Fieldset({
   error,
   className,
   children,
+  "aria-describedby": describedBy,
   ...props
 }: ComponentProps<"fieldset"> & {
   legend: ReactNode;
@@ -21,7 +22,10 @@ export function Fieldset({
   return (
     <fieldset
       data-slot="fieldset"
-      aria-describedby={note ? `${id}-note` : undefined}
+      aria-describedby={
+        [describedBy, note && `${id}-note`].filter(Boolean).join(" ") ||
+        undefined
+      }
       className={cn("flex min-w-0 flex-col gap-1.5", className)}
       {...props}
     >
