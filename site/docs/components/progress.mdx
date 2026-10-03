@@ -6,13 +6,13 @@
 
 ### Default
 
-Its bar is a [Slider](/components/slider)'s, and `format` writes the value at the end and for screen readers.
+Its bar is a [Slider](/components/slider)'s. With a `label`, the value shows at the end, as a percentage of `max` (100 unless set) or as `format`'s `Intl.NumberFormat` options write it, and screen readers read the same.
 
 <Example name="progress/demo" />
 
 ### Bare
 
-Without `label` or `format`, it is the bar alone; give it an `aria-label`. `max` is 100 unless set.
+Without a `label`, it is the bar alone; give it an `aria-label`. `format` still writes what screen readers read.
 
 <Example name="progress/bare" />
 
