@@ -1,0 +1,36 @@
+## Installation
+
+<Install name="drawer" />
+
+## Examples
+
+### Default
+
+A panel for what sits beside the work, such as settings. It slides in from the right, fills the window's height, and scrolls what doesn't fit. Its `Section`s stack without a line, as a dialog's do. Swipe it back the way it came, or press Escape, to close it.
+
+<Example name="drawer/demo" />
+
+### From the bottom
+
+`swipeDirection` on the `Drawer` sets the side it docks to and swipes away to: `right`, `left`, `down`, or `up`. One from the bottom fills the width, as a sheet on a phone.
+
+<Example name="drawer/bottom" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Drawer>
+  <DrawerTrigger /> // drawer-trigger, or the slot of the element it renders
+  <DrawerContent> // drawer-content, in a drawer-viewport, over a drawer-backdrop
+    <Section> // section
+      <DrawerTitle /> // drawer-title
+      <DrawerDescription /> // drawer-description
+    </Section>
+    <Section> // section
+      <DrawerClose /> // drawer-close, or the slot of the element it renders
+    </Section>
+  </DrawerContent>
+</Drawer>
+```

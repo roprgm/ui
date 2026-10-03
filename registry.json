@@ -791,6 +791,25 @@
       ]
     },
     {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "A panel that slides in from an edge and swipes away.",
+      "categories": ["overlays"],
+      "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/popup.json",
+        "https://ui.roprgm.com/r/section.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "notice",
       "type": "registry:ui",
       "title": "Notice",
