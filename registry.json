@@ -162,6 +162,32 @@
               }
             }
           },
+          "[data-slot=\"table-row\"]": {
+            "height": "--spacing(10)",
+            "&[data-selected=\"true\"]": {
+              "background-color": "var(--color-control)"
+            },
+            "@media (hover: hover)": {
+              "&[data-selected=\"false\"]:hover": {
+                "background-color": "var(--color-hover)"
+              }
+            }
+          },
+          "[data-slot=\"table-head\"], [data-slot=\"table-cell\"]": {
+            "padding-inline": "--spacing(3.5)",
+            "text-align": "start",
+            "white-space": "nowrap"
+          },
+          "[data-slot=\"table-head\"]": {
+            "font-weight": "inherit",
+            "color": "var(--color-secondary)"
+          },
+          ":where(.material-card, .material-panel, .material-float) [data-slot=\"table-row\"] > *": {
+            "box-shadow": "inset 0 -1px 0 var(--color-border-subtle)"
+          },
+          "[data-slot=\"table\"] > :last-child > :last-child > *": {
+            "box-shadow": "none"
+          },
           "[data-slot=\"tree\"] [role=\"treeitem\"]": {
             "gap": "--spacing(1.5)",
             "outline-style": "none",
@@ -959,6 +985,21 @@
       "files": [
         {
           "path": "src/components/scroll-area.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Rows of data in columns that scroll sideways where they don't fit.",
+      "categories": ["containers"],
+      "dependencies": ["cn"],
+      "files": [
+        {
+          "path": "src/components/table.tsx",
           "type": "registry:ui"
         }
       ],
