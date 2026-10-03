@@ -34,3 +34,37 @@ export function Input({
     />
   );
 }
+
+/** An Input with addons over its edges; pad the Input clear of them, as `pl-7`. */
+export function InputGroup({ className, ...props }: ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="input-group"
+      className={cn("relative", className)}
+      {...props}
+    />
+  );
+}
+
+/**
+ * An icon, a short text, or an icon button over the Input's `start` or `end`, centered in a column
+ * at least as wide as a control; a button's is square. Only a button takes the pointer.
+ */
+export function InputGroupAddon({
+  align = "start",
+  className,
+  ...props
+}: ComponentProps<"div"> & { align?: "start" | "end" }) {
+  return (
+    <div
+      data-slot="input-group-addon"
+      data-align={align}
+      className={cn(
+        "pointer-events-none absolute inset-y-0 flex min-w-(--spacing-control) items-center justify-center px-1.5 text-secondary has-[button]:pointer-events-auto has-[button]:aspect-square has-[button]:px-0",
+        align === "start" ? "left-0" : "right-0",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
