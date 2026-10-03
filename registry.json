@@ -482,6 +482,25 @@
       ]
     },
     {
+      "name": "number-field",
+      "type": "registry:ui",
+      "title": "Number field",
+      "description": "A number to type or step, in a field that looks like an Input, formatted with Intl.NumberFormat.",
+      "categories": ["inputs"],
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/chevron.json",
+        "https://ui.roprgm.com/r/input.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/number-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
