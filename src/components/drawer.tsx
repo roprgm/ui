@@ -57,7 +57,7 @@ export function DrawerContent(props: Primitive.Popup.Props) {
     <Primitive.Portal data-slot="drawer-portal">
       <Primitive.Backdrop
         data-slot="drawer-backdrop"
-        className="fixed inset-0 z-50 backdrop opacity-[calc(1-var(--drawer-swipe-progress))] transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0"
+        className="fixed inset-0 z-50 backdrop opacity-[calc(1-var(--drawer-swipe-progress))] transition-opacity duration-200 data-ending-style:opacity-0 data-starting-style:opacity-0 data-swiping:duration-0"
       />
       <Primitive.Viewport
         data-slot="drawer-viewport"
