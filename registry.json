@@ -512,6 +512,21 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
+      "name": "fieldset",
+      "type": "registry:ui",
+      "title": "Fieldset",
+      "description": "A legend over a group of controls, such as checkboxes, and a description or error.",
+      "categories": ["inputs"],
+      "dependencies": ["cn"],
+      "files": [
+        {
+          "path": "src/components/fieldset.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+    },
+    {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
