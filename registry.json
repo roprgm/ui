@@ -725,6 +725,21 @@
       ]
     },
     {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "A shimmering block that holds content's place while it loads.",
+      "categories": ["effects"],
+      "dependencies": ["cn"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
