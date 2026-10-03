@@ -329,7 +329,7 @@
           }
         },
         "@utility dim-disabled": {
-          "&:is(:disabled, [data-disabled], :has(:disabled))": {
+          "&:is(:disabled, [data-disabled], [aria-disabled=\"true\"], :has(:disabled))": {
             "pointer-events": "none",
             "opacity": "40%"
           }
