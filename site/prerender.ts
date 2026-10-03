@@ -29,9 +29,10 @@ export async function prerender(root: string) {
       template
         .replace(
           "<!--head-->",
-          `<title>${escapeHtml(title)}</title>\n    <meta name="description" content="${escapeHtml(description)}" />`,
+          () =>
+            `<title>${escapeHtml(title)}</title>\n    <meta name="description" content="${escapeHtml(description)}" />`,
         )
-        .replace("<!--app-->", html),
+        .replace("<!--app-->", () => html),
     );
   }
   await rm(server, { recursive: true });
