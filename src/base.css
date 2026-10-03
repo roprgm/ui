@@ -4,6 +4,7 @@
 
 @import "./utils/overflow-fade.css";
 @import "./utils/shimmer.css";
+@import "./rows.css";
 
 /* The app's Tailwind skips node_modules, so this registers the components to generate classes for. */
 @source "./components";

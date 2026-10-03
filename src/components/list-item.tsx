@@ -22,10 +22,8 @@ export function ListItem({
     "data-selected": selected,
     "data-muted": muted,
   };
-  const classes = cn(
-    "group relative flex h-10 items-center gap-2 px-3.5 text-foreground shadow-[inset_0_-1px_0_var(--color-border-subtle)] data-[muted=true]:text-secondary data-[selected=false]:hover:bg-hover data-[selected=true]:bg-control",
-    className,
-  );
+  // Styled by its slot in rows.css, since a list repeats it; `group` lets what's inside react to it.
+  const classes = cn("group", className);
   if (render) {
     return cloneElement(render, {
       ...mergeProps(render.props, { ...attributes, ...props }),

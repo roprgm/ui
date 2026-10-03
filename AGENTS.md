@@ -15,11 +15,11 @@ A minimal, dark component library for React and Tailwind CSS v4, on Base UI. It 
 ## Files and code
 
 - `src/components/` has one flat file per component, so `./` imports resolve after shadcn copies them. Import only `react`, `cn`, `class-variance-authority`, `@base-ui/react`, and sibling files; anything else comes in as a prop, as `CodeBlock` takes a highlighter's `html`.
-- `src/base.css` holds the tokens with their defaults, the materials as plain as they can be, and the shared utilities, the complex ones in `src/utils/`. A theme imports it and sets again only what it changes; themes share no helpers. `src/themes/default.css` ships; other themes are unexported experiments.
+- `src/base.css` holds the tokens with their defaults, the materials as plain as they can be, and the shared utilities, the complex ones in `src/utils/`, and the rows a list or a tree repeats in `src/rows.css`. A theme imports it and sets again only what it changes; themes share no helpers. `src/themes/default.css` ships; other themes are unexported experiments.
 - Every element a component renders carries a `data-slot` (`menu-content`, `select-item`), set before `{...props}` so a composing component's wins, and its variants a `data-variant` and `data-size`.
 - The site is a Vite app in `site/`, one bundle with every page, which the build also renders to HTML for each URL. `site/tree.ts` orders its pages, and takes each component's title, description, and group from the registry, whose `categories` (actions, inputs, containers, navigation, overlays, effects) are the groups under Components; `site/routes.tsx` gives each its route. Fundamentals is the site's only, and the reference for every token, material, and utility: keep it current. Links are React Router's `Link`, including those in MDX, so navigating renders in place and fetches nothing. `check`, `chevron`, `popup`, and `text-runs` are internal. `bun run build` writes the `theme` item; don't edit it.
 - CSS before JavaScript: Tailwind variants (`checked:`, `has-checked:`) on native elements, and Base UI for positioning, focus, and typeahead. `"use client";` only with Base UI, hooks, or handlers.
-- Styles in each component's class strings, `cva` only for variants, named exports, ternaries only when short, comments only for what code can't say.
+- Styles in each component's class strings, except a row a list repeats by the hundred, such as `ListItem` and a tree's rows, which `src/rows.css` styles once by its `data-slot`, under the utilities, so a `className` still wins; `cva` only for variants, named exports, ternaries only when short, comments only for what code can't say.
 
 ## Look
 
