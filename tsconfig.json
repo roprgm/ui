@@ -10,6 +10,7 @@
     "noEmit": true,
     "skipLibCheck": true,
     "isolatedModules": true,
+    "rewriteRelativeImportExtensions": true,
     "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["./site/*"],

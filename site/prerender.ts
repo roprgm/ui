@@ -1,7 +1,7 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import type { Head } from "./head";
+import type { Head } from "./head.ts";
 
 const escapeHtml = (text: string) =>
   text.replace(/[&<>"]/g, (char) => `&#${char.charCodeAt(0)};`);
