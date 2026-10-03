@@ -34,17 +34,18 @@ export function DrawerClose(props: Primitive.Close.Props) {
   );
 }
 
-// It follows the finger while swiped, and once let go, leaves as fast as it was thrown.
+// It follows the finger while swiped, and once let go, leaves as fast as it was thrown. Its
+// movement is a `transform`, which the inline one Base UI sets while swiping replaces.
 const drawer = cva(
-  "max-h-full w-full translate-x-(--drawer-swipe-movement-x) translate-y-(--drawer-swipe-movement-y) transition-[opacity,translate] duration-200 ease-out data-ending-style:duration-[calc(var(--drawer-swipe-strength)*200ms)] data-swiping:duration-0",
+  "max-h-full w-full transform-[translate(var(--drawer-swipe-movement-x),var(--drawer-swipe-movement-y))] transition-[opacity,transform] duration-200 ease-out data-ending-style:duration-[calc(var(--drawer-swipe-strength)*200ms)]",
   {
     variants: {
       side: {
         right:
-          "ml-auto max-w-sm data-ending-style:translate-x-full data-starting-style:translate-x-full",
-        left: "max-w-sm data-ending-style:-translate-x-full data-starting-style:-translate-x-full",
-        down: "self-end data-ending-style:translate-y-full data-starting-style:translate-y-full",
-        up: "self-start data-ending-style:-translate-y-full data-starting-style:-translate-y-full",
+          "ml-auto max-w-sm rounded-r-none data-ending-style:transform-[translateX(100%)] data-starting-style:transform-[translateX(100%)]",
+        left: "max-w-sm rounded-l-none data-ending-style:transform-[translateX(-100%)] data-starting-style:transform-[translateX(-100%)]",
+        down: "self-end rounded-b-none data-ending-style:transform-[translateY(100%)] data-starting-style:transform-[translateY(100%)]",
+        up: "self-start rounded-t-none data-ending-style:transform-[translateY(-100%)] data-starting-style:transform-[translateY(-100%)]",
       },
     },
   },
@@ -60,7 +61,7 @@ export function DrawerContent(props: Primitive.Popup.Props) {
       />
       <Primitive.Viewport
         data-slot="drawer-viewport"
-        className="fixed inset-0 z-50 flex p-2"
+        className="fixed inset-0 z-50 flex"
       >
         <Primitive.Popup
           data-slot="drawer-content"
