@@ -1,7 +1,7 @@
 "use client";
 
 import { Collapsible } from "@base-ui/react/collapsible";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { cn } from "cn";
 import {
   type ComponentProps,
@@ -70,30 +70,6 @@ function preventScroll(event: TouchEvent) {
   event.preventDefault();
 }
 
-const row = cva(
-  "gap-1.5 outline-none select-none [-webkit-touch-callout:none] focus-visible:bg-hover focus-visible:ring-1 focus-visible:ring-focus focus-visible:ring-inset",
-  {
-    variants: {
-      variant: {
-        // As a popup's rows: no lines, a pixel apart so two filled rows don't merge. A group's
-        // name reads above what it holds.
-        default:
-          "mb-px h-6.5 rounded-md px-2 text-secondary shadow-none before:left-2 hover:bg-hover hover:text-foreground aria-expanded:text-foreground aria-[expanded=false]:text-foreground data-[selected=true]:text-foreground",
-        // As a panel's list, such as layers: a line between rows, each level set in.
-        list: "pl-(--indent) before:left-(--indent)",
-      },
-    },
-  },
-);
-
-// Only while a row drags: it dims, and where it would land fills or draws a line.
-const dropStyles = [
-  "data-[dragging=true]:opacity-40",
-  "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-accent/60 data-[drop=inside]:ring-inset",
-  "before:absolute before:right-2 before:z-10 before:h-0.5 before:rounded-full before:bg-accent before:opacity-0",
-  "data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100",
-].join(" ");
-
 const toggleButton = cva(
   "grid shrink-0 place-items-center rounded-xs focus-ring hover:text-foreground",
   {
@@ -142,20 +118,20 @@ export function Tree<T extends TreeNode<T>>({
   onDrop,
   className,
   ...props
-}: Omit<ComponentProps<"div">, "children" | "onSelect" | "onDrop"> &
-  VariantProps<typeof row> & {
-    items: readonly T[];
-    /** Names the row for the drag preview and its toggle. */
-    label: (item: T) => string;
-    children: (item: T) => ReactNode;
-    selected?: string;
-    onSelect?: (id: string) => void;
-    /** The element a row renders as, such as a link. */
-    render?: (item: T) => ReactElement<{ className?: string }> | undefined;
-    canDrag?: (item: T) => boolean;
-    canDrop?: (drop: TreeDrop) => boolean;
-    onDrop?: (drop: TreeDrop) => void;
-  }) {
+}: Omit<ComponentProps<"div">, "children" | "onSelect" | "onDrop"> & {
+  variant?: "default" | "list";
+  items: readonly T[];
+  /** Names the row for the drag preview and its toggle. */
+  label: (item: T) => string;
+  children: (item: T) => ReactNode;
+  selected?: string;
+  onSelect?: (id: string) => void;
+  /** The element a row renders as, such as a link. */
+  render?: (item: T) => ReactElement<{ className?: string }> | undefined;
+  canDrag?: (item: T) => boolean;
+  canDrop?: (drop: TreeDrop) => boolean;
+  onDrop?: (drop: TreeDrop) => void;
+}) {
   const root = useRef<HTMLDivElement>(null);
   const ghost = useRef<HTMLDivElement>(null);
   const gesture = useRef<Gesture | null>(null);
@@ -346,10 +322,10 @@ export function Tree<T extends TreeNode<T>>({
             aria-expanded={branch ? expanded : undefined}
             tabIndex={item.id === tabbable?.item.id ? 0 : -1}
             data-tree-id={item.id}
-            data-dragging={item.id === dragging?.id}
+            data-dragging={item.id === dragging?.id || undefined}
             data-drop={drop?.target === item.id ? drop.position : undefined}
             selected={item.id === selected}
-            style={indent}
+            style={variant === "list" ? indent : undefined}
             onFocus={() => setFocused(item.id)}
             onClick={(event) => {
               // Buttons and fields in the row act on their own.
@@ -362,7 +338,6 @@ export function Tree<T extends TreeNode<T>>({
               if (branch) toggle(item.id, !expanded);
             }}
             onKeyDown={(event) => onRowKeyDown(event, item.id)}
-            className={cn(row({ variant }), dragging && dropStyles)}
           >
             {branch && (
               <button
