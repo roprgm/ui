@@ -5,6 +5,29 @@ import { cn } from "cn";
 import type { ComponentProps, TransitionEvent } from "react";
 import { sections } from "./section";
 
+// Shared with Accordion, whose items look and move as a Collapsible does.
+
+// Square at the bottom while the panel shows under it.
+export const collapsibleTrigger =
+  "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring -outline-offset-2 hover:bg-hover data-panel-open:rounded-b-none dim-disabled";
+
+// Each primitive names the variable for its height.
+export const collapsiblePanel =
+  "overflow-hidden transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none";
+
+export const collapsiblePanelContent = cn(
+  sections(),
+  "shadow-[inset_0_1px_0_var(--color-border-subtle)]",
+);
+
+/** Scrolls a section into view once it has opened. */
+export function revealSection(event: TransitionEvent<HTMLDivElement>) {
+  const panel = event.currentTarget;
+  if (event.target !== panel || event.propertyName !== "height") return;
+  if (!panel.hasAttribute("data-open")) return;
+  panel.parentElement?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+
 /**
  * A trigger that shows and hides a panel. A chevron inside turns with
  * `group-data-open/collapsible:rotate-90`. It counts as a section of the card that holds it.
@@ -34,22 +57,10 @@ export function CollapsibleTrigger({
   return (
     <Primitive.Trigger
       data-slot="collapsible-trigger"
-      className={cn(
-        // Square at the bottom while the panel shows under it.
-        "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring -outline-offset-2 hover:bg-hover data-panel-open:rounded-b-none dim-disabled",
-        className,
-      )}
+      className={cn(collapsibleTrigger, className)}
       {...props}
     />
   );
-}
-
-/** Scrolls a section into view once it has opened. */
-function revealSection(event: TransitionEvent<HTMLDivElement>) {
-  const panel = event.currentTarget;
-  if (event.target !== panel || event.propertyName !== "height") return;
-  if (!panel.hasAttribute("data-open")) return;
-  panel.parentElement?.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
 
 /**
@@ -72,16 +83,12 @@ export function CollapsiblePanel({
         revealSection(event);
         onTransitionEnd?.(event);
       }}
-      className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-200 ease-out data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0 motion-reduce:transition-none"
+      className={cn("h-(--collapsible-panel-height)", collapsiblePanel)}
       {...props}
     >
       <div
         data-slot="collapsible-panel-content"
-        className={cn(
-          sections(),
-          "shadow-[inset_0_1px_0_var(--color-border-subtle)]",
-          className,
-        )}
+        className={cn(collapsiblePanelContent, className)}
       >
         {children}
       </div>
