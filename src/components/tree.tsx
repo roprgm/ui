@@ -86,6 +86,14 @@ const row = cva(
   },
 );
 
+// Only on rows that drag: the dragged row dims, and where it would land fills or draws a line.
+const dropStyles = [
+  "data-[dragging=true]:opacity-40",
+  "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-accent/60 data-[drop=inside]:ring-inset",
+  "before:absolute before:right-2 before:z-10 before:h-0.5 before:rounded-full before:bg-accent before:opacity-0",
+  "data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100",
+].join(" ");
+
 const toggleButton = cva(
   "grid shrink-0 place-items-center rounded-xs focus-ring hover:text-foreground",
   {
@@ -354,13 +362,7 @@ export function Tree<T extends TreeNode<T>>({
               if (branch) toggle(item.id, !expanded);
             }}
             onKeyDown={(event) => onRowKeyDown(event, item.id)}
-            className={cn(
-              row({ variant }),
-              "data-[dragging=true]:opacity-40",
-              "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-accent/60 data-[drop=inside]:ring-inset",
-              "before:absolute before:right-2 before:z-10 before:h-0.5 before:rounded-full before:bg-accent before:opacity-0",
-              "data-[drop=after]:before:-bottom-px data-[drop=before]:before:-top-px data-[drop=after]:before:opacity-100 data-[drop=before]:before:opacity-100",
-            )}
+            className={cn(row({ variant }), onDrop && dropStyles)}
           >
             {branch && (
               <button
