@@ -5,15 +5,21 @@ import { Outlet, ScrollRestoration, useMatches } from "react-router";
 import { head, type Meta } from "@/head";
 import { MobileBar, Sidebar } from "./sidebar";
 
-/** The page's title and description, kept in step as it navigates; the build writes each page's in its HTML. */
+/** The page's head, kept in step as it navigates; the build writes each page's in its HTML. */
 function useHead() {
-  const { title, description } = head(useMatches().at(-1)?.handle as Meta);
+  const handle = useMatches().at(-1)?.handle as Meta;
   useEffect(() => {
+    const { title, canonical, meta } = head(handle);
     document.title = title;
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute("content", description);
-  }, [title, description]);
+    if (canonical)
+      document
+        .querySelector('link[rel="canonical"]')
+        ?.setAttribute("href", canonical);
+    for (const [attribute, key, value = ""] of meta)
+      document
+        .querySelector(`meta[${attribute}="${key}"]`)
+        ?.setAttribute("content", value);
+  }, [handle]);
 }
 
 export function Layout() {

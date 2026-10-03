@@ -6,6 +6,9 @@ import {
   StaticRouterProvider,
 } from "react-router";
 import { head, type Meta } from "./head";
+
+export { origin } from "./head";
+
 import { routes } from "./routes";
 
 const { query, dataRoutes } = createStaticHandler(routes);
@@ -20,7 +23,7 @@ export async function render(path: string) {
       <StaticRouterProvider router={router} context={context} hydrate={false} />
     </StrictMode>,
   );
-  return { html, ...head(context.matches.at(-1)?.route.handle as Meta) };
+  return { html, head: head(context.matches.at(-1)?.route.handle as Meta) };
 }
 
 /** Every path with a page of its own. */

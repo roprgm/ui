@@ -13,15 +13,23 @@ export const routes: RouteObject[] = [
       ...sections.map((section) => ({
         path: `/${section.slug}`,
         element: <SectionIndex section={section} />,
-        handle: { title: section.title, description: section.description },
+        handle: {
+          title: section.title,
+          description: section.description,
+          path: `/${section.slug}`,
+        },
       })),
       ...pages.map((page) => ({
         path: page.href,
         element: <Doc page={page} />,
         handle:
           page.href === "/"
-            ? undefined
-            : { title: page.title, description: page.description },
+            ? { path: "/" }
+            : {
+                title: page.title,
+                description: page.description,
+                path: page.href,
+              },
       })),
       { path: "*", Component: NotFound, handle: { title: "Not found" } },
     ],
