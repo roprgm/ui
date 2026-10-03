@@ -12,7 +12,7 @@ Numbers line up in `tabular-nums`; right-align a numeric column with `text-right
 
 ### In a card
 
-After a header, a table runs edge to edge, and the card clips its corners. A row with `data-selected`, true or false, is one you pick: it lights on hover, and fills when true. Other rows stay still.
+A table counts as a section of its card, without padding: alone or after a header, it runs edge to edge, and the card clips its corners. A row with `data-selected`, true or false, is one you pick: it lights on hover, and fills when true. Other rows stay still.
 
 <Example name="table/card" />
 
@@ -27,7 +27,7 @@ A table never wraps or stacks its columns: give it a width, and what doesn't fit
 Each part's `data-slot`, which a theme styles, is beside it. Inside a container, a line runs under each row but the last; on the page, rows are apart by space alone.
 
 ```tsx
-<Table> // table-container, around table
+<Table> // section, around table
   <TableHeader> // table-header
     <TableRow> // table-row
       <TableHead /> // table-head
