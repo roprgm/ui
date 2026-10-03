@@ -1,0 +1,31 @@
+## Installation
+
+<Install name="breadcrumb" />
+
+## Examples
+
+### Default
+
+The path to the page you're on. Each `BreadcrumbItem` after the first draws a slash before it, and the current page's takes `aria-current="page"`. `render` draws a link as another element, such as a router's `Link`.
+
+<Example name="breadcrumb/demo" />
+
+### Overflow
+
+A path that doesn't fit scrolls sideways rather than wrapping, fading at the edge where more lies.
+
+<Example name="breadcrumb/overflow" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Breadcrumb> // breadcrumb, a nav
+  <ol> // breadcrumb-list
+    <BreadcrumbItem> // breadcrumb-item
+      <BreadcrumbLink /> // breadcrumb-link
+    </BreadcrumbItem>
+  </ol>
+</Breadcrumb>
+```
