@@ -710,6 +710,21 @@
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
     },
     {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "A task's progress on a bar, labeled and drawn as a Slider's.",
+      "categories": ["effects"],
+      "dependencies": ["cn", "@base-ui/react"],
+      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
+      "files": [
+        {
+          "path": "src/components/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",

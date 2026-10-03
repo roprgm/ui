@@ -1,0 +1,37 @@
+## Installation
+
+<Install name="progress" />
+
+## Examples
+
+### Default
+
+Its bar is a [Slider](/components/slider)'s, and `format` writes the value at the end and for screen readers.
+
+<Example name="progress/demo" />
+
+### Bare
+
+Without `label` or `format`, it is the bar alone; give it an `aria-label`. `max` is 100 unless set.
+
+<Example name="progress/bare" />
+
+### Indeterminate
+
+`value={null}` is work of unknown length, and the bar shimmers.
+
+<Example name="progress/indeterminate" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it. Progress renders them all from its props.
+
+```tsx
+<Progress> // progress
+  <Label /> // progress-label
+  <Value /> // progress-value
+  <Track> // progress-track
+    <Indicator /> // progress-indicator
+  </Track>
+</Progress>
+```
