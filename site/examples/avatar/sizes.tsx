@@ -6,22 +6,22 @@ export default function AvatarSizes() {
     <div className="flex flex-col gap-2">
       <span className="flex items-center gap-2">
         <Avatar size="sm">
-          <AvatarImage src="https://github.com/roprgm.png" alt="Rodrigo" />
-          <AvatarFallback>RP</AvatarFallback>
+          <AvatarImage src="https://picsum.photos/id/1027/128" alt="Mara Kim" />
+          <AvatarFallback>MK</AvatarFallback>
         </Avatar>
         <Button size="sm">Follow</Button>
       </span>
       <span className="flex items-center gap-2">
         <Avatar>
-          <AvatarImage src="https://github.com/roprgm.png" alt="Rodrigo" />
-          <AvatarFallback>RP</AvatarFallback>
+          <AvatarImage src="https://picsum.photos/id/1027/128" alt="Mara Kim" />
+          <AvatarFallback>MK</AvatarFallback>
         </Avatar>
         <Button>Follow</Button>
       </span>
       <span className="flex items-center gap-2">
         <Avatar size="lg">
-          <AvatarImage src="https://github.com/roprgm.png" alt="Rodrigo" />
-          <AvatarFallback>RP</AvatarFallback>
+          <AvatarImage src="https://picsum.photos/id/1027/128" alt="Mara Kim" />
+          <AvatarFallback>MK</AvatarFallback>
         </Avatar>
         <Button size="lg">Follow</Button>
       </span>
