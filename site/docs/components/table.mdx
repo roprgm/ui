@@ -1,0 +1,43 @@
+## Installation
+
+<Install name="table" />
+
+## Examples
+
+### Default
+
+Numbers line up in `tabular-nums`; right-align a numeric column with `text-right` on its head and its cells.
+
+<Example name="table/demo" />
+
+### In a card
+
+After a header, a table runs edge to edge, and the card clips its corners. A row with `data-selected`, true or false, is one you pick: it lights on hover, and fills when true. Other rows stay still.
+
+<Example name="table/card" />
+
+### Scrolling sideways
+
+A table never wraps or stacks its columns: give it a width, and what doesn't fit scrolls, fading at the edges.
+
+<Example name="table/scroll" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it. Inside a container, a line runs under each row but the last; on the page, rows are apart by space alone.
+
+```tsx
+<Table> // table-container, around table
+  <TableHeader> // table-header
+    <TableRow> // table-row
+      <TableHead /> // table-head
+    </TableRow>
+  </TableHeader>
+  <TableBody> // table-body
+    <TableRow> // table-row, with data-selected
+      <TableCell /> // table-cell
+    </TableRow>
+  </TableBody>
+  <TableFooter /> // table-footer
+</Table>
+```
