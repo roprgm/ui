@@ -56,6 +56,7 @@ export function Pagination({
           <span
             key={index === 1 ? "before" : "after"}
             data-slot="pagination-ellipsis"
+            aria-hidden
             className="px-1 text-secondary"
           >
             …
