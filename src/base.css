@@ -46,7 +46,7 @@
      supporting text, hints, and what is disabled. */
   --color-foreground: oklch(96% 0 0);
   --color-secondary: oklch(70% 0 0);
-  --color-muted: oklch(55% 0 0);
+  --color-muted: oklch(59% 0 0);
   --color-disabled: oklch(44% 0 0);
 
   /* Lines, translucent over any fill: separators, and dividers inside a material. */
