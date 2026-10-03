@@ -86,7 +86,7 @@ const row = cva(
   },
 );
 
-// Only on rows that drag: the dragged row dims, and where it would land fills or draws a line.
+// Only while a row drags: it dims, and where it would land fills or draws a line.
 const dropStyles = [
   "data-[dragging=true]:opacity-40",
   "data-[drop=inside]:bg-hover data-[drop=inside]:ring-1 data-[drop=inside]:ring-accent/60 data-[drop=inside]:ring-inset",
@@ -362,7 +362,7 @@ export function Tree<T extends TreeNode<T>>({
               if (branch) toggle(item.id, !expanded);
             }}
             onKeyDown={(event) => onRowKeyDown(event, item.id)}
-            className={cn(row({ variant }), onDrop && dropStyles)}
+            className={cn(row({ variant }), dragging && dropStyles)}
           >
             {branch && (
               <button
