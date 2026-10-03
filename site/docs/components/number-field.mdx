@@ -1,0 +1,37 @@
+## Installation
+
+<Install name="number-field" />
+
+## Examples
+
+### Default
+
+A NumberField looks like an [Input](/components/input) and holds a number: the chevrons at its end and the arrow keys step it by `step`, Shift by 10, and it keeps within `min` and `max`. For a number that drags in an editor's panel, use a [ScrubInput](/components/scrub-input).
+
+<Example name="number-field/demo" />
+
+### In a field
+
+In a [Field](/components/field), the label and note reach its input. `format` takes `Intl.NumberFormat`'s options, such as a unit.
+
+<Example name="number-field/field" />
+
+### Sizes
+
+`default` and `lg`, as tall as an Input of each size.
+
+<Example name="number-field/sizes" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it. NumberField renders them all from its props.
+
+```tsx
+<NumberField> // number-field
+  <Input /> // number-field-input, with data-size
+  <InputGroupAddon> // input-group-addon
+    <Increment /> // number-field-increment, with a chevron
+    <Decrement /> // number-field-decrement, with a chevron
+  </InputGroupAddon>
+</NumberField>
+```
