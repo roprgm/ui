@@ -63,8 +63,10 @@
     box-shadow: none;
   }
 
-  /* Filled, the last row covers the line its card draws under the table, so it draws it again. */
-  [data-slot="section"]:not(:last-child)
+  /* Filled, the last row covers the line its card draws under the table, so it draws it again;
+     a dialog's or a notice's sections have no line between them. */
+  :not([data-slot="dialog-content"], [data-slot="notice"])
+    > [data-slot="section"]:not(:last-child)
     > [data-slot="table"]
     > :last-child
     > :last-child {
