@@ -3,7 +3,6 @@
 import { Drawer as Primitive } from "@base-ui/react/drawer";
 import { cva } from "class-variance-authority";
 import { cn } from "cn";
-import { Popup } from "./popup";
 import { sections } from "./section";
 
 /** A panel that slides in from the side it swipes away to: `swipeDirection`, `right` unless set. */
@@ -34,24 +33,25 @@ export function DrawerClose(props: Primitive.Close.Props) {
   );
 }
 
-// It follows the finger while swiped, and once let go, leaves as fast as it was thrown. Its
-// movement is a `transform`, which the inline one Base UI sets while swiping replaces.
+// A panel, with a line on the side that faces the page. It follows the finger while swiped, and
+// once let go, leaves as fast as it was thrown. Its movement is a `transform`, which the inline
+// one Base UI sets while swiping replaces.
 const drawer = cva(
-  "max-h-full w-full transform-[translate(var(--drawer-swipe-movement-x),var(--drawer-swipe-movement-y))] transition-[opacity,transform] duration-200 ease-out data-ending-style:duration-[calc(var(--drawer-swipe-strength)*200ms)]",
+  "max-h-full w-full overflow-y-auto text-foreground material-panel outline-none transform-[translate(var(--drawer-swipe-movement-x),var(--drawer-swipe-movement-y))] transition-[opacity,transform] duration-200 ease-out data-ending-style:duration-[calc(var(--drawer-swipe-strength)*200ms)]",
   {
     variants: {
       side: {
         right:
-          "ml-auto max-w-sm rounded-r-none data-ending-style:transform-[translateX(100%)] data-starting-style:transform-[translateX(100%)]",
-        left: "max-w-sm rounded-l-none data-ending-style:transform-[translateX(-100%)] data-starting-style:transform-[translateX(-100%)]",
-        down: "self-end rounded-b-none data-ending-style:transform-[translateY(100%)] data-starting-style:transform-[translateY(100%)]",
-        up: "self-start rounded-t-none data-ending-style:transform-[translateY(-100%)] data-starting-style:transform-[translateY(-100%)]",
+          "ml-auto max-w-sm shadow-[inset_1px_0_0_var(--color-border-subtle)] data-ending-style:transform-[translateX(100%)] data-starting-style:transform-[translateX(100%)]",
+        left: "max-w-sm shadow-[inset_-1px_0_0_var(--color-border-subtle)] data-ending-style:transform-[translateX(-100%)] data-starting-style:transform-[translateX(-100%)]",
+        down: "self-end shadow-[inset_0_1px_0_var(--color-border-subtle)] data-ending-style:transform-[translateY(100%)] data-starting-style:transform-[translateY(100%)]",
+        up: "self-start shadow-[inset_0_-1px_0_var(--color-border-subtle)] data-ending-style:transform-[translateY(-100%)] data-starting-style:transform-[translateY(-100%)]",
       },
     },
   },
 );
 
-/** Fills the side it docks to, and scrolls; its `Section`s stack without a line, as a dialog's do. */
+/** Fills the side it docks to, and scrolls; its `Section`s stack with a line between each, as a panel's do. */
 export function DrawerContent(props: Primitive.Popup.Props) {
   return (
     <Primitive.Portal data-slot="drawer-portal">
@@ -66,10 +66,10 @@ export function DrawerContent(props: Primitive.Popup.Props) {
         <Primitive.Popup
           data-slot="drawer-content"
           render={(popup, state) => (
-            <Popup
+            <div
               {...popup}
               className={cn(
-                sections({ lines: false }),
+                sections(),
                 drawer({ side: state.swipeDirection }),
                 popup.className,
               )}
