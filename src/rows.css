@@ -62,9 +62,16 @@
     color: var(--color-secondary);
   }
 
-  /* A light line under each row but the table's last, which reads on the page as in a card. */
+  /* A line under each row but the table's last: in a container, a divider, as between its
+     sections; on the page, where a dark line doesn't read, a light one. */
   [data-slot="table-row"] > * {
     box-shadow: inset 0 -1px 0 var(--color-border-light);
+  }
+
+  :is(.material-card, .material-panel, .material-float)
+    [data-slot="table-row"]
+    > * {
+    box-shadow: inset 0 -1px 0 var(--color-border-subtle);
   }
 
   [data-slot="table"] > :last-child > :last-child > * {

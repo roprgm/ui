@@ -44,6 +44,6 @@ export const lines = [
   color("border-subtle", "Dividers in a card."),
   color(
     "border-light",
-    "A line under a table's rows, lighter than what it's on.",
+    "A line under a table's rows on the page, where a dark one doesn't read.",
   ),
 ];

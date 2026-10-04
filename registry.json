@@ -215,6 +215,9 @@
           "[data-slot=\"table-row\"] > *": {
             "box-shadow": "inset 0 -1px 0 var(--color-border-light)"
           },
+          ":is(.material-card, .material-panel, .material-float) [data-slot=\"table-row\"] > *": {
+            "box-shadow": "inset 0 -1px 0 var(--color-border-subtle)"
+          },
           "[data-slot=\"table\"] > :last-child > :last-child > *": {
             "box-shadow": "none"
           },
