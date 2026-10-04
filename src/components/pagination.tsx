@@ -37,7 +37,7 @@ export function Pagination({
   onPageChange: (page: number) => void;
 }) {
   // Every slot as wide as the longest page number, so paging moves none of them.
-  const minWidth = `calc(${String(count).length}ch + 1.25rem)`;
+  const minWidth = `max(var(--spacing-control-sm), calc(${String(count).length}ch + 1.25rem))`;
   return (
     <nav
       data-slot="pagination"
