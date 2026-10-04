@@ -42,4 +42,8 @@ export const overlays = [
 export const lines = [
   color("border", "Separators."),
   color("border-subtle", "Dividers in a card."),
+  color(
+    "border-light",
+    "A line under a table's rows on the page, where a dark one doesn't read.",
+  ),
 ];

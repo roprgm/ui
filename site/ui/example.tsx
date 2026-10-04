@@ -14,13 +14,22 @@ const sources = import.meta.glob<string>("../examples/**/*.tsx", {
 });
 
 /** The example in `examples/{name}.tsx`, running, with its source. */
-export function Example({ name, block }: { name: string; block?: boolean }) {
+export function Example({
+  name,
+  block,
+  flush,
+}: {
+  name: string;
+  block?: boolean;
+  flush?: boolean;
+}) {
   const file = `../examples/${name}.tsx`;
   const { default: Demo } = demos[file];
   return (
     <ExampleFrame
       file={`${name.split("/").pop()}.tsx`}
       block={block}
+      flush={flush}
       preview={<Demo />}
       code={
         <Code lang="tsx" className="max-h-120 rounded-md">
