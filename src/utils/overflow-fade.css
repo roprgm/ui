@@ -83,6 +83,54 @@
   }
 }
 
+/* Scrolls sideways as overflow-fade-x does, and down, fading only the bottom, for content whose top
+   stays put, such as a table's head. */
+@utility overflow-fade-x-bottom {
+  @apply overflow-fade-x;
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent,
+      oklch(0% 0 0) var(--overflow-fade-start),
+      oklch(0% 0 0) calc(100% - var(--overflow-fade-end)),
+      transparent
+    ),
+    linear-gradient(
+      to bottom,
+      oklch(0% 0 0) calc(100% - var(--overflow-fade-bottom)),
+      transparent
+    );
+  mask-composite: intersect;
+
+  @supports (animation-timeline: scroll()) {
+    animation:
+      overflow-fade-start linear both,
+      overflow-fade-end linear both,
+      overflow-fade-bottom linear both;
+    animation-timeline:
+      scroll(self inline), scroll(self inline), scroll(self block);
+    animation-range:
+      0 1.5rem,
+      calc(100% - 1.5rem) 100%,
+      calc(100% - 1.5rem) 100%;
+  }
+}
+
+@property --overflow-fade-bottom {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes overflow-fade-bottom {
+  from {
+    --overflow-fade-bottom: 1.5rem;
+  }
+  to {
+    --overflow-fade-bottom: 0px;
+  }
+}
+
 /* Each edge fades in over the first 1.5rem of scrolling, and out over the last. */
 @keyframes overflow-fade-start {
   from {

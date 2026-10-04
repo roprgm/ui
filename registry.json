@@ -108,6 +108,29 @@
             "animation-range": "0 1.5rem, calc(100% - 1.5rem) 100%"
           }
         },
+        "@utility overflow-fade-x-bottom": {
+          "@apply overflow-fade-x": {},
+          "mask-image": "linear-gradient(to right, transparent, oklch(0% 0 0) var(--overflow-fade-start), oklch(0% 0 0) calc(100% - var(--overflow-fade-end)), transparent), linear-gradient(to bottom, oklch(0% 0 0) calc(100% - var(--overflow-fade-bottom)), transparent)",
+          "mask-composite": "intersect",
+          "@supports (animation-timeline: scroll())": {
+            "animation": "overflow-fade-start linear both, overflow-fade-end linear both, overflow-fade-bottom linear both",
+            "animation-timeline": "scroll(self inline), scroll(self inline), scroll(self block)",
+            "animation-range": "0 1.5rem, calc(100% - 1.5rem) 100%, calc(100% - 1.5rem) 100%"
+          }
+        },
+        "@property --overflow-fade-bottom": {
+          "syntax": "\"<length>\"",
+          "inherits": "false",
+          "initial-value": "0px"
+        },
+        "@keyframes overflow-fade-bottom": {
+          "from": {
+            "--overflow-fade-bottom": "1.5rem"
+          },
+          "to": {
+            "--overflow-fade-bottom": "0px"
+          }
+        },
         "@keyframes overflow-fade-start": {
           "from": {
             "--overflow-fade-start": "0px"
@@ -179,11 +202,13 @@
             "text-align": "start",
             "white-space": "nowrap"
           },
-          "[data-slot=\"table-head\"]": {
+          "[data-slot=\"table-header\"]": {
             "position": "sticky",
             "top": "0",
             "z-index": "1",
-            "background-color": "var(--color-background)",
+            "background-color": "var(--color-background)"
+          },
+          "[data-slot=\"table-head\"]": {
             "font-weight": "inherit",
             "color": "var(--color-secondary)"
           },

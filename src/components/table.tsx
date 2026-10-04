@@ -2,16 +2,17 @@ import { cn } from "cn";
 import type { ComponentProps } from "react";
 
 /**
- * A native table, whose columns scroll sideways where they don't fit. It counts as a section of
- * the card that holds it, without padding. `className` sizes the scroller; its rows are styled by
- * their slots in rows.css, since a table repeats them.
+ * A native table, whose columns scroll sideways where they don't fit, and whose rows scroll down
+ * under its head once it has a height. It counts as a section of the card that holds it, without
+ * padding. `className` sizes the scroller; its rows are styled by their slots in rows.css, since a
+ * table repeats them.
  */
 export function Table({ className, ...props }: ComponentProps<"table">) {
   return (
     <div
       data-slot="section"
       tabIndex={-1}
-      className={cn("overflow-fade-x", className)}
+      className={cn("overflow-fade-x-bottom", className)}
     >
       <table data-slot="table" className="w-full tabular-nums" {...props} />
     </div>

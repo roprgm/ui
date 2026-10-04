@@ -50,11 +50,14 @@
   }
 
   /* It stays at the top of a table that scrolls down, over the rows, in the fill of where it is. */
-  [data-slot="table-head"] {
+  [data-slot="table-header"] {
     position: sticky;
     top: 0;
     z-index: 1;
     background-color: var(--color-background);
+  }
+
+  [data-slot="table-head"] {
     font-weight: inherit;
     color: var(--color-secondary);
   }
