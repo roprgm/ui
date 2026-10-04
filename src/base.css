@@ -53,6 +53,7 @@
   /* Lines, translucent over any fill: separators, and dividers inside a material. */
   --color-border: oklch(0% 0 0 / 0.7);
   --color-border-subtle: oklch(0% 0 0 / 0.6);
+  --color-border-light: oklch(100% 0 0 / 0.08);
 
   /* What is on: checked controls, thumbs. */
   --color-accent: oklch(89% 0 0);

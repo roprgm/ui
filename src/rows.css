@@ -1,5 +1,5 @@
-/* Rows, which a list or a tree repeats by the hundred, styled once here by their slot instead of in
-   each row's classes. Under the utilities, so a row's className still wins. */
+/* Rows, which a list, a tree, or a table repeats by the hundred, styled once here by their slot
+   instead of in each row's classes. Under the utilities, so a row's className still wins. */
 @layer components {
   /* A row in a panel's list, such as a layer, with a line under it. */
   [data-slot="list-item"] {
@@ -23,6 +23,75 @@
     @media (hover: hover) {
       &:not([data-selected="true"]):hover {
         background-color: var(--color-hover);
+      }
+    }
+  }
+
+  /* A table's rows, as tall as a list's. One with data-selected, true or false, is one you pick. */
+  [data-slot="table-row"] {
+    height: --spacing(10);
+
+    &[data-selected="true"] {
+      background-color: var(--color-control);
+    }
+
+    @media (hover: hover) {
+      &[data-selected="false"]:hover {
+        background-color: var(--color-hover);
+      }
+    }
+  }
+
+  [data-slot="table-head"],
+  [data-slot="table-cell"] {
+    padding-inline: --spacing(3.5);
+    text-align: start;
+    white-space: nowrap;
+  }
+
+  /* It stays at the top of a table that scrolls down, over the rows, in the fill of where it is. */
+  [data-slot="table-header"] {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--color-background);
+  }
+
+  [data-slot="table-head"] {
+    font-weight: inherit;
+    color: var(--color-secondary);
+  }
+
+  /* A line under each row but the table's last: in a container, a divider, as between its
+     sections; on the page, where a dark line doesn't read, a light one. */
+  [data-slot="table-row"] > * {
+    box-shadow: inset 0 -1px 0 var(--color-border-light);
+  }
+
+  :is(.material-card, .material-panel, .material-float)
+    [data-slot="table-row"]
+    > * {
+    box-shadow: inset 0 -1px 0 var(--color-border-subtle);
+  }
+
+  [data-slot="table"] > :last-child > :last-child > * {
+    box-shadow: none;
+  }
+
+  /* Filled, the last row covers the line its card draws under the table, so it draws it again;
+     a dialog's or a notice's sections have no line between them. */
+  :not([data-slot="dialog-content"], [data-slot="notice"])
+    > [data-slot="section"]:not(:last-child)
+    > [data-slot="table"]
+    > :last-child
+    > :last-child {
+    &[data-selected="true"] > * {
+      box-shadow: inset 0 -1px 0 var(--color-border-subtle);
+    }
+
+    @media (hover: hover) {
+      &[data-selected="false"]:hover > * {
+        box-shadow: inset 0 -1px 0 var(--color-border-subtle);
       }
     }
   }

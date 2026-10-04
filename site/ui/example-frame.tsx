@@ -6,19 +6,22 @@ import type { ReactNode } from "react";
 
 /**
  * A demo on a card, and its source a tab away. A block, a whole layout, sits instead on the page's
- * colors, as it would in an app, under a panel that heads it.
+ * colors, as it would in an app, under a panel that heads it. A `flush` demo is the card's content,
+ * as a table is, edge to edge under its header.
  */
 export function ExampleFrame({
   file,
   preview,
   code,
   block = false,
+  flush = false,
 }: {
   /** The example's file name, which heads the frame. */
   file: string;
   preview: ReactNode;
   code: ReactNode;
   block?: boolean;
+  flush?: boolean;
 }) {
   return (
     <Tabs
@@ -50,11 +53,12 @@ export function ExampleFrame({
       </Section>
       <TabPanel
         value="preview"
-        className={
-          block
-            ? "@container"
-            : "flex flex-wrap items-center justify-center-safe gap-3 p-8 sm:p-12"
-        }
+        className={cn(
+          block && "@container",
+          !block &&
+            !flush &&
+            "flex flex-wrap items-center justify-center-safe gap-3 p-8 sm:p-12",
+        )}
       >
         {preview}
       </TabPanel>

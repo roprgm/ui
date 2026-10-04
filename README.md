@@ -78,7 +78,7 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 | --- | --- |
 | Actions | `Button`, `IconButton`, `CopyButton`, `Chip`, `Kbd`, `Badge`, `Avatar` |
 | Inputs | `Input`, with `InputGroup` and `InputGroupAddon`, `NumberField`, `Textarea`, `Field`, `Fieldset`, `Checkbox`, `DragToggle`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput` |
-| Containers | `Card`, `Separator`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `material-*` primitives; `Collapsible`, `Accordion`, `ScrollArea`, `CodeBlock` |
+| Containers | `Card`, `Separator`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `material-*` primitives; `Collapsible`, `Accordion`, `ScrollArea`, `Table`, `CodeBlock` |
 | Navigation | `Breadcrumb`, `Pagination`, `Tabs`, `ListItem`, `Tree` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Drawer`, `Notice`, `Toast` |
 | Effects | `Spinner`, `Progress`, `Skeleton`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, `overflow-fade-y`, and `backdrop` utilities |

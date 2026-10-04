@@ -1,0 +1,55 @@
+## Installation
+
+<Install name="table" />
+
+## Examples
+
+### Default
+
+A table is a card's content, and its head is the card's header: put it alone in a `Card`, as each example here sits in its frame's, and it runs edge to edge while the card clips its corners. Numbers line up in `tabular-nums`; right-align a numeric column with `text-right` on its head and its cells.
+
+<Example name="table/demo" flush />
+
+### Selecting rows
+
+A row with `data-selected`, true or false, is one you pick: it lights on hover, and fills when true. Other rows stay still. In a `DragToggle`, with a `name` they share, a drag across the checkboxes flips each one it passes.
+
+<Example name="table/select" flush />
+
+### Scrolling down
+
+Give the table a height, such as `max-h-80`, and its rows scroll under the head, which stays at the top.
+
+<Example name="table/long" flush />
+
+### Scrolling sideways
+
+A table never wraps or stacks its columns: what doesn't fit its card scrolls sideways, fading at the edges.
+
+<Example name="table/scroll" flush />
+
+### On the page
+
+On the page, as in a documentation page, a table sits without a card. A dark line doesn't read there, so its rows are apart by a light one, in `border-light`; in a card, panel, or popup, they take the divider between its sections, `border-subtle`.
+
+<Example name="table/page" block />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it. A line runs under each row but the last: `border-subtle` in a container, and `border-light` on the page.
+
+```tsx
+<Table> // section, around table
+  <TableHeader> // table-header
+    <TableRow> // table-row
+      <TableHead /> // table-head
+    </TableRow>
+  </TableHeader>
+  <TableBody> // table-body
+    <TableRow> // table-row, with data-selected
+      <TableCell /> // table-cell
+    </TableRow>
+  </TableBody>
+  <TableFooter /> // table-footer
+</Table>
+```
