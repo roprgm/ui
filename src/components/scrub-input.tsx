@@ -2,6 +2,7 @@
 
 import { cn } from "cn";
 import {
+  type ComponentProps,
   type FocusEvent,
   type KeyboardEvent,
   type PointerEvent,
@@ -37,8 +38,16 @@ export function ScrubInput({
   minChars,
   chevrons = false,
   className,
+  id,
   "aria-label": label,
-}: {
+  "aria-labelledby": labelledBy,
+  "aria-describedby": describedBy,
+  "aria-invalid": invalid,
+  ...props
+}: Omit<
+  ComponentProps<"span">,
+  "onChange" | "defaultValue" | "children" | `aria-${string}`
+> & {
   value: number;
   onChange: (value: number) => void;
   /** Brackets a drag or typing, so a caller can group its changes into one edit. */
@@ -53,8 +62,12 @@ export function ScrubInput({
   minChars?: number;
   /** Chevrons on hover, hinting that it drags. */
   chevrons?: boolean;
-  className?: string;
+  /** The input's, with its label and description, as a Field gives them. */
+  id?: string;
   "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+  "aria-invalid"?: boolean;
 }) {
   const [draft, setDraft] = useState<string>();
   const input = useRef<HTMLInputElement>(null);
@@ -174,6 +187,7 @@ export function ScrubInput({
       )}
       onDoubleClick={reset}
       onPointerDown={start}
+      {...props}
     >
       {chevrons && (
         <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
@@ -204,7 +218,11 @@ export function ScrubInput({
         <input
           data-slot="scrub-input-control"
           ref={input}
+          id={id}
           aria-label={label}
+          aria-labelledby={labelledBy}
+          aria-describedby={describedBy}
+          aria-invalid={invalid}
           inputMode="decimal"
           className="w-12 min-w-full cursor-[inherit] bg-transparent text-right text-transparent text-shadow-none outline-none field-sizing-content selection:bg-pressed focus:text-foreground focus:[text-shadow:inherit] supports-[field-sizing:content]:w-auto"
           value={draft ?? fixed}
