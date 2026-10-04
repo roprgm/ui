@@ -189,6 +189,16 @@
           "[data-slot=\"table\"] > :last-child > :last-child > *": {
             "box-shadow": "none"
           },
+          "[data-slot=\"section\"]:not(:last-child) > [data-slot=\"table\"] > :last-child > :last-child": {
+            "&[data-selected=\"true\"] > *": {
+              "box-shadow": "inset 0 -1px 0 var(--color-border-subtle)"
+            },
+            "@media (hover: hover)": {
+              "&[data-selected=\"false\"]:hover > *": {
+                "box-shadow": "inset 0 -1px 0 var(--color-border-subtle)"
+              }
+            }
+          },
           "[data-slot=\"tree\"] [role=\"treeitem\"]": {
             "gap": "--spacing(1.5)",
             "outline-style": "none",
