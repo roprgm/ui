@@ -57,7 +57,8 @@ export function AccordionTrigger({
   return (
     <Primitive.Header
       data-slot="accordion-header"
-      className="rounded-[inherit]"
+      // Hands its item's corners and line to the trigger, drawing neither.
+      className="contents rounded-[inherit] shadow-[inherit]"
     >
       <Primitive.Trigger
         data-slot="accordion-trigger"
