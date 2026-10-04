@@ -1,0 +1,32 @@
+## Installation
+
+<Install name="accordion" />
+
+## Examples
+
+### Default
+
+Collapsibles that open one at a time: opening one closes the other. It counts as a section of the `Card` that holds it, and its items stack in it with a line between each. Each item looks and moves as a `Collapsible` does, so a chevron in its trigger turns with `group-data-open/collapsible:rotate-90`, and find-in-page opens it.
+
+<Example name="accordion/demo" />
+
+### Multiple
+
+`multiple` lets several stay open at once; `defaultValue` lists the items that start open, by their `value`.
+
+<Example name="accordion/multiple" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Accordion> // section
+  <AccordionItem> // section
+    <AccordionTrigger /> // accordion-trigger, in an accordion-header
+    <AccordionPanel> // accordion-panel, which slides
+      <div /> // accordion-panel-content, around the children; it takes className
+    </AccordionPanel>
+  </AccordionItem>
+</Accordion>
+```

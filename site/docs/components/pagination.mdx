@@ -1,0 +1,30 @@
+## Installation
+
+<Install name="pagination" />
+
+## Examples
+
+### Default
+
+`page`, from 1, of `count`, with `onPageChange` called with the page to show. The current page takes `aria-current="page"` and a selected row's fill. Small, to sit in a table's footer or under a list.
+
+<Example name="pagination/demo" />
+
+### Many pages
+
+Past seven pages, it keeps seven slots: the first, the last, and the current with its neighbours, with an ellipsis where pages are skipped, so its buttons don't move as you page.
+
+<Example name="pagination/long" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Pagination> // pagination, a nav
+  <IconButton /> // icon-button, the previous page
+  <Button /> // button, a page
+  <span /> // pagination-ellipsis
+  <IconButton /> // icon-button, the next page
+</Pagination>
+```

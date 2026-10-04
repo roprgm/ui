@@ -53,7 +53,7 @@ export function ExampleFrame({
         className={
           block
             ? "@container"
-            : "flex min-h-56 flex-wrap items-center justify-center-safe gap-3 p-8 sm:p-12"
+            : "flex flex-wrap items-center justify-center-safe gap-3 p-8 sm:p-12"
         }
       >
         {preview}
