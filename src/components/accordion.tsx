@@ -11,6 +11,8 @@ import {
 } from "./collapsible";
 import { sections } from "./section";
 
+// Each part is rounded only where it meets the card's corners, so a line between two stays straight.
+
 /**
  * Collapsibles that open one at a time, or all of them with `multiple`. It counts as a section of
  * the card that holds it, and its items stack in it with a line between each.
@@ -24,7 +26,11 @@ export function Accordion({
   return (
     <Primitive.Root
       data-slot="section"
-      className={cn(sections(), "rounded-[inherit]", className)}
+      className={cn(
+        sections(),
+        "first:rounded-t-[inherit] last:rounded-b-[inherit]",
+        className,
+      )}
       {...props}
     />
   );
@@ -41,7 +47,6 @@ export function AccordionItem({
     <Primitive.Item
       data-slot="section"
       className={cn(
-        // Rounded only where it meets the card's corners, so a line between two stays straight.
         "group/collapsible first:rounded-t-[inherit] last:rounded-b-[inherit]",
         className,
       )}

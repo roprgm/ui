@@ -41,7 +41,11 @@ export function Collapsible({
   return (
     <Primitive.Root
       data-slot="section"
-      className={cn("group/collapsible rounded-[inherit]", className)}
+      className={cn(
+        // Rounded only where it meets the card's corners.
+        "group/collapsible first:rounded-t-[inherit] last:rounded-b-[inherit]",
+        className,
+      )}
       {...props}
     />
   );
