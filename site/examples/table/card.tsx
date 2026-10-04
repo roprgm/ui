@@ -49,25 +49,30 @@ export default function TableCard() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {members.map((member) => (
-            <TableRow
-              key={member.email}
-              data-selected={selected.includes(member.email)}
-              onClick={() => toggle(member.email)}
-            >
-              <TableCell className="pr-0">
-                <Checkbox
-                  className="grid"
-                  aria-label={`Select ${member.name}`}
-                  checked={selected.includes(member.email)}
-                  readOnly
-                />
-              </TableCell>
-              <TableCell>{member.name}</TableCell>
-              <TableCell className="text-secondary">{member.email}</TableCell>
-              <TableCell className="text-secondary">{member.role}</TableCell>
-            </TableRow>
-          ))}
+          {members.map((member) => {
+            const isSelected = selected.includes(member.email);
+            // Secondary text doesn't read on a selected row's fill.
+            const detail = isSelected ? undefined : "text-secondary";
+            return (
+              <TableRow
+                key={member.email}
+                data-selected={isSelected}
+                onClick={() => toggle(member.email)}
+              >
+                <TableCell className="pr-0">
+                  <Checkbox
+                    className="grid"
+                    aria-label={`Select ${member.name}`}
+                    checked={isSelected}
+                    readOnly
+                  />
+                </TableCell>
+                <TableCell>{member.name}</TableCell>
+                <TableCell className={detail}>{member.email}</TableCell>
+                <TableCell className={detail}>{member.role}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </Card>
