@@ -6,12 +6,11 @@ import type { ComponentProps } from "react";
 import {
   collapsiblePanel,
   collapsiblePanelContent,
+  collapsibleSection,
   collapsibleTrigger,
   revealSection,
 } from "./collapsible";
 import { sections } from "./section";
-
-// Each part is rounded only where it meets the card's corners, so a line between two stays straight.
 
 /**
  * Collapsibles that open one at a time, or all of them with `multiple`. It counts as a section of
@@ -26,11 +25,7 @@ export function Accordion({
   return (
     <Primitive.Root
       data-slot="section"
-      className={cn(
-        sections(),
-        "first:rounded-t-[inherit] last:rounded-b-[inherit]",
-        className,
-      )}
+      className={cn(sections(), collapsibleSection, className)}
       {...props}
     />
   );
@@ -46,10 +41,7 @@ export function AccordionItem({
   return (
     <Primitive.Item
       data-slot="section"
-      className={cn(
-        "group/collapsible first:rounded-t-[inherit] last:rounded-b-[inherit]",
-        className,
-      )}
+      className={cn("group/collapsible", collapsibleSection, className)}
       {...props}
     />
   );

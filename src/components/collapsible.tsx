@@ -7,6 +7,12 @@ import { sections } from "./section";
 
 // Shared with Accordion, whose items look and move as a Collapsible does.
 
+// A section rounded only where it meets the card's corners, so a line between two stays straight.
+// The line its card draws under it is drawn again over what it holds, where a trigger's fill can't
+// cover it.
+export const collapsibleSection =
+  "relative first:rounded-t-[inherit] last:rounded-b-[inherit] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:shadow-[inherit]";
+
 // Square at the bottom while the panel shows under it.
 export const collapsibleTrigger =
   "flex w-full cursor-pointer items-center gap-2 rounded-[inherit] px-3.5 py-2.5 text-left transition focus-ring -outline-offset-2 hover:bg-hover data-panel-open:rounded-b-none dim-disabled";
@@ -41,11 +47,7 @@ export function Collapsible({
   return (
     <Primitive.Root
       data-slot="section"
-      className={cn(
-        // Rounded only where it meets the card's corners.
-        "group/collapsible first:rounded-t-[inherit] last:rounded-b-[inherit]",
-        className,
-      )}
+      className={cn("group/collapsible", collapsibleSection, className)}
       {...props}
     />
   );
