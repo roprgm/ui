@@ -543,7 +543,10 @@
           "type": "registry:ui"
         }
       ],
-      "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/drag-toggle.json"
+      ]
     },
     {
       "name": "checkbox",

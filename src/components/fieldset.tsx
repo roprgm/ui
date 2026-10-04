@@ -2,8 +2,12 @@
 
 import { cn } from "cn";
 import { type ComponentProps, type ReactNode, useId } from "react";
+import { DragToggle } from "./drag-toggle";
 
-/** A legend over a group of controls, such as checkboxes or radios, and a description or error. */
+/**
+ * A legend over a group of controls, such as checkboxes or radios, and a description or error. A
+ * drag across its checkboxes or switches flips each one it passes, as in a `DragToggle`.
+ */
 export function Fieldset({
   legend,
   description,
@@ -33,7 +37,7 @@ export function Fieldset({
       <legend data-slot="fieldset-legend" className="float-left text-secondary">
         {legend}
       </legend>
-      {children}
+      <DragToggle className="flex flex-col gap-1.5">{children}</DragToggle>
       {note && (
         <p
           data-slot={error ? "fieldset-error" : "fieldset-description"}
