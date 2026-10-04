@@ -21,11 +21,9 @@ A path that doesn't fit scrolls sideways rather than wrapping, fading at the edg
 Each part's `data-slot`, which a theme styles, is beside it.
 
 ```tsx
-<Breadcrumb> // breadcrumb, a nav
-  <ol> // breadcrumb-list, which Breadcrumb renders
-    <BreadcrumbItem> // breadcrumb-item
-      <BreadcrumbLink /> // breadcrumb-link
-    </BreadcrumbItem>
-  </ol>
+<Breadcrumb> // breadcrumb, a nav around a breadcrumb-list
+  <BreadcrumbItem> // breadcrumb-item
+    <BreadcrumbLink /> // breadcrumb-link
+  </BreadcrumbItem>
 </Breadcrumb>
 ```
