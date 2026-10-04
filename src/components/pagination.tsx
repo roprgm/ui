@@ -36,6 +36,8 @@ export function Pagination({
   count: number;
   onPageChange: (page: number) => void;
 }) {
+  // Every slot as wide as the longest page number, so paging moves none of them.
+  const minWidth = `calc(${String(count).length}ch + 1.25rem)`;
   return (
     <nav
       data-slot="pagination"
@@ -57,7 +59,8 @@ export function Pagination({
             key={index === 1 ? "before" : "after"}
             data-slot="pagination-ellipsis"
             aria-hidden
-            className="px-1 text-secondary"
+            className="text-center text-secondary"
+            style={{ minWidth }}
           >
             …
           </span>
@@ -66,6 +69,7 @@ export function Pagination({
             key={slot}
             variant={slot === page ? "flat" : "ghost"}
             size="sm"
+            style={{ minWidth }}
             aria-current={slot === page ? "page" : undefined}
             aria-label={`Page ${slot}`}
             onClick={() => onPageChange(slot)}

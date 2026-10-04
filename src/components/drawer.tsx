@@ -33,11 +33,11 @@ export function DrawerClose(props: Primitive.Close.Props) {
   );
 }
 
-// A panel, with a line on the side that faces the page. It follows the finger while swiped, and
-// once let go, leaves as fast as it was thrown. Its movement is a `transform`, which the inline
-// one Base UI sets while swiping replaces.
+// A panel, with a line on the side that faces the page. It rests at its snap point, follows the
+// finger while swiped, and once let go, leaves as fast as it was thrown. Its movement is a
+// `transform`, which the inline one Base UI sets while swiping replaces.
 const drawer = cva(
-  "max-h-full w-full overflow-y-auto text-foreground material-panel outline-none transform-[translate(var(--drawer-swipe-movement-x),var(--drawer-swipe-movement-y))] transition-[opacity,transform] duration-200 ease-out data-ending-style:duration-[calc(var(--drawer-swipe-strength)*200ms)]",
+  "max-h-full w-full overflow-y-auto text-foreground material-panel outline-none transform-[translate(var(--drawer-swipe-movement-x),calc(var(--drawer-snap-point-offset)+var(--drawer-swipe-movement-y)))] transition-[opacity,transform] duration-200 ease-out data-ending-style:duration-[calc(var(--drawer-swipe-strength)*200ms)]",
   {
     variants: {
       side: {

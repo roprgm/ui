@@ -844,7 +844,6 @@
       "dependencies": ["cn", "@base-ui/react", "class-variance-authority"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
-        "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/section.json"
       ],
       "files": [
