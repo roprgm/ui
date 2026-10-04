@@ -49,7 +49,12 @@
     white-space: nowrap;
   }
 
+  /* It stays at the top of a table that scrolls down, over the rows, in the fill of where it is. */
   [data-slot="table-head"] {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--color-background);
     font-weight: inherit;
     color: var(--color-secondary);
   }
