@@ -63,6 +63,22 @@
     box-shadow: none;
   }
 
+  /* Filled, the last row covers the line its card draws under the table, so it draws it again. */
+  [data-slot="section"]:not(:last-child)
+    > [data-slot="table"]
+    > :last-child
+    > :last-child {
+    &[data-selected="true"] > * {
+      box-shadow: inset 0 -1px 0 var(--color-border-subtle);
+    }
+
+    @media (hover: hover) {
+      &[data-selected="false"]:hover > * {
+        box-shadow: inset 0 -1px 0 var(--color-border-subtle);
+      }
+    }
+  }
+
   /* A tree's rows, whose drop line is drawn before them while one drags. */
   [data-slot="tree"] [role="treeitem"] {
     gap: --spacing(1.5);
