@@ -52,7 +52,10 @@ const drawer = cva(
 );
 
 /** Fills the side it docks to, and scrolls; its `Section`s stack with a line between each, as a panel's do. */
-export function DrawerContent(props: Primitive.Popup.Props) {
+export function DrawerContent({
+  className,
+  ...props
+}: Omit<Primitive.Popup.Props, "className"> & { className?: string }) {
   return (
     <Primitive.Portal data-slot="drawer-portal">
       <Primitive.Backdrop
@@ -65,16 +68,9 @@ export function DrawerContent(props: Primitive.Popup.Props) {
       >
         <Primitive.Popup
           data-slot="drawer-content"
-          render={(popup, state) => (
-            <div
-              {...popup}
-              className={cn(
-                sections(),
-                drawer({ side: state.swipeDirection }),
-                popup.className,
-              )}
-            />
-          )}
+          className={(state) =>
+            cn(sections(), drawer({ side: state.swipeDirection }), className)
+          }
           {...props}
         />
       </Primitive.Viewport>
