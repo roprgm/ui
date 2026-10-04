@@ -1,58 +1,33 @@
-"use client";
-
-import { NumberField as Primitive } from "@base-ui/react/number-field";
 import { cn } from "cn";
-import { Chevron } from "./chevron";
-import { Input, InputGroup, InputGroupAddon } from "./input";
+import type { ComponentProps } from "react";
+import { ScrubInput } from "./scrub-input";
 
-const stepper =
-  "flex w-full flex-1 cursor-pointer items-center justify-center hover:text-foreground dim-disabled";
-
-// Clear of the stepper, which is as wide as the field is tall.
-const padding = {
-  default: "pr-(--spacing-control)",
-  lg: "pr-(--spacing-control-lg)",
+const height = {
+  default: "h-(--spacing-control)",
+  lg: "h-(--spacing-control-lg)",
 };
 
 /**
- * A number to type, or to step with the arrow keys and the chevrons at its end. `format` writes it
- * with `Intl.NumberFormat`, such as a unit.
+ * A ScrubInput in a field as tall as an Input: the number drags sideways, types on click, and
+ * steps with the arrow keys. `aria-invalid` rings it red.
  */
 export function NumberField({
   size = "default",
-  "aria-label": label,
-  "aria-labelledby": labelledBy,
-  "aria-invalid": invalid,
-  "aria-describedby": describedBy,
+  className,
   ...props
-}: Primitive.Root.Props & { size?: "default" | "lg" }) {
+}: Omit<ComponentProps<typeof ScrubInput>, "chevrons"> & {
+  size?: "default" | "lg";
+}) {
   return (
-    <Primitive.Root data-slot="number-field" render={<InputGroup />} {...props}>
-      {/* A Field gives `id` to the root, which passes it on, and the rest to the input. */}
-      <Primitive.Input
-        data-slot="number-field-input"
-        aria-label={label}
-        aria-labelledby={labelledBy}
-        aria-invalid={invalid}
-        aria-describedby={describedBy}
-        render={
-          <Input size={size} className={cn(padding[size], "tabular-nums")} />
-        }
-      />
-      <InputGroupAddon align="end" className="flex-col py-1">
-        <Primitive.Increment
-          data-slot="number-field-increment"
-          className={stepper}
-        >
-          <Chevron direction="up" size="sm" />
-        </Primitive.Increment>
-        <Primitive.Decrement
-          data-slot="number-field-decrement"
-          className={stepper}
-        >
-          <Chevron size="sm" />
-        </Primitive.Decrement>
-      </InputGroupAddon>
-    </Primitive.Root>
+    <ScrubInput
+      data-slot="number-field"
+      data-size={size}
+      className={cn(
+        "w-full rounded-md material-field px-2.5 py-0 focus-ring has-[[aria-invalid=true]]:ring-1 has-[[aria-invalid=true]]:ring-danger/60",
+        height[size],
+        className,
+      )}
+      {...props}
+    />
   );
 }

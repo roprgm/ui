@@ -6,13 +6,13 @@
 
 ### Default
 
-A NumberField looks like an [Input](/components/input) and holds a number: the chevrons at its end and the arrow keys step it by `step`, Shift by 10, and it keeps within `min` and `max`. For a number that drags in an editor's panel, use a [ScrubInput](/components/scrub-input).
+A NumberField is a [ScrubInput](/components/scrub-input) in a field as tall as an [Input](/components/input): drag it sideways, click to type, or step it with the arrow keys by `step`, Shift by 10, within `min` and `max`. A double-click restores `defaultValue`. For a bare number in an editor's panel, use the ScrubInput itself.
 
 <Example name="number-field/demo" />
 
 ### In a field
 
-In a [Field](/components/field), the label and note reach its input. `format` takes `Intl.NumberFormat`'s options, such as a unit.
+In a [Field](/components/field), the label and note reach its input. What `format` writes after the last digit reads as the unit, as in a ScrubInput.
 
 <Example name="number-field/field" />
 
@@ -24,14 +24,8 @@ In a [Field](/components/field), the label and note reach its input. `format` ta
 
 ## Anatomy
 
-Each part's `data-slot`, which a theme styles, is beside it. NumberField renders them all from its props.
+Each part's `data-slot`, which a theme styles, is beside it. NumberField renders a ScrubInput, whose parts keep their slots.
 
 ```tsx
-<NumberField> // number-field
-  <Input /> // number-field-input, with data-size
-  <InputGroupAddon> // input-group-addon
-    <Increment /> // number-field-increment, with a chevron
-    <Decrement /> // number-field-decrement, with a chevron
-  </InputGroupAddon>
-</NumberField>
+<NumberField /> // number-field, with data-size, a scrub-input's parts inside
 ```

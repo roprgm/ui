@@ -1,7 +1,11 @@
+"use client";
+
 import { Field } from "@roprgm/ui/field";
 import { NumberField } from "@roprgm/ui/number-field";
+import { useState } from "react";
 
 export default function NumberFieldInField() {
+  const [limit, setLimit] = useState(25);
   return (
     <Field
       label="Upload limit"
@@ -9,10 +13,11 @@ export default function NumberFieldInField() {
       className="w-64"
     >
       <NumberField
-        defaultValue={25}
+        value={limit}
+        onChange={setLimit}
         min={1}
         max={100}
-        format={{ style: "unit", unit: "megabyte" }}
+        format={(value) => `${value} MB`}
       />
     </Field>
   );
