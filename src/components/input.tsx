@@ -35,7 +35,7 @@ export function Input({
   );
 }
 
-/** An Input with addons over its edges; pad the Input clear of them, as `pl-7`. */
+/** An Input with addons over its edges; pad the Input clear of them, as `pl-(--spacing-control)`. */
 export function InputGroup({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
@@ -60,7 +60,7 @@ export function InputGroupAddon({
       data-slot="input-group-addon"
       data-align={align}
       className={cn(
-        "pointer-events-none absolute inset-y-0 flex min-w-(--spacing-control) items-center justify-center px-1.5 text-secondary has-[button]:pointer-events-auto has-[button]:aspect-square has-[button]:px-0",
+        "pointer-events-none absolute inset-y-0 flex min-w-(--spacing-control) items-center justify-center px-1.5 text-secondary has-[button]:aspect-square [&_button]:pointer-events-auto has-[button]:px-0",
         align === "start" ? "left-0" : "right-0",
         className,
       )}
