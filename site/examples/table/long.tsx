@@ -1,4 +1,3 @@
-import { Card } from "@roprgm/ui/card";
 import {
   Table,
   TableBody,
@@ -19,27 +18,25 @@ const photos = Array.from({ length: 40 }, (_, index) => ({
 
 export default function TableLong() {
   return (
-    <Card className="w-lg">
-      <Table className="max-h-80">
-        <TableHeader>
-          <TableRow>
-            <TableHead>File</TableHead>
-            <TableHead>Album</TableHead>
-            <TableHead>Taken</TableHead>
-            <TableHead className="text-right">Size</TableHead>
+    <Table className="max-h-80">
+      <TableHeader>
+        <TableRow>
+          <TableHead>File</TableHead>
+          <TableHead>Album</TableHead>
+          <TableHead>Taken</TableHead>
+          <TableHead className="text-right">Size</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {photos.map((photo) => (
+          <TableRow key={photo.file}>
+            <TableCell>{photo.file}</TableCell>
+            <TableCell className="text-secondary">{photo.album}</TableCell>
+            <TableCell className="text-secondary">{photo.taken}</TableCell>
+            <TableCell className="text-right">{photo.size}</TableCell>
           </TableRow>
-        </TableHeader>
-        <TableBody>
-          {photos.map((photo) => (
-            <TableRow key={photo.file}>
-              <TableCell>{photo.file}</TableCell>
-              <TableCell className="text-secondary">{photo.album}</TableCell>
-              <TableCell className="text-secondary">{photo.taken}</TableCell>
-              <TableCell className="text-right">{photo.size}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Card>
+        ))}
+      </TableBody>
+    </Table>
   );
 }

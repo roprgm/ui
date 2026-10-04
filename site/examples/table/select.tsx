@@ -1,6 +1,5 @@
 "use client";
 
-import { Card } from "@roprgm/ui/card";
 import { Checkbox } from "@roprgm/ui/checkbox";
 import { DragToggle } from "@roprgm/ui/drag-toggle";
 import {
@@ -31,46 +30,44 @@ export default function TableSelect() {
         : [...current, email],
     );
   return (
-    <DragToggle className="min-w-0">
-      <Card className="w-lg max-w-full">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-0 pr-0" />
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {members.map((member) => {
-              const isSelected = selected.includes(member.email);
-              // Secondary text doesn't read on a selected row's fill.
-              const detail = isSelected ? undefined : "text-secondary";
-              return (
-                <TableRow
-                  key={member.email}
-                  data-selected={isSelected}
-                  onClick={() => toggle(member.email)}
-                >
-                  <TableCell className="pr-0">
-                    <Checkbox
-                      name="members"
-                      className="grid"
-                      aria-label={`Select ${member.name}`}
-                      checked={isSelected}
-                      readOnly
-                    />
-                  </TableCell>
-                  <TableCell>{member.name}</TableCell>
-                  <TableCell className={detail}>{member.email}</TableCell>
-                  <TableCell className={detail}>{member.role}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </Card>
+    <DragToggle>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-0 pr-0" />
+            <TableHead>Name</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Role</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {members.map((member) => {
+            const isSelected = selected.includes(member.email);
+            // Secondary text doesn't read on a selected row's fill.
+            const detail = isSelected ? undefined : "text-secondary";
+            return (
+              <TableRow
+                key={member.email}
+                data-selected={isSelected}
+                onClick={() => toggle(member.email)}
+              >
+                <TableCell className="pr-0">
+                  <Checkbox
+                    name="members"
+                    className="grid"
+                    aria-label={`Select ${member.name}`}
+                    checked={isSelected}
+                    readOnly
+                  />
+                </TableCell>
+                <TableCell>{member.name}</TableCell>
+                <TableCell className={detail}>{member.email}</TableCell>
+                <TableCell className={detail}>{member.role}</TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     </DragToggle>
   );
 }

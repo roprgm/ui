@@ -1,4 +1,3 @@
-import { Card } from "@roprgm/ui/card";
 import {
   Table,
   TableBody,
@@ -33,27 +32,25 @@ const photos = [
 
 export default function TableDemo() {
   return (
-    <Card className="w-lg">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Camera</TableHead>
-            <TableHead>Taken</TableHead>
-            <TableHead className="text-right">Size</TableHead>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Name</TableHead>
+          <TableHead>Camera</TableHead>
+          <TableHead>Taken</TableHead>
+          <TableHead className="text-right">Size</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {photos.map((photo) => (
+          <TableRow key={photo.name}>
+            <TableCell>{photo.name}</TableCell>
+            <TableCell className="text-secondary">{photo.camera}</TableCell>
+            <TableCell className="text-secondary">{photo.taken}</TableCell>
+            <TableCell className="text-right">{photo.size}</TableCell>
           </TableRow>
-        </TableHeader>
-        <TableBody>
-          {photos.map((photo) => (
-            <TableRow key={photo.name}>
-              <TableCell>{photo.name}</TableCell>
-              <TableCell className="text-secondary">{photo.camera}</TableCell>
-              <TableCell className="text-secondary">{photo.taken}</TableCell>
-              <TableCell className="text-right">{photo.size}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Card>
+        ))}
+      </TableBody>
+    </Table>
   );
 }
