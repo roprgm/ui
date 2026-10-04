@@ -138,3 +138,9 @@ export const ArrowRightIcon = () => (
     <path d="M5 12h14M13 6l6 6-6 6" />
   </Icon>
 );
+
+export const CloseIcon = () => (
+  <Icon>
+    <path d="M18 6 6 18M6 6l12 12" />
+  </Icon>
+);
