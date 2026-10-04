@@ -180,6 +180,10 @@
             "white-space": "nowrap"
           },
           "[data-slot=\"table-head\"]": {
+            "position": "sticky",
+            "top": "0",
+            "z-index": "1",
+            "background-color": "var(--color-background)",
             "font-weight": "inherit",
             "color": "var(--color-secondary)"
           },
@@ -1122,7 +1126,7 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "Rows of data in columns that scroll sideways where they don't fit.",
+      "description": "Rows of data in columns, as a card's content, that scroll where they don't fit.",
       "categories": ["containers"],
       "dependencies": ["cn"],
       "files": [
