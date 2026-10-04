@@ -13,7 +13,7 @@ export default function InputPassword() {
         type={visible ? "text" : "password"}
         defaultValue="lisbon-2024"
         aria-label="Password"
-        className="pr-7"
+        className="pr-(--spacing-control)"
       />
       <InputGroupAddon align="end">
         <IconButton

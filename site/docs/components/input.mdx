@@ -30,7 +30,7 @@ An Input is as tall as a Button of the same size, so the two sit in a row. Wrap 
 
 ### With addons
 
-An `InputGroupAddon` puts an icon, a short text, or an icon button over the Input's `start` or `end`, centered in a column at least as wide as a default control. Text and icons let the pointer through to the field. The Input pads itself clear of it: `pl-7` for an icon, more for longer text.
+An `InputGroupAddon` puts an icon, a short text, or an icon button over the Input's `start` or `end`, centered in a column at least as wide as a default control. Text and icons let the pointer through to the field. The Input pads itself clear of it by a control's width, `pl-(--spacing-control)` for an icon, so a theme that scales controls moves both; longer text takes more.
 
 <Example name="input/addons" />
 

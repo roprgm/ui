@@ -11,7 +11,7 @@ export default function InputAddons() {
         <Input
           placeholder="Search photos"
           aria-label="Search photos"
-          className="pl-7"
+          className="pl-(--spacing-control)"
         />
       </InputGroup>
       <InputGroup>
@@ -23,7 +23,11 @@ export default function InputAddons() {
         />
       </InputGroup>
       <InputGroup>
-        <Input defaultValue="1.8" aria-label="Weight" className="pr-7" />
+        <Input
+          defaultValue="1.8"
+          aria-label="Weight"
+          className="pr-(--spacing-control)"
+        />
         <InputGroupAddon align="end">kg</InputGroupAddon>
       </InputGroup>
     </div>

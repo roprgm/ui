@@ -11,7 +11,7 @@ export default function InputWithCopyButton() {
         value={link}
         aria-label="Link"
         size="lg"
-        className="pr-8"
+        className="pr-(--spacing-control-lg)"
       />
       <InputGroupAddon align="end">
         <CopyButton value={link} size="icon-sm" className="rounded-sm" />
