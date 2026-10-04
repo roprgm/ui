@@ -18,14 +18,14 @@ export default function InputAddons() {
         <InputGroupAddon>https://</InputGroupAddon>
         <Input
           defaultValue="lisbon.photos"
-          aria-label="Website"
+          aria-label="Website, after https://"
           className="pl-14.5"
         />
       </InputGroup>
       <InputGroup>
         <Input
           defaultValue="1.8"
-          aria-label="Weight"
+          aria-label="Weight in kilograms"
           className="pr-(--spacing-control)"
         />
         <InputGroupAddon align="end">kg</InputGroupAddon>
