@@ -66,6 +66,10 @@ export const utilities: Entry[] = [
     name: "overflow-fade-y",
     use: "A column that may not fit, the same way.",
   },
+  {
+    name: "overflow-fade-x-bottom",
+    use: "Both, fading only the bottom, for content whose top stays put, such as a table's head.",
+  },
   { name: "shimmer", use: "Text, icons, or blocks while work is pending." },
   {
     name: "backdrop",
