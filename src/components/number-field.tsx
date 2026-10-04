@@ -21,6 +21,7 @@ const padding = {
 export function NumberField({
   size = "default",
   "aria-label": label,
+  "aria-labelledby": labelledBy,
   "aria-invalid": invalid,
   "aria-describedby": describedBy,
   ...props
@@ -31,6 +32,7 @@ export function NumberField({
       <Primitive.Input
         data-slot="number-field-input"
         aria-label={label}
+        aria-labelledby={labelledBy}
         aria-invalid={invalid}
         aria-describedby={describedBy}
         render={
