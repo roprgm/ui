@@ -28,9 +28,15 @@ A table never wraps or stacks its columns: what doesn't fit its card scrolls sid
 
 <Example name="table/scroll" flush />
 
+### On the page
+
+On the page, as in a documentation page, a table sits without a card. A dark line doesn't read there, so its rows are apart by a light one, in `border-light`; in a card, panel, or popup, they take the divider between its sections, `border-subtle`.
+
+<Example name="table/page" block />
+
 ## Anatomy
 
-Each part's `data-slot`, which a theme styles, is beside it. A light line, in `border-light`, runs under each row but the last.
+Each part's `data-slot`, which a theme styles, is beside it. A line runs under each row but the last: `border-subtle` in a container, and `border-light` on the page.
 
 ```tsx
 <Table> // section, around table
