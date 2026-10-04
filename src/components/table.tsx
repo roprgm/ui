@@ -12,7 +12,7 @@ export function Table({ className, ...props }: ComponentProps<"table">) {
     <div
       data-slot="section"
       tabIndex={-1}
-      className={cn("overflow-fade-x-bottom", className)}
+      className={cn("overflow-fade-x-bottom outline-none", className)}
     >
       <table data-slot="table" className="w-full tabular-nums" {...props} />
     </div>
