@@ -76,12 +76,12 @@ Mount one `<Toaster />` near the root, then show a toast from anywhere, even out
 
 | Section | Components |
 | --- | --- |
-| Actions | `Button`, `IconButton`, `CopyButton`, `Chip`, `Kbd`, `Badge` |
+| Actions | `Button`, `IconButton`, `CopyButton`, `Chip`, `Kbd`, `Badge`, `Avatar` |
 | Inputs | `Input`, `Textarea`, `Field`, `Checkbox`, `DragToggle`, `Radio`, `Switch`, `ToggleGroup`, `Select`, `Combobox`, `Slider`, `ScrubInput` |
 | Containers | `Card`, `Separator`, with `Section` and `SectionAction` from `section`, and `sections()` for a panel docked at your app's side; the `material-*` primitives; `Collapsible`, `ScrollArea`, `Table`, `CodeBlock` |
 | Navigation | `Tabs`, `ListItem`, `Tree` |
 | Overlays | `Tooltip`, `Menu`, `ContextMenu`, `Popover`, `Dialog`, `Notice`, `Toast` |
-| Effects | `Spinner`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, `overflow-fade-y`, and `backdrop` utilities |
+| Effects | `Spinner`, `Progress`, `Skeleton`, `ScrollText`, and the `shimmer`, `overflow-fade-x`, `overflow-fade-y`, and `backdrop` utilities |
 
 Each one has a page with live examples, their code, and its install command on the [docs site](https://ui.roprgm.com/components).
 

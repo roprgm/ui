@@ -1,0 +1,34 @@
+## Installation
+
+<Install name="avatar" />
+
+## Examples
+
+### Default
+
+The fallback shows until the image loads, and stays if it fails.
+
+<Example name="avatar/demo" />
+
+### Sizes
+
+It is as tall as a Button, and `sm` and `lg` match a Button of the same size, so it sits in a row with one.
+
+<Example name="avatar/sizes" />
+
+### Initials
+
+Without an image, the fallback holds the initials, centered by their capitals, or an icon.
+
+<Example name="avatar/initials" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Avatar> // avatar, with data-size
+  <AvatarImage /> // avatar-image
+  <AvatarFallback /> // avatar-fallback
+</Avatar>
+```
