@@ -16,6 +16,20 @@ import { Chevron } from "./chevron";
 const hint =
   "pointer-events-none absolute size-[9px] text-secondary opacity-0 transition-opacity group-[:hover:not(:focus-within)]/scrub-input:opacity-100";
 
+// Each way a drag can go: its cursor, the touch scrolling it leaves alone, and its hints.
+const axes = {
+  horizontal: {
+    drag: "cursor-ew-resize touch-pan-y",
+    less: ["left", "right-full -mr-0.75"],
+    more: ["right", "left-full -ml-0.75"],
+  },
+  vertical: {
+    drag: "cursor-ns-resize touch-pan-x",
+    less: ["down", "top-full -mt-0.75 left-1/2 -translate-x-1/2"],
+    more: ["up", "bottom-full -mb-0.75 left-1/2 -translate-x-1/2"],
+  },
+} as const;
+
 /** Whole `ch`, since tabular digits can differ from it by a fraction of a pixel. */
 function digitsWidth(digits: string, minChars?: number) {
   if (!minChars) return undefined;
@@ -23,8 +37,9 @@ function digitsWidth(digits: string, minChars?: number) {
 }
 
 /**
- * A number that drags sideways, types on click, and steps with the arrow keys. What `format`
- * writes after the last digit reads as the unit.
+ * A number that drags sideways, or up and down with `scrub="vertical"`, types on click, and steps
+ * with the arrow keys; `scrub={false}` only types and steps. What `format` writes after the last
+ * digit reads as the unit.
  */
 export function ScrubInput({
   value,
@@ -37,6 +52,7 @@ export function ScrubInput({
   format,
   minChars,
   chevrons = false,
+  scrub = "horizontal",
   className,
   id,
   "aria-label": label,
@@ -62,6 +78,8 @@ export function ScrubInput({
   minChars?: number;
   /** Chevrons on hover, hinting that it drags. */
   chevrons?: boolean;
+  /** The way a drag moves the value, up for more when vertical, or `false` for none. */
+  scrub?: keyof typeof axes | false;
   /** The input's, with its label and description, as a Field gives them. */
   id?: string;
   "aria-label"?: string;
@@ -104,23 +122,33 @@ export function ScrubInput({
 
   // Follows the pointer on the window, so a drag holds once it leaves the value.
   const start = (event: PointerEvent<HTMLElement>) => {
-    if (event.button !== 0 || document.activeElement === input.current) return;
+    if (event.button !== 0) return;
+    // While typing, a press beside the digits keeps the focus there.
+    if (document.activeElement === input.current) {
+      if (event.target !== input.current) event.preventDefault();
+      return;
+    }
     event.preventDefault();
     const target = event.currentTarget;
     const mouse = event.pointerType === "mouse";
     const pointer = event.pointerId;
-    let x = event.clientX;
+    const vertical = scrub === "vertical";
+    // Up is more, so a vertical drag reads the pointer upside down.
+    const at = (event: globalThis.PointerEvent | PointerEvent<HTMLElement>) =>
+      vertical ? -event.clientY : event.clientX;
+    let x = at(event);
     let dx = 0;
     let moved = false;
     // Held within range, so a drag that turns back after passing either end moves the value at once.
     let reached = value;
 
     function move(event: globalThis.PointerEvent) {
-      if (event.pointerId !== pointer) return;
-      // Under pointer lock clientX freezes, so deltas come from movementX.
+      if (event.pointerId !== pointer || !scrub) return;
+      // Under pointer lock the pointer's position freezes, so deltas come from its movement.
       const locked = document.pointerLockElement === target;
-      const delta = locked ? event.movementX : event.clientX - x;
-      x = event.clientX;
+      const movement = vertical ? -event.movementY : event.movementX;
+      const delta = locked ? movement : at(event) - x;
+      x = at(event);
       dx += delta;
       // Every range sweeps end to end in about 250px.
       reached = Math.min(
@@ -176,21 +204,23 @@ export function ScrubInput({
     onEditingChange?.(true);
   };
 
+  const axis = scrub && axes[scrub];
   return (
     // The input is the control; dragging is a pointer shortcut over it.
     // biome-ignore lint/a11y/noStaticElementInteractions: the input inside is the accessible control.
     <span
       data-slot="scrub-input"
       className={cn(
-        "group/scrub-input relative inline-flex cursor-ew-resize touch-pan-y items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
+        "group/scrub-input relative inline-flex items-center rounded-sm px-1 py-0.5 whitespace-nowrap tabular-nums transition focus-within:cursor-text focus-within:bg-field",
+        axis ? axis.drag : "cursor-text",
         className,
       )}
       onDoubleClick={reset}
       onPointerDown={start}
       {...props}
     >
-      {chevrons && (
-        <Chevron direction="left" className={cn(hint, "right-full -mr-0.75")} />
+      {chevrons && axis && (
+        <Chevron direction={axis.less[0]} className={cn(hint, axis.less[1])} />
       )}
       <span
         data-slot="scrub-input-value"
@@ -232,8 +262,8 @@ export function ScrubInput({
           onKeyDown={key}
         />
       </span>
-      {chevrons && (
-        <Chevron direction="right" className={cn(hint, "left-full -ml-0.75")} />
+      {chevrons && axis && (
+        <Chevron direction={axis.more[0]} className={cn(hint, axis.more[1])} />
       )}
     </span>
   );
