@@ -398,7 +398,7 @@
           }
         },
         "@utility dim-disabled": {
-          "&:is(:disabled, [data-disabled], :has(:disabled))": {
+          "&:is(:disabled, [data-disabled], [aria-disabled=\"true\"], :has(:disabled))": {
             "pointer-events": "none",
             "opacity": "40%"
           }
@@ -539,13 +539,31 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "A sunken text field; aria-invalid rings it red.",
+      "description": "A sunken text field, with icons, text, or buttons over its edges; aria-invalid rings it red.",
       "categories": ["inputs"],
       "dependencies": ["cn", "class-variance-authority"],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"],
       "files": [
         {
           "path": "src/components/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "number-field",
+      "type": "registry:ui",
+      "title": "Number field",
+      "description": "A number that drags, types, and steps, as a ScrubInput, in a field as tall as an Input.",
+      "categories": ["inputs"],
+      "dependencies": ["cn"],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/scrub-input.json"
+      ],
+      "files": [
+        {
+          "path": "src/components/number-field.tsx",
           "type": "registry:ui"
         }
       ]
@@ -579,6 +597,24 @@
         }
       ],
       "registryDependencies": ["https://ui.roprgm.com/r/theme.json"]
+    },
+    {
+      "name": "fieldset",
+      "type": "registry:ui",
+      "title": "Fieldset",
+      "description": "A legend over a group of controls, such as checkboxes, and a description or error.",
+      "categories": ["inputs"],
+      "dependencies": ["cn"],
+      "files": [
+        {
+          "path": "src/components/fieldset.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/drag-toggle.json"
+      ]
     },
     {
       "name": "checkbox",
@@ -830,11 +866,12 @@
       "name": "menu",
       "type": "registry:ui",
       "title": "Menu",
-      "description": "Commands, with separators and submenus.",
+      "description": "Commands, with checkbox and radio items, groups, separators, and submenus.",
       "categories": ["overlays"],
       "dependencies": ["cn", "@base-ui/react"],
       "registryDependencies": [
         "https://ui.roprgm.com/r/theme.json",
+        "https://ui.roprgm.com/r/check.json",
         "https://ui.roprgm.com/r/chevron.json",
         "https://ui.roprgm.com/r/popup.json",
         "https://ui.roprgm.com/r/kbd.json",

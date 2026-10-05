@@ -1,0 +1,29 @@
+## Installation
+
+<Install name="fieldset" />
+
+## Examples
+
+### Default
+
+A Fieldset is a [Field](/components/field) for a group of controls, such as checkboxes: its legend names them all, and its note is their description. Its controls sit in a [DragToggle](/components/drag-toggle), so a drag across its checkboxes flips each one it passes.
+
+<Example name="fieldset/demo" />
+
+### Error
+
+`error` takes the description's place in red, as in a Field.
+
+<Example name="fieldset/error" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it.
+
+```tsx
+<Fieldset> // fieldset
+  {legend} // fieldset-legend
+  {children} // in a drag-toggle
+  {description} // fieldset-description, or fieldset-error
+</Fieldset>
+```

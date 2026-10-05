@@ -5,7 +5,7 @@ export default function InputDemo() {
   return (
     <div className="flex w-72 gap-1.5">
       <Input placeholder="Album name" />
-      <Button variant="primary">Create</Button>
+      <Button>Create</Button>
     </div>
   );
 }

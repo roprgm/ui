@@ -1,0 +1,52 @@
+"use client";
+
+import { cn } from "cn";
+import { type ComponentProps, type ReactNode, useId } from "react";
+import { DragToggle } from "./drag-toggle";
+
+/**
+ * A legend over a group of controls, such as checkboxes or radios, and a description or error. A
+ * drag across its checkboxes or switches flips each one it passes, as in a `DragToggle`.
+ */
+export function Fieldset({
+  legend,
+  description,
+  error,
+  className,
+  children,
+  "aria-describedby": describedBy,
+  ...props
+}: ComponentProps<"fieldset"> & {
+  legend: ReactNode;
+  description?: ReactNode;
+  error?: ReactNode;
+}) {
+  const id = useId();
+  const note = error ?? description;
+  return (
+    <fieldset
+      data-slot="fieldset"
+      aria-describedby={
+        [describedBy, note && `${id}-note`].filter(Boolean).join(" ") ||
+        undefined
+      }
+      className={cn("flex min-w-0 flex-col gap-1.5", className)}
+      {...props}
+    >
+      {/* Floated, it lays out as the other children do. */}
+      <legend data-slot="fieldset-legend" className="float-left text-secondary">
+        {legend}
+      </legend>
+      <DragToggle className="flex flex-col gap-1.5">{children}</DragToggle>
+      {note && (
+        <p
+          data-slot={error ? "fieldset-error" : "fieldset-description"}
+          id={`${id}-note`}
+          className={cn("text-secondary", error && "text-danger")}
+        >
+          {note}
+        </p>
+      )}
+    </fieldset>
+  );
+}

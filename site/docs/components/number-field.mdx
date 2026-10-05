@@ -1,0 +1,37 @@
+## Installation
+
+<Install name="number-field" />
+
+## Examples
+
+### Default
+
+A NumberField is a [ScrubInput](/components/scrub-input) in a field as tall as an [Input](/components/input): drag it sideways, click to type, or step it with the arrow keys by `step`, Shift by 10, within `min` and `max`. A double-click restores `defaultValue`. For a bare number in an editor's panel, use the ScrubInput itself.
+
+<Example name="number-field/demo" />
+
+### In a field
+
+In a [Field](/components/field), the label and note reach its input. What `format` writes after the last digit reads as the unit, as in a ScrubInput.
+
+<Example name="number-field/field" />
+
+### Without dragging
+
+`scrub={false}` takes the drag away, for a number you'd rather type, such as a year; a click anywhere on the field still types. `scrub="vertical"` drags it up and down instead.
+
+<Example name="number-field/typed" />
+
+### Sizes
+
+`default` and `lg`, as tall as an Input of each size.
+
+<Example name="number-field/sizes" />
+
+## Anatomy
+
+Each part's `data-slot`, which a theme styles, is beside it. NumberField renders a ScrubInput, whose parts keep their slots.
+
+```tsx
+<NumberField /> // number-field, with data-size, a scrub-input's parts inside
+```

@@ -28,9 +28,19 @@ An Input is as tall as a Button of the same size, so the two sit in a row. Wrap 
 
 <Example name="input/file" />
 
+### With addons
+
+An `InputGroupAddon` puts an icon, a short text, or an icon button over the Input's `start` or `end`, centered in a column at least as wide as a default control. Text and icons let the pointer through to the field. The Input pads itself clear of it by a control's width, `pl-(--spacing-control)` for an icon, so a theme that scales controls moves both; longer text takes more.
+
+<Example name="input/addons" />
+
+An icon button at `icon-sm` takes the pointer, in a square as tall as the Input, so it sits as far from the edge as from the top and bottom.
+
+<Example name="input/password" />
+
 ### With a copy button
 
-A read-only link at `lg` holds a CopyButton at `icon-sm`, 4px from each edge.
+A read-only link at `lg` holds a CopyButton at `icon-sm` in an addon, 4px from each edge.
 
 <Example name="input/copy" />
 
@@ -40,4 +50,9 @@ Each part's `data-slot`, which a theme styles, is beside it.
 
 ```tsx
 <Input /> // input, with data-size
+<InputGroup> // input-group
+  <InputGroupAddon align="start" /> // input-group-addon, with data-align
+  <Input /> // input
+  <InputGroupAddon align="end" /> // input-group-addon, with data-align
+</InputGroup>
 ```

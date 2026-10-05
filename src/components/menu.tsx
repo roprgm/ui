@@ -3,6 +3,7 @@
 import { Menu as Primitive } from "@base-ui/react/menu";
 import { cn } from "cn";
 import { type ComponentProps, createContext, useContext } from "react";
+import { Check } from "./check";
 import { Chevron } from "./chevron";
 import { Kbd } from "./kbd";
 import { Popup, popupItem } from "./popup";
@@ -71,6 +72,92 @@ export function MenuItem({
       {children}
       {shortcut && <Kbd className="ml-auto pl-4">{shortcut}</Kbd>}
     </Primitive.Item>
+  );
+}
+
+/** A setting that turns on and off. Its check holds a column at the start, so the items' text lines up. */
+export function MenuCheckboxItem({
+  shortcut,
+  className,
+  children,
+  ...props
+}: Primitive.CheckboxItem.Props & { shortcut?: string }) {
+  return (
+    <Primitive.CheckboxItem
+      data-slot="menu-checkbox-item"
+      className={cn(popupItem, "gap-2", className)}
+      {...props}
+    >
+      <Primitive.CheckboxItemIndicator
+        data-slot="menu-checkbox-item-indicator"
+        keepMounted
+        className="data-unchecked:invisible"
+        render={<Check />}
+      />
+      {children}
+      {shortcut && <Kbd className="ml-auto pl-4">{shortcut}</Kbd>}
+    </Primitive.CheckboxItem>
+  );
+}
+
+/** Radio items that choose one `value`. */
+export function MenuRadioGroup({
+  className,
+  ...props
+}: Primitive.RadioGroup.Props) {
+  return (
+    <Primitive.RadioGroup
+      data-slot="menu-radio-group"
+      className={cn("flex flex-col gap-0.5", className)}
+      {...props}
+    />
+  );
+}
+
+/** One choice of a MenuRadioGroup, checked as a MenuCheckboxItem is. */
+export function MenuRadioItem({
+  className,
+  children,
+  ...props
+}: Primitive.RadioItem.Props) {
+  return (
+    <Primitive.RadioItem
+      data-slot="menu-radio-item"
+      className={cn(popupItem, "gap-2", className)}
+      {...props}
+    >
+      <Primitive.RadioItemIndicator
+        data-slot="menu-radio-item-indicator"
+        keepMounted
+        className="data-unchecked:invisible"
+        render={<Check />}
+      />
+      {children}
+    </Primitive.RadioItem>
+  );
+}
+
+/** Items under a MenuGroupLabel. */
+export function MenuGroup({ className, ...props }: Primitive.Group.Props) {
+  return (
+    <Primitive.Group
+      data-slot="menu-group"
+      className={cn("flex flex-col gap-0.5", className)}
+      {...props}
+    />
+  );
+}
+
+export function MenuGroupLabel({
+  className,
+  ...props
+}: Primitive.GroupLabel.Props) {
+  return (
+    <Primitive.GroupLabel
+      data-slot="menu-group-label"
+      className={cn(popupItem, "text-secondary", className)}
+      {...props}
+    />
   );
 }
 
